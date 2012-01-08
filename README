@@ -26,6 +26,14 @@ Rails. You can read more about Action Pack in
 link:files/vendor/rails/actionpack/README.html.
 
 
+== Kimbra Studio
+
+bundle install
+rake db:create
+rake db:migrate
+rake db:seed
+
+
 == Getting Started
 
 1. At the command prompt, create a new Rails application:
