@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120108222123) do
+ActiveRecord::Schema.define(:version => 20120109124011) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -65,6 +65,8 @@ ActiveRecord::Schema.define(:version => 20120108222123) do
     t.boolean  "active"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "featured"
+    t.datetime "deleted_at"
   end
 
   create_table "roles", :force => true do |t|
@@ -119,9 +121,15 @@ ActiveRecord::Schema.define(:version => 20120108222123) do
     t.string   "perishable_token"
     t.string   "persistence_token"
     t.string   "access_token"
-    t.integer  "comments_count",    :default => 0
+    t.integer  "comments_count",           :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "database_authenticatable"
+    t.boolean  "recoverable"
+    t.boolean  "rememberable"
+    t.boolean  "trackable"
+    t.string   "reset_password_token"
+    t.string   "encrypted_password"
   end
 
   add_index "users", ["access_token"], :name => "index_users_on_access_token", :unique => true
@@ -130,5 +138,6 @@ ActiveRecord::Schema.define(:version => 20120108222123) do
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
   add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token", :unique => true
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token", :unique => true
+  add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
 
 end

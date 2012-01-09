@@ -1,0 +1,69 @@
+/Users/larryb/.rvm/gems/ruby-1.9.2-p290@rails31/bin/rake routes
+
+        new_user_session GET    /users/sign_in(.:format)            {:action=>"new", :controller=>"devise/sessions"}
+            user_session POST   /users/sign_in(.:format)            {:action=>"create", :controller=>"devise/sessions"}
+    destroy_user_session DELETE /users/sign_out(.:format)           {:action=>"destroy", :controller=>"devise/sessions"}
+           user_password POST   /users/password(.:format)           {:action=>"create", :controller=>"devise/passwords"}
+       new_user_password GET    /users/password/new(.:format)       {:action=>"new", :controller=>"devise/passwords"}
+      edit_user_password GET    /users/password/edit(.:format)      {:action=>"edit", :controller=>"devise/passwords"}
+                         PUT    /users/password(.:format)           {:action=>"update", :controller=>"devise/passwords"}
+cancel_user_registration GET    /users/cancel(.:format)             {:action=>"cancel", :controller=>"devise/registrations"}
+       user_registration POST   /users(.:format)                    {:action=>"create", :controller=>"devise/registrations"}
+   new_user_registration GET    /users/sign_up(.:format)            {:action=>"new", :controller=>"devise/registrations"}
+  edit_user_registration GET    /users/edit(.:format)               {:action=>"edit", :controller=>"devise/registrations"}
+                         PUT    /users(.:format)                    {:action=>"update", :controller=>"devise/registrations"}
+                         DELETE /users(.:format)                    {:action=>"destroy", :controller=>"devise/registrations"}
+                   users GET    /users(.:format)                    {:action=>"index", :controller=>"users"}
+                         POST   /users(.:format)                    {:action=>"create", :controller=>"users"}
+                new_user GET    /users/new(.:format)                {:action=>"new", :controller=>"users"}
+               edit_user GET    /users/:id/edit(.:format)           {:action=>"edit", :controller=>"users"}
+                    user GET    /users/:id(.:format)                {:action=>"show", :controller=>"users"}
+                         PUT    /users/:id(.:format)                {:action=>"update", :controller=>"users"}
+                         DELETE /users/:id(.:format)                {:action=>"destroy", :controller=>"users"}
+                   admin        /admin(.:format)                    {:action=>"index", :controller=>"admin/overviews"}
+                   login        /login(.:format)                    {:action=>"new", :controller=>"user_sessions"}
+                  logout        /logout(.:format)                   {:action=>"destroy", :controller=>"user_sessions"}
+                  signup        /signup(.:format)                   {:action=>"new", :controller=>"studio/registrations"}
+                    root        /                                   {:controller=>"welcome", :action=>"index"}
+               countries GET    /countries(.:format)                {:action=>"index", :controller=>"countries"}
+                         POST   /countries(.:format)                {:action=>"create", :controller=>"countries"}
+             new_country GET    /countries/new(.:format)            {:action=>"new", :controller=>"countries"}
+            edit_country GET    /countries/:id/edit(.:format)       {:action=>"edit", :controller=>"countries"}
+                 country GET    /countries/:id(.:format)            {:action=>"show", :controller=>"countries"}
+                         PUT    /countries/:id(.:format)            {:action=>"update", :controller=>"countries"}
+                         DELETE /countries/:id(.:format)            {:action=>"destroy", :controller=>"countries"}
+                  states GET    /states(.:format)                   {:action=>"index", :controller=>"states"}
+                   about GET    /about(.:format)                    {:action=>"show", :controller=>"abouts"}
+                   terms GET    /terms(.:format)                    {:action=>"index", :controller=>"terms"}
+              categories GET    /categories(.:format)               {:action=>"index", :controller=>"categories"}
+                         POST   /categories(.:format)               {:action=>"create", :controller=>"categories"}
+            new_category GET    /categories/new(.:format)           {:action=>"new", :controller=>"categories"}
+           edit_category GET    /categories/:id/edit(.:format)      {:action=>"edit", :controller=>"categories"}
+                category GET    /categories/:id(.:format)           {:action=>"show", :controller=>"categories"}
+                         PUT    /categories/:id(.:format)           {:action=>"update", :controller=>"categories"}
+                         DELETE /categories/:id(.:format)           {:action=>"destroy", :controller=>"categories"}
+                  pieces GET    /pieces(.:format)                   {:action=>"index", :controller=>"pieces"}
+                         POST   /pieces(.:format)                   {:action=>"create", :controller=>"pieces"}
+               new_piece GET    /pieces/new(.:format)               {:action=>"new", :controller=>"pieces"}
+              edit_piece GET    /pieces/:id/edit(.:format)          {:action=>"edit", :controller=>"pieces"}
+                   piece GET    /pieces/:id(.:format)               {:action=>"show", :controller=>"pieces"}
+                         PUT    /pieces/:id(.:format)               {:action=>"update", :controller=>"pieces"}
+                         DELETE /pieces/:id(.:format)               {:action=>"destroy", :controller=>"pieces"}
+                  offers GET    /offers(.:format)                   {:action=>"index", :controller=>"offers"}
+                         POST   /offers(.:format)                   {:action=>"create", :controller=>"offers"}
+               new_offer GET    /offers/new(.:format)               {:action=>"new", :controller=>"offers"}
+              edit_offer GET    /offers/:id/edit(.:format)          {:action=>"edit", :controller=>"offers"}
+                   offer GET    /offers/:id(.:format)               {:action=>"show", :controller=>"offers"}
+                         PUT    /offers/:id(.:format)               {:action=>"update", :controller=>"offers"}
+                         DELETE /offers/:id(.:format)               {:action=>"destroy", :controller=>"offers"}
+                 studios GET    /studios(.:format)                  {:action=>"index", :controller=>"studios"}
+                         POST   /studios(.:format)                  {:action=>"create", :controller=>"studios"}
+              new_studio GET    /studios/new(.:format)              {:action=>"new", :controller=>"studios"}
+             edit_studio GET    /studios/:id/edit(.:format)         {:action=>"edit", :controller=>"studios"}
+                  studio GET    /studios/:id(.:format)              {:action=>"show", :controller=>"studios"}
+                         PUT    /studios/:id(.:format)              {:action=>"update", :controller=>"studios"}
+                         DELETE /studios/:id(.:format)              {:action=>"destroy", :controller=>"studios"}
+    studio_registrations POST   /studio/registrations(.:format)     {:action=>"create", :controller=>"studio/registrations"}
+ new_studio_registration GET    /studio/registrations/new(.:format) {:action=>"new", :controller=>"studio/registrations"}
+
+Process finished with exit code 0

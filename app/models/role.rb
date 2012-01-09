@@ -22,6 +22,7 @@ class Role < ActiveRecord::Base
            CUSTOMER_SERVICE]
 
   NON_ADMIN_ROLES = [STUDIO, STUDIO_STAFF, CLIENT, REPORT, CUSTOMER_SERVICE]
+  ADMIN_ROLES     = ROLES - NON_ADMIN_ROLES
 
   SUPER_ADMIN_ID      = 1
   ADMIN_ID            = 2
@@ -30,6 +31,14 @@ class Role < ActiveRecord::Base
   CLIENT_ID           = 5
   REPORT_ID           = 6
   CUSTOMER_SERVICE_ID = 7
+
+  def is_admin?
+    name.present? and (ADMIN_ROLES.include?(name))
+  end
+
+  def is_studio?
+    name.present? and (name == STUDIO)
+  end
 
   private
 
@@ -44,4 +53,5 @@ class Role < ActiveRecord::Base
       self.find_by_name(name)
     end
   end
+
 end
