@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
+# ignore editor settings
+/.idea/*
+
 # Ignore bundler config
 /.bundle
 
@@ -12,6 +15,9 @@
 
 # Ignore sensitive config information
 #/config/config.yml
+
+# Ignore vendor gems
+/vendor/ruby/*
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
