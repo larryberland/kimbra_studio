@@ -3,7 +3,6 @@
 <table>
   <tr>
     <th>Description</th>
-    <th>File name</th>
     <th>Active</th>
     <th></th>
     <th></th>
@@ -14,7 +13,6 @@
 <% @studio_pictures.each do |studio_picture| %>
   <tr>
     <td><%= studio_picture.description %></td>
-    <td><%= studio_picture.file_name %></td>
     <td><%= studio_picture.active %></td>
     <td><%= image_tag_list(studio_picture) %></td>
     <td><%= link_to 'Show', studio_shoot_picture_path(@shoot, studio_picture) %></td>

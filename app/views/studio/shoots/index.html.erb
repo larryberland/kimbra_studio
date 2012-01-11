@@ -1,12 +1,15 @@
 <h1>Listing studio_shoots</h1>
 
+<%= link_to 'New Shoot', new_studio_shoot_path %>
+<br/>
+<%= link_to 'My Studio', studio_overview_path %>
+
 <table>
   <tr>
     <th>Name</th>
     <th>Date</th>
     <th>Category</th>
     <th>Client</th>
-    <th>Client email</th>
     <th>Active?</th>
     <th>Pictures</th>
     <th></th>
@@ -20,7 +23,6 @@
     <td><%= studio_shoot.date %></td>
     <td><%= studio_shoot.category_name %></td>
     <td><%= studio_shoot.client.try(:name) %></td>
-    <td><%= studio_shoot.client.try(:email) %></td>
     <td><%= studio_shoot.client.try(:active) %></td>
     <td><%= link_to 'Pictures', studio_shoot_pictures_path(studio_shoot) %></td>
     <td><%= link_to 'Show', studio_shoot %></td>
@@ -30,6 +32,3 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Shoot', new_studio_shoot_path %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120111175610) do
+ActiveRecord::Schema.define(:version => 20120111215432) do
 
   create_table "address_types", :force => true do |t|
     t.string "name",        :limit => 64, :null => false
@@ -141,7 +141,6 @@ ActiveRecord::Schema.define(:version => 20120111175610) do
 
   create_table "studio_pictures", :force => true do |t|
     t.string   "description"
-    t.string   "file_name"
     t.boolean  "active"
     t.integer  "shoot_id"
     t.datetime "created_at"
