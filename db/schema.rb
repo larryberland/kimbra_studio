@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120111151545) do
+ActiveRecord::Schema.define(:version => 20120111175610) do
 
   create_table "address_types", :force => true do |t|
     t.string "name",        :limit => 64, :null => false
@@ -146,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20120111151545) do
     t.integer  "shoot_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image"
   end
 
   add_index "studio_pictures", ["shoot_id"], :name => "index_studio_pictures_on_shoot_id"

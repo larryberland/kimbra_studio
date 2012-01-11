@@ -1,30 +1,42 @@
 <% url = @studio_picture.id.nil? ? studio_shoot_pictures_path(@shoot) : studio_shoot_picture_path(@shoot, @studio_picture) %>
-<%= form_for(@studio_picture, :url => url) do |f| %>
-  <% if @studio_picture.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@studio_picture.errors.count, "error") %> prohibited this studio_picture from being saved:</h2>
+<%= form_for(@studio_picture, :url => url, :html => {:multipart => true}) do |f| %>
+    <% if @studio_picture.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@studio_picture.errors.count, "error") %> prohibited this studio_picture from being
+            saved:</h2>
 
-      <ul>
-      <% @studio_picture.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @studio_picture.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :description %>
+      <br/>
+      <%= f.text_field :description %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :description %><br />
-    <%= f.text_field :description %>
-  </div>
-  <div class="field">
-    <%= f.label :file_name %><br />
-    <%= f.text_field :file_name %>
-  </div>
-  <div class="field">
-    <%= f.label :active %><br />
-    <%= f.check_box :active %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :file_name %>
+      <br/>
+      <%= f.text_field :file_name %>
+    </div>
+    <p>
+      <%= image_tag_thumb %>
+    </p>
+    <div class="field">
+      <%= f.label :image %>
+      <br/>
+      <%= f.file_field :image %>
+    </div>
+    <div class="field">
+      <%= f.label :active %>
+      <br/>
+      <%= f.check_box :active %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
