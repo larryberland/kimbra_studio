@@ -1,0 +1,29 @@
+<h1>Listing studio_pictures</h1>
+
+<table>
+  <tr>
+    <th>Description</th>
+    <th>File name</th>
+    <th>Active</th>
+    <th>Shoot</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @studio_pictures.each do |studio_picture| %>
+  <tr>
+    <td><%= studio_picture.description %></td>
+    <td><%= studio_picture.file_name %></td>
+    <td><%= studio_picture.active %></td>
+    <td><%= studio_picture.shoot %></td>
+    <td><%= link_to 'Show', studio_picture %></td>
+    <td><%= link_to 'Edit', edit_studio_picture_path(studio_picture) %></td>
+    <td><%= link_to 'Destroy', studio_picture, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Picture', new_studio_picture_path %>

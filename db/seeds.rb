@@ -31,3 +31,7 @@ Category::NAMES.each do |category_type|
   Category.find_or_create_by_name(category_type)
 end
 
+AddressType::NAMES.each do |address_type|
+  AddressType.find_or_create_by_name(address_type)
+end
+

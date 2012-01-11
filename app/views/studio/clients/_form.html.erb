@@ -1,0 +1,19 @@
+<%= f.fields_for :client, @studio_shoot.client do |g| %>
+
+  <div class="field">
+    <%= g.label :name, 'Client name:' %><br />
+    <%= g.text_field :name %>
+  </div>
+  <div class="field">
+    <%= g.label :email, 'Client email:' %><br />
+    <%= g.email_field :email %>
+  </div>
+  <div class="field">
+    <%= g.label :phone_number, 'Client phone:' %><br />
+    <%= g.text_field :phone_number %>
+  </div>
+  <div class="field">
+    <%= g.label :active, 'Client active?' %>
+    <%= g.check_box :active %>
+  </div>
+<% end %>

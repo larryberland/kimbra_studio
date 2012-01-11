@@ -1,0 +1,20 @@
+<p>
+  <b>Name:</b>
+  <%= @studio_shoot.name %>
+</p>
+
+<p>
+  <b>Date:</b>
+  <%= @studio_shoot.date %>
+</p>
+
+<p>
+  <b>Category:</b>
+  <%= @studio_shoot.category_name %>
+</p>
+
+<% @studio_client = @studio_shoot.client %>
+<%= render 'studio/clients/show' %>
+
+<%= link_to 'Edit', edit_studio_shoot_path(@studio_shoot) %> |
+<%= link_to 'Back', studio_shoots_path %>

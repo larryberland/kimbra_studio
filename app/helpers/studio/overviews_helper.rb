@@ -1,0 +1,2 @@
+module Studio::OverviewsHelper
+end

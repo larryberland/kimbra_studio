@@ -8,21 +8,22 @@ class WelcomeController < ApplicationController
     @other_pieces  ## search 2 or 3 categories (maybe based on the user)
     unless @featured_piece
       if current_user
-        if current_user.admin?
-          redirect_to login_url # TODO: find admin process if any => admin_merchandise_products_url
-        elsif current_user.studio?
-          redirect_to new_studio_registration_url
-        elsif current_user.studio_staff?
-          raise "studio_staff not implemented yet"
-          redirect_to login_url
-        elsif current_user.client?
-          redirect_to login_url
-        else
-          redirect_to login_url
-        end
-      end
-      if current_user && current_user.admin?
-      else
+        #puts "role=>#{current_user.roles.inspect}"
+        #if current_user.admin?
+        #  raise 'welcome role admin not implemented'
+        #elsif current_user.studio?
+        #  if current_user.studio_id
+        #    redirect_to studio_upload_url
+        #  else
+        #    redirect_to new_studio_registration_url
+        #  end
+        #elsif current_user.studio_staff?
+        #  raise "welcome role studio_staff not implemented yet"
+        #elsif current_user.client?
+        #  raise "welcome role client not implemented yet"
+        #else
+        #  redirect_to login_url
+        #end
       end
     end
   end

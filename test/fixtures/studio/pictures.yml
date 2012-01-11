@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  description: MyString
+  file_name: MyString
+  active: false
+  shoot: 
+
+two:
+  description: MyString
+  file_name: MyString
+  active: false
+  shoot: 

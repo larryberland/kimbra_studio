@@ -1,0 +1,2 @@
+module Studio::ShootsHelper
+end

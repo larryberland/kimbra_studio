@@ -2,26 +2,36 @@
 
 <table>
   <tr>
-    <th>String</th>
-    <th>String</th>
-    <th>String</th>
+    <th>Name</th>
+    <th>Phone number</th>
+    <th>Owner</th>
+    <th>Address</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
 
-<% @studios.each do |studio| %>
-  <tr>
-    <td><%= studio.string %></td>
-    <td><%= studio.string %></td>
-    <td><%= studio.string %></td>
-    <td><%= link_to 'Show', studio %></td>
-    <td><%= link_to 'Edit', edit_studio_path(studio) %></td>
-    <td><%= link_to 'Destroy', studio, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  <% @studios.each do |studio| %>
+      <tr>
+        <td><%= studio.name %></td>
+        <td><%= studio.phone_number %></td>
+        <td>
+          <div class='ar-widget'>
+            <%= link_to 'Owner', studio.owner.nil? ? new_studio_user_path : studio_users_path(studio.owner) %>
+          </div>
+        </td>
+        <td>
+          <div class='ar-widget'>
+            <%= link_to 'My Addresses', studio.addresses.nil? ? new_studio_addresses_path : studio_addresses_path(studio) %>
+          </div>
+        </td>
+        <td><%= link_to 'Show', studio %></td>
+        <td><%= link_to 'Edit', edit_studio_path(studio) %></td>
+        <td><%= link_to 'Destroy', studio, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+  <% end %>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Studio', new_studio_path %>

@@ -1,47 +1,64 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>KimbraStudio</title>
-  <%= stylesheet_link_tag    "application" %>
-  <%= javascript_include_tag 'jquery-1.5.2.min', 'rails', 'jquery-ui-1.8.12.custom.min','application' %>
+  <title>KimbraStudio Click Plus+</title>
+
+  <%= stylesheet_link_tag "application" %>
+
+  <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
 </head>
-<body >
+<body>
 
 <div id='body_wrapper'>
 
   <div class="bp">
-    <%= raw "<p class='flash_notice'> #{notice}</p>"  if notice %>
-    <%= raw "<p class='flash_error'>#{alert}</p>"     if alert %>
+    <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
+    <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
   </div>
 
-    <div id='content_wrapper' class='container'>
-      <%= yield %>
+  <div id="header_wrapper" class='bp'>
+    <div class="container logged-in" id="header">
+      <ul id="menu-main">
+        <li class="" id="menu-main-user">
+          <div>
+            <strong><%= link_to 'Login', login_path %></strong> or
+            <span><%= link_to 'Sign up', signup_path %></span>
+            <strong>Hi <%= current_user.try(:email) %></strong>
+            <span>(<%= link_to 'not you?', logout_path %>)</span>
+          </div>
+        </li>
+      </ul>
     </div>
   </div>
 
-  <div id="footer_buffer" class='bp'>
-    &nbsp;
+  <div id='content_wrapper' class='container'>
+    <%= yield %>
   </div>
 </div>
 
-  <%= render 'shared/main_footer' %>
+<div id="footer_buffer" class='bp'>
+  &nbsp;
+</div>
+</div>
 
-  <%= yield :bottom %>
+<%= render 'shared/main_footer' %>
 
-  <script>
-  jQuery(window).ready(
-    function() {
-      jQuery('.flash_notice').delay(6000).slideUp( 'slow');
-      jQuery('.flash_error').delay(6000).slideUp( 'slow');
-    }
-  );
-  </script>
+<%= yield :bottom %>
 
-  <%# javascript_include_tag :defaults %>
-  <%#= javascript_include_tag 'jquery-1.4.2.min', 'rails' %>
-  <%#= javascript_include_tag :all, :cache => true %>
+<script>
+    jQuery(window).ready(
+            function() {
+                jQuery('.flash_notice').delay(6000).slideUp('slow');
+                jQuery('.flash_error').delay(6000).slideUp('slow');
+            }
+    );
+</script>
+
+<%# javascript_include_tag :defaults %>
+<%#= javascript_include_tag 'jquery-1.4.2.min', 'rails' %>
+<%#= javascript_include_tag :all, :cache => true %>
 </body>
-  <%= yield :below_body %>
+<%= yield :below_body %>
 </html>

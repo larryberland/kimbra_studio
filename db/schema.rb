@@ -11,7 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120109124011) do
+ActiveRecord::Schema.define(:version => 20120111151545) do
+
+  create_table "address_types", :force => true do |t|
+    t.string "name",        :limit => 64, :null => false
+    t.string "description"
+  end
+
+  add_index "address_types", ["name"], :name => "index_address_types_on_name"
+
+  create_table "addresses", :force => true do |t|
+    t.integer  "address_type_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "addressable_type",                    :null => false
+    t.integer  "addressable_id",                      :null => false
+    t.string   "address1",                            :null => false
+    t.string   "address2"
+    t.string   "city",                                :null => false
+    t.integer  "state_id"
+    t.string   "state_name"
+    t.string   "zip_code",                            :null => false
+    t.integer  "phone_id"
+    t.boolean  "default",          :default => false
+    t.boolean  "billing_default",  :default => false
+    t.boolean  "active",           :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["addressable_id"], :name => "index_addresses_on_addressable_id"
+  add_index "addresses", ["addressable_type"], :name => "index_addresses_on_addressable_type"
+  add_index "addresses", ["state_id"], :name => "index_addresses_on_state_id"
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -38,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20120109124011) do
     t.boolean  "ping_email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "studio_id"
   end
 
   create_table "mini_site_studios", :force => true do |t|
@@ -47,11 +79,19 @@ ActiveRecord::Schema.define(:version => 20120109124011) do
     t.string   "font_color"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "studio_id"
   end
 
   create_table "offers", :force => true do |t|
     t.string   "image"
     t.integer  "pieces_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "pictures", :force => true do |t|
+    t.string   "name"
+    t.string   "file_name"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -87,14 +127,45 @@ ActiveRecord::Schema.define(:version => 20120109124011) do
   add_index "states", ["country_id"], :name => "index_states_on_country_id"
   add_index "states", ["name"], :name => "index_states_on_name"
 
+  create_table "studio_clients", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.boolean  "active"
+    t.integer  "address_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "studio_clients", ["address_id"], :name => "index_studio_clients_on_address_id"
+
+  create_table "studio_pictures", :force => true do |t|
+    t.string   "description"
+    t.string   "file_name"
+    t.boolean  "active"
+    t.integer  "shoot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "studio_pictures", ["shoot_id"], :name => "index_studio_pictures_on_shoot_id"
+
+  create_table "studio_shoots", :force => true do |t|
+    t.string   "name"
+    t.datetime "date"
+    t.integer  "studio_id"
+    t.integer  "client_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "studio_shoots", ["category_id"], :name => "index_studio_shoots_on_category_id"
+  add_index "studio_shoots", ["client_id"], :name => "index_studio_shoots_on_client_id"
+  add_index "studio_shoots", ["studio_id"], :name => "index_studio_shoots_on_studio_id"
+
   create_table "studios", :force => true do |t|
     t.string   "name"
-    t.string   "address_1"
-    t.string   "address_2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "zip"
-    t.string   "country"
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -130,6 +201,7 @@ ActiveRecord::Schema.define(:version => 20120109124011) do
     t.boolean  "trackable"
     t.string   "reset_password_token"
     t.string   "encrypted_password"
+    t.integer  "studio_id"
   end
 
   add_index "users", ["access_token"], :name => "index_users_on_access_token", :unique => true

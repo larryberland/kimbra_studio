@@ -1,0 +1,8 @@
+<h1> Edit Address </h1>
+
+<%= form_for(@address, :url => studio_address_path(@address)) do |f| %>
+  <%= render :partial => 'form', :locals => {:f => f} %>
+<% end %>
+
+  <%= link_to 'Show', studio_address_path( @address ), :class => 'button ar-small-black-button' %> |
+  <%= link_to 'View All', studio_addresses_path, :class => 'button ar-small-black-button' %>

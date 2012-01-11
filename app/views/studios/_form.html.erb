@@ -1,29 +1,30 @@
 <%= form_for(@studio) do |f| %>
-  <% if @studio.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@studio.errors.count, "error") %> prohibited this studio from being saved:</h2>
+    <% if @studio.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@studio.errors.count, "error") %> prohibited this studio from being saved:</h2>
 
-      <ul>
-      <% @studio.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @studio.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
     </div>
-  <% end %>
+    <div class="field">
+      <%= f.label :phone_number %>
+      <br/>
+      <%= f.text_field :phone_number %>
+    </div>
 
-  <div class="field">
-    <%= f.label :string %><br />
-    <%= f.text_field :string %>
-  </div>
-  <div class="field">
-    <%= f.label :string %><br />
-    <%= f.text_field :string %>
-  </div>
-  <div class="field">
-    <%= f.label :string %><br />
-    <%= f.text_field :string %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <%= render "studios/info_studio/form", :f => f %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

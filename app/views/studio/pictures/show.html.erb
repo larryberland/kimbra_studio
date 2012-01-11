@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Description:</b>
+  <%= @studio_picture.description %>
+</p>
+
+<p>
+  <b>File name:</b>
+  <%= @studio_picture.file_name %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @studio_picture.active %>
+</p>
+
+<p>
+  <b>Shoot:</b>
+  <%= @studio_picture.shoot %>
+</p>
+
+
+<%= link_to 'Edit', edit_studio_picture_path(@studio_picture) %> |
+<%= link_to 'Back', studio_pictures_path %>

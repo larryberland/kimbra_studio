@@ -37,7 +37,23 @@ class Role < ActiveRecord::Base
   end
 
   def is_studio?
-    name.present? and (name == STUDIO)
+    is_role?(STUDIO)
+  end
+
+  def is_studio_staff?
+    is_role?(STUDIO_STAFF)
+  end
+
+  def is_client?
+    is_role?(CLIENT)
+  end
+
+  def is_report?
+    is_role?(REPORT)
+  end
+
+  def is_customer_service?
+    is_role?(CUSTOMER_SERVICE)
   end
 
   private
@@ -54,4 +70,7 @@ class Role < ActiveRecord::Base
     end
   end
 
+  def is_role?(this_role_name)
+    name.present? and (name == this_role_name)
+  end
 end

@@ -1,0 +1,33 @@
+<h1>Listing studio_shoots</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Date</th>
+    <th>Category</th>
+    <th>Client</th>
+    <th>Client email</th>
+    <th>Active?</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @studio_shoots.each do |studio_shoot| %>
+  <tr>
+    <td><%= studio_shoot.name %></td>
+    <td><%= studio_shoot.date %></td>
+    <td><%= studio_shoot.category_name %></td>
+    <td><%= studio_shoot.client.try(:name) %></td>
+    <td><%= studio_shoot.client.try(:email) %></td>
+    <td><%= studio_shoot.client.try(:active) %></td>
+    <td><%= link_to 'Show', studio_shoot %></td>
+    <td><%= link_to 'Edit', edit_studio_shoot_path(studio_shoot) %></td>
+    <td><%= link_to 'Destroy', studio_shoot, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Shoot', new_studio_shoot_path %>

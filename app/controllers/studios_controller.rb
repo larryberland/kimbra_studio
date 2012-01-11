@@ -40,7 +40,10 @@ class StudiosController < ApplicationController
   # POST /studios
   # POST /studios.json
   def create
-    @studio = Studio.new(params[:studio])
+    @info_studio = InfoStudio.new(params[:studio].delete(:info_studio))
+    @studio      = Studio.new(params[:studio])
+    @studio.info_studio = @info_studio if @info_studio
+    @studio.current_user = current_user
 
     respond_to do |format|
       if @studio.save
@@ -56,7 +59,10 @@ class StudiosController < ApplicationController
   # PUT /studios/1
   # PUT /studios/1.json
   def update
-    @studio = Studio.find(params[:id])
+    @studio      = Studio.find(params[:id])
+    @info_studio = InfoStudio.new(params[:studio].delete(:info_studio))
+    @studio.info_studio = @info_studio if @info_studio
+    @studio.current_user = current_user
 
     respond_to do |format|
       if @studio.update_attributes(params[:studio])

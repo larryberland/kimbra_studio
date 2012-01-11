@@ -1,0 +1,33 @@
+<%= form_for(@studio_picture) do |f| %>
+  <% if @studio_picture.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@studio_picture.errors.count, "error") %> prohibited this studio_picture from being saved:</h2>
+
+      <ul>
+      <% @studio_picture.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_field :description %>
+  </div>
+  <div class="field">
+    <%= f.label :file_name %><br />
+    <%= f.text_field :file_name %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br />
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    <%= f.label :shoot %><br />
+    <%= f.text_field :shoot %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

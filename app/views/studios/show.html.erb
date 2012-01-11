@@ -1,19 +1,14 @@
-<p id="notice"><%= notice %></p>
-
 <p>
-  <b>String:</b>
-  <%= @studio.string %>
+  <b>Name:</b>
+  <%= @studio.name %>
 </p>
 
 <p>
-  <b>String:</b>
-  <%= @studio.string %>
+  <b>Phone number:</b>
+  <%= @studio.phone_number %>
 </p>
 
-<p>
-  <b>String:</b>
-  <%= @studio.string %>
-</p>
+<%= render 'studios/info_studio/show' %>
 
 
 <%= link_to 'Edit', edit_studio_path(@studio) %> |
