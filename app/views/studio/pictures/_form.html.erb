@@ -1,4 +1,5 @@
-<%= form_for(@studio_picture) do |f| %>
+<% url = @studio_picture.id.nil? ? studio_shoot_pictures_path(@shoot) : studio_shoot_picture_path(@shoot, @studio_picture) %>
+<%= form_for(@studio_picture, :url => url) do |f| %>
   <% if @studio_picture.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@studio_picture.errors.count, "error") %> prohibited this studio_picture from being saved:</h2>
@@ -22,10 +23,6 @@
   <div class="field">
     <%= f.label :active %><br />
     <%= f.check_box :active %>
-  </div>
-  <div class="field">
-    <%= f.label :shoot %><br />
-    <%= f.text_field :shoot %>
   </div>
   <div class="actions">
     <%= f.submit %>

@@ -1,8 +1,5 @@
 KimbraStudio::Application.routes.draw do
 
-  namespace :studio do resources :pictures end
-
-  namespace :studio do resources :clients end
 
   resources :studios
 
@@ -35,8 +32,12 @@ KimbraStudio::Application.routes.draw do
     resources :registrations,   :only => [:new, :create]
     resources :addresses
     resources :users
-    resources :shoots
+    resources :shoots do
+      resources :pictures
+    end
     resource  :overview, :only => [:show]
+    resources :clients
   end
+
 
 end

@@ -1,4 +1,7 @@
-<p id="notice"><%= notice %></p>
+<p>
+  <b>Shoot:</b>
+  <%= @studio_picture.try(:shoot).try(:name) %>
+</p>
 
 <p>
   <b>Description:</b>
@@ -15,11 +18,7 @@
   <%= @studio_picture.active %>
 </p>
 
-<p>
-  <b>Shoot:</b>
-  <%= @studio_picture.shoot %>
-</p>
 
 
-<%= link_to 'Edit', edit_studio_picture_path(@studio_picture) %> |
-<%= link_to 'Back', studio_pictures_path %>
+<%= link_to 'Edit', edit_studio_shoot_picture_path(@shoot, @studio_picture) %> |
+<%= link_to 'Back', studio_shoot_pictures_path(@shoot) %>

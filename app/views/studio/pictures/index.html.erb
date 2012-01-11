@@ -1,11 +1,10 @@
 <h1>Listing studio_pictures</h1>
-
+<h3> For <%= @shoot.try(:name) %></h3>
 <table>
   <tr>
     <th>Description</th>
     <th>File name</th>
     <th>Active</th>
-    <th>Shoot</th>
     <th></th>
     <th></th>
     <th></th>
@@ -16,14 +15,14 @@
     <td><%= studio_picture.description %></td>
     <td><%= studio_picture.file_name %></td>
     <td><%= studio_picture.active %></td>
-    <td><%= studio_picture.shoot %></td>
-    <td><%= link_to 'Show', studio_picture %></td>
-    <td><%= link_to 'Edit', edit_studio_picture_path(studio_picture) %></td>
-    <td><%= link_to 'Destroy', studio_picture, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', studio_shoot_picture_path(@shoot, studio_picture) %></td>
+    <td><%= link_to 'Edit', edit_studio_shoot_picture_path(@shoot, studio_picture) %></td>
+    <td><%= link_to 'Destroy', studio_shoot_picture_path(@shoot, studio_picture), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Picture', new_studio_picture_path %>
+<%= link_to 'New Picture', new_studio_shoot_picture_path(@shoot) %>
+<%= link_to 'Back', studio_shoots_path %>

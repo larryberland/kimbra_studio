@@ -8,6 +8,7 @@
     <th>Client</th>
     <th>Client email</th>
     <th>Active?</th>
+    <th>Pictures</th>
     <th></th>
     <th></th>
     <th></th>
@@ -21,6 +22,7 @@
     <td><%= studio_shoot.client.try(:name) %></td>
     <td><%= studio_shoot.client.try(:email) %></td>
     <td><%= studio_shoot.client.try(:active) %></td>
+    <td><%= link_to 'Pictures', studio_shoot_pictures_path(studio_shoot) %></td>
     <td><%= link_to 'Show', studio_shoot %></td>
     <td><%= link_to 'Edit', edit_studio_shoot_path(studio_shoot) %></td>
     <td><%= link_to 'Destroy', studio_shoot, confirm: 'Are you sure?', method: :delete %></td>
