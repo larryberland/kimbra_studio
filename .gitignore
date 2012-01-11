@@ -19,6 +19,9 @@
 # Ignore vendor gems
 /vendor/ruby/*
 
+# Ignore CarrierWave uploads
+/public/uploads/*
+
 # Ignore all logfiles and tempfiles.
 /log/*.log
 /tmp
