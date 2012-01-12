@@ -12,6 +12,7 @@ class CreateAdminEmailOffers < ActiveRecord::Migration
       t.boolean :active
       t.references :piece
       t.references :studio_picture
+      t.references :email
 
       t.timestamps
     end

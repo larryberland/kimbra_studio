@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112143102) do
+ActiveRecord::Schema.define(:version => 20120112200050) do
 
   create_table "address_types", :force => true do |t|
     t.string "name",        :limit => 64, :null => false
@@ -44,6 +44,17 @@ ActiveRecord::Schema.define(:version => 20120112143102) do
   add_index "addresses", ["addressable_type"], :name => "index_addresses_on_addressable_type"
   add_index "addresses", ["state_id"], :name => "index_addresses_on_state_id"
 
+  create_table "admin_customer_emails", :force => true do |t|
+    t.text     "message"
+    t.datetime "sent_at"
+    t.boolean  "active"
+    t.integer  "shoot_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_customer_emails", ["shoot_id"], :name => "index_admin_customer_emails_on_shoot_id"
+
   create_table "admin_email_offers", :force => true do |t|
     t.string   "name"
     t.string   "image"
@@ -56,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20120112143102) do
     t.boolean  "active"
     t.integer  "piece_id"
     t.integer  "studio_picture_id"
+    t.integer  "email_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -113,19 +125,6 @@ ActiveRecord::Schema.define(:version => 20120112143102) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "studio_id"
-  end
-
-  create_table "pieces", :force => true do |t|
-    t.string   "name"
-    t.string   "short_description"
-    t.string   "long_description"
-    t.string   "sku"
-    t.decimal  "price",             :precision => 8, :scale => 2, :default => 0.0, :null => false
-    t.boolean  "active"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "featured"
-    t.datetime "deleted_at"
   end
 
   create_table "roles", :force => true do |t|
@@ -202,9 +201,14 @@ ActiveRecord::Schema.define(:version => 20120112143102) do
     t.string   "first_name"
     t.string   "last_name"
     t.date     "birth_date"
+    t.string   "friendly_name"
     t.string   "email"
+    t.string   "phone_number"
+    t.string   "address_1"
+    t.string   "address_2"
     t.string   "state"
-    t.integer  "account_id"
+    t.string   "city"
+    t.string   "zip"
     t.string   "customer_cim_id"
     t.string   "password_salt"
     t.string   "crypted_password"

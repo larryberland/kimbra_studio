@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  message: MyText
+  sent_at: 2012-01-12 15:00:50
+  active: false
+  shoot: 
+
+two:
+  message: MyText
+  sent_at: 2012-01-12 15:00:50
+  active: false
+  shoot: 

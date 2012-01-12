@@ -1,3 +1,35 @@
+== Welcome to Kimbra Studios Click Plus+
+
+brew install imagemagick
+brew install postgres
+
+bundle install --path vendor
+
+rake db:create
+rake db:migrate
+rake db:seed
+
+start Server
+
+localhost:3000/studios/new
+
+select Sign Up with email and password to create yourself as a Studio user
+
+Setup Your Studio go to overview
+    /studio/overview
+
+    Setup a Shoot Date
+        Add Pictures
+
+Setup Merchandise Pieces
+    /admin/merchandise/pieces
+
+Setup Email Offers
+    /admin/email/offers
+
+Setup Customer Emails
+    /admin/customer/emails
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create

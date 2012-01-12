@@ -59,7 +59,7 @@ class User < ActiveRecord::Base
   def set_roles
     # TODO: set roles based on some new logic
     if roles.empty?
-      self.roles = [Role.where('name = ?', STUDIO).first]
+      self.roles = [Role.where('name = ?', Role::STUDIO).first]
     end
   end
 

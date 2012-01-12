@@ -1,5 +1,7 @@
 <h1>Listing studio_pictures</h1>
 <h3> For <%= @shoot.try(:name) %></h3>
+<%= link_to 'New Picture', new_studio_shoot_picture_path(@shoot) %>
+
 <table>
   <tr>
     <th>Description</th>
@@ -22,7 +24,4 @@
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Picture', new_studio_shoot_picture_path(@shoot) %>
 <%= link_to 'Back', studio_shoots_path %>

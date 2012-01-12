@@ -1,0 +1,29 @@
+<h1>Listing admin_customer_emails</h1>
+
+<table>
+  <tr>
+    <th>Message</th>
+    <th>Sent at</th>
+    <th>Active</th>
+    <th>Shoot</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_customer_emails.each do |admin_customer_email| %>
+  <tr>
+    <td><%= admin_customer_email.message %></td>
+    <td><%= admin_customer_email.sent_at %></td>
+    <td><%= admin_customer_email.active %></td>
+    <td><%= link_to 'Shoot', studio_shoot_path(admin_customer_email.shoot) %></td>
+    <td><%= link_to 'Show', admin_customer_email %></td>
+    <td><%= link_to 'Edit', edit_admin_customer_email_path(admin_customer_email) %></td>
+    <td><%= link_to 'Destroy', admin_customer_email, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Email', new_admin_customer_email_path %>

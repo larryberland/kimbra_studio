@@ -19,7 +19,7 @@
       <%= image_tag_thumb(@admin_merchandise_piece) %>
     </p>
     <div class="field">
-      <%= f.label :image %>
+      <%= f.label :image, 'Final Piece image' %>
       <%= f.file_field :image %>
       <%= f.label :remote_image_url, 'or image URL' %>
       <%= f.text_field :remote_image_url %>

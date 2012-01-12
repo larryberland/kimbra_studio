@@ -5,3 +5,8 @@
  *= require_self
  *= require_tree . 
 */
+div#body_wrapper {
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%}
+textarea { height:100px;}

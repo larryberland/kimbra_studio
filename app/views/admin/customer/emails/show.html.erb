@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Message:</b>
+  <%= @admin_customer_email.message %>
+</p>
+
+<p>
+  <b>Sent at:</b>
+  <%= @admin_customer_email.sent_at %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @admin_customer_email.active %>
+</p>
+
+<p>
+  <b>Shoot:</b>
+  <%= @admin_customer_email.shoot %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_customer_email_path(@admin_customer_email) %> |
+<%= link_to 'Back', admin_customer_emails_path %>
