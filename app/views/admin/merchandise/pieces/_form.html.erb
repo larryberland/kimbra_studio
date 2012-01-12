@@ -1,0 +1,71 @@
+<%= form_for(@admin_merchandise_piece, :html => {:multipart => true}) do |f| %>
+    <% if @admin_merchandise_piece.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@admin_merchandise_piece.errors.count, "error") %> prohibited this admin_merchandise_piece
+            from being saved:</h2>
+
+          <ul>
+            <% @admin_merchandise_piece.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
+    </div>
+    <p>
+      <%= image_tag_thumb(@admin_merchandise_piece) %>
+    </p>
+    <div class="field">
+      <%= f.label :image %>
+      <br/>
+      <%= f.file_field :image %>
+    </div>
+    <div class="field">
+      <%= f.label :remote_image_url, 'or image URL' %>
+      <br/>
+      <%= f.text_field :remote_image_url %>
+    </div>
+    <div class="field">
+      <%= f.label :short_description %>
+      <br/>
+      <%= f.text_field :short_description %>
+    </div>
+    <div class="field">
+      <%= f.label :description_markup, 'Description' %>
+      <br/>
+      <%= f.text_area :description_markup %>
+    </div>
+    <div class="field">
+      <%= f.label :sku %>
+      <br/>
+      <%= f.text_field :sku %>
+    </div>
+    <div class="field">
+      <%= f.label :price %>
+      <br/>
+      <%= f.text_field :price %>
+    </div>
+    <div class="field">
+      <%= f.label :active %>
+      <br/>
+      <%= f.check_box :active %>
+    </div>
+    <div class="field">
+      <%= f.label :featured %>
+      <br/>
+      <%= f.check_box :featured %>
+    </div>
+    <div class="field">
+      <%= f.label :deleted_at %>
+      <br/>
+      <%= f.datetime_select :deleted_at %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

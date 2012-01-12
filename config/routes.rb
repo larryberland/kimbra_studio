@@ -1,9 +1,13 @@
 KimbraStudio::Application.routes.draw do
 
 
-  resources :studios
+  namespace :admin do
+    namespace :merchandise do
+      resources :pieces
+    end
+  end
 
-  resources :pictures
+  resources :studios
 
   devise_for :users
 
@@ -24,19 +28,17 @@ KimbraStudio::Application.routes.draw do
 
   resources :categories
 
-  resources :pieces
-
   resources :offers
 
   namespace :studio do
-    resources :registrations,   :only => [:new, :create]
+    resources :registrations, :only => [:new, :create]
     resources :addresses
     resources :users
+    resources :clients
     resources :shoots do
       resources :pictures
     end
-    resource  :overview, :only => [:show]
-    resources :clients
+    resource :overview, :only => [:show]
   end
 
 

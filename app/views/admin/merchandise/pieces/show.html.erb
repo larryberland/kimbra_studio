@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @admin_merchandise_piece.name %>
+</p>
+
+<p>
+  <%= image_tag_thumb(@admin_merchandise_piece) %>
+</p>
+
+<p>
+  <b>Short description:</b>
+  <%= @admin_merchandise_piece.short_description %>
+</p>
+
+<p>
+  <b>Long description:</b>
+  <%= @admin_merchandise_piece.description_markup %>
+</p>
+
+<p>
+  <b>Sku:</b>
+  <%= @admin_merchandise_piece.sku %>
+</p>
+
+<p>
+  <b>Price:</b>
+  <%= @admin_merchandise_piece.price %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @admin_merchandise_piece.active %>
+</p>
+
+<p>
+  <b>Featured:</b>
+  <%= @admin_merchandise_piece.featured %>
+</p>
+
+<p>
+  <b>Deleted at:</b>
+  <%= @admin_merchandise_piece.deleted_at %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_merchandise_piece_path(@admin_merchandise_piece) %> |
+<%= link_to 'Back', admin_merchandise_pieces_path %>

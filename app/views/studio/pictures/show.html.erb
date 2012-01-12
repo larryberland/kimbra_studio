@@ -14,7 +14,7 @@
 </p>
 
 <p>
-  <%= image_tag @studio_picture.image_url(:thumb).to_s %>
+  <%= image_tag_thumb(@studio_picture) %>
 </p>
 
 <%= link_to 'Edit', edit_studio_shoot_picture_path(@shoot, @studio_picture) %> |

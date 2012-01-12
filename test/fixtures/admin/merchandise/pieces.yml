@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  image: MyString
+  short_description: MyString
+  long_description: MyString
+  sku: MyString
+  price: 9.99
+  active: false
+  featured: false
+  deleted_at: 2012-01-12 07:35:27
+
+two:
+  name: MyString
+  image: MyString
+  short_description: MyString
+  long_description: MyString
+  sku: MyString
+  price: 9.99
+  active: false
+  featured: false
+  deleted_at: 2012-01-12 07:35:27

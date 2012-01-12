@@ -2,7 +2,7 @@ class CreateStudioPictures < ActiveRecord::Migration
   def change
     create_table :studio_pictures do |t|
       t.string :description
-      t.string :file_name
+      t.string :image
       t.boolean :active
       t.references :shoot
 
