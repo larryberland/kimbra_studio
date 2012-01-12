@@ -4,5 +4,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
                   :sku, :price,
                   :active, :featured, :deleted_at
 
+  has_many :offers, :class_name => 'Admin::Email::Offer'
+
   mount_uploader :image, ImageUploader
 end

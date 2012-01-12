@@ -1,0 +1,43 @@
+<h1>Listing admin_email_offers</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Image</th>
+    <th>Description</th>
+    <th>X pos</th>
+    <th>Y pos</th>
+    <th>Width</th>
+    <th>Height</th>
+    <th>Activation code</th>
+    <th>Active</th>
+    <th>Piece</th>
+    <th>Studio picture</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_email_offers.each do |admin_email_offer| %>
+  <tr>
+    <td><%= admin_email_offer.name %></td>
+    <td><%= image_tag_list(admin_email_offer) %></td>
+    <td><%= admin_email_offer.description %></td>
+    <td><%= admin_email_offer.x_pos %></td>
+    <td><%= admin_email_offer.y_pos %></td>
+    <td><%= admin_email_offer.width %></td>
+    <td><%= admin_email_offer.height %></td>
+    <td><%= admin_email_offer.activation_code %></td>
+    <td><%= admin_email_offer.active %></td>
+    <td><%= image_tag_list(admin_email_offer.piece) %></td>
+    <td><%= image_tag_list(admin_email_offer.studio_picture) %></td>
+    <td><%= link_to 'Show', admin_email_offer %></td>
+    <td><%= link_to 'Edit', edit_admin_email_offer_path(admin_email_offer) %></td>
+    <td><%= link_to 'Destroy', admin_email_offer, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Offer', new_admin_email_offer_path %>

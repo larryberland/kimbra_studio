@@ -1,0 +1,56 @@
+<p>
+  <b>Name:</b>
+  <%= @admin_email_offer.name %>
+</p>
+
+<p>
+  <%= image_tag_thumb(@admin_email_offer) %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @admin_email_offer.description %>
+</p>
+
+<p>
+  <b>X pos:</b>
+  <%= @admin_email_offer.x_pos %>
+</p>
+
+<p>
+  <b>Y pos:</b>
+  <%= @admin_email_offer.y_pos %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @admin_email_offer.width %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @admin_email_offer.height %>
+</p>
+
+<p>
+  <b>Activation code:</b>
+  <%= @admin_email_offer.activation_code %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @admin_email_offer.active %>
+</p>
+
+<p>
+  <b>Piece:</b>
+  <%= image_tag_thumb(@admin_email_offer.piece) %>
+</p>
+
+<p>
+  <b>Studio picture:</b>
+  <%= image_tag_thumb(@admin_email_offer.studio_picture) %>
+</p>
+
+<%= link_to 'Edit', edit_admin_email_offer_path(@admin_email_offer) %> |
+<%= link_to 'Back', admin_email_offers_path %>

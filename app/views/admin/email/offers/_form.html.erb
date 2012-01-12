@@ -1,0 +1,58 @@
+<%= form_for(@admin_email_offer, :html => {:multipart => true}) do |f| %>
+  <% if @admin_email_offer.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@admin_email_offer.errors.count, "error") %> prohibited this admin_email_offer from being saved:</h2>
+
+      <ul>
+      <% @admin_email_offer.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+    <p>
+      <%= image_tag_thumb(@admin_merchandise_piece) %>
+    </p>
+    <div class="field">
+      <%= f.label :image %>
+      <%= f.file_field :image %>
+      <%= f.label :remote_image_url, 'or image URL' %>
+      <%= f.text_field :remote_image_url %>
+    </div>
+  <div class="field">
+    <%= f.label :description %><br />
+    <%= f.text_area :description, :rows => 4 %>
+  </div>
+  <div class="field">
+    <%= f.label :x_pos %>
+    <%= f.number_field :x_pos%>
+    <%= f.label :y_pos %>
+    <%= f.number_field :y_pos %>
+    <%= f.label :width %>
+    <%= f.number_field :width %>
+    <%= f.label :height %>
+    <%= f.number_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :activation_code %><br />
+    <%= f.text_field :activation_code %>
+  </div>
+  <div class="field">
+    <%= f.label :active %>
+    <%= f.check_box :active %>
+  </div>
+  <div class="field">
+    Create a pick list from Admin::Merchandise::Pieces
+  </div>
+  <div class="field">
+    Create a pick list from Studio::Pictures
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

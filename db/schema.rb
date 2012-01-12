@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112123527) do
+ActiveRecord::Schema.define(:version => 20120112143102) do
 
   create_table "address_types", :force => true do |t|
     t.string "name",        :limit => 64, :null => false
@@ -43,6 +43,25 @@ ActiveRecord::Schema.define(:version => 20120112123527) do
   add_index "addresses", ["addressable_id"], :name => "index_addresses_on_addressable_id"
   add_index "addresses", ["addressable_type"], :name => "index_addresses_on_addressable_type"
   add_index "addresses", ["state_id"], :name => "index_addresses_on_state_id"
+
+  create_table "admin_email_offers", :force => true do |t|
+    t.string   "name"
+    t.string   "image"
+    t.text     "description"
+    t.integer  "x_pos"
+    t.integer  "y_pos"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "activation_code"
+    t.boolean  "active"
+    t.integer  "piece_id"
+    t.integer  "studio_picture_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_email_offers", ["piece_id"], :name => "index_admin_email_offers_on_piece_id"
+  add_index "admin_email_offers", ["studio_picture_id"], :name => "index_admin_email_offers_on_studio_picture_id"
 
   create_table "admin_merchandise_pieces", :force => true do |t|
     t.string   "name"
@@ -94,13 +113,6 @@ ActiveRecord::Schema.define(:version => 20120112123527) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "studio_id"
-  end
-
-  create_table "offers", :force => true do |t|
-    t.string   "image"
-    t.integer  "pieces_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "pieces", :force => true do |t|

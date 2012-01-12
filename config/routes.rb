@@ -1,6 +1,8 @@
 KimbraStudio::Application.routes.draw do
 
 
+  namespace :admin do  namespace :email do resources :offers end end
+
   namespace :admin do
     namespace :merchandise do
       resources :pieces
@@ -27,8 +29,6 @@ KimbraStudio::Application.routes.draw do
   resources :terms, :only => [:index]
 
   resources :categories
-
-  resources :offers
 
   namespace :studio do
     resources :registrations, :only => [:new, :create]
