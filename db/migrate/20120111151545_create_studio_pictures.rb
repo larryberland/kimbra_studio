@@ -3,7 +3,7 @@ class CreateStudioPictures < ActiveRecord::Migration
     create_table :studio_pictures do |t|
       t.string :description
       t.string :image
-      t.boolean :active
+      t.boolean :active, :default => true
       t.references :shoot
 
       t.timestamps

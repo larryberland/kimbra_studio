@@ -13,7 +13,7 @@ class CreateStudios < ActiveRecord::Migration
     end
 
     create_table :info_studios do |t|
-      t.boolean :active
+      t.boolean :active, :default => true
       t.string :email_info
       t.string :email
       t.string :tax_id

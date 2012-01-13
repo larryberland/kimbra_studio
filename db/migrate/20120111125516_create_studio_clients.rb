@@ -4,7 +4,7 @@ class CreateStudioClients < ActiveRecord::Migration
       t.string :name
       t.string :email
       t.string :phone_number
-      t.boolean :active
+      t.boolean :active, :default => true
       t.references :address
 
       t.timestamps

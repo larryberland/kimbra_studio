@@ -7,7 +7,7 @@ class CreateAdminMerchandisePieces < ActiveRecord::Migration
       t.text   :description_markup
       t.string :sku
       t.decimal :price
-      t.boolean :active
+      t.boolean :active, :default => true
       t.boolean :featured
       t.datetime :deleted_at
 

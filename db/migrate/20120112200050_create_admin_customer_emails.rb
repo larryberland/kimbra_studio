@@ -3,7 +3,7 @@ class CreateAdminCustomerEmails < ActiveRecord::Migration
     create_table :admin_customer_emails do |t|
       t.text :message
       t.datetime :sent_at
-      t.boolean :active
+      t.boolean :active, :default => true
       t.references :shoot
 
       t.timestamps

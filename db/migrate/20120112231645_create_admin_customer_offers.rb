@@ -9,7 +9,7 @@ class CreateAdminCustomerOffers < ActiveRecord::Migration
       t.integer :width
       t.integer :height
       t.string :activation_code
-      t.boolean :active
+      t.boolean :active, :default => true
       t.references :email
       t.references :piece
       t.references :studio_picture
