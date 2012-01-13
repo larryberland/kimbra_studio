@@ -11,6 +11,7 @@ gem 'devise'
 gem 'pg'
 
 gem 'blueprint-rails'
+gem 'web-app-theme'
 
 # Gems used only for assets and not required
 # in production environments by default.
