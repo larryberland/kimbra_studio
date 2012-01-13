@@ -5,6 +5,9 @@
  *= require_self
  *= require_tree . 
 */
+
+require blueprint
+
 div#body_wrapper {
     margin-left: auto;
     margin-right: auto;
