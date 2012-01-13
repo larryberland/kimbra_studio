@@ -13,9 +13,9 @@
   <%= @studio_picture.active %>
 </p>
 
-<p>
+<div class="image-thumb">
   <%= image_tag_thumb(@studio_picture) %>
-</p>
+</div>
 
 <%= link_to 'Edit', edit_studio_shoot_picture_path(@shoot, @studio_picture) %> |
 <%= link_to 'Back', studio_shoot_pictures_path(@shoot) %>

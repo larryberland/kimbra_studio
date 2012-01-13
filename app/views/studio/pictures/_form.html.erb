@@ -14,7 +14,7 @@
     <% end %>
 
     <div class="field">
-      <%= f.label :description %>
+      <%= f.label :description, 'Description (optional)' %>
       <br/>
       <%= f.text_field :description %>
     </div>
@@ -22,9 +22,9 @@
       <%= image_tag_thumb(@studio_picture) %>
     </p>
     <div class="field">
-      <%= f.label :image %>
+      <%= f.label :image, 'Photo:' %>
       <%= f.file_field :image %>
-      <%= f.label :remote_image_url, 'or image URL' %>
+      <%= f.label :remote_image_url, 'or Photo URL' %>
       <%= f.text_field :remote_image_url %>
     </div>
     <div class="field">

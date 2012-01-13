@@ -5,6 +5,8 @@ class Studio::Shoot < ActiveRecord::Base
 
   has_many :pictures, :dependent => :destroy
 
+  before_save :set_name
+
   # allow the forms to send in a text name
   def category_name=(category_name)
     self.category = Category.find_or_initialize_by_name(category_name)
@@ -14,4 +16,9 @@ class Studio::Shoot < ActiveRecord::Base
     category.name if category
   end
 
+  private
+
+  def set_name
+    self.name = "#{category.name} for #{client.name}" if name.blank?
+  end
 end

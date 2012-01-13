@@ -1,5 +1,7 @@
 class Studio::ShootsController < ApplicationController
 
+  before_filter :form_info
+
   # GET /studio/shoots
   # GET /studio/shoots.json
   def index
@@ -25,7 +27,7 @@ class Studio::ShootsController < ApplicationController
   # GET /studio/shoots/new
   # GET /studio/shoots/new.json
   def new
-    @studio_shoot = Studio::Shoot.new
+    @studio_shoot        = Studio::Shoot.new
     @studio_shoot.studio = current_user.studio
 
     respond_to do |format|
@@ -42,8 +44,8 @@ class Studio::ShootsController < ApplicationController
   # POST /studio/shoots
   # POST /studio/shoots.json
   def create
-    @client = Studio::Client.new(params[:studio_shoot].delete(:client))
-    @studio_shoot = Studio::Shoot.new(params[:studio_shoot])
+    @client              = Studio::Client.new(params[:studio_shoot].delete(:client))
+    @studio_shoot        = Studio::Shoot.new(params[:studio_shoot])
     @studio_shoot.client = @client
     @studio_shoot.studio = current_user.studio
 
@@ -85,5 +87,11 @@ class Studio::ShootsController < ApplicationController
       format.html { redirect_to studio_shoots_url }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def form_info
+    @categories = Category.order(:name).all.map { |c| [c.name, c.id] }
   end
 end

@@ -25,13 +25,13 @@
 
     <div class="field">
       <%= f.label :category_name %>
-      <br/>
-      <%= f.text_field :category_name %>
+      <%= f.select :category_id, @categories %>
+
     </div>
 
     <%= render "studio/clients/form", :f => f %>
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit 'Create Photo Shoot' %>
     </div>
 <% end %>
