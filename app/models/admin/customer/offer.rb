@@ -1,0 +1,7 @@
+class Admin::Customer::Offer < ActiveRecord::Base
+  attr_accessible :image, :remote_image_url
+  belongs_to :piece, :class_name => 'Admin::Merchandise::Piece'
+  belongs_to :studio_picture, :class_name => 'Studio::Picture'
+  belongs_to :email, :class_name => 'Admin::Customer::Email'
+  mount_uploader :image, ImageUploader
+end

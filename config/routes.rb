@@ -23,10 +23,9 @@ KimbraStudio::Application.routes.draw do
 
   namespace :admin do
     namespace :customer do
-      resources :emails
-    end
-    namespace :email do
-      resources :offers
+      resources :emails do
+        resources :offers
+      end
     end
     namespace :merchandise do
       resources :pieces
@@ -43,6 +42,5 @@ KimbraStudio::Application.routes.draw do
     end
     resource :overview, :only => [:show]
   end
-
 
 end

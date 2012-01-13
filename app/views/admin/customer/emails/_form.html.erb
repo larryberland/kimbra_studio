@@ -27,21 +27,21 @@
       <%= f.check_box :active %>
     </div>
 
-    <% (0..2).each  do |index| %>
-        <div class='field'>
-          <% if @admin_customer_email.offers[index] %>
-            email offer id
-          <% else %>
-              <%= link_to "New Offer #{index+1}", new_admin_email_offer_path %>
-          <% end %>
-        </div>
+    <% if @admin_customer_email.id %>
+        <% (0..2).each do |index| %>
+            <div class='field'>
+              <% if @admin_customer_email.offers[index] %>
+                  email offer id
+              <% else %>
+                  <%= link_to "New Offer #{index+1}", new_admin_customer_email_offer_path(@admin_customer_email) %>
+              <% end %>
+            </div>
+        <% end %>
     <% end %>
 
 
     <div class="field">
-      <%= f.label :shoot %>
-      <br/>
-      <%= f.text_field :shoot %>
+      Pick list for a Shoot??
     </div>
     <div class="actions">
       <%= f.submit %>

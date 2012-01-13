@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112200050) do
+ActiveRecord::Schema.define(:version => 20120112231645) do
 
   create_table "address_types", :force => true do |t|
     t.string "name",        :limit => 64, :null => false
@@ -54,6 +54,27 @@ ActiveRecord::Schema.define(:version => 20120112200050) do
   end
 
   add_index "admin_customer_emails", ["shoot_id"], :name => "index_admin_customer_emails_on_shoot_id"
+
+  create_table "admin_customer_offers", :force => true do |t|
+    t.string   "name"
+    t.string   "image"
+    t.text     "description"
+    t.integer  "x_pos"
+    t.integer  "y_pos"
+    t.integer  "width"
+    t.integer  "height"
+    t.string   "activation_code"
+    t.boolean  "active"
+    t.integer  "email_id"
+    t.integer  "piece_id"
+    t.integer  "studio_picture_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_customer_offers", ["email_id"], :name => "index_admin_customer_offers_on_email_id"
+  add_index "admin_customer_offers", ["piece_id"], :name => "index_admin_customer_offers_on_piece_id"
+  add_index "admin_customer_offers", ["studio_picture_id"], :name => "index_admin_customer_offers_on_studio_picture_id"
 
   create_table "admin_email_offers", :force => true do |t|
     t.string   "name"

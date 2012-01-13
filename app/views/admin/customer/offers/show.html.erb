@@ -1,0 +1,53 @@
+<p>
+  <b>Email:</b>
+  <%= @admin_customer_offer.email.to_s %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @admin_customer_offer.name %>
+</p>
+
+<div class='image-thumb'>
+  <%= image_tag_thumb(@admin_customer_offer) %>
+</div>
+
+<p>
+  <b>Description:</b>
+  <%= @admin_customer_offer.description %>
+</p>
+
+<p>
+  <b>X pos:</b>
+  <%= @admin_customer_offer.x_pos %>
+  <b>Y pos:</b>
+  <%= @admin_customer_offer.y_pos %>
+  <b>Width:</b>
+  <%= @admin_customer_offer.width %>
+  <b>Height:</b>
+  <%= @admin_customer_offer.height %>
+</p>
+
+<p>
+  <b>Activation code:</b>
+  <%= @admin_customer_offer.activation_code %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @admin_customer_offer.active %>
+</p>
+
+<p>
+  <b>Piece:</b>
+  <%= @admin_customer_offer.piece %>
+</p>
+
+<p>
+  <b>Studio picture:</b>
+  <%= @admin_customer_offer.studio_picture %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_customer_email_offer_path(@email, @admin_customer_offer) %> |
+<%= link_to 'Back', admin_customer_email_offers_path(@email) %>

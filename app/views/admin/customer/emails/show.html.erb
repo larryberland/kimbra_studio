@@ -1,5 +1,4 @@
-<p id="notice"><%= notice %></p>
-
+<div class='show'>
 <p>
   <b>Message:</b>
   <%= @admin_customer_email.message %>
@@ -19,7 +18,13 @@
   <b>Shoot:</b>
   <%= @admin_customer_email.shoot %>
 </p>
-
+</div>
+<% @admin_customer_email.offers.each_with_index do |offer, index| %>
+    <div class='image-thumb'>
+      <%= "Offer #{index+1}" %>
+      <%= image_tag_thumb(offer) %>
+    </div>
+<% end %>
 
 <%= link_to 'Edit', edit_admin_customer_email_path(@admin_customer_email) %> |
 <%= link_to 'Back', admin_customer_emails_path %>
