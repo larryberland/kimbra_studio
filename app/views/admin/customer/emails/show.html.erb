@@ -15,9 +15,10 @@
 </p>
 
 <p>
-  <b>Shoot:</b>
-  <%= @admin_customer_email.shoot %>
+  <b>Session:</b>
+  <%= link_to 'Session', my_studio_session_path(@admin_customer_email.my_studio_session) %> |
 </p>
+
 </div>
 <% @admin_customer_email.offers.each_with_index do |offer, index| %>
     <div class='image-thumb'>

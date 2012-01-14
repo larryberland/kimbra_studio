@@ -4,7 +4,6 @@
 
 <table>
   <tr>
-    <th>Email</th>
     <th>Name</th>
     <th>Image</th>
     <th>Description</th>
@@ -21,7 +20,6 @@
 
 <% @admin_customer_offers.each do |admin_customer_offer| %>
   <tr>
-    <td><%= admin_customer_offer.email %></td>
     <td><%= admin_customer_offer.name %></td>
     <td><%= image_tag_list(admin_customer_offer) %></td>
     <td><%= admin_customer_offer.description %></td>
@@ -29,8 +27,10 @@
     <td><%= admin_customer_offer.height %></td>
     <td><%= admin_customer_offer.activation_code %></td>
     <td><%= admin_customer_offer.active %></td>
-    <td><%= admin_customer_offer.piece %></td>
-    <td><%= admin_customer_offer.studio_picture %></td>
+
+    <td><%= image_tag_list(admin_customer_offer.piece) %></td>
+    <td><%= image_tag_list(admin_customer_offer.portrait) %></td>
+
     <td><%= link_to 'Show', admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
     <td><%= link_to 'Edit', edit_admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
     <td><%= link_to 'Destroy', admin_customer_email_offer_path(@email, admin_customer_offer), confirm: 'Are you sure?', method: :delete %></td>

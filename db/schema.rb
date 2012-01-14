@@ -47,13 +47,13 @@ ActiveRecord::Schema.define(:version => 20120114142447) do
   create_table "admin_customer_emails", :force => true do |t|
     t.text     "message"
     t.datetime "sent_at"
-    t.boolean  "active"
-    t.integer  "shoot_id"
+    t.boolean  "active",               :default => true
+    t.integer  "my_studio_session_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "admin_customer_emails", ["shoot_id"], :name => "index_admin_customer_emails_on_shoot_id"
+  add_index "admin_customer_emails", ["my_studio_session_id"], :name => "index_admin_customer_emails_on_my_studio_session_id"
 
   create_table "admin_customer_offers", :force => true do |t|
     t.string   "name"
@@ -64,37 +64,17 @@ ActiveRecord::Schema.define(:version => 20120114142447) do
     t.integer  "width"
     t.integer  "height"
     t.string   "activation_code"
-    t.boolean  "active"
+    t.boolean  "active",          :default => true
     t.integer  "email_id"
     t.integer  "piece_id"
-    t.integer  "studio_picture_id"
+    t.integer  "portrait_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "admin_customer_offers", ["email_id"], :name => "index_admin_customer_offers_on_email_id"
   add_index "admin_customer_offers", ["piece_id"], :name => "index_admin_customer_offers_on_piece_id"
-  add_index "admin_customer_offers", ["studio_picture_id"], :name => "index_admin_customer_offers_on_studio_picture_id"
-
-  create_table "admin_email_offers", :force => true do |t|
-    t.string   "name"
-    t.string   "image"
-    t.text     "description"
-    t.integer  "x_pos"
-    t.integer  "y_pos"
-    t.integer  "width"
-    t.integer  "height"
-    t.string   "activation_code"
-    t.boolean  "active"
-    t.integer  "piece_id"
-    t.integer  "studio_picture_id"
-    t.integer  "email_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "admin_email_offers", ["piece_id"], :name => "index_admin_email_offers_on_piece_id"
-  add_index "admin_email_offers", ["studio_picture_id"], :name => "index_admin_email_offers_on_studio_picture_id"
+  add_index "admin_customer_offers", ["portrait_id"], :name => "index_admin_customer_offers_on_portrait_id"
 
   create_table "admin_merchandise_pieces", :force => true do |t|
     t.string   "name"

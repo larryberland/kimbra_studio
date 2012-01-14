@@ -1,16 +1,12 @@
 <p>
   <b>Email:</b>
-  <%= @admin_customer_offer.email.to_s %>
+  <%= @admin_customer_offer.try(:email).try(:my_studio_session).try(:client).try(:email) %>
 </p>
 
 <p>
   <b>Name:</b>
   <%= @admin_customer_offer.name %>
 </p>
-
-<div class='image-thumb'>
-  <%= image_tag_thumb(@admin_customer_offer) %>
-</div>
 
 <p>
   <b>Description:</b>
@@ -38,16 +34,22 @@
   <%= @admin_customer_offer.active %>
 </p>
 
-<p>
-  <b>Piece:</b>
-  <%= @admin_customer_offer.piece %>
-</p>
+<div class='image-thumb'>
+  <p>
+    <b>Jewelry Offer:</b>
+    <%= image_tag_thumb(@admin_customer_offer) %>
+  </p>
 
-<p>
-  <b>Studio picture:</b>
-  <%= @admin_customer_offer.studio_picture %>
-</p>
+  <p>
+    <b>Jewelry Image:</b>
+    <%= image_tag_thumb(@admin_customer_offer.piece) %>
+  </p>
 
+  <p>
+    <b>Studio Portrait:</b>
+    <%= image_tag_thumb(@admin_customer_offer.portrait) %>
+  </p>
+</div>
 
 <%= link_to 'Edit', edit_admin_customer_email_offer_path(@email, @admin_customer_offer) %> |
 <%= link_to 'Back', admin_customer_email_offers_path(@email) %>

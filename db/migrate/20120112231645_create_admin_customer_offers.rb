@@ -12,12 +12,12 @@ class CreateAdminCustomerOffers < ActiveRecord::Migration
       t.boolean :active, :default => true
       t.references :email
       t.references :piece
-      t.references :studio_picture
+      t.references :portrait
 
       t.timestamps
     end
     add_index :admin_customer_offers, :email_id
     add_index :admin_customer_offers, :piece_id
-    add_index :admin_customer_offers, :studio_picture_id
+    add_index :admin_customer_offers, :portrait_id
   end
 end
