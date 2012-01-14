@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(:version => 20120114142447) do
     t.text     "description_markup"
     t.string   "sku"
     t.decimal  "price"
-    t.boolean  "active"
+    t.boolean  "active",             :default => true
     t.boolean  "featured"
     t.datetime "deleted_at"
     t.datetime "created_at"
@@ -183,29 +183,6 @@ ActiveRecord::Schema.define(:version => 20120114142447) do
   add_index "states", ["abbreviation"], :name => "index_states_on_abbreviation"
   add_index "states", ["country_id"], :name => "index_states_on_country_id"
   add_index "states", ["name"], :name => "index_states_on_name"
-
-  create_table "studio_clients", :force => true do |t|
-    t.string   "name"
-    t.string   "email"
-    t.string   "phone_number"
-    t.boolean  "active"
-    t.integer  "address_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "studio_clients", ["address_id"], :name => "index_studio_clients_on_address_id"
-
-  create_table "studio_pictures", :force => true do |t|
-    t.string   "description"
-    t.string   "image"
-    t.boolean  "active"
-    t.integer  "shoot_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "studio_pictures", ["shoot_id"], :name => "index_studio_pictures_on_shoot_id"
 
   create_table "studio_shoots", :force => true do |t|
     t.string   "name"

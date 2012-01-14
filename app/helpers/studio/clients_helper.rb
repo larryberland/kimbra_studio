@@ -1,2 +1,0 @@
-module Studio::ClientsHelper
-end

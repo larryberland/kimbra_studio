@@ -1,2 +1,0 @@
-module Studio::PicturesHelper
-end
