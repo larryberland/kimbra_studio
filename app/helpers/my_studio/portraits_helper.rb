@@ -1,0 +1,2 @@
+module MyStudio::PortraitsHelper
+end

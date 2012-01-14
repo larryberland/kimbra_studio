@@ -1,0 +1,22 @@
+<div class='sub-form' title='Client Info'>
+
+  <%= f.fields_for :client, client do |g| %>
+
+      <div>
+        <h3>Client</h3>
+
+        <div class="field">
+          <%= g.label :name %>
+          <%= g.text_field :name %>
+          <%= g.label :email %>
+          <%= g.email_field :email %>
+          <%= g.label :phone_number %>
+          <%= g.text_field :phone_number %>
+        </div>
+      </div>
+      <div class="field">
+        <%= g.label :active, 'Client active?' %>
+        <%= g.check_box :active %>
+      </div>
+  <% end %>
+</div>

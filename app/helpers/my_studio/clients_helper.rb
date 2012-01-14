@@ -1,0 +1,2 @@
+module MyStudio::ClientsHelper
+end

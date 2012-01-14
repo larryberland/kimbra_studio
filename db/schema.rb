@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120112231645) do
+ActiveRecord::Schema.define(:version => 20120114142447) do
 
   create_table "address_types", :force => true do |t|
     t.string "name",        :limit => 64, :null => false
@@ -147,6 +147,44 @@ ActiveRecord::Schema.define(:version => 20120112231645) do
     t.datetime "updated_at"
     t.integer  "studio_id"
   end
+
+  create_table "my_studio_clients", :force => true do |t|
+    t.string   "name"
+    t.string   "email"
+    t.string   "phone_number"
+    t.boolean  "active",       :default => true
+    t.integer  "address_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "my_studio_clients", ["address_id"], :name => "index_my_studio_clients_on_address_id"
+
+  create_table "my_studio_portraits", :force => true do |t|
+    t.string   "image"
+    t.string   "description"
+    t.boolean  "active",               :default => true
+    t.integer  "my_studio_session_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "my_studio_portraits", ["my_studio_session_id"], :name => "index_my_studio_portraits_on_my_studio_session_id"
+
+  create_table "my_studio_sessions", :force => true do |t|
+    t.string   "name"
+    t.datetime "session_at"
+    t.boolean  "active",      :default => true
+    t.integer  "studio_id"
+    t.integer  "client_id"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "my_studio_sessions", ["category_id"], :name => "index_my_studio_sessions_on_category_id"
+  add_index "my_studio_sessions", ["client_id"], :name => "index_my_studio_sessions_on_client_id"
+  add_index "my_studio_sessions", ["studio_id"], :name => "index_my_studio_sessions_on_studio_id"
 
   create_table "roles", :force => true do |t|
     t.string "name", :limit => 30, :null => false

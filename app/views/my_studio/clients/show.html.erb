@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @my_studio_client.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @my_studio_client.email %>
+</p>
+
+<p>
+  <b>Phone number:</b>
+  <%= @my_studio_client.phone_number %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @my_studio_client.active %>
+</p>
+
+<p>
+  <b>Address:</b>
+  <%= @my_studio_client.address %>
+</p>
+
+
+<%= link_to 'Edit', edit_my_studio_client_path(@my_studio_client) %> |
+<%= link_to 'Back', my_studio_clients_path %>

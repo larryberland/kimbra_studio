@@ -1,5 +1,6 @@
 class Studio < ActiveRecord::Base
 
+  has_many :sessions, :class_name => 'MyStudio::Session', :dependent => :destroy
   has_many :shoots, :dependent => :destroy
 
   has_many :users, :dependent => :destroy

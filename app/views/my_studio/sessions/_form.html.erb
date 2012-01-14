@@ -1,0 +1,42 @@
+<%= form_for(@my_studio_session) do |f| %>
+    <% if @my_studio_session.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@my_studio_session.errors.count, "error") %> prohibited this my_studio_session from being
+            saved:</h2>
+
+          <ul>
+            <% @my_studio_session.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :name %>
+      <br/>
+      <%= f.text_field :name %>
+    </div>
+
+    <div class="field ui-widget">
+      <%= f.label :session_at, 'Session Date:' %>
+      <br/>
+      <%= f.text_field :session_at %>
+    </div>
+
+    <div class="field">
+      <%= f.label :active %>
+      <%= f.check_box :active %>
+    </div>
+
+    <div class="field">
+      <%= f.label :category_id %>
+      <%= f.select :category_id, @categories %>
+    </div>
+
+    <%= render "my_studio/clients/form", :f => f, :client => @my_studio_session.client %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>

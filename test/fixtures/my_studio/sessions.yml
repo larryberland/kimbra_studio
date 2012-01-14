@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  session_at: 2012-01-14 09:22:39
+  active: false
+  studio: 
+  client: 
+  category: 
+
+two:
+  name: MyString
+  session_at: 2012-01-14 09:22:39
+  active: false
+  studio: 
+  client: 
+  category: 

@@ -1,0 +1,31 @@
+<h1>Listing my_studio_clients</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone number</th>
+    <th>Active</th>
+    <th>Address</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @my_studio_clients.each do |my_studio_client| %>
+  <tr>
+    <td><%= my_studio_client.name %></td>
+    <td><%= my_studio_client.email %></td>
+    <td><%= my_studio_client.phone_number %></td>
+    <td><%= my_studio_client.active %></td>
+    <td><%= my_studio_client.address %></td>
+    <td><%= link_to 'Show', my_studio_client %></td>
+    <td><%= link_to 'Edit', edit_my_studio_client_path(my_studio_client) %></td>
+    <td><%= link_to 'Destroy', my_studio_client, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Client', new_my_studio_client_path %>

@@ -1,0 +1,19 @@
+<p>
+  <b>Session:</b>
+  <%= @my_studio_portrait.try(:my_studio_session).try(:name) %>
+</p>
+<p>
+  <b>Description:</b>
+  <%= @my_studio_portrait.description %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @my_studio_portrait.active %>
+</p>
+<div class="image-thumb">
+  <%= image_tag_thumb(@my_studio_portrait) %>
+</div>
+
+<%= link_to 'Edit', edit_my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %> |
+<%= link_to 'Back', my_studio_session_portraits_path(@my_studio_session) %>

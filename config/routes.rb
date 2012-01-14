@@ -32,6 +32,14 @@ KimbraStudio::Application.routes.draw do
     end
   end
 
+  namespace :my_studio do
+    resources :clients
+    resources :sessions do
+      resources :portraits
+    end
+    resource :overview, :only => [:show]
+  end
+
   namespace :studio do
     resources :registrations, :only => [:new, :create]
     resources :addresses

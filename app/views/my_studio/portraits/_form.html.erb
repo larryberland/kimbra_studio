@@ -1,0 +1,39 @@
+<% url = @my_studio_portrait.id.nil? ? my_studio_session_portraits_path(@my_studio_session) : my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %>
+<%= form_for(@my_studio_portrait, :url => url, :html => {:multipart => true}) do |f| %>
+    <% if @my_studio_portrait.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@my_studio_portrait.errors.count, "error") %> prohibited this my_studio_portrait from being
+            saved:</h2>
+
+          <ul>
+            <% @my_studio_portrait.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :description %>
+      <br/>
+      <%= f.text_field :description %>
+    </div>
+
+    <p>
+      <%= image_tag_thumb(@my_studio_portrait) %>
+    </p>
+    <div class="field">
+      <%= f.label :image, 'Portrait:' %>
+      <%= f.file_field :image %>
+      <%= f.label :remote_image_url, 'or Portrait URL' %>
+      <%= f.text_field :remote_image_url %>
+    </div>
+
+    <div class="field">
+      <%= f.label :active %>
+      <%= f.check_box :active %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
+<% end %>
