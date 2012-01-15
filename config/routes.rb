@@ -1,10 +1,8 @@
 KimbraStudio::Application.routes.draw do
 
-  devise_for :devise_users
-
   resources :studios
 
-  devise_for :users
+  devise_for :users, :path_names => {:sign_up => 'register'}
   resources :users
 
   match 'admin' => 'admin/overviews#index'
