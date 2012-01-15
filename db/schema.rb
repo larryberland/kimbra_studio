@@ -249,7 +249,7 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
     t.string   "last_name"
     t.date     "birth_date"
     t.string   "friendly_name"
-    t.string   "email"
+    t.string   "email",                                 :default => "", :null => false
     t.string   "phone_number"
     t.string   "address_1"
     t.string   "address_2"
@@ -263,19 +263,26 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
     t.string   "perishable_token"
     t.string   "persistence_token"
     t.string   "access_token"
-    t.integer  "comments_count",           :default => 0
+    t.integer  "comments_count",                        :default => 0
+    t.string   "encrypted_password",     :limit => 128, :default => "", :null => false
+    t.string   "confirmation_token"
+    t.datetime "confirmed_at"
+    t.datetime "confirmation_sent_at"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",                         :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "database_authenticatable"
-    t.boolean  "recoverable"
-    t.boolean  "rememberable"
-    t.boolean  "trackable"
-    t.string   "reset_password_token"
-    t.string   "encrypted_password"
     t.integer  "studio_id"
   end
 
   add_index "users", ["access_token"], :name => "index_users_on_access_token", :unique => true
+  add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["first_name"], :name => "index_users_on_first_name"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"

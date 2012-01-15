@@ -23,10 +23,13 @@
       <ul id="menu-main">
         <li class="" id="menu-main-user">
           <div>
-            <strong><%= link_to 'Login', login_path %></strong> or
-            <span><%= link_to 'Sign up', signup_path %></span>
-            <strong>Hi <%= current_user.try(:email) %></strong>
-            <span>(<%= link_to 'not you?', logout_path %>)</span>
+            <% if user_signed_in? %>
+                <strong>Hi <%= current_user.try(:email) %></strong>
+                <span>(<%= link_to 'not you?', destroy_user_session_path, method: :delete  %>)</span>
+            <% else %>
+                <strong><%= link_to 'Login', new_user_session_path %></strong> or
+                <span><%= link_to 'Sign up', new_user_registration_path %></span>
+            <% end %>
           </div>
         </li>
       </ul>

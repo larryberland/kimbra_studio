@@ -7,6 +7,13 @@ class WelcomeController < ApplicationController
     #@best_selling_pieces = Piece.limit(3)
     #@other_pieces  ## search 2 or 3 categories (maybe based on the user)
     unless @featured_piece
+      if user_signed_in?
+        if current_user.studio? or current_user.studio_staff?
+          redirect_to my_studio_overview_url
+        elsif current_user.admin?
+          redirect_to admin_customer_emails_path
+        end
+      end
       if current_user
         #puts "role=>#{current_user.roles.inspect}"
         #if current_user.admin?

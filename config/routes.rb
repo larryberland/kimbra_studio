@@ -1,15 +1,16 @@
 KimbraStudio::Application.routes.draw do
 
+  devise_for :devise_users
+
   resources :studios
 
   devise_for :users
-
   resources :users
 
   match 'admin' => 'admin/overviews#index'
-  match 'login' => 'user_sessions#new'
-  match 'logout' => 'user_sessions#destroy'
-  match 'signup' => 'my_studio/registrations#new'
+  #match 'login' => 'user_sessions#new'
+  #match 'logout' => 'user_sessions#destroy'
+  #match 'signup' => 'my_studio/registrations#new'
 
   root :to => "welcome#index"
 

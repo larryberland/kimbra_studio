@@ -23,11 +23,11 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :access_token
       t.integer :comments_count, :default => 0
 
-      #t.database_authenticatable :null => false
-      #t.confirmable
-      #t.recoverable
-      #t.rememberable
-      #t.trackable
+      t.database_authenticatable :null => false
+      t.confirmable
+      t.recoverable
+      t.rememberable
+      t.trackable
 
       # t.lockable :lock_strategy => :failed_attempts, :unlock_strategy => :both
       # t.token_authenticatable
@@ -41,9 +41,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
     add_index :users, :perishable_token, :unique => true
     add_index :users, :persistence_token, :unique => true
     add_index :users, :access_token, :unique => true
-    #add_index :users, :confirmation_token,   :unique => true
-    #add_index :users, :confirmation_token,   :unique => true
-    #add_index :users, :reset_password_token, :unique => true
+    add_index :users, :confirmation_token,   :unique => true
+    add_index :users, :reset_password_token, :unique => true
     # add_index :users, :unlock_token,         :unique => true
   end
 
