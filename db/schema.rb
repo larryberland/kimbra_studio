@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120114142447) do
+ActiveRecord::Schema.define(:version => 20120114204523) do
 
   create_table "address_types", :force => true do |t|
     t.string "name",        :limit => 64, :null => false
@@ -104,7 +104,7 @@ ActiveRecord::Schema.define(:version => 20120114142447) do
   add_index "countries", ["name"], :name => "index_countries_on_name"
 
   create_table "info_studios", :force => true do |t|
-    t.boolean  "active"
+    t.boolean  "active",         :default => true
     t.string   "email_info"
     t.string   "email"
     t.string   "tax_id"
@@ -139,6 +139,37 @@ ActiveRecord::Schema.define(:version => 20120114142447) do
   end
 
   add_index "my_studio_clients", ["address_id"], :name => "index_my_studio_clients_on_address_id"
+
+  create_table "my_studio_infos", :force => true do |t|
+    t.integer  "studio_id"
+    t.boolean  "active",             :default => true
+    t.string   "website"
+    t.string   "email"
+    t.string   "email_notification"
+    t.string   "tax_ein"
+    t.boolean  "pictage_member"
+    t.boolean  "smug_mug_member"
+    t.boolean  "mac_user"
+    t.boolean  "windows_user"
+    t.boolean  "ping_email",         :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "my_studio_infos", ["studio_id"], :name => "index_my_studio_infos_on_studio_id"
+
+  create_table "my_studio_mini_sites", :force => true do |t|
+    t.integer  "studio_id"
+    t.string   "bgcolor"
+    t.string   "logo"
+    t.string   "font_family"
+    t.string   "font_color"
+    t.string   "theme"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "my_studio_mini_sites", ["studio_id"], :name => "index_my_studio_mini_sites_on_studio_id"
 
   create_table "my_studio_portraits", :force => true do |t|
     t.string   "image"
@@ -224,7 +255,8 @@ ActiveRecord::Schema.define(:version => 20120114142447) do
     t.string   "address_2"
     t.string   "state"
     t.string   "city"
-    t.string   "zip"
+    t.integer  "state_id"
+    t.string   "zip_code"
     t.string   "customer_cim_id"
     t.string   "password_salt"
     t.string   "crypted_password"

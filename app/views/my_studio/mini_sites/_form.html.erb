@@ -1,0 +1,30 @@
+<div>
+  <h3>Mini Site Info</h3>
+  <%= f.fields_for :mini_site, mini_site do |g| %>
+      <div class="field">
+        <%= g.label :bgcolor %>
+        <br/>
+        <%= g.text_field :bgcolor %>
+      </div>
+      <div class="field">
+        <%= g.label :logo %>
+        <br/>
+        <%= g.text_field :logo %>
+      </div>
+      <div class="field">
+        <%= g.label :font_family %>
+        <br/>
+        <%= g.text_field :font_family %>
+      </div>
+      <div class="field">
+        <%= g.label :font_color %>
+        <br/>
+        <%= g.text_field :font_color %>
+      </div>
+      <div class="field">
+        <%= g.label :theme %>
+        <br/>
+        <%= g.text_field :theme %>
+      </div>
+  <% end %>
+</div>

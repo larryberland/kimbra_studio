@@ -7,9 +7,6 @@
     <%= stylesheet_link_tag 'cupertino/jquery-ui-1.8.12.custom' %>
 <% end %>
 
-<% content_for :bottom do -%>
-    <%= javascript_include_tag 'jquery.datePicker-2.1.2', 'datePickerInitialize' %>
-<% end %>
 <% if @studio.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@studio.errors.count, "error") %> prohibited you from logging in:</h2>
@@ -32,7 +29,7 @@
         <fieldset>
           <ol id='login_form'>
             <%#= render "info_studio/form", :f => f %>
-            <%= form.fields_for :info_studio do |g| %>
+            <%= form.fields_for :info do |g| %>
                 <li>
                   <%= g.label :email, 'Email' %>
                   <%= g.email_field :email %>
@@ -53,7 +50,7 @@
   </div>
 
   <div id='signup'>
-    <%= form_for @studio, :url => studio_registrations_path(@studio) do |form| %>
+    <%= form_for @studio, :url => my_studio_registrations_path(@studio) do |form| %>
         <h3>New to <%= site_name %>?</h3>
 
         <p>A <%= site_name %> account is required to checkout. </p>
@@ -67,48 +64,11 @@
               <%= form.label :phone_number, 'phone_number' %>
               <%= form.text_field :phone_number %>
             </li>
-
-            <%= form.fields_for :info_studio do |g| %>
-                <li>
-                  <%= g.label :email, 'Email' %>
-                  <%= g.email_field :email %>
-                </li>
-                <li>
-                  <%= g.label :tax_id, 'Tax ID or EIN' %>
-                  <%= g.text_field :tax_id %>
-                </li>
-                <li>
-                  <%= g.label :website, 'Your website' %>
-                  <%= g.text_field :website %>
-                </li>
-                <div class="field">
-                  <%= g.label :pictage_member %><br />
-                  <%= g.check_box :pictage_member %>
-                </div>
-                <div class="field">
-                  <%= g.label :mac_user %><br />
-                  <%= g.check_box :mac_user %>
-                </div>
-                <div class="field">
-                  <%= g.label :windows_user %><br />
-                  <%= g.check_box :windows_user %>
-                </div>
-                <div class="field">
-                  <%= g.label :ping_email, 'Would you like email notifications?' %><br />
-                  <%= g.check_box :ping_email %>
-                </div>
-
-            <% end %>
+            <%= render 'my_studio/infos/form', :f => form, :info => @studio.info %>
           </ol>
-          <%#= form.buttons do %>
           <%= form.submit "Register" %>
-          <%# end %>
         </fieldset>
     <% end %>
-  </div>
-  <div class='ar-widget'>
-    <h3 style='text-align:left;'> My Addresses </h3>
-    <%= link_to 'View My Addresses', studio_addresses_path %>
   </div>
 
 </div>

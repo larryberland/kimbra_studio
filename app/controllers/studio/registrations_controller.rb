@@ -4,14 +4,16 @@ class Studio::RegistrationsController < ApplicationController
 
   def new
     @registration = true
-    @studio       = Studio.new(:info_studio => InfoStudio.new)
+    @studio       = Studio.new(:info => MyStudio::Info.new, :mini_site => MyStudio::MiniSite.new)
     #render :template => 'user_sessions/new'
   end
 
   def create
-    @info_studio = InfoStudio.new(params[:studio].delete(:info_studio))
+    @info = MyStudio::Info.new(params[:studio].delete(:info))
+    @mini_site = MyStudio::MiniSite.new(params[:studio].delete(:mini_site))
     @studio = Studio.new(params[:studio])
-    @studio.info_studio = @info_studio if @info_studio
+    @studio.info = @info if @info
+    @studio.mini_site = @mini_site if @mini_site
     @studio.current_user = current_user
 
     # Saving without session maintenance to skip

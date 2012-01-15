@@ -1,4 +1,7 @@
 class UsersController < ApplicationController
+
+  before_filter :form_info
+
   # GET /users
   # GET /users.json
   def index
@@ -79,5 +82,11 @@ class UsersController < ApplicationController
       format.html { redirect_to users_url }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def form_info
+    @states = State.form_selector
   end
 end

@@ -23,8 +23,9 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    current_user_session.destroy
-    reset_session
+    # ror_ecommerce uses auth_logic
+    #current_user_session.destroy
+    #reset_session
     cookies.delete(:hadean_uid)
     flash[:notice] = I18n.t('logout_successful')
     redirect_to login_url

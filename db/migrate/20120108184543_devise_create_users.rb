@@ -13,8 +13,8 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :address_2
       t.string :state
       t.string :city
-      t.string :state
-      t.string :zip
+      t.references :state
+      t.string :zip_code
       t.string :customer_cim_id ## This is the ID returned from AUTH.NET
       t.string :password_salt
       t.string :crypted_password

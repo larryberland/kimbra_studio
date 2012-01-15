@@ -1,9 +1,9 @@
 <h1 style='text-align:left;'> My Studio </h1>
 <p>
   <b>Name:</b>
-  <%= current_user.studio.name %>
+  <%= @my_studio.try(:name) %>
   <b>Phone number:</b>
-  <%= current_user.studio.phone_number %>
+  <%= @my_studio.try(:phone_number) %>
 </p>
 
 <div class='span-18 column' style='width:708px;'>
@@ -12,16 +12,16 @@
     <%= link_to 'View My Sessions', my_studio_sessions_path %>
   </div>
   <div class='ar-widget'>
+    <h3 style='text-align:left;'> My Staff </h3>
+    <%= link_to 'View My Staff', my_studio_staffers_path %>
+  </div>
+  <div class='ar-widget'>
     <h3 style='text-align:left;'> My Addresses </h3>
     <%= link_to 'View My Addresses', studio_addresses_path %>
   </div>
   <div class='ar-widget'>
     <h3 style='text-align:left;'> My Info </h3>
-    <%= link_to 'View My Info', studio_user_path(current_user) %>
-  </div>
-  <div class='ar-widget'>
-    <h3 style='text-align:left;'> My Profile </h3>
-    <%= link_to 'View My Profile', studio_path(current_user.studio) %>
+    <%= link_to 'View My Info', user_path(current_user) %>
   </div>
 </div>
 <div class='span-6 last ar-widget'>

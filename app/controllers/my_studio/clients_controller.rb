@@ -1,4 +1,4 @@
-class MyStudio::ClientsController < ApplicationController
+class MyStudio::ClientsController < MyStudio::BaseController
   # GET /my_studio/clients
   # GET /my_studio/clients.json
   def index

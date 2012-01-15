@@ -1,4 +1,4 @@
-class MyStudio::OverviewsController < ApplicationController
+class MyStudio::OverviewsController < MyStudio::BaseController
 
   # GET /my_studio/overview
   # GET /my_studio/overview.json

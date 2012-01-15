@@ -1,0 +1,76 @@
+<% content_for :head do -%>
+    <% if @registration %>
+        <%= stylesheet_link_tag 'signup.css' %>
+    <% else %>
+        <%= stylesheet_link_tag 'login.css' %>
+    <% end %>
+    <%= stylesheet_link_tag 'cupertino/jquery-ui-1.8.12.custom' %>
+<% end %>
+
+<% if @studio.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@studio.errors.count, "error") %> prohibited you from logging in:</h2>
+
+      <ul>
+        <% @studio.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+<div id='login-wrapper' class='hadean-login'>
+  <div id='login' class='hadean-login span-8 '>
+
+    <%= form_for @studio, :as => :studio,
+                 :url         => studio_registrations_path,
+                 :html        => {:class => 'span-12'} do |form| %>
+        <h3>Log in.</h3>
+        <fieldset>
+          <ol id='login_form'>
+            <%#= render "info_studio/form", :f => f %>
+            <%= form.fields_for :info do |g| %>
+                <li>
+                  <%= g.label :email, 'Email' %>
+                  <%= g.email_field :email %>
+                </li>
+            <% end %>
+
+            <li>
+              <%= form.label :password, 'Password' %>
+              <%= form.password_field :password %>
+            </li>
+
+          </ol>
+
+          <%= form.submit "Log In" %>
+
+        </fieldset>
+    <% end %>
+  </div>
+
+  <div id='signup'>
+    <%= form_for @studio, :url => my_studio_registrations_path(@studio) do |form| %>
+        <h3>New to <%= site_name %>?</h3>
+
+        <p>A <%= site_name %> account is required to checkout. </p>
+        <fieldset>
+          <ol id='registration_form'>
+            <li>
+              <%= form.label :name, 'Studio Name*' %>
+              <%= form.text_field :name %>
+            </li>
+            <li>
+              <%= form.label :phone_number, 'phone_number' %>
+              <%= form.text_field :phone_number %>
+            </li>
+            <%= render 'my_studio/infos/form', :f => form, :info => @studio.info %>
+          </ol>
+          <%#= form.buttons do %>
+          <%= form.submit "Register" %>
+          <%# end %>
+        </fieldset>
+    <% end %>
+  </div>
+
+</div>

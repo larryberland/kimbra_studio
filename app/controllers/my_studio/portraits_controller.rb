@@ -1,4 +1,4 @@
-class MyStudio::PortraitsController < ApplicationController
+class MyStudio::PortraitsController < MyStudio::BaseController
   before_filter :load_my_studio_session
 
   # GET /my_studio/portraits

@@ -1,0 +1,43 @@
+<h1>Listing my_studio_infos</h1>
+
+<table>
+  <tr>
+    <th>Studio</th>
+    <th>Active</th>
+    <th>Website</th>
+    <th>Email</th>
+    <th>Email notification</th>
+    <th>Tax ein</th>
+    <th>Picatage member</th>
+    <th>Smug mug member</th>
+    <th>Mac user</th>
+    <th>Windows user</th>
+    <th>Ping email</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @my_studio_infos.each do |my_studio_info| %>
+  <tr>
+    <td><%= my_studio_info.studio %></td>
+    <td><%= my_studio_info.active %></td>
+    <td><%= my_studio_info.website %></td>
+    <td><%= my_studio_info.email %></td>
+    <td><%= my_studio_info.email_notification %></td>
+    <td><%= my_studio_info.tax_ein %></td>
+    <td><%= my_studio_info.pictage_member %></td>
+    <td><%= my_studio_info.smug_mug_member %></td>
+    <td><%= my_studio_info.mac_user %></td>
+    <td><%= my_studio_info.windows_user %></td>
+    <td><%= my_studio_info.ping_email %></td>
+    <td><%= link_to 'Show', my_studio_info %></td>
+    <td><%= link_to 'Edit', edit_my_studio_info_path(my_studio_info) %></td>
+    <td><%= link_to 'Destroy', my_studio_info, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Info', new_my_studio_info_path %>

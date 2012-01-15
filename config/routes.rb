@@ -9,7 +9,7 @@ KimbraStudio::Application.routes.draw do
   match 'admin' => 'admin/overviews#index'
   match 'login' => 'user_sessions#new'
   match 'logout' => 'user_sessions#destroy'
-  match 'signup' => 'studio/registrations#new'
+  match 'signup' => 'my_studio/registrations#new'
 
   root :to => "welcome#index"
 
@@ -33,11 +33,19 @@ KimbraStudio::Application.routes.draw do
   end
 
   namespace :my_studio do
+    resource :activation, :only => [:show] do
+      get :show, :path => 'show/:a(.:format)'
+    end
+    resources :registrations, :only => [:new, :create]
+    resources :infos
+    resources :mini_sites
     resources :clients
     resources :sessions do
       resources :portraits
     end
     resource :overview, :only => [:show]
+    resources :staffers
+    resources :users
   end
 
   namespace :studio do

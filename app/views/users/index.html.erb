@@ -2,19 +2,20 @@
 
 <table>
   <tr>
-    <th>String</th>
-    <th>String</th>
-    <th>String</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Studio</th>
+    <th>Email</th>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>Birth Date</th>
   </tr>
 
 <% @users.each do |user| %>
   <tr>
-    <td><%= user.string %></td>
-    <td><%= user.string %></td>
-    <td><%= user.string %></td>
+    <td><%= user.try(:studio).try(:name) %></td>
+    <td><%= user.email %></td>
+    <td><%= full_name(user) %></td>
+    <td><%= user.phone_number %></td>
+    <td><%= user.try(:birth_date).to_s %></td>
     <td><%= link_to 'Show', user %></td>
     <td><%= link_to 'Edit', edit_user_path(user) %></td>
     <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>

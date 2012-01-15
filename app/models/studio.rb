@@ -1,9 +1,6 @@
 class Studio < ActiveRecord::Base
 
   has_many :sessions, :class_name => 'MyStudio::Session', :dependent => :destroy
-  has_many :shoots, :dependent => :destroy
-
-  has_many :users, :dependent => :destroy
 
   has_one :owner, :dependent => :destroy,
           :class_name        => 'User'
@@ -16,8 +13,8 @@ class Studio < ActiveRecord::Base
            :conditions          => Proc.new{User.where('roles.name = ?', Role::STUDIO_STAFF).includes(:roles)},
            :class_name          => 'User'
 
-  has_one :info_studio, :dependent => :destroy
-  has_one :mini_site_studio, :dependent => :destroy
+  has_one :info, :class_name => 'MyStudio::Info', :dependent => :destroy
+  has_one :mini_site, :class_name => 'MyStudio::MiniSite', :dependent => :destroy
 
   has_many :addresses, :dependent => :destroy,
            :as                    => :addressable
@@ -48,7 +45,7 @@ class Studio < ActiveRecord::Base
   # @param  [ none ]
   # @return [ String ]
   def email_address_with_name
-    "\"#{name}\" <#{info_studio.email}>"
+    "\"#{name}\" <#{info.email}>"
   end
 
   private
@@ -65,9 +62,6 @@ class Studio < ActiveRecord::Base
     elsif current_user.client?
       self.clients << current_user  if clients.select{|u| u.id == current_user.id}
     end
-    puts "owner=>#{owner.inspect}"
-    puts "staffers=>#{staffers.inspect}"
-    puts "clients=>#{clients.inspect}"
   end
 
 end

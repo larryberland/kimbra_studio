@@ -1,20 +1,44 @@
-<p id="notice"><%= notice %></p>
 
 <p>
-  <b>String:</b>
-  <%= @user.string %>
+  <b>Studio:</b>
+  <%= @user.try(:studio).try(:name) %>
 </p>
 
 <p>
-  <b>String:</b>
-  <%= @user.string %>
+  <b>Email:</b>
+  <%= @user.email %>
 </p>
 
 <p>
-  <b>String:</b>
-  <%= @user.string %>
+  <b>Name: </b>
+  <%= full_name(@user) %>
 </p>
 
+<p>
+  <b>Friendly Name: </b>
+  <%= @user.friendly_name %>
+</p>
+<p>
+  <b>Phone: </b>
+  <%= @user.phone_number %>
+</p>
+<p>
+  <b>Address:</b>
+  <%= @user.address_1 %><br/>
+  <%= @user.address_2 %>
+</p>
+<p>
+  <b>City: </b>
+  <%= @user.city %>
+</p>
+<p>
+  <b>State/Province</b>
+  <%= @user.try(:state).try(:abbrev_and_name)%>
+</p>
+<p>
+  <b>Zip Code:</b>
+  <%= @user.zip_code %>
+</p>
 
 <%= link_to 'Edit', edit_user_path(@user) %> |
 <%= link_to 'Back', users_path %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  studio: 
+  bgcolor: MyString
+  logo: MyString
+  font_family: MyString
+  font_color: MyString
+  theme: MyString
+
+two:
+  studio: 
+  bgcolor: MyString
+  logo: MyString
+  font_family: MyString
+  font_color: MyString
+  theme: MyString

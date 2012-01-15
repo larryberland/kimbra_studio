@@ -3,9 +3,9 @@ class WelcomeController < ApplicationController
   # no special layout right now layout 'welcome'
 
   def index
-    @featured_piece = Piece.featured
-    @best_selling_pieces = Piece.limit(3)
-    @other_pieces  ## search 2 or 3 categories (maybe based on the user)
+    #@featured_piece = Piece.featured
+    #@best_selling_pieces = Piece.limit(3)
+    #@other_pieces  ## search 2 or 3 categories (maybe based on the user)
     unless @featured_piece
       if current_user
         #puts "role=>#{current_user.roles.inspect}"

@@ -22,7 +22,8 @@
       <%= f.text_field :phone_number %>
     </div>
 
-    <%= render "studios/info_studio/form", :f => f %>
+    <%= render "my_studio/info/form", :f => f, :info => @studio.info %>
+    <%= render "my_studio/mini_site/form", :f => f, :mini_site => @studio.mini_site %>
 
     <div class="actions">
       <%= f.submit %>

@@ -6,12 +6,6 @@ Babies, Children, Family, Maternity, Holiday Portraits, Couples, Graduation
 Military, Sports & Activities, Religious & Special Occasions, Business,
 Pets, Story Booth Portraits
 
-Galleries, Portfolio
-
-Sessions Shoots
-
-Image Picture Portraits
-
 == Welcome to Kimbra Studios Click Plus+
 
 brew install imagemagick
@@ -25,24 +19,28 @@ rake db:seed
 
 start Server
 
-localhost:3000/studios/new
+localhost:3000/my_studio/new
 
 select Sign Up with email and password to create yourself as a Studio user
 
-Setup Your Studio go to overview
-    /studio/overview
+===
+My Studio Functionality
+    Setup Your Studio
+        /my_studio/overview
 
-    Setup a Shoot Date
-        Add Pictures
+    Setup a Session Date for clients
+        Add Portraits
+===
+Admin Functionality
 
-Setup Merchandise Pieces
-    /admin/merchandise/pieces
+    Setup Merchandise Pieces
+        /admin/merchandise/pieces
 
-Setup Email Offers
-    /admin/email/offers
+    Setup Customer Emails
+        /admin/customer/emails
 
-Setup Customer Emails
-    /admin/customer/emails
+    Setup Email Offers
+        /admin/customer/email/offers
 
 == Welcome to Rails
 

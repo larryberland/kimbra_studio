@@ -1,0 +1,33 @@
+<h1>Listing my_studio_mini_sites</h1>
+
+<table>
+  <tr>
+    <th>Studio</th>
+    <th>Bgcolor</th>
+    <th>Logo</th>
+    <th>Font family</th>
+    <th>Font color</th>
+    <th>Theme</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @my_studio_mini_sites.each do |my_studio_mini_site| %>
+  <tr>
+    <td><%= my_studio_mini_site.studio %></td>
+    <td><%= my_studio_mini_site.bgcolor %></td>
+    <td><%= my_studio_mini_site.logo %></td>
+    <td><%= my_studio_mini_site.font_family %></td>
+    <td><%= my_studio_mini_site.font_color %></td>
+    <td><%= my_studio_mini_site.theme %></td>
+    <td><%= link_to 'Show', my_studio_mini_site %></td>
+    <td><%= link_to 'Edit', edit_my_studio_mini_site_path(my_studio_mini_site) %></td>
+    <td><%= link_to 'Destroy', my_studio_mini_site, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Mini site', new_my_studio_mini_site_path %>

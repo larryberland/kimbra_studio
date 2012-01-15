@@ -14,8 +14,8 @@ class Notifier < ActionMailer::Base
 
     mail(:to => recipient.email_address_with_name,
          :subject => "New account information") do |format|
-      format.text { render :text => "Welcome!  #{recipient.name} go to #{studio_activation_url(:a => recipient.perishable_token )}" }
-      format.html { render :text => "<h1>Welcome</h1> #{recipient.name} <a href='#{studio_activation_url(:a => recipient.perishable_token )}'>Click to Activate</a>" }
+      format.text { render :text => "Welcome!  #{recipient.name} go to #{my_studio_activation_url(recipient.owner.perishable_token )}" }
+      format.html { render :text => "<h1>Welcome</h1> #{recipient.name} <a href='#{my_studio_activation_url(recipient.owner.perishable_token )}'>Click to Activate</a>" }
     end
 
   end

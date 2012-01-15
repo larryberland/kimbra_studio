@@ -1,0 +1,21 @@
+<h1>Listing my_studio_staffers</h1>
+
+<table>
+  <tr>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @my_studio_staffers.each do |my_studio_staffer| %>
+  <tr>
+    <td><%= link_to 'Show', my_studio_staffer %></td>
+    <td><%= link_to 'Edit', edit_my_studio_staffer_path(my_studio_staffer) %></td>
+    <td><%= link_to 'Destroy', my_studio_staffer, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Staffer', new_my_studio_staffer_path %>

@@ -1,11 +1,11 @@
-class MyStudio::SessionsController < ApplicationController
+class MyStudio::SessionsController < MyStudio::BaseController
 
   before_filter :form_info
 
   # GET /my_studio/sessions
   # GET /my_studio/sessions.json
   def index
-    @my_studio_sessions = MyStudio::Session.all
+    @my_studio_sessions = MyStudio::Session.where('studio_id=?', @my_studio).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -27,7 +27,7 @@ class MyStudio::SessionsController < ApplicationController
   # GET /my_studio/sessions/new
   # GET /my_studio/sessions/new.json
   def new
-    @my_studio_session = MyStudio::Session.new(:studio => current_user.studio, :client => MyStudio::Client.new)
+    @my_studio_session = MyStudio::Session.new(:studio => @my_studio, :client => MyStudio::Client.new)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -46,7 +46,7 @@ class MyStudio::SessionsController < ApplicationController
     @client                   = MyStudio::Client.new(params[:my_studio_session].delete(:client))
     @my_studio_session        = MyStudio::Session.new(params[:my_studio_session])
     @my_studio_session.client = @client
-    @my_studio_session.studio = current_user.studio
+    @my_studio_session.studio = @my_studio
 
     respond_to do |format|
       if @my_studio_session.save
