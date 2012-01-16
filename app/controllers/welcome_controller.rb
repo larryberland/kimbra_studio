@@ -15,7 +15,7 @@ class WelcomeController < ApplicationController
             redirect_to my_studio_overview_url
           end
         elsif current_user.admin?
-          redirect_to admin_customer_emails_path
+          redirect_to admin_overview_url
         end
       end
       if current_user

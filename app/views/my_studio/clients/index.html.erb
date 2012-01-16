@@ -25,7 +25,7 @@
     <td><%= my_studio_client.address %></td>
     <td><%= link_to t(:show), my_studio_client %></td>
     <td><%= link_to t(:edit), edit_my_studio_client_path(my_studio_client) %></td>
-    <td><%= link_to 'Destroy', my_studio_client, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:destroy), my_studio_client, confirm: t(:link_destroy_confirm), method: :delete %></td>
   </tr>
 <% end %>
 </table>

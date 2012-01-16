@@ -23,7 +23,7 @@
     <td><%= my_studio_mini_site.theme %></td>
     <td><%= link_to t(:show), my_studio_mini_site %></td>
     <td><%= link_to t(:edit), edit_my_studio_mini_site_path(my_studio_mini_site) %></td>
-    <td><%= link_to 'Destroy', my_studio_mini_site, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:destroy), my_studio_mini_site, confirm: t(:link_destroy_confirm), method: :delete %></td>
   </tr>
 <% end %>
 </table>

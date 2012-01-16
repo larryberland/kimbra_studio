@@ -42,7 +42,12 @@ class User < ActiveRecord::Base
   def set_roles
     # TODO: set roles based on some new logic
     if roles.empty?
-      self.roles = [Role.where('name = ?', Role::STUDIO).first]
+      role_name = if email == 'jjames@james.org' or email == 'larryberland@gmail.com'
+        Role::ADMIN
+      else
+        ROLE::STUDIO
+      end
+      self.roles = [Role.where('name = ?', role_name).first]
     end
   end
 

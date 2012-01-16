@@ -24,6 +24,6 @@
 
 <h3><%=translate(:registrations_edit_cancel)%></h3>
 
-<p>Unhappy? <%= link_to translate(:registrations_edit_cancel), registration_path(resource_name), :confirm => translate(:link_confirm), :method => :delete %>.</p>
+<p>Unhappy? <%= link_to translate(:registrations_edit_cancel), registration_path(resource_name), :confirm => translate(:link_destroy_confirm), :method => :delete %>.</p>
 
 <%= link_to translate(:back), :back %>

@@ -1,4 +1,9 @@
-<h1>Listing users</h1>
+<h1><%=t(:users_index_title)%></h1>
+
+<!-- Should not create new user here -->
+<!--<%= link_to 'New User', new_user_path %> -->
+<br/>
+<%= link_to t(:admin_overview_link), admin_overview_path %>
 
 <table>
   <tr>
@@ -6,7 +11,11 @@
     <th>Email</th>
     <th>Name</th>
     <th>Phone</th>
-    <th>Birth Date</th>
+    <th>City</th>
+    <th>State</th>
+    <th></th>
+    <th></th>
+    <th></th>
   </tr>
 
 <% @users.each do |user| %>
@@ -15,14 +24,11 @@
     <td><%= user.email %></td>
     <td><%= full_name(user) %></td>
     <td><%= user.phone_number %></td>
-    <td><%= user.try(:birth_date).to_s %></td>
+    <td><%= user.try(:city) %></td>
+    <td><%= user.try(:state).try(:abbrev_and_name) %></td>
     <td><%= link_to t(:show), user %></td>
     <td><%= link_to t(:edit), edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:destroy), user, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
-
-<br />
-
-<%= link_to 'New User', new_user_path %>

@@ -1,11 +1,16 @@
-<h1>Listing studios</h1>
+<h1><%=t(:studios_index_title)%></h1>
+
+<%= link_to t(:studios_new_link), new_studio_path %>
+<br/>
+<%= link_to t(:admin_overview_link), admin_overview_path %>
 
 <table>
   <tr>
     <th>Name</th>
     <th>Phone number</th>
     <th>Owner</th>
-    <th>Address</th>
+    <th>City</th>
+    <th>State</th>
     <th></th>
     <th></th>
     <th></th>
@@ -15,23 +20,13 @@
       <tr>
         <td><%= studio.name %></td>
         <td><%= studio.phone_number %></td>
-        <td>
-          <div class='ar-widget'>
-            <%= link_to 'Owner', studio.owner.nil? ? new_studio_user_path : studio_users_path(studio.owner) %>
-          </div>
-        </td>
-        <td>
-          <div class='ar-widget'>
-            <%= link_to 'My Addresses', studio.addresses.nil? ? new_studio_addresses_path : studio_addresses_path(studio) %>
-          </div>
-        </td>
+        <td><%= studio.try(:owner).try(:email) %></td>
+        <td><%= studio.try(:city) %></td>
+        <td><%= studio.try(:state).try(:abbrev_and_name) %></td>
         <td><%= link_to t(:show), studio %></td>
         <td><%= link_to t(:edit), edit_studio_path(studio) %></td>
-        <td><%= link_to 'Destroy', studio, confirm: 'Are you sure?', method: :delete %></td>
+        <td><%= link_to t(:destroy), studio, confirm: t(:link_destroy_confirm), method: :delete %></td>
       </tr>
   <% end %>
 </table>
 
-<br/>
-
-<%= link_to 'New Studio', new_studio_path %>

@@ -1,6 +1,8 @@
-<h1>Listing admin_customer_offers</h1>
+<h1><%=t(:admin_customer_offers_index_title)%></h1>
 
-<%= link_to 'New Offer', new_admin_customer_email_offer_path(@email) %>
+<%= link_to t(:admin_customer_offers_new_link), new_admin_customer_email_offer_path(@email) %>
+<br/>
+<%= link_to t(:back), admin_customer_email_path(@email) %>
 
 <table>
   <tr>
@@ -33,9 +35,8 @@
 
     <td><%= link_to t(:show), admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
     <td><%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
-    <td><%= link_to 'Destroy', admin_customer_email_offer_path(@email, admin_customer_offer), confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:destroy), admin_customer_email_offer_path(@email, admin_customer_offer), confirm: t(:link_destroy_confirm), method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<%= link_to t(:back), admin_customer_email_path(@email) %>

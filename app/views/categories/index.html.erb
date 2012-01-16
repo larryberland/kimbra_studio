@@ -13,7 +13,7 @@
     <td><%= category.string %></td>
     <td><%= link_to t(:show), category %></td>
     <td><%= link_to t(:edit), edit_category_path(category) %></td>
-    <td><%= link_to 'Destroy', category, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:destroy), category, confirm: t(:link_destroy_confirm), method: :delete %></td>
   </tr>
 <% end %>
 </table>

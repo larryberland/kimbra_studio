@@ -13,7 +13,7 @@
     <td><%= country.name %></td>
     <td><%= link_to t(:show), country %></td>
     <td><%= link_to t(:edit), edit_country_path(country) %></td>
-    <td><%= link_to 'Destroy', country, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:destroy), country, confirm: t(:link_destroy_confirm), method: :delete %></td>
   </tr>
 <% end %>
 </table>

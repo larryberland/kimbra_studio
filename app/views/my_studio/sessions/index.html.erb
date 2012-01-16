@@ -27,7 +27,7 @@
     <td><%= link_to 'Portraits', my_studio_session_portraits_path(my_studio_session) %></td>
     <td><%= link_to t(:show), my_studio_session %></td>
     <td><%= link_to t(:edit), edit_my_studio_session_path(my_studio_session) %></td>
-    <td><%= link_to 'Destroy', my_studio_session, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to t(:destroy), my_studio_session, confirm: t(:link_destroy_confirm), method: :delete %></td>
   </tr>
 <% end %>
 </table>

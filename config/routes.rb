@@ -21,6 +21,7 @@ KimbraStudio::Application.routes.draw do
   resources :categories # studio session categories
 
   namespace :admin do
+    resource :overview, :only => [:show]
     namespace :customer do
       resources :emails do
         resources :offers
