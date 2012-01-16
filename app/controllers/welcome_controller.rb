@@ -9,7 +9,11 @@ class WelcomeController < ApplicationController
     unless @featured_piece
       if user_signed_in?
         if current_user.studio? or current_user.studio_staff?
-          redirect_to my_studio_overview_url
+          if current_user.studio.nil?
+            redirect_to new_studio_url
+          else
+            redirect_to my_studio_overview_url
+          end
         elsif current_user.admin?
           redirect_to admin_customer_emails_path
         end

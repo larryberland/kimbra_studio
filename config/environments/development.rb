@@ -27,4 +27,7 @@ KimbraStudio::Application.configure do
 
   # Expands the lines which load the assets
   config.assets.debug = true
+
+  # suppress the Served asset log messages
+  config.assets.logger = false
 end

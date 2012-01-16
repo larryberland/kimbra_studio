@@ -5,6 +5,7 @@ en:
   hello: "Hello world"
   company: 'Kimbra Studios Click Plus'
 
+  show: 'Show'
   back: 'Back'
 
   # devise views
@@ -41,7 +42,6 @@ en:
   sessions_new_title: 'Sign in'
   sessions_new_submit: 'Sign in'
 
-
   # shared/links
   forgot_password: 'Forgot your password?'
   no_confirmation_email: "Didn't receive confirmation instructions?"
@@ -52,3 +52,6 @@ en:
   unlocks_new_submit: 'Resend unlock instructions'
 
   # devise views end
+
+  # studios/new
+  studios_new_title: 'Your Studio'

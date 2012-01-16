@@ -40,9 +40,12 @@ class StudiosController < ApplicationController
   # POST /studios
   # POST /studios.json
   def create
-    @info_studio = InfoStudio.new(params[:studio].delete(:info_studio))
-    @studio      = Studio.new(params[:studio])
-    @studio.info_studio = @info_studio if @info_studio
+    @my_studio_info      = MyStudio::Info.new(params[:studio].delete(:info))
+    @my_studio_mini_site = MyStudio::MiniSite.new(params[:studio].delete(:mini_site))
+    assoc                = {:info      => @my_studio_info,
+                            :mini_site => @my_studio_mini_site,
+                            :owner     => current_user}
+    @studio              = Studio.new(params[:studio].merge(assoc))
     @studio.current_user = current_user
 
     respond_to do |format|
@@ -59,9 +62,9 @@ class StudiosController < ApplicationController
   # PUT /studios/1
   # PUT /studios/1.json
   def update
-    @studio      = Studio.find(params[:id])
-    @info_studio = InfoStudio.new(params[:studio].delete(:info_studio))
-    @studio.info_studio = @info_studio if @info_studio
+    @studio = Studio.find(params[:id])
+    @studio.info.update_attributes(params[:studio].delete(:info))
+    @studio.mini_site.update_attributes(params[:studio].delete(:mini_site))
     @studio.current_user = current_user
 
     respond_to do |format|

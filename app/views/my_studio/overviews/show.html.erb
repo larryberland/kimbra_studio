@@ -23,6 +23,10 @@
     <h3 style='text-align:left;'> My Info </h3>
     <%= link_to 'View My Info', user_path(current_user) %>
   </div>
+  <div class='ar-widget'>
+    <h3 style='text-align:left;'> My Info </h3>
+    <%= link_to 'View My Studio Info', studio_path(current_user.studio) %>
+  </div>
 </div>
 <div class='span-6 last ar-widget'>
   <!--<%= image_tag 'home.png' %>-->

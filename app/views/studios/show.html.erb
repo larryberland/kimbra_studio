@@ -8,8 +8,13 @@
   <%= @studio.phone_number %>
 </p>
 
-<%= render 'studios/info_studio/show' %>
+<% @my_studio_info = @studio.info %>
+<%= render 'my_studio/infos/show' %>
+
+<% @my_studio_mini_site = @studio.mini_site %>
+<%= render 'my_studio/mini_sites/show' %>
 
 
-<%= link_to 'Edit', edit_studio_path(@studio) %> |
-<%= link_to 'Back', studios_path %>
+<%= link_to translate(:edit), edit_studio_path(@studio) %> |
+<% url = current_user.admin? ? studios_path : my_studio_overview_path%>
+<%= link_to translate(:back), url %>
