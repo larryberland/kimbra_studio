@@ -1,4 +1,7 @@
 class StudiosController < ApplicationController
+
+  before_filter :form_info
+
   # GET /studios
   # GET /studios.json
   def index
@@ -24,7 +27,9 @@ class StudiosController < ApplicationController
   # GET /studios/new
   # GET /studios/new.json
   def new
-    @studio = Studio.new
+    @studio = Studio.new(:info => MyStudio::Info.new(:email => current_user.email),
+                         :mini_site => MyStudio::MiniSite.new,
+                         :owner => current_user)
 
     respond_to do |format|
       format.html # new.html.erb
@@ -89,4 +94,11 @@ class StudiosController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  private
+
+  def form_info
+    @states = State.form_selector
+  end
+
 end

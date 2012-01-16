@@ -1,4 +1,4 @@
-<h1 style='text-align:left;'> My Studio </h1>
+<h1 style='text-align:left;'> <%=t(:my_studio_overview_title)%> </h1>
 <p>
   <b>Name:</b>
   <%= @my_studio.try(:name) %>
@@ -8,28 +8,23 @@
 
 <div class='span-18 column' style='width:708px;'>
   <div class='ar-widget'>
-    <h3 style='text-align:left;'> My Sessions </h3>
-    <%= link_to 'View My Sessions', my_studio_sessions_path %>
+    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_session)%> </h3>
+    <%= link_to t(:my_studio_overview_link_session), my_studio_sessions_path %>
   </div>
   <div class='ar-widget'>
-    <h3 style='text-align:left;'> My Staff </h3>
-    <%= link_to 'View My Staff', my_studio_staffers_path %>
+    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_staff)%> </h3>
+    <%= link_to t(:my_studio_overview_link_staff, :action => 'View '), my_studio_staffers_path %>
   </div>
   <div class='ar-widget'>
-    <h3 style='text-align:left;'> My Addresses </h3>
-    <%= link_to 'View My Addresses', studio_addresses_path %>
+    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_info)%> </h3>
+    <%= link_to t(:my_studio_overview_link_info, :action => 'View '), user_path(current_user) %>
   </div>
   <div class='ar-widget'>
-    <h3 style='text-align:left;'> My Info </h3>
-    <%= link_to 'View My Info', user_path(current_user) %>
-  </div>
-  <div class='ar-widget'>
-    <h3 style='text-align:left;'> My Info </h3>
-    <%= link_to 'View My Studio Info', studio_path(current_user.studio) %>
+    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_studio)%> </h3>
+    <%= link_to t(:my_studio_overview_link_studio, :action => 'View '), studio_path(current_user.studio) %>
   </div>
 </div>
 <div class='span-6 last ar-widget'>
   <!--<%= image_tag 'home.png' %>-->
 </div>
 
-<%= link_to 'Back', my_studio_overview_path %>

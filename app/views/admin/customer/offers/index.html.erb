@@ -31,11 +31,11 @@
     <td><%= image_tag_list(admin_customer_offer.piece) %></td>
     <td><%= image_tag_list(admin_customer_offer.portrait) %></td>
 
-    <td><%= link_to 'Show', admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
-    <td><%= link_to 'Edit', edit_admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
+    <td><%= link_to t(:show), admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
+    <td><%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
     <td><%= link_to 'Destroy', admin_customer_email_offer_path(@email, admin_customer_offer), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<%= link_to 'Back', admin_customer_email_path(@email) %>
+<%= link_to t(:back), admin_customer_email_path(@email) %>

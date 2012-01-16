@@ -22,23 +22,8 @@
   <b>Phone: </b>
   <%= @user.phone_number %>
 </p>
-<p>
-  <b>Address:</b>
-  <%= @user.address_1 %><br/>
-  <%= @user.address_2 %>
-</p>
-<p>
-  <b>City: </b>
-  <%= @user.city %>
-</p>
-<p>
-  <b>State/Province</b>
-  <%= @user.try(:state).try(:abbrev_and_name)%>
-</p>
-<p>
-  <b>Zip Code:</b>
-  <%= @user.zip_code %>
-</p>
+
+<%= render 'shared/addresses/show', :resource => @user %>
 
 <%= link_to translate(:edit), edit_user_path(@user) %> |
 <% url = current_user.admin? ? users_path : my_studio_overview_path%>

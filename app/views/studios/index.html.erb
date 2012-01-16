@@ -25,8 +25,8 @@
             <%= link_to 'My Addresses', studio.addresses.nil? ? new_studio_addresses_path : studio_addresses_path(studio) %>
           </div>
         </td>
-        <td><%= link_to 'Show', studio %></td>
-        <td><%= link_to 'Edit', edit_studio_path(studio) %></td>
+        <td><%= link_to t(:show), studio %></td>
+        <td><%= link_to t(:edit), edit_studio_path(studio) %></td>
         <td><%= link_to 'Destroy', studio, confirm: 'Are you sure?', method: :delete %></td>
       </tr>
   <% end %>

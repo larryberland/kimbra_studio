@@ -1,4 +1,7 @@
 class MyStudio::StaffersController < MyStudio::BaseController
+
+  before_filter :form_info
+
   # GET /my_studio/staffers
   # GET /my_studio/staffers.json
   def index
@@ -41,7 +44,7 @@ class MyStudio::StaffersController < MyStudio::BaseController
   # POST /my_studio/staffers
   # POST /my_studio/staffers.json
   def create
-    attrs = params[:my_studio_staffer]
+    attrs = params[:user]  # using users/_form.html.erb
     attrs[:studio] = @studio
     @my_studio_staffer = User.new(attrs)
     @my_studio_staffer.roles = [Role.find_by_name(Role::STUDIO_STAFF)]
@@ -84,4 +87,10 @@ class MyStudio::StaffersController < MyStudio::BaseController
       format.json { head :ok }
     end
   end
+  private
+
+  def form_info
+    @states = State.form_selector
+  end
+
 end

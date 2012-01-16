@@ -14,25 +14,6 @@ class User < ActiveRecord::Base
   has_many :user_roles, :dependent => :destroy
   has_many :roles, :through => :user_roles
 
-  has_many    :addresses,                 :dependent => :destroy,
-                                          :as => :addressable
-
-  has_one     :default_billing_address,   :conditions => {:addresses => { :billing_default => true, :active => true}},
-                                          :as => :addressable,
-                                          :class_name => 'Address'
-
-  has_many    :billing_addresses,         :conditions => {:addresses => { :active => true}},
-                                          :as => :addressable,
-                                          :class_name => 'Address'
-
-  has_one     :default_shipping_address,  :conditions => {:addresses => { :default => true, :active => true}},
-                                          :as => :addressable,
-                                          :class_name => 'Address'
-
-  has_many     :shipping_addresses,       :conditions => {:addresses => { :active => true}},
-                                          :as => :addressable,
-                                          :class_name => 'Address'
-
   validates :email, :presence => true,
             :format           => {:with => CustomValidators::Emails.email_validator},
             :length           => {:maximum => 255}
@@ -65,6 +46,8 @@ class User < ActiveRecord::Base
     end
   end
 
+  # after_create
+  #   need to assign the user to the current studio clients or staffers
   def update_studio
     if studio.present?
       if client?

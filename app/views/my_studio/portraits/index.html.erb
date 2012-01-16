@@ -1,7 +1,9 @@
-<h1>Listing my_studio_portraits</h1>
-<h3> For <%= @my_studio_session.try(:name) %></h3>
+<h1><%=t(:my_studio_portraits_index_title)%></h1>
+<h3><%=t(:my_studio_portraits_session, :name => @my_studio_session.try(:name)) %></h3>
 
-<%= link_to 'New Portrait', new_my_studio_session_portrait_path(@my_studio_session) %>
+<%= link_to t(:my_studio_portraits_new_link), new_my_studio_session_portrait_path(@my_studio_session) %>
+<br/>
+<%= link_to t(:back), my_studio_sessions_path %>
 
 <table>
   <tr>
@@ -18,11 +20,10 @@
         <td><%= my_studio_portrait.description %></td>
         <td><%= my_studio_portrait.active %></td>
         <td><%= image_tag_list(my_studio_portrait) %></td>
-        <td><%= link_to 'Show', my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
-        <td><%= link_to 'Edit', edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
+        <td><%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
+        <td><%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
         <td><%= link_to 'Destroy', my_studio_session_portrait_path(@my_studio_session, my_studio_portrait), confirm: 'Are you sure?', method: :delete %></td>
       </tr>
   <% end %>
 </table>
 
-<%= link_to 'Back', my_studio_sessions_path %>

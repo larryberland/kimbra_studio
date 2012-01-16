@@ -26,8 +26,8 @@
     <td><%= admin_merchandise_piece.active %></td>
     <td><%= admin_merchandise_piece.featured %></td>
     <td><%= admin_merchandise_piece.deleted_at %></td>
-    <td><%= link_to 'Show', admin_merchandise_piece %></td>
-    <td><%= link_to 'Edit', edit_admin_merchandise_piece_path(admin_merchandise_piece) %></td>
+    <td><%= link_to t(:show), admin_merchandise_piece %></td>
+    <td><%= link_to t(:edit), edit_admin_merchandise_piece_path(admin_merchandise_piece) %></td>
     <td><%= link_to 'Destroy', admin_merchandise_piece, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>

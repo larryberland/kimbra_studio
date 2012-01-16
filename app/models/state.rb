@@ -1,6 +1,7 @@
 class State < ActiveRecord::Base
   belongs_to :country
-  #has_many   :addresses
+  has_many :users
+  has_many :studios
   #has_many   :tax_rates
   #belongs_to :shipping_zone
 

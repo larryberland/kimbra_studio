@@ -1,9 +1,8 @@
 <div class='sub-form' title='Client Info'>
   <div>
-    <h3>Client</h3>
+    <h3><%=t(:my_studio_clients_form_title)%></h3>
 
     <%= f.fields_for :client, client do |g| %>
-
 
         <div class="field">
           <%= g.label :name %>

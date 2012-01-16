@@ -1,7 +1,7 @@
 class DeviseCreateUsers < ActiveRecord::Migration
   def change
     create_table(:users) do |t|
-      ##  THIS info goes into signup-info
+      t.references :studio
       t.string :first_name, :length => 40
       t.string :last_name, :length => 40
       t.date :birth_date
@@ -15,6 +15,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :city
       t.references :state
       t.string :zip_code
+      t.references :country
       t.string :customer_cim_id ## This is the ID returned from AUTH.NET
       t.string :password_salt
       t.string :crypted_password
@@ -35,6 +36,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.timestamps
     end
 
+    add_index :users, :studio_id
     add_index :users, :first_name
     add_index :users, :last_name
     add_index :users, :email, :unique => true

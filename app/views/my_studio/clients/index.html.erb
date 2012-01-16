@@ -1,5 +1,9 @@
 <h1>Listing my_studio_clients</h1>
 
+<%= link_to 'New Client', new_my_studio_client_path %>
+<br/>
+<%= link_to t(:my_studio_overview_link), my_studio_overview_path %>
+
 <table>
   <tr>
     <th>Name</th>
@@ -19,13 +23,10 @@
     <td><%= my_studio_client.phone_number %></td>
     <td><%= my_studio_client.active %></td>
     <td><%= my_studio_client.address %></td>
-    <td><%= link_to 'Show', my_studio_client %></td>
-    <td><%= link_to 'Edit', edit_my_studio_client_path(my_studio_client) %></td>
+    <td><%= link_to t(:show), my_studio_client %></td>
+    <td><%= link_to t(:edit), edit_my_studio_client_path(my_studio_client) %></td>
     <td><%= link_to 'Destroy', my_studio_client, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>
 
-<br />
-
-<%= link_to 'New Client', new_my_studio_client_path %>

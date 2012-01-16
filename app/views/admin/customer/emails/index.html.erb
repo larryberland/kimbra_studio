@@ -18,8 +18,8 @@
     <td><%= admin_customer_email.sent_at %></td>
     <td><%= admin_customer_email.active %></td>
     <td><%= link_to 'Offers', admin_customer_email_offers_path(admin_customer_email) %></td>
-    <td><%= link_to 'Show', admin_customer_email %></td>
-    <td><%= link_to 'Edit', edit_admin_customer_email_path(admin_customer_email) %></td>
+    <td><%= link_to t(:show), admin_customer_email %></td>
+    <td><%= link_to t(:edit), edit_admin_customer_email_path(admin_customer_email) %></td>
     <td><%= link_to 'Destroy', admin_customer_email, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>

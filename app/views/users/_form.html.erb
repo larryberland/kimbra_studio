@@ -36,27 +36,9 @@
       <%= f.label :phone_number %><br />
       <%= f.text_field :phone_number %>
     </div>
-    <div class="field">
-      <%= f.label :address_1 %><br />
-      <%= f.text_field :address_1 %>
-    </div>
-    <div class="field">
-      <%= f.label :address_2 %><br />
-      <%= f.text_field :address_2 %>
-    </div>
-    <div class="field column">
-      <%= f.label :city %><br />
-      <%= f.text_field :city %>
-    </div>
-    <div class="field column">
-      <%= f.label :state_id, "State/Province" %>
-      <%= f.select :state_id, @states,
-                   :include_blank => true %>
-    </div>
-    <div class="field">
-      <%= f.label :zip_code %><br />
-      <%= f.text_field :zip_code %>
-    </div>
+
+    <%= render 'shared/addresses/form', :f => f %>
+
     <div class="actions">
       <%= f.submit %>
     </div>

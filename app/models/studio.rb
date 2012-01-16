@@ -1,5 +1,9 @@
 class Studio < ActiveRecord::Base
 
+  attr_accessible :name, :phone_number, :address_1, :address_2, :city, :state_id, :zip_code
+
+  belongs_to :state
+
   has_many :sessions, :class_name => 'MyStudio::Session', :dependent => :destroy
 
   has_one :owner, :dependent => :destroy,
@@ -15,17 +19,6 @@ class Studio < ActiveRecord::Base
 
   has_one :info, :class_name => 'MyStudio::Info', :dependent => :destroy
   has_one :mini_site, :class_name => 'MyStudio::MiniSite', :dependent => :destroy
-
-  has_many :addresses, :dependent => :destroy,
-           :as                    => :addressable
-
-  has_one :default_billing_address, :conditions => {:addresses => {:billing_default => true, :active => true}},
-          :as                                   => :addressable,
-          :class_name                           => 'Address'
-
-  has_many :billing_addresses, :conditions => {:addresses => {:active => true}},
-           :as                             => :addressable,
-           :class_name                     => 'Address'
 
   before_save :set_user_info
 

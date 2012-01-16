@@ -31,8 +31,8 @@
     <td><%= my_studio_info.mac_user %></td>
     <td><%= my_studio_info.windows_user %></td>
     <td><%= my_studio_info.ping_email %></td>
-    <td><%= link_to 'Show', my_studio_info %></td>
-    <td><%= link_to 'Edit', edit_my_studio_info_path(my_studio_info) %></td>
+    <td><%= link_to t(:show), my_studio_info %></td>
+    <td><%= link_to t(:edit), edit_my_studio_info_path(my_studio_info) %></td>
     <td><%= link_to 'Destroy', my_studio_info, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>

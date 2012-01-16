@@ -13,37 +13,6 @@
 
 ActiveRecord::Schema.define(:version => 20120114204523) do
 
-  create_table "address_types", :force => true do |t|
-    t.string "name",        :limit => 64, :null => false
-    t.string "description"
-  end
-
-  add_index "address_types", ["name"], :name => "index_address_types_on_name"
-
-  create_table "addresses", :force => true do |t|
-    t.integer  "address_type_id"
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "addressable_type",                    :null => false
-    t.integer  "addressable_id",                      :null => false
-    t.string   "address1",                            :null => false
-    t.string   "address2"
-    t.string   "city",                                :null => false
-    t.integer  "state_id"
-    t.string   "state_name"
-    t.string   "zip_code",                            :null => false
-    t.integer  "phone_id"
-    t.boolean  "default",          :default => false
-    t.boolean  "billing_default",  :default => false
-    t.boolean  "active",           :default => true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "addresses", ["addressable_id"], :name => "index_addresses_on_addressable_id"
-  add_index "addresses", ["addressable_type"], :name => "index_addresses_on_addressable_type"
-  add_index "addresses", ["state_id"], :name => "index_addresses_on_state_id"
-
   create_table "admin_customer_emails", :force => true do |t|
     t.text     "message"
     t.datetime "sent_at"
@@ -102,31 +71,6 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
   end
 
   add_index "countries", ["name"], :name => "index_countries_on_name"
-
-  create_table "info_studios", :force => true do |t|
-    t.boolean  "active",         :default => true
-    t.string   "email_info"
-    t.string   "email"
-    t.string   "tax_id"
-    t.string   "website"
-    t.boolean  "pictage_member"
-    t.boolean  "mac_user"
-    t.boolean  "windows_user"
-    t.boolean  "ping_email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "studio_id"
-  end
-
-  create_table "mini_site_studios", :force => true do |t|
-    t.string   "bgcolor"
-    t.string   "logo"
-    t.string   "font_family"
-    t.string   "font_color"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.integer  "studio_id"
-  end
 
   create_table "my_studio_clients", :force => true do |t|
     t.string   "name"
@@ -215,22 +159,14 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
   add_index "states", ["country_id"], :name => "index_states_on_country_id"
   add_index "states", ["name"], :name => "index_states_on_name"
 
-  create_table "studio_shoots", :force => true do |t|
-    t.string   "name"
-    t.datetime "date"
-    t.integer  "studio_id"
-    t.integer  "client_id"
-    t.integer  "category_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "studio_shoots", ["category_id"], :name => "index_studio_shoots_on_category_id"
-  add_index "studio_shoots", ["client_id"], :name => "index_studio_shoots_on_client_id"
-  add_index "studio_shoots", ["studio_id"], :name => "index_studio_shoots_on_studio_id"
-
   create_table "studios", :force => true do |t|
     t.string   "name"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.integer  "state_id"
+    t.string   "zip_code"
+    t.integer  "country_id"
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -245,6 +181,7 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
   add_index "user_roles", ["user_id"], :name => "index_user_roles_on_user_id"
 
   create_table "users", :force => true do |t|
+    t.integer  "studio_id"
     t.string   "first_name"
     t.string   "last_name"
     t.date     "birth_date"
@@ -257,6 +194,7 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
     t.string   "city"
     t.integer  "state_id"
     t.string   "zip_code"
+    t.integer  "country_id"
     t.string   "customer_cim_id"
     t.string   "password_salt"
     t.string   "crypted_password"
@@ -278,7 +216,6 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "studio_id"
   end
 
   add_index "users", ["access_token"], :name => "index_users_on_access_token", :unique => true
@@ -289,5 +226,6 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
   add_index "users", ["perishable_token"], :name => "index_users_on_perishable_token", :unique => true
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
+  add_index "users", ["studio_id"], :name => "index_users_on_studio_id"
 
 end

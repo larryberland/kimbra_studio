@@ -11,8 +11,8 @@
 <% @categories.each do |category| %>
   <tr>
     <td><%= category.string %></td>
-    <td><%= link_to 'Show', category %></td>
-    <td><%= link_to 'Edit', edit_category_path(category) %></td>
+    <td><%= link_to t(:show), category %></td>
+    <td><%= link_to t(:edit), edit_category_path(category) %></td>
     <td><%= link_to 'Destroy', category, confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
