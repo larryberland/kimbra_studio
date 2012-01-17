@@ -1,0 +1,2 @@
+module MyStudio::DashboardsHelper
+end

@@ -24,6 +24,9 @@ KimbraStudio::Application.routes.draw do
     resource :overview, :only => [:show]
     namespace :customer do
       resources :emails do
+        member do
+          post :generate
+        end
         resources :offers
       end
     end
@@ -34,6 +37,7 @@ KimbraStudio::Application.routes.draw do
 
   namespace :my_studio do
     resource :overview, :only => [:show]
+    resource :dashboard, :only => [:show]
     resources :infos
     resources :mini_sites
     resources :sessions do

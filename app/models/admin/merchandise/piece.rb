@@ -7,4 +7,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   has_many :offers, :class_name => 'Admin::Email::Offer'
 
   mount_uploader :image, ImageUploader
+
+  scope :pick, lambda{|previous_picks| where('id not in (?)', previous_picks)}
+
 end

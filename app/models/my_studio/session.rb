@@ -4,8 +4,19 @@ class MyStudio::Session < ActiveRecord::Base
   belongs_to :client, :class_name => 'MyStudio::Client'
 
   has_many :portraits, :class_name => 'MyStudio::Portrait', :foreign_key => 'my_studio_session_id', :dependent => :destroy
+  has_many :emails, :class_name => 'Admin::Customer::Email', :foreign_key => 'my_studio_session_id', :dependent => :destroy
 
   before_save :set_name
+
+  scope :by_studio, lambda { |studio_id| where('studio_id = ?', studio_id) }
+
+  scope :within_seven_days, lambda {
+    where('created_at >= ?', 7.days.ago(Time.now))
+  }
+
+  def email_ready?
+    portraits.count > 2
+  end
 
   # allow the forms to send in a text name
   def category_name=(category_name)

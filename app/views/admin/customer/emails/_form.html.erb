@@ -1,3 +1,5 @@
+<h3><%=t(:my_studio_portraits_session, :name => @admin_customer_email.try(:my_studio_session).try(:name))%></h3>
+
 <%= form_for(@admin_customer_email) do |f| %>
     <% if @admin_customer_email.errors.any? %>
         <div id="error_explanation">
@@ -31,7 +33,10 @@
         <% (0..2).each do |index| %>
             <div class='field'>
               <% if @admin_customer_email.offers[index] %>
-                  email offer id
+                  <div class='image-thumb'>
+                    <%= "Offer #{index+1}" %>
+                    <%= image_tag_thumb(@admin_customer_email.offers[index]) %>
+                  </div>
               <% else %>
                   <%= link_to "New Offer #{index+1}", new_admin_customer_email_offer_path(@admin_customer_email) %>
               <% end %>
@@ -40,9 +45,6 @@
     <% end %>
 
 
-    <div class="field">
-      Pick list for a Shoot??
-    </div>
     <div class="actions">
       <%= f.submit %>
     </div>

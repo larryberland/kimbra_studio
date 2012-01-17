@@ -14,10 +14,14 @@
 ActiveRecord::Schema.define(:version => 20120114204523) do
 
   create_table "admin_customer_emails", :force => true do |t|
-    t.text     "message"
-    t.datetime "sent_at"
-    t.boolean  "active",               :default => true
     t.integer  "my_studio_session_id"
+    t.boolean  "active",               :default => true
+    t.text     "message"
+    t.string   "activation_code"
+    t.datetime "generated_at"
+    t.datetime "sent_at"
+    t.datetime "opened_at"
+    t.datetime "visited_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -25,18 +29,20 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
   add_index "admin_customer_emails", ["my_studio_session_id"], :name => "index_admin_customer_emails_on_my_studio_session_id"
 
   create_table "admin_customer_offers", :force => true do |t|
+    t.integer  "email_id"
+    t.integer  "piece_id"
+    t.integer  "portrait_id"
+    t.boolean  "active",          :default => true
     t.string   "name"
-    t.string   "image"
     t.text     "description"
+    t.string   "image"
+    t.string   "activation_code"
+    t.datetime "visited_at"
+    t.datetime "purchased_at"
     t.integer  "x_pos"
     t.integer  "y_pos"
     t.integer  "width"
     t.integer  "height"
-    t.string   "activation_code"
-    t.boolean  "active",          :default => true
-    t.integer  "email_id"
-    t.integer  "piece_id"
-    t.integer  "portrait_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

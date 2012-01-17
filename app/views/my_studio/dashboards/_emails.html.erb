@@ -1,0 +1,27 @@
+<h3>Email Activity</h3>
+<table id='dashboard_emails'>
+  <tr>
+    <th>Session</th>
+    <th>Client</th>
+    <th>Offers</th>
+    <th>sent</th>
+    <th>read</th>
+    <th>click through</th>
+    <th>purchased</th>
+  </tr>
+
+  <% sessions.each do |session| %>
+
+      <% session.emails.each do |email| %>
+          <tr>
+            <td><%= link_to session.name, my_studio_session_path(session) %></td>
+            <td><%= session.try(:client).try(:name) %></td>
+            <td><%= email.try(:offers).try(:count) %></td>
+            <td><%= email.try(:sent_at) %></td>
+            <td><%= email.try(:opened_at) %></td>
+            <td><%= email.try(:visited_at) %></td>
+            <td><% email.offers.select{|o| o.purchased_at.present?}.count %></td>
+          </tr>
+      <% end %>
+  <% end %>
+</table>

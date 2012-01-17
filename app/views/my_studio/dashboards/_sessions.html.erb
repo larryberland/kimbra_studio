@@ -1,0 +1,30 @@
+<h3>Session Activity</h3>
+<table id='dashboard_sessions'>
+  <tr>
+    <th>Session</th>
+    <th>Client</th>
+    <th>Emails</th>
+    <th>Portraits</th>
+    <th></th>
+    <th>Session Date</th>
+  </tr>
+
+  <% sessions.each do |session| %>
+      <tr>
+        <td><%= link_to session.name, my_studio_session_path(session) %></td>
+        <td><%= session.try(:client).try(:name) %></td>
+        <td><%= session.emails.count %></td>
+        <td>
+        <% if session.portraits.count < 3 %>
+              <%= link_to 'Upload portraits', my_studio_session_portraits_path(session) %>
+        <% else %>
+            <%= session.portraits.count %>
+        <% end %>
+        </td>
+        <td>
+          <%= session.email_ready? ? link_to('Generate Email', generate_admin_customer_email_path(session.id), :method => :post) : '' %>
+        </td>
+        <td><%= session.session_at %></td>
+      </tr>
+  <% end %>
+</table>

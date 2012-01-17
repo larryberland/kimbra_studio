@@ -1,23 +1,43 @@
 <div class='show'>
-<p>
-  <b>Message:</b>
-  <%= @admin_customer_email.message %>
-</p>
+  <p>
+    <b>Message:</b>
+    <%= @admin_customer_email.message %>
+  </p>
 
-<p>
-  <b>Sent at:</b>
-  <%= @admin_customer_email.sent_at %>
-</p>
+  <p>
+    <b>Generated at:</b>
+    <%= @admin_customer_email.generated_at %>
+  </p>
 
-<p>
-  <b>Active:</b>
-  <%= @admin_customer_email.active %>
-</p>
+  <p>
+    <b>Sent at:</b>
+    <%= @admin_customer_email.sent_at %>
+  </p>
 
-<p>
-  <b>Session:</b>
-  <%= link_to 'Session', my_studio_session_path(@admin_customer_email.my_studio_session) %> |
-</p>
+  <p>
+    <b>Opened at:</b>
+    <%= @admin_customer_email.opened_at %>
+  </p>
+
+  <p>
+    <b>Visited at:</b>
+    <%= @admin_customer_email.visited_at %>
+  </p>
+
+  <p>
+    <b>Updated at:</b>
+    <%= @admin_customer_email.updated_at %>
+  </p>
+
+  <p>
+    <b>Active:</b>
+    <%= @admin_customer_email.active %>
+  </p>
+
+  <p>
+    <b>Session:</b>
+    <%= link_to 'Session', my_studio_session_path(@admin_customer_email.my_studio_session) %> |
+  </p>
 
 </div>
 <% @admin_customer_email.offers.each_with_index do |offer, index| %>

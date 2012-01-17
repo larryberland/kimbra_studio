@@ -80,4 +80,10 @@ class Admin::Customer::EmailsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def generate
+    puts "Generate params=>#{params.inspect}"
+    @admin_customer_email = Admin::Customer::Email.generate(MyStudio::Session.find(params[:id]))
+    render :edit
+  end
 end

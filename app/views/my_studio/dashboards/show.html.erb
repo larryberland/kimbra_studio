@@ -1,0 +1,9 @@
+<% last_seven_days = MyStudio::Session.by_studio(@my_studio).within_seven_days.limit(5) %>
+<div class='container'>
+  <%= render 'my_studio/dashboards/sessions', :sessions => last_seven_days %>
+</div>
+<div class='container'>
+  <%= render 'my_studio/dashboards/emails', :sessions => last_seven_days %>
+</div>
+
+<%= link_to t(:back), my_studio_overview_path %>
