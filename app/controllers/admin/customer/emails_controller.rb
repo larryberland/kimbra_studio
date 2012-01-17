@@ -81,9 +81,19 @@ class Admin::Customer::EmailsController < ApplicationController
     end
   end
 
+  # GET /admin/customer/emails/session_id/generate
+  # GET /admin/customer/emails/session_id/generate/.json
   def generate
     puts "Generate params=>#{params.inspect}"
     @admin_customer_email = Admin::Customer::Email.generate(MyStudio::Session.find(params[:id]))
     render :edit
+  end
+
+  # GET /admin/customer/emails/session_id/session
+  # GET /admin/customer/emails/session_id/session/.json
+  def session_list
+    puts "Session params=>#{params.inspect}"
+    @admin_customer_emails = Admin::Customer::Email.by_session(MyStudio::Session.find(params[:id])).all
+    render :index
   end
 end
