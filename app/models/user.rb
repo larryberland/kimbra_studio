@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
       role_name = if email == 'jjames@james.org' or email == 'larryberland@gmail.com'
         Role::ADMIN
       else
-        ROLE::STUDIO
+        Role::STUDIO
       end
       self.roles = [Role.where('name = ?', role_name).first]
     end

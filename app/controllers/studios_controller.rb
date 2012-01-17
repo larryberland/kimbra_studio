@@ -27,9 +27,10 @@ class StudiosController < ApplicationController
   # GET /studios/new
   # GET /studios/new.json
   def new
-    @studio = Studio.new(:info => MyStudio::Info.new(:email => current_user.email),
-                         :mini_site => MyStudio::MiniSite.new,
-                         :owner => current_user)
+    @studio           = Studio.new
+    @studio.info      = MyStudio::Info.new(:email => current_user.email)
+    @studio.mini_site = MyStudio::MiniSite.new
+    @studio.owner     = current_user
 
     respond_to do |format|
       format.html # new.html.erb
@@ -47,10 +48,10 @@ class StudiosController < ApplicationController
   def create
     @my_studio_info      = MyStudio::Info.new(params[:studio].delete(:info))
     @my_studio_mini_site = MyStudio::MiniSite.new(params[:studio].delete(:mini_site))
-    assoc                = {:info      => @my_studio_info,
-                            :mini_site => @my_studio_mini_site,
-                            :owner     => current_user}
-    @studio              = Studio.new(params[:studio].merge(assoc))
+    @studio              = Studio.new(params[:studio])
+    @studio.info         = @my_studio_info
+    @studio.mini_site    = @my_studio_mini_site
+    @studio.owner        = current_user
     @studio.current_user = current_user
 
     respond_to do |format|
@@ -68,8 +69,13 @@ class StudiosController < ApplicationController
   # PUT /studios/1.json
   def update
     @studio = Studio.find(params[:id])
+
+    @studio.info ||= MyStudio::Info.new()
     @studio.info.update_attributes(params[:studio].delete(:info))
+
+    @studio.mini_site ||= MyStudio::MiniSite.new()
     @studio.mini_site.update_attributes(params[:studio].delete(:mini_site))
+
     @studio.current_user = current_user
 
     respond_to do |format|

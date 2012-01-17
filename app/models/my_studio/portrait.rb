@@ -1,7 +1,8 @@
 class MyStudio::Portrait < ActiveRecord::Base
   attr_accessible :description, :active, :image, :remote_image_url
 
-  belongs_to :my_studio_session, :class_name => 'MyStudio::Session'
+  belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => "my_studio_session_id"
+
   has_many :offers, :class_name => 'Admin::Customer::Offer'
 
   mount_uploader :image, ImageUploader

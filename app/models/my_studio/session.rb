@@ -3,7 +3,7 @@ class MyStudio::Session < ActiveRecord::Base
   belongs_to :category
   belongs_to :client, :class_name => 'MyStudio::Client'
 
-  has_many :portraits, :class_name => 'MyStudio::Portrait', :dependent => :destroy
+  has_many :portraits, :class_name => 'MyStudio::Portrait', :foreign_key => 'my_studio_session_id', :dependent => :destroy
 
   before_save :set_name
 

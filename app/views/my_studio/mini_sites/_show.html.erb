@@ -2,12 +2,6 @@
   <b>Bgcolor:</b>
   <%= @my_studio_mini_site.bgcolor %>
 </p>
-
-<p>
-  <b>Logo:</b>
-  <%= @my_studio_mini_site.logo %>
-</p>
-
 <p>
   <b>Font family:</b>
   <%= @my_studio_mini_site.font_family %>
@@ -22,3 +16,11 @@
   <b>Theme:</b>
   <%= @my_studio_mini_site.theme %>
 </p>
+
+<div class='image-thumb'>
+  <p>
+    <b>Logo:</b>
+    <%= image_tag_thumb(@my_studio_mini_site) %>
+  </p>
+</div>
+

@@ -6,10 +6,15 @@
         <br/>
         <%= g.text_field :bgcolor %>
       </div>
+
+      <div class="image-thumb">
+        <%= image_tag_thumb(mini_site) %>
+      </div>
       <div class="field">
-        <%= g.label :logo %>
-        <br/>
-        <%= g.text_field :logo %>
+        <%= g.label :image, 'Logo' %>
+        <%= g.file_field :image %>
+        <%= g.label :remote_image_url, 'or Logo URL' %>
+        <%= g.text_field :remote_image_url %>
       </div>
       <div class="field">
         <%= g.label :font_family %>

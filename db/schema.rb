@@ -105,7 +105,7 @@ ActiveRecord::Schema.define(:version => 20120114204523) do
   create_table "my_studio_mini_sites", :force => true do |t|
     t.integer  "studio_id"
     t.string   "bgcolor"
-    t.string   "logo"
+    t.string   "image"
     t.string   "font_family"
     t.string   "font_color"
     t.string   "theme"
