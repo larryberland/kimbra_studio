@@ -1,0 +1,38 @@
+<h1><%=t(:admin_merchandise_parts_index_title)%></h1>
+
+<%= link_to t(:admin_merchandise_parts_new_link), new_admin_merchandise_piece_part_path(@piece) %>
+<br/>
+<%= link_to t(:back), admin_merchandise_piece_path(@piece) %>
+
+<table>
+  <tr>
+    <th>Piece</th>
+    <th>Portrait</th>
+    <th>Image part</th>
+    <th>Image</th>
+    <th>Order</th>
+    <th>Width</th>
+    <th>Height</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @parts.each do |admin_merchandise_part| %>
+  <tr>
+    <td><%= admin_merchandise_part.try(:piece).try(:name) %></td>
+    <td><%= admin_merchandise_part.portrait %></td>
+    <td><%= image_tag admin_merchandise_part.image_part_url(:list).to_s%></td>
+    <td><%= admin_merchandise_part.image %></td>
+    <td><%= admin_merchandise_part.order %></td>
+    <td><%= admin_merchandise_part.width %></td>
+    <td><%= admin_merchandise_part.height %></td>
+    <td><%= admin_merchandise_part.active %></td>
+    <td><%= link_to 'Show', admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></td>
+    <td><%= link_to 'Edit', edit_admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></td>
+    <td><%= link_to 'Destroy', admin_merchandise_piece_part_path(@piece, admin_merchandise_part), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+

@@ -128,9 +128,15 @@ en:
   admin_customer_offers_index_title: 'Listing Email Offers'
   admin_customer_offers_edit_title: 'Editing Email Offer'
   
+  # admin/merchandise/parts
+  admin_merchandise_parts_new_title: "New Piece's part"
+  admin_merchandise_parts_new_link: 'New Part'
+  admin_merchandise_parts_index_title: "Listing %{piece_name}'s Parts"
+  admin_merchandise_parts_edit_title: "Editing %{piece_name}'s Part"
+
   # admin/merchandise/pieces
   admin_merchandise_pieces_new_title: 'New Kimbra Studio Piece'
   admin_merchandise_pieces_new_link: 'New Piece'
   admin_merchandise_pieces_index_title: 'Listing Kimbra Studio Pieces'
   admin_merchandise_pieces_edit_title: 'Editing Kimbra Studio Piece'
-  
+

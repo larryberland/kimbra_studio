@@ -4,10 +4,16 @@
   - category: Photo Bracelets
     name: Alexis Bracelet
     price: 265.00
-    image: MyString
+    image: alexis_bracelet.jpeg
     short_description: "Measuring: 7-1/2\" length. Photo charms measuring: 3/4\"w x 7/8\"h. Solid Sterling Silver. Completely waterproof. Specify longer length if needed. The Alexis Bracelet is an exclusive, copyrighted design of Kimbra Studios."
-    long_description:
+    description_markup:
     sku:
+    :parts:
+      - :image: part.png
+      - :image: part.png
+      - :image: part.png
+      - :image: part.png
+      - :image: part.png
 
   - category: Photo Bracelets
     name: Taylor Bracelet

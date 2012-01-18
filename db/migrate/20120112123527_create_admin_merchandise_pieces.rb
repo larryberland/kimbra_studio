@@ -1,6 +1,7 @@
 class CreateAdminMerchandisePieces < ActiveRecord::Migration
   def change
     create_table :admin_merchandise_pieces do |t|
+      t.string :category
       t.string :name
       t.string :image
       t.string :short_description
@@ -13,5 +14,7 @@ class CreateAdminMerchandisePieces < ActiveRecord::Migration
 
       t.timestamps
     end
+    add_index :admin_merchandise_pieces, [:name, :category], :unique => true
+
   end
 end

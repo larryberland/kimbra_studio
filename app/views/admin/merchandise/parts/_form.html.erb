@@ -1,0 +1,50 @@
+<% url = @part.id.nil? ? admin_merchandise_piece_parts_path(@piece) : admin_merchandise_piece_part_path(@piece, @part) %>
+<%= form_for(@part, :url => url, :html => {:multipart => true}) do |f| %>
+  <% if @part.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@part.errors.count, "error") %> prohibited this admin_merchandise_part from being saved:</h2>
+
+      <ul>
+      <% @part.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :piece %><br />
+    <%= @part.piece.name %>
+  </div>
+  <div class="field">
+    <%= f.label :portrait %><br />
+    <%= f.text_field :portrait %>
+  </div>
+  <div class="field">
+    <%= f.label :image_part %><br />
+    <%= f.text_field :image_part %>
+  </div>
+  <div class="field">
+    <%= f.label :image %><br />
+    <%= f.text_field :image %>
+  </div>
+  <div class="field">
+    <%= f.label :order %><br />
+    <%= f.number_field :order %>
+  </div>
+  <div class="field">
+    <%= f.label :width %><br />
+    <%= f.number_field :width %>
+  </div>
+  <div class="field">
+    <%= f.label :height %><br />
+    <%= f.number_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :active %><br />
+    <%= f.check_box :active %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

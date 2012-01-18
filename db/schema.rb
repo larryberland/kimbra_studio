@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120117183842) do
+ActiveRecord::Schema.define(:version => 20120118162957) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -66,7 +66,24 @@ ActiveRecord::Schema.define(:version => 20120117183842) do
   add_index "admin_customer_offers", ["piece_id"], :name => "index_admin_customer_offers_on_piece_id"
   add_index "admin_customer_offers", ["portrait_id"], :name => "index_admin_customer_offers_on_portrait_id"
 
+  create_table "admin_merchandise_parts", :force => true do |t|
+    t.integer  "piece_id"
+    t.integer  "portrait_id"
+    t.string   "image_part"
+    t.string   "image"
+    t.integer  "order"
+    t.integer  "width"
+    t.integer  "height"
+    t.boolean  "active"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_merchandise_parts", ["piece_id"], :name => "index_admin_merchandise_parts_on_piece_id"
+  add_index "admin_merchandise_parts", ["portrait_id"], :name => "index_admin_merchandise_parts_on_portrait_id"
+
   create_table "admin_merchandise_pieces", :force => true do |t|
+    t.string   "category"
     t.string   "name"
     t.string   "image"
     t.string   "short_description"
@@ -79,6 +96,8 @@ ActiveRecord::Schema.define(:version => 20120117183842) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "admin_merchandise_pieces", ["name", "category"], :name => "index_admin_merchandise_pieces_on_name_and_category", :unique => true
 
   create_table "admin_users", :force => true do |t|
     t.string   "email",                                 :default => "", :null => false

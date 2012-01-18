@@ -36,7 +36,9 @@ KimbraStudio::Application.routes.draw do
       end
     end
     namespace :merchandise do
-      resources :pieces
+      resources :pieces do
+        resources :parts
+      end
     end
   end
 

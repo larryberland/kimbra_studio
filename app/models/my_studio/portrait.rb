@@ -4,6 +4,7 @@ class MyStudio::Portrait < ActiveRecord::Base
   belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => "my_studio_session_id"
 
   has_many :offers, :class_name => 'Admin::Customer::Offer'
+  has_many :parts, :class_name => 'Admin::Merchandise::Part'
 
   mount_uploader :image, ImageUploader
 

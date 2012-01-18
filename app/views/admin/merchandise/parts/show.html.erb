@@ -1,0 +1,43 @@
+<p>
+  <b>Piece:</b>
+  <%= @part.piece.name %>
+</p>
+
+<p>
+  <b>Portrait:</b>
+  <%= @part.portrait %>
+</p>
+
+<p>
+  <b>Image part:</b>
+  <%= image_tag(@part.image_part_url(:thumb).to_s) %>
+</p>
+
+<p>
+  <b>Image:</b>
+  <%= image_tag(@part.image_url(:thumb).to_s) %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%= @part.order %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @part.width %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @part.height %>
+</p>
+
+<p>
+  <b>Active:</b>
+  <%= @part.active %>
+</p>
+
+
+<%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, @part) %> |
+<%= link_to t(:back), admin_merchandise_piece_parts_path(@piece) %>
