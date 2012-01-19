@@ -11,6 +11,7 @@ class Admin::Customer::Email < ActiveRecord::Base
     list = studio_session.portraits.collect do |portrait|
       offer = Admin::Customer::Offer.generate(email, portrait)
       offer.pieceilize(Admin::Merchandise::Piece.pick(piece_pick_list).first)
+      offer.assemble
       piece_pick_list << offer.piece.id
       offer
     end

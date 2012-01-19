@@ -8,6 +8,10 @@ class CreateAdminMerchandiseParts < ActiveRecord::Migration
       t.integer :order
       t.integer :width
       t.integer :height
+      t.integer :item_x,      :default => 80
+      t.integer :item_y,      :default => 80
+      t.integer :item_width,  :default => 245
+      t.integer :item_height, :default => 290
       t.boolean :active, :default => true
 
       t.timestamps

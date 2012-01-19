@@ -10,10 +10,30 @@
     sku:
     :parts:
       - :image: part.png
+        item_x: 85
+        item_y: 80
+        item_width: 245
+        item_height: 290
       - :image: part.png
+        item_x: 85
+        item_y: 80
+        item_width: 245
+        item_height: 290
       - :image: part.png
+        item_x: 85
+        item_y: 80
+        item_width: 245
+        item_height: 290
       - :image: part.png
+        item_x: 85
+        item_y: 80
+        item_width: 245
+        item_height: 290
       - :image: part.png
+        item_x: 85
+        item_y: 80
+        item_width: 245
+        item_height: 290
 
   - category: Photo Bracelets
     name: Taylor Bracelet
@@ -183,7 +203,7 @@
     name: Keepsake Year Frame
     price: 32.00
   - category: Holiday
-    name: Keepsake Year Frame - Horizontal
+    name: Keepsake Year Frame Horizontal
     price: 32.00
   - category: Holiday
     name: Awareness Ornament

@@ -8,6 +8,8 @@ class CreateAdminMerchandisePieces < ActiveRecord::Migration
       t.text   :description_markup
       t.string :sku
       t.decimal :price
+      t.integer :width, :default => 0
+      t.integer :height, :default => 0
       t.boolean :active, :default => true
       t.boolean :featured
       t.datetime :deleted_at

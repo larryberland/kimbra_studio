@@ -5,4 +5,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   mount_uploader :image_part, ImageUploader
 
+  def assemble(portrait)
+
+  end
 end

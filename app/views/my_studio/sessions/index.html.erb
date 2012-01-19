@@ -24,7 +24,9 @@
     <td><%= my_studio_session.active %></td>
     <td><%= my_studio_session.category_name %></td>
     <td><%= my_studio_session.client.try(:name) %></td>
-    <td><%= link_to 'Portraits', my_studio_session_portraits_path(my_studio_session) %></td>
+    <% text = my_studio_session.portraits.size.to_s  %>
+    <% text = t(:my_studio_portraits_new_link) if text == '0'  %>
+    <td><%= link_to text, my_studio_session_portraits_path(my_studio_session) %></td>
     <td><%= link_to t(:show), my_studio_session %></td>
     <td><%= link_to t(:edit), edit_my_studio_session_path(my_studio_session) %></td>
     <td><%= link_to t(:destroy), my_studio_session, confirm: t(:link_destroy_confirm), method: :delete %></td>

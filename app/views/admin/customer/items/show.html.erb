@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Offer:</b>
+  <%= @admin_customer_item.offer %>
+</p>
+
+<p>
+  <b>Part:</b>
+  <%= @admin_customer_item.part %>
+</p>
+
+<p>
+  <b>Image stock:</b>
+  <%= image_tag(@item.image_stock_url.to_s) %>
+</p>
+
+<p>
+  <b>Image item:</b>
+  <%= image_tag(@item.image_item_url.to_s) %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @admin_customer_item.width %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @admin_customer_item.height %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_customer_item_path(@admin_customer_item) %> |
+<%= link_to 'Back', admin_customer_items_path %>

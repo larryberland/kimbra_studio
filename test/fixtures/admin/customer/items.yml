@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  offer: 
+  part: 
+  image_stock: MyString
+  image_item: MyString
+  width: 1
+  height: 1
+
+two:
+  offer: 
+  part: 
+  image_stock: MyString
+  image_item: MyString
+  width: 1
+  height: 1

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120118162957) do
+ActiveRecord::Schema.define(:version => 20120119184056) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.integer  "resource_id",   :null => false
@@ -42,6 +42,20 @@ ActiveRecord::Schema.define(:version => 20120118162957) do
   end
 
   add_index "admin_customer_emails", ["my_studio_session_id"], :name => "index_admin_customer_emails_on_my_studio_session_id"
+
+  create_table "admin_customer_items", :force => true do |t|
+    t.integer  "offer_id"
+    t.integer  "part_id"
+    t.string   "image_stock"
+    t.string   "image_item"
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "admin_customer_items", ["offer_id"], :name => "index_admin_customer_items_on_offer_id"
+  add_index "admin_customer_items", ["part_id"], :name => "index_admin_customer_items_on_part_id"
 
   create_table "admin_customer_offers", :force => true do |t|
     t.integer  "email_id"
@@ -74,7 +88,11 @@ ActiveRecord::Schema.define(:version => 20120118162957) do
     t.integer  "order"
     t.integer  "width"
     t.integer  "height"
-    t.boolean  "active"
+    t.integer  "item_x",      :default => 80
+    t.integer  "item_y",      :default => 80
+    t.integer  "item_width",  :default => 245
+    t.integer  "item_height", :default => 290
+    t.boolean  "active",      :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -90,6 +108,8 @@ ActiveRecord::Schema.define(:version => 20120118162957) do
     t.text     "description_markup"
     t.string   "sku"
     t.decimal  "price"
+    t.integer  "width",              :default => 0
+    t.integer  "height",             :default => 0
     t.boolean  "active",             :default => true
     t.boolean  "featured"
     t.datetime "deleted_at"
@@ -135,12 +155,9 @@ ActiveRecord::Schema.define(:version => 20120118162957) do
     t.string   "email"
     t.string   "phone_number"
     t.boolean  "active",       :default => true
-    t.integer  "address_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "my_studio_clients", ["address_id"], :name => "index_my_studio_clients_on_address_id"
 
   create_table "my_studio_infos", :force => true do |t|
     t.integer  "studio_id"
@@ -176,6 +193,8 @@ ActiveRecord::Schema.define(:version => 20120118162957) do
   create_table "my_studio_portraits", :force => true do |t|
     t.string   "image"
     t.string   "description"
+    t.integer  "width",                :default => 0
+    t.integer  "height",               :default => 0
     t.boolean  "active",               :default => true
     t.integer  "my_studio_session_id"
     t.datetime "created_at"

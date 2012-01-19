@@ -9,6 +9,8 @@
   <tr>
     <th>Description</th>
     <th>Active?</th>
+    <th>Width</th>
+    <th>Height</th>
     <th></th>
     <th></th>
     <th></th>
@@ -19,6 +21,8 @@
       <tr>
         <td><%= my_studio_portrait.description %></td>
         <td><%= my_studio_portrait.active %></td>
+        <td><%= my_studio_portrait.width %></td>
+        <td><%= my_studio_portrait.height %></td>
         <td><%= image_tag_list(my_studio_portrait) %></td>
         <td><%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
         <td><%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>

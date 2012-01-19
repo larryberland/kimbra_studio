@@ -1,0 +1,28 @@
+:studios:
+  - name: Studio One
+    address_1: 123 Main Street
+    city: Tampa
+    zip_code: 34638
+    phone_number: 813 555 1234
+    owner:
+      email: owner@studioone.com
+      first_name: One
+      last_name: Studio
+      address_1: 123 Owner Street
+      city: Tampa
+    sessions:
+      - name: Couples
+        client:
+          name: acme smith
+          email: acme_smith@client.com
+          phone_number: 813 111 1234
+      - name: Pets
+        client:
+          name: bravo smith
+          email: bravo_smith@client.com
+          phone_number: 813 222 1234
+      - name: Graduation
+        client:
+          name: charlie smith
+          email: charlie_smith@client.com
+          phone_number: 813 333 1234

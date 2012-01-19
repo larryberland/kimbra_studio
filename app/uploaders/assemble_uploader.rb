@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-class ImageUploader < CarrierWave::Uploader::Base
+class AssembleUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
@@ -28,33 +28,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   #   # do something
   # end
 
-  # store the width and height into model
-  process :store_geometry
-
   # Create different versions of your uploaded files:
-  version :thumb do
-     process :resize_to_limit => [200, 200]
-  end
-
-  version :list do
-     process :resize_to_limit => [50, 50]
-  end
-
-  #version :best do
-  #  process :convert => 'jpg'
-  #  process :store_best_geometry
-  #end
-
-  # Add a white list of extensions which are allowed to be uploaded.
-  # For images you might use something like this:
-  # def extension_white_list
-  #   %w(jpg jpeg gif png)
-  # end
+  process :convert => 'jpg'
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
   # def filename
   #   "something.jpg" if original_filename
+  # end
+
+  # Add a white list of extensions whih are allowed to be uploaded.
+  # For images you might use something like this:
+  # def extension_white_list
+  #   %w(jpg jpeg gif png)
   # end
 
 end

@@ -1,0 +1,33 @@
+<h1>Listing admin_customer_items</h1>
+<%= link_to t(:admin_customer_items_new_link), new_admin_customer_email_offer_item_path(@offer.email, @offer) %>
+<br/>
+<%= link_to t(:back), admin_customer_email_offer_path(@offer.email, @offer) %>
+
+<table>
+  <tr>
+    <th>Offer</th>
+    <th>Part</th>
+    <th>Image stock</th>
+    <th>Image item</th>
+    <th>Width</th>
+    <th>Height</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @items.each do |admin_customer_item| %>
+  <tr>
+    <td><%= admin_customer_item.offer %></td>
+    <td><%= admin_customer_item.part %></td>
+    <td><%= image_tag admin_customer_item.image_stock_url.to_s %></td>
+    <td><%= image_tag admin_customer_item.image_item_url.to_s %></td>
+    <td><%= admin_customer_item.width %></td>
+    <td><%= admin_customer_item.height %></td>
+    <td><%= link_to 'Show', admin_customer_email_offer_item_path(@offer.email, @offer, admin_customer_item) %></td>
+    <td><%= link_to 'Edit', edit_admin_customer_email_offer_item_path(@offer.email, @offer, admin_customer_item) %></td>
+    <td><%= link_to 'Destroy', admin_customer_email_offer_item_path(@offer.email, @offer, admin_customer_item), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+

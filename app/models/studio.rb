@@ -1,6 +1,6 @@
 class Studio < ActiveRecord::Base
 
-  attr_accessible :name, :phone_number, :address_1, :address_2, :city, :state_id, :zip_code
+  attr_accessible :name, :phone_number, :address_1, :address_2, :city, :state_id, :zip_code, :sessions
 
   belongs_to :state
 

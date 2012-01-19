@@ -34,6 +34,11 @@
   <%= @admin_customer_offer.active %>
 </p>
 
+<p>
+  <b>Items:</b>
+  <%= link_to 'Items', admin_customer_email_offer_items_path(@admin_customer_offer.email, @admin_customer_offer) %>
+</p>
+
 <div class='image-thumb'>
   <p>
     <b>Jewelry Offer:</b>

@@ -1,5 +1,6 @@
 KimbraStudio::Application.routes.draw do
 
+
   ActiveAdmin.routes(self)
 
   devise_for :admin_users, ActiveAdmin::Devise.config
@@ -32,7 +33,9 @@ KimbraStudio::Application.routes.draw do
           post :generate
           get  :session_list
         end
-        resources :offers
+        resources :offers do
+          resources :items
+        end
       end
     end
     namespace :merchandise do
