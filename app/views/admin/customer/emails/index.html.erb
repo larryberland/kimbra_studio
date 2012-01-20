@@ -7,6 +7,7 @@
 <table>
   <tr>
     <th>Message</th>
+    <th>Generated</th>
     <th>Sent at</th>
     <th>Active</th>
     <th>Offers</th>
@@ -17,6 +18,7 @@
 <% @admin_customer_emails.each do |admin_customer_email| %>
   <tr>
     <td><%= admin_customer_email.message %></td>
+    <td><%= admin_customer_email.generated_at %></td>
     <td><%= admin_customer_email.sent_at %></td>
     <td><%= admin_customer_email.active %></td>
     <td><%= link_to t(:offers), admin_customer_email_offers_path(admin_customer_email) %></td>

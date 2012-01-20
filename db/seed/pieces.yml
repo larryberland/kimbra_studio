@@ -9,27 +9,27 @@
     description_markup:
     sku:
     :parts:
-      - :image: part.png
+      - :image_part: part.png
         item_x: 85
         item_y: 80
         item_width: 245
         item_height: 290
-      - :image: part.png
+      - :image_part: part.png
         item_x: 85
         item_y: 80
         item_width: 245
         item_height: 290
-      - :image: part.png
+      - :image_part: part.png
         item_x: 85
         item_y: 80
         item_width: 245
         item_height: 290
-      - :image: part.png
+      - :image_part: part.png
         item_x: 85
         item_y: 80
         item_width: 245
         item_height: 290
-      - :image: part.png
+      - :image_part: part.png
         item_x: 85
         item_y: 80
         item_width: 245

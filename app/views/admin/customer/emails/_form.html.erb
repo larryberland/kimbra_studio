@@ -1,51 +1,56 @@
-<h3><%=t(:my_studio_portraits_session, :name => @admin_customer_email.try(:my_studio_session).try(:name))%></h3>
+<div class="show">
 
-<%= form_for(@admin_customer_email) do |f| %>
-    <% if @admin_customer_email.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@admin_customer_email.errors.count, "error") %> prohibited this admin_customer_email from
-            being saved:</h2>
+  <h3><%= t(:my_studio_portraits_session, :name => @admin_customer_email.try(:my_studio_session).try(:name)) %></h3>
 
-          <ul>
-            <% @admin_customer_email.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+  <%= form_for(@admin_customer_email) do |f| %>
+      <% if @admin_customer_email.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@admin_customer_email.errors.count, "error") %> prohibited this admin_customer_email from
+              being saved:</h2>
 
-    <div class="field">
-      <%= f.label :message %>
-      <br/>
-      <%= f.text_area :message %>
-    </div>
-    <div class="field ui-widget">
-      <%= f.label :sent_at %>
-      <br/>
-      <%= f.text_field :sent_at %>
-    </div>
-    <div class="field">
-      <%= f.label :active %>
-      <%= f.check_box :active %>
-    </div>
-
-    <% if @admin_customer_email.id %>
-        <% (0..2).each do |index| %>
-            <div class='field'>
-              <% if @admin_customer_email.offers[index] %>
-                  <div class='image-thumb'>
-                    <%= "Offer #{index+1}" %>
-                    <%= image_tag_thumb(@admin_customer_email.offers[index]) %>
-                  </div>
-              <% else %>
-                  <%= link_to "New Offer #{index+1}", new_admin_customer_email_offer_path(@admin_customer_email) %>
+            <ul>
+              <% @admin_customer_email.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
               <% end %>
-            </div>
-        <% end %>
-    <% end %>
+            </ul>
+          </div>
+      <% end %>
 
+      <div class="field">
+        <%= f.label :message %>
+        <br/>
+        <%= f.text_area :message %>
+      </div>
+      <div class="field">
+        <%= f.label :generated_at %>
+        <%= f.text_field :generated_at, :readonly => 'readonly' %>
+      </div>
 
-    <div class="actions">
-      <%= f.submit %>
-    </div>
+      <div class="field ui-widget">
+        <%= f.label :sent_at %>
+        <br/>
+        <%= f.text_field :sent_at %>
+      </div>
+      <div class="field">
+        <%= f.label :active %>
+        <%= f.check_box :active %>
+      </div>
+
+      <% if @admin_customer_email.id %>
+          <% (0..2).each do |index| %>
+              <div class='field'>
+                <% unless @admin_customer_email.offers[index] %>
+                    <%= link_to "New Offer #{index+1}", new_admin_customer_email_offer_path(@admin_customer_email) %>
+                <% end %>
+              </div>
+          <% end %>
+      <% end %>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
+  <% end %>
+</div>
+
+<% if @admin_customer_email.id %>
+<%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
 <% end %>

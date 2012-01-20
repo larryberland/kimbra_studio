@@ -8,16 +8,15 @@ class Admin::Customer::Email < ActiveRecord::Base
     email = Admin::Customer::Email.new
     email.my_studio_session = studio_session
     piece_pick_list = [0]
-    list = studio_session.portraits.collect do |portrait|
-      offer = Admin::Customer::Offer.generate(email, portrait)
-      offer.pieceilize(Admin::Merchandise::Piece.pick(piece_pick_list).first)
-      offer.assemble
-      piece_pick_list << offer.piece.id
-      offer
+    offers = studio_session.portraits.collect do |portrait|
+      piece = Admin::Merchandise::Piece.pick(piece_pick_list).first
+      puts "pick_list=>#{piece_pick_list.inspect} got=>#{piece.id}"
+      piece_pick_list << piece.id
+      Admin::Customer::Offer.generate(email, portrait, piece)
     end
-    email.offers = list
-    email.save
+    email.offers = offers
     email.generated_at = Time.now
+    email.save
     email
   end
 

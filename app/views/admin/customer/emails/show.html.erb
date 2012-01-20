@@ -38,14 +38,9 @@
     <b>Session:</b>
     <%= link_to 'Session', my_studio_session_path(@admin_customer_email.my_studio_session) %> |
   </p>
+  <%= link_to t(:edit), edit_admin_customer_email_path(@admin_customer_email) %> |
+  <%= link_to t(:back), admin_customer_emails_path %>
 
 </div>
-<% @admin_customer_email.offers.each_with_index do |offer, index| %>
-    <div class='image-thumb'>
-      <%= "Offer #{index+1}" %>
-      <%= image_tag_thumb(offer) %>
-    </div>
-<% end %>
+<%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
 
-<%= link_to t(:edit), edit_admin_customer_email_path(@admin_customer_email) %> |
-<%= link_to t(:back), admin_customer_emails_path %>

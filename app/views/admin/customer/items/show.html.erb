@@ -1,13 +1,12 @@
-<p id="notice"><%= notice %></p>
 
 <p>
   <b>Offer:</b>
-  <%= @admin_customer_item.offer %>
+  <%= image_tag(@item.offer.piece.image_url(:list).to_s) %>
 </p>
 
 <p>
   <b>Part:</b>
-  <%= @admin_customer_item.part %>
+  <%= image_tag(@item.part.image_part_url(:list).to_s) %>
 </p>
 
 <p>
@@ -22,14 +21,13 @@
 
 <p>
   <b>Width:</b>
-  <%= @admin_customer_item.width %>
+  <%= @item.width %>
 </p>
 
 <p>
   <b>Height:</b>
-  <%= @admin_customer_item.height %>
+  <%= @item.height %>
 </p>
 
-
-<%= link_to 'Edit', edit_admin_customer_item_path(@admin_customer_item) %> |
-<%= link_to 'Back', admin_customer_items_path %>
+<%= link_to t(:edit), edit_admin_customer_email_offer_item_path(@offer.email, @offer, @item) %> |
+<%= link_to t(:back), admin_customer_email_offer_items_path(@offer.email, @offer) %>

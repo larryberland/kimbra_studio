@@ -1,6 +1,9 @@
 // Place all the styles related to the Admin::Customer::Emails controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-div.show {width: 80%;}
-div.image-thumb{ float:right;}
+div.show {width: 60%;
+          float: left;}
+
+div.side-menu{ float:right;}
+div.image-thumb span.image-text{font-weight: bold;}
 div.field textarea {height: 100px;}

@@ -62,7 +62,7 @@ pieces_list.each do |piece|
   path = path.join(piece['name'].underscore.gsub(' ', '_'))
   path.mkpath unless path.directory?
   parts.each do |part|
-    part_image_fname = path.join(part.delete(:image))
+    part_image_fname = path.join(part.delete(:image_part))
     my_part          = Admin::Merchandise::Part.create(part)
     my_part.image_part.store!(File.open(part_image_fname.to_s))
     p.parts << my_part
