@@ -7,6 +7,10 @@ class CreateAdminCustomerItems < ActiveRecord::Migration
       t.string :image_item
       t.integer :width
       t.integer :height
+      t.integer :item_x       # copy of part item_x
+      t.integer :item_y
+      t.integer :item_width
+      t.integer :item_height
 
       t.timestamps
     end

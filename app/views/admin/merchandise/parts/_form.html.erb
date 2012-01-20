@@ -1,50 +1,71 @@
-<% url = @part.id.nil? ? admin_merchandise_piece_parts_path(@piece) : admin_merchandise_piece_part_path(@piece, @part) %>
-<%= form_for(@part, :url => url, :html => {:multipart => true}) do |f| %>
-  <% if @part.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@part.errors.count, "error") %> prohibited this admin_merchandise_part from being saved:</h2>
+<div class='show'>
+  <% url = @part.id.nil? ? admin_merchandise_piece_parts_path(@piece) : admin_merchandise_piece_part_path(@piece, @part) %>
+  <%= form_for(@part, :url => url, :html => {:multipart => true}) do |f| %>
+      <% if @part.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@part.errors.count, "error") %> prohibited this admin_merchandise_part from being
+              saved:</h2>
 
-      <ul>
-      <% @part.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
+            <ul>
+              <% @part.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
       <% end %>
-      </ul>
-    </div>
+
+      <div class="field">
+        <%= f.label :piece %>
+        <br/>
+        <%= @part.piece.name %>
+      </div>
+
+      <div class="field">
+        <%= f.label :order %>
+        <%= f.number_field :order %>
+        <%= f.label :width %>
+        <%= f.number_field :width %>
+        <%= f.label :height %>
+        <%= f.number_field :height %>
+      </div>
+
+      <div class="field">
+        <%= f.label :item_x %>
+        <%= f.number_field  :item_x %>
+        <%= f.label :item_y %>
+        <%= f.number_field  :item_y %>
+      </div>
+      <div class="field">
+        <%= f.label :item_width %>
+        <%= f.number_field  :item_width %>
+        <%= f.label :item_height %>
+        <%= f.number_field  :item_height %>
+      </div>
+
+      <div class="field">
+        <%= f.label :portrait %>
+        <br/>
+        <%= f.text_field :portrait %>
+      </div>
+      <div class="field">
+        <%= f.label :image_part %>
+        <br/>
+        <%= f.text_field :image_part %>
+      </div>
+      <div class="field">
+        <%= f.label :image %>
+        <br/>
+        <%= f.text_field :image %>
+      </div>
+      <div class="field">
+        <%= f.label :active %>
+        <br/>
+        <%= f.check_box :active %>
+      </div>
+      <div class="actions">
+        <%= f.submit %>
+      </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :piece %><br />
-    <%= @part.piece.name %>
-  </div>
-  <div class="field">
-    <%= f.label :portrait %><br />
-    <%= f.text_field :portrait %>
-  </div>
-  <div class="field">
-    <%= f.label :image_part %><br />
-    <%= f.text_field :image_part %>
-  </div>
-  <div class="field">
-    <%= f.label :image %><br />
-    <%= f.text_field :image %>
-  </div>
-  <div class="field">
-    <%= f.label :order %><br />
-    <%= f.number_field :order %>
-  </div>
-  <div class="field">
-    <%= f.label :width %><br />
-    <%= f.number_field :width %>
-  </div>
-  <div class="field">
-    <%= f.label :height %><br />
-    <%= f.number_field :height %>
-  </div>
-  <div class="field">
-    <%= f.label :active %><br />
-    <%= f.check_box :active %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
+</div>
+<%= render 'admin/merchandise/parts/side_menu', :part => @part %>

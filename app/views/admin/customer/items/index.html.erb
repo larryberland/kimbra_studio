@@ -19,8 +19,8 @@
 
 <% @items.each do |admin_customer_item| %>
   <tr>
-    <td><%= admin_customer_item.offer %></td>
-    <td><%= admin_customer_item.part %></td>
+    <td><%= link_to 'Offer', admin_customer_email_offer_path(admin_customer_item.offer.email, admin_customer_item.offer) %></td>
+    <td><%= link_to 'Part', admin_merchandise_piece_part_path(admin_customer_item.part.piece, admin_customer_item.part) %></td>
     <td><%= image_tag admin_customer_item.image_stock_url.to_s %></td>
     <td><%= image_tag admin_customer_item.image_item_url.to_s %></td>
     <td><%= admin_customer_item.width %></td>

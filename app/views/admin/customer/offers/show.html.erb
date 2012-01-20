@@ -1,6 +1,10 @@
 <div class="show">
 
   <p>
+    <b>Items:</b>
+    <%= link_to 'Items', admin_customer_email_offer_items_path(@admin_customer_offer.email, @admin_customer_offer) %>
+  </p>
+  <p>
     <b>Email:</b>
     <%= @admin_customer_offer.try(:email).try(:my_studio_session).try(:client).try(:email) %>
   </p>
@@ -10,7 +14,7 @@
     <%= @admin_customer_offer.name %>
   </p>
 
-  <p>
+  <p style="width:400px;">
     <b>Description:</b>
     <%= @admin_customer_offer.description %>
   </p>
@@ -33,10 +37,6 @@
     <%= @admin_customer_offer.active %>
   </p>
 
-  <p>
-    <b>Items:</b>
-    <%= link_to 'Items', admin_customer_email_offer_items_path(@admin_customer_offer.email, @admin_customer_offer) %>
-  </p>
   <%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, @admin_customer_offer) %> |
   <%= link_to t(:back), admin_customer_email_offers_path(@email) %>
 </div>

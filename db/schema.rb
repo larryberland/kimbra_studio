@@ -50,6 +50,10 @@ ActiveRecord::Schema.define(:version => 20120119184056) do
     t.string   "image_item"
     t.integer  "width"
     t.integer  "height"
+    t.integer  "item_x"
+    t.integer  "item_y"
+    t.integer  "item_width"
+    t.integer  "item_height"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

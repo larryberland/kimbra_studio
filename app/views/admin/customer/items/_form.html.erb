@@ -1,41 +1,61 @@
-<%= form_for(@admin_customer_item) do |f| %>
-  <% if @admin_customer_item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@admin_customer_item.errors.count, "error") %> prohibited this admin_customer_item from being saved:</h2>
+<% url = @item.id.nil? ? admin_customer_email_offer_items_path(@offer.email, @offer, @item) : admin_customer_email_offer_item_path(@offer.email, @offer, @item) %>
+<%= form_for(@item, :url => url, :html => {:multipart => true}) do |f| %>
+    <% if @item.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@item.errors.count, "error") %> prohibited this admin_customer_item from being saved:</h2>
 
-      <ul>
-      <% @admin_customer_item.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @item.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <fieldset title="Portrait position">
+      <b>Portrait Position</b>
+      <div class="field">
+        <%= f.label :item_x, 'X' %>
+        <%= f.number_field :item_x %>
+        <%= f.label :item_y, 'Y' %>
+        <%= f.number_field :item_y %>
+      </div>
+      <div class="field">
+        <%= f.label :item_width, 'Width' %>
+        <%= f.number_field :item_width %>
+        <%= f.label :item_height, 'Height' %>
+        <%= f.number_field :item_height %>
+      </div>
+    </fieldset>
+    <%= f.hidden_field :image_item_cache %>
+    <div class="field">
+      <%= f.label :image_item, 'Custom Kimbra Part:' %>
+      <%= f.file_field :image_item %><br/>
+      <%= f.label :remote_image_item_url, 'or Part URL' %>
+      <%= f.text_field :remote_image_item_url %>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :offer %><br />
-    <%= f.text_field :offer %>
-  </div>
-  <div class="field">
-    <%= f.label :part %><br />
-    <%= f.text_field :part %>
-  </div>
-  <div class="field">
-    <%= f.label :image_stock %><br />
-    <%= f.text_field :image_stock %>
-  </div>
-  <div class="field">
-    <%= f.label :image_item %><br />
-    <%= f.text_field :image_item %>
-  </div>
-  <div class="field">
-    <%= f.label :width %><br />
-    <%= f.number_field :width %>
-  </div>
-  <div class="field">
-    <%= f.label :height %><br />
-    <%= f.number_field :height %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :image_stock, 'Portrait:' %>
+      <%= f.file_field :image_stock %><br/>
+      <%= f.label :remote_image_stock_url, 'or Portrait URL' %>
+      <%= f.text_field :remote_image_stock_url %>
+    </div>
+
+    <div class="field">
+      <%= link_to 'Offer', admin_customer_email_offer_path(@item.offer.email, @item.offer) %>
+    </div>
+    <div class="field">
+      <%= link_to 'Part', admin_merchandise_piece_part_path(@item.part.piece, @item.part) %>
+    </div>
+    <div class="field">
+      <%= f.label :width %>
+      <%= f.number_field :width %>
+      <%= f.label :height %>
+      <%= f.number_field :height %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>
