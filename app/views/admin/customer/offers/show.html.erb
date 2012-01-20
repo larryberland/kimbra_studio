@@ -1,60 +1,44 @@
-<p>
-  <b>Email:</b>
-  <%= @admin_customer_offer.try(:email).try(:my_studio_session).try(:client).try(:email) %>
-</p>
+<div class="show">
 
-<p>
-  <b>Name:</b>
-  <%= @admin_customer_offer.name %>
-</p>
-
-<p>
-  <b>Description:</b>
-  <%= @admin_customer_offer.description %>
-</p>
-
-<p>
-  <b>X pos:</b>
-  <%= @admin_customer_offer.x_pos %>
-  <b>Y pos:</b>
-  <%= @admin_customer_offer.y_pos %>
-  <b>Width:</b>
-  <%= @admin_customer_offer.width %>
-  <b>Height:</b>
-  <%= @admin_customer_offer.height %>
-</p>
-
-<p>
-  <b>Activation code:</b>
-  <%= @admin_customer_offer.activation_code %>
-</p>
-
-<p>
-  <b>Active:</b>
-  <%= @admin_customer_offer.active %>
-</p>
-
-<p>
-  <b>Items:</b>
-  <%= link_to 'Items', admin_customer_email_offer_items_path(@admin_customer_offer.email, @admin_customer_offer) %>
-</p>
-
-<div class='image-thumb'>
   <p>
-    <b>Jewelry Offer:</b>
-    <%= image_tag_thumb(@admin_customer_offer) %>
+    <b>Email:</b>
+    <%= @admin_customer_offer.try(:email).try(:my_studio_session).try(:client).try(:email) %>
   </p>
 
   <p>
-    <b>Jewelry Image:</b>
-    <%= image_tag_thumb(@admin_customer_offer.piece) %>
+    <b>Name:</b>
+    <%= @admin_customer_offer.name %>
   </p>
 
   <p>
-    <b>Studio Portrait:</b>
-    <%= image_tag_thumb(@admin_customer_offer.portrait) %>
+    <b>Description:</b>
+    <%= @admin_customer_offer.description %>
   </p>
+
+  <p>
+    Studio Portrait
+    <b>Width:</b>
+    <%= @admin_customer_offer.width %>
+    <b>Height:</b>
+    <%= @admin_customer_offer.height %>
+  </p>
+
+  <p>
+    <b>Activation code:</b>
+    <%= @admin_customer_offer.activation_code %>
+  </p>
+
+  <p>
+    <b>Active:</b>
+    <%= @admin_customer_offer.active %>
+  </p>
+
+  <p>
+    <b>Items:</b>
+    <%= link_to 'Items', admin_customer_email_offer_items_path(@admin_customer_offer.email, @admin_customer_offer) %>
+  </p>
+  <%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, @admin_customer_offer) %> |
+  <%= link_to t(:back), admin_customer_email_offers_path(@email) %>
 </div>
 
-<%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, @admin_customer_offer) %> |
-<%= link_to t(:back), admin_customer_email_offers_path(@email) %>
+<%= render 'admin/customer/offers/side_menu', :offer => @admin_customer_offer %>

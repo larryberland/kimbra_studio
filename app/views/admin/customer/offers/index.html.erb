@@ -7,14 +7,14 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Image</th>
+    <th>Studio picture</th>
+    <th>Kimbra Piece</th>
+    <th>Custom Piece</th>
     <th>Description</th>
     <th>Width</th>
     <th>Height</th>
     <th>Activation code</th>
     <th>Active</th>
-    <th>Piece</th>
-    <th>Studio picture</th>
     <th></th>
     <th></th>
     <th></th>
@@ -23,6 +23,8 @@
 <% @admin_customer_offers.each do |admin_customer_offer| %>
   <tr>
     <td><%= admin_customer_offer.name %></td>
+    <td><%= image_tag_list(admin_customer_offer.portrait) %></td>
+    <td><%= image_tag_list(admin_customer_offer.piece) %></td>
     <td><%= image_tag_list(admin_customer_offer) %></td>
     <td><%= admin_customer_offer.description %></td>
     <td><%= admin_customer_offer.width %></td>
@@ -30,8 +32,6 @@
     <td><%= admin_customer_offer.activation_code %></td>
     <td><%= admin_customer_offer.active %></td>
 
-    <td><%= image_tag_list(admin_customer_offer.piece) %></td>
-    <td><%= image_tag_list(admin_customer_offer.portrait) %></td>
 
     <td><%= link_to t(:show), admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
     <td><%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, admin_customer_offer) %></td>

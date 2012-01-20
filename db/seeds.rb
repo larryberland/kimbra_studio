@@ -27,6 +27,7 @@ end
 image_path   = Rails.root.join('public', 'kimbra')
 file_to_load = seed_path.join('pieces.yml').to_s
 pieces_list  = YAML::load(File.open(file_to_load))[:pieces]
+image_stub = Rails.root.join('app','assets','images','home.png')
 pieces_list.each do |piece|
   parts = piece.delete(:parts)
 
@@ -54,6 +55,7 @@ pieces_list.each do |piece|
     end
     if p.image_url.blank?
       puts "missing Piece #{fname}.[png|jpeg]  in #{piece['category']}/#{piece['name']}"
+      p.image.store!(File.open(image_stub.to_s)) # stub them for now
     end
   end
 

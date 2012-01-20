@@ -11,10 +11,8 @@ class CreateAdminCustomerOffers < ActiveRecord::Migration
       t.string :activation_code
       t.datetime :visited_at # customer visited mini-site offer
       t.datetime :purchased_at # customer purchased item
-      t.integer :x_pos
-      t.integer :y_pos
-      t.integer :width
-      t.integer :height
+      t.integer :width  # width of portrait??
+      t.integer :height # height of portrait??
       t.timestamps
     end
     add_index :admin_customer_offers, :email_id

@@ -68,8 +68,6 @@ ActiveRecord::Schema.define(:version => 20120119184056) do
     t.string   "activation_code"
     t.datetime "visited_at"
     t.datetime "purchased_at"
-    t.integer  "x_pos"
-    t.integer  "y_pos"
     t.integer  "width"
     t.integer  "height"
     t.datetime "created_at"

@@ -1,6 +1,8 @@
-<h1><%=t(:admin_customer_offers_edit_title)%></h1>
+<h1><%= t(:admin_customer_offers_edit_title) %></h1>
 
 <%= render 'form' %>
 
-<%= link_to t(:show), admin_customer_email_offer_path(@email, @admin_customer_offer) %> |
-<%= link_to t(:back), admin_customer_email_offers_path(@email) %>
+<div class="show">
+  <%= link_to t(:show), admin_customer_email_offer_path(@email, @admin_customer_offer) %> |
+  <%= link_to t(:back), admin_customer_email_offers_path(@email) %>
+</div>

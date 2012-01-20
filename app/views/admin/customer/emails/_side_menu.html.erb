@@ -1,6 +1,11 @@
 <div class='side-menu'>
-  <% offers.each_with_index do |offer, index| %>
-      <%= div_image_offer(offer) %>
-      <br/>
-  <% end unless offers.nil?%>
+  <table>
+
+    <% offers.each_with_index do |offer, index| %>
+        <tr>
+          <td><%= index+1 %></td>
+          <td><%= div_image_offer(offer) %></td>
+        </tr>
+    <% end unless offers.nil? %>
+  </table>
 </div>

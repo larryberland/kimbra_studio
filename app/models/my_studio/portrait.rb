@@ -9,6 +9,13 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   before_save :set_description
 
+  # span text for Portrait
+  def to_image_span
+    text = description.to_s
+    text = 'Portrait' if text.blank?
+    text
+  end
+
   private
 
   def set_description
@@ -16,5 +23,6 @@ class MyStudio::Portrait < ActiveRecord::Base
       self.description = image_url.to_s.split('/').last
     end
   end
+
 
 end

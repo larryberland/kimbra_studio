@@ -11,5 +11,17 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
 
   scope :pick, lambda{|previous_picks| where('id not in (?)', previous_picks)}
 
+  # span text for Piece
+  def to_image_span
+    text = name.to_s
+    text = 'Piece' if text.blank?
+    text
+  end
+
+  def to_offer_name
+    text = name.to_s
+    text = 'Piece' if text.blank?
+    text
+  end
 
 end
