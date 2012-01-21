@@ -1,6 +1,8 @@
 class Admin::Merchandise::Part < ActiveRecord::Base
 
-  attr_accessible :image, :remote_image_url, :image_part, :image_part_url, :piece, :portrait, :width, :height
+  attr_accessible :image, :remote_image_url, :image_part, :image_part_url,
+                  :piece, :portrait, :width, :height,
+                  :item_x, :item_y, :item_width, :item_height
   mount_uploader :image, ImageUploader
   mount_uploader :image_part, ImageUploader
 

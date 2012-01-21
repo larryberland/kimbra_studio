@@ -1,5 +1,12 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
+:default:
+  :parts:
+    - :image_part: part_charm.png
+      item_x: 19
+      item_y: 34
+      item_width: 96
+      item_height: 137
 :pieces:
   - category: Photo Bracelets
     name: Alexis Bracelet
@@ -10,28 +17,28 @@
     sku:
     :parts:
       - :image_part: part.png
-        item_x: 85
-        item_y: 80
+        item_x: 90
+        item_y: 90
         item_width: 245
         item_height: 290
       - :image_part: part.png
-        item_x: 85
-        item_y: 80
+        item_x: 90
+        item_y: 90
         item_width: 245
         item_height: 290
       - :image_part: part.png
-        item_x: 85
-        item_y: 80
+        item_x: 90
+        item_y: 90
         item_width: 245
         item_height: 290
       - :image_part: part.png
-        item_x: 85
-        item_y: 80
+        item_x: 90
+        item_y: 90
         item_width: 245
         item_height: 290
       - :image_part: part.png
-        item_x: 85
-        item_y: 80
+        item_x: 90
+        item_y: 90
         item_width: 245
         item_height: 290
 
@@ -89,7 +96,7 @@
     name: Bailey Necklace
     price: 28.00
   - category: Photo Necklaces
-    name: Awarenesss Necklace
+    name: Awareness Necklace
     price: 65.00
   - category: Photo Necklaces
     name: The Sophie
@@ -131,9 +138,6 @@
     name: Karrie
     price: 46.00
   - category: Photo Charms
-    name: Charm
-    price: 58.00
-  - category: Photo Charms
     name: Taneka
     price: 46.00
   - category: Photo Charms
@@ -167,7 +171,7 @@
     name: Faith Charm
     price: 18.00
   - category: Photo Charms
-    name: Peace Sgn Charm
+    name: Peace Sign Charm
     price: 18.00
   - category: Photo Charms
     name: Angel Wing Charm

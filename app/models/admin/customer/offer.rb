@@ -16,13 +16,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     offer = Admin::Customer::Offer.create(:email    => email,
                                                       :portrait => portrait,
                                                       :piece    => piece)
-
-    # TODO: overriding default behavior since not all pieces have part images
-                                                                                  #       should_be =>  merchandise_piece = piece
-    merchandise_piece = Admin::Merchandise::Piece.find_by_name('Alexis Bracelet') # use for all right now
-                                                                                  # TODO: end
-
-    offer.assemble(merchandise_piece)
+    offer.assemble(piece)
 
     # TODO: this image should be a composite
                                         #       of all the parts of this piece put together

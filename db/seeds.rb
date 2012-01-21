@@ -26,8 +26,11 @@ end
 
 image_path   = Rails.root.join('public', 'kimbra')
 file_to_load = seed_path.join('pieces.yml').to_s
-pieces_list  = YAML::load(File.open(file_to_load))[:pieces]
-image_stub = Rails.root.join('app','assets','images','home.png')
+info         = YAML::load(File.open(file_to_load))
+pieces_list  = info[:pieces]
+default      = info[:default]
+image_stub   = Rails.root.join('app', 'assets', 'images', 'home.png')
+
 pieces_list.each do |piece|
   parts = piece.delete(:parts)
 
@@ -61,9 +64,16 @@ pieces_list.each do |piece|
 
   # seed the parts for this Jewelry Piece
   p.parts.destroy_all if p.parts.present?
-  path = path.join(piece['name'].underscore.gsub(' ', '_'))
-  path.mkpath unless path.directory?
-  parts.each do |part|
+  if parts.blank?
+    parts = default[:parts]
+    path = image_path
+  else
+    path = path.join(piece['name'].underscore.gsub(' ', '_'))
+    path.mkpath unless path.directory?
+  end
+
+  parts.each do |part_info|
+    part = part_info.clone
     part_image_fname = path.join(part.delete(:image_part))
     my_part          = Admin::Merchandise::Part.create(part)
     my_part.image_part.store!(File.open(part_image_fname.to_s))
@@ -102,9 +112,9 @@ studios.each do |my_studio_attrs|
     owner.update_attributes(attrs.merge(:password => 'password'))
 
     # create Sessions
-    index = 0
+    index                  = 0
     sessions               = my_studio_attrs.delete('sessions').collect do |session_attrs|
-      index += 1
+      index       += 1
       client      = MyStudio::Client.create(session_attrs.delete('client'))
 
       # load portraits

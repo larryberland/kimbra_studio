@@ -1,5 +1,9 @@
 <div class='show'>
   <p>
+    <b>Offers:</b>
+    <%= link_to 'Offers', admin_customer_email_offers_path(@admin_customer_email) %>
+  </p>
+  <p>
     <b>Message:</b>
     <%= @admin_customer_email.message %>
   </p>
