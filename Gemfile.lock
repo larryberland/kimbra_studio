@@ -167,6 +167,7 @@ DEPENDENCIES
   coffee-rails (~> 3.1.1)
   crack
   devise
+  inherited_resources
   jquery-rails
   pg
   rails (= 3.1.3)
