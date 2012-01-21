@@ -1,8 +1,12 @@
 class Admin::Customer::Email < ActiveRecord::Base
+  attr_accessible :description
+
   belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => 'my_studio_session_id'
   has_many :offers, :class_name => 'Admin::Customer::Offer', :dependent => :destroy
 
   scope :by_session, lambda { |studio_session_id| where('my_studio_session_id = ?', studio_session_id) }
+
+  before_save :set_message
 
   def self.generate(studio_session)
     email = Admin::Customer::Email.new
@@ -22,5 +26,13 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   def sort_session_name
     my_studio_session.name
+  end
+
+  private
+
+  def set_message
+    if message.nil?
+      self.message = I18n.translate(:email_message, :name => my_studio_session.client.name.titleize)
+    end
   end
 end

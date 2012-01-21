@@ -1,6 +1,9 @@
-<h1><%=t(:my_studio_portraits_edit_title)%></h1>
+<h1><%= t(:my_studio_portraits_edit_title) %></h1>
+<div class="show">
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %> |
-<%= link_to t(:back), my_studio_session_portraits_path(@my_studio_session) %>
+  <%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %> |
+  <%= link_to t(:back), my_studio_session_portraits_path(@my_studio_session) %>
+</div>
+<%= render 'my_studio/portraits/side_menu', :portrait => @my_studio_portrait %>

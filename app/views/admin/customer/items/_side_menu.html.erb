@@ -1,12 +1,12 @@
 <div class='side-menu'>
   <table>
     <tr><td>Custom Item:</td></tr>
-    <tr><td><%= div_image_offer(@item, :image => :image_item, :version => :original) %></td></tr>
+    <tr><td><%= cw_div_image(@item, :image => :image_item, :version => :original) %></td></tr>
     <tr><td>Resized Portrait:</td></tr>
-    <tr><td><%= div_image_offer(@item, :image => :image_stock, :version => :original) %></td></tr>
+    <tr><td><%= cw_div_image(@item, :image => :image_stock, :version => :original) %></td></tr>
     <tr><td>Kimbra Part:</td></tr>
-    <tr><td><%= div_image_offer(@item.part, :image => :image_part) %></td></tr>
+    <tr><td><%= cw_div_image(@item.part, :image => :image_part) %></td></tr>
     <tr><td>Kimbra Piece:</td></tr>
-    <tr><td><%= div_image_offer(@item.offer.piece) %></td></tr>
+    <tr><td><%= cw_div_image(@item.offer.piece) %></td></tr>
   </table>
 </div>

@@ -5,7 +5,7 @@
     - :image_part: part_charm.png
       item_x: 19
       item_y: 34
-      item_width: 96
+      item_width: 90
       item_height: 137
 :pieces:
   - category: Photo Bracelets

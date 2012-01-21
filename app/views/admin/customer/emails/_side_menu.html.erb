@@ -4,7 +4,7 @@
     <% offers.each_with_index do |offer, index| %>
         <tr>
           <td><%= index+1 %></td>
-          <td><%= div_image_offer(offer) %></td>
+          <td><%= cw_div_image(offer) %></td>
         </tr>
     <% end unless offers.nil? %>
   </table>

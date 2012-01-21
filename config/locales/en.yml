@@ -12,6 +12,8 @@ en:
   destroy: 'Destroy'
   offers: 'Offers'
 
+  email_message: "Kimbra Studio Click Plus+ has created this special offer just for %{name}."
+
   # devise views
   sign_in: 'Sign in'
   sign_up: 'Register'
