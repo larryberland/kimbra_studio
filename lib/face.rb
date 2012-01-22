@@ -19,7 +19,7 @@ class Face
     response = RestClient.get(URL_FACE,
                               :params=>{:api_key => @api_key,
                                         :api_secret => @api_secret,
-                                        :urls   => portrait.image_url})
+                                        :urls   => portrait.image_url(:face)})
     puts response.inspect
     r = Crack::JSON.parse(response)
     puts "keys=>#{r.keys.join(', ')}"
@@ -40,9 +40,9 @@ class Face
       puts tags.inspect
       # download the image locally first, and then read it
 
-      fname = File.basename(portrait.image_url.split("?AWS").first).split('.').first
+      fname = File.basename(portrait.image_url(:face).split("?AWS").first).split('.').first
 
-      img     = Magick::Image.read(portrait.image_url).first
+      img     = Magick::Image.read(portrait.image_url(:face)).first
       img_dim = [img.columns, img.rows]
 
       puts "tags size=>#{tags.size}"
@@ -69,10 +69,6 @@ class Face
       end
 
       # center the face into our part
-
-
-      puts "fname=>#{fname}"
-      fname = 'test'
       img.write("#{fname}-blurred.jpg")
 
     end
