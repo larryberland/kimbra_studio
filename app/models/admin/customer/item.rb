@@ -34,7 +34,7 @@ class Admin::Customer::Item < ActiveRecord::Base
     if offer and offer.portrait and offer.portrait.image
       image_stock.remove!
       t_resize = Tempfile.new(['resize', '.jpeg'])
-      img      = Magick::Image.read(offer.portrait.image.file.file).first
+      img      = Magick::Image.read(offer.portrait.image_url).first
       @resize  = img.resize_to_fit(item_width, item_height)
       @resize.write(t_resize.path)
       image_stock.store!(File.open(t_resize.path))
@@ -45,9 +45,9 @@ class Admin::Customer::Item < ActiveRecord::Base
   def reposition_image
     if part and part.image_part.present?
       image_item.remove!
-      @resize = Magick::Image.read(image_stock.file.file).first if @resize.nil?
+      @resize = Magick::Image.read(image_stock_url).first if @resize.nil?
       t_assembled = Tempfile.new(['assembled', '.jpeg'])
-      image_piece = Magick::Image.read(part.image_part.file.file).first
+      image_piece = Magick::Image.read(part.image_part_url).first
       image_piece.composite(@resize, item_x, item_y, Magick::AtopCompositeOp).write(t_assembled.path)
       image_item.store!(File.open(t_assembled.path))
       write_image_item_identifier

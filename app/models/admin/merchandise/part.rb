@@ -13,14 +13,14 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   def assemble(portrait)
 
     t_resize = Tempfile.new(['resize','.jpeg'])
-    img = Magick::Image.read(portrait.image.file.file).first
+    img = Magick::Image.read(portrait.image_url).first
     resize = img.resize_to_fit(item_width, item_height)
     resize.write(t_resize.path)
 
     # combine the part image with the re-sized stock image
     if image_part.present?
       t_assembled = Tempfile.new(['assembled','.jpeg'])
-      image_piece = Magick::Image.read(image_part.file.file).first
+      image_piece = Magick::Image.read(image_part_url).first
       image_piece.composite(resize, item_x, item_y, Magick::AtopCompositeOp).write(t_assembled.path)
     end
 

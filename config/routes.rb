@@ -47,7 +47,9 @@ KimbraStudio::Application.routes.draw do
     resources :infos
     resources :mini_sites
     resources :sessions do
-      resources :portraits
+      resources :portraits do
+        resources :faces
+      end
     end
     resources :clients
     resources :staffers

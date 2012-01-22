@@ -31,6 +31,7 @@ pieces_list  = info[:pieces]
 default      = info[:default]
 image_stub   = Rails.root.join('app', 'assets', 'images', 'home.png')
 
+puts "storing #{pieces_list.size} Pieces"
 pieces_list.each do |piece|
   parts = piece.delete(:parts)
 
@@ -43,7 +44,6 @@ pieces_list.each do |piece|
   if piece_image_fname
     fname = path.join(piece_image_fname)
     if File.exist?(fname.to_s)
-      puts "STORING #{piece_image_fname}"
       p.image.store!(File.open(fname.to_s))
     else
       puts "missing Piece image fname=>#{piece_image_fname} in #{piece['category']}/#{piece['name']} image=>#{fname}"
@@ -114,18 +114,21 @@ studios.each do |my_studio_attrs|
     # create Sessions
     index                  = 0
     sessions               = my_studio_attrs.delete('sessions').collect do |session_attrs|
-      index       += 1
-      client      = MyStudio::Client.create(session_attrs.delete('client'))
+      index  += 1
+      client = MyStudio::Client.create(session_attrs.delete('client'))
+      puts "mystudio client=>#{client.inspect}"
 
       # load portraits
       client_path = path.join(client.name.underscore.gsub(' ', '_'))
       client_path.mkpath unless client_path.directory?
       portraits = client_path.children.collect do |p|
         if p.file?
-          portrait = MyStudio::Portrait.create
-          portrait.image.store!(File.open(p.to_s))
-          portrait.save
-          portrait
+          if File.basename(p).split('.').last.match(/JPG|jpg/)
+            portrait = MyStudio::Portrait.create
+            portrait.image.store!(File.open(p.to_s))
+            portrait.save
+            portrait
+          end
         end
       end
 

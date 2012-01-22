@@ -1,0 +1,73 @@
+<%= form_for(@my_studio_portrait_face) do |f| %>
+  <% if @my_studio_portrait_face.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@my_studio_portrait_face.errors.count, "error") %> prohibited this my_studio_portrait_face from being saved:</h2>
+
+      <ul>
+      <% @my_studio_portrait_face.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :portraits %><br />
+    <%= f.text_field :portraits %>
+  </div>
+  <div class="field">
+    <%= f.label :center %><br />
+    <%= f.text_field :center %>
+  </div>
+  <div class="field">
+    <%= f.label :eye_left_x %><br />
+    <%= f.text_field :eye_left_x %>
+  </div>
+  <div class="field">
+    <%= f.label :eye_right_x %><br />
+    <%= f.text_field :eye_right_x %>
+  </div>
+  <div class="field">
+    <%= f.label :mouth_left_x %><br />
+    <%= f.text_field :mouth_left_x %>
+  </div>
+  <div class="field">
+    <%= f.label :mouth_center_x %><br />
+    <%= f.text_field :mouth_center_x %>
+  </div>
+  <div class="field">
+    <%= f.label :mouth_right_x %><br />
+    <%= f.text_field :mouth_right_x %>
+  </div>
+  <div class="field">
+    <%= f.label :nose_x %><br />
+    <%= f.text_field :nose_x %>
+  </div>
+  <div class="field">
+    <%= f.label :ear_left_x %><br />
+    <%= f.text_field :ear_left_x %>
+  </div>
+  <div class="field">
+    <%= f.label :ear_right_x %><br />
+    <%= f.text_field :ear_right_x %>
+  </div>
+  <div class="field">
+    <%= f.label :chin_x %><br />
+    <%= f.text_field :chin_x %>
+  </div>
+  <div class="field">
+    <%= f.label :yaw %><br />
+    <%= f.text_field :yaw %>
+  </div>
+  <div class="field">
+    <%= f.label :roll %><br />
+    <%= f.text_field :roll %>
+  </div>
+  <div class="field">
+    <%= f.label :tag_attributes %><br />
+    <%= f.text_area :tag_attributes %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

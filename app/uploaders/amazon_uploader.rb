@@ -30,7 +30,6 @@ class AmazonUploader < CarrierWave::Uploader::Base
 
   # store the width and height into model
   process :store_geometry
-  process :resize_to_limit => [900, 900]  # face only supports 900x900
 
   # Create different versions of your uploaded files:
   version :thumb do
@@ -39,6 +38,11 @@ class AmazonUploader < CarrierWave::Uploader::Base
 
   version :list do
      process :resize_to_limit => [50, 50]
+  end
+
+  version :face do
+    process :convert => 'jpg'
+    process :resize_to_limit => [900, 900]
   end
 
   #version :best do

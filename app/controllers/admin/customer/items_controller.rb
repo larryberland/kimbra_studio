@@ -2,7 +2,6 @@ class Admin::Customer::ItemsController < InheritedResources::Base
   belongs_to :offer,
              :parent_class => Admin::Customer::Offer
 
-
   def update
     puts "params=>#{params.inspect}"
     @item  = Admin::Customer::Item.find(params[:id])

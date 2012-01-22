@@ -14,15 +14,19 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def self.generate(email, portrait, piece)
 
     offer = Admin::Customer::Offer.create(:email    => email,
-                                                      :portrait => portrait,
-                                                      :piece    => piece)
+                                          :portrait => portrait,
+                                          :piece    => piece)
     offer.assemble(piece)
 
     # TODO: this image should be a composite
-                                        #       of all the parts of this piece put together
-    file = piece.image.present? ? piece.image.file.file : Rails.root.join('app', 'assets', 'images', 'home.png')
-    offer.image.store!(File.open(file)) # copy the existing for now
-                                        # TODO: end
+    #       of all the parts of this piece put together
+    # copy the existing for now
+    if piece.image.present?
+      offer.image.store!(piece.image_url) # copy the existing for now
+    else
+      offer.image.store!(File.open(Rails.root.join('app', 'assets', 'images', 'home.png').to_s))
+    end
+    # TODO: end
 
     offer.save
     offer

@@ -1,12 +1,13 @@
-require 'rubygems'
-require 'restclient'
-require 'crack'
-require 'rmagick'
+#require 'rubygems'
+#require 'restclient'
+#require 'crack'
+#require 'rmagick'
+require 'uri'
 
 URL_FACE  = "http://api.face.com/faces/detect.json"
 URL_IMAGE = 'http://farm3.staticflickr.com/2751/4204160273_8aa8a03fab_b.jpg'
 
-class Face
+class GetFace
   def initialize
     face        = YAML.load_file(Rails.root.join('config', 'click_face.yml'))
     @api_key    = face[:click_face]['api_key']
@@ -17,9 +18,9 @@ class Face
     #####  make API call
 
     response = RestClient.get(URL_FACE,
-                              :params=>{:api_key => @api_key,
+                              :params=>{:api_key    => @api_key,
                                         :api_secret => @api_secret,
-                                        :urls   => portrait.image_url(:face)})
+                                        :urls       => URI.escape(portrait.image_url(:face))})
     puts response.inspect
     r = Crack::JSON.parse(response)
     puts "keys=>#{r.keys.join(', ')}"
@@ -45,10 +46,16 @@ class Face
       img     = Magick::Image.read(portrait.image_url(:face)).first
       img_dim = [img.columns, img.rows]
 
+      # remove any previous face info
+      portrait.faces.each do |face|
+        face.destroy
+      end if portrait.faces.present?
+
       puts "tags size=>#{tags.size}"
       tags.each do |tag|
         puts "tag keys=>#{tag.keys.join(', ')}"
         puts "tag => #{tag.inspect}"
+        portrait.faces << MyStudio::Portrait::Face.from_tag(tag)
         face_topleft = {
             'x' => img.columns * tag['eye_left']['x']/100.0,
             'y' => img.rows * tag['eye_left']['y']/100.0
@@ -67,6 +74,7 @@ class Face
         img.composite!(new_face_img.gaussian_blur(0, 5),
                        face_topleft['x'], face_topleft['y'], Magick::OverCompositeOp)
       end
+      portrait.save
 
       # center the face into our part
       img.write("#{fname}-blurred.jpg")
