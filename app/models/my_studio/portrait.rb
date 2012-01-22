@@ -1,6 +1,6 @@
 class MyStudio::Portrait < ActiveRecord::Base
   attr_accessible :image, :remote_image_url, :description, :active
-  mount_uploader :image, ImageUploader
+  mount_uploader :image, AmazonUploader
 
   belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => "my_studio_session_id"
 
@@ -20,7 +20,7 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   def set_description
     if description.blank?
-      self.description = image_url.to_s.split('/').last
+      self.description = File.basename(image_url.to_s.split("?AWS").first)
     end
   end
 

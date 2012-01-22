@@ -6,36 +6,49 @@ require 'rmagick'
 URL_FACE  = "http://api.face.com/faces/detect.json"
 URL_IMAGE = 'http://farm3.staticflickr.com/2751/4204160273_8aa8a03fab_b.jpg'
 
-
 class Face
   def initialize
     face        = YAML.load_file(Rails.root.join('config', 'click_face.yml'))
     @api_key    = face[:click_face]['api_key']
     @api_secret = face[:click_face]['api_secret']
-
   end
 
   def perform(portrait)
-
-
     #####  make API call
-    response = RestClient.get(URL_FACE,
-                              :params=>{:api_key=>@api_key,
-                                        :api_secret=>@api_secret,
-                                        :urls   => portrait.image.file.file})
-    puts response.inspect
-    tags = Crack::JSON.parse(response)['photos'][0]['tags']
 
-    puts tags.inspect
-    if tags.length > 0
+    response = RestClient.get(URL_FACE,
+                              :params=>{:api_key => @api_key,
+                                        :api_secret => @api_secret,
+                                        :urls   => portrait.image_url})
+    puts response.inspect
+    r = Crack::JSON.parse(response)
+    puts "keys=>#{r.keys.join(', ')}"
+
+    puts "status=>#{r['status']}"
+    puts "error=>#{r['error_code']} msg=>#{r['error_message']}"
+    puts "usage=>#{r['usage'].inspect}"
+
+    photos = r['photos']
+    puts "photos=>#{photos.inspect}"
+
+    info = photos.first
+    puts "info=>#{info.inspect}"
+
+    tags = info['tags']
+
+    if tags and tags.length > 0
+      puts tags.inspect
       # download the image locally first, and then read it
 
-      fname = File.basename(portrait.image_url)
+      fname = File.basename(portrait.image_url.split("?AWS").first).split('.').first
 
-      img     = Magick::Image.read(portrait.image.file.file).first
+      img     = Magick::Image.read(portrait.image_url).first
       img_dim = [img.columns, img.rows]
 
+      puts "tags size=>#{tags.size}"
       tags.each do |tag|
+        puts "tag keys=>#{tag.keys.join(', ')}"
+        puts "tag => #{tag.inspect}"
         face_topleft = {
             'x' => img.columns * tag['eye_left']['x']/100.0,
             'y' => img.rows * tag['eye_left']['y']/100.0
@@ -55,6 +68,11 @@ class Face
                        face_topleft['x'], face_topleft['y'], Magick::OverCompositeOp)
       end
 
+      # center the face into our part
+
+
+      puts "fname=>#{fname}"
+      fname = 'test'
       img.write("#{fname}-blurred.jpg")
 
     end

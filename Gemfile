@@ -16,6 +16,9 @@ gem 'rest-client'
 gem 'crack'
 
 gem 'inherited_resources'
+gem 'aws-s3', :require => 'aws/s3'
+gem 'fog'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

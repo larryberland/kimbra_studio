@@ -31,6 +31,10 @@ GEM
       multi_json (~> 1.0)
     ansi (1.4.1)
     arel (2.2.1)
+    aws-s3 (0.6.2)
+      builder
+      mime-types
+      xml-simple
     bcrypt-ruby (3.0.1)
     blueprint-rails (0.1.2)
       railties (~> 3.0)
@@ -51,8 +55,20 @@ GEM
       orm_adapter (~> 0.0.3)
       warden (~> 1.1)
     erubis (2.7.0)
+    excon (0.9.5)
     execjs (1.3.0)
       multi_json (~> 1.0)
+    fog (1.1.2)
+      builder
+      excon (~> 0.9.0)
+      formatador (~> 0.2.0)
+      mime-types
+      multi_json (~> 1.0.3)
+      net-scp (~> 1.0.4)
+      net-ssh (>= 2.1.3)
+      nokogiri (~> 1.5.0)
+      ruby-hmac
+    formatador (0.2.1)
     has_scope (0.5.1)
     hike (1.2.1)
     i18n (0.6.0)
@@ -69,6 +85,10 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.17.2)
     multi_json (1.0.4)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-ssh (2.3.0)
+    nokogiri (1.5.0)
     orm_adapter (0.0.6)
     pg (0.12.2)
     polyglot (0.3.3)
@@ -103,6 +123,7 @@ GEM
     rest-client (1.6.7)
       mime-types (>= 1.16)
     rmagick (2.13.1)
+    ruby-hmac (0.4.0)
     sass (3.1.12)
     sass-rails (3.1.5)
       actionpack (~> 3.1.0)
@@ -131,16 +152,19 @@ GEM
     web-app-theme (0.8.0)
       rails (~> 3.1.0.rc6)
       thor (~> 0.14)
+    xml-simple (1.1.1)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-s3
   blueprint-rails
   carrierwave
   coffee-rails (~> 3.1.1)
   crack
   devise
+  fog
   inherited_resources
   jquery-rails
   pg

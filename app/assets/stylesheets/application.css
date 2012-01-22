@@ -9,6 +9,10 @@
 
 require blueprint
 
+/*div#content_wrapper {*/
+  /*width: 800px;*/
+/*}*/
+
 div#body_wrapper {
     margin-left: auto;
     margin-right: auto;
