@@ -4,6 +4,9 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile ~/.gitignore_global
 
+# ignore Amazon s3 settings
+.DS_Store
+
 # ignore editor settings
 /.idea/*
 
@@ -23,6 +26,9 @@
 
 # Ignore CarrierWave uploads
 /public/uploads/*
+
+# Ignore temp jpg files
+face*.jpg
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
