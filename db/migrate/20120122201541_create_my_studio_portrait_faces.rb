@@ -28,6 +28,10 @@ class CreateMyStudioPortraitFaces < ActiveRecord::Migration
       t.decimal :roll
       t.decimal :pitch
       t.text :tag_attributes
+      t.integer :face_top_left_x
+      t.integer :face_top_left_y
+      t.integer :face_width
+      t.integer :face_height
 
       t.timestamps
     end

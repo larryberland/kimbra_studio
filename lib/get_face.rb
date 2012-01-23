@@ -21,24 +21,20 @@ class GetFace
                               :params=>{:api_key    => @api_key,
                                         :api_secret => @api_secret,
                                         :urls       => URI.escape(portrait.image_url(:face))})
-    puts response.inspect
     r = Crack::JSON.parse(response)
-    puts "keys=>#{r.keys.join(', ')}"
 
-    puts "status=>#{r['status']}"
-    puts "error=>#{r['error_code']} msg=>#{r['error_message']}"
-    puts "usage=>#{r['usage'].inspect}"
+    puts "error=>#{r['error_code']} msg=>#{r['error_message']}" if r['error_code'].present?
 
     photos = r['photos']
-    puts "photos=>#{photos.inspect}"
+    #puts "usage=>#{r['usage'].inspect}"
+    #puts "photos=>#{photos.inspect}"
 
     info = photos.first
-    puts "info=>#{info.inspect}"
+    #puts "info=>#{info.inspect}"
 
     tags = info['tags']
 
     if tags and tags.length > 0
-      puts tags.inspect
       # download the image locally first, and then read it
 
       fname = File.basename(portrait.image_url(:face).split("?AWS").first).split('.').first
@@ -51,15 +47,20 @@ class GetFace
         face.destroy
       end if portrait.faces.present?
 
-      puts "tags size=>#{tags.size}"
+     # puts "tags size=>#{tags.size}"
       tags.each do |tag|
-        puts "tag keys=>#{tag.keys.join(', ')}"
-        puts "tag => #{tag.inspect}"
-        portrait.faces << MyStudio::Portrait::Face.from_tag(tag)
+        #puts "tag keys=>#{tag.keys.join(', ')}"
+
+        face         = MyStudio::Portrait::Face.from_tag(tag)
+
+        #puts "eye_left =>#{tag['eye_left']}"
         face_topleft = {
             'x' => img.columns * tag['eye_left']['x']/100.0,
             'y' => img.rows * tag['eye_left']['y']/100.0
         }
+
+        #puts "eye_right =>#{tag['eye_right']}"
+        #puts "mouth_right =>#{tag['mouth_right']}"
 
         face_width  = img.columns * tag['eye_right']['x']/100.0 - face_topleft['x']
         face_height = img.rows * tag['mouth_right']['y']/100.0 - face_topleft['y']
@@ -73,7 +74,16 @@ class GetFace
 
         img.composite!(new_face_img.gaussian_blur(0, 5),
                        face_topleft['x'], face_topleft['y'], Magick::OverCompositeOp)
+
+        face.face_top_left_x = face_topleft['x']
+        face.face_top_left_y = face_topleft['y']
+        face.face_width      = face_width
+        face.face_height     = face_height
+        face.save
+
+        portrait.faces << face
       end
+
       portrait.save
 
       # center the face into our part

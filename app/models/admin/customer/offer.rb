@@ -16,6 +16,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
     offer = Admin::Customer::Offer.create(:email    => email,
                                           :portrait => portrait,
                                           :piece    => piece)
+
+    puts "offer assemble portrait=>#{offer.portrait.id}"
     offer.assemble(piece)
 
     # TODO: this image should be a composite
@@ -32,17 +34,69 @@ class Admin::Customer::Offer < ActiveRecord::Base
     offer
   end
 
-  # assemble all the parts for this piece
+  # Using a Kimbra Piece made up of Kimbra Parts we create
+  #  a Custom Offer with custom items which are mapped one to one
+  #  with the Kimbra parts.
+  #
+  # assemble all the Kimbra parts turning them into Offer Items.
+  # Strategy
+  #
+  #   Piece has a single part
+  #     create item with portrait as function of face
+  #
+  #   Piece has multiple parts
+  #     Portrait
+  #       has no faces:
+  #         create item with portrait resize
+  #       has one face:
+  #         create item for this face centered
+  #       has multiple faces:
+  #         create item for each face centered
+  #
+
+  def kimbra_parts(merchandise_piece)
+    @kimbra_parts ||= merchandise_piece.parts
+    @kimbra_part_index = -1
+    @kimbra_parts
+  end
+
+  def kimbra_part?
+    (@kimbra_part_index + 1) < @kimbra_parts.size
+  end
+
+  def kimbra_part_next
+    @kimbra_parts[@kimbra_part_index+=1]
+  end
+
   def assemble(merchandise_piece)
     raise "did you forget to assign a piece for this offer?" if merchandise_piece.nil?
     raise "did you forget to assign a studio session for this portrait?" if portrait.my_studio_session.nil?
-    portraits = portrait.my_studio_session.portraits
-    merchandise_piece.parts.each_with_index do |part, index|
-      if portraits[index]
-        self.items << Admin::Customer::Item.assemble(self, portraits[index], part)
+
+    if kimbra_parts(merchandise_piece)
+
+      if merchandise_piece.parts.size > 1
+
+        portrait_list = [portrait] + (portrait.my_studio_session.portraits - [portrait])
+
+        portrait_list.each do |picture|
+
+          puts "  picture id=>#{picture.id} for #{merchandise_piece.name}"
+          if picture.faces.present?
+            picture.faces.each do |face|
+              # create an item with this face
+              self.items << Admin::Customer::Item.assemble_portrait_face(self, kimbra_part_next, picture, face)
+              break unless kimbra_part?
+            end
+          else
+            self.items << Admin::Customer::Item.assemble_portrait(self, kimbra_part_next, picture)
+          end
+          break unless kimbra_part?
+        end
       else
-        puts "WARN: only #{portraits.size} need #{index+1}"
+        self.items << Admin::Customer::Item.assemble_portrait(self, merchandise_piece.parts.first, portrait)
       end
+    else
+      Rails.logger.info("WARN: missing parts for merchandise::piece=>#{merchandise_piece.inspect}")
     end
     self
   end

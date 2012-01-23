@@ -1,0 +1,60 @@
+<h1>Listing my_studio_portrait_faces</h1>
+
+<table>
+  <tr>
+    <th>Portraits</th>
+    <th>Face x</th>
+    <th>y</th>
+    <th>Face Width</th>
+    <th>Face Height</th>
+    <th>Center</th>
+    <th>Eye left x</th>
+    <th>Eye right x</th>
+    <th>Mouth left x</th>
+    <th>Mouth center x</th>
+    <th>Mouth right x</th>
+    <th>Nose x</th>
+    <th>Ear left x</th>
+    <th>Ear right x</th>
+    <th>Chin x</th>
+    <th>Yaw</th>
+    <th>Roll</th>
+    <th>Tag attributes</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @faces.each do |face| %>
+  <tr>
+    <td><%= face.portrait.id %></td>
+    <td><%= face.face_top_left_x %></td>
+    <td><%= face.face_top_left_y %></td>
+    <td><%= face.face_width %></td>
+    <td><%= face.face_height %></td>
+    <td><%= face.center_x %></td>
+    <td><%= face.center_y %></td>
+    <td><%= face.eye_left_x %></td>
+    <td><%= face.eye_right_x %></td>
+    <td><%= face.mouth_left_x %></td>
+    <td><%= face.mouth_center_x %></td>
+    <td><%= face.mouth_right_x %></td>
+    <td><%= face.nose_x %></td>
+    <td><%= face.ear_left_x %></td>
+    <td><%= face.ear_right_x %></td>
+    <td><%= face.chin_x %></td>
+    <td><%= face.yaw %></td>
+    <td><%= face.roll %></td>
+    <td><%= face.tag_attributes %></td>
+    <td><%= link_to 'Show', my_studio_session_portrait_face_path(face.portrait.my_studio_session, face.portrait, face) %></td>
+    <td><%= link_to 'Edit', edit_my_studio_session_portrait_face_path(face.portrait.my_studio_session, face.portrait,face) %></td>
+    <td><%= link_to 'Destroy', my_studio_session_portrait_face_path(face.portrait.my_studio_session, face.portrait, face), confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Face', new_my_studio_session_portrait_face_path(@portrait.my_studio_session, @portrait) %>
+<%= link_to t(:back), my_studio_session_portraits_path(@portrait.my_studio_session) %>
+

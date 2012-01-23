@@ -12,16 +12,33 @@ class Admin::Customer::Item < ActiveRecord::Base
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # one of many parts that make up a Piece
 
   before_create :default_part
-                                                              #before_save :reposition_image
 
-                                                              # Create the item for this offer
-  def self.assemble(offer, portrait, merchandise_part)
-    item              = Admin::Customer::Item.create(:offer => offer, :part => merchandise_part)
-    resize, assembled = merchandise_part.assemble(portrait)
-    item.image_stock.store!(File.open(resize.path)) if resize.present?
-    item.image_item.store!(File.open(assembled.path)) if assembled.present?
-    item.save
+  def self.assemble_portrait_face(offer, merchandise_part, portrait, face)
+    item              = assemble(offer, merchandise_part, portrait)
+    resize, assembled = item.part.center_on_face(face)
+    item.save_versions(resize, assembled)
     item
+  end
+
+  def self.assemble_portrait(offer, merchandise_part, portrait)
+    item              = assemble(offer, merchandise_part, portrait)
+    resize, assembled = item.part.group_shot
+    item.save_versions(resize, assembled)
+    item
+  end
+
+  def save_versions(stock, assembled)
+    raise 'could not resize image' unless File.exist?(stock.path)
+    raise 'could not assemble image' unless File.exist?(assembled.path)
+    if stock.present?
+      image_stock.store!(File.open(stock.path))
+      write_image_stock_identifier
+    end
+    if assembled.present?
+      image_item.store!(File.open(assembled.path))
+      write_image_item_identifier
+    end
+    save
   end
 
   def to_image_span
@@ -55,7 +72,27 @@ class Admin::Customer::Item < ActiveRecord::Base
     end
   end
 
+  # create the item's part referenced by the Kimbra Part
+  def create_part(merchandise_part, portrait)
+    self.part     = merchandise_part.clone
+    part.portrait = portrait
+    part.image_part.store!(merchandise_part.image_part_url)
+    part.write_image_part_identifier
+    part.save
+    part
+  end
+
   private
+
+  # create an Item with a part for building an offer
+  def self.assemble(offer, merchandise_part, portrait)
+    raise "missing kimbra part in offer=>#{offer.inspect}" unless merchandise_part.present?
+    raise "missing portrait in offer=>#{offer.inspect}" unless portrait.present?
+    item = Admin::Customer::Item.create(:offer => offer)
+    item.part = Admin::Customer::Part.assemble(merchandise_part, portrait) # create a replica of merchandise part for this item
+    item
+  end
+
 
   # on create grab the item position information
   #  from the Part

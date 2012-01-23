@@ -24,64 +24,8 @@ states_list.each_pair do |key, state|
   State.create(state['attributes']) unless s
 end
 
-image_path   = Rails.root.join('public', 'kimbra')
-file_to_load = seed_path.join('pieces.yml').to_s
-info         = YAML::load(File.open(file_to_load))
-pieces_list  = info[:pieces]
-default      = info[:default]
-image_stub   = Rails.root.join('app', 'assets', 'images', 'home.png')
-
-puts "storing #{pieces_list.size} Pieces"
-pieces_list.each do |piece|
-  parts = piece.delete(:parts)
-
-  path = image_path.join(piece['category'].underscore.gsub(' ', '_'))
-  path.mkpath unless path.directory?
-
-  p = Admin::Merchandise::Piece.find_or_create_by_category_and_name(piece['category'], piece['name'])
-
-  piece_image_fname = piece.delete('image')
-  if piece_image_fname
-    fname = path.join(piece_image_fname)
-    if File.exist?(fname.to_s)
-      p.image.store!(File.open(fname.to_s))
-    else
-      puts "missing Piece image fname=>#{piece_image_fname} in #{piece['category']}/#{piece['name']} image=>#{fname}"
-    end
-  else
-    # look for an image
-    fname = piece['name'].underscore.gsub(' ', '_')
-    ['jpeg', 'png'].each do |ext|
-      if File.exists?(path.join("#{fname}.#{ext}").to_s)
-        p.image.store!(File.open(path.join("#{fname}.#{ext}").to_s))
-      end
-    end
-    if p.image_url.blank?
-      puts "missing Piece #{fname}.[png|jpeg]  in #{piece['category']}/#{piece['name']}"
-      p.image.store!(File.open(image_stub.to_s)) # stub them for now
-    end
-  end
-
-  # seed the parts for this Jewelry Piece
-  p.parts.destroy_all if p.parts.present?
-  if parts.blank?
-    parts = default[:parts]
-    path = image_path
-  else
-    path = path.join(piece['name'].underscore.gsub(' ', '_'))
-    path.mkpath unless path.directory?
-  end
-
-  parts.each do |part_info|
-    part = part_info.clone
-    part_image_fname = path.join(part.delete(:image_part))
-    my_part          = Admin::Merchandise::Part.create(part)
-    my_part.image_part.store!(File.open(part_image_fname.to_s))
-    p.parts << my_part
-  end if parts.present?
-
-  p.update_attributes(piece)
-end
+require Rails.root.join('db', 'merchandise_seeds.rb').to_s
+MerchandiseSeeds.seeds(seed_path)
 
 roles = Role::ROLES
 roles.each do |role|
@@ -93,60 +37,8 @@ Category::NAMES.each do |category_type|
 end
 
 # seed studio for testing
-image_path   = Rails.root.join('public', 'studios')
-file_to_load = seed_path.join('studios.yml').to_s
-studios      = YAML::load(File.open(file_to_load))[:studios]
-studios.each do |my_studio_attrs|
+require Rails.root.join('db', 'my_studio_seeds.rb').to_s
+MyStudioSeeds.seeds(seed_path)
 
-  if Studio.find_by_name(my_studio_attrs['name'])
-    Studio.find_by_name(my_studio_attrs['name']).destroy
-  end
-  unless Studio.find_by_name(my_studio_attrs['name'])
-
-    path = image_path.join(my_studio_attrs['name'].underscore.gsub(' ', '_'))
-    path.mkpath unless path.directory?
-
-    # create owner
-    attrs = my_studio_attrs.delete('owner')
-    owner = User.find_or_create_by_email(attrs['email'])
-    owner.update_attributes(attrs.merge(:password => 'password'))
-
-    # create Sessions
-    index                  = 0
-    sessions               = my_studio_attrs.delete('sessions').collect do |session_attrs|
-      index  += 1
-      client = MyStudio::Client.create(session_attrs.delete('client'))
-      puts "mystudio client=>#{client.inspect}"
-
-      # load portraits
-      client_path = path.join(client.name.underscore.gsub(' ', '_'))
-      client_path.mkpath unless client_path.directory?
-      portraits = client_path.children.collect do |p|
-        if p.file?
-          if File.basename(p).split('.').last.match(/JPG|jpg/)
-            portrait = MyStudio::Portrait.create
-            portrait.image.store!(File.open(p.to_s))
-            portrait.save
-            portrait
-          end
-        end
-      end
-
-      s = MyStudio::Session.create(session_attrs.merge(:client => client, :session_at => index.days.ago))
-      s.portraits = portraits if portraits.present?
-      s.category = Category.find_by_name(session_attrs['name'])
-      s.save
-      s
-    end
-
-    # tie them all up into studio
-    my_studio              = Studio.new(my_studio_attrs)
-    my_studio.current_user = owner
-    my_studio.owner        = owner
-    my_studio.sessions     = sessions
-    my_studio.save
-    puts "my_studio #{my_studio.name} errors=>#{my_studio.errors.full_messages}"
-  end
-end
 
 
