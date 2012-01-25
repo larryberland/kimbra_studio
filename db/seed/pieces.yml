@@ -18,27 +18,27 @@
     :parts:
       - :image_part: part.png
         item_x: 90
-        item_y: 90
+        item_y: 85
         item_width: 245
         item_height: 290
       - :image_part: part.png
         item_x: 90
-        item_y: 90
+        item_y: 85
         item_width: 245
         item_height: 290
       - :image_part: part.png
         item_x: 90
-        item_y: 90
+        item_y: 85
         item_width: 245
         item_height: 290
       - :image_part: part.png
         item_x: 90
-        item_y: 90
+        item_y: 85
         item_width: 245
         item_height: 290
       - :image_part: part.png
         item_x: 90
-        item_y: 90
+        item_y: 85
         item_width: 245
         item_height: 290
 

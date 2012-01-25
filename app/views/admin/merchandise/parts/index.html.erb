@@ -7,12 +7,16 @@
 <table>
   <tr>
     <th>Piece</th>
+    <th>Kimbra part</th>
+    <th>Custom part</th>
     <th>Portrait</th>
-    <th>Image part</th>
-    <th>Image</th>
+    <th>x</th>
+    <th>y</th>
+    <th>width</th>
+    <th>height</th>
     <th>Order</th>
-    <th>Width</th>
-    <th>Height</th>
+    <th>Part Width</th>
+    <th>Part Height</th>
     <th>Active</th>
     <th></th>
     <th></th>
@@ -22,9 +26,13 @@
 <% @parts.each do |admin_merchandise_part| %>
   <tr>
     <td><%= admin_merchandise_part.try(:piece).try(:name) %></td>
-    <td><%= admin_merchandise_part.portrait %></td>
     <td><%= image_tag admin_merchandise_part.image_part_url(:list).to_s%></td>
-    <td><%= admin_merchandise_part.image %></td>
+    <td><%= image_tag admin_merchandise_part.image_url(:list).to_s %></td>
+    <td><%= image_tag admin_merchandise_part.portrait.image_url(:list).to_s %></td>
+    <td><%= admin_merchandise_part.item_x %></td>
+    <td><%= admin_merchandise_part.item_y %></td>
+    <td><%= admin_merchandise_part.item_width %></td>
+    <td><%= admin_merchandise_part.item_height %></td>
     <td><%= admin_merchandise_part.order %></td>
     <td><%= admin_merchandise_part.width %></td>
     <td><%= admin_merchandise_part.height %></td>

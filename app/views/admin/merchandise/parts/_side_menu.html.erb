@@ -5,6 +5,16 @@
       <td><%= cw_div_image(@part.piece) %></td>
     </tr>
     <tr>
+      <td>Custom Part:</td>
+      <td><%= cw_div_image(@part) %></td>
+    </tr>
+    <% if @part.portrait %>
+        <tr>
+          <td>Portrait:</td>
+          <td><%= cw_div_image(@part.portrait) %></td>
+        </tr>
+    <% end %>
+    <tr>
       <td>Kimbra Part:</td>
       <td><%= cw_div_image(@part, :image => :image_part) %></td>
     </tr>

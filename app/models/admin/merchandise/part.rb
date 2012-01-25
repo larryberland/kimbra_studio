@@ -21,15 +21,38 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     item_part
   end
 
+  def scale_image(img)
+
+    w          = img.columns
+    h          = img.rows
+    new_width  = w
+    new_height = (image_width.to_f * w.to_f) / image_width.to_f
+    if new_height < h
+      new_width = (image_height.to_f * new_height) / image_width.to_f
+    end
+
+    # center inside new width and height
+    if new_width > w
+      new_x = new_x - ((new_width - w) / 2)
+    elsif new_width < w
+      new_x = new_x + ((w - new_width) / 2)
+    end
+    if new_height > h
+      new_y = new_y - ((new_height - h) / 2)
+    elsif new_height < h
+      new_y = new_y + ((h - new_height) / 2)
+    end
+    {:x => new_x, :y => new_y, :width => new_width, :height => new_height}
+  end
+
   # create a custom assembled image by resize on portrait
   def group_shot
     puts "group_shot portrait=>#{portrait.id}"
     raise 'forget to assign portrait?' unless portrait.present?
     t_resize = Tempfile.new(['resize', '.jpeg'])
-    img      = Magick::Image.read(portrait.image_url).first
-    resize   = img.resize_to_fit(item_width, item_height)
+    resize = portrait.resize_to_fit_and_center(item_width, item_height)
     resize.write(t_resize.path)
-    t_assembled = save_custom_image(resize)
+    t_assembled = save_custom_image(t_resize)
     return t_resize, t_assembled
   end
 
@@ -37,17 +60,11 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   #  face information onto the kimbra part
   def center_on_face(face)
     raise 'forget to assign portrait?' unless portrait.present?
-    dx    = (item_width - face.face_width) * 0.50
-    dy    = (item_height - face.face_height) * 0.50
-    new_x = [face.face_top_left_x - dx.to_i, 0].max
-    new_y = [face.face_top_left_y - dy.to_i, 0].max
-
-    puts "crop #{new_x} #{new_y} #{item_width}x#{item_height}"
-    img     = Magick::Image.read(portrait.image_url(:face)).first
-    cropped = img.crop(new_x, new_y, item_width, item_height) #img.crop(x, y, width, height) -> image
-    t_crop  = Tempfile.new(['crop', '.jpeg'])
-    cropped.write(t_crop.path)
-    t_assembled = save_custom_image(cropped)
+    t_crop   = Tempfile.new(['crop', '.jpeg'])
+    centered = face.center_in_area(item_width, item_height)
+    centered.write(t_crop.path)
+    centered.write("#{portrait.id}_cropped.jpg") if Rails.env.development?
+    t_assembled = save_custom_image(t_crop)
     return t_crop, t_assembled
   end
 
@@ -59,16 +76,28 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   private
 
+  def path(dir)
+    p = Rails.root.join('public','pieces','parts', dir)
+    p.mkpath unless File.exists?(p.to_s)
+    p
+  end
+
   # using the src_image place it onto the
   #  kimbra part
-  def save_custom_image(src_image)
-    raise "no src_image to make custom part #{self.inspect}" if src_image.nil?
+  def save_custom_image(src)
+    raise "no src_image to make custom part #{self.inspect}" if src.nil?
     raise "no image_part in #{self.inspect}" if image_part.nil?
     t_assembled = Tempfile.new(['assembled', '.jpeg'])
     image_piece = Magick::Image.read(image_part_url).first
-    image_piece.composite(src_image, item_x, item_y, Magick::AtopCompositeOp).write(t_assembled.path)
+    src_image   = Magick::Image.read(File.open(src.path)).first
+    assemble    = image_piece.composite(src_image, item_x, item_y, Magick::AtopCompositeOp)
+    assemble.write(t_assembled.path)
+    if Rails.env.development?
+      assemble.write(path('assembled').join("part_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg").to_s)
+    end
     image.store!(File.open(t_assembled.path))
     write_image_identifier
+    save
     t_assembled
   end
 

@@ -11,6 +11,12 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   before_save :piece_default
 
+  def self.path(dir)
+    p = Rails.root.join('public','emails','offers', dir)
+    p.mkpath unless File.exists?(p.to_s)
+    p
+  end
+
   def self.generate(email, portrait, piece)
 
     offer = Admin::Customer::Offer.create(:email    => email,
@@ -23,14 +29,25 @@ class Admin::Customer::Offer < ActiveRecord::Base
     # TODO: this image should be a composite
     #       of all the parts of this piece put together
     # copy the existing for now
-    if piece.image.present?
-      offer.image.store!(piece.image_url) # copy the existing for now
-    else
-      offer.image.store!(File.open(Rails.root.join('app', 'assets', 'images', 'home.png').to_s))
-    end
-    # TODO: end
 
+    if piece.image.present?
+      puts "offer get piece=>#{piece.image_url}"
+      offer.image = piece.image.file # copy the existing for now
+    else
+      puts "offer get home=>#{home.jpg}"
+      offer.image = File.open(Rails.root.join('app', 'assets', 'images', 'home.png').to_s)
+    end
+
+    offer.write_image_identifier
+    # TODO: end
     offer.save
+
+    if Rails.env.development?
+      puts "offer image=>#{offer.image_url}"
+      if offer.image_url.present?
+        Magick::Image.read(offer.image_url.to_s).first.write(path('custom').join("offer_#{offer.id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg").to_s)
+      end
+    end
     offer
   end
 
@@ -93,11 +110,24 @@ class Admin::Customer::Offer < ActiveRecord::Base
           break unless kimbra_part?
         end
       else
-        self.items << Admin::Customer::Item.assemble_portrait(self, merchandise_piece.parts.first, portrait)
+        # only 1 Kimbra part so use any face info otherwise use whole portrait
+        if portrait.faces.present?
+          if portrait.faces.size == 1
+            # create an item with this face
+            self.items << Admin::Customer::Item.assemble_portrait_face(self, kimbra_part_next, portrait, portrait.faces.first)
+          else
+            self.items << Admin::Customer::Item.assemble_portrait(self, kimbra_part_next, portrait)
+          end
+        else
+          self.items << Admin::Customer::Item.assemble_portrait(self, kimbra_part_next, portrait)
+        end
       end
     else
       Rails.logger.info("WARN: missing parts for merchandise::piece=>#{merchandise_piece.inspect}")
     end
+
+    # create a composite of all the items
+    create_custom_image
     self
   end
 
@@ -118,4 +148,15 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
   end
 
+  def create_custom_image
+    w = 0
+    h = 0
+    list = []
+    items.each do |item|
+      list << [w, 0]
+      w += item.width.to_i
+      h = item.height.to_i if item.height.to_i > h
+    end
+    puts "list=>#{list.inspect}"
+  end
 end

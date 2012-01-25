@@ -38,6 +38,8 @@ class Admin::Customer::Item < ActiveRecord::Base
       image_item.store!(File.open(assembled.path))
       write_image_item_identifier
     end
+    puts "stock    =>#{stock.path}"
+    puts "assembled=>#{assembled.path}"
     save
   end
 
@@ -72,16 +74,6 @@ class Admin::Customer::Item < ActiveRecord::Base
     end
   end
 
-  # create the item's part referenced by the Kimbra Part
-  def create_part(merchandise_part, portrait)
-    self.part     = merchandise_part.clone
-    part.portrait = portrait
-    part.image_part.store!(merchandise_part.image_part_url)
-    part.write_image_part_identifier
-    part.save
-    part
-  end
-
   private
 
   # create an Item with a part for building an offer
@@ -89,7 +81,8 @@ class Admin::Customer::Item < ActiveRecord::Base
     raise "missing kimbra part in offer=>#{offer.inspect}" unless merchandise_part.present?
     raise "missing portrait in offer=>#{offer.inspect}" unless portrait.present?
     item = Admin::Customer::Item.create(:offer => offer)
-    item.part = Admin::Customer::Part.assemble(merchandise_part, portrait) # create a replica of merchandise part for this item
+    item.part = Admin::Merchandise::Part.assemble(merchandise_part, portrait) # create a replica of merchandise part for this item
+    item.send(:default_part) # load coordinates
     item
   end
 
