@@ -26,6 +26,13 @@
 
 # Ignore CarrierWave uploads
 /public/uploads/*
+/public/emails/*
+/public/pieces/*
+/public/resize/*
+/public/resize_test/*
+/public/cropped/*
+/public/assembled/*
+
 
 # Ignore temp jpg files
 face*.jpg
