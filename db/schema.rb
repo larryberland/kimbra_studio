@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120122201541) do
+ActiveRecord::Schema.define(:version => 20120125200614) do
 
   create_table "admin_customer_emails", :force => true do |t|
     t.integer  "my_studio_session_id"
@@ -118,6 +118,17 @@ ActiveRecord::Schema.define(:version => 20120122201541) do
   end
 
   add_index "countries", ["name"], :name => "index_countries_on_name"
+
+  create_table "image_layouts", :force => true do |t|
+    t.string   "type"
+    t.integer  "x"
+    t.integer  "y"
+    t.integer  "width"
+    t.integer  "height"
+    t.decimal  "rotation"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "my_studio_clients", :force => true do |t|
     t.string   "name"

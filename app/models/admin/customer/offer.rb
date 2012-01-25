@@ -18,28 +18,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def self.generate(email, portrait, piece)
-
     offer = Admin::Customer::Offer.create(:email    => email,
                                           :portrait => portrait,
                                           :piece    => piece)
-
-    puts "offer assemble portrait=>#{offer.portrait.id}"
     offer.assemble(piece)
-
-    # TODO: this image should be a composite
-    #       of all the parts of this piece put together
-    # copy the existing for now
-
-    if piece.image.present?
-      puts "offer get piece=>#{piece.image_url}"
-      offer.image = piece.image.file # copy the existing for now
-    else
-      puts "offer get home=>#{home.jpg}"
-      offer.image = File.open(Rails.root.join('app', 'assets', 'images', 'home.png').to_s)
-    end
-    offer.write_image_identifier
-    # TODO: end
-
     offer.save
     offer.send(:dump_custom)
     offer
@@ -143,15 +125,22 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def create_custom_image
-    w = 0
-    h = 0
-    list = []
-    items.each do |item|
-      list << [w, 0]
-      w += item.width.to_i
-      h = item.height.to_i if item.height.to_i > h
+    x = 106
+    img = piece.get_image
+    dest_width =
+    dest_height = 83
+    items.each_with_index do |item|
+      part_image = item.stock_image
+      dest_width = 69
+      img.composite!(part_image.resize_to_fit(dest_width, dest_height), x, 46, Magick::SrcOverCompositeOp)
+      puts "img size=>#{img.columns}x#{img.rows}"
+      x += 119
     end
-    puts "list=>#{list.inspect}"
+    p = Tempfile.new(["offer_#{id}", 'jpeg'])
+    img.write(p.path)
+    image.store!(File.open(p.path))
+    write_image_identifier
+    true
   end
 
   #noinspection RubyArgCount

@@ -27,6 +27,14 @@ class Admin::Customer::Item < ActiveRecord::Base
     item
   end
 
+  def custom_image
+    Magick::Image.read(image_item_url).first
+  end
+
+  def stock_image
+    Magick::Image.read(image_stock_url).first
+  end
+
   def save_versions(stock, assembled)
     raise 'could not resize image' unless File.exist?(stock.path)
     raise 'could not assemble image' unless File.exist?(assembled.path)

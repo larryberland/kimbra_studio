@@ -5,6 +5,11 @@
     <%= link_to 'Items', admin_customer_email_offer_items_path(@admin_customer_offer.email, @admin_customer_offer) %>
   </p>
   <p>
+    <b>Custom Piece</b>
+    <%= image_tag @admin_customer_offer.image_url.to_s %>
+  </p>
+
+  <p>
     <b>Email:</b>
     <%= @admin_customer_offer.try(:email).try(:my_studio_session).try(:client).try(:email) %>
   </p>

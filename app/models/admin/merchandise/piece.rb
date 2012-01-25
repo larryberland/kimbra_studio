@@ -11,6 +11,10 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
 
   scope :pick, lambda{|previous_picks| where('id not in (?)', previous_picks)}
 
+  def get_image
+    Magick::Image.read(image_url).first
+  end
+
   # span text for Piece
   def to_image_span
     text = name.to_s

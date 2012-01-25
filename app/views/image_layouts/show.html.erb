@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Type:</b>
+  <%= @image_layout.type %>
+</p>
+
+<p>
+  <b>X:</b>
+  <%= @image_layout.x %>
+</p>
+
+<p>
+  <b>Y:</b>
+  <%= @image_layout.y %>
+</p>
+
+<p>
+  <b>Width:</b>
+  <%= @image_layout.width %>
+</p>
+
+<p>
+  <b>Height:</b>
+  <%= @image_layout.height %>
+</p>
+
+<p>
+  <b>Rotation:</b>
+  <%= @image_layout.rotation %>
+</p>
+
+
+<%= link_to 'Edit', edit_image_layout_path(@image_layout) %> |
+<%= link_to 'Back', image_layouts_path %>

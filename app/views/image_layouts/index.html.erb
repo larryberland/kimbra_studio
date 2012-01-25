@@ -1,0 +1,33 @@
+<h1>Listing image_layouts</h1>
+
+<table>
+  <tr>
+    <th>Type</th>
+    <th>X</th>
+    <th>Y</th>
+    <th>Width</th>
+    <th>Height</th>
+    <th>Rotation</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @image_layouts.each do |image_layout| %>
+  <tr>
+    <td><%= image_layout.type %></td>
+    <td><%= image_layout.x %></td>
+    <td><%= image_layout.y %></td>
+    <td><%= image_layout.width %></td>
+    <td><%= image_layout.height %></td>
+    <td><%= image_layout.rotation %></td>
+    <td><%= link_to 'Show', image_layout %></td>
+    <td><%= link_to 'Edit', edit_image_layout_path(image_layout) %></td>
+    <td><%= link_to 'Destroy', image_layout, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Image layout', new_image_layout_path %>

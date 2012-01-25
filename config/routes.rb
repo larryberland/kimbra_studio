@@ -1,6 +1,8 @@
 KimbraStudio::Application.routes.draw do
 
 
+  resources :image_layouts
+
   resources :studios
 
   devise_for :users, :path_names => {:sign_up => 'register'}

@@ -1,0 +1,41 @@
+<%= form_for(@image_layout) do |f| %>
+  <% if @image_layout.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@image_layout.errors.count, "error") %> prohibited this image_layout from being saved:</h2>
+
+      <ul>
+      <% @image_layout.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :type %><br />
+    <%= f.text_field :type %>
+  </div>
+  <div class="field">
+    <%= f.label :x %><br />
+    <%= f.number_field :x %>
+  </div>
+  <div class="field">
+    <%= f.label :y %><br />
+    <%= f.number_field :y %>
+  </div>
+  <div class="field">
+    <%= f.label :width %><br />
+    <%= f.number_field :width %>
+  </div>
+  <div class="field">
+    <%= f.label :height %><br />
+    <%= f.number_field :height %>
+  </div>
+  <div class="field">
+    <%= f.label :rotation %><br />
+    <%= f.text_field :rotation %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
