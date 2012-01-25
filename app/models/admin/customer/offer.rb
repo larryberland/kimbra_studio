@@ -37,17 +37,11 @@ class Admin::Customer::Offer < ActiveRecord::Base
       puts "offer get home=>#{home.jpg}"
       offer.image = File.open(Rails.root.join('app', 'assets', 'images', 'home.png').to_s)
     end
-
     offer.write_image_identifier
     # TODO: end
-    offer.save
 
-    if Rails.env.development?
-      puts "offer image=>#{offer.image_url}"
-      if offer.image_url.present?
-        Magick::Image.read(offer.image_url.to_s).first.write(path('custom').join("offer_#{offer.id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg").to_s)
-      end
-    end
+    offer.save
+    offer.send(:dump_custom)
     offer
   end
 
@@ -159,4 +153,25 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
     puts "list=>#{list.inspect}"
   end
+
+  #noinspection RubyArgCount
+  def path(dir)
+    p = Rails.root.join('public', 'offers', dir)
+    p.mkpath unless File.exists?(p.to_s)
+    p
+  end
+
+  def dump(dir, img, filename=nil)
+    if Rails.env.development? and img
+      filename ||= "offer_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg"
+      img.write(path(dir).join(filename).to_s)
+    end
+  end
+
+  def dump_custom
+    if Rails.env.development? and image_url
+      dump('custom', Magick::Image.read(image_url).first)
+    end
+  end
+
 end

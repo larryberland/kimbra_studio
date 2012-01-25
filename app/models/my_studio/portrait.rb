@@ -19,42 +19,37 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   def self.test
     MyStudio::Portrait.all.each do |p|
-      #p.faces.each do |face|
-      #  p.center_on_face(face, 200, 300)
-      #end if p.faces.present?
+      p.faces.each do |face|
+        p.center_on_face(face)
+      end if p.faces.present?
       p.resize_to_fit_and_center(245, 290)
     end
   end
 
   # center this face inside this area
-  def center_on_face(face, dest_width, dest_height)
-    p = Rails.root.join('public', 'test')
-    p.mkpath unless File.exist?(p.to_s)
+  def center_on_face(face)
     puts "portrait=>#{id}"
     # put the face area onto portrait
-    face.area_in_portrait.write(p.join("portrait_#{id}_face_#{face.id}_area.jpg").to_s)
-    face.center_in_area(245, 290).write(p.join("portrait_#{id}_face_#{face.id}_245x290.jpg").to_s)
-    face.center_in_area(90, 137).write(p.join("portrait_#{id}_face_#{face.id}_90x137.jpg").to_s)
+    dump_face(face.area_in_portrait, face)
+
+    test_areas = [[245, 290], [90, 137]]
+    test_areas.each do |size|
+      w = size.first
+      h = size.last
+      dump_face_area(face.center_in_area(w, h), face, w, h)
+    end
   end
 
   def resize_to_fit_and_center(dest_width, dest_height)
     raise 'forget to assign image?' unless image.present?
-
     # resize using aspect ratio of portrait
     resize = Magick::Image.read(image_url).first.resize_to_fit!(dest_width, dest_height)
-
     img = center_in_area(resize, dest_width, dest_height)
-    img.write(path('resize').join("portrait_#{id}_#{dest_width}_x_#{dest_height}_resize.jpg").to_s) if Rails.env.development?
+    dump_resize(img, dest_width, dest_height)
     img
   end
 
   private
-
-  def path(dir)
-    p = Rails.root.join('public', dir)
-    p.mkpath unless File.exists?(p.to_s)
-    p
-  end
 
   def center_in_area(img, dest_width, dest_height)
     w = img.columns
@@ -68,6 +63,32 @@ class MyStudio::Portrait < ActiveRecord::Base
     end
     new_image ||= img
     new_image
+  end
+
+  #noinspection RubyArgCount
+  def path(dir)
+    p = Rails.root.join('public', 'portraits', dir)
+    p.mkpath unless File.exists?(p.to_s)
+    p
+  end
+
+  def dump(dir, img, filename=nil)
+    if Rails.env.development? and img
+      filename ||= "portrait_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg"
+      img.write(path(dir).join(filename).to_s)
+    end
+  end
+
+  def dump_resize(img, width, height)
+    dump('resize', img, "portrait_#{id}_size_#{width}_x_#{height}.jpg")
+  end
+
+  def dump_face(img, face)
+    dump('face',img, "portrait_#{id}_face_#{face.id}.jpg")
+  end
+
+  def dump_face_area(img, face, width, height)
+    dump('face', img, "portrait_#{id}_face_#{face.id}_size_#{width}_x_#{height}.jpg")
   end
 
   def set_description

@@ -30,8 +30,8 @@
 /public/pieces/*
 /public/resize/*
 /public/resize_test/*
-/public/cropped/*
-/public/assembled/*
+/public/offers/*
+/public/portraits/*
 
 
 # Ignore temp jpg files

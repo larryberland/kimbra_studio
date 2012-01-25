@@ -50,7 +50,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     puts "group_shot portrait=>#{portrait.id}"
     raise 'forget to assign portrait?' unless portrait.present?
     t_resize = Tempfile.new(['resize', '.jpeg'])
-    resize = portrait.resize_to_fit_and_center(item_width, item_height)
+    resize   = portrait.resize_to_fit_and_center(item_width, item_height)
     resize.write(t_resize.path)
     t_assembled = save_custom_image(t_resize)
     return t_resize, t_assembled
@@ -60,10 +60,10 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   #  face information onto the kimbra part
   def center_on_face(face)
     raise 'forget to assign portrait?' unless portrait.present?
-    t_crop   = Tempfile.new(['crop', '.jpeg'])
     centered = face.center_in_area(item_width, item_height)
+    dump_cropped(centered)
+    t_crop = Tempfile.new(['crop', '.jpeg'])
     centered.write(t_crop.path)
-    centered.write("#{portrait.id}_cropped.jpg") if Rails.env.development?
     t_assembled = save_custom_image(t_crop)
     return t_crop, t_assembled
   end
@@ -76,12 +76,6 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   private
 
-  def path(dir)
-    p = Rails.root.join('public','pieces','parts', dir)
-    p.mkpath unless File.exists?(p.to_s)
-    p
-  end
-
   # using the src_image place it onto the
   #  kimbra part
   def save_custom_image(src)
@@ -92,13 +86,33 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     src_image   = Magick::Image.read(File.open(src.path)).first
     assemble    = image_piece.composite(src_image, item_x, item_y, Magick::AtopCompositeOp)
     assemble.write(t_assembled.path)
-    if Rails.env.development?
-      assemble.write(path('assembled').join("part_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg").to_s)
-    end
+    dump_assembled(assemble)
     image.store!(File.open(t_assembled.path))
     write_image_identifier
     save
     t_assembled
+  end
+
+  #noinspection RubyArgCount
+  def path(dir)
+    p = Rails.root.join('public', 'pieces', 'parts', dir)
+    p.mkpath unless File.exists?(p.to_s)
+    p
+  end
+
+  def dump(dir, img, filename=nil)
+    if Rails.env.development? and img
+      filename ||= "part_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg"
+      img.write(path(dir).join(filename).to_s)
+    end
+  end
+
+  def dump_cropped(img)
+    dump('cropped', img)
+  end
+
+  def dump_assembled(img)
+    dump('assembled', img)
   end
 
 end

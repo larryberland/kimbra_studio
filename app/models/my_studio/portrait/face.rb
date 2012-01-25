@@ -1,3 +1,4 @@
+
 class MyStudio::Portrait::Face < ActiveRecord::Base
   attr_accessible :width
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
@@ -76,17 +77,16 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
 
     puts "crop #{new_x} #{new_y} #{part.item_width}x#{part.item_height}"
     img     = Magick::Image.read(portrait.image_url(:face)).first
-    cropped = img.crop(new_x, new_y, part.item_width, part.item_height) #img.crop(x, y, width, height) -> image
-    t_crop  = Tempfile.new(['crop', '.jpeg'])
-    cropped.write("crop.jpeg")
-    puts "crop=>#{t_crop.path}"
+
+    # crop the portrait for the kimbra part
+    cropped = img.crop(new_x, new_y, part.item_width, part.item_height)
+    dump_cropped(cropped, part.item_width, part.item_height)
 
     t_assembled = Tempfile.new(['assemble', '.jpeg'])
     image_piece = Magick::Image.read(part.image_part_url).first
-    image_piece.composite(cropped, part.item_x, part.item_y, Magick::AtopCompositeOp).write("assembled.jpeg")
-    puts "image_piece=>#{t_assembled.path}"
-
-    item.image_item.store!(File.open('assembled.jpeg'))
+    image_piece.composite(cropped, part.item_x, part.item_y, Magick::AtopCompositeOp).write(t_assembled.path)
+    dump_assembled(image_piece)
+    item.image_item.store!(File.open(t_assembled.path))
     item.write_image_item_identifier
     item.save
     item
@@ -132,7 +132,7 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
 
     puts "face_id=>#{id} dest=>#{dest_width}x#{dest_height} dx=>#{dx} dy=>#{dy}"
     puts "center in dest x=>#{new_x} y=>#{new_y} size=>#{w}x#{h}"
-    img = Magick::Image.new(dest_width, dest_height)
+    img = ::Magick::Image.new(dest_width, dest_height)
 
     # calculate crop area so resize will not clip image
     new_width  = w
@@ -169,7 +169,7 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
 
   # blank image the width and height of know face area
   def area
-    Magick::Image.new(face_width, face_height)
+    RMagick::Image.new(face_width, face_height)
   end
 
   def area_in_portrait
@@ -194,6 +194,27 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
       self.face_width      = (img.columns * x_right)/100.0 - face_top_left_x
       self.face_height     = (img.rows * y_bottom)/100.0 - face_top_left_y
     end
+  end
+  #noinspection RubyArgCount
+  def path(dir)
+    p = Rails.root.join('public', 'faces', dir)
+    p.mkpath unless File.exists?(p.to_s)
+    p
+  end
+
+  def dump(dir, img, filename=nil)
+    if Rails.env.development? and img
+      filename ||= "face_#{id}_portrait_#{portrait.id}.jpg"
+      img.write(path(dir).join(filename).to_s)
+    end
+  end
+
+  def dump_cropped(img, width, height)
+    dump('cropped', img, "face_#{id}_portrait_#{portrait.id}_size_#{width}_x_#{height}.jpg")
+  end
+
+  def dump_assembled(img)
+    dump('assembled', img)
   end
 
 end
