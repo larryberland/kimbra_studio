@@ -32,7 +32,7 @@
 /public/resize_test/*
 /public/offers/*
 /public/portraits/*
-
+/public/kmagick/*
 
 # Ignore temp jpg files
 face*.jpg

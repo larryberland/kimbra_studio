@@ -11,6 +11,9 @@ class Admin::Customer::Item < ActiveRecord::Base
   belongs_to :offer, :class_name => 'Admin::Customer::Offer'  # offer contained in email
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # one of many parts that make up a Piece
 
+  has_one :layout_part, :class_name => 'ImageLayout', :as => :layout
+  has_one :layout_piece, :class_name => 'ImageLayout', :as => :layout
+
   before_create :default_part
 
   def self.assemble_portrait_face(offer, merchandise_part, portrait, face)
@@ -31,23 +34,20 @@ class Admin::Customer::Item < ActiveRecord::Base
     Magick::Image.read(image_item_url).first
   end
 
+  # custom portrait image for this item
   def stock_image
     Magick::Image.read(image_stock_url).first
+  end
+
+  def draw_piece(piece_image)
+    part.draw_piece(piece_image, stock_image)
   end
 
   def save_versions(stock, assembled)
     raise 'could not resize image' unless File.exist?(stock.path)
     raise 'could not assemble image' unless File.exist?(assembled.path)
-    if stock.present?
-      image_stock.store!(File.open(stock.path))
-      write_image_stock_identifier
-    end
-    if assembled.present?
-      image_item.store!(File.open(assembled.path))
-      write_image_item_identifier
-    end
-    puts "stock    =>#{stock.path}"
-    puts "assembled=>#{assembled.path}"
+    set_from_file(image_stock, stock.path) if stock.present?
+    set_from_file(image_item, assembled.path) if assembled.present?
     save
   end
 
@@ -64,8 +64,7 @@ class Admin::Customer::Item < ActiveRecord::Base
       img      = Magick::Image.read(offer.portrait.image_url).first
       @resize  = img.resize_to_fit(item_width, item_height)
       @resize.write(t_resize.path)
-      image_stock.store!(File.open(t_resize.path))
-      write_image_stock_identifier
+      set_from_file(image_stock, t_resize.path)
     end
   end
 
@@ -76,8 +75,7 @@ class Admin::Customer::Item < ActiveRecord::Base
       t_assembled = Tempfile.new(['assembled', '.jpeg'])
       image_piece = Magick::Image.read(part.image_part_url).first
       image_piece.composite(@resize, item_x, item_y, Magick::AtopCompositeOp).write(t_assembled.path)
-      image_item.store!(File.open(t_assembled.path))
-      write_image_item_identifier
+      set_from_file(image_item, t_assembled.path)
       save
     end
   end
@@ -88,9 +86,9 @@ class Admin::Customer::Item < ActiveRecord::Base
   def self.assemble(offer, merchandise_part, portrait)
     raise "missing kimbra part in offer=>#{offer.inspect}" unless merchandise_part.present?
     raise "missing portrait in offer=>#{offer.inspect}" unless portrait.present?
-    item = Admin::Customer::Item.create(:offer => offer)
+    item      = Admin::Customer::Item.create(:offer => offer)
     item.part = Admin::Merchandise::Part.assemble(merchandise_part, portrait) # create a replica of merchandise part for this item
-    item.send(:default_part) # load coordinates
+    item.send(:default_part)                                                  # load coordinates
     item
   end
 

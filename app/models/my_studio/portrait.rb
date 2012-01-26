@@ -18,25 +18,22 @@ class MyStudio::Portrait < ActiveRecord::Base
   end
 
   def self.test
+    test_areas = [[245, 290], [90, 137], [146, 146]]
+
     MyStudio::Portrait.all.each do |p|
+      puts "portrait=>#{p.id}"
       p.faces.each do |face|
-        p.center_on_face(face)
+
+        p.dump_face(face.area_in_portrait, face)
+
+        test_areas.each do |size|
+          w = size.first
+          h = size.last
+          p.dump_face_area(face.center_in_area(w, h), face, w, h)
+        end
+
       end if p.faces.present?
       p.resize_to_fit_and_center(245, 290)
-    end
-  end
-
-  # center this face inside this area
-  def center_on_face(face)
-    puts "portrait=>#{id}"
-    # put the face area onto portrait
-    dump_face(face.area_in_portrait, face)
-
-    test_areas = [[245, 290], [90, 137]]
-    test_areas.each do |size|
-      w = size.first
-      h = size.last
-      dump_face_area(face.center_in_area(w, h), face, w, h)
     end
   end
 
@@ -49,8 +46,17 @@ class MyStudio::Portrait < ActiveRecord::Base
     img
   end
 
+  def dump_face(img, face)
+    dump('face',img, "portrait_#{id}_face_#{face.id}.jpg")
+  end
+
+  def dump_face_area(img, face, width, height)
+    dump('face', img, "portrait_#{id}_face_#{face.id}_size_#{width}_x_#{height}.jpg")
+  end
+
   private
 
+  #noinspection RubyArgCount
   def center_in_area(img, dest_width, dest_height)
     w = img.columns
     h = img.rows
@@ -65,31 +71,10 @@ class MyStudio::Portrait < ActiveRecord::Base
     new_image
   end
 
-  #noinspection RubyArgCount
-  def path(dir)
-    p = Rails.root.join('public', 'portraits', dir)
-    p.mkpath unless File.exists?(p.to_s)
-    p
-  end
-
-  def dump(dir, img, filename=nil)
-    if Rails.env.development? and img
-      filename ||= "portrait_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg"
-      img.write(path(dir).join(filename).to_s)
-    end
-  end
-
   def dump_resize(img, width, height)
     dump('resize', img, "portrait_#{id}_size_#{width}_x_#{height}.jpg")
   end
 
-  def dump_face(img, face)
-    dump('face',img, "portrait_#{id}_face_#{face.id}.jpg")
-  end
-
-  def dump_face_area(img, face, width, height)
-    dump('face', img, "portrait_#{id}_face_#{face.id}_size_#{width}_x_#{height}.jpg")
-  end
 
   def set_description
     if description.blank?

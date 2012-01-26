@@ -1,14 +1,39 @@
 <table>
+  <thead>
+  <th></th>
+  <th>x</th>
+  <th>y</th>
+  <th>width</th>
+  <th>height</th>
+  </thead>
+  <tr>
+    <td><b>Layout Piece:</b></td>
+    <td><%= @item.part.layout_piece.x %></td>
+    <td><%= @item.part.layout_piece.y %></td>
+    <td><%= @item.part.layout_piece.w %></td>
+    <td><%= @item.part.layout_piece.h %></td>
+  </tr>
+
+  <tr>
+    <td><b>Layout Part:</b></td>
+    <td><%= @item.part.layout_part.x %></td>
+    <td><%= @item.part.layout_part.y %></td>
+    <td><%= @item.part.layout_part.w %></td>
+    <td><%= @item.part.layout_part.h %></td>
+  </tr>
+
+</table>
+<table>
 
   <tr>
     <td><b>Kimbra Piece:</b></td>
     <td><%= image_tag(@item.offer.piece.image_url(:list).to_s) %></td>
     <td><b>Kimbra Part:</b></td>
     <td><%= image_tag(@item.part.image_part_url(:list).to_s) %></td>
-    <td><b>Width:</b></td>
-    <td><%= @item.width %></td>
-    <td><b>Height:</b></td>
-    <td><%= @item.height %></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
   </tr>
 
   <tr>

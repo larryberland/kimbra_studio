@@ -120,12 +120,13 @@ ActiveRecord::Schema.define(:version => 20120125200614) do
   add_index "countries", ["name"], :name => "index_countries_on_name"
 
   create_table "image_layouts", :force => true do |t|
-    t.string   "type"
+    t.string   "layout_type"
+    t.integer  "layout_id"
     t.integer  "x"
     t.integer  "y"
-    t.integer  "width"
-    t.integer  "height"
-    t.decimal  "rotation"
+    t.integer  "w"
+    t.integer  "h"
+    t.decimal  "degrees"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

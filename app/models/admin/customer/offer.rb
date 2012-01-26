@@ -11,12 +11,6 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   before_save :piece_default
 
-  def self.path(dir)
-    p = Rails.root.join('public','emails','offers', dir)
-    p.mkpath unless File.exists?(p.to_s)
-    p
-  end
-
   def self.generate(email, portrait, piece)
     offer = Admin::Customer::Offer.create(:email    => email,
                                           :portrait => portrait,
@@ -125,36 +119,15 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def create_custom_image
-    x = 106
-    img = piece.get_image
-    dest_width =
-    dest_height = 83
-    items.each_with_index do |item|
-      part_image = item.stock_image
-      dest_width = 69
-      img.composite!(part_image.resize_to_fit(dest_width, dest_height), x, 46, Magick::SrcOverCompositeOp)
-      puts "img size=>#{img.columns}x#{img.rows}"
-      x += 119
+    custom_piece = piece.get_image
+    items.each_with_index do |item, index|
+      custom_piece = item.draw_piece(custom_piece)
+      custom_piece.write("public/kmagick/custom_offer_#{id}_index_#{index}.jpeg")
     end
     p = Tempfile.new(["offer_#{id}", 'jpeg'])
-    img.write(p.path)
-    image.store!(File.open(p.path))
-    write_image_identifier
+    custom_piece.write(p.path)
+    set_from_file(image, p.path)
     true
-  end
-
-  #noinspection RubyArgCount
-  def path(dir)
-    p = Rails.root.join('public', 'offers', dir)
-    p.mkpath unless File.exists?(p.to_s)
-    p
-  end
-
-  def dump(dir, img, filename=nil)
-    if Rails.env.development? and img
-      filename ||= "offer_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg"
-      img.write(path(dir).join(filename).to_s)
-    end
   end
 
   def dump_custom

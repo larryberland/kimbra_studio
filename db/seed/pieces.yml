@@ -7,6 +7,9 @@
       item_y: 34
       item_width: 90
       item_height: 137
+  :layout_part: {x: 19, y: 34, w: 90, h: 137}
+  :layout_piece: {x: 0, y: 0, w: 70, h: 85}
+
 :pieces:
   - category: Photo Bracelets
     name: Alexis Bracelet
@@ -17,34 +20,61 @@
     sku:
     :parts:
       - :image_part: part.png
+        order: 0
         item_x: 90
         item_y: 85
         item_width: 245
         item_height: 290
+        :layout_part: {x: 90, y: 85, w: 245, h: 290}
+        :layout_piece: {x: 106, y: 46, w: 69, h: 83}
       - :image_part: part.png
+        order: 1
         item_x: 90
         item_y: 85
         item_width: 245
         item_height: 290
+        :layout_part: {x: 90, y: 85, w: 245, h: 290}
+        :layout_piece: {x: 225, y: 46, w: 69, h: 83}
       - :image_part: part.png
+        order: 2
         item_x: 90
         item_y: 85
         item_width: 245
         item_height: 290
+        :layout_part: {x: 90, y: 85, w: 245, h: 290}
+        :layout_piece: {x: 344, y: 46, w: 69, h: 83}
       - :image_part: part.png
+        order: 3
         item_x: 90
         item_y: 85
         item_width: 245
         item_height: 290
+        :layout_part: {x: 90, y: 85, w: 245, h: 290}
+        :layout_piece: {x: 463, y: 46, w: 69, h: 83}
       - :image_part: part.png
+        order: 4
         item_x: 90
         item_y: 85
         item_width: 245
         item_height: 290
+        :layout_part: {x: 90, y: 85, w: 245, h: 290}
+        :layout_piece: {x: 582, y: 46, w: 69, h: 83}
 
   - category: Photo Bracelets
     name: Taylor Bracelet
     price: 28.00
+    short_description: "Measuring: 7-1/2\" x 9-1/4\" in length. Photo measuring: 1\" square. Genuine Leather and Pewter. Completely waterproof. The Taylor Bracelet is an exclusive, copyrighted design of Kimbra Studios."
+    description_markup:
+    sku:
+    :parts:
+      - :image_part: part.png
+        order: 0
+        item_x: 177
+        item_y: 88
+        item_width: 146
+        item_height: 146
+        :layout_part: {x: 177, y: 88, w: 146, h: 146}
+        :layout_piece:{x: 325, y: 33, w: 94, h: 87}
 
   - category: Photo Bracelets
     name: Large Oval Link Bracelet
@@ -57,6 +87,42 @@
   - category: Photo Bracelets
     name: Eileen Bracelet
     price: 245.00
+    short_description:
+    description_markup: "4 round photos measuring: 7/16\" round. 4 oval photos measuring: 9/16\"w x 7/16\"h. 8\" length. Solid Sterling Silver. Completely waterproof. We will reproduce your treasured photos, handwritten notes, monograms or initials, special dates or whatever reminds you of family!"
+    sku:
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :layout_part: {x: 36, y: 23, w: 186, h: 133}
+        :layout_piece: {x: 0, y: 0, w: 186, h: 133}
+      - :image_part: part1.png
+        order: 1
+        :layout_part: {x: 57, y: 32, w: 136, h: 136}
+        :layout_piece: {x: 0, y: 0, w: 136, h: 136}
+      - :image_part: part2.png
+        order: 2
+        :layout_part: {x: 36, y: 23, w: 186, h: 133}
+        :layout_piece: {x: 0, y: 0, w: 186, h: 133}
+      - :image_part: part3.png
+        order: 3
+        :layout_part: {x: 57, y: 32, w: 136, h: 136}
+        :layout_piece: {x: 0, y: 0, w: 136, h: 136}
+      - :image_part: part4.png
+        order: 4
+        :layout_part: {x: 36, y: 23, w: 186, h: 133}
+        :layout_piece: {x: 0, y: 0, w: 186, h: 133}
+      - :image_part: part5.png
+        order: 5
+        :layout_part: {x: 57, y: 32, w: 136, h: 136}
+        :layout_piece: {x: 0, y: 0, w: 136, h: 136}
+      - :image_part: part6.png
+        order: 6
+        :layout_part: {x: 36, y: 23, w: 186, h: 133}
+        :layout_piece: {x: 0, y: 0, w: 186, h: 133}
+      - :image_part: part7.png
+        order: 7
+        :layout_part: {x: 57, y: 32, w: 136, h: 136}
+        :layout_piece: {x: 0, y: 0, w: 136, h: 136}
 
   - category: Photo Bracelets
     name: Black Onyx Bracelet

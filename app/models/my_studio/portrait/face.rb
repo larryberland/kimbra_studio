@@ -1,4 +1,3 @@
-
 class MyStudio::Portrait::Face < ActiveRecord::Base
   attr_accessible :width
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
@@ -132,7 +131,7 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
 
     puts "face_id=>#{id} dest=>#{dest_width}x#{dest_height} dx=>#{dx} dy=>#{dy}"
     puts "center in dest x=>#{new_x} y=>#{new_y} size=>#{w}x#{h}"
-    img = ::Magick::Image.new(dest_width, dest_height)
+    img        = ::Magick::Image.new(dest_width, dest_height)
 
     # calculate crop area so resize will not clip image
     new_width  = w
@@ -168,8 +167,9 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
   end
 
   # blank image the width and height of know face area
+  #noinspection RubyArgCount
   def area
-    RMagick::Image.new(face_width, face_height)
+    Magick::Image.new(face_width, face_height)
   end
 
   def area_in_portrait
@@ -184,8 +184,8 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
 
   # calculate face coordinates
   def to_coords
-    y_top, y_bottom      = top
-    x_left, x_right      = left
+    y_top, y_bottom = top
+    x_left, x_right = left
     # grab the portrait 900x900 version
     if portrait and portrait.image_url
       img                  = my_portrait
@@ -195,18 +195,9 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
       self.face_height     = (img.rows * y_bottom)/100.0 - face_top_left_y
     end
   end
-  #noinspection RubyArgCount
-  def path(dir)
-    p = Rails.root.join('public', 'faces', dir)
-    p.mkpath unless File.exists?(p.to_s)
-    p
-  end
 
-  def dump(dir, img, filename=nil)
-    if Rails.env.development? and img
-      filename ||= "face_#{id}_portrait_#{portrait.id}.jpg"
-      img.write(path(dir).join(filename).to_s)
-    end
+  def dump_filename
+    "face_#{id}_portrait_#{portrait.id}.jpg"
   end
 
   def dump_cropped(img, width, height)
