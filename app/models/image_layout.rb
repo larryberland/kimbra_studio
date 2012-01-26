@@ -21,4 +21,5 @@ class ImageLayout < ActiveRecord::Base
   def draw_custom_part(part_image, src_image, operator=Magick::DstOverCompositeOp)
     part_image.composite(src_image, x, y, operator)
   end
+
 end

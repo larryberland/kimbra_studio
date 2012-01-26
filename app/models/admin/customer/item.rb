@@ -11,9 +11,6 @@ class Admin::Customer::Item < ActiveRecord::Base
   belongs_to :offer, :class_name => 'Admin::Customer::Offer'  # offer contained in email
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # one of many parts that make up a Piece
 
-  has_one :layout_part, :class_name => 'ImageLayout', :as => :layout
-  has_one :layout_piece, :class_name => 'ImageLayout', :as => :layout
-
   before_create :default_part
 
   def self.assemble_portrait_face(offer, merchandise_part, portrait, face)
@@ -57,6 +54,7 @@ class Admin::Customer::Item < ActiveRecord::Base
     text
   end
 
+  # controller method to resize existing image
   def resize_image
     if offer and offer.portrait and offer.portrait.image
       image_stock.remove!

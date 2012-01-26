@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120125200614) do
+ActiveRecord::Schema.define(:version => 20120126193839) do
 
   create_table "admin_customer_emails", :force => true do |t|
     t.integer  "my_studio_session_id"
@@ -236,6 +236,22 @@ ActiveRecord::Schema.define(:version => 20120125200614) do
   add_index "my_studio_sessions", ["category_id"], :name => "index_my_studio_sessions_on_category_id"
   add_index "my_studio_sessions", ["client_id"], :name => "index_my_studio_sessions_on_client_id"
   add_index "my_studio_sessions", ["studio_id"], :name => "index_my_studio_sessions_on_studio_id"
+
+  create_table "part_layouts", :force => true do |t|
+    t.integer  "part_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "part_layouts", ["part_id"], :name => "index_part_layouts_on_part_id"
+
+  create_table "piece_layouts", :force => true do |t|
+    t.integer  "part_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "piece_layouts", ["part_id"], :name => "index_piece_layouts_on_part_id"
 
   create_table "roles", :force => true do |t|
     t.string "name", :limit => 30, :null => false

@@ -3,7 +3,9 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   attr_accessible :image, :remote_image_url, :image_part, :image_part_url,
                   :piece, :portrait, :width, :height,
                   :item_x, :item_y, :item_width, :item_height,
-                  :layout_part, :layout_piece
+                  :part_layout, :piece_layout,
+                  :part_layout_attributes, :piece_layout_attributes
+
   mount_uploader :image, ImageUploader                  # custom assembled part
   mount_uploader :image_part, ImageUploader             # kimbra part
 
@@ -12,8 +14,34 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   has_one :item, :class_name => 'Admin::Customer::Item' # TODO: do we destroy Offer::Item on this?
 
-  has_one :layout_part, :class_name => 'ImageLayout', :as => :layout
-  has_one :layout_piece, :class_name => 'ImageLayout', :as => :layout
+  has_one :part_layout
+  has_one :piece_layout
+  accepts_nested_attributes_for :part_layout
+  accepts_nested_attributes_for :piece_layout
+
+
+  def self.seed_nested_attributes(info, attr, default)
+    key                               = info.key?(attr) ? attr : info.key?(attr.to_s) ? attr.to_s : attr
+    info["#{attr}_attributes".to_sym] = if info.key?(key)
+                                          info[key].clone
+                                        else
+                                          default[attr].clone
+                                        end
+    info.delete(key) if info.key?(key)
+  end
+
+  def self.seed(attrs, default, image_part_path)
+    # convert to nested_attributes
+    d = default.clone
+    seed_nested_attributes(attrs, :piece_layout, d)
+    seed_nested_attributes(attrs, :part_layout, d)
+    seed_nested_attributes(attrs[:piece_layout_attributes], :layout, d)
+    seed_nested_attributes(attrs[:part_layout_attributes], :layout, d)
+
+    my_part = Admin::Merchandise::Part.create(attrs)
+    my_part.send(:set_from_file, my_part.image_part, image_part_path.to_s)
+    my_part
+  end
 
   # create a replica of the merchandise_part
   #  with the current portrait.
@@ -22,8 +50,8 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     item_part.update_attributes(:piece    => merchandise_part.piece,
                                 :portrait => portrait)
     item_part.copy_image(merchandise_part)
-    raise "missing layout_piece in merchandise_part=>#{merchandise_part.inspect}" if item_part.layout_piece.nil?
-    raise "missing layout_part in merchandise_part=>#{merchandise_part.inspect}" if item_part.layout_part.nil?
+    raise "missing piece_layout in merchandise_part=>#{merchandise_part.inspect}" if item_part.piece_layout.nil?
+    raise "missing part_layout in merchandise_part=>#{merchandise_part.inspect}" if item_part.part_layout.nil?
     item_part
   end
 
@@ -34,14 +62,14 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   # draw the custom portrait image onto the Kimbra piece image
   def draw_piece(piece_image, portrait_item_image)
-    layout_piece.draw_piece(piece_image, portrait_item_image)
+    piece_layout.draw_piece(piece_image, portrait_item_image)
   end
 
   # create a custom assembled image by resize on portrait
   def group_shot
     raise 'forget to assign portrait?' unless portrait.present?
     portrait_part_image, t_file = create_image_temp do
-      portrait.resize_to_fit_and_center(layout_part.w, layout_part.h)
+      portrait.resize_to_fit_and_center(part_layout.w, part_layout.h)
     end
     t_custom                    = create_custom_part(portrait_part_image)
     return t_file, t_custom
@@ -52,7 +80,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   def center_on_face(face)
     raise 'forget to assign portrait?' unless portrait.present?
     portrait_part_image, t_file = create_image_temp do
-      face.center_in_area(layout_part.w, layout_part.h)
+      face.center_in_area(part_layout.w, part_layout.h)
     end
     dump_cropped(portrait_part_image)
     t_custom = create_custom_part(portrait_part_image)
@@ -76,7 +104,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   #  kimbra part
   def create_custom_part(src_image)
     raise "no src_image to make custom part #{self.inspect}" if src_image.nil?
-    custom_part = layout_part.draw_custom_part(part_image, src_image)
+    custom_part = part_layout.draw_custom_part(part_image, src_image)
     dump_assembled(custom_part)
     save_image!(custom_part, image)
   end

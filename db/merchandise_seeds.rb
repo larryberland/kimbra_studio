@@ -1,5 +1,6 @@
 class MerchandiseSeeds
 
+  #noinspection RubyArgCount
   def self.seeds(seed_path)
     file_to_load = seed_path.join('pieces.yml').to_s
     image_path   = Rails.root.join('public', 'kimbra')
@@ -51,23 +52,9 @@ class MerchandiseSeeds
       end
 
       parts.each do |part_info|
-        part                 = part_info.clone
-        part_image_fname     = path.join(part.delete(:image_part))
-        layout_piece         = part.delete(:layout_piece)
-        layout_part          = part.delete(:layout_part)
-        my_part              = Admin::Merchandise::Part.create(part)
-        my_part.layout_piece = if layout_piece
-                                 ImageLayout.create(layout_piece)
-                               else
-                                 ImageLayout.create(default[:layout_piece])
-                               end
-        my_part.layout_part  = if layout_part
-                                 ImageLayout.create(layout_part)
-                               else
-                                 ImageLayout.create(default[:layout_part])
-                               end
-        my_part.image_part.store!(File.open(part_image_fname.to_s))
-        p.parts << my_part
+        attrs = part_info.clone
+        part_image_fname = path.join(attrs.delete(:image_part))
+        p.parts << Admin::Merchandise::Part.seed(attrs, default, part_image_fname)
       end if parts.present?
 
       p.update_attributes(piece)
