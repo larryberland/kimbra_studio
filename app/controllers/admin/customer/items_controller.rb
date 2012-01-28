@@ -5,14 +5,14 @@ class Admin::Customer::ItemsController < InheritedResources::Base
   def update
     puts "params=>#{params.inspect}"
     @item  = Admin::Customer::Item.find(params[:id])
-    offset = [@item.item_x, @item.item_y]
-    size   = [@item.item_width, @item.item_height]
+    offset = [@item.part.part_layout.x, @item.part.part_layout.y]
+    size   = [@item.part.part_layout.w, @item.part.part_layout.h]
 
     update! do |success, failure|
-      if (size.first != @item.item_width) or (size.last != @item.item_height)
+      if (size.first != @item.part.part_layout.w) or (size.last != @item.part.part_layout.h)
         @item.resize_image
         @item.reposition_image
-      elsif (offset.first != @item.item_x) or (offset.last != @item.item_y)
+      elsif (offset.first != @item.part.part_layout.x) or (offset.last != @item.part.part_layout.y)
         @item.reposition_image
       end
 

@@ -56,7 +56,6 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   private
 
-  #noinspection RubyArgCount
   def center_in_area(img, dest_width, dest_height)
     w = img.columns
     h = img.rows
@@ -65,7 +64,7 @@ class MyStudio::Portrait < ActiveRecord::Base
     if x or y
       x         ||= 0
       y         ||= 0
-      new_image = Magick::Image.new(dest_width, dest_height).composite(img, x, y, Magick::AtopCompositeOp)
+      new_image = image_new(dest_width, dest_height).composite(img, x, y, Magick::AtopCompositeOp)
     end
     new_image ||= img
     new_image

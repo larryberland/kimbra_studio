@@ -14,19 +14,13 @@
 
     <fieldset title="Portrait position">
       <b>Portrait Position</b>
-      <div class="field">
-        <%= f.label :item_x, 'X' %>
-        <%= f.number_field :item_x %>
-        <%= f.label :item_y, 'Y' %>
-        <%= f.number_field :item_y %>
-      </div>
-      <div class="field">
-        <%= f.label :item_width, 'Width' %>
-        <%= f.number_field :item_width %>
-        <%= f.label :item_height, 'Height' %>
-        <%= f.number_field :item_height %>
-      </div>
+      <%= render "part_layout/form", :f => f, :part => @item.part %>
     </fieldset>
+    <fieldset title="Custom Piece position">
+      <b>Piece Position</b>
+      <%= render "piece_layout/form", :f => f, :part => @item.part %>
+    </fieldset>
+
     <%= f.hidden_field :image_item_cache %>
     <div class="field">
       <%= f.label :image_item, 'Custom Kimbra Part:' %>
@@ -49,8 +43,8 @@
       <%= link_to 'Part', admin_merchandise_piece_part_path(@item.part.piece, @item.part) %>
     </div>
     <div class="field">
-      <%= f.label :width %>
-      <%= f.number_field :width %>
+      <%= f.label :height %>
+      <%= f.number_field :height %>
       <%= f.label :height %>
       <%= f.number_field :height %>
     </div>

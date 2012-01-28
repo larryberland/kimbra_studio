@@ -5,12 +5,9 @@ class CreateAdminCustomerItems < ActiveRecord::Migration
       t.references :part
       t.string :image_stock
       t.string :image_item
+      t.boolean :photo, :default => true # this item needs a photo
       t.integer :width
       t.integer :height
-      t.integer :item_x       # copy of part item_x
-      t.integer :item_y
-      t.integer :item_width
-      t.integer :item_height
 
       t.timestamps
     end

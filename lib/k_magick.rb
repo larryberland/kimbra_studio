@@ -19,11 +19,17 @@ module KMagick
   module InstanceMethods
     private
 
+    # wrapper to avoid the api problem
+    #noinspection RubyArgCount
+    def image_new(width, height)
+      Magick::Image.new(width, height)
+    end
+
     # wrapper around image processing so the image
     #  will be written to a temp file for anlaysis
     #  or loading by another Uploader
     def create_image_temp(base_filename='resize')
-      t_temp = Tempfile.new([base_filename, '.jpeg'])
+      t_temp = Tempfile.new([base_filename, '.jpg'])
       img = yield; img.write(t_temp.path) if block_given?
       return img, t_temp
     end
@@ -31,7 +37,7 @@ module KMagick
     # save the current rmagick_image into a temp file
     #  so the carrier_wave uploader will save this image
     def save_image!(rmagick_image, model_image_attr, tmp_filename='custom')
-      t_custom = Tempfile.new([tmp_filename, '.jpeg'])
+      t_custom = Tempfile.new([tmp_filename, '.jpg'])
       rmagick_image.write(t_custom.path)
       model_image_attr.store!(File.open(t_custom.path))
       send("write_#{model_image_attr.mounted_as}_identifier")

@@ -1,7 +1,7 @@
 class Admin::Merchandise::Piece < ActiveRecord::Base
   attr_accessible :image, :remote_image_url,
                   :name, :short_description, :long_description,
-                  :sku, :price,
+                  :sku, :price, :custom_layout,
                   :active, :featured, :deleted_at
 
   mount_uploader :image, ImageUploader

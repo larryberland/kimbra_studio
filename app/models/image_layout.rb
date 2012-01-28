@@ -1,4 +1,6 @@
 class ImageLayout < ActiveRecord::Base
+  attr_accessible :x, :y, :w, :h
+
   belongs_to :layout, :polymorphic => true
 
   def resize(image)

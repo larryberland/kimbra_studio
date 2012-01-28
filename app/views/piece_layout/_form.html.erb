@@ -1,0 +1,25 @@
+<div class='sub-form' title='Part Layout Info'>
+  <div>
+    <h3><%= t(:my_studio_clients_form_title) %></h3>
+
+    <%= f.fields_for :part, part do |g| %>
+
+        <%= g.fields_for :piece_layout, part.piece_layout do |h| %>
+
+            <%= h.fields_for :layout, part.piece_layout.layout do |i| %>
+
+                <div class="field">
+                  <%= i.label :x %>
+                  <%= i.number_field :x %>
+                  <%= i.label :y %>
+                  <%= i.number_field :y %>
+                  <%= i.label :w, 'Width' %>
+                  <%= i.number_field :w %>
+                  <%= i.label :h, 'Height' %>
+                  <%= i.number_field :h %>
+                </div>
+            <% end %>
+        <% end %>
+    <% end %>
+  </div>
+</div>

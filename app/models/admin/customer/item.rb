@@ -1,27 +1,30 @@
 class Admin::Customer::Item < ActiveRecord::Base
 
   attr_accessible :image_stock, :remote_image_stock_url, :image_item, :remote_image_item_url,
-                  :offer, :part,
-                  :item_x, :item_y, :item_width, :item_height,
-                  :width, :height, :image_item_cache
+                  :offer, :part, :width, :height, :photo, :image_item_cache,
+                  :part_attributes
 
   mount_uploader :image_stock, AssembleUploader               # original portrait scaled for part
   mount_uploader :image_item, AssembleUploader                # final image with portrait and part
 
   belongs_to :offer, :class_name => 'Admin::Customer::Offer'  # offer contained in email
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # one of many parts that make up a Piece
+  accepts_nested_attributes_for :part
 
-  before_create :default_part
 
-  def self.assemble_portrait_face(offer, merchandise_part, portrait, face)
-    item              = assemble(offer, merchandise_part, portrait)
-    resize, assembled = item.part.center_on_face(face)
-    item.save_versions(resize, assembled)
+  def self.assemble_portrait(offer, merchandise_part, portrait_options)
+    item              = assemble(offer, merchandise_part, portrait_options[:portrait])
+    f_stock, f_custom = if portrait_options[:face]
+                          item.part.center_on_face(portrait_options[:face])
+                        else
+                          item.part.group_shot
+                        end
+    item.save_versions(f_stock, f_custom)
     item
   end
 
-  def self.assemble_portrait(offer, merchandise_part, portrait)
-    item              = assemble(offer, merchandise_part, portrait)
+  def self.assemble_no_photo(offer, merchandise_part)
+    item              = assemble(offer, merchandise_part, nil)
     resize, assembled = item.part.group_shot
     item.save_versions(resize, assembled)
     item
@@ -34,6 +37,10 @@ class Admin::Customer::Item < ActiveRecord::Base
   # custom portrait image for this item
   def stock_image
     Magick::Image.read(image_stock_url).first
+  end
+
+  def draw_piece_with_custom(piece_image)
+    part.draw_piece(piece_image, custom_image)
   end
 
   def draw_piece(piece_image)
@@ -58,9 +65,11 @@ class Admin::Customer::Item < ActiveRecord::Base
   def resize_image
     if offer and offer.portrait and offer.portrait.image
       image_stock.remove!
-      t_resize = Tempfile.new(['resize', '.jpeg'])
-      img      = Magick::Image.read(offer.portrait.image_url).first
-      @resize  = img.resize_to_fit(item_width, item_height)
+      t_resize = Tempfile.new(['resize', '.jpg'])
+      # TODO: this needs to handle the method that
+      #  was used originally by this item when creating the stock image
+      img      = Magick::Image.read(part.portrait.image_url).first
+      @resize  = img.resize_to_fit(part.part_layout.w, part.part_layout.h)
       @resize.write(t_resize.path)
       set_from_file(image_stock, t_resize.path)
     end
@@ -70,10 +79,8 @@ class Admin::Customer::Item < ActiveRecord::Base
     if part and part.image_part.present?
       image_item.remove!
       @resize = Magick::Image.read(image_stock_url).first if @resize.nil?
-      t_assembled = Tempfile.new(['assembled', '.jpeg'])
-      image_piece = Magick::Image.read(part.image_part_url).first
-      image_piece.composite(@resize, item_x, item_y, Magick::AtopCompositeOp).write(t_assembled.path)
-      set_from_file(image_item, t_assembled.path)
+      custom_part_file = part.send(:create_custom_part, @resize)
+      set_from_file(image_item, custom_part_file.path)
       save
     end
   end
@@ -83,22 +90,9 @@ class Admin::Customer::Item < ActiveRecord::Base
   # create an Item with a part for building an offer
   def self.assemble(offer, merchandise_part, portrait)
     raise "missing kimbra part in offer=>#{offer.inspect}" unless merchandise_part.present?
-    raise "missing portrait in offer=>#{offer.inspect}" unless portrait.present?
     item      = Admin::Customer::Item.create(:offer => offer)
     item.part = Admin::Merchandise::Part.assemble(merchandise_part, portrait) # create a replica of merchandise part for this item
-    item.send(:default_part)                                                  # load coordinates
     item
   end
 
-
-  # on create grab the item position information
-  #  from the Part
-  def default_part
-    if part
-      self.item_x      = part.item_x
-      self.item_y      = part.item_y
-      self.item_width  = part.item_width
-      self.item_height = part.item_height
-    end
-  end
 end

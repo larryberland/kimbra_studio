@@ -33,12 +33,9 @@ ActiveRecord::Schema.define(:version => 20120126193839) do
     t.integer  "part_id"
     t.string   "image_stock"
     t.string   "image_item"
+    t.boolean  "photo",       :default => true
     t.integer  "width"
     t.integer  "height"
-    t.integer  "item_x"
-    t.integer  "item_y"
-    t.integer  "item_width"
-    t.integer  "item_height"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -50,10 +47,11 @@ ActiveRecord::Schema.define(:version => 20120126193839) do
     t.integer  "email_id"
     t.integer  "piece_id"
     t.integer  "portrait_id"
+    t.string   "image"
     t.boolean  "active",          :default => true
     t.string   "name"
     t.text     "description"
-    t.string   "image"
+    t.string   "custom_layout",   :default => "order"
     t.string   "activation_code"
     t.datetime "visited_at"
     t.datetime "purchased_at"
@@ -73,12 +71,9 @@ ActiveRecord::Schema.define(:version => 20120126193839) do
     t.string   "image_part"
     t.string   "image"
     t.integer  "order"
+    t.boolean  "photo",       :default => true
     t.integer  "width"
     t.integer  "height"
-    t.integer  "item_x",      :default => 80
-    t.integer  "item_y",      :default => 80
-    t.integer  "item_width",  :default => 245
-    t.integer  "item_height", :default => 290
     t.boolean  "active",      :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -95,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20120126193839) do
     t.text     "description_markup"
     t.string   "sku"
     t.decimal  "price"
+    t.string   "custom_layout",      :default => "order"
     t.integer  "width",              :default => 0
     t.integer  "height",             :default => 0
     t.boolean  "active",             :default => true

@@ -1,8 +1,7 @@
 class Admin::Merchandise::Part < ActiveRecord::Base
 
   attr_accessible :image, :remote_image_url, :image_part, :image_part_url,
-                  :piece, :portrait, :width, :height,
-                  :item_x, :item_y, :item_width, :item_height,
+                  :piece, :portrait, :width, :height, :photo, :order,
                   :part_layout, :piece_layout,
                   :part_layout_attributes, :piece_layout_attributes
 
@@ -16,8 +15,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   has_one :part_layout
   has_one :piece_layout
-  accepts_nested_attributes_for :part_layout
-  accepts_nested_attributes_for :piece_layout
+  accepts_nested_attributes_for :part_layout, :piece_layout
 
 
   def self.seed_nested_attributes(info, attr, default)
@@ -87,10 +85,36 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     return t_file, t_custom
   end
 
+  # create a custom assembled part by centering the portrait's
+  #  face information onto the kimbra part
+  def no_photo
+    no_photo_image, t_file = create_image_temp do
+      part_image
+    end
+    t_custom = create_custom_part(no_photo_image)
+    return t_file, t_custom
+  end
+
   def to_image_span
     text = piece.to_image_span
     text = "Part #{id}" if text.blank?
     text
+  end
+
+  def item_x
+    part_layout.x
+  end
+
+  def item_y
+    part_layout.y
+  end
+
+  def item_width
+    part_layout.w
+  end
+
+  def item_height
+    part_layout.h
   end
 
   private
@@ -107,6 +131,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     custom_part = part_layout.draw_custom_part(part_image, src_image)
     dump_assembled(custom_part)
     save_image!(custom_part, image)
+
   end
 
   def dump_filename

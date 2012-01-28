@@ -22,6 +22,11 @@
         <%= f.text_field :name %>
       </div>
       <div class="field">
+        <%= f.label :custom_layout %>
+        <br/>
+        <%= f.text_field :custom_layout %>
+      </div>
+      <div class="field">
         <%= f.label :image, 'Final Piece image' %>
         <%= f.file_field :image %>
         <%= f.label :remote_image_url, 'or image URL' %>

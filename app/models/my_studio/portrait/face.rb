@@ -81,7 +81,7 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
     cropped = img.crop(new_x, new_y, part.item_width, part.item_height)
     dump_cropped(cropped, part.item_width, part.item_height)
 
-    t_assembled = Tempfile.new(['assemble', '.jpeg'])
+    t_assembled = Tempfile.new(['assemble', '.jpg'])
     image_piece = Magick::Image.read(part.image_part_url).first
     image_piece.composite(cropped, part.item_x, part.item_y, Magick::AtopCompositeOp).write(t_assembled.path)
     dump_assembled(image_piece)
@@ -131,7 +131,7 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
 
     puts "face_id=>#{id} dest=>#{dest_width}x#{dest_height} dx=>#{dx} dy=>#{dy}"
     puts "center in dest x=>#{new_x} y=>#{new_y} size=>#{w}x#{h}"
-    img        = ::Magick::Image.new(dest_width, dest_height)
+    img        = image_new(dest_width, dest_height)
 
     # calculate crop area so resize will not clip image
     new_width  = w
@@ -167,9 +167,8 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
   end
 
   # blank image the width and height of know face area
-  #noinspection RubyArgCount
   def area
-    Magick::Image.new(face_width, face_height)
+    image_new(face_width, face_height)
   end
 
   def area_in_portrait

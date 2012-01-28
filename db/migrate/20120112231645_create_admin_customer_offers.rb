@@ -4,13 +4,18 @@ class CreateAdminCustomerOffers < ActiveRecord::Migration
       t.references :email
       t.references :piece
       t.references :portrait
-      t.boolean :active, :default => true
-      t.string :name
-      t.text :description
+
       t.string :image
+      t.boolean :active, :default => true
+      t.string :name # from merchandise/piece.name
+      t.text :description  # from merchandise/piece.short_description
+
+      t.string  :custom_layout, :default => 'order'
+
       t.string :activation_code
       t.datetime :visited_at # customer visited mini-site offer
       t.datetime :purchased_at # customer purchased item
+
       t.integer :width  # width of portrait??
       t.integer :height # height of portrait??
       t.timestamps
