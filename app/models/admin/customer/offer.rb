@@ -47,27 +47,6 @@ class Admin::Customer::Offer < ActiveRecord::Base
   #         create item for each face centered
   #
 
-  def kimbra_parts(merchandise_piece)
-    @kimbra_parts      ||= merchandise_piece.parts
-    @kimbra_part_index = -1
-    @kimbra_parts
-  end
-
-  def kimbra_part?
-    (@kimbra_part_index + 1) < @kimbra_parts.size
-  end
-
-  def kimbra_part_next
-    @kimbra_parts[@kimbra_part_index+=1]
-  end
-
-  # create a portrait list of photos we have used and not used
-  def init_portrait_list
-    @portrait_list = PortraitList.new(portrait)
-    (portrait.my_studio_session.portraits - [portrait]).each { |portrait| @portrait_list.add(portrait) }
-    @portrait_list
-  end
-
   def assemble(merchandise_piece)
     raise "did you forget to assign a piece for this offer?" if merchandise_piece.nil?
     raise "did you forget to assign a studio session for this portrait?" if portrait.my_studio_session.nil?

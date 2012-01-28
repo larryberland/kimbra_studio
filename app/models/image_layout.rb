@@ -16,7 +16,6 @@ class ImageLayout < ActiveRecord::Base
   end
 
   def draw_piece(dest_image, src_image)
-    puts inspect
     dest_image.composite(rotate(resize(src_image)), x, y, Magick::SrcOverCompositeOp)
   end
 

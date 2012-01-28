@@ -1,8 +1,8 @@
 class Admin::Customer::Item < ActiveRecord::Base
 
   attr_accessible :image_stock, :remote_image_stock_url, :image_item, :remote_image_item_url,
-                  :offer, :part, :width, :height, :photo, :image_item_cache,
-                  :part_attributes
+                  :offer, :part, :width, :height, :photo, :order,
+                  :image_item_cache, :part_attributes
 
   mount_uploader :image_stock, AssembleUploader               # original portrait scaled for part
   mount_uploader :image_item, AssembleUploader                # final image with portrait and part
@@ -13,6 +13,7 @@ class Admin::Customer::Item < ActiveRecord::Base
 
 
   def self.assemble_portrait(offer, merchandise_part, portrait_options)
+    raise "offer=>#{offer.id} for merchandise_part=>#{merchandise_part.id} has no portrait=>#{portrait_options.inspect}" if portrait_options[:portrait].nil?
     item              = assemble(offer, merchandise_part, portrait_options[:portrait])
     f_stock, f_custom = if portrait_options[:face]
                           item.part.center_on_face(portrait_options[:face])
@@ -25,7 +26,7 @@ class Admin::Customer::Item < ActiveRecord::Base
 
   def self.assemble_no_photo(offer, merchandise_part)
     item              = assemble(offer, merchandise_part, nil)
-    resize, assembled = item.part.group_shot
+    resize, assembled = item.part.no_photo
     item.save_versions(resize, assembled)
     item
   end

@@ -5,7 +5,7 @@ class CreateAdminMerchandiseParts < ActiveRecord::Migration
       t.references :portrait
       t.string :image_part
       t.string :image
-      t.integer :order
+      t.integer :order, :default => 0
       t.boolean :photo, :default => true
       t.integer :width
       t.integer :height

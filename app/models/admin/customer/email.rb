@@ -43,7 +43,7 @@ class PickList
 
       # first pass only use portraits with 1 or no faces
       @list.select { |e| e[:portrait].faces.size < 2 }.each do |entry|
-        picture_list << {:portrait => entry[:portrait]}
+        picture_list << {:portrait => entry[:portrait], :face => entry[:portrait].faces.first}
         break if picture_list.size >= number_of_parts
       end
 
@@ -72,15 +72,27 @@ class Admin::Customer::Email < ActiveRecord::Base
     email                   = Admin::Customer::Email.new
     email.my_studio_session = studio_session
     piece_pick_list         = [0]
+
+    # setup portrait pick_list strategy
     portrait_pick_list      = PickList.new
     studio_session.portraits.each { |p| portrait_pick_list.add(p) }
-    offers             = studio_session.portraits.collect do |portrait|
+
+    # generate the merchandise piece list
+    number_offers = [studio_session.portraits.size, 4].min
+
+    piece_list = (0..number_offers).collect do |index|
       piece = Admin::Merchandise::Piece.pick(piece_pick_list).first
       piece_pick_list << piece.id
-      photo_parts   = piece.parts.select { |part| part.photo? }
-      portrait_list = portrait_pick_list.portraits_by_parts(photo_parts.size)
-      Admin::Customer::Offer.generate(email, portrait_list, piece)
+      {:piece => piece, :photo_parts => piece.parts.select{|part| part.photo?}}
     end
+
+    order_by_number_of_parts = piece_list.sort_by{|info| info[:photo_parts].size}.reverse
+
+    offers = order_by_number_of_parts.collect do |piece_info|
+      portrait_list = portrait_pick_list.portraits_by_parts(piece_info[:photo_parts].size)
+      Admin::Customer::Offer.generate(email, portrait_list, piece_info[:piece])
+    end
+
     email.offers       = offers
     email.generated_at = Time.now
     email.save
