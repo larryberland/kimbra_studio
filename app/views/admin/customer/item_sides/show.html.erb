@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Item:</b>
+  <%= @admin_customer_item_side.item %>
+</p>
+
+<p>
+  <b>Part:</b>
+  <%= @admin_customer_item_side.part %>
+</p>
+
+<p>
+  <b>Image stock:</b>
+  <%= @admin_customer_item_side.image_stock %>
+</p>
+
+<p>
+  <b>Image custom:</b>
+  <%= @admin_customer_item_side.image_custom %>
+</p>
+
+
+<%= link_to 'Edit', edit_admin_customer_item_side_path(@admin_customer_item_side) %> |
+<%= link_to 'Back', admin_customer_item_sides_path %>

@@ -6,11 +6,13 @@
     </tr>
     <tr>
       <td>Custom Piece:</td>
-      <td><%= cw_div_image(offer) %></td>
+      <td><%= cw_div_image(offer, :image => 'image_front') %></td>
     </tr>
-    <tr>
-      <td>Studio Portrait :</td>
-      <td><%= cw_div_image(offer.portrait) %></td>
-    </tr>
+    <% if offer.back.present? %>
+        <tr>
+          <td>Custom Piece Side 2:</td>
+          <td><%= cw_div_image(offer, :image => 'image_back') %></td>
+        </tr>
+    <% end %>
   </table>
 </div>

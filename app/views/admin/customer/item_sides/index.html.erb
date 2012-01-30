@@ -1,0 +1,29 @@
+<h1>Listing admin_customer_item_sides</h1>
+
+<table>
+  <tr>
+    <th>Item</th>
+    <th>Part</th>
+    <th>Image stock</th>
+    <th>Image custom</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @admin_customer_item_sides.each do |admin_customer_item_side| %>
+  <tr>
+    <td><%= admin_customer_item_side.item %></td>
+    <td><%= admin_customer_item_side.part %></td>
+    <td><%= admin_customer_item_side.image_stock %></td>
+    <td><%= admin_customer_item_side.image_custom %></td>
+    <td><%= link_to 'Show', admin_customer_item_side %></td>
+    <td><%= link_to 'Edit', edit_admin_customer_item_side_path(admin_customer_item_side) %></td>
+    <td><%= link_to 'Destroy', admin_customer_item_side, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Item side', new_admin_customer_item_side_path %>

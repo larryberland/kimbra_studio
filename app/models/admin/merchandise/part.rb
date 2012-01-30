@@ -2,14 +2,16 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   attr_accessible :image, :remote_image_url, :image_part, :image_part_url,
                   :piece, :portrait, :width, :height, :photo, :order,
-                  :part_layout, :piece_layout,
-                  :part_layout_attributes, :piece_layout_attributes
+                  :part_layout, :part_layout_attributes,
+                  :piece_layout, :piece_layout_attributes,
+                  :face, :face_attributes
 
   mount_uploader :image, ImageUploader                  # custom assembled part
   mount_uploader :image_part, ImageUploader             # kimbra part
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece'
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
+  belongs_to :face, :class_name => 'MyStudio::Portrait::Face'
 
   has_one :item, :class_name => 'Admin::Customer::Item' # TODO: do we destroy Offer::Item on this?
 
@@ -41,21 +43,40 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     my_part
   end
 
-  # create a replica of the merchandise_part
-  #  with the current portrait.
-  def self.assemble(merchandise_part, portrait)
-    item_part = merchandise_part.clone
-    item_part.update_attributes(:piece    => merchandise_part.piece,
-                                :portrait => portrait)
+  def generate
+    f_stock, f_custom = if face.present?
+                          center_on_face(face)
+                        else
+                          group_shot
+                        end
+  end
+
+  # create a clone of merchandise_part we can use for customisation
+  def self.create_clone(merchandise_part, portrait_options=nil)
+    item_part          = merchandise_part.clone
+    item_part.piece    = merchandise_part.piece
+    item_part.save
+    if portrait_options
+      item_part.portrait = portrait_options[:portrait]
+      item_part.face     = portrait_options[:face]
+      f_stock, f_custom = if portrait_options[:face]
+                            item_part.center_on_face(portrait_options[:face])
+                          else
+                            item_part.group_shot
+                          end
+
+    end
     item_part.copy_image(merchandise_part)
-    raise "missing piece_layout in merchandise_part=>#{merchandise_part.inspect}" if item_part.piece_layout.nil?
-    raise "missing part_layout in merchandise_part=>#{merchandise_part.inspect}" if item_part.part_layout.nil?
     item_part
   end
 
   def copy_image(from_part)
     raise "missing part image in part=>#{from_part.inspect}" if from_part.image_part.nil?
     set_from_url(image_part, from_part.image_part_url)
+  end
+
+  def draw_part(stock_image)
+    part_layout.draw_custom_part(part_image, stock_image)
   end
 
   # draw the custom portrait image onto the Kimbra piece image
@@ -91,7 +112,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     no_photo_image, t_file = create_image_temp do
       part_image
     end
-    t_custom = create_custom_part(no_photo_image)
+    t_custom               = create_custom_part(no_photo_image)
     return t_file, t_custom
   end
 

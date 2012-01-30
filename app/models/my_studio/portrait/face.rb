@@ -95,6 +95,10 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
     puts "top= x=>#{face_top_left_x} y=>#{face_top_left_y} width=>#{face_width} height=>#{face_height}"
   end
 
+  def center_in_size(layout, padding=0.38)
+    center_in_area(layout.w, layout.h, padding)
+  end
+
   def center_in_area(dest_width, dest_height, padding=0.38)
 
     puts "orig x=>#{face_top_left_x} y=#{face_top_left_y} size=>#{face_width}x#{face_height}"

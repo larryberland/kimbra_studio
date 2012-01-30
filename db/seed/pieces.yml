@@ -52,11 +52,57 @@
 
   - category: Photo Bracelets
     name: Large Oval Link Bracelet
+    short_description: "Measuring: 7-8\" in length. Three adjustable rings. Large Solid Sterling Silver Oval Link Chain."
+    description_markup: "Photos measuring: 7/16\" square. Solid Sterling Silver. Completely waterproof. Offered with 1-6 photo links, with 1 or 2 sided photos."
+    sku:
+    custom_layout: 'order'
     price:
+    :parts:
+      - :image_part: rachel_part0.png
+        order: 0
+        :part_layout: {layout: {x: 125, y: 143, w: 260, h: 260}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+      - :image_part: nicole_part0.png
+        order: 1
+        :part_layout: {layout: {x: 100, y: 95, w: 110, h: 145}}
+        :piece_layout: {layout: {x: 85, y: 0, w: 85, h: 66}}
+      - :image_part: karrie_part0.png
+        order: 2
+        :part_layout: {layout: {x: 110, y: 139, w: 290, h: 220}}
+        :piece_layout: {layout: {x: 170, y: 0, w: 85, h: 66}}
+      - :image_part: shelise_part0.png
+        order: 3
+        :part_layout: {layout: {x: 107, y: 164, w: 320, h: 320}}
+        :piece_layout: {layout: {x: 255, y: 0, w: 85, h: 66}}
+      - :image_part: taneka_part0.png
+        order: 4
+        :part_layout: {layout: {x: 141, y: 116, w: 233, h: 355}}
+        :piece_layout: {layout: {x: 340, y: 0, w: 85, h: 66}}
 
   - category: Photo Bracelets
     name: Leota Collection
     price:
+    short_description: "Photos measuring: 7/16\" square. Solid Sterling Silver. Completely waterproof. Offered with 1-6 photo links, with 1 or 2 sided photos."
+    description_markup: "Photos measuring: 7/16\" square. Solid Sterling Silver. Completely waterproof. Offered with 1-6 photo links, with 1 or 2 sided photos."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 82, y: 36, w: 153, h: 153}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+      - :image_part: part1.png
+        order: 1
+        :part_layout: {layout: {x: 82, y: 36, w: 153, h: 153}}
+        :piece_layout: {layout: {x: 85, y: 0, w: 85, h: 66}}
+      - :image_part: part2.png
+        order: 2
+        :part_layout: {layout: {x: 82, y: 36, w: 153, h: 153}}
+        :piece_layout: {layout: {x: 170, y: 0, w: 85, h: 66}}
+      - :image_part: part3.png
+        order: 3
+        :part_layout: {layout: {x: 82, y: 36, w: 153, h: 153}}
+        :piece_layout: {layout: {x: 255, y: 0, w: 85, h: 66}}
 
   - category: Photo Bracelets
     name: Eileen Bracelet
@@ -76,7 +122,7 @@
         :piece_layout: {layout: {x: 85, y: 0, w: 85, h: 66}}
       - :image_part: part2.png
         order: 2
-        :part_layout: {layout: {x: 40, y: 45, w: 184, h: 140}}
+        :part_layout: {layout: {x: 40, y: 20, w: 184, h: 140}}
         :piece_layout: {layout: {x: 170, y: 0, w: 85, h: 66}}
       - :image_part: part3.png
         order: 3
@@ -84,7 +130,7 @@
         :piece_layout: {layout: {x: 255, y: 0, w: 85, h: 66}}
       - :image_part: part4.png
         order: 4
-        :part_layout: {layout: {x: 40, y: 45, w: 184, h: 140}}
+        :part_layout: {layout: {x: 40, y: 26, w: 184, h: 140}}
         :piece_layout: {layout: {x: 340, y: 0, w: 85, h: 66}}
       - :image_part: part5.png
         order: 5
@@ -92,7 +138,7 @@
         :piece_layout: {layout: {x: 425, y: 0, w: 85, h: 66}}
       - :image_part: part6.png
         order: 6
-        :part_layout: {layout: {x: 40, y: 45, w: 184, h: 140}}
+        :part_layout: {layout: {x: 40, y: 30, w: 184, h: 140}}
         :piece_layout: {layout: {x: 510, y: 0, w: 85, h: 66}}
       - :image_part: part7.png
         order: 7
@@ -144,9 +190,6 @@
         :part_layout: {layout: {x: 57, y: 32, w: 136, h: 136}}
         :piece_layout: {layout: {x: 595, y: 0, w: 85, h: 66}}
 
-  - category: Photo Bracelets
-    name: Awareness Bracelet
-    price: 60.00
   - category: Photo Necklaces
     name: Madelyn Necklace
     price: 38.00
@@ -156,6 +199,7 @@
   - category: Photo Necklaces
     name: The Embrace Necklace
     price: 120.00
+
   - category: Photo Necklaces
     name: Josephine Pendant
     price: 64.00
@@ -213,23 +257,59 @@
   - category: Photo Charms
     name: Margaret
     price: 64.00
+
   - category: Photo Charms
     name: Nicole
     price: 46.00
+    short_description: "Measuring: 3/8\"w x 1/2\"h. Solid Sterling Silver (includes jump ring). Completely waterproof. One of our exclusive, copyrighted Kimbra Studios designs!"
+    :parts:
+      - :image_part: nicole_part0.png
+        order: 0
+        :part_layout: {layout: {x: 100, y: 95, w: 110, h: 145}}
+        :piece_layout: {layout: {x: 100, y: 95, w: 110, h: 145}}
+
   - category: Photo Charms
     name: Karrie
     price: 46.00
+    short_description: "Measuring: 1/2w\" x 3/8h\". Solid Sterling Silver (includes jump ring). Completely waterproof."
+    :parts:
+      - :image_part: karrie_part0.png
+        order: 0
+        :part_layout: {layout: {x: 110, y: 139, w: 290, h: 220}}
+        :piece_layout: {layout: {x: 110, y: 139, w: 290, h: 220}}
+
   - category: Photo Charms
     name: Taneka
     price: 46.00
+    short_description: "Measuring: 7/16\"w x 5/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    :parts:
+      - :image_part: taneka_part0.png
+        order: 0
+        :part_layout: {layout: {x: 141, y: 116, w: 233, h: 355}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Charms
     name: Shelise
     price: 46.00
+    short_description: "Measuring: 5/8\" round. Solid Sterling Silver (includes jump ring). Completely waterproof. "
+    :parts:
+      - :image_part: shelise_part0.png
+        order: 0
+        :part_layout: {layout: {x: 107, y: 164, w: 320, h: 320}}
+        :piece_layout: {layout: {x: 107, y: 164, w: 320, h: 320}}
+
   - category: Photo Charms
     name: Tucker
     price: 46.00
   - category: Photo Charms
     name: Rachel
+    short_description: "Photo measuring: 7/16\" square. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    :parts:
+      - :image_part: rachel_part0.png
+        order: 0
+        :part_layout: {layout: {x: 125, y: 143, w: 260, h: 260}}
+        :piece_layout: {layout: {x: 125, y: 143, w: 260, h: 260}}
+
     price: 46.00
   - category: Photo Charms
     name: 2-Sided Rachel

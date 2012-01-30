@@ -1,29 +1,4 @@
 <table>
-  <thead>
-  <th></th>
-  <th>x</th>
-  <th>y</th>
-  <th>width</th>
-  <th>height</th>
-  </thead>
-  <tr>
-    <td><b>Layout Piece:</b></td>
-    <td><%= @item.part.piece_layout.x %></td>
-    <td><%= @item.part.piece_layout.y %></td>
-    <td><%= @item.part.piece_layout.w %></td>
-    <td><%= @item.part.piece_layout.h %></td>
-  </tr>
-
-  <tr>
-    <td><b>Layout Part:</b></td>
-    <td><%= @item.part.part_layout.x %></td>
-    <td><%= @item.part.part_layout.y %></td>
-    <td><%= @item.part.part_layout.w %></td>
-    <td><%= @item.part.part_layout.h %></td>
-  </tr>
-
-</table>
-<table>
 
   <tr>
     <td><b>Kimbra Piece:</b></td>
@@ -36,17 +11,11 @@
     <td></td>
   </tr>
 
-  <tr>
-    <td><b>Custom Part:</b></td>
-    <td colspan="7" ><%= image_tag(@item.image_item_url.to_s) %></td>
-  </tr>
-
-  <tr>
-    <td><b>Portrait Sized:</b></td>
-    <td colspan="7"><%= image_tag(@item.image_stock_url.to_s) %></td>
-  </tr>
-
 </table>
+
+<%= render 'admin/customer/item_sides/show', :item_side => @item.front, :label => '1' %>
+<%= render 'admin/customer/item_sides/show', :item_side => @item.back, :label => '2'  if @item.back.present?%>
+
 
 <%= link_to t(:edit), edit_admin_customer_email_offer_item_path(@offer.email, @offer, @item) %> |
 <%= link_to t(:back), admin_customer_email_offer_items_path(@offer.email, @offer) %>

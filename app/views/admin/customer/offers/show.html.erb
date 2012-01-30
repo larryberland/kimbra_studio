@@ -4,10 +4,25 @@
     <b>Items:</b>
     <%= link_to 'Items', admin_customer_email_offer_items_path(@admin_customer_offer.email, @admin_customer_offer) %>
   </p>
-  <p>
-    <b>Custom Piece</b>
-    <%= image_tag @admin_customer_offer.image_url.to_s %>
-  </p>
+
+
+  <% if @admin_customer_offer.back.present? %>
+
+      <p>
+        <b>Custom Piece Side 1</b>
+        <%= image_tag @admin_customer_offer.image_front_url.to_s %>
+      </p>
+
+      <p>
+        <b>Custom Piece Side 2</b>
+        <%= image_tag @admin_customer_offer.image_back_url.to_s %>
+      </p>
+  <% else %>
+      <p>
+        <b>Custom Piece</b>
+        <%= image_tag @admin_customer_offer.image_url.to_s %>
+      </p>
+  <% end %>
 
   <p>
     <b>Email:</b>
@@ -22,14 +37,6 @@
   <p style="width:400px;">
     <b>Description:</b>
     <%= @admin_customer_offer.description %>
-  </p>
-
-  <p>
-    Studio Portrait
-    <b>Width:</b>
-    <%= @admin_customer_offer.width %>
-    <b>Height:</b>
-    <%= @admin_customer_offer.height %>
   </p>
 
   <p>

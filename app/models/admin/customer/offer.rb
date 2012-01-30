@@ -1,14 +1,18 @@
 class Admin::Customer::Offer < ActiveRecord::Base
 
   attr_accessible :image, :remote_image_url,
-                  :name, :email, :portrait, :piece, :description,
+                  :image_front, :remote_image_front_url,
+                  :image_back, :remote_image_back_url,
+                  :name, :email, :piece, :description,
                   :custom_layout, :portrait_parts_list
 
-  attr_accessor :portrait_parts_list
+  attr_accessor :portrait_parts_list                            # parts list having portraits assigned to which part
+
   mount_uploader :image, ImageUploader                          # the final custom kimbra piece
+  mount_uploader :image_front, ImageUploader                    # the front side of the final custom kimbra piece
+  mount_uploader :image_back, ImageUploader                     # the back side of the final custom kimbra piece
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece' # kimbra piece
-  belongs_to :portrait, :class_name => 'MyStudio::Portrait'     # Studio session Portrait
   belongs_to :email, :class_name => 'Admin::Customer::Email'
 
   has_many :items, :class_name => 'Admin::Customer::Item'       # Items that make up the custom piece
@@ -16,11 +20,14 @@ class Admin::Customer::Offer < ActiveRecord::Base
   before_create :piece_create_default
   before_save :piece_default
 
-  def self.generate(email, portrait_list, piece)
+  # portrait_parts_list
+  #   array => {:photo_parts => merchandise_part to use,
+  #             :portrait => portrait to use for this part,
+  #             :face => face within this portrait to use
+  def self.generate(email, piece, portrait_parts_list)
     offer = Admin::Customer::Offer.create(:email               => email,
-                                          :portrait            => portrait_list.first[:portrait],
                                           :piece               => piece,
-                                          :portrait_parts_list => portrait_list)
+                                          :portrait_parts_list => portrait_parts_list)
     offer.assemble(piece)
     offer.save
     offer.send(:dump_custom)
@@ -49,20 +56,17 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   def assemble(merchandise_piece)
     raise "did you forget to assign a piece for this offer?" if merchandise_piece.nil?
-    raise "did you forget to assign a studio session for this portrait?" if portrait.my_studio_session.nil?
     raise "did you forget to assign a portrait_parts_list for this offer?" if portrait_parts_list.nil?
 
-    photo_parts     = merchandise_piece.parts.select { |part| part.photo? }
-    non_photo_parts = merchandise_piece.parts - photo_parts
-
-    non_photo_parts.each do |part|
-      self.items << Admin::Customer::Item.assemble_no_photo(self, part)
+    # add an item for every non_photo part
+    merchandise_piece.non_photo_parts.each do |part|
+      portrait_parts_list << [{:photo_part => part}] # bad choice on name
+                                                     # this is really a non_photo_part
     end
 
-    raise "piece=>#{merchandise_piece.name} the portrait_parts_list does not match, expected #{photo_parts.size} got #{portrait_parts_list.size}" if portrait_parts_list.size != photo_parts.size
-
-    photo_parts.each_with_index do |part, index|
-      self.items << Admin::Customer::Item.assemble_portrait(self, part, portrait_parts_list[index])
+                        # add an item for every photo_part we have
+    portrait_parts_list.each do |item_options|
+      self.items << Admin::Customer::Item.assemble_side(self, item_options)
     end
 
     create_custom_image # create a composite of all the items
@@ -75,6 +79,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
     text = piece.to_image_span if piece.present?
     text = 'Offer' if text.blank?
     text
+  end
+
+  def back
+    image_back
   end
 
   private
@@ -94,7 +102,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
   end
 
-  def draw_by_order
+  def draw_by_order(front_side=true)
     w = []
     h = []
     items.each do |item|
@@ -105,28 +113,40 @@ class Admin::Customer::Offer < ActiveRecord::Base
     width        = w.sum
     custom_piece = image_new(width, height)
     items.each_with_index do |item, index|
-      custom_piece = item.draw_piece_with_custom(custom_piece)
+      custom_piece = item.draw_piece_with_custom(custom_piece, front_side)
     end
-    p = Tempfile.new(["offer_#{id}", '.jpg'])
-    custom_piece.write(p.path)
-    set_from_file(image, p.path)
-    true
+    t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
+    custom_piece.write(t_front_or_back.path)
+    set_from_file(front_side ? image_front : image_back, t_front_or_back.path)
+    t_front_or_back
   end
 
-  def draw_by_composite
+  def draw_by_composite(front=true)
     custom_piece = piece.get_image
     items.each_with_index do |item, index|
-      custom_piece = item.draw_piece(custom_piece)
+      custom_piece = item.draw_piece(custom_piece, front)
       custom_piece.write("public/kmagick/custom_offer_#{id}_index_#{index}.jpeg")
     end
-    p = Tempfile.new(["offer_#{id}", 'jpg'])
-    custom_piece.write(p.path)
-    set_from_file(image, p.path)
-    true
+    t_front_or_back = Tempfile.new(["offer_#{id}", 'jpg'])
+    custom_piece.write(t_front_or_back.path)
+    set_from_file(front ? image_front : image_back, t_front_or_back.path)
+    t_front_or_back
+  end
+
+  def baby_got_back
+    list = items.select { |item| item.back.present? }
+    list.size > 0 ? true : false
   end
 
   def create_custom_image
-    send("draw_by_#{custom_layout}")
+    t_front = send("draw_by_#{custom_layout}", front=true)
+    set_from_file(image, t_front.path)
+    if baby_got_back
+      puts "has back side"
+      send("draw_by_#{custom_layout}", front=false)
+    else
+      puts "no back side"
+    end
   end
 
   def dump_custom

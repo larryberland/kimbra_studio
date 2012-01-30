@@ -1,6 +1,8 @@
 KimbraStudio::Application.routes.draw do
 
 
+  namespace :admin do  namespace :customer do resources :item_sides end end
+
   resources :image_layouts
 
   resources :studios

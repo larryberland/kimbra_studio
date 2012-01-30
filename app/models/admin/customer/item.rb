@@ -1,59 +1,55 @@
 class Admin::Customer::Item < ActiveRecord::Base
 
-  attr_accessible :image_stock, :remote_image_stock_url, :image_item, :remote_image_item_url,
-                  :offer, :part, :width, :height, :photo, :order,
-                  :image_item_cache, :part_attributes
+  attr_accessible :width, :height, :photo, :order,
+                  :part, :part_attributes,
+                  :offer, :offer_attributes
 
-  mount_uploader :image_stock, AssembleUploader               # original portrait scaled for part
-  mount_uploader :image_item, AssembleUploader                # final image with portrait and part
 
   belongs_to :offer, :class_name => 'Admin::Customer::Offer'  # offer contained in email
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # one of many parts that make up a Piece
-  accepts_nested_attributes_for :part
+  accepts_nested_attributes_for :part, :offer
 
+  has_many :item_sides, :class_name => 'Admin::Customer::ItemSide', :dependent => :destroy
 
-  def self.assemble_portrait(offer, merchandise_part, portrait_options)
-    raise "offer=>#{offer.id} for merchandise_part=>#{merchandise_part.id} has no portrait=>#{portrait_options.inspect}" if portrait_options[:portrait].nil?
-    item              = assemble(offer, merchandise_part, portrait_options[:portrait])
-    f_stock, f_custom = if portrait_options[:face]
-                          item.part.center_on_face(portrait_options[:face])
-                        else
-                          item.part.group_shot
-                        end
-    item.save_versions(f_stock, f_custom)
+  # assemble an item and its sides
+  #  options = [front_side => {:photo_part, :portrait, :face},
+  #             back_side => {:photo_part, :portrait, :face}]
+  #
+  def self.assemble_side(offer, options)
+    sides = [options] if options.kind_of?(Hash)
+    sides ||= options
+
+    item = assemble(offer, sides.first[:photo_part])
+
+    item.item_sides = sides.collect do |item_side_options|
+      Admin::Customer::ItemSide.assemble(item, item_side_options)
+    end
+    item.save
     item
   end
 
-  def self.assemble_no_photo(offer, merchandise_part)
-    item              = assemble(offer, merchandise_part, nil)
-    resize, assembled = item.part.no_photo
-    item.save_versions(resize, assembled)
-    item
+  def front
+    item_sides[0]
   end
 
-  def custom_image
-    Magick::Image.read(image_item_url).first
+  def back
+    item_sides[1]
   end
 
-  # custom portrait image for this item
-  def stock_image
-    Magick::Image.read(image_stock_url).first
+  def draw_piece_with_custom(piece_image, front_side)
+    if side = get_side(front_side)
+      side.draw_piece_with_custom(piece_image)
+    else
+      piece_image
+    end
   end
 
-  def draw_piece_with_custom(piece_image)
-    part.draw_piece(piece_image, custom_image)
-  end
-
-  def draw_piece(piece_image)
-    part.draw_piece(piece_image, stock_image)
-  end
-
-  def save_versions(stock, assembled)
-    raise 'could not resize image' unless File.exist?(stock.path)
-    raise 'could not assemble image' unless File.exist?(assembled.path)
-    set_from_file(image_stock, stock.path) if stock.present?
-    set_from_file(image_item, assembled.path) if assembled.present?
-    save
+  def draw_piece(piece_image, front_side)
+    if side = get_side(front_side)
+      side.draw_piece(piece_image)
+    else
+      piece_image
+    end
   end
 
   def to_image_span
@@ -88,12 +84,25 @@ class Admin::Customer::Item < ActiveRecord::Base
 
   private
 
+  def get_side(front_side)
+    front_side ? front : back
+  end
+
   # create an Item with a part for building an offer
-  def self.assemble(offer, merchandise_part, portrait)
+  def self.assemble(offer, merchandise_part)
     raise "missing kimbra part in offer=>#{offer.inspect}" unless merchandise_part.present?
-    item      = Admin::Customer::Item.create(:offer => offer)
-    item.part = Admin::Merchandise::Part.assemble(merchandise_part, portrait) # create a replica of merchandise part for this item
+    my_part = Admin::Merchandise::Part.create_clone(merchandise_part)
+    item    = Admin::Customer::Item.create(:offer => offer,
+                                           :part  => my_part)
     item
+  end
+
+  def save_versions(f_stock, f_custom)
+    raise 'missing_file with stock image' unless File.exist?(f_stock.path)
+    raise 'missing file with custom image' unless File.exist?(f_custom.path)
+    set_from_file(image_stock, f_stock.path) if f_stock.present?
+    set_from_file(image_custom, f_custom.path) if f_custom.present?
+    save
   end
 
 end

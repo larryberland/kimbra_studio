@@ -28,12 +28,21 @@ ActiveRecord::Schema.define(:version => 20120126193839) do
 
   add_index "admin_customer_emails", ["my_studio_session_id"], :name => "index_admin_customer_emails_on_my_studio_session_id"
 
+  create_table "admin_customer_item_sides", :force => true do |t|
+    t.integer  "item_id"
+    t.integer  "part_id"
+    t.integer  "portrait_id"
+    t.integer  "face_id"
+    t.string   "image_stock"
+    t.string   "image_custom"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "admin_customer_items", :force => true do |t|
     t.integer  "offer_id"
     t.integer  "part_id"
-    t.string   "image_stock"
-    t.string   "image_item"
-    t.boolean  "photo",       :default => true
+    t.boolean  "photo",      :default => true
     t.integer  "width"
     t.integer  "height"
     t.datetime "created_at"
@@ -46,8 +55,9 @@ ActiveRecord::Schema.define(:version => 20120126193839) do
   create_table "admin_customer_offers", :force => true do |t|
     t.integer  "email_id"
     t.integer  "piece_id"
-    t.integer  "portrait_id"
     t.string   "image"
+    t.string   "image_front"
+    t.string   "image_back"
     t.boolean  "active",          :default => true
     t.string   "name"
     t.text     "description"
@@ -63,14 +73,13 @@ ActiveRecord::Schema.define(:version => 20120126193839) do
 
   add_index "admin_customer_offers", ["email_id"], :name => "index_admin_customer_offers_on_email_id"
   add_index "admin_customer_offers", ["piece_id"], :name => "index_admin_customer_offers_on_piece_id"
-  add_index "admin_customer_offers", ["portrait_id"], :name => "index_admin_customer_offers_on_portrait_id"
 
   create_table "admin_merchandise_parts", :force => true do |t|
     t.integer  "piece_id"
     t.integer  "portrait_id"
     t.string   "image_part"
     t.string   "image"
-    t.integer  "order"
+    t.integer  "order",       :default => 0
     t.boolean  "photo",       :default => true
     t.integer  "width"
     t.integer  "height"
