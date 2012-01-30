@@ -117,7 +117,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
     t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
     custom_piece.write(t_front_or_back.path)
-    set_from_file(front_side ? image_front : image_back, t_front_or_back.path)
+    i = front_side ? image_front : image_back
+    i.store_file!(t_front_or_back.path)
     t_front_or_back
   end
 
@@ -129,7 +130,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
     t_front_or_back = Tempfile.new(["offer_#{id}", 'jpg'])
     custom_piece.write(t_front_or_back.path)
-    set_from_file(front ? image_front : image_back, t_front_or_back.path)
+    i = front ? image_front : image_back
+    i.store_file!(t_front_or_back.path)
     t_front_or_back
   end
 
@@ -140,7 +142,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   def create_custom_image
     t_front = send("draw_by_#{custom_layout}", front=true)
-    set_from_file(image, t_front.path)
+    image.store_file!(t_front.path)
     if baby_got_back
       puts "has back side"
       send("draw_by_#{custom_layout}", front=false)

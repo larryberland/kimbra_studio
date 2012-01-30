@@ -84,7 +84,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     raise "no src_image to make custom part #{self.inspect}" if src_image.nil?
     custom_part = part.draw_part(src_image)
     dump_custom(custom_part)
-    save_image!(custom_part, image_custom)
+    image_custom.store_image!(custom_part)
   end
 
   def center_on_face
@@ -110,8 +110,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   def save_versions(f_stock, f_custom)
     raise 'missing_file with stock image' unless File.exist?(f_stock.path)
     raise 'missing file with custom image' unless File.exist?(f_custom.path)
-    set_from_file(image_stock, f_stock.path) if f_stock.present?
-    set_from_file(image_custom, f_custom.path) if f_custom.present?
+    image_stock.store_file!(f_stock.path) if f_stock.present?
+    image_custom.store_file!(f_custom.path) if f_custom.present?
     save
   end
 

@@ -99,9 +99,7 @@ class PortraitStrategy
   end
 
   def limit?
-    r = @picture_list.size >= limit
-    puts "limit? res=>#{r} pl=>#{@picture_list.size} >= #{limit}"
-    r
+    @picture_list.size >= limit
   end
 
   def add_portrait(portrait)
@@ -130,5 +128,11 @@ class PortraitStrategy
 
   def match_no_faces(used=false)
     @list.select { |entry| (entry[:used] == used) and (entry[:portrait].faces.size.to_i == 0) }
+  end
+
+  def dump_list
+    @list.each do |entry|
+      puts "used=>#{entry[:used]} faces=>#{entry[:portrait].faces.size} portrait=>#{entry[:portrait].id}"
+    end
   end
 end

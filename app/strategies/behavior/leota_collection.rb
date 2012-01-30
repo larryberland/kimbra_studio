@@ -7,12 +7,14 @@ module LeotaCollection
   def leota_collection_strategy
     init
 
-    puts "Using leota_collection strategy"
-    # four parts needed
+    #dump_list # debug
+
+              # four parts needed
     raise "portrait_strategy config issue leota_collection max_parts expected 4 got #{@max_parts}" if @max_parts != 4
 
     # look for 8, 6, 4 or 2 faces that have not been used before
     [8, 6, 4, 2].each do |number_of_faces|
+      #puts "UNused faces=>#{number_of_faces}"
       select_from_unused_matches(number_of_faces)
       break if limit?
     end
@@ -20,6 +22,7 @@ module LeotaCollection
     unless limit?
       # look for 8, 6, 4 or 2 faces that have been used before
       [8, 6, 4, 2].each do |number_of_faces|
+        #puts "used faces=>#{number_of_faces}"
         select_from_used_matches(number_of_faces)
         break if limit?
       end
@@ -27,21 +30,23 @@ module LeotaCollection
 
     unless limit?
       # select any that have at least 1 face and not used yet
+      #puts "used any faces"
       select_from_face_list(match_any_face)
     end
 
     unless limit?
       # have at least 1 face and has been used before
+      #puts "UNused any faces"
       select_from_face_list(match_any_face(used=true))
     end
 
     unless limit?
-      unless limit_pictures?
-        # need to fill up the pictures regardless of used or not
+      # need to fill up the pictures regardless of used or not
+      while !limit?
         @list.each do |entry|
           entry[:used] = true
           if entry[:portrait].faces
-            entry[:portrait].each do |face|
+            entry[:portrait].faces.each do |face|
               add(entry[:portrait], face)
               break if limit?
             end
@@ -63,7 +68,7 @@ module LeotaCollection
   private
 
   def init
-    @max_pictures = 8
+    @max_pictures    = 8
     @number_pictures = -1
   end
 
@@ -74,6 +79,7 @@ module LeotaCollection
   def limit_pictures?
     @number_pictures >= limit_pictures
   end
+
   # add the front and back side to a single photo_part
   #  and add this to the picture list as an array
   #  of portrait, face, and part information
@@ -99,14 +105,12 @@ module LeotaCollection
       @front_side = {:portrait => portrait, :face => face}
     end
     @number_pictures += 1
-    puts "  parts=>#{limit} pictures=>#{limit_pictures}"
     add_to_picture_list if @front_side.present? and @back_side.present?
   end
 
   # using the list fill up the part picture_list
   #  with two face pictures per part
   def select_from_face_list(list)
-    puts "list size=>#{list.size} parts=>#{@picture_list.size} pictures=>#{@number_pictures}"
     list.each do |entry|
       break if limit?
       entry[:used] = true

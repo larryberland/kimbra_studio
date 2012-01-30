@@ -39,7 +39,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     seed_nested_attributes(attrs[:part_layout_attributes], :layout, d)
 
     my_part = Admin::Merchandise::Part.create(attrs)
-    my_part.send(:set_from_file, my_part.image_part, image_part_path.to_s)
+    my_part.image_part.store_file!(image_part_path.to_s)
     my_part
   end
 
@@ -151,8 +151,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     raise "no src_image to make custom part #{self.inspect}" if src_image.nil?
     custom_part = part_layout.draw_custom_part(part_image, src_image)
     dump_assembled(custom_part)
-    save_image!(custom_part, image)
-
+    image.store_image!(custom_part)
   end
 
   def dump_filename

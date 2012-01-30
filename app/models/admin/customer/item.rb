@@ -68,7 +68,7 @@ class Admin::Customer::Item < ActiveRecord::Base
       img      = Magick::Image.read(part.portrait.image_url).first
       @resize  = img.resize_to_fit(part.part_layout.w, part.part_layout.h)
       @resize.write(t_resize.path)
-      set_from_file(image_stock, t_resize.path)
+      image_stock.store_file!(t_resize.path)
     end
   end
 
@@ -77,7 +77,7 @@ class Admin::Customer::Item < ActiveRecord::Base
       image_item.remove!
       @resize = Magick::Image.read(image_stock_url).first if @resize.nil?
       custom_part_file = part.send(:create_custom_part, @resize)
-      set_from_file(image_item, custom_part_file.path)
+      image_item.store_file!(custom_part_file.path)
       save
     end
   end
@@ -100,8 +100,8 @@ class Admin::Customer::Item < ActiveRecord::Base
   def save_versions(f_stock, f_custom)
     raise 'missing_file with stock image' unless File.exist?(f_stock.path)
     raise 'missing file with custom image' unless File.exist?(f_custom.path)
-    set_from_file(image_stock, f_stock.path) if f_stock.present?
-    set_from_file(image_custom, f_custom.path) if f_custom.present?
+    image_stock.store_file!(f_stock.path) if f_stock.present?
+    image_custom.store_file!(f_custom.path) if f_custom.present?
     save
   end
 
