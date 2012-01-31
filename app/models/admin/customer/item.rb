@@ -60,12 +60,13 @@ class Admin::Customer::Item < ActiveRecord::Base
 
   # controller method to resize existing image
   def resize_image
+    raise 'need to move these to item_side'
     if offer and offer.portrait and offer.portrait.image
       image_stock.remove!
       t_resize = Tempfile.new(['resize', '.jpg'])
       # TODO: this needs to handle the method that
       #  was used originally by this item when creating the stock image
-      img      = Magick::Image.read(part.portrait.image_url).first
+      img      = part.portrait.send(:portrait_image)
       @resize  = img.resize_to_fit(part.part_layout.w, part.part_layout.h)
       @resize.write(t_resize.path)
       image_stock.store_file!(t_resize.path)
@@ -73,6 +74,7 @@ class Admin::Customer::Item < ActiveRecord::Base
   end
 
   def reposition_image
+    raise 'need to move these to item_side'
     if part and part.image_part.present?
       image_item.remove!
       @resize = Magick::Image.read(image_stock_url).first if @resize.nil?

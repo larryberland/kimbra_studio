@@ -54,6 +54,11 @@ class MyStudio::Portrait < ActiveRecord::Base
     dump('face', img, "portrait_#{id}_face_#{face.id}_size_#{width}_x_#{height}.jpg")
   end
 
+  # the one and only portrait image scaled to 900x900 for faces.com
+  def portrait_image
+    @portrait_image ||= image.to_image(:face)
+  end
+
   private
 
   def center_in_area(img, dest_width, dest_height)
@@ -72,11 +77,6 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   def dump_resize(img, width, height)
     dump('resize', img, "portrait_#{id}_size_#{width}_x_#{height}.jpg")
-  end
-
-
-  def portrait_image
-    @portrait_image ||= image.to_image(:face)
   end
 
   def set_description

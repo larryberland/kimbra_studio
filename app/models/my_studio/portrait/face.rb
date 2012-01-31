@@ -75,14 +75,14 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
     new_y = [face_top_left_y - dy.to_i, 0].max
 
     puts "crop #{new_x} #{new_y} #{part.item_width}x#{part.item_height}"
-    img     = Magick::Image.read(portrait.image_url(:face)).first
+    img     = portrait.portrait_image
 
     # crop the portrait for the kimbra part
     cropped = img.crop(new_x, new_y, part.item_width, part.item_height)
     dump_cropped(cropped, part.item_width, part.item_height)
 
     t_assembled = Tempfile.new(['assemble', '.jpg'])
-    image_piece = Magick::Image.read(part.image_part_url).first
+    image_piece = part.image_part.to_image
     image_piece.composite(cropped, part.item_x, part.item_y, Magick::AtopCompositeOp).write(t_assembled.path)
     dump_assembled(image_piece)
     item.image_item.store!(File.open(t_assembled.path))
@@ -182,7 +182,7 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
   private
 
   def my_portrait
-    @my_portrait ||= Magick::Image.read(portrait.image_url(:face)).first
+    @my_portrait ||= portrait.portrait_image
     raise "no portrait for face=>#{inspect}" unless @my_portrait.kind_of?(Magick::Image)
     @my_portrait
   end
