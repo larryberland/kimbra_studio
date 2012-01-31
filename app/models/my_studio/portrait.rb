@@ -10,6 +10,8 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   before_save :set_description
 
+  after_save :get_faces
+
   # span text for Portrait
   def to_image_span
     text = description.to_s
@@ -87,5 +89,14 @@ class MyStudio::Portrait < ActiveRecord::Base
     end
   end
 
+  def get_faces
+    if image_changed?
+      puts "image_changed"
+      gf = GetFace.new
+      gf.perform(self)
+    else
+      puts "image NOT Changed"
+    end
+  end
 
 end

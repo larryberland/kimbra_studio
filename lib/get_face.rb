@@ -85,7 +85,7 @@ class GetFace
           portrait.faces << face
         end
 
-        portrait.save
+        #portrait.save
 
         # center the face into our part
         #img.write("#{fname}-blurred.jpg")
