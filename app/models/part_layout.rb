@@ -22,6 +22,10 @@ class PartLayout < ActiveRecord::Base
     return layout.w, layout.h
   end
 
+  def draw_stock(portrait, face)
+
+  end
+
   def draw_custom_part(part_image, src_image)
     layout.draw_custom_part(part_image, src_image)
   end

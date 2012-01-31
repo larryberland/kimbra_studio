@@ -89,19 +89,19 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 82, y: 36, w: 153, h: 153}}
+        :part_layout: {layout: {x: 80, y: 36, w: 156, h: 156}}
         :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
       - :image_part: part1.png
         order: 1
-        :part_layout: {layout: {x: 82, y: 36, w: 153, h: 153}}
+        :part_layout: {layout: {x: 91, y: 36, w: 156, h: 156}}
         :piece_layout: {layout: {x: 85, y: 0, w: 85, h: 66}}
       - :image_part: part2.png
         order: 2
-        :part_layout: {layout: {x: 82, y: 36, w: 153, h: 153}}
+        :part_layout: {layout: {x: 104, y: 33, w: 156, h: 156}}
         :piece_layout: {layout: {x: 170, y: 0, w: 85, h: 66}}
       - :image_part: part3.png
         order: 3
-        :part_layout: {layout: {x: 82, y: 36, w: 153, h: 153}}
+        :part_layout: {layout: {x: 116, y: 27, w: 156, h: 156}}
         :piece_layout: {layout: {x: 255, y: 0, w: 85, h: 66}}
 
   - category: Photo Bracelets
@@ -126,7 +126,7 @@
         :piece_layout: {layout: {x: 170, y: 0, w: 85, h: 66}}
       - :image_part: part3.png
         order: 3
-        :part_layout: {layout: {x: 57, y: 32, w: 136, h: 136}}
+        :part_layout: {layout: {x: 57, y: 26, w: 136, h: 136}}
         :piece_layout: {layout: {x: 255, y: 0, w: 85, h: 66}}
       - :image_part: part4.png
         order: 4
@@ -142,7 +142,7 @@
         :piece_layout: {layout: {x: 510, y: 0, w: 85, h: 66}}
       - :image_part: part7.png
         order: 7
-        :part_layout: {layout: {x: 57, y: 32, w: 136, h: 136}}
+        :part_layout: {layout: {x: 45, y: 27, w: 132, h: 132}}
         :piece_layout: {layout: {x: 595, y: 0, w: 85, h: 66}}
 
   - category: Photo Bracelets

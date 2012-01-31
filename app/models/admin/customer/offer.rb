@@ -153,7 +153,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   def dump_custom
     if Rails.env.development? and image_url
-      dump('custom', Magick::Image.read(image_url).first)
+      dump('custom', image.to_image)
     end
   end
 

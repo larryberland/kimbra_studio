@@ -40,7 +40,7 @@ class MyStudio::Portrait < ActiveRecord::Base
   def resize_to_fit_and_center(dest_width, dest_height)
     raise 'forget to assign image?' unless image.present?
     # resize using aspect ratio of portrait
-    resize = Magick::Image.read(image_url).first.resize_to_fit!(dest_width, dest_height)
+    resize = portrait_image.resize_to_fit!(dest_width, dest_height)
     img = center_in_area(resize, dest_width, dest_height)
     dump_resize(img, dest_width, dest_height)
     img
@@ -74,6 +74,10 @@ class MyStudio::Portrait < ActiveRecord::Base
     dump('resize', img, "portrait_#{id}_size_#{width}_x_#{height}.jpg")
   end
 
+
+  def portrait_image
+    @portrait_image ||= image.to_image(:face)
+  end
 
   def set_description
     if description.blank?

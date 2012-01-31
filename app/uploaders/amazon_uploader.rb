@@ -20,6 +20,8 @@ class AmazonUploader < BaseUploader
   #   # do something
   # end
 
+  storage :fog  # always use fog for this
+
   # store the width and height into model
   process :store_geometry
 

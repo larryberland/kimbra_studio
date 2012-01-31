@@ -14,7 +14,7 @@ development: &non_production_settings
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
 
   :carrier_wave:
-    :storage: :fog
+    :storage: :file
   :mailer:
     :address: smtp.gmail.com  # C ror_ecommerce
     :domain: 'gmail.com'

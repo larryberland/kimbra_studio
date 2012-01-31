@@ -108,9 +108,9 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   # create a custom assembled part by centering the portrait's
   #  face information onto the kimbra part
-  def no_photo
+  def no_photo(width, height)
     no_photo_image, t_file = create_image_temp do
-      part_image
+      part_image.resize_to_fit(width, height)
     end
     t_custom               = create_custom_part(no_photo_image)
     return t_file, t_custom
@@ -142,7 +142,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   def part_image
     raise "no image_part in #{self.inspect}" if image_part.nil?
-    Magick::Image.read(image_part_url).first
+    image_part.to_image
   end
 
   # using the src_image place it onto the

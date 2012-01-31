@@ -28,22 +28,15 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                                                     :part     => my_part,
                                                     :portrait => options[:portrait],
                                                     :face     => options[:face])
-    my_item_side.generate_custom_image
+    my_item_side.draw_part
     my_item_side
   end
 
-  def generate_custom_image
-    raise "did you forget to assign a part? item_side=>#{self.inspect}" if part.nil?
-    if portrait.present?
-      f_stock, f_custom = if face.present?
-                            center_on_face
-                          else
-                            center_on_group
-                          end
-    else
-      f_stock, f_custom = part.no_photo
-    end
-    save_versions(f_stock, f_custom)
+  # draw the image using part_layout
+  def draw_part
+    image = create_stock_image(part_layout)
+    create_custom_part(image)
+    save
   end
 
   def draw_piece_with_custom(piece_image)
@@ -55,21 +48,52 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     part.draw_piece(piece_image, stock_image)
   end
 
-  # draw the image using part_layout
-  def draw_part
-
+  def create_stock_image(layout)
+    image = if face
+              draw_face(layout.w, layout.h)
+            elsif portrait
+              draw_portrait(layout.w, layout.h)
+            else
+              draw_no_photo(layout.w, layout.h)
+            end
+    image_stock.store_image!(image)
+    image
   end
 
   private
 
+  def draw_face(width, height)
+    image = face.center_in_area(width, height)
+    dump_cropped(image)
+    image
+  end
+
+  def draw_portrait(width, height)
+    image = portrait.resize_to_fit_and_center(width, height)
+    dump_cropped(image)
+    image
+  end
+
+  def draw_no_photo(width, height)
+    part.no_photo(width, height)
+  end
+
+  def piece_layout
+    part.piece_layout.layout
+  end
+
+  def part_layout
+    part.part_layout.layout
+  end
+
   # reversed name means image instead of file
   def custom_image
-    Magick::Image.read(image_custom_url).first
+    image_custom.to_image
   end
 
   # custom portrait image for this item
   def stock_image
-    Magick::Image.read(image_stock_url).first
+    image_stock.to_image
   end
 
   # return the blank part_image for this part
@@ -87,31 +111,11 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     image_custom.store_image!(custom_part)
   end
 
-  def center_on_face
-    raise 'forget to assign portrait?' unless portrait.present?
-    portrait_part_image, t_stock = create_image_temp do
-      face.center_in_size(part.part_layout.layout)
-    end
-    dump_cropped(portrait_part_image)
-
-    t_custom = create_custom_part(portrait_part_image)
-    return t_stock, t_custom
-  end
-
-  def center_on_group
-    portrait_part_image, t_stock = create_image_temp do
-      portrait.resize_to_fit_and_center(part.part_layout.w, part.part_layout.h)
-    end
-
-    t_custom = create_custom_part(portrait_part_image)
-    return t_stock, t_custom
-  end
-
   def save_versions(f_stock, f_custom)
     raise 'missing_file with stock image' unless File.exist?(f_stock.path)
     raise 'missing file with custom image' unless File.exist?(f_custom.path)
-    image_stock.store_file!(f_stock.path) if f_stock.present?
-    image_custom.store_file!(f_custom.path) if f_custom.present?
+    image_stock.store_image!(f_stock.path) if f_stock.present?
+    image_custom.store_image!(custom_imagef_custom.path) if f_custom.present?
     save
   end
 

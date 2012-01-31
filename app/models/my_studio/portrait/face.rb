@@ -183,6 +183,8 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
 
   def my_portrait
     @my_portrait ||= Magick::Image.read(portrait.image_url(:face)).first
+    raise "no portrait for face=>#{inspect}" unless @my_portrait.kind_of?(Magick::Image)
+    @my_portrait
   end
 
   # calculate face coordinates

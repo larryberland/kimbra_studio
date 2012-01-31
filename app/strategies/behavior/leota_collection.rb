@@ -45,7 +45,7 @@ module LeotaCollection
       while !limit?
         @list.each do |entry|
           entry[:used] = true
-          if entry[:portrait].faces
+          if entry[:portrait].faces and entry[:portrait].faces.size > 0
             entry[:portrait].faces.each do |face|
               add(entry[:portrait], face)
               break if limit?

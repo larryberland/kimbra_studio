@@ -20,7 +20,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   end
 
   def get_image
-    Magick::Image.read(image_url).first
+    image.to_image
   end
 
   # span text for Piece
