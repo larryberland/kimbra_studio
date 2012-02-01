@@ -23,7 +23,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def self.test_offer(options)
     options[:email] ||= Admin::Customer::Email.first
     options[:piece] ||= Admin::Merchandise::Piece.first
-    options[:portrait_parts_list]
+    options[:portrait_parts_list
+    ]
   end
 
   # portrait_parts_list
