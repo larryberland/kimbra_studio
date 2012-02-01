@@ -37,8 +37,8 @@ Category::NAMES.each do |category_type|
 end
 
 # seed studio for testing
-#require Rails.root.join('db', 'my_studio_seeds.rb').to_s
-#MyStudioSeeds.seeds(seed_path)
+require Rails.root.join('db', 'my_studio_seeds.rb').to_s
+MyStudioSeeds.seeds(seed_path)
 
 
 

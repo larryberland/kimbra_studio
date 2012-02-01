@@ -681,7 +681,7 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :part_layout: {layout: {x: 138, y: 205, w: 178, h: 178}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
   - category: Holiday
     name: Fairchild Ornament
@@ -692,7 +692,7 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :part_layout: {layout: {x: 145, y: 222, w: 168, h: 168}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
   - category: Holiday
     name: Aspen Ornament
@@ -703,7 +703,7 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :part_layout: {layout: {x: 201, y: 251, w: 90, h: 90}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
   - category: Holiday
     name: Evergreen Ornament
@@ -714,7 +714,7 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :part_layout: {layout: {x: 169, y: 309, w: 166, h: 166}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
   - category: Holiday
     name: Keepsake Year Frame
@@ -725,7 +725,7 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :part_layout: {layout: {x: 111, y: 100, w: 149, h: 196}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
   - category: Holiday
     name: Keepsake Year Frame Horizontal
@@ -736,7 +736,7 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :part_layout: {layout: {x: 127, y: 168, w: 236, h: 179}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
   - category: Holiday
     name: Awareness Ornament
@@ -747,7 +747,7 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :part_layout: {layout: {x: 88, y: 61, w: 114, h: 151}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
   - category: Holiday
     name: Memorial Ornament
@@ -758,5 +758,5 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :part_layout: {layout: {x: 100, y: 321, w: 300, h: 417}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
