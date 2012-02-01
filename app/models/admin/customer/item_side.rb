@@ -39,6 +39,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     save
   end
 
+  # draw the custom portrait image onto the Kimbra piece image
   def draw_piece_with_custom(piece_image)
     part.draw_piece(piece_image, custom_image)
   end

@@ -1,6 +1,8 @@
 class ImageLayout < ActiveRecord::Base
   attr_accessible :x, :y, :w, :h
 
+  attr_accessor :draw_piece_size
+
   belongs_to :layout, :polymorphic => true
 
   before_validation :set_previous
@@ -23,7 +25,9 @@ class ImageLayout < ActiveRecord::Base
   end
 
   def draw_piece(dest_image, src_image)
-    dest_image.composite(rotate(resize(src_image)), x, y, Magick::SrcOverCompositeOp)
+    image = rotate(resize(src_image))
+    @draw_piece_size = {:w => image.columns, :h => image.rows}
+    dest_image.composite(image, x, y, Magick::SrcOverCompositeOp)
   end
 
   def draw_custom_part(part_image, src_image, operator=Magick::DstOverCompositeOp)

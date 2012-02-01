@@ -102,6 +102,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
   end
 
+  # draw each part in a horizontal line
   def draw_by_order(front_side=true)
     w = []
     h = []
@@ -141,6 +142,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def create_custom_image
+    puts "Offer=>#{piece.name}"
     t_front = send("draw_by_#{custom_layout}", front=true)
     image.store_file!(t_front.path)
     if baby_got_back

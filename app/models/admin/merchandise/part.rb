@@ -81,7 +81,10 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   # draw the custom portrait image onto the Kimbra piece image
   def draw_piece(piece_image, portrait_item_image)
-    piece_layout.draw_piece(piece_image, portrait_item_image)
+    puts "custom_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
+    i = piece_layout.draw_piece(piece_image, portrait_item_image)
+    puts "draw_piece=>#{piece_layout.layout.draw_piece_size.inspect}"
+    i
   end
 
   # create a custom assembled image by resize on portrait
@@ -106,14 +109,11 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     return t_file, t_custom
   end
 
-  # create a custom assembled part by centering the portrait's
-  #  face information onto the kimbra part
+  # create a custom assembled part that does not need a photo
   def no_photo(width, height)
-    no_photo_image, t_file = create_image_temp do
-      part_image.resize_to_fit(width, height)
-    end
-    t_custom               = create_custom_part(no_photo_image)
-    return t_file, t_custom
+    no_photo_image = part_image.resize_to_fit(width, height)
+    create_custom_part(no_photo_image)
+    image.to_image
   end
 
   def to_image_span
@@ -149,9 +149,9 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   #  kimbra part
   def create_custom_part(src_image)
     raise "no src_image to make custom part #{self.inspect}" if src_image.nil?
-    custom_part = part_layout.draw_custom_part(part_image, src_image)
-    dump_assembled(custom_part)
-    image.store_image!(custom_part)
+    @custom_part = part_layout.draw_custom_part(part_image, src_image)
+    dump_assembled(@custom_part)
+    image.store_image!(@custom_part)
   end
 
   def dump_filename
