@@ -18,7 +18,7 @@ class Admin::Customer::Email < ActiveRecord::Base
     categories << 'Holiday'
     # Photo Bracelets
     # Photo Necklaces
-    piece_strategy_list = PieceStrategy.new.pick_category(categories[0]) # testing
+    piece_strategy_list = PieceStrategy.new.pick_category(categories[3]) # testing
     #piece_strategy_list = PieceStrategy.new.pick_pieces
 
     # setup portrait pick_list strategy

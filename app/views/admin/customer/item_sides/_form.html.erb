@@ -1,33 +1,45 @@
 <%= form_for(@admin_customer_item_side) do |f| %>
-  <% if @admin_customer_item_side.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@admin_customer_item_side.errors.count, "error") %> prohibited this admin_customer_item_side from being saved:</h2>
+    <% if @admin_customer_item_side.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@admin_customer_item_side.errors.count, "error") %> prohibited this admin_customer_item_side
+            from being saved:</h2>
 
-      <ul>
-      <% @admin_customer_item_side.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @admin_customer_item_side.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :item %>
+      <br/>
+      <%= f.text_field :item %>
     </div>
-  <% end %>
+    <div class="field">
+      <%= f.label :part %>
+      <br/>
+      <%= f.text_field :part %>
+    </div>
 
-  <div class="field">
-    <%= f.label :item %><br />
-    <%= f.text_field :item %>
-  </div>
-  <div class="field">
-    <%= f.label :part %><br />
-    <%= f.text_field :part %>
-  </div>
-  <div class="field">
-    <%= f.label :image_stock %><br />
-    <%= f.text_field :image_stock %>
-  </div>
-  <div class="field">
-    <%= f.label :image_custom %><br />
-    <%= f.text_field :image_custom %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :image_custom, 'Custom Kimbra Part:' %>
+      <%= f.file_field :image_custom %><br/>
+      <%= f.label :remote_image_custom_url, 'or Part URL' %>
+      <%= f.text_field :remote_image_custom_url %>
+    </div>
+    <%= f.hidden_field :image_custom_cache %>
+
+    <div class="field">
+      <%= f.label :image_stock, 'Portrait:' %>
+      <%= f.file_field :image_stock %><br/>
+      <%= f.label :remote_image_stock_url, 'or Portrait URL' %>
+      <%= f.text_field :remote_image_stock_url %>
+    </div>
+    <%= f.hidden_field :image_stock_cache %>
+
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

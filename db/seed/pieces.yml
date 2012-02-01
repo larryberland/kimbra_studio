@@ -334,9 +334,27 @@
   - category: Photo Rings
     name: Emma Ring
     price: 98.00
+    short_description: "Oval measuring: 1\"h x 3/4\"w. Available in sizes 6-9. Solid Sterling Silver. Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 30, y: 25, w: 213, h: 297}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Rings
     name: Cadence Ring
     price: 98.00
+    short_description: "Photo measuring: 9/16\"w x 3/4\"h. Available in sizes 6-8. Solid Sterling Silver. Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Charms
     name: Evalina Charm
     price: 58.00

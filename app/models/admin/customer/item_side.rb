@@ -61,6 +61,12 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     image
   end
 
+  def to_image_span
+    text = part.to_image_span
+    text = "Item #{id}" if text.blank?
+    text
+  end
+
   private
 
   def draw_face(width, height)
