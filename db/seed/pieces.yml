@@ -193,40 +193,144 @@
   - category: Photo Necklaces
     name: Madelyn Necklace
     price: 38.00
-  - category: Photo Necklaces
-    name: Charm Necklace
-    price: 38.00
+    short_description: "Solid pewter photo charm measuring 1\" square. Available on either an 18\" 2 strand ball chain or black ribbon and 3 cord chain."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 107, y: 152, w: 277, h: 263}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Necklaces
     name: The Embrace Necklace
     price: 120.00
+    short_description: "Photo measuring: 9/16\"w x 3/4\"h. The Embrace Necklace is made up of a Taneka photo charm, a hammered ring, the \"Mom\" charm, an angel wing charm, a crystal bead charm. All charms are solid sterling silver. Completely waterproof."
+    description_markup: "Photo measuring: 9/16\"w x 3/4\"h. The Embrace Necklace is made up of a Taneka photo charm, a hammered ring, the \"Mom\" charm, an angel wing charm, a crystal bead charm, and a 24\" solid sterling silver link chain. All charms are solid sterling silver. Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: taneka_part0.png
+        order: 0
+        :part_layout: {layout: {x: 141, y: 116, w: 233, h: 355}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
 
   - category: Photo Necklaces
     name: Josephine Pendant
     price: 64.00
+    short_description: "Measuring: 1-1/4\"w x 3/4\"h. Solid Sterling Silver. Completely waterproof."
+    description_markup: "Measuring: 1-1/4\"w x 3/4\"h. Solid Sterling Silver. Completely waterproof. Choose a necklace style from the menu below. All chains are 18\" in length except for the $42 link chain which is 24\". Please view chain choices from photo below and not from the link called chain style examples."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 57, y: 113, w: 386, h: 274}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Necklaces
     name: Chloe Pendant
     price: 80.00
+    short_description: "Photo measuring: 1 1/4\"w x 7/8\"h. White Bronze. Completely waterproof."
+    description_markup: "Photo measuring: 1 1/4\"w x 7/8\"h. White Bronze. Completely waterproof. Choose a necklace style from the menu below. All chains are 18\" in length except for the $42 link chain which is 24\". Please view chain choices from photo below and not from the link called chain style examples."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 92, y: 130, w: 206, h: 148}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Necklaces
     name: Linda Pendant
     price: 60.00
+    short_description: "Photo measuring: 13/16\"w x 1-1/8\"h. Solid Sterling Silver. Completely waterproof."
+    description_markup:
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 125, y: 102, w: 242, h: 368}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Necklaces
     name: Roseanne Pendant
     price: 32.00
+    short_description: "Photo measuring: 1-1/8\"w x 13/16\"h. Stainless Steel. Completely waterproof."
+    description_markup:
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 104, y: 110, w: 300, h: 203}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
+
   - category: Photo Necklaces
     name: Denise Pendant
     price: 68.00
+    short_description: "Photo measuring: 9/16\"w x 3/4\"h. Solid Sterling Silver. Completely waterproof. "
+    description_markup:
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 190, y: 160, w: 125, h: 195}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Necklaces
     name: My Love Necklace
     price: 78.00
+    short_description: "Measuring: 9/16\"w x 3/4\"h. Includes My Love charm and 18\" small bead chain. Solid Sterling Silver. Completely waterproof. "
+    description_markup:
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 142, y: 117, w: 231, h: 351}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Necklaces
     name: Bailey Necklace
     price: 28.00
+    short_description: "Photo measuring: 1\"w x 1-7/8\"h. Stainless 27\" ball chain included. Black silencer included. Completely waterproof."
+    description_markup:
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 139, y: 90, w: 211, h: 390}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Necklaces
     name: Awareness Necklace
     price: 65.00
+    short_description: "Honor a survivor, a loved one who has passed on, or show your support for breast cancer with this stunning necklace. It features a Kayda charm measuring 5/8\" square and a 1/2\" x 1/4\" sterling silver and pink Swarovksi crystal awareness ribbon charm."
+    description_markup:
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 107, y: 151, w: 280, h: 264}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Necklaces
     name: The Sophie
     price: 42.00
+    short_description: "Photo measuring: 5/16\"w x 3/8\"h. Solid Sterling Silver. Completely waterproof."
+    description_markup:
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 141, y: 124, w: 215, h: 240}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Photo Rings
     name: Emma Ring
     price: 98.00
@@ -296,7 +400,8 @@
       - :image_part: shelise_part0.png
         order: 0
         :part_layout: {layout: {x: 107, y: 164, w: 320, h: 320}}
-        :piece_layout: {layout: {x: 107, y: 164, w: 320, h: 320}}
+        :part_layout: {layout: {x: 107, y: 164, w: 320, h: 320}}
+
 
   - category: Photo Charms
     name: Tucker

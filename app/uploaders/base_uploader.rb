@@ -24,22 +24,14 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def to_image(version=nil)
-    #puts "cp=>#{storage.path}"
-    if file.kind_of?(CarrierWave::SanitizedFile)
-      puts "using storage file"
-      Magick::Image.read(current_path).first
-    else
-      puts "using storage fog"
-      p = model.send("#{mounted_as}_url", version)
-      Magick::Image.read(p).first
-    end
-
-    #image = if storage.kind_of?(CarrierWave::Storage::File)
-    #else
-    #  s = send("#{mounted_as}_url")
-    #  Magick::Image.read(storage.file)
-    #end
-    #image.first
+    image = if file.kind_of?(CarrierWave::SanitizedFile)
+              puts "using storage file"
+              Magick::Image.read(current_path)
+            else
+              p = model.send("#{mounted_as}_url", version)
+              Magick::Image.read(p)
+            end
+    image.first
   end
 
 end

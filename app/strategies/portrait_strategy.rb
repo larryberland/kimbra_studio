@@ -1,4 +1,3 @@
-puts "pulling in #{__FILE__}"
 require 'behavior/leota_collection'
 class PortraitStrategy
 

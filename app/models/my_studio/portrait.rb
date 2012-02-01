@@ -91,11 +91,8 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   def get_faces
     if image_changed?
-      puts "image_changed"
       gf = GetFace.new
       gf.perform(self)
-    else
-      puts "image NOT Changed"
     end
   end
 

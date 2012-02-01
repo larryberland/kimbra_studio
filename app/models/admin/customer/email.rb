@@ -11,22 +11,20 @@ class Admin::Customer::Email < ActiveRecord::Base
   def self.generate(studio_session)
     email                   = Admin::Customer::Email.new
     email.my_studio_session = studio_session
-    piece_pick_list         = [0]
+
+    # setup merchandise piece pick_list strategy
+    # Categories
+    categories = %w(Necklaces Bracelets Charms Rings ).collect {|e| "Photo #{e}"}
+    categories << 'Holiday'
+    # Photo Bracelets
+    # Photo Necklaces
+    piece_strategy_list = PieceStrategy.new.pick_category(categories[0]) # testing
+    #piece_strategy_list = PieceStrategy.new.pick_pieces
 
     # setup portrait pick_list strategy
     portrait_strategy_list  = PortraitStrategy.new(studio_session)
 
-    # generate the merchandise piece list
-    number_offers           = [studio_session.portraits.size, 4].min
-
-    # create a Hash of each piece and the number of photo_parts needed
-    piece_list              = (0..number_offers).collect do |index|
-      piece = Admin::Merchandise::Piece.pick(piece_pick_list).first
-      piece_pick_list << piece.id
-      piece
-    end
-
-    order_by_number_of_parts = piece_list.sort_by { |piece| piece.photo_parts.size.to_i }.reverse
+    order_by_number_of_parts = piece_strategy_list.sort_by { |piece| piece.photo_parts.size.to_i }.reverse
 
     offers = order_by_number_of_parts.collect do |piece|
       strategy_picture_list = portrait_strategy_list.portraits_by_parts(piece)

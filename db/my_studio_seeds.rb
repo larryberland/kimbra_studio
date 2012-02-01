@@ -6,7 +6,7 @@ class MyStudioSeeds
     file_to_load = seed_path.join('studios.yml').to_s
     image_path   = Rails.root.join('public', 'studios')
     studios      = YAML::load(File.open(file_to_load))[:studios]
-    get_face     = GetFace.new
+    #get_face     = GetFace.new
 
     studios.each do |my_studio_attrs|
 
@@ -39,7 +39,7 @@ class MyStudioSeeds
                 portrait = MyStudio::Portrait.create
                 portrait.image.store!(File.open(p.to_s))
                 portrait.save
-                get_face.perform(portrait) # process for faces
+                #get_face.perform(portrait) # process for faces
                 portrait
               end
             end
