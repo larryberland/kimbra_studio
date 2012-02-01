@@ -15,9 +15,9 @@
 
   <tr>
     <td><b>Image stock:</b></td>
-    <td><%= image_tag item_side.image_stock_url.to_s %></td>
+    <td><%= image_tag(item_side.image_stock_url.to_s, :title => item_side.image_title(item_side.image_stock)) %></td>
     <td><b>Image custom:</b></td>
-    <td><%= image_tag item_side.image_custom_url.to_s %></td>
+    <td><%= image_tag(item_side.image_custom_url.to_s, :title => item_side.image_title(item_side.image_custom)) %></td>
   </tr>
 
 </table>

@@ -3,6 +3,9 @@ module ApplicationHelper
     I18n.t(:company)
   end
 
+  def image_tag_title(image_url)
+
+  end
   # show.html
   def image_tag_thumb(model_with_carrier_wave_image)
     url = model_with_carrier_wave_image.image_url(:thumb).to_s rescue ''

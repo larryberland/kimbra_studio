@@ -358,27 +358,91 @@
   - category: Photo Charms
     name: Evalina Charm
     price: 58.00
+    short_description: "New! Our sweet 1/2\" round cz Evalina charm."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 63, y: 91, w: 165, h: 165}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 100, h: 100}}
   - category: Photo Charms
     name: Annika
     price: 60.00
+    short_description: "Measuring: 1-1/16\" round. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 46, y: 57, w: 180, h: 180}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Kayda
     price: 60.00
+    short_description: "Measuring: 5/8\" square. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 126, y: 178, w: 434, h: 424}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Harper
     price: 64.00
+    short_description: "Measuring: 7/8\"w x 5/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 17, y: 42, w: 168, h: 115}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: 2-Sided Harper
     price: 80.00
+    short_description: "Measuring: 7/8\"w x 13/16\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 17, y: 42, w: 168, h: 115}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Sela
     price: 64.00
+    short_description: "Measuring: 5/8\"w x 7/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 84, y: 71, w: 95, h: 136}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: 2-Sided Sela
     price: 80.00
+    short_description: "Measuring: 13/16\"w x 7/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 84, y: 71, w: 95, h: 136}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Margaret
     price: 64.00
+    short_description: "Photo Measuring: 13/16\"w x 7/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 63, y: 59, w: 174, h: 194}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
 
   - category: Photo Charms
     name: Nicole
@@ -387,8 +451,8 @@
     :parts:
       - :image_part: nicole_part0.png
         order: 0
-        :part_layout: {layout: {x: 100, y: 95, w: 110, h: 145}}
-        :piece_layout: {layout: {x: 100, y: 95, w: 110, h: 145}}
+        :part_layout: {layout: {x: 100, y: 95, w: 113, h: 142}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 100, h: 100}}
 
   - category: Photo Charms
     name: Karrie
@@ -398,7 +462,7 @@
       - :image_part: karrie_part0.png
         order: 0
         :part_layout: {layout: {x: 110, y: 139, w: 290, h: 220}}
-        :piece_layout: {layout: {x: 110, y: 139, w: 290, h: 220}}
+        :piece_layout: {layout: {x: 53, y: 68, w: 100, h: 75}}
 
   - category: Photo Charms
     name: Taneka
@@ -420,83 +484,276 @@
         :part_layout: {layout: {x: 107, y: 164, w: 320, h: 320}}
         :part_layout: {layout: {x: 107, y: 164, w: 320, h: 320}}
 
-
   - category: Photo Charms
     name: Tucker
     price: 46.00
+    short_description: "Measuring: 3/8\"w x 7/16\"h. Solid Sterling Silver (includes jump ring). Completely waterproof. A Kimbra Studios' exclusive copyrighted design."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 141, y: 123, w: 215, h: 241}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Rachel
     short_description: "Photo measuring: 7/16\" square. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    price: 46.00
+    :parts:
+      - :image_part: rachel_part0.png
+        order: 0
+        :part_layout: {layout: {x: 125, y: 143, w: 260, h: 260}}
+        :piece_layout: {layout: {x: 53, y: 64, w: 96, h: 96}}
+
+  - category: Photo Charms
+    name: 2-Sided Rachel
+    price: 70.00
+    short_description: "Photo measuring: 7/16\" square. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
     :parts:
       - :image_part: rachel_part0.png
         order: 0
         :part_layout: {layout: {x: 125, y: 143, w: 260, h: 260}}
         :piece_layout: {layout: {x: 125, y: 143, w: 260, h: 260}}
-
-    price: 46.00
-  - category: Photo Charms
-    name: 2-Sided Rachel
-    price: 70.00
   - category: Photo Charms
     name: Sadie
     price: 64.00
+    short_description: "Measuring: 5/8\"w x 1-1/4\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Baby Foot Bead Charm
     price: 32.00
+    short_description: "Photo measuring: 5/16\"w x 3/8\"h. Solid Sterling Silver. Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 75, y: 102, w: 38, h: 49}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Paw Print Bead Charm
     price: 32.00
+    short_description: "Photo measuring: 5/16\"w x 3/8\"h. Solid Sterling Silver. Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 112, y: 157, w: 56, h: 67}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Wendy Bead Charm
     price: 32.00
+    short_description: "Photo measuring: 5/16\"w x 3/8\"h. Solid Sterling Silver. Completely waterproof."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 206, y: 280, w: 96, h: 128}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Camera Charm
     price: 24.00
+    short_description: "Solid Sterling Silver"
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Faith Charm
     price: 18.00
+    short_description: "Solid Sterling Silver Occasion Charm \"Faith\""
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Peace Sign Charm
     price: 18.00
+    short_description: "Solid Sterling Silver Peace Sign. 5/8\" round"
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Angel Wing Charm
     price: 18.00
+    short_description: "Solid Sterling Silver"
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Mom Charm
     price: 18.00
+    short_description: "Solid Sterling Silver"
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Cut Out Heart Charm
     price: 18.00
+    short_description: "Solid Sterling Silver Occasion Charm - cut out heart."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Plain Heart Charm
     price: 28.00
+    short_description: "Measuring: 5/8\"w. Solid Sterling Silver."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Filigree Heart Charm
     price: 18.00
+    short_description: "Solid Sterling Silver"
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Photo Charms
     name: Fleur de lis Charm
     price: 18.00
+    short_description: "Solid Sterling Silver"
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+
   - category: Holiday
     name: Joy Love Peace Ornament
     price: 42.00
+    short_description: "Solid pewter, photo measuring 2\" round, comes with gray satin ribbon and 2011 oval year tag. The back of the ornament says Joy Love Peace ©KIMBRA. MADE IN THE USA. Copyrighted design of Kimbra Studios."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Holiday
     name: Fairchild Ornament
     price: 42.00
+    short_description: "Solid pewter, photo measuring 2\" round, comes with gray satin ribbon and 2011 oval year tag. The back of the ornament says Joy Love Peace ©KIMBRA. MADE IN THE USA. Copyrighted design of Kimbra Studios."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Holiday
     name: Aspen Ornament
     price: 28.00
+    short_description: "Photo measuring: 7/8\" round. Pewter ornament. Gray satin ribbon included. Completely waterproof. This beautiful design is exclusively copyrighted by Kimbra Studios."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Holiday
     name: Evergreen Ornament
     price: 32.00
+    short_description: "Photo measuring: 1\" round. Pewter ornament. Completely waterproof. Gray satin ribbon included. MADE IN USA"
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Holiday
     name: Keepsake Year Frame
     price: 32.00
+    short_description: "Photo measuring: 1-1/4\"w x 1-3/4\"h. Pewter ornament. Completely waterproof. Gray satin ribbon included."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Holiday
     name: Keepsake Year Frame Horizontal
     price: 32.00
+    short_description: "Photo measuring: 1-3/4\"w x 1-1/4\"h. Pewter ornament. Completely waterproof. Gray satin ribbon included."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Holiday
     name: Awareness Ornament
     price: 40.00
+    short_description: "Honor a Breast Cancer Survivor or memorialize a loved one with this beautiful Pewter Ornament. Photo measures 1-1/4\" w x 1-3/4\" h. Includes pink ribbon and and 1/2\" x 1/4\" sterling silver and pink Swarovski crystal awareness ribbon charm."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
   - category: Holiday
     name: Memorial Ornament
     price: 32.00
+    short_description: "Photo measuring: 1-1/2\"w X 2-1/4\"h. Solid Pewter ornament. Completely waterproof. Gray satin ribbon included. MADE IN USA."
+    sku:
+    custom_layout: 'order'
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}

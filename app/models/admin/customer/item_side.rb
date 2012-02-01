@@ -67,6 +67,11 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     text
   end
 
+  def image_title(attr)
+    img = attr.to_image
+    "size #{img.columns} x #{img.rows}"
+  end
+
   private
 
   def draw_face(width, height)

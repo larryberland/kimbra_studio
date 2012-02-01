@@ -20,6 +20,12 @@ class Admin::Customer::Offer < ActiveRecord::Base
   before_create :piece_create_default
   before_save :piece_default
 
+  def self.test_offer(options)
+    options[:email] ||= Admin::Customer::Email.first
+    options[:piece] ||= Admin::Merchandise::Piece.first
+    options[:portrait_parts_list]
+  end
+
   # portrait_parts_list
   #   array => {:photo_parts => merchandise_part to use,
   #             :portrait => portrait to use for this part,
