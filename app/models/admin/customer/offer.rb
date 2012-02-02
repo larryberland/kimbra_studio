@@ -92,6 +92,11 @@ class Admin::Customer::Offer < ActiveRecord::Base
     image_back
   end
 
+  def on_layout_change
+    # need to redraw the offer image
+    create_custom_image
+  end
+
   private
 
   def piece_create_default

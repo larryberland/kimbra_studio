@@ -14,11 +14,13 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   belongs_to :face, :class_name => 'MyStudio::Portrait::Face'
 
   has_one :item, :class_name => 'Admin::Customer::Item' # TODO: do we destroy Offer::Item on this?
+  has_one :item_side, :class_name => 'Admin::Customer::ItemSide' # TODO: do we destroy Offer::Item on this?
 
   has_one :part_layout
   has_one :piece_layout
   accepts_nested_attributes_for :part_layout, :piece_layout
 
+  after_update :reposition
 
   def self.seed_nested_attributes(info, attr, default)
     key                               = info.key?(attr) ? attr : info.key?(attr.to_s) ? attr.to_s : attr
@@ -53,17 +55,17 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   # create a clone of merchandise_part we can use for customisation
   def self.create_clone(merchandise_part, portrait_options=nil)
-    item_part          = merchandise_part.clone
-    item_part.piece    = merchandise_part.piece
+    item_part       = merchandise_part.clone
+    item_part.piece = merchandise_part.piece
     item_part.save
     if portrait_options
       item_part.portrait = portrait_options[:portrait]
       item_part.face     = portrait_options[:face]
-      f_stock, f_custom = if portrait_options[:face]
-                            item_part.center_on_face(portrait_options[:face])
-                          else
-                            item_part.group_shot
-                          end
+      f_stock, f_custom  = if portrait_options[:face]
+                             item_part.center_on_face(portrait_options[:face])
+                           else
+                             item_part.group_shot
+                           end
 
     end
     item_part.copy_image(merchandise_part)
@@ -82,9 +84,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   # draw the custom portrait image onto the Kimbra piece image
   def draw_piece(piece_image, portrait_item_image)
     puts "custom_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
-    i = piece_layout.draw_piece(piece_image, portrait_item_image)
-    puts "draw_piece=>#{piece_layout.layout.draw_piece_size.inspect}"
-    i
+    piece_layout.draw_piece(piece_image, portrait_item_image)
   end
 
   # create a custom assembled image by resize on portrait
@@ -166,4 +166,16 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     dump('assembled', img)
   end
 
+  def reposition
+    if piece_layout.size?
+      puts "#{self} #{id} piece size changed"
+    elsif piece_layout.position?
+      puts "#{self} #{id} piece position changed"
+    end
+    if part_layout.size?
+      puts "#{self} #{id} part size changed"
+    elsif part_layout.position?
+      puts "#{self} #{id} part position changed"
+    end
+  end
 end

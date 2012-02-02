@@ -5,8 +5,10 @@ class ImageLayout < ActiveRecord::Base
 
   belongs_to :layout, :polymorphic => true
 
-  before_validation :set_previous
   after_save :set_size
+
+  before_update :before_reposition
+  after_update :reposition
 
   def size
     @size ||= {:w => w, :h => h}
@@ -25,7 +27,7 @@ class ImageLayout < ActiveRecord::Base
   end
 
   def draw_piece(dest_image, src_image)
-    image = rotate(resize(src_image))
+    image            = rotate(resize(src_image))
     @draw_piece_size = {:w => image.columns, :h => image.rows}
     dest_image.composite(image, x, y, Magick::SrcOverCompositeOp)
   end
@@ -34,14 +36,31 @@ class ImageLayout < ActiveRecord::Base
     part_image.composite(src_image, x, y, operator)
   end
 
-  private
-
-  def set_previous
-    @previous = {:x => x, :y => y, :w => w, :h => h}
+  def size?
+    @size_changed
   end
+
+  def position?
+    @position_changed
+  end
+
+  private
 
   def set_size
     @size = nil
     size
+  end
+
+  def before_reposition
+    @position_changed = (x_changed? or y_changed?)
+    @size_changed = (w_changed? or h_changed?)
+  end
+
+  def reposition
+    if size?
+      layout.part.item_side.on_layout_change if layout.part.item_side
+    elsif position?
+      layout.part.item_side.on_layout_change if layout.part.item_side
+    end
   end
 end

@@ -226,7 +226,7 @@
       - :image_part: part0.png
         order: 0
         :part_layout: {layout: {x: 57, y: 113, w: 386, h: 274}}
-        :piece_layout: {layout: {x: 0, y: 0, w: 85, h: 66}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Necklaces
     name: Chloe Pendant

@@ -17,6 +17,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
   belongs_to :face, :class_name => 'MyStudio::Portrait::Face'
 
+  after_update :reposition
+
   # assemble a part side for this item and portrait
   # options => {:photo_part,
   #             :portrait,
@@ -28,14 +30,21 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                                                     :part     => my_part,
                                                     :portrait => options[:portrait],
                                                     :face     => options[:face])
-    my_item_side.draw_part
+    my_item_side.create_side
     my_item_side
   end
 
-  # draw the image using part_layout
-  def draw_part
-    image = create_stock_image(part_layout)
-    create_custom_part(image)
+  def on_layout_change
+    # redraw the item_side
+    create_side
+    if item.offer.present?
+      item.offer.on_layout_change
+    end
+  end
+  # create the image_stock from [portrait | face | part]
+  # create the image_custom from stock and merchandise_part
+  def create_side
+    create_image_custom(size_image_stock(part_layout))
     save
   end
 
@@ -49,7 +58,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     part.draw_piece(piece_image, stock_image)
   end
 
-  def create_stock_image(layout)
+  def size_image_stock(layout)
     image = if face
               draw_face(layout.w, layout.h)
             elsif portrait
@@ -116,7 +125,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   # using the src_image place it onto the
   #  kimbra part
-  def create_custom_part(src_image)
+  def create_image_custom(src_image)
     raise "no src_image to make custom part #{self.inspect}" if src_image.nil?
     custom_part = part.draw_part(src_image)
     dump_custom(custom_part)
@@ -143,4 +152,26 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     dump('custom', img)
   end
 
+  def reposition
+
+    if part.piece_layout.size?
+      puts "#{self} #{id} piece size changed"
+      #@item.resize_image
+      #@item.reposition_image
+    elsif part.piece_layout.position?
+      puts "#{self} #{id} piece position changed"
+      #@item.reposition_image
+    end
+
+    if part.part_layout.size?
+      puts "#{self} #{id} part size changed"
+
+      #@item.resize_image
+      #@item.reposition_image
+    elsif part.part_layout.position?
+      puts "#{self} #{id} part position changed"
+      #@item.reposition_image
+    end
+
+  end
 end

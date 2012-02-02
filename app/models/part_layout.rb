@@ -6,6 +6,8 @@ class PartLayout < ActiveRecord::Base
   has_one :layout, :class_name => 'ImageLayout', :as => :layout
   accepts_nested_attributes_for :layout
 
+  after_update :reposition
+
   def x
     layout.x
   end
@@ -30,4 +32,21 @@ class PartLayout < ActiveRecord::Base
     layout.draw_custom_part(part_image, src_image)
   end
 
+  def size?
+    layout.size?
+  end
+
+  def position?
+    layout.position?
+  end
+
+  private
+
+  def reposition
+    if size?
+      puts "#{self} #{id} size changed"
+    elsif position?
+      puts "#{self} #{id} position changed"
+    end
+  end
 end
