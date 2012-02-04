@@ -1,0 +1,29 @@
+<%= form_for(@showroom) do |f| %>
+  <% if @showroom.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@showroom.errors.count, "error") %> prohibited this minisite_showroom from being saved:</h2>
+
+      <ul>
+      <% @showroom.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :offer %><br />
+    <%= f.text_field :offer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :customer %><br />
+    <%= f.text_field :customer_id %>
+  </div>
+  <div class="field">
+    <%= f.label :studio %><br />
+    <%= f.text_field :studio_id %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

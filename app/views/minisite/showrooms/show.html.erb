@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Offer:</b>
+  <%= @showroom.offer.name %>
+</p>
+
+<p>
+  <b>Customer:</b>
+  <%= @showroom.customer.name %>
+</p>
+
+<p>
+  <b>Studio:</b>
+  <%= @showroom.studio.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_minisite_showroom_path(@showroom) %> |
+<%= link_to 'Back', minisite_showrooms_path %>

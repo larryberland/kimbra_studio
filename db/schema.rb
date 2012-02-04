@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120126193839) do
+ActiveRecord::Schema.define(:version => 20120204193650) do
 
   create_table "admin_customer_emails", :force => true do |t|
     t.integer  "my_studio_session_id"
@@ -135,6 +135,18 @@ ActiveRecord::Schema.define(:version => 20120126193839) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "minisite_showrooms", :force => true do |t|
+    t.integer  "offer_id"
+    t.integer  "customer_id"
+    t.integer  "studio_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "minisite_showrooms", ["customer_id"], :name => "index_minisite_showrooms_on_customer_id"
+  add_index "minisite_showrooms", ["offer_id"], :name => "index_minisite_showrooms_on_offer_id"
+  add_index "minisite_showrooms", ["studio_id"], :name => "index_minisite_showrooms_on_studio_id"
 
   create_table "my_studio_clients", :force => true do |t|
     t.string   "name"

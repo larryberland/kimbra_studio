@@ -1,5 +1,10 @@
 KimbraStudio::Application.routes.draw do
 
+  namespace :minisite do
+    resources :showrooms do
+      get :show, :path => 'customer/:id/studio/:id(.:format)'
+    end
+  end
 
   namespace :admin do  namespace :customer do resources :item_sides end end
 
