@@ -9,7 +9,7 @@ module LeotaCollection
 
     #dump_list # debug
 
-              # four parts needed
+    # four parts needed
     raise "portrait_strategy config issue leota_collection max_parts expected 4 got #{@max_parts}" if @max_parts != 4
 
     # look for 8, 6, 4 or 2 faces that have not been used before
@@ -44,7 +44,6 @@ module LeotaCollection
       # need to fill up the pictures regardless of used or not
       while !limit?
         @list.each do |entry|
-          entry[:used] = true
           if entry[:portrait].faces and entry[:portrait].faces.size > 0
             entry[:portrait].faces.each do |face|
               add(entry[:portrait], face)
@@ -113,7 +112,6 @@ module LeotaCollection
   def select_from_face_list(list)
     list.each do |entry|
       break if limit?
-      entry[:used] = true
       entry[:portrait].faces.each do |face|
         add(entry[:portrait], face)
         break if limit?

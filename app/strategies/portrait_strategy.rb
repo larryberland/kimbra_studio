@@ -18,7 +18,6 @@ class PortraitStrategy
     else
       default_strategy
     end
-
     @picture_list
   end
 
@@ -52,8 +51,7 @@ class PortraitStrategy
     unused_list =  match_faces_to_parts(limit)
     entry = unused_list.first if unused_list.present?
     if entry
-      entry[:used] = true
-      add_faces(entry[:portrait])
+      add_faces(entry)
     else
       # going to have to use more than one portrait
 
@@ -61,16 +59,14 @@ class PortraitStrategy
 
       unused_list = match_any_face
       unused_list.each do |entry|
-        entry[:used] = true
-        add_faces(entry[:portrait])
+        add_faces(entry)
         break if limit?
       end if unused_list.present?
 
       unless limit?
         unused_list = match_no_faces
         unused_list.each do |entry|
-          entry[:used] = true
-          add_portrait(entry[:portrait])
+          add_portrait(entry)
           break if limit?
         end if unused_list.present?
       end
@@ -78,9 +74,9 @@ class PortraitStrategy
       unless limit?
         previously_used.each do |entry|
           if (entry[:portrait].faces.size.to_i > 0)
-            add_faces(entry[:portrait])
+            add_faces(entry)
           else
-            add_portrait(entry[:portrait])
+            add_portrait(entry)
           end
           break if limit?
         end
@@ -101,17 +97,19 @@ class PortraitStrategy
     @picture_list.size >= limit
   end
 
-  def add_portrait(portrait)
-    @picture_list << to_picture_list(portrait)
+  def add_portrait(entry)
+    entry[:used] = true if @max_parts < 2
+    @picture_list << to_picture_list(entry[:portrait])
   end
 
   def add_face(portrait, face)
     @picture_list << to_picture_list(portrait, face)
   end
 
-  def add_faces(portrait)
-    portrait.faces.each do |face|
-      add_face(portrait, face)
+  def add_faces(entry)
+    entry[:used] = true if @max_parts < 2
+    entry[:portrait].faces.each do |face|
+      add_face(entry[:portrait], face)
       break if limit?
     end
   end
