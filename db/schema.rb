@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20120204193650) do
     t.integer  "part_id"
     t.integer  "portrait_id"
     t.integer  "face_id"
+    t.datetime "changed_layout_at"
     t.string   "image_stock"
     t.string   "image_custom"
     t.datetime "created_at"

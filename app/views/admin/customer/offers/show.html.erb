@@ -20,7 +20,7 @@
   <% else %>
       <p>
         <b>Custom Piece</b>
-        <%= image_tag @admin_customer_offer.image_url.to_s %>
+        <%= image_tag @admin_customer_offer.image_url.to_s, :title => "size #{@admin_customer_offer.width}x#{@admin_customer_offer.height}" %>
       </p>
   <% end %>
 

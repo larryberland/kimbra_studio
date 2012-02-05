@@ -2,14 +2,18 @@ class Admin::Customer::Item < ActiveRecord::Base
 
   attr_accessible :width, :height, :photo, :order,
                   :part, :part_attributes,
-                  :offer, :offer_attributes
+                  :offer, :offer_attributes,
+                  :item_sides, :item_sides_attributes
 
 
   belongs_to :offer, :class_name => 'Admin::Customer::Offer'  # offer contained in email
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # one of many parts that make up a Piece
-  accepts_nested_attributes_for :part, :offer
 
   has_many :item_sides, :class_name => 'Admin::Customer::ItemSide', :dependent => :destroy
+  accepts_nested_attributes_for :part, :offer, :item_sides
+
+  before_update :b_update
+  after_update :b_after_update
 
   # assemble an item and its sides
   #  options = [front_side => {:photo_part, :portrait, :face},
@@ -107,4 +111,13 @@ class Admin::Customer::Item < ActiveRecord::Base
     save
   end
 
+  def b_update
+    puts "#{self} before_update"
+    true
+  end
+
+  def b_after_update
+    puts "#{self} after_update"
+    true
+  end
 end

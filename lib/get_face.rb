@@ -68,7 +68,9 @@ class GetFace
                                         :api_secret => @api_secret,
                                         :urls       => image_url})
     Crack::JSON.parse(response)
-
+  rescue Exception => e
+    puts "face_request=>#{e}"
+    {'error_code' => 100, 'error_message' => e.message}
   end
 
   def blur(portrait)

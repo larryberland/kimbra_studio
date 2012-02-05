@@ -5,6 +5,7 @@ class CreateAdminCustomerItemSides < ActiveRecord::Migration
       t.references :part
       t.references :portrait
       t.references :face
+      t.datetime :changed_layout_at
       t.string :image_stock
       t.string :image_custom
 

@@ -48,5 +48,6 @@ class PartLayout < ActiveRecord::Base
     elsif position?
       puts "#{self} #{id} position changed"
     end
+    true
   end
 end

@@ -29,9 +29,25 @@ class BaseUploader < CarrierWave::Uploader::Base
               Magick::Image.read(current_path)
             else
               p = model.send("#{mounted_as}_url", version)
+              puts "#{model.class.name} for #{mounted_as} using amazon file#{p}"
+              raise "#{model.class.name} for #{mounted_as} using amazon file#{p}" if p.blank?
               Magick::Image.read(p)
             end
     image.first
   end
+
+  #def center_in_area(img, dest_width, dest_height)
+  #  w = img.columns
+  #  h = img.rows
+  #  x = (dest_width - w) / 2 if w < dest_width
+  #  y = (dest_height - h) / 2 if h < dest_height
+  #  if x or y
+  #    x         ||= 0
+  #    y         ||= 0
+  #    new_image = image_new(dest_width, dest_height).composite(img, x, y, Magick::AtopCompositeOp)
+  #  end
+  #  new_image ||= img
+  #  new_image
+  #end
 
 end

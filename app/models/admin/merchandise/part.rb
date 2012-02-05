@@ -45,13 +45,13 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     my_part
   end
 
-  def generate
-    f_stock, f_custom = if face.present?
-                          center_on_face(face)
-                        else
-                          group_shot
-                        end
-  end
+  #def generate
+  #  f_stock, f_custom = if face.present?
+  #                        center_on_face(face)
+  #                      else
+  #                        group_shot
+  #                      end
+  #end
 
   # create a clone of merchandise_part we can use for customisation
   def self.create_clone(merchandise_part, portrait_options=nil)
@@ -85,28 +85,6 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   def draw_piece(piece_image, portrait_item_image)
     puts "custom_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
     piece_layout.draw_piece(piece_image, portrait_item_image)
-  end
-
-  # create a custom assembled image by resize on portrait
-  def group_shot
-    raise 'forget to assign portrait?' unless portrait.present?
-    portrait_part_image, t_file = create_image_temp do
-      portrait.resize_to_fit_and_center(part_layout.w, part_layout.h)
-    end
-    t_custom                    = create_custom_part(portrait_part_image)
-    return t_file, t_custom
-  end
-
-  # create a custom assembled part by centering the portrait's
-  #  face information onto the kimbra part
-  def center_on_face(face)
-    raise 'forget to assign portrait?' unless portrait.present?
-    portrait_part_image, t_file = create_image_temp do
-      face.center_in_area(part_layout.w, part_layout.h)
-    end
-    dump_cropped(portrait_part_image)
-    t_custom = create_custom_part(portrait_part_image)
-    return t_file, t_custom
   end
 
   # create a custom assembled part that does not need a photo

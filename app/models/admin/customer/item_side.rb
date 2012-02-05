@@ -1,13 +1,14 @@
 class Admin::Customer::ItemSide < ActiveRecord::Base
   attr_accessible :image_stock, :remote_image_stock_url, :image_stock_cache,
                   :image_custom, :remote_image_custom_url, :image_custom_cache,
+                  :changed_layout_at,
                   :portrait, :portrait_attributes,
                   :face, :face_attributes,
                   :item, :item_attributes,
                   :part, :part_attributes
 
-  mount_uploader :image_stock, AssembleUploader               # original portrait scaled for part
-  mount_uploader :image_custom, AssembleUploader              # final image with portrait and part
+  mount_uploader :image_stock, StockUploader                  # original portrait scaled for part
+  mount_uploader :image_custom, PartCustomUploader            # final image with portrait and part
 
   belongs_to :item, :class_name => 'Admin::Customer::Item'
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # my own copy of merchandise part
@@ -36,15 +37,25 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   def on_layout_change
     # redraw the item_side
-    create_side
-    if item.offer.present?
-      item.offer.on_layout_change
-    end
+    puts "layout_change begin"
+    #create_side
+    #if item.offer.present?
+    #  item.offer.on_layout_change
+    #end
+    puts "layout change finished"
   end
+
   # create the image_stock from [portrait | face | part]
   # create the image_custom from stock and merchandise_part
   def create_side
-    create_image_custom(size_image_stock(part_layout))
+    if face or portrait
+      self.image_stock = portrait.face_file
+    else
+      self.image_stock.store_file!(part.image_part.current_path)
+    end
+    # TODO: still need to figure out the difference between storage stuff
+    #self.remote_image_custom_url = part.image_part.url.to_s
+    self.image_custom.store_file!(part.image_part.current_path)
     save
   end
 
@@ -58,16 +69,22 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     part.draw_piece(piece_image, stock_image)
   end
 
-  def size_image_stock(layout)
-    image = if face
-              draw_face(layout.w, layout.h)
-            elsif portrait
-              draw_portrait(layout.w, layout.h)
-            else
-              draw_no_photo(layout.w, layout.h)
-            end
-    image_stock.store_image!(image)
-    image
+  # carrier_wave process callback from StockUploader
+  def process_stock(portrait_image)
+    w = part_layout.w
+    h = part_layout.h
+    if face
+      draw_face(portrait_image, w, h)
+    elsif portrait
+      portrait_image.resize_to_fit(w, h)
+    else
+      part.no_photo(w, h)
+    end
+  end
+
+  # carrier_wave process callback from PartCustomUploader
+  def process_custom_part(part_image)
+    part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::DstOverCompositeOp)
   end
 
   def to_image_span
@@ -83,16 +100,23 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   private
 
-  def draw_face(width, height)
-    image = face.center_in_area(width, height)
-    dump_cropped(image)
-    image
+  # used in CarrierWave process center_in_area
+  def get_dest_area
+    return part_layout.w, part_layout.h
   end
 
-  def draw_portrait(width, height)
-    image = portrait.resize_to_fit_and_center(width, height)
-    dump_cropped(image)
-    image
+  def draw_face(portrait_image, w, h)
+    info = face.calculate_center_in_area(w, h)
+
+    crop    = info[:crop]
+    cropped = portrait_image.crop(crop[:x], crop[:y], crop[:w], crop[:h])
+
+    resize = info[:resize]
+    cropped = cropped.resize_to_fit(resize[:w], resize[:h]) if resize
+
+    # return the cropped image into our destination image
+    img = image_new(w, h)
+    img.composite(cropped, 0, 0, Magick::AtopCompositeOp)
   end
 
   def draw_no_photo(width, height)
@@ -123,15 +147,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     part.send(:part_image)
   end
 
-  # using the src_image place it onto the
-  #  kimbra part
-  def create_image_custom(src_image)
-    raise "no src_image to make custom part #{self.inspect}" if src_image.nil?
-    custom_part = part.draw_part(src_image)
-    dump_custom(custom_part)
-    image_custom.store_image!(custom_part)
-  end
-
   def save_versions(f_stock, f_custom)
     raise 'missing_file with stock image' unless File.exist?(f_stock.path)
     raise 'missing file with custom image' unless File.exist?(f_custom.path)
@@ -153,11 +168,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   end
 
   def reposition
-
     if part.piece_layout.size?
       puts "#{self} #{id} piece size changed"
-      #@item.resize_image
-      #@item.reposition_image
+      #on_layout_change
     elsif part.piece_layout.position?
       puts "#{self} #{id} piece position changed"
       #@item.reposition_image
@@ -172,6 +185,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
       puts "#{self} #{id} part position changed"
       #@item.reposition_image
     end
-
+    true
   end
 end

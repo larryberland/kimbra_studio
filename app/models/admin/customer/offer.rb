@@ -19,6 +19,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   before_create :piece_create_default
   before_save :piece_default
+  after_update :check_width
 
   def self.test_offer(options)
     options[:email] ||= Admin::Customer::Email.first
@@ -36,8 +37,6 @@ class Admin::Customer::Offer < ActiveRecord::Base
                                           :piece               => piece,
                                           :portrait_parts_list => portrait_parts_list)
     offer.assemble(piece)
-    offer.save
-    offer.send(:dump_custom)
     offer
   end
 
@@ -71,12 +70,13 @@ class Admin::Customer::Offer < ActiveRecord::Base
                                                      # this is really a non_photo_part
     end
 
-                        # add an item for every photo_part we have
+    # add an item for every photo_part we have
     portrait_parts_list.each do |item_options|
       self.items << Admin::Customer::Item.assemble_side(self, item_options)
     end
 
-    create_custom_image # create a composite of all the items
+    # create a composite of all the items
+    create_custom_image
     self
   end
 
@@ -124,11 +124,13 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
     height       = h.max
     width        = w.sum
+    puts "size=>#{width}x#{height}"
     custom_piece = image_new(width, height)
     items.each_with_index do |item, index|
       custom_piece = item.draw_piece_with_custom(custom_piece, front_side)
     end
     t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
+    puts "custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
     custom_piece.write(t_front_or_back.path)
     i = front_side ? image_front : image_back
     i.store_file!(t_front_or_back.path)
@@ -154,8 +156,9 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def create_custom_image
-    puts "Offer=>#{piece.name}"
+    puts "Offer=>#{piece.name} custom_layout=>#{custom_layout}"
     t_front = send("draw_by_#{custom_layout}", front=true)
+    puts "front=>#{t_front.path}"
     image.store_file!(t_front.path)
     if baby_got_back
       puts "has back side"
@@ -163,12 +166,18 @@ class Admin::Customer::Offer < ActiveRecord::Base
     else
       puts "no back side"
     end
+    dump_custom
+    save
   end
 
   def dump_custom
     if Rails.env.development? and image_url
       dump('custom', image.to_image)
     end
+  end
+
+  def check_width
+    puts "#{self} size=>#{width}x#{height}"
   end
 
 end

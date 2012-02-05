@@ -1,75 +1,73 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Portraits:</b>
-  <%= @my_studio_portrait_face.portraits %>
+  <%= @face.portrait %>
 </p>
 
 <p>
   <b>Center:</b>
-  <%= @my_studio_portrait_face.center %>
+  <%= "#{@face.center_x} #{@face.center_y}" %>
 </p>
 
 <p>
   <b>Eye left x:</b>
-  <%= @my_studio_portrait_face.eye_left_x %>
+  <%= @face.eye_left_x %>
 </p>
 
 <p>
   <b>Eye right x:</b>
-  <%= @my_studio_portrait_face.eye_right_x %>
+  <%= @face.eye_right_x %>
 </p>
 
 <p>
   <b>Mouth left x:</b>
-  <%= @my_studio_portrait_face.mouth_left_x %>
+  <%= @face.mouth_left_x %>
 </p>
 
 <p>
   <b>Mouth center x:</b>
-  <%= @my_studio_portrait_face.mouth_center_x %>
+  <%= @face.mouth_center_x %>
 </p>
 
 <p>
   <b>Mouth right x:</b>
-  <%= @my_studio_portrait_face.mouth_right_x %>
+  <%= @face.mouth_right_x %>
 </p>
 
 <p>
   <b>Nose x:</b>
-  <%= @my_studio_portrait_face.nose_x %>
+  <%= @face.nose_x %>
 </p>
 
 <p>
   <b>Ear left x:</b>
-  <%= @my_studio_portrait_face.ear_left_x %>
+  <%= @face.ear_left_x %>
 </p>
 
 <p>
   <b>Ear right x:</b>
-  <%= @my_studio_portrait_face.ear_right_x %>
+  <%= @face.ear_right_x %>
 </p>
 
 <p>
   <b>Chin x:</b>
-  <%= @my_studio_portrait_face.chin_x %>
+  <%= @face.chin_x %>
 </p>
 
 <p>
   <b>Yaw:</b>
-  <%= @my_studio_portrait_face.yaw %>
+  <%= @face.yaw %>
 </p>
 
 <p>
   <b>Roll:</b>
-  <%= @my_studio_portrait_face.roll %>
+  <%= @face.roll %>
 </p>
 
 <p>
   <b>Tag attributes:</b>
-  <%= @my_studio_portrait_face.tag_attributes %>
+  <%= @face.tag_attributes %>
 </p>
 
 
-<%= link_to 'Edit', edit_my_studio_portrait_face_path(@my_studio_portrait_face) %> |
+<%= link_to 'Edit', edit_my_studio_portrait_face_path(@face) %> |
 <%= link_to 'Back', my_studio_portrait_faces_path %>

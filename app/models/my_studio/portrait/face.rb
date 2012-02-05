@@ -34,11 +34,6 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
     f
   end
 
-  def calculate_area
-
-
-  end
-
   def left
     a = []
     a << eye_left_x if eye_left_x.present?
@@ -99,8 +94,7 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
     center_in_area(layout.w, layout.h, padding)
   end
 
-  def center_in_area(dest_width, dest_height, padding=0.38)
-
+  def calculate_center_in_area(dest_width, dest_height, padding=0.38)
     puts "orig x=>#{face_top_left_x} y=#{face_top_left_y} size=>#{face_width}x#{face_height}"
     # add 38% to face width and height
     w     = (face_width / padding).to_i
@@ -109,17 +103,13 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
     new_y = face_top_left_y - ((h - face_height)/2)
     puts "38%  x=>#{new_x} y=#{new_y} size=>#{w}x#{h}"
 
-    #my_portrait.crop(new_x, new_y, w, h).write("#{id}_first.jpg")
-
     # place new area into destination width x height
     if w < dest_width
       # center in destination
       dx    = (dest_width - w) * 0.50
       new_x = [(new_x - dx).to_i, 0].max
       w     = dest_width
-      puts "center width"
     else
-      puts "resize width"
       resize = true
     end
     if h < dest_height
@@ -127,15 +117,12 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
       dy    = (dest_height - h) * 0.50
       new_y = [(new_y - dy).to_i, 0].max
       h     = dest_height
-      puts "center height"
     else
       resize = true
-      puts "resize height"
     end
 
     puts "face_id=>#{id} dest=>#{dest_width}x#{dest_height} dx=>#{dx} dy=>#{dy}"
     puts "center in dest x=>#{new_x} y=>#{new_y} size=>#{w}x#{h}"
-    img        = image_new(dest_width, dest_height)
 
     # calculate crop area so resize will not clip image
     new_width  = w
@@ -154,15 +141,8 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
       new_y = new_y + ((h - new_height) / 2)
     end
 
-    #puts "crop size old=>#{w}x#{h} new=>#{new_width}x#{new_height}"
-    #puts "crop left   x=>#{new_x}    y=>#{new_y}"
-
-    # crop the portrait to the destination size
-    cropped = my_portrait.crop(new_x, new_y, new_width.to_i, new_height.to_i)
-    cropped = cropped.resize_to_fit(dest_width, dest_height) if resize
-
-    # return the cropped image into our destination image
-    img.composite(cropped, 0, 0, Magick::AtopCompositeOp)
+    {:crop => {:x => new_x, :y => new_y, :w => new_width.to_i, :h => new_height.to_i},
+     :resize => {:w => dest_width, :h => dest_height}}
   end
 
   def cropped(portrait_image=nil)

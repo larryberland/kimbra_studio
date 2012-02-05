@@ -27,7 +27,13 @@
     <div class="field">
       <%= link_to 'Part', admin_merchandise_piece_part_path(@item.part.piece, @item.part) %>
     </div>
+    <% @item.item_sides.each do |side| %>
+        <%= f.fields_for :item_sides, side do |g| %>
 
+            <%= g.hidden_field :changed_layout_at, :value => Time.now %>
+
+        <% end %>
+    <% end %>
     <div class="actions">
       <%= f.submit %>
     </div>
