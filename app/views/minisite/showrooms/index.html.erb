@@ -3,7 +3,7 @@
 <table>
   <tr>
     <th>Offer</th>
-    <th>Customer</th>
+    <th>Client</th>
     <th>Studio</th>
     <th></th>
     <th></th>
@@ -13,7 +13,7 @@
 <% @showrooms.each do |minisite_showroom| %>
   <tr>
     <td><%= minisite_showroom.offer %></td>
-    <td><%= minisite_showroom.customer %></td>
+    <td><%= minisite_showroom.client %></td>
     <td><%= minisite_showroom.studio %></td>
     <td><%= link_to 'Show', minisite_showroom %></td>
     <td><%= link_to 'Edit', edit_minisite_showroom_path(minisite_showroom) %></td>

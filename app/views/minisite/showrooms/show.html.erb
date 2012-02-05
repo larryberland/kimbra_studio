@@ -2,19 +2,21 @@
 
 <p>
   <b>Offer:</b>
-  <%= @showroom.offer.name %>
+  <%= render 'admin/customer/offers/show', :offer => @showroom.offer %>
 </p>
 
 <p>
-  <b>Customer:</b>
-  <%= @showroom.customer.name %>
+  <b>Client:</b>
+  <%= render 'my_studio/clients/show', :client => @showroom.client %>
 </p>
 
 <p>
   <b>Studio:</b>
-  <%= @showroom.studio.name %>
+  <%= render "studios/show", :studio => @showroom.studio %>
 </p>
 
 
 <%= link_to 'Edit', edit_minisite_showroom_path(@showroom) %> |
 <%= link_to 'Back', minisite_showrooms_path %>
+
+<%= SassAccessor.set 'bg_color' => '#efefef' %>

@@ -1,0 +1,54 @@
+<div class="show">
+
+  <p>
+    <b>Items:</b>
+    <%= link_to 'Items', admin_customer_email_offer_items_path(offer.email, offer) %>
+  </p>
+
+
+  <% if offer.back.present? %>
+
+      <p>
+        <b>Custom Piece Side 1</b>
+        <%= image_tag offer.image_front_url.to_s %>
+      </p>
+
+      <p>
+        <b>Custom Piece Side 2</b>
+        <%= image_tag offer.image_back_url.to_s %>
+      </p>
+  <% else %>
+      <p>
+        <b>Custom Piece</b>
+        <%= image_tag offer.image_url.to_s, :title => "size #{offer.width}x#{offer.height}" %>
+      </p>
+  <% end %>
+
+  <p>
+    <b>Email:</b>
+    <%= offer.try(:email).try(:my_studio_session).try(:client).try(:email) %>
+  </p>
+
+  <p>
+    <b>Name:</b>
+    <%= offer.name %>
+  </p>
+
+  <p style="width:400px;">
+    <b>Description:</b>
+    <%= offer.description %>
+  </p>
+
+  <p>
+    <b>Activation code:</b>
+    <%= offer.activation_code %>
+  </p>
+
+  <p>
+    <b>Active:</b>
+    <%= offer.active %>
+  </p>
+
+</div>
+
+<%= render 'admin/customer/offers/side_menu', :offer => offer %>

@@ -1,5 +1,7 @@
 KimbraStudio::Application.routes.draw do
 
+  namespace :minisite do resources :showrooms end
+
   namespace :minisite do
     resources :showrooms do
       get :show, :path => 'customer/:id/studio/:id(.:format)'

@@ -1,0 +1,13 @@
+<p>
+  <b>Name:</b>
+  <%= studio.name %>
+</p>
+
+<p>
+  <b>Phone number:</b>
+  <%= studio.phone_number %>
+</p>
+
+<%= render 'my_studio/infos/show', :info => studio.info %>
+
+<%= render 'shared/addresses/show', :resource => studio %>

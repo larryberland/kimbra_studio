@@ -1,6 +1,6 @@
 class Studio < ActiveRecord::Base
 
-  attr_accessible :name, :phone_number, :address_1, :address_2, :city, :state_id, :zip_code, :sessions
+  attr_accessible :name, :phone_number, :address_1, :address_2, :city, :state_id, :zip_code, :sessions, :info, :info_attributes
 
   belongs_to :state
 
@@ -18,11 +18,14 @@ class Studio < ActiveRecord::Base
            :class_name          => 'User'
 
   has_one :info, :class_name => 'MyStudio::Info', :dependent => :destroy
-  has_one :mini_site, :class_name => 'MyStudio::MiniSite', :dependent => :destroy
+  has_one :minisite, :class_name => 'MyStudio::MiniSite', :dependent =>:destroy
+  has_one :showroom, :class_name => "Minisite::Showroom", :dependent => :destroy
 
   before_save :set_user_info
 
   attr_accessor :current_user
+
+  accepts_nested_attributes_for :info
 
   # email activation instructions after a user signs up
   #

@@ -1,37 +1,37 @@
 <p>
   <b>Active:</b>
-  <%= @my_studio_info.active %>
+  <%= info.try(:active) %>
 </p>
 
 <p>
   <b>Website:</b>
-  <%= @my_studio_info.website %>
+  <%= info.try(:website) %>
 </p>
 
 <p>
   <b>Studio Email:</b>
-  <%= @my_studio_info.email %>
+  <%= info.try(:email) %>
 </p>
 
 <p>
   <b>Studio Email notification:</b>
-  <%= @my_studio_info.email_notification %>
+  <%= info.try(:email_notification) %>
 </p>
 
 <p>
   <b>Tax ID/EIN:</b>
-  <%= @my_studio_info.tax_ein %>
+  <%= info.try(:tax_ein) %>
 </p>
 
 <div class='container'>
   <b>Pictage member:</b>
-  <%= @my_studio_info.pictage_member %>
+  <%= info.try(:pictage_member) %>
   <b>SmugMug member:</b>
-  <%= @my_studio_info.smug_mug_member %>
+  <%= info.try(:smug_mug_member) %>
   <b>Mac user:</b>
-  <%= @my_studio_info.mac_user %>
+  <%= info.try(:mac_user) %>
   <b>Windows user:</b>
-  <%= @my_studio_info.windows_user %>
+  <%= info.try(:windows_user) %>
   <b>Ping email:</b>
-  <%= @my_studio_info.ping_email %>
+  <%= info.try(:ping_email) %>
 </div>
