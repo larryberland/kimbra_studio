@@ -13,17 +13,12 @@ module CarrierWave
       end
     end
 
-    # convert portrait into a stock_image
-    def store_stock
+    # let the model do processing on the original image
+    def model_process
       manipulate! do |img|
         if model
-          puts "store_stock"
-          new_image = model.send(:process_stock, img)
-          puts "store stock portrait #{model} #{img.columns}x#{img.rows}"
-          puts "store stock new_image #{model} #{new_image.columns}x#{new_image.rows}"
-          model.send('width=', new_image.columns) if model.respond_to?(:width)
-          model.send('height=', new_image.rows) if model.respond_to?(:height)
-          img = new_image
+          m = "#{mounted_as}_process"
+          img = model.send(m, img) if model.respond_to?(m) if model.respond_to?(m)
         end
         img = yield(img) if block_given?
         img
@@ -50,15 +45,5 @@ module CarrierWave
       end
     end
 
-    # process the custom_part
-    def store_custom_part
-      manipulate! do |img|
-        if model
-          img = model.send(:process_custom_part, img)
-        end
-        img = yield(img) if block_given?
-        img
-      end
-    end
   end
 end

@@ -21,7 +21,8 @@ class PartCustomUploader < BaseUploader
   # end
 
   # Create different versions of your uploaded files:
-  process :store_custom_part
+  process :model_process
+  process :convert => 'jpg'
 
   version :thumb do
      process :resize_to_limit => [100, 100]

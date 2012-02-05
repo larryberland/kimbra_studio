@@ -69,21 +69,20 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     part.draw_piece(piece_image, stock_image)
   end
 
-  # carrier_wave process callback from StockUploader
-  def process_stock(portrait_image)
+  def image_stock_process(src_image)
     w = part_layout.w
     h = part_layout.h
     if face
-      draw_face(portrait_image, w, h)
+      draw_face(src_image, w, h)
     elsif portrait
-      portrait_image.resize_to_fit(w, h)
+      src_image.resize_to_fit(w, h)
     else
       part.no_photo(w, h)
     end
   end
 
   # carrier_wave process callback from PartCustomUploader
-  def process_custom_part(part_image)
+  def image_custom_process(part_image)
     part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::DstOverCompositeOp)
   end
 
@@ -145,14 +144,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   def part_image
     raise "did you forget to assign a part? #{self.inspect}" if part.nil?
     part.send(:part_image)
-  end
-
-  def save_versions(f_stock, f_custom)
-    raise 'missing_file with stock image' unless File.exist?(f_stock.path)
-    raise 'missing file with custom image' unless File.exist?(f_custom.path)
-    image_stock.store_image!(f_stock.path) if f_stock.present?
-    image_custom.store_image!(custom_imagef_custom.path) if f_custom.present?
-    save
   end
 
   def dump_filename

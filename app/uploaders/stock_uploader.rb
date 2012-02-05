@@ -21,7 +21,7 @@ class StockUploader < BaseUploader
   # end
 
   # Create different versions of your uploaded files:
-  process :store_stock
+  process :model_process
   process :convert => 'jpg'
   process :center_in_area
 
