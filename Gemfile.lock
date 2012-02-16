@@ -50,6 +50,7 @@ GEM
       execjs
     coffee-script-source (1.2.0)
     crack (0.3.1)
+    dalli (1.1.4)
     devise (1.5.3)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.0.3)
@@ -166,6 +167,7 @@ DEPENDENCIES
   carrierwave
   coffee-rails (~> 3.1.1)
   crack
+  dalli
   devise
   fog
   inherited_resources

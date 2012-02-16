@@ -14,11 +14,15 @@ en:
 
   email_message: "Kimbra Studio Click Plus+ has created this special offer just for %{name}."
 
+  # credit card profile
+  new_credit_card_title: 'Credit Card Profile name'
+
   # devise views
   sign_in: 'Sign in'
   sign_up: 'Register'
   not_you: 'Not you?'
   link_destroy_confirm: 'Are you sure?'
+  link_myaccount_overview: 'My Account'
 
   # confirmations/new
   confirmations_new_title: 'Resend confirmation instructions'

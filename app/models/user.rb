@@ -18,6 +18,26 @@ class User < ActiveRecord::Base
             :format           => {:with => CustomValidators::Emails.email_validator},
             :length           => {:maximum => 255}
 
+  has_many :addresses, :dependent => :destroy,
+           :as                    => :addressable
+
+  has_one :default_billing_address, :conditions => {:addresses => {:billing_default => true, :active => true}},
+          :as                                   => :addressable,
+          :class_name                           => 'Address'
+
+  has_many :billing_addresses, :conditions => {:addresses => {:active => true}},
+           :as                             => :addressable,
+           :class_name                     => 'Address'
+
+  has_one :default_shipping_address, :conditions => {:addresses => {:default => true, :active => true}},
+          :as                                    => :addressable,
+          :class_name                            => 'Address'
+
+  has_many :shipping_addresses, :conditions => {:addresses => {:active => true}},
+           :as                              => :addressable,
+           :class_name                      => 'Address'
+  has_many :payment_profiles
+
   before_create :set_roles
   after_create :update_studio
 
@@ -26,15 +46,15 @@ class User < ActiveRecord::Base
   end
 
   def studio?
-    @studio ||= roles.select{|r| r.is_studio?}.present?
+    @studio ||= roles.select { |r| r.is_studio? }.present?
   end
 
   def studio_staff?
-    @studio_staff ||= roles.select{|r| r.is_studio_staff?}.present?
+    @studio_staff ||= roles.select { |r| r.is_studio_staff? }.present?
   end
 
   def client?
-    @client ||= roles.select{|r| r.is_client?}.present?
+    @client ||= roles.select { |r| r.is_client? }.present?
   end
 
   private
@@ -42,11 +62,11 @@ class User < ActiveRecord::Base
   def set_roles
     # TODO: set roles based on some new logic
     if roles.empty?
-      role_name = if email == 'jjames@james.org' or email == 'larryberland@gmail.com'
-        Role::ADMIN
-      else
-        Role::STUDIO
-      end
+      role_name  = if email == 'jjames@james.org' or email == 'larryberland@gmail.com'
+                     Role::ADMIN
+                   else
+                     Role::STUDIO
+                   end
       self.roles = [Role.where('name = ?', role_name).first]
     end
   end
@@ -56,13 +76,13 @@ class User < ActiveRecord::Base
   def update_studio
     if studio.present?
       if client?
-        if studio.clients.select{|u| u.id == id}.nil?
+        if studio.clients.select { |u| u.id == id }.nil?
           studio.clients << self
           studio.save
         end
       end
       if studio_staff?
-        if studio.staffers.select{|u| u.id == id}.nil?
+        if studio.staffers.select { |u| u.id == id }.nil?
           studio.staffers << self
           studio.save
         end

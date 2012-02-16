@@ -1,0 +1,43 @@
+<h1>Listing addresses</h1>
+
+<table>
+  <tr>
+    <th>Address type</th>
+    <th>Addressable type</th>
+    <th>Addressable</th>
+    <th>Line1</th>
+    <th>Line2</th>
+    <th>City</th>
+    <th>State</th>
+    <th>Zip</th>
+    <th>Default</th>
+    <th>Billing default</th>
+    <th>Active</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @addresses.each do |address| %>
+  <tr>
+    <td><%= address.address_type %></td>
+    <td><%= address.addressable_type %></td>
+    <td><%= address.addressable %></td>
+    <td><%= address.line1 %></td>
+    <td><%= address.line2 %></td>
+    <td><%= address.city %></td>
+    <td><%= address.state %></td>
+    <td><%= address.zip %></td>
+    <td><%= address.default %></td>
+    <td><%= address.billing_default %></td>
+    <td><%= address.active %></td>
+    <td><%= link_to 'Show', address %></td>
+    <td><%= link_to 'Edit', edit_address_path(address) %></td>
+    <td><%= link_to 'Destroy', address, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Address', new_address_path %>

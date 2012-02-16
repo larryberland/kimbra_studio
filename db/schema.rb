@@ -11,7 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120205163926) do
+ActiveRecord::Schema.define(:version => 20120211152622) do
+
+  create_table "address_types", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "addresses", :force => true do |t|
+    t.integer  "address_type_id"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "addressable_type",                    :null => false
+    t.integer  "addressable_id",                      :null => false
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city",                                :null => false
+    t.integer  "state_id"
+    t.string   "zip_code",                            :null => false
+    t.integer  "phone_id"
+    t.string   "alternate_phone"
+    t.boolean  "default",          :default => false
+    t.boolean  "billing_default",  :default => false
+    t.boolean  "active",           :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "addresses", ["address_type_id"], :name => "index_addresses_on_address_type_id"
+  add_index "addresses", ["addressable_id"], :name => "index_addresses_on_addressable_id"
+  add_index "addresses", ["state_id"], :name => "index_addresses_on_state_id"
 
   create_table "admin_customer_emails", :force => true do |t|
     t.integer  "my_studio_session_id"
@@ -133,6 +164,11 @@ ActiveRecord::Schema.define(:version => 20120205163926) do
     t.integer  "w"
     t.integer  "h"
     t.decimal  "degrees"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mailing_addresses", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -262,6 +298,50 @@ ActiveRecord::Schema.define(:version => 20120205163926) do
   end
 
   add_index "part_layouts", ["part_id"], :name => "index_part_layouts_on_part_id"
+
+  create_table "payment_profiles", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "address_id"
+    t.string   "payment_cim_id"
+    t.boolean  "default"
+    t.boolean  "active"
+    t.string   "last_digits"
+    t.string   "month"
+    t.string   "year"
+    t.string   "cc_type"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "card_name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "payment_profiles", ["address_id"], :name => "index_payment_profiles_on_address_id"
+  add_index "payment_profiles", ["user_id"], :name => "index_payment_profiles_on_user_id"
+
+  create_table "phone_types", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "phones", :force => true do |t|
+    t.integer  "phone_type_id"
+    t.string   "number"
+    t.string   "phonable_type"
+    t.integer  "phoneable_id"
+    t.boolean  "primary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "phones", ["phone_type_id"], :name => "index_phones_on_phone_type_id"
+  add_index "phones", ["phoneable_id"], :name => "index_phones_on_phoneable_id"
+
+  create_table "physical_addresses", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "piece_layouts", :force => true do |t|
     t.integer  "part_id"

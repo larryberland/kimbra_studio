@@ -1,0 +1,13 @@
+<h1> Addresses </h1>
+
+<ul>
+  <% for address in @addresses %>
+    <li><br/>
+      <%= render :partial => '/shared/compact_address', :locals => { :shopping_address => address } %>
+      <%= link_to "Edit", edit_myaccount_address_path(address) %> |
+      <%= link_to "Remove", myaccount_address_path(address), :confirm => 'Are you sure?', :method => :delete %>
+    </li>
+  <% end %>
+</ul>
+
+<p><%= link_to "New Address", new_myaccount_address_path, :class => 'b-link' %></p>

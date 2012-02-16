@@ -66,4 +66,14 @@ KimbraStudio::Application.routes.draw do
     resources :staffers
   end
 
+  resources :payment_profiles
+
+  namespace :myaccount do
+    resources :orders, :only => [:index, :show]
+    resources :addresses
+    resources :credit_cards
+    resource  :store_credit, :only => [:show]
+    resource  :overview, :only => [:show]
+  end
+
 end

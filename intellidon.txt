@@ -1,0 +1,16 @@
+admin/config/web_ex
+admin/config/travel_port (sum_total) lms
+
+trainer/ekb
+trainer/sumtotal (Systems)
+
+landing/Citrix
+landing/Aicc
+landing/service
+
+learner/training
+
+Create learning
+Citrix URl
+
+URL =>

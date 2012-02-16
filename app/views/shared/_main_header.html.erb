@@ -1,0 +1,18 @@
+<div id="header_wrapper" class='bp'>
+  <div class="container logged-in" id="header">
+    <ul id="menu-main">
+      <li class="" id="menu-main-user">
+        <div>
+          <% if user_signed_in? %>
+              <strong>Hi <%= current_user.try(:email) %></strong>
+              <span>(<%= link_to translate(:not_you), destroy_user_session_path, method: :delete %>)</span>
+          <% else %>
+              <strong><%= link_to translate(:sign_in), new_user_session_path %></strong> or
+              <span><%= link_to translate(:sign_up), new_user_registration_path %></span>
+          <% end %>
+          <%= link_to t(:link_myaccount_overview), myaccount_overview_url %>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
