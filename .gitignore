@@ -20,6 +20,7 @@
 #/config/config.yml
 /config/amazon_s3.yml
 /config/click_face.yml
+/config/database.yml
 
 # Ignore vendor gems
 /vendor/ruby/*
