@@ -10,9 +10,24 @@
               <strong><%= link_to translate(:sign_in), new_user_session_path %></strong> or
               <span><%= link_to translate(:sign_up), new_user_registration_path %></span>
           <% end %>
-          <%= link_to t(:link_myaccount_overview), myaccount_overview_url %>
         </div>
       </li>
     </ul>
+    <table>
+      <tr>
+        <td>
+          <%= link_to t(:my_studio_overview_link), my_studio_overview_url %>
+        </td>
+        <td>
+          <%= link_to t(:admin_overview_link), admin_overview_url %>
+        </td>
+        <td colspan="2">
+          &nbsp;
+        </td>
+        <td>
+          <%= link_to t(:myaccount_overview_link), myaccount_overview_url %>
+        </td>
+      </tr>
+    </table>
   </div>
 </div>

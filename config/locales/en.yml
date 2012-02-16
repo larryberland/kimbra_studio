@@ -22,7 +22,6 @@ en:
   sign_up: 'Register'
   not_you: 'Not you?'
   link_destroy_confirm: 'Are you sure?'
-  link_myaccount_overview: 'My Account'
 
   # confirmations/new
   confirmations_new_title: 'Resend confirmation instructions'
@@ -151,4 +150,7 @@ en:
   admin_merchandise_pieces_new_link: 'New Piece'
   admin_merchandise_pieces_index_title: 'Listing Kimbra Studio Pieces'
   admin_merchandise_pieces_edit_title: 'Editing Kimbra Studio Piece'
+
+  # myaccount/overview
+  myaccount_overview_link: 'My Account'
 

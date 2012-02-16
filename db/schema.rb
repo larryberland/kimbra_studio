@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120211152622) do
+ActiveRecord::Schema.define(:version => 20120216124040) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -291,6 +291,46 @@ ActiveRecord::Schema.define(:version => 20120211152622) do
   add_index "my_studio_sessions", ["client_id"], :name => "index_my_studio_sessions_on_client_id"
   add_index "my_studio_sessions", ["studio_id"], :name => "index_my_studio_sessions_on_studio_id"
 
+  create_table "order_items", :force => true do |t|
+    t.decimal  "price"
+    t.decimal  "total"
+    t.integer  "order_id"
+    t.string   "state"
+    t.integer  "tax_rate_id"
+    t.integer  "shipping_rate_id"
+    t.integer  "shipment_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "order_items", ["order_id"], :name => "index_order_items_on_order_id"
+  add_index "order_items", ["shipment_id"], :name => "index_order_items_on_shipment_id"
+  add_index "order_items", ["shipping_rate_id"], :name => "index_order_items_on_shipping_rate_id"
+  add_index "order_items", ["tax_rate_id"], :name => "index_order_items_on_tax_rate_id"
+
+  create_table "orders", :force => true do |t|
+    t.string   "number"
+    t.string   "ip_address"
+    t.string   "email"
+    t.string   "state"
+    t.integer  "user_id"
+    t.integer  "bill_address_id"
+    t.integer  "ship_address_id"
+    t.integer  "coupon_id"
+    t.boolean  "active",           :default => true
+    t.boolean  "shipped",          :default => false
+    t.integer  "shipment_counter", :default => 0
+    t.datetime "calculated_at"
+    t.datetime "completed_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "orders", ["bill_address_id"], :name => "index_orders_on_bill_address_id"
+  add_index "orders", ["coupon_id"], :name => "index_orders_on_coupon_id"
+  add_index "orders", ["ship_address_id"], :name => "index_orders_on_ship_address_id"
+  add_index "orders", ["user_id"], :name => "index_orders_on_user_id"
+
   create_table "part_layouts", :force => true do |t|
     t.integer  "part_id"
     t.datetime "created_at"
@@ -368,6 +408,15 @@ ActiveRecord::Schema.define(:version => 20120211152622) do
   add_index "states", ["abbreviation"], :name => "index_states_on_abbreviation"
   add_index "states", ["country_id"], :name => "index_states_on_country_id"
   add_index "states", ["name"], :name => "index_states_on_name"
+
+  create_table "store_credits", :force => true do |t|
+    t.decimal  "amount",     :default => 0.0
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "store_credits", ["user_id"], :name => "index_store_credits_on_user_id"
 
   create_table "studios", :force => true do |t|
     t.string   "name"

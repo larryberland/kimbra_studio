@@ -14,9 +14,18 @@ class User < ActiveRecord::Base
   has_many :user_roles, :dependent => :destroy
   has_many :roles, :through => :user_roles
 
-  validates :email, :presence => true,
-            :format           => {:with => CustomValidators::Emails.email_validator},
-            :length           => {:maximum => 255}
+  has_one     :store_credit
+  has_many    :orders
+  has_many    :completed_orders,          :class_name => 'Order',
+                                          :conditions => {:orders => { :state => 'complete'}}
+
+  has_many    :phones,                    :dependent => :destroy,
+                                          :as => :phoneable
+
+  has_one     :primary_phone,             :conditions => {:phones => { :primary => true}},
+                                          :as => :phoneable,
+                                          :class_name => 'Phone'
+
 
   has_many :addresses, :dependent => :destroy,
            :as                    => :addressable
@@ -38,6 +47,12 @@ class User < ActiveRecord::Base
            :class_name                      => 'Address'
   has_many :payment_profiles
 
+  accepts_nested_attributes_for :addresses, :phones, :user_roles
+
+  validates :email, :presence => true,
+            :format           => {:with => CustomValidators::Emails.email_validator},
+            :length           => {:maximum => 255}
+
   before_create :set_roles
   after_create :update_studio
 
@@ -55,6 +70,38 @@ class User < ActiveRecord::Base
 
   def client?
     @client ||= roles.select { |r| r.is_client? }.present?
+  end
+
+  def name
+    "#{first_name} #{last_name}"
+  end
+
+  state_machine :state, :initial => :active do
+    state :inactive
+    state :active
+    state :unregistered
+    state :registered
+    state :registered_with_credit
+    state :canceled
+
+    event :activate do
+      transition all => :active, :unless => :active?
+      #transition :from => :inactive,    :to => :active
+    end
+
+    event :register do
+      #transition :to => 'registered', :from => :all
+      transition :from => :active,                 :to => :registered
+      transition :from => :inactive,               :to => :registered
+      transition :from => :unregistered,           :to => :registered
+      transition :from => :registered_with_credit, :to => :registered
+      transition :from => :canceled,               :to => :registered
+    end
+
+    event :cancel do
+      transition :from => any, :to => :canceled
+    end
+
   end
 
   private

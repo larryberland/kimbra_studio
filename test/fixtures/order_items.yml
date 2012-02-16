@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  price: 9.99
+  total: 9.99
+  order: 
+  state: MyString
+  tax_rate: 
+  shipping_rate: 
+  shipment: 
+
+two:
+  price: 9.99
+  total: 9.99
+  order: 
+  state: MyString
+  tax_rate: 
+  shipping_rate: 
+  shipment: 

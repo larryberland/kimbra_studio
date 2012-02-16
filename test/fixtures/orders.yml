@@ -1,0 +1,31 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  number: MyString
+  ip_address: MyString
+  email: MyString
+  state: MyString
+  user: 
+  bill_address: 
+  ship_address: 
+  coupon: 
+  active: false
+  shipped: false
+  shipment_counter: 1
+  calculated_at: 2012-02-16 07:37:52
+  completed_at: 2012-02-16 07:37:52
+
+two:
+  number: MyString
+  ip_address: MyString
+  email: MyString
+  state: MyString
+  user: 
+  bill_address: 
+  ship_address: 
+  coupon: 
+  active: false
+  shipped: false
+  shipment_counter: 1
+  calculated_at: 2012-02-16 07:37:52
+  completed_at: 2012-02-16 07:37:52
