@@ -368,7 +368,7 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
   create_table "phones", :force => true do |t|
     t.integer  "phone_type_id"
     t.string   "number"
-    t.string   "phonable_type"
+    t.string   "phoneable_type"
     t.integer  "phoneable_id"
     t.boolean  "primary"
     t.datetime "created_at"

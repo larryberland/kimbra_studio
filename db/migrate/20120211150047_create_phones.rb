@@ -3,7 +3,7 @@ class CreatePhones < ActiveRecord::Migration
     create_table :phones do |t|
       t.references :phone_type
       t.string :number
-      t.string :phonable_type
+      t.string :phoneable_type
       t.references :phoneable
       t.boolean :primary
 

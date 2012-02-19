@@ -76,7 +76,7 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  state_machine :state, :initial => :active do
+  state_machine :user_state, :initial => :active do
     state :inactive
     state :active
     state :unregistered
@@ -104,12 +104,12 @@ class User < ActiveRecord::Base
 
   end
 
-  private
+  private #===================================================================================
 
   def set_roles
     # TODO: set roles based on some new logic
     if roles.empty?
-      role_name  = if email == 'jjames@james.org' or email == 'larryberland@gmail.com'
+      role_name  = if email == 'jim@jimjames.org' or email == 'larryberland@gmail.com'
                      Role::ADMIN
                    else
                      Role::STUDIO
@@ -136,4 +136,5 @@ class User < ActiveRecord::Base
       end
     end
   end
+
 end
