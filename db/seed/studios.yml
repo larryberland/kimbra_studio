@@ -10,6 +10,10 @@
       last_name: Studio
       address_1: 123 Owner Street
       city: Tampa
+    minisite:
+      bgcolor: '#2a1907'
+      font_color: '#d3b492'
+      font_family: Arial
     sessions:
       - name: Couples
         client:

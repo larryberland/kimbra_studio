@@ -33,7 +33,16 @@ class MyStudioSeeds
           break
         end
 
-       # create Sessions
+        # create minisite details
+        attrs = my_studio_attrs.delete('minisite')
+        minisite = MyStudio::MiniSite.create(attrs)
+        if minisite.errors.blank?
+          puts "created minisite"
+        else
+          puts "failed to create minisite"
+        end
+
+        # create Sessions
         puts "now creating sessions"
         index                  = 0
         sessions               = my_studio_attrs.delete('sessions').collect do |session_attrs|
@@ -70,8 +79,9 @@ class MyStudioSeeds
         my_studio.current_user = owner
         my_studio.owner        = owner
         my_studio.sessions     = sessions
+        my_studio.minisite     = minisite
         if my_studio.save
-          puts "Finished!Created studio: #{my_studio.name}, with owner: #{my_studio.owner.first_name} #{my_studio.owner.last_name} (login with #{my_studio.owner.email}/#{password})"
+          puts "Finished!Created studio: #{my_studio.name}, with owner: #{my_studio.owner.first_name} #{my_studio.owner.last_name} (login with #{my_studio.owner.email}/#{password}) and background: #{my_studio.minisite.bgcolor}"
           puts "Don't forget to activate the owner using the activation URL spat out earlier in this seeds job."
         else
           puts "CRAP! my_studio #{my_studio.name} errors=>#{my_studio.errors.full_messages.join(', ')}"

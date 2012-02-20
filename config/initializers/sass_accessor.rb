@@ -1,6 +1,7 @@
 module SassAccessor
 
   Sass::Script::Functions.send :include, self
+
   def self.variables
     @variables ||= {}
   end
@@ -13,7 +14,7 @@ module SassAccessor
     SassAccessor.variables[v.value]
   end
 
-  def xbg_for(v)
+  def bg_for(v)
     result = variable(v)
     Sass::Script::String.new(result)
   end
