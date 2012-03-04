@@ -53,7 +53,7 @@ class Admin::Customer::Email < ActiveRecord::Base
     offers = order_by_number_of_parts.collect do |piece|
       strategy_picture_list = portrait_strategy_list.portraits_by_parts(piece)
       offer = Admin::Customer::Offer.generate(email, piece, strategy_picture_list)
-      Minisite::Showroom.generate(offer, studio_session.studio, studio_session.client)
+      Minisite::Showroom.generate(offer, studio_session.studio, studio_session.client, email)
       offer
     end
 

@@ -6,7 +6,7 @@ development:
   encoding: unicode
   database: kimbra_studio_development
   pool: 5
-  username: larryb
+  username: jjames
   password:
 
 # Warning: The database defined as "test" will be erased and
@@ -18,7 +18,7 @@ test:
   encoding: unicode
   database: kimbra_studio_test
   pool: 5
-  username: larryb
+  username: jjames
   password:
 
 production:

@@ -5,9 +5,7 @@ KimbraStudio::Application.routes.draw do
   resources :orders
 
   namespace :minisite do
-    resources :showrooms do
-      get :show, :path => 'customer/:id/studio/:id(.:format)'
-    end
+    resources :showrooms
   end
 
   resources :image_layouts

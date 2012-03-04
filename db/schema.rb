@@ -177,13 +177,17 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
     t.integer  "offer_id"
     t.integer  "client_id"
     t.integer  "studio_id"
+    t.integer  "email_id"
+    t.string   "tracking"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "minisite_showrooms", ["client_id"], :name => "index_minisite_showrooms_on_client_id"
+  add_index "minisite_showrooms", ["email_id"], :name => "index_minisite_showrooms_on_email_id"
   add_index "minisite_showrooms", ["offer_id"], :name => "index_minisite_showrooms_on_offer_id"
   add_index "minisite_showrooms", ["studio_id"], :name => "index_minisite_showrooms_on_studio_id"
+  add_index "minisite_showrooms", ["tracking"], :name => "index_minisite_showrooms_on_tracking"
 
   create_table "my_studio_clients", :force => true do |t|
     t.string   "name"

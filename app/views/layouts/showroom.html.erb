@@ -2,47 +2,51 @@
 <html>
 <head>
   <title><%= content_for :page_title %></title>
-
   <%= stylesheet_link_tag "application" %>
-
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
 </head>
 <body>
-
 <div id='body_wrapper'>
-
   <div class="bp">
     <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
     <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
   </div>
-
-  <%= render 'shared/main_header' %>
-
+  <table class="showroom_nav">
+    <tr>
+      <td>
+        <%= link_to "All Offers", minisite_showrooms_url %>
+      </td>
+      <td>
+        About <%= content_for :page_title %>
+      </td>
+      <td>
+        Custom Work
+      </td>
+      <td>
+        Shopping Cart
+      </td>
+    </tr>
+  </table>
   <div id='content_wrapper' class='container'>
     <%= yield %>
   </div>
 </div>
-
 <div id="footer_buffer" class='bp'>
   &nbsp;
 </div>
 </div>
-
 <%= render 'shared/main_footer' %>
-
 <%= yield :bottom %>
-
 <script>
     jQuery(window).ready(
-            function() {
+            function () {
                 jQuery('.flash_notice').delay(6000).slideUp('slow');
                 jQuery('.flash_error').delay(6000).slideUp('slow');
             }
     );
 </script>
-
 <%# javascript_include_tag :defaults %>
 <%#= javascript_include_tag 'jquery-1.4.2.min', 'rails' %>
 <%#= javascript_include_tag :all, :cache => true %>
