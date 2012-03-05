@@ -13,18 +13,18 @@
     <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
     <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
   </div>
-  <table class="showroom_nav">
+  <table class="showroom_nav" style="border:1px solid white">
     <tr>
-      <td>
+      <td style="border:1px solid white;width:25%">
         <%= link_to "All Offers", minisite_showrooms_url %>
       </td>
-      <td>
+      <td style="border:1px solid white;width:25%">
         About <%= content_for :page_title %>
       </td>
-      <td>
+      <td style="border:1px solid white;width:25%">
         Custom Work
       </td>
-      <td>
+      <td style="border:1px solid white;width:25%">
         Shopping Cart
       </td>
     </tr>

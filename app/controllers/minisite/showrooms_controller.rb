@@ -18,6 +18,11 @@ class Minisite::ShowroomsController < InheritedResources::Base
   #  end
   #end
 
+  def collection
+    @showroom = Minisite::Showroom.find_by_tracking(params[:id])
+    @showrooms = Minisite::Showroom.where(:email_id => @showroom.email_id)
+  end
+
   private #=======================================================
 
   # We use tracking number instead of :id in routes. Use tracking to establish showroom.

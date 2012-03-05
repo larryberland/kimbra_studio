@@ -7,6 +7,7 @@ KimbraStudio::Application.routes.draw do
   namespace :minisite do
     resources :showrooms
   end
+  match "/minisite/showrooms/collection/:id" => "minisite/showrooms#collection"
 
   resources :image_layouts
 
