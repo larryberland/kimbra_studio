@@ -11,6 +11,7 @@ class Minisite::ShowroomsController < InheritedResources::Base
   #     minisite_showroom GET    /minisite/showrooms/:id(.:format)                                               {:action=>"show", :controller=>"minisite/showrooms"}
   #                       PUT    /minisite/showrooms/:id(.:format)                                               {:action=>"update", :controller=>"minisite/showrooms"}
   #                       DELETE /minisite/showrooms/:id(.:format)                                               {:action=>"destroy", :controller=>"minisite/showrooms"}
+  #collection_minisite_showroom GET    /minisite/showrooms/:id/collection(.:format)                                    {:action=>"collection", :controller=>"minisite/showrooms"}
 
   #respond_to do |format|
   #  format.css do

@@ -5,9 +5,12 @@ KimbraStudio::Application.routes.draw do
   resources :orders
 
   namespace :minisite do
-    resources :showrooms
+    resources :showrooms do
+      member do
+        get 'collection'
+      end
+    end
   end
-  match "/minisite/showrooms/collection/:id" => "minisite/showrooms#collection"
 
   resources :image_layouts
 
