@@ -70,12 +70,17 @@ body-wrapper {
 .signup .signup-box .agreement {
     position: relative;
 }
-
 .signup-box .agreement {
     margin-bottom: 5px;
     padding-top: 0;
 }
-
+.signup-box .remember label {
+    display: inline;
+}
+.signup-box .remember input {
+    height: auto;
+    width: 20px;
+}
 .form-buttons.no-float {
     float: none;
 }
