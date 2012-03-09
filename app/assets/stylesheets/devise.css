@@ -1,0 +1,91 @@
+.box-body, .signup-box, .marketing {
+    overflow: hidden;
+}
+.wrapper {
+    height: auto !important;
+    margin: 0 auto -9em;
+    min-height: 100%;
+}
+
+.wrapper .signup {
+    background: url("images/marketing/tour/white-noise.png") repeat-x scroll 0 0 transparent;
+}
+
+body-wrapper {
+    margin: 0 auto;
+    overflow: hidden;
+    padding-bottom: 36px;
+    width: 960px;
+}
+
+.marketing {
+    font-family: "proxima-nova", arial, sans-serif;
+}
+
+.signup .signup-box {
+    background-color: #F5F5F5;
+    margin: 50px auto 0;
+    width: 654px;
+    height: 550px;  /* LDB needs to go away when figure this out */
+}
+
+.signup .shadow, .tour .shadow {
+    box-shadow: 0 0 6px 0 #888888;
+}
+
+.marketing .signup-box .signup-headline {
+    border-bottom: 1px solid #D6D6D6;
+    font-size: 14px;
+    margin: 0 35px;
+    padding: 28px 0 12px;
+}
+
+.marketing .signup-box .signup-headline h2 {
+    font-size: 32px;
+    letter-spacing: 1px;
+    line-height: 32px;
+    margin-bottom: 9px;
+}
+
+.custom-header, .username, .username a, .ui-dialog-titlebar.ui-widget-header, .info-box .body h3, .info-box .body ul, .thread-preview .custom-header {
+    color: #8BAA6D;
+}
+
+.signup-box .latest-features {
+    float: right;
+    margin: 15px 25px;
+    width: 290px;
+}
+.signup-form fieldset {
+    /*margin-bottom: 18px;*/
+}
+.signup-form label{
+    /*display: block;*/
+    /*font-size: 15px;*/
+    /*margin-bottom: 3px;*/
+}
+.signup-form fieldset input{
+    width: 230px;
+}
+.signup .signup-box .agreement {
+    position: relative;
+}
+
+.signup-box .agreement {
+    margin-bottom: 5px;
+    padding-top: 0;
+}
+
+.form-buttons.no-float {
+    float: none;
+}
+
+.form-buttons {
+    float: right;
+    padding-top: 8px;
+}
+.signup-box .openid-separator {
+    background-color: #CCCCCC;
+    height: 1px;
+    margin: 36px 0 9px;
+}

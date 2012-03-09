@@ -26,3 +26,28 @@ textarea { height:100px;}
 .ui-timepicker-div dl dd { margin: 0 10px 10px 65px; }
 .ui-timepicker-div td { font-size: 90%; }
 .ui-tpicker-grid-label { background: none; border: none; margin: 0; padding: 0; }
+
+select,
+textarea,
+input[type="text"] {
+    /*background:url(button.png);*/
+    /*text-indent: -9999em;*/
+    font-family: Verdana, Arial, sans-serif;
+    font-size: 0.95em;
+}
+
+input[type="submit"] {
+    /*background-color: #ffda75; *//* form header */
+    /*background:url(button.png);*/
+    /*text-indent: -9999em;*/
+    font-size: 1.3em;
+}
+
+input {
+    border: 1px solid #cccccc;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: 0 2px 3px 0 #ebebeb inset;
+    font-size: 1.3em;
+    padding: 6px 10px;
+}
+

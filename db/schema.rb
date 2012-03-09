@@ -143,6 +143,30 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
 
   add_index "admin_merchandise_pieces", ["name", "category"], :name => "index_admin_merchandise_pieces_on_name_and_category", :unique => true
 
+  create_table "cart_items", :force => true do |t|
+    t.integer  "user_id"
+    t.integer  "cart_id"
+    t.integer  "variant_id",                     :null => false
+    t.integer  "quantity",     :default => 1
+    t.boolean  "active",       :default => true
+    t.integer  "item_type_id",                   :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "cart_items", ["cart_id"], :name => "index_cart_items_on_cart_id"
+  add_index "cart_items", ["item_type_id"], :name => "index_cart_items_on_item_type_id"
+  add_index "cart_items", ["user_id"], :name => "index_cart_items_on_user_id"
+  add_index "cart_items", ["variant_id"], :name => "index_cart_items_on_variant_id"
+
+  create_table "carts", :force => true do |t|
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "carts", ["user_id"], :name => "index_carts_on_user_id"
+
   create_table "categories", :force => true do |t|
     t.string   "name"
     t.datetime "created_at"
@@ -177,17 +201,13 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
     t.integer  "offer_id"
     t.integer  "client_id"
     t.integer  "studio_id"
-    t.integer  "email_id"
-    t.string   "tracking"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "minisite_showrooms", ["client_id"], :name => "index_minisite_showrooms_on_client_id"
-  add_index "minisite_showrooms", ["email_id"], :name => "index_minisite_showrooms_on_email_id"
   add_index "minisite_showrooms", ["offer_id"], :name => "index_minisite_showrooms_on_offer_id"
   add_index "minisite_showrooms", ["studio_id"], :name => "index_minisite_showrooms_on_studio_id"
-  add_index "minisite_showrooms", ["tracking"], :name => "index_minisite_showrooms_on_tracking"
 
   create_table "my_studio_clients", :force => true do |t|
     t.string   "name"
@@ -372,7 +392,7 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
   create_table "phones", :force => true do |t|
     t.integer  "phone_type_id"
     t.string   "number"
-    t.string   "phoneable_type"
+    t.string   "phonable_type"
     t.integer  "phoneable_id"
     t.boolean  "primary"
     t.datetime "created_at"
@@ -400,6 +420,57 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "shipments", :force => true do |t|
+    t.integer  "order_id"
+    t.integer  "shipping_method_id",                   :null => false
+    t.integer  "address_id",                           :null => false
+    t.string   "tracking"
+    t.string   "number",                               :null => false
+    t.string   "state",                                :null => false
+    t.datetime "shipped_at"
+    t.boolean  "active",             :default => true, :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shipments", ["address_id"], :name => "index_shipments_on_address_id"
+  add_index "shipments", ["number"], :name => "index_shipments_on_number"
+  add_index "shipments", ["order_id"], :name => "index_shipments_on_order_id"
+  add_index "shipments", ["shipping_method_id"], :name => "index_shipments_on_shipping_method_id"
+
+  create_table "shipping_methods", :force => true do |t|
+    t.string   "name",             :null => false
+    t.integer  "shipping_zone_id", :null => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shipping_methods", ["shipping_zone_id"], :name => "index_shipping_methods_on_shipping_zone_id"
+
+  create_table "shipping_rate_types", :force => true do |t|
+    t.string "name", :null => false
+  end
+
+  create_table "shipping_rates", :force => true do |t|
+    t.integer  "shipping_method_id",                                                    :null => false
+    t.decimal  "rate",                  :precision => 8, :scale => 2, :default => 0.0,  :null => false
+    t.integer  "shipping_rate_type_id",                                                 :null => false
+    t.integer  "shipping_category_id",                                                  :null => false
+    t.decimal  "minimum_charge",        :precision => 8, :scale => 2, :default => 0.0,  :null => false
+    t.integer  "position"
+    t.boolean  "active",                                              :default => true
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shipping_rates", ["shipping_category_id"], :name => "index_shipping_rates_on_shipping_category_id"
+  add_index "shipping_rates", ["shipping_method_id"], :name => "index_shipping_rates_on_shipping_method_id"
+  add_index "shipping_rates", ["shipping_rate_type_id"], :name => "index_shipping_rates_on_shipping_rate_type_id"
+
+  create_table "shipping_zones", :force => true do |t|
+    t.string "name", :null => false
+  end
 
   create_table "states", :force => true do |t|
     t.string  "name",                          :null => false
@@ -435,6 +506,42 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
     t.datetime "updated_at"
   end
 
+  create_table "tax_statuses", :force => true do |t|
+    t.string "name", :null => false
+  end
+
+  create_table "transaction_accounts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "transaction_ledgers", :force => true do |t|
+    t.string   "accountable_type"
+    t.integer  "accountable_id"
+    t.integer  "transaction_id"
+    t.integer  "transaction_account_id"
+    t.decimal  "tax_amount",             :precision => 8, :scale => 2, :default => 0.0
+    t.decimal  "debit",                  :precision => 8, :scale => 2,                  :null => false
+    t.decimal  "credit",                 :precision => 8, :scale => 2,                  :null => false
+    t.string   "period"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "transaction_ledgers", ["accountable_id"], :name => "index_transaction_ledgers_on_accountable_id"
+  add_index "transaction_ledgers", ["transaction_account_id"], :name => "index_transaction_ledgers_on_transaction_account_id"
+  add_index "transaction_ledgers", ["transaction_id"], :name => "index_transaction_ledgers_on_transaction_id"
+
+  create_table "transactions", :force => true do |t|
+    t.string   "type"
+    t.integer  "batch_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "transactions", ["batch_id"], :name => "index_transactions_on_batch_id"
+
   create_table "user_roles", :force => true do |t|
     t.integer "role_id", :null => false
     t.integer "user_id", :null => false
@@ -450,14 +557,7 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
     t.date     "birth_date"
     t.string   "friendly_name"
     t.string   "email",                                 :default => "", :null => false
-    t.string   "phone_number"
-    t.string   "address_1"
-    t.string   "address_2"
     t.string   "state"
-    t.string   "city"
-    t.integer  "state_id"
-    t.string   "zip_code"
-    t.integer  "country_id"
     t.string   "customer_cim_id"
     t.string   "password_salt"
     t.string   "crypted_password"

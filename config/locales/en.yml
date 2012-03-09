@@ -5,6 +5,8 @@ en:
   hello: "Hello world"
   company: 'Kimbra Studios Click Plus'
 
+  welcome: 'Welcome!'
+
   show: 'Show'
   back: 'Back'
   edit: 'Edit'

@@ -1,20 +1,64 @@
-<% if Rails.env.development? %>
-<h3>devise/sessions/new.html</h3>
-<% end %>
-<h2> <%= translate(:sessions_new_title) %></h2>
+<div class='wrapper signup'>
+  <div class='body-wrapper'>
 
-<%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+    <div class='signup-box shadow openid'>
 
-  <div><%= f.label :password %><br />
-  <%= f.password_field :password %></div>
+      <div class='box-header private-labeled'>
 
-  <% if devise_mapping.rememberable? -%>
-    <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
-  <% end -%>
+      </div>
+      <div class='box-body'>
+        <div class='signup-headline'>
+          <h2 class='custom-header'> <%= translate(:sessions_new_title) %></h2>
+          <%= t(:welcome) %>
+        </div>
+        <div class='latest-features login-area'>
+          Log in to collaborate on projects, download files, and stay in the loop on our project progress.
+          Email Address
+        </div>
+        <div id='login' class='signup-form login-area'>
 
-  <div><%= f.submit translate(:sessions_new_submit) %></div>
-<% end %>
+          <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
 
-<%= render :partial => "devise/shared/links" %>
+              <div class='logins-wrapper'>
+
+                <div class='standard-login'>
+                  <fieldset>
+                    <%= f.label :email, 'Email Address' %>
+                    <br/>
+                    <%= f.email_field :email, :size => 30 %>
+                  </fieldset>
+
+                  <fieldset>
+
+                    <%= f.label :password, 'Password' %>
+                    <br/>
+                    <%= f.password_field :password %>
+                  </fieldset>
+
+                </div>
+              </div>
+
+              <fieldset class='agreement'>
+                <div class='form-buttons spinner-replacement no-float'>
+                  <%= f.submit translate(:sessions_new_submit) %>
+                </div>
+
+                <div class='remember'>
+
+                  <% if devise_mapping.rememberable? -%>
+                      <%= f.check_box :remember_me %> <%= f.label :remember_me %>
+                  <% end -%>
+
+                  <%= render :partial => "devise/shared/links" %>
+                </div>
+              </fieldset>
+
+              <div class='openid-separator'></div>
+          <% end %>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
