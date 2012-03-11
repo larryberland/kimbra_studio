@@ -91,6 +91,8 @@ en:
   my_studio_overview_link_info: "View My Info"
   my_studio_overview_label_studio: "My Studio Info"
   my_studio_overview_link_studio: "View My Studio Info"
+  my_studio_overview_label_minisite: "My Studio Minisite Info"
+  my_studio_overview_link_minisite: "View My Studio Minisite Info"
 
   # my_studio/portraits
   my_studio_portraits_new_title: 'New Session Portrait'

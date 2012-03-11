@@ -70,16 +70,17 @@ class StudiosController < ApplicationController
   def update
     @studio = Studio.find(params[:id])
 
-    @studio.info ||= MyStudio::Info.new()
-    @studio.info.update_attributes(params[:studio].delete(:info))
-
-    @studio.mini_site ||= MyStudio::MiniSite.new()
-    @studio.mini_site.update_attributes(params[:studio].delete(:mini_site))
+    #@studio.info ||= MyStudio::Info.new()
+    #@studio.info.update_attributes(params[:studio].delete(:info))
+    #
+    #@studio.mini_site ||= MyStudio::MiniSite.new()
+    #@studio.mini_site.update_attributes(params[:studio].delete(:mini_site))
 
     @studio.current_user = current_user
+    @studio.update_attributes(params[:studio])
 
     respond_to do |format|
-      if @studio.update_attributes(params[:studio])
+      if @studio.save
         format.html { redirect_to @studio, notice: 'Studio was successfully updated.' }
         format.json { head :ok }
       else

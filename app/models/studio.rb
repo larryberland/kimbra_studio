@@ -1,6 +1,9 @@
 class Studio < ActiveRecord::Base
 
-  attr_accessible :name, :phone_number, :address_1, :address_2, :city, :state_id, :zip_code, :sessions, :info, :info_attributes
+  attr_accessible :name, :phone_number,
+                  :address_1, :address_2, :city, :state_id, :zip_code, :sessions,
+                  :info, :info_attributes,
+                  :minisite, :minisite_attributes
 
   belongs_to :state
 
@@ -25,7 +28,7 @@ class Studio < ActiveRecord::Base
 
   attr_accessor :current_user
 
-  accepts_nested_attributes_for :info
+  accepts_nested_attributes_for :info, :minisite
 
   # email activation instructions after a user signs up
   #

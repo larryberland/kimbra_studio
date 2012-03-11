@@ -1,6 +1,6 @@
 <div>
   <h3>Mini Site Info</h3>
-  <%= f.fields_for :mini_site, mini_site do |g| %>
+  <%= f.fields_for :minisite, minisite do |g| %>
       <div class="field">
         <%= g.label :bgcolor %>
         <br/>
@@ -8,7 +8,7 @@
       </div>
 
       <div class="image-thumb">
-        <%= image_tag_thumb(mini_site) %>
+        <%= image_tag_thumb(minisite) %>
       </div>
       <div class="field">
         <%= g.label :image, 'Logo' %>
@@ -16,6 +16,7 @@
         <%= g.label :remote_image_url, 'or Logo URL' %>
         <%= g.text_field :remote_image_url %>
       </div>
+      <div><%= g.hidden_field :image_cache %></div>
       <div class="field">
         <%= g.label :font_family %>
         <br/>

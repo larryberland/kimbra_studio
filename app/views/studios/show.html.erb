@@ -8,16 +8,12 @@
   <%= @studio.phone_number %>
 </p>
 
-<% @my_studio_info = @studio.info %>
-<%= render 'my_studio/infos/show' %>
+<%= render 'my_studio/infos/show', :info => @studio.info %>
 
-<% @my_studio_mini_site = @studio.mini_site %>
-<% if current_user.admin? %>
-    <%= render "my_studio/mini_sites/show" %>
-<% end %>
+<%= render "my_studio/mini_sites/show", :minisite => @studio.minisite %>
 
 <%= render 'shared/addresses/show', :resource => @studio %>
 
 <%= link_to translate(:edit), edit_studio_path(@studio) %> |
-<% url = current_user.admin? ? studios_path : my_studio_overview_path%>
+<% url = current_user.admin? ? studios_path : my_studio_overview_path %>
 <%= link_to translate(:back), url %>
