@@ -35,9 +35,13 @@ class MyStudioSeeds
 
         # create minisite details
         attrs = my_studio_attrs.delete('minisite')
-        minisite = MyStudio::MiniSite.create(attrs)
+        minisite = MyStudio::Minisite.create(attrs)
         if minisite.errors.blank?
           puts "created minisite"
+          # Add logo from public/studios/studio_one/minisite.
+          logo_path   = Rails.root.join('public', 'studios','studio_one', 'minisite','studiog_logo.png')
+          minisite.image.store!(File.open(logo_path))
+          minisite.save
         else
           puts "failed to create minisite"
         end

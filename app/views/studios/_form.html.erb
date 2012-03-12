@@ -27,8 +27,8 @@
     <% info = @studio.info.nil? ? MyStudio::Info.new : @studio.info %>
     <%= render "my_studio/infos/form", :f => f, :info => info %>
 
-    <% ms = @studio.minisite.nil? ? MyStudio::MiniSite.new : @studio.minisite %>
-     <%= render "my_studio/mini_sites/form", :f => f, :minisite => ms %>
+    <% ms = @studio.minisite.nil? ? MyStudio::Minisite.new : @studio.minisite %>
+     <%= render "my_studio/minisites/form", :f => f, :minisite => ms %>
 
     <div class="actions">
       <%= f.submit %>

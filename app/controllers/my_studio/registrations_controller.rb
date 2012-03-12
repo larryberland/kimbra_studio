@@ -4,16 +4,16 @@ class MyStudio::RegistrationsController < MyStudio::BaseController
 
   def new
     @registration = true
-    @studio       = Studio.new(:info => MyStudio::Info.new, :mini_site => MyStudio::MiniSite.new)
+    @studio       = Studio.new(:info => MyStudio::Info.new, :minisite => MyStudio::Minisite.new)
     #render :template => 'user_sessions/new'
   end
 
   def create
     @info      = MyStudio::Info.new(params[:studio].delete(:info))
-    @mini_site = MyStudio::MiniSite.new(params[:studio].delete(:mini_site))
+    @minisite = MyStudio::Minisite.new(params[:studio].delete(:minisite))
     @studio    = Studio.new(params[:studio])
     @studio.info = @info if @info
-    @studio.mini_site = @mini_site if @mini_site
+    @studio.minisite = @minisite if @minisite
     @studio.owner = User.new(:email => @info.email)
     @studio.current_user = @studio.owner
 

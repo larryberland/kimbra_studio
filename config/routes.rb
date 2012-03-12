@@ -58,7 +58,7 @@ KimbraStudio::Application.routes.draw do
     resource :overview, :only => [:show]
     resource :dashboard, :only => [:show]
     resources :infos
-    resources :mini_sites
+    resources :minisites
     resources :sessions do
       resources :portraits do
         resources :faces

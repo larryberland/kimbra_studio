@@ -29,7 +29,7 @@ class StudiosController < ApplicationController
   def new
     @studio           = Studio.new
     @studio.info      = MyStudio::Info.new(:email => current_user.email)
-    @studio.mini_site = MyStudio::MiniSite.new
+    @studio.minisite = MyStudio::Minisite.new
     @studio.owner     = current_user
 
     respond_to do |format|
@@ -47,10 +47,10 @@ class StudiosController < ApplicationController
   # POST /studios.json
   def create
     @my_studio_info      = MyStudio::Info.new(params[:studio].delete(:info))
-    @my_studio_mini_site = MyStudio::MiniSite.new(params[:studio].delete(:mini_site))
+    @my_studio_minisite = MyStudio::Minisite.new(params[:studio].delete(:minisite))
     @studio              = Studio.new(params[:studio])
     @studio.info         = @my_studio_info
-    @studio.mini_site    = @my_studio_mini_site
+    @studio.minisite    = @my_studio_minisite
     @studio.owner        = current_user
     @studio.current_user = current_user
 
@@ -73,8 +73,8 @@ class StudiosController < ApplicationController
     #@studio.info ||= MyStudio::Info.new()
     #@studio.info.update_attributes(params[:studio].delete(:info))
     #
-    #@studio.mini_site ||= MyStudio::MiniSite.new()
-    #@studio.mini_site.update_attributes(params[:studio].delete(:mini_site))
+    #@studio.minisite ||= MyStudio::Minisite.new()
+    #@studio.minisite.update_attributes(params[:studio].delete(:minisite))
 
     @studio.current_user = current_user
     @studio.update_attributes(params[:studio])
