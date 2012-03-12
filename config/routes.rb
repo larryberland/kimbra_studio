@@ -7,7 +7,7 @@ KimbraStudio::Application.routes.draw do
   namespace :minisite do
     resources :showrooms do
       member do
-        get 'collection'
+        get :collection
       end
     end
   end
