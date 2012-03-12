@@ -1,0 +1,2 @@
+module MyStudio::MinisitesHelper
+end

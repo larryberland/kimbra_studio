@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Studio:</b>
+  <%= @my_studio_minisite.studio %>
+</p>
+
+<p>
+  <b>Bgcolor:</b>
+  <%= @my_studio_minisite.bgcolor %>
+</p>
+
+<p>
+  <b>Logo:</b>
+  <%= image_tag @my_studio_minisite.image %>
+</p>
+
+<p>
+  <b>Font family:</b>
+  <%= @my_studio_minisite.font_family %>
+</p>
+
+<p>
+  <b>Font color:</b>
+  <%= @my_studio_minisite.font_color %>
+</p>
+
+<p>
+  <b>Theme:</b>
+  <%= @my_studio_minisite.theme %>
+</p>
+
+
+<%= link_to t(:edit), edit_my_studio_minisite_path(@my_studio_minisite) %> |
+<%= link_to t(:back), my_studio_minisites_path %>
