@@ -40,6 +40,9 @@
     <%= f.hidden_field :image_stock_cache %>
 
     <div class="actions">
-      <%= f.submit %>
+      <%= f.submit :id => 'my_submit' %>
+      <span id="spinner" style="display:none">
+        <%= image_tag 'ajax-loader.gif' %>
+      </span>
     </div>
 <% end %>

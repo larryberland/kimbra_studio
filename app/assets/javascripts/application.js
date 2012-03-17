@@ -8,3 +8,6 @@
 //= require jquery-ui
 //= require jquery_ujs
 //= require_tree .
+$(function() {
+    $("#my_submit").click(function() {$("#spinner").toggle(); });
+});

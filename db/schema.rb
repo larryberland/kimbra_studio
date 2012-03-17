@@ -216,7 +216,7 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
 
   add_index "my_studio_infos", ["studio_id"], :name => "index_my_studio_infos_on_studio_id"
 
-  create_table "my_studio_minisites", :force => true do |t|
+  create_table "my_studio_mini_sites", :force => true do |t|
     t.integer  "studio_id"
     t.string   "bgcolor"
     t.string   "image"
@@ -227,7 +227,7 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
     t.datetime "updated_at"
   end
 
-  add_index "my_studio_minisites", ["studio_id"], :name => "index_my_studio_minisites_on_studio_id"
+  add_index "my_studio_mini_sites", ["studio_id"], :name => "index_my_studio_mini_sites_on_studio_id"
 
   create_table "my_studio_portrait_faces", :force => true do |t|
     t.integer  "portrait_id"
