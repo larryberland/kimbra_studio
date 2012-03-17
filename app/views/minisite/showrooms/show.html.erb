@@ -1,8 +1,8 @@
 <style type="text/css">
   body {
-      background-color: <%= @showroom.studio.minisite.bgcolor %>;
-      font-family: <%= @showroom.studio.minisite.font_family %>;
-      color: <%= @showroom.studio.minisite.font_color %>;
+      background-color: <%= @showroom.studio.try(:minisite).try(:bgcolor) %>;
+      font-family: <%= @showroom.studio.try(:minisite).try(:font_family) %>;
+      color: <%= @showroom.studio.try(:minisite).try(:font_color) %>;
   }
 </style>
 
@@ -12,6 +12,9 @@
 
 <img src="<%= @showroom.studio.minisite.image %>" title="<%= @showroom.studio.name %>">
 
+<p>
+  <h3><%=  link_to t(:minisite_showrooms_show_add_to_cart), root_url  %></h3>
+</p>
 <p>
   <b>Offer:</b>
   <%= render 'admin/customer/offers/show', :offer => @showroom.offer %>

@@ -1,0 +1,27 @@
+<h1>Listing shopping_purchases</h1>
+
+<table>
+  <tr>
+    <th>Cart</th>
+    <th>Tax</th>
+    <th>Total</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @shopping_purchases.each do |shopping_purchase| %>
+  <tr>
+    <td><%= shopping_purchase.cart %></td>
+    <td><%= shopping_purchase.tax %></td>
+    <td><%= shopping_purchase.total %></td>
+    <td><%= link_to 'Show', shopping_purchase %></td>
+    <td><%= link_to 'Edit', edit_shopping_purchase_path(shopping_purchase) %></td>
+    <td><%= link_to 'Destroy', shopping_purchase, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Purchase', new_shopping_purchase_path %>

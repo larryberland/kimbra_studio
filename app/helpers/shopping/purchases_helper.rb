@@ -1,0 +1,2 @@
+module Shopping::PurchasesHelper
+end

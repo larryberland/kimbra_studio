@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Cart:</b>
+  <%= @shopping_purchase.cart %>
+</p>
+
+<p>
+  <b>Tax:</b>
+  <%= @shopping_purchase.tax %>
+</p>
+
+<p>
+  <b>Total:</b>
+  <%= @shopping_purchase.total %>
+</p>
+
+
+<%= link_to 'Edit', edit_shopping_purchase_path(@shopping_purchase) %> |
+<%= link_to 'Back', shopping_purchases_path %>

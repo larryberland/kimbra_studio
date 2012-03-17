@@ -1,5 +1,13 @@
 KimbraStudio::Application.routes.draw do
 
+  namespace :shopping do resources :addresses end
+
+  namespace :shopping do resources :purchases end
+
+  namespace :shopping do resources :items end
+
+  namespace :shopping do resources :carts end
+
   resources :order_items
 
   resources :orders

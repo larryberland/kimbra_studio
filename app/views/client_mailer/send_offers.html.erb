@@ -15,6 +15,9 @@
   <% @email.offers.each do |offer| %>
       <tr>
         <td>
+          Offers at <%= minisite_showroom_url(offer.showroom.to_param) %>
+        </td>
+        <td>
           <%= render 'admin/customer/offers/show', :offer => offer%>
         </td>
       </tr>

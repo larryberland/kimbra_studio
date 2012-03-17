@@ -21,7 +21,7 @@ class Minisite::ShowroomsController < InheritedResources::Base
 
   def collection
     @showroom = Minisite::Showroom.find_by_tracking(params[:id])
-    @showrooms = Minisite::Showroom.where(:email_id => @showroom.email_id)
+    @showrooms = Minisite::Showroom.where('email_id = ?', @showroom.email_id)
   end
 
   private #=======================================================
