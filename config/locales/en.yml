@@ -14,6 +14,9 @@ en:
   destroy: 'Destroy'
   offers: 'Offers'
 
+  # customer_mailer/send_offer.html.erb
+  client_send_offers_subject: "%{name} custom jewelry offer"
+
   email_message: "Kimbra Studio Click Plus+ has created this special offer just for %{name}."
 
   # credit card profile

@@ -20,7 +20,7 @@ development: &non_production_settings
     :domain: 'gmail.com'
     :port: 587
     :user_name: clickplus1@gmail.com  # C ror_ecommerce
-    :password: 'some_cooler_password'          # C ror_ecommerce
+    :password: 'kimbrarul3s'          # C ror_ecommerce
     :authentication: :plain
     :enable_starttls_auto: true
     :perform_deliveries: true

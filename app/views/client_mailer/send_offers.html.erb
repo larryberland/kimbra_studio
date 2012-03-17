@@ -1,0 +1,23 @@
+<% studio = @email.my_studio_session.studio %>
+<p><%= @client.name %>,</p>
+<p>
+  <%= @email.message %>
+</p>
+<p>
+  Brought to you by:<br>
+  <%= studio.name %>
+</p>
+<p>
+  Visit us again <%= root_url %>
+</p>
+
+<table border='0'>
+  <% @email.offers.each do |offer| %>
+      <tr>
+        <td>
+          <%= render 'admin/customer/offers/show', :offer => offer%>
+        </td>
+      </tr>
+  <% end %>
+</table>
+

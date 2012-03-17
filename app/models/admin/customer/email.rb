@@ -67,6 +67,11 @@ class Admin::Customer::Email < ActiveRecord::Base
     my_studio_session.name
   end
 
+  def send_offers
+    ClientMailer.send_offers(self).deliver
+    update_attributes(:sent_at => Time.now.to_s(:db))
+  end
+
   private
 
   def set_message

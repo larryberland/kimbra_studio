@@ -7,7 +7,7 @@ class DevelopmentMailInterceptor
       puts message.body.to_s
     end
     message.subject = "[#{message.to}] #{message.subject}"
-    message.to = "hokahey100@gmail.com"
+    message.to = ["hokahey100@gmail.com", 'jim@jimjames.org']
   end
 
 end
