@@ -1,5 +1,14 @@
 <h1>Collection</h1>
 
-<% @showrooms.each do |showroom| %>
-    <p><%= showroom.id %></p>
-<% end %>
+<table border='0'>
+  <% @showrooms.each do |showroom| %>
+      <tr>
+        <td>
+          Offers at <%= minisite_showroom_url(showroom.offer.showroom.to_param) %>
+        </td>
+        <td>
+          <%= render 'admin/customer/offers/show', :offer => showroom.offer %>
+        </td>
+      </tr>
+  <% end %>
+</table>
