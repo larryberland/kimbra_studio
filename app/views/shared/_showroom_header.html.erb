@@ -1,0 +1,12 @@
+<style type="text/css">
+  body {
+      background-color: <%= showroom.studio.try(:minisite).try(:bgcolor) %>;
+      font-family: <%= showroom.studio.try(:minisite).try(:font_family) %>;
+      color: <%= showroom.studio.try(:minisite).try(:font_color) %>;
+  }
+</style>
+
+<% content_for :page_title, "#{showroom.studio.name} Photo Jewelry Offer" %>
+
+<img src="<%= showroom.studio.minisite.image %>" title="<%= showroom.studio.name %>">
+

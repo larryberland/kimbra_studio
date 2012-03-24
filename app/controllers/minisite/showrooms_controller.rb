@@ -17,10 +17,10 @@ class Minisite::ShowroomsController < InheritedResources::Base
   #  format.css do
   #    render :text => Sass::Engine.new(render_to_string, syntax: :scss, cache: false).render
   #  end
-  #end
+          #end
 
   def collection
-    @showroom = Minisite::Showroom.find_by_tracking(params[:id])
+    @showroom  = Minisite::Showroom.find_by_tracking(params[:id])
     @showrooms = Minisite::Showroom.where('email_id = ?', @showroom.email_id)
   end
 
@@ -37,6 +37,12 @@ class Minisite::ShowroomsController < InheritedResources::Base
     @client = @showroom.client if @showroom
     session[:client_id] = @client.id if @client
     @client = MyStudio::Client.find(session[:client_id]) if @client.nil? && session[:client_id].present?
+    @cart = if @showroom.cart
+              @showroom.cart
+            else
+              Shopping::Cart.new(:showroom => @showroom)
+            end
+    @cart = @showroom.cart
   end
 
 end

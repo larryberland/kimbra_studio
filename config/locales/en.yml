@@ -64,6 +64,11 @@ en:
 
   # devise views end
 
+  # minisite menu buttons
+  minisite_menu_collection_link: 'The Collection'
+  minisite_menu_custom_work_link: 'Custom Work'
+  minisite_menu_shopping_cart_link: 'Shopping Cart'
+
   # studios
   studios_new_title: 'Your Studio'
   studios_new_link: 'New Click Plus+ Studio'
@@ -163,4 +168,8 @@ en:
 
   # myaccount/overview
   myaccount_overview_link: 'My Account'
+
+  # shopping
+  # item
+  shopping_item_destroy_link: 'Remove From Cart'
 

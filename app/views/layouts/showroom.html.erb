@@ -9,6 +9,7 @@
 </head>
 <body>
 <div id='body_wrapper'>
+  <%= render 'shared/showroom_header', :showroom => @showroom %>
   <div class="bp">
     <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
     <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
@@ -16,16 +17,17 @@
   <table class="showroom_nav" style="border:1px solid white">
     <tr>
       <td style="border:1px solid white;width:25%">
-        <%= link_to "The Collection", collection_minisite_showroom_url %>
+        <% url = @tracking ? collection_minisite_showroom_path(@tracking) : collection_minisite_showroom_path %>
+        <%= link_to t(:minisite_menu_custom_work_link), url %>
       </td>
       <td style="border:1px solid white;width:25%">
         About <%= content_for :page_title %>
       </td>
       <td style="border:1px solid white;width:25%">
-        Custom Work
+        <%= t(:minisite_menu_custom_work_link) %>
       </td>
       <td style="border:1px solid white;width:25%">
-        Shopping Cart
+        <%=  link_to t(:minisite_menu_shopping_cart_link), shopping_cart_path(@cart), :class=>'my-submit' %>
       </td>
     </tr>
   </table>

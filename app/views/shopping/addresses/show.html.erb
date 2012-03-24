@@ -1,40 +1,38 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>First name:</b>
-  <%= @shopping_address.first_name %>
+  <%= @address.first_name %>
 </p>
 
 <p>
   <b>Last name:</b>
-  <%= @shopping_address.last_name %>
+  <%= @address.last_name %>
 </p>
 
 <p>
   <b>Address1:</b>
-  <%= @shopping_address.address1 %>
+  <%= @address.address1 %>
 </p>
 
 <p>
   <b>Address2:</b>
-  <%= @shopping_address.address2 %>
+  <%= @address.address2 %>
 </p>
 
 <p>
   <b>City:</b>
-  <%= @shopping_address.city %>
+  <%= @address.city %>
 </p>
 
 <p>
   <b>State:</b>
-  <%= @shopping_address.state %>
+  <%= @address.try(:state).try(:abbrev_and_name) %>
 </p>
 
 <p>
   <b>Zip code:</b>
-  <%= @shopping_address.zip_code %>
+  <%= @address.zip_code %>
 </p>
 
 
-<%= link_to 'Edit', edit_shopping_address_path(@shopping_address) %> |
+<%= link_to 'Edit', edit_shopping_address_path(@address) %> |
 <%= link_to 'Back', shopping_addresses_path %>
