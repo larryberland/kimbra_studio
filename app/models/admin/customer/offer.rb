@@ -18,6 +18,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
   has_many :items, :class_name => 'Admin::Customer::Item'       # Items that make up the custom piece
   has_one :showroom, :class_name => "Minisite::Showroom", :dependent => :destroy
 
+  has_one :shopping_item, :class_name => 'Shopping::Item'
+
   before_create :piece_create_default
   before_save :piece_default
   after_update :check_width

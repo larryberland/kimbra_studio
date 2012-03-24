@@ -12,9 +12,18 @@
 
 <img src="<%= @showroom.studio.minisite.image %>" title="<%= @showroom.studio.name %>">
 
-<p>
-  <h3><%=  link_to t(:minisite_showrooms_show_add_to_cart), root_url  %></h3>
-</p>
+<% @showroom.send(:setup_shopping_cart) if @showroom.cart.nil?%>
+<% @shopping_item = ::Shopping::Item.new(:offer => @showroom.offer,
+                                         :cart => @showroom.cart) %>
+<%= form_for(@shopping_item, :remote => true) do |f| %>
+  <p>
+    <%= f.hidden_field :offer_id %>
+    <%= f.hidden_field :cart_id  %>
+    <%= submit_tag 'Add to Cart', :id => 'my_submit' %>
+  </p>
+<% end %>
+<div id='shopping_item'></div>
+
 <p>
   <b>Offer:</b>
   <%= render 'admin/customer/offers/show', :offer => @showroom.offer %>

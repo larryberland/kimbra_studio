@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120216124040) do
+ActiveRecord::Schema.define(:version => 20120317204651) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -400,6 +400,49 @@ ActiveRecord::Schema.define(:version => 20120216124040) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "shopping_addresses", :force => true do |t|
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "address1"
+    t.string   "address2"
+    t.string   "city"
+    t.integer  "state_id"
+    t.string   "zip_code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shopping_addresses", ["state_id"], :name => "index_shopping_addresses_on_state_id"
+
+  create_table "shopping_carts", :force => true do |t|
+    t.integer  "showroom_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shopping_carts", ["showroom_id"], :name => "index_shopping_carts_on_showroom_id"
+
+  create_table "shopping_items", :force => true do |t|
+    t.integer  "cart_id"
+    t.integer  "offer_id"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shopping_items", ["cart_id"], :name => "index_shopping_items_on_cart_id"
+  add_index "shopping_items", ["offer_id"], :name => "index_shopping_items_on_offer_id"
+
+  create_table "shopping_purchases", :force => true do |t|
+    t.integer  "cart_id"
+    t.decimal  "tax"
+    t.decimal  "total"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shopping_purchases", ["cart_id"], :name => "index_shopping_purchases_on_cart_id"
 
   create_table "states", :force => true do |t|
     t.string  "name",                          :null => false

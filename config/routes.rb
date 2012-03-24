@@ -1,15 +1,13 @@
 KimbraStudio::Application.routes.draw do
 
-  namespace :shopping do resources :addresses end
-
-  namespace :shopping do resources :purchases end
-
-  namespace :shopping do resources :items end
-
-  namespace :shopping do resources :carts end
+  namespace :shopping do
+    resources :carts
+    resources :items
+    resources :purchases
+    resources :addresses
+  end
 
   resources :order_items
-
   resources :orders
 
   namespace :minisite do
@@ -48,7 +46,7 @@ KimbraStudio::Application.routes.draw do
       resources :emails do
         member do
           post :generate
-          get  :session_list
+          get :session_list
         end
         resources :offers do
           resources :items
@@ -82,8 +80,8 @@ KimbraStudio::Application.routes.draw do
     resources :orders, :only => [:index, :show]
     resources :addresses
     resources :credit_cards
-    resource  :store_credit, :only => [:show]
-    resource  :overview, :only => [:show]
+    resource :store_credit, :only => [:show]
+    resource :overview, :only => [:show]
   end
 
 end
