@@ -1,35 +1,37 @@
-<table class='shopping-item-index'>
+<div id="shopping_item_index">
+  <table class='shopping-item-index'>
 
-  <thead>
-  <th>Name</th>
-  <th>Price</th>
-  <th>Actions</th>
-  </thead>
-  <tbody>
-  <% total = 0 %>
-  <% items.each do |item| %>
-      <tr>
-        <td>
-          <%= item.try(:offer).try(:name) %>
-        </td>
-        <td>
-          <% total += item.try(:offer).try(:piece).try(:price) %>
-          <%= number_to_currency(item.try(:offer).try(:piece).try(:price)) %>
-        </td>
-        <td><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
-      </tr>
-  <% end if items and items.present? %>
-  <% if total %>
-      <tr>
-        <td>Shipping:</td>
-        <td><%= number_to_currency(15.00) %></td>
-      </tr>
-      <tr>
-        <% total += 15.00 %>
-        <td>Total:</td>
-        <td><%= number_to_currency(total) %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
+    <thead>
+    <th>Name</th>
+    <th>Price</th>
+    <th>Actions</th>
+    </thead>
+    <tbody>
+    <% total = 0 %>
+    <% items.each do |item| %>
+        <tr>
+          <td>
+            <%= item.try(:offer).try(:name) %>
+          </td>
+          <td>
+            <% total += item.try(:offer).try(:piece).try(:price) %>
+            <%= number_to_currency(item.try(:offer).try(:piece).try(:price)) %>
+          </td>
+          <td><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
+        </tr>
+    <% end if items and items.present? %>
+    <% if total %>
+        <tr>
+          <td>Shipping:</td>
+          <td><%= number_to_currency(15.00) %></td>
+        </tr>
+        <tr>
+          <% total += 15.00 %>
+          <td>Total:</td>
+          <td><%= number_to_currency(total) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
 
+</div>

@@ -4,7 +4,7 @@
   <% @showrooms.each do |showroom| %>
       <tr>
         <td>
-          Offers at <%= minisite_showroom_url(showroom.offer.showroom.to_param) %>
+          Offers at <%= link_to "BUY ME!", minisite_showroom_url(showroom.offer.showroom.to_param) %>
         </td>
         <td>
           <%= render 'admin/customer/offers/show', :offer => showroom.offer %>

@@ -71,6 +71,7 @@ en:
   minisite_menu_collection_link: 'The Collection'
   minisite_menu_custom_work_link: 'Custom Work'
   minisite_menu_shopping_cart_link: 'Shopping Cart'
+  minisite_menu_about_link: "About %{studio_name}"
 
   # studios
   studios_new_title: 'Your Studio'

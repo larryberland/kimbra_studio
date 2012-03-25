@@ -19,13 +19,10 @@
     <tr>
       <td style="border:1px solid white;width:25%">
         <% url = @tracking ? collection_minisite_showroom_path(@tracking) : collection_minisite_showroom_path %>
-        <%= link_to t(:minisite_menu_custom_work_link), url %>
+        <%= link_to t(:minisite_menu_collection_link), url %>
       </td>
       <td style="border:1px solid white;width:25%">
-        About <%= content_for :page_title %>
-      </td>
-      <td style="border:1px solid white;width:25%">
-        <%= t(:minisite_menu_custom_work_link) %>
+        <%= link_to t(:minisite_menu_about_link, :studio_name => @showroom.studio.name), about_minisite_showroom_path(@tracking) %>
       </td>
       <td style="border:1px solid white;width:25%">
         <%=  link_to t(:minisite_menu_shopping_cart_link), shopping_cart_path(@cart), :class=>'my-submit' %>
