@@ -1,3 +1,5 @@
+KIMBRA_STUDIO_CONFIG[:mailer][:password] ||= ENV['KIMBRA_STUDIO_PASSWORD']
+
 mailer_config                    = {
     :address              => KIMBRA_STUDIO_CONFIG[:mailer][:address],
     :port                 => KIMBRA_STUDIO_CONFIG[:mailer][:port],

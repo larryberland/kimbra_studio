@@ -4,6 +4,12 @@ class CreateShoppingPurchases < ActiveRecord::Migration
       t.references :cart
       t.decimal :tax
       t.decimal :total
+      t.string :stripe_card_token
+      t.string :stripe_response_id
+      t.string :stripe_paid
+      t.string :stripe_fee
+      t.integer :total_cents
+      t.datetime :purchased_at
 
       t.timestamps
     end

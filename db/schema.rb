@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120317204651) do
+ActiveRecord::Schema.define(:version => 20120325022414) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -402,6 +402,7 @@ ActiveRecord::Schema.define(:version => 20120317204651) do
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
   create_table "shopping_addresses", :force => true do |t|
+    t.integer  "cart_id"
     t.string   "first_name"
     t.string   "last_name"
     t.string   "address1"
@@ -438,11 +439,32 @@ ActiveRecord::Schema.define(:version => 20120317204651) do
     t.integer  "cart_id"
     t.decimal  "tax"
     t.decimal  "total"
+    t.string   "stripe_card_token"
+    t.string   "stripe_response_id"
+    t.string   "stripe_paid"
+    t.string   "stripe_fee"
+    t.integer  "total_cents"
+    t.datetime "purchased_at"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "shopping_purchases", ["cart_id"], :name => "index_shopping_purchases_on_cart_id"
+
+  create_table "shopping_stripe_cards", :force => true do |t|
+    t.integer  "purchase_id"
+    t.string   "country"
+    t.string   "cvc_check"
+    t.integer  "exp_month"
+    t.integer  "exp_year"
+    t.string   "last4"
+    t.string   "stripe_type"
+    t.string   "stripe_object"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "shopping_stripe_cards", ["purchase_id"], :name => "index_shopping_stripe_cards_on_purchase_id"
 
   create_table "states", :force => true do |t|
     t.string  "name",                          :null => false

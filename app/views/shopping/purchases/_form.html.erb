@@ -1,29 +1,66 @@
-<%= form_for(@shopping_purchase) do |f| %>
-  <% if @shopping_purchase.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@shopping_purchase.errors.count, "error") %> prohibited this shopping_purchase from being saved:</h2>
+<% url = @purchase.new_record? ? shopping_cart_purchase_path(@cart) : shopping_cart_purchase_path(@cart) %>
+<%= form_for(@purchase, :url => url) do |f| %>
+    <% if @purchase.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this shopping_purchase from being saved:</h2>
 
-      <ul>
-      <% @shopping_purchase.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @purchase.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :cart_total %><br/>
+      <%= f.text_field :cart_total, :readonly => true, :value => number_to_currency(@purchase.cart_total)%>
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :cart %><br />
-    <%= f.text_field :cart %>
-  </div>
-  <div class="field">
-    <%= f.label :tax %><br />
-    <%= f.text_field :tax %>
-  </div>
-  <div class="field">
-    <%= f.label :total %><br />
-    <%= f.text_field :total %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :tax %><br/>
+      <%= f.text_field :tax %>
+    </div>
+
+    <div class="field">
+      <%= f.label :total %> <br/>
+      <%= f.text_field :total, :readonly => true, :value => number_to_currency(@purchase.calculate_total) %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :card_number, 'Credit Card Number' %> <br>
+      <%= text_field_tag :card_number, nil, :name => nil %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :card_code, 'Security Code on Card (CVV)' %> <br>
+      <%= text_field_tag :card_code, nil, :name => nil %>
+    </div>
+
+    <div class="field">
+      <%= label_tag :card_month, 'Card Expiration' %> <br>
+      <%= select_month nil, {:add_month_numbers => true}, {:name => nil, :id => 'card_month'} %>
+      <%= select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => 'card_year'} %>
+    </div>
+
+    <div class="field">
+      <%= f.hidden_field :cart_id, :value => @purchase.cart.id %>
+      <%= f.hidden_field :stripe_card_token %>
+      <%= f.hidden_field :total_cents, :value => (@purchase.total * 100).to_i %>
+    </div>
+
+    <div id="stripe_error" class='flash_error'>
+
+    </div>
+
+    <div class="actions">
+      <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
+      <%= f.submit text, :id => 'my_submit' %>
+      <span id="spinner" style="display:none">
+          <%= image_tag 'ajax-loader.gif' %>
+      </span>
+    </div>
+
 <% end %>
+
+

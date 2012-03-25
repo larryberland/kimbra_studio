@@ -127,3 +127,7 @@ div.shopping-item-index {
 table.shopping-item-index {
 
 }
+
+#stripe_error {
+    display: none;
+}

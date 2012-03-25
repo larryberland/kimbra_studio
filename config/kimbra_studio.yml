@@ -5,14 +5,17 @@
 # it on deployment with this Capistrano task:#
 
 # task :copy_config_files do
-#   filename = "config/config.yml"
-#   run "cp #{shared_path}/#{filename} #{release_path}/#{filename}"
+#   filenames = %w(kimbra_studio sensitive)
+#   filenames.each do |file|
+#     run "cp #{shared_path}/#{filename} #{release_path}/config/#{filename}"
+#   end
 # end
 # after "deploy:update_code", :copy_config_files
 
 development: &non_production_settings
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
-
+  :s3:
+    bucket_name: test.mytripscrapbook.com
   :carrier_wave:
     :storage: :file
   :mailer:
@@ -20,17 +23,21 @@ development: &non_production_settings
     :domain: 'gmail.com'
     :port: 587
     :user_name: clickplus1@gmail.com  # C ror_ecommerce
-    :password: 'kimbrarul3s'          # C ror_ecommerce
     :authentication: :plain
     :enable_starttls_auto: true
     :perform_deliveries: true
     :default_url_options:
        :host: 'localhost:3000'
+  :stripe:
+    :name: clickplus1@gmail.com
+    :publishable_key_test: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs' # test publishable key
 
 test:
   <<: *non_production_settings
 production:
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
+  :s3:
+    bucket_name: test.mytripscrapbook.com
   :carrier_wave:
     :storage: :file
   :mailer:
@@ -38,9 +45,11 @@ production:
     :domain: 'gmail.com'
     :port: 587
     :user_name: clickplus1@gmail.com  # C ror_ecommerce
-    :password: 'some_cool_password'       # C ror_ecommerce
     :authentication: :plain
     :enable_starttls_auto: true
     :perform_deliveries: true
     :default_url_options:
        :host: 'clickplus.herokuapp.com'
+  :stripe:
+    :name: clickplus1@gmail.com
+    :publishable_key_test: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs' # test publishable key

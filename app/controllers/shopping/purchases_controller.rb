@@ -1,28 +1,38 @@
-class Shopping::PurchasesController < InheritedResources::Base
+module Shopping
+  class PurchasesController < BaseController
+    belongs_to :cart,
+                 :parent_class => Shopping::Cart,
+                 :singleton    => true
 
-  before_filter :set_by_tracking
+    def new
+      new! do
+        @purchase.cart        = @cart
+        @purchase.total       = @cart.to_total
+        @purchase.total_cents = @purchase.total * 100.0
+      end
+    end
 
-  layout 'showroom'
+    def create
+      create! do
+        if @purchase.errors.present?
+          edit_shopping_purchase_path(@purchase)
+        else
+          shopping_stripe_card_path(@purchase.stripe_card)
+        end
+      end
 
-  private
+    end
 
-    # We use tracking number instead of :id in routes. Use tracking to establish showroom.
-  # Use showroom to establish client. Use session to store both.
-  # Client and showroom should always be in the session after the first visit.
-  # We don't support changing between multiple clients or showrooms in one session.
-  def set_by_tracking
-    @showroom = Minisite::Showroom.find_by_tracking(params[:id]) if params[:id]
-    @showroom = Minisite::Showroom.find(session[:showroom_id]) if @showroom.nil? && session[:showroom_id]
-    session[:showroom_id] = @showroom.id
-    @client = @showroom.client if @showroom
-    session[:client_id] = @client.id if @client
-    @client = MyStudio::Client.find(session[:client_id]) if @client.nil? && session[:client_id].present?
-    params[:showroom_id] = @showroom.id
-    @cart = if @showroom.cart
-              @showroom.cart
-            else
-              Shopping::Cart.new(:showroom => @showroom)
-            end
-    @cart = @showroom.cart
+    def update
+      update! do
+        if @purchase.errors.present?
+          edit_shopping_purchase_path(@purchase)
+        else
+          shopping_stripe_card_path(@purchase.stripe_card)
+        end
+      end
+
+    end
+
   end
 end

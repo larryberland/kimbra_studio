@@ -39,7 +39,10 @@
     <%= f.label :zip_code %><br />
     <%= f.text_field :zip_code %>
   </div>
+    <div class="field">
+      <%= f.hidden_field :cart_id, :value => @cart.id %>
+    </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit t(:shopping_submit_address), :id => 'my_submit' %>
   </div>
 <% end %>

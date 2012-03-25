@@ -64,6 +64,9 @@ en:
 
   # devise views end
 
+  # stripe
+  stripe_description_prefix: 'Kimbra Studio via ClickPlus1'
+
   # minisite menu buttons
   minisite_menu_collection_link: 'The Collection'
   minisite_menu_custom_work_link: 'Custom Work'
@@ -169,7 +172,14 @@ en:
   # myaccount/overview
   myaccount_overview_link: 'My Account'
 
-  # shopping
-  # item
+  # shopping/cart
+
+  # shopping/item
   shopping_item_destroy_link: 'Remove From Cart'
 
+  # shopping/address
+  shopping_submit_address: 'Purchase Now'
+
+  # shopping/purchase
+  shopping_purchases_submit_new: 'Submit Payment'
+  shopping_purchases_submit_edit: 'Submit Payment'

@@ -1,6 +1,7 @@
 class CreateShoppingAddresses < ActiveRecord::Migration
   def change
     create_table :shopping_addresses do |t|
+      t.references :cart
       t.string :first_name
       t.string :last_name
       t.string :address1
