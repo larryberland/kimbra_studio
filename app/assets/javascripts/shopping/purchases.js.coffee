@@ -10,8 +10,6 @@ subscription =
     frm = $('form.new_shopping_purchase')
     if !frm[0]
       frm = $('form.edit_shopping_purchase')
-    if !frm[0]
-      alert('no form1')
     frm.submit ->
       $('input[type=submit]').attr('disabled', true)
       if $('#card_number').length
@@ -34,8 +32,6 @@ subscription =
       frm = $('form.new_shopping_purchase')
       if !frm[0]
         frm = $('form.edit_shopping_purchase')
-      if !frm[0]
-        alert('no form 2')
       frm[0].submit()
     else
       $('#stripe_error').text(response.error.message)

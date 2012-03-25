@@ -16,6 +16,7 @@ KimbraStudio::Application.routes.draw do
     resources :showrooms do
       member do
         get :collection
+        get :about
       end
     end
   end

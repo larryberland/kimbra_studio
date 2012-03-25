@@ -44,3 +44,4 @@ face*.jpg
 /tmp
 
 /config/database.yml
+/config/kimbra_studio.yml

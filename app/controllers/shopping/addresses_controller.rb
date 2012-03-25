@@ -11,7 +11,7 @@ module Shopping
         if @address.errors.present?
           edit_shopping_address_path(@address)
         else
-          new_shopping_cart_purchas_path(@cart)
+          new_shopping_cart_purchase_path(@cart)
         end
       end
     end
