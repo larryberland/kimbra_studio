@@ -1,4 +1,5 @@
 class MyStudio::Portrait < ActiveRecord::Base
+
   attr_accessible :image, :remote_image_url, :description, :active, :faces
   mount_uploader :image, AmazonUploader
 
@@ -49,7 +50,7 @@ class MyStudio::Portrait < ActiveRecord::Base
     @portrait_image ||= image.to_image(:face)
   end
 
-  private
+  private #===============================================================================
 
   def dump_resize(img, width, height)
     dump('resize', img, "portrait_#{id}_size_#{width}_x_#{height}.jpg")

@@ -2,7 +2,7 @@
 
 <table>
   <tr>
-    <th>Showroom</th>
+    <th>Email</th>
     <th></th>
     <th></th>
     <th></th>
@@ -10,7 +10,7 @@
 
 <% @shopping_carts.each do |shopping_cart| %>
   <tr>
-    <td><%= shopping_cart.showroom %></td>
+    <td><%= shopping_cart.email %></td>
     <td><%= link_to 'Show', shopping_cart %></td>
     <td><%= link_to 'Edit', edit_shopping_cart_path(shopping_cart) %></td>
     <td><%= link_to 'Destroy', shopping_cart, confirm: 'Are you sure?', method: :delete %></td>

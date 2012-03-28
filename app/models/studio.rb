@@ -22,7 +22,6 @@ class Studio < ActiveRecord::Base
 
   has_one :info, :class_name => 'MyStudio::Info', :dependent => :destroy
   has_one :minisite, :class_name => 'MyStudio::Minisite', :dependent =>:destroy
-  has_one :showroom, :class_name => "Minisite::Showroom", :dependent => :destroy
 
   before_save :set_user_info
 

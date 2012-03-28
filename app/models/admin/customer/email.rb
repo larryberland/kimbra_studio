@@ -67,8 +67,6 @@ class Admin::Customer::Email < ActiveRecord::Base
       offer
     end
 
-    Minisite::Showroom.generate(studio_session.studio, studio_session.client, email)
-
     email.offers = offers
     email.generated_at = Time.now
     email.save

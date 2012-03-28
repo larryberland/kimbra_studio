@@ -70,7 +70,7 @@ class MyStudioSeeds
           end
 
           portraits.compact! unless portraits.nil?
-
+          puts "portraits compacted."
           s = MyStudio::Session.create(session_attrs.merge(:client => client, :session_at => index.days.ago))
           s.portraits = portraits unless portraits.nil?
           s.category = Category.find_by_name(session_attrs['name'])
