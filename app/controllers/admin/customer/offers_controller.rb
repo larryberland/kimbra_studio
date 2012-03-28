@@ -81,7 +81,7 @@ class Admin::Customer::OffersController < ApplicationController
   private #===========================================================================
 
   def load_email
-    @email = Admin::Customer::Email.where(:tracking => params[:email_id]) if params[:email_id]
+    @email = Admin::Customer::Email.find_by_tracking(params[:email_id]) if params[:email_id]
   end
 
   def set_by_tracking
