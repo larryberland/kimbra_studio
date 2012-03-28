@@ -47,13 +47,11 @@
       <% end %>
       <div class="actions">
         <%= f.submit :id => 'my_submit' %>
-        <span id="spinner" style="display:none">
-          <%= image_tag 'ajax-loader.gif' %>
-        </span>
+        <span id="spinner" style="display:none"></span>
       </div>
   <% end %>
 </div>
 
 <% if @admin_customer_email.id %>
-<%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
+    <%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
 <% end %>

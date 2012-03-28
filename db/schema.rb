@@ -177,18 +177,6 @@ ActiveRecord::Schema.define(:version => 20120325022414) do
     t.datetime "updated_at"
   end
 
-  create_table "minisite_showrooms", :force => true do |t|
-    t.integer  "client_id"
-    t.integer  "studio_id"
-    t.integer  "email_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "minisite_showrooms", ["client_id"], :name => "index_minisite_showrooms_on_client_id"
-  add_index "minisite_showrooms", ["email_id"], :name => "index_minisite_showrooms_on_email_id"
-  add_index "minisite_showrooms", ["studio_id"], :name => "index_minisite_showrooms_on_studio_id"
-
   create_table "my_studio_clients", :force => true do |t|
     t.string   "name"
     t.string   "email"
@@ -417,12 +405,13 @@ ActiveRecord::Schema.define(:version => 20120325022414) do
   add_index "shopping_addresses", ["state_id"], :name => "index_shopping_addresses_on_state_id"
 
   create_table "shopping_carts", :force => true do |t|
-    t.integer  "showroom_id"
+    t.integer  "email_id"
+    t.string   "tracking"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "shopping_carts", ["showroom_id"], :name => "index_shopping_carts_on_showroom_id"
+  add_index "shopping_carts", ["email_id"], :name => "index_shopping_carts_on_email_id"
 
   create_table "shopping_items", :force => true do |t|
     t.integer  "cart_id"

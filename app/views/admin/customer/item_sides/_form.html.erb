@@ -25,7 +25,8 @@
 
     <div class="field">
       <%= f.label :image_custom, 'Custom Kimbra Part:' %>
-      <%= f.file_field :image_custom %><br/>
+      <%= f.file_field :image_custom %>
+      <br/>
       <%= f.label :remote_image_custom_url, 'or Part URL' %>
       <%= f.text_field :remote_image_custom_url %>
     </div>
@@ -33,7 +34,8 @@
 
     <div class="field">
       <%= f.label :image_stock, 'Portrait:' %>
-      <%= f.file_field :image_stock %><br/>
+      <%= f.file_field :image_stock %>
+      <br/>
       <%= f.label :remote_image_stock_url, 'or Portrait URL' %>
       <%= f.text_field :remote_image_stock_url %>
     </div>
@@ -41,8 +43,6 @@
 
     <div class="actions">
       <%= f.submit :id => 'my_submit' %>
-      <span id="spinner" style="display:none">
-        <%= image_tag 'ajax-loader.gif' %>
-      </span>
+      <span id="spinner" style="display:none"></span>
     </div>
 <% end %>

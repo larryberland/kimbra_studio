@@ -38,8 +38,8 @@ class Shopping::Purchase < ActiveRecord::Base
   end
 
   def stripe_description
-    "Charge for Kimbra Studios... for #{cart.showroom.email}"
-    # TODO  "Charge for #{t(:stripe_description_prefix)}... for #{cart.showroom.email}"
+    "Charge for Kimbra Studios... for #{cart.email}"
+    # TODO  "Charge for #{t(:stripe_description_prefix)}... for #{cart.email}"
   end
 
   def create_stripe_card(stripe_card_hash)

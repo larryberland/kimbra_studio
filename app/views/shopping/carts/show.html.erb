@@ -1,5 +1,5 @@
 <div class='shopping-item-index'>
-  You have <%= @cart.try(:items).try(:size) %> pieces in your cart. |
+  You have <span id="cart_count"><%= @cart.try(:items).try(:size) %></span> pieces in your cart.
 
   <% url = if @cart.purchase.present?
              edit_shopping_cart_purchase_path(@cart)
@@ -8,12 +8,14 @@
            else
              new_shopping_address_path
            end %>
-  <%= link_to 'Checkout', url, :class => 'button-link' %>
+  <% if @cart.try(:items).try(:size).to_i > 0 %>
+      <%= link_to 'Checkout', url, :class => 'button-link' %>
+  <% end %>
 </div>
 <br>
 <div class='cart-show'>
-  <%= render 'shopping/items/index', :items => @cart.items %>
+  <%= render('shopping/items/index', :items => @cart.items)if @cart.try(:items).try(:size).to_i > 0 %>
 </div>
 
-<%= link_to 'Edit', edit_shopping_cart_path(@cart) %> |
+<%= link_to 'Edit', edit_shopping_cart_path(@cart.id) %> |
 <%= link_to 'Back', shopping_carts_path %>

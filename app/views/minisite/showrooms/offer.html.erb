@@ -1,11 +1,9 @@
-<% @showroom.send(:setup_shopping_cart) if @showroom.cart.nil?%>
-<% @shopping_item = ::Shopping::Item.new(:offer => @admin_customer_offer,
-                                         :cart => @showroom.cart) %>
 <%= form_for(@shopping_item, :remote => true) do |f| %>
   <p>
     <%= f.hidden_field :offer_id %>
     <%= f.hidden_field :cart_id  %>
     <%= submit_tag 'Add to Cart', :id => 'my_submit' %>
+    <span id="spinner" style="display:none"></span>
   </p>
 <% end %>
 <div id='shopping_item'></div>
@@ -17,16 +15,10 @@
 
 <p>
   <b>Client:</b>
-  <%= render 'my_studio/clients/show', :client => @showroom.client %>
+  <%= render 'my_studio/clients/show', :client => @client %>
 </p>
 
 <p>
   <b>Studio:</b>
-  <%= render "studios/show", :studio => @showroom.studio %>
+  <%= render "studios/show", :studio => @studio %>
 </p>
-
-
-<%= link_to 'Edit', edit_minisite_showroom_path(@showroom) %> |
-<%= link_to 'Back', minisite_showrooms_path %>
-
-<p><%= Time.now %></p>

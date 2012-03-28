@@ -1,5 +1,6 @@
 module Shopping
   class PurchasesController < BaseController
+
     belongs_to :cart,
                  :parent_class => Shopping::Cart,
                  :singleton    => true

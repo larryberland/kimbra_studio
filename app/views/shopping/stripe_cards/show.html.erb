@@ -1,6 +1,6 @@
 <p>
   <b>Purchase:</b>
-  <%= @stripe_card.purchase %>
+  <%= @stripe_card.purchase.total.to_s %>
 </p>
 
 <p>

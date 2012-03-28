@@ -1,72 +1,83 @@
 <%= form_for(@order) do |f| %>
-  <% if @order.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
+    <% if @order.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@order.errors.count, "error") %> prohibited this order from being saved:</h2>
 
-      <ul>
-      <% @order.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+          <ul>
+            <% @order.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <%= f.label :number %>
+      <br/>
+      <%= f.text_field :number %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :number %><br />
-    <%= f.text_field :number %>
-  </div>
-  <div class="field">
-    <%= f.label :ip_address %><br />
-    <%= f.text_field :ip_address %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :state %><br />
-    <%= f.text_field :state %>
-  </div>
-  <div class="field">
-    <%= f.label :user %><br />
-    <%= f.text_field :user %>
-  </div>
-  <div class="field">
-    <%= f.label :bill_address %><br />
-    <%= f.text_field :bill_address %>
-  </div>
-  <div class="field">
-    <%= f.label :ship_address %><br />
-    <%= f.text_field :ship_address %>
-  </div>
-  <div class="field">
-    <%= f.label :coupon %><br />
-    <%= f.text_field :coupon %>
-  </div>
-  <div class="field">
-    <%= f.label :active %><br />
-    <%= f.check_box :active %>
-  </div>
-  <div class="field">
-    <%= f.label :shipped %><br />
-    <%= f.check_box :shipped %>
-  </div>
-  <div class="field">
-    <%= f.label :shipment_counter %><br />
-    <%= f.number_field :shipment_counter %>
-  </div>
-  <div class="field">
-    <%= f.label :calculated_at %><br />
-    <%= f.datetime_select :calculated_at %>
-  </div>
-  <div class="field">
-    <%= f.label :completed_at %><br />
-    <%= f.datetime_select :completed_at %>
-  </div>
-  <div class="actions">
-    <%= f.submit :id => 'my_submit' %>
-    <span id="spinner" style="display:none">
-      <%= image_tag 'ajax-loader.gif' %>
-    </span>
-  </div>
+    <div class="field">
+      <%= f.label :ip_address %>
+      <br/>
+      <%= f.text_field :ip_address %>
+    </div>
+    <div class="field">
+      <%= f.label :email %>
+      <br/>
+      <%= f.text_field :email %>
+    </div>
+    <div class="field">
+      <%= f.label :state %>
+      <br/>
+      <%= f.text_field :state %>
+    </div>
+    <div class="field">
+      <%= f.label :user %>
+      <br/>
+      <%= f.text_field :user %>
+    </div>
+    <div class="field">
+      <%= f.label :bill_address %>
+      <br/>
+      <%= f.text_field :bill_address %>
+    </div>
+    <div class="field">
+      <%= f.label :ship_address %>
+      <br/>
+      <%= f.text_field :ship_address %>
+    </div>
+    <div class="field">
+      <%= f.label :coupon %>
+      <br/>
+      <%= f.text_field :coupon %>
+    </div>
+    <div class="field">
+      <%= f.label :active %>
+      <br/>
+      <%= f.check_box :active %>
+    </div>
+    <div class="field">
+      <%= f.label :shipped %>
+      <br/>
+      <%= f.check_box :shipped %>
+    </div>
+    <div class="field">
+      <%= f.label :shipment_counter %>
+      <br/>
+      <%= f.number_field :shipment_counter %>
+    </div>
+    <div class="field">
+      <%= f.label :calculated_at %>
+      <br/>
+      <%= f.datetime_select :calculated_at %>
+    </div>
+    <div class="field">
+      <%= f.label :completed_at %>
+      <br/>
+      <%= f.datetime_select :completed_at %>
+    </div>
+    <div class="actions">
+      <%= f.submit :id => 'my_submit' %>
+      <span id="spinner" style="display:none"></span>
+    </div>
 <% end %>

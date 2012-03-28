@@ -1,1 +1,3 @@
 $("#shopping_item").html("<%= escape_javascript(render(@item))%>");
+$("#shopping_item").effect("highlight", {}, 1500);
+$("#spinner").toggle();
