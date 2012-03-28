@@ -6,7 +6,7 @@ class Admin::Customer::OffersController < ApplicationController
   # GET /admin/customer/offers
   # GET /admin/customer/offers.json
   def index
-    @admin_customer_offers = Admin::Customer::Offer.where('email_id=?', params[:email_id]).all
+    @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @admin_customer_offers }
@@ -81,7 +81,7 @@ class Admin::Customer::OffersController < ApplicationController
   private #===========================================================================
 
   def load_email
-    @email = Admin::Customer::Email.find(params[:email_id]) if params[:email_id]
+    @email = Admin::Customer::Email.where(:tracking => params[:email_id]) if params[:email_id]
   end
 
   def set_by_tracking
