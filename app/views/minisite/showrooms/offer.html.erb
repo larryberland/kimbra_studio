@@ -1,5 +1,5 @@
 <% @showroom.send(:setup_shopping_cart) if @showroom.cart.nil?%>
-<% @shopping_item = ::Shopping::Item.new(:offer => @showroom.offer,
+<% @shopping_item = ::Shopping::Item.new(:offer => @admin_customer_offer,
                                          :cart => @showroom.cart) %>
 <%= form_for(@shopping_item, :remote => true) do |f| %>
   <p>
@@ -12,7 +12,7 @@
 
 <p>
   <b>Offer:</b>
-  <%= render 'admin/customer/offers/show', :offer => @showroom.offer %>
+  <%= render 'admin/customer/offers/show', :offer => @admin_customer_offer %>
 </p>
 
 <p>

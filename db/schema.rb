@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120325022414) do
     t.integer  "my_studio_session_id"
     t.boolean  "active",               :default => true
     t.text     "message"
+    t.string   "tracking"
     t.string   "activation_code"
     t.datetime "generated_at"
     t.datetime "sent_at"
@@ -58,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20120325022414) do
   end
 
   add_index "admin_customer_emails", ["my_studio_session_id"], :name => "index_admin_customer_emails_on_my_studio_session_id"
+  add_index "admin_customer_emails", ["tracking"], :name => "index_admin_customer_emails_on_tracking"
 
   create_table "admin_customer_item_sides", :force => true do |t|
     t.integer  "item_id"
@@ -87,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20120325022414) do
   create_table "admin_customer_offers", :force => true do |t|
     t.integer  "email_id"
     t.integer  "piece_id"
+    t.string   "tracking"
     t.string   "image"
     t.string   "image_front"
     t.string   "image_back"
@@ -105,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20120325022414) do
 
   add_index "admin_customer_offers", ["email_id"], :name => "index_admin_customer_offers_on_email_id"
   add_index "admin_customer_offers", ["piece_id"], :name => "index_admin_customer_offers_on_piece_id"
+  add_index "admin_customer_offers", ["tracking"], :name => "index_admin_customer_offers_on_tracking"
 
   create_table "admin_merchandise_parts", :force => true do |t|
     t.integer  "piece_id"
@@ -174,20 +178,16 @@ ActiveRecord::Schema.define(:version => 20120325022414) do
   end
 
   create_table "minisite_showrooms", :force => true do |t|
-    t.integer  "offer_id"
     t.integer  "client_id"
     t.integer  "studio_id"
     t.integer  "email_id"
-    t.string   "tracking"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "minisite_showrooms", ["client_id"], :name => "index_minisite_showrooms_on_client_id"
   add_index "minisite_showrooms", ["email_id"], :name => "index_minisite_showrooms_on_email_id"
-  add_index "minisite_showrooms", ["offer_id"], :name => "index_minisite_showrooms_on_offer_id"
   add_index "minisite_showrooms", ["studio_id"], :name => "index_minisite_showrooms_on_studio_id"
-  add_index "minisite_showrooms", ["tracking"], :name => "index_minisite_showrooms_on_tracking"
 
   create_table "my_studio_clients", :force => true do |t|
     t.string   "name"

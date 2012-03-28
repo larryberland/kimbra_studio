@@ -1,30 +1,40 @@
 class Minisite::ShowroomsController < InheritedResources::Base
 
-  before_filter :set_by_tracking
-
   layout 'showroom'
 
-  #    minisite_showrooms GET    /minisite/showrooms(.:format)                                                   {:action=>"index", :controller=>"minisite/showrooms"}
-  #                       POST   /minisite/showrooms(.:format)                                                   {:action=>"create", :controller=>"minisite/showrooms"}
-  # new_minisite_showroom GET    /minisite/showrooms/new(.:format)                                               {:action=>"new", :controller=>"minisite/showrooms"}
-  #edit_minisite_showroom GET    /minisite/showrooms/:id/edit(.:format)                                          {:action=>"edit", :controller=>"minisite/showrooms"}
-  #     minisite_showroom GET    /minisite/showrooms/:id(.:format)                                               {:action=>"show", :controller=>"minisite/showrooms"}
-  #                       PUT    /minisite/showrooms/:id(.:format)                                               {:action=>"update", :controller=>"minisite/showrooms"}
-  #                       DELETE /minisite/showrooms/:id(.:format)                                               {:action=>"destroy", :controller=>"minisite/showrooms"}
-  #collection_minisite_showroom GET    /minisite/showrooms/:id/collection(.:format)                                    {:action=>"collection", :controller=>"minisite/showrooms"}
-
-  #respond_to do |format|
-  #  format.css do
-  #    render :text => Sass::Engine.new(render_to_string, syntax: :scss, cache: false).render
-  #  end
-          #end
-
   def collection
-    @showroom  = Minisite::Showroom.find_by_tracking(params[:id])
-    @showrooms = Minisite::Showroom.where('email_id = ?', @showroom.email_id)
+    @admin_customer_email = Admin::Customer::Email.where(:tracking => params[:id]).first
+    set_client_and_cart
   end
 
+  def offer
+    @admin_customer_offer = Admin::Customer::Offer.where(:tracking => params[:id]).first
+    @admin_customer_email = @admin_customer_offer.email
+    set_client_and_cart
+  end
+
+  def about
+      @admin_customer_email = Admin::Customer::Email.where(:tracking => params[:id]).first
+      set_client_and_cart
+    end
+
   private #=======================================================
+
+  # We use tracking for offers and emails. A showroom equates to an email:
+  # it is a collection of offers. Because we are using tracking instead of ids
+  # we need to load the email and offer from tracking.
+  def set_client_and_cart
+    @showroom = @admin_customer_email.showroom
+    @client = @admin_customer_email.my_studio_session.client
+    session[:client_id] = @client.id if @client
+    @client = MyStudio::Client.find(session[:client_id]) if @client.nil? && session[:client_id].present?
+    @cart = if @showroom.cart
+              @showroom.cart
+            else
+              Shopping::Cart.new(:showroom => @showroom)
+            end
+    @cart = @showroom.cart
+  end
 
   # We use tracking number instead of :id in routes. Use tracking to establish showroom.
   # Use showroom to establish client. Use session to store both.

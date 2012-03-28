@@ -1,37 +1,27 @@
 class Minisite::Showroom < ActiveRecord::Base
 
   belongs_to :studio
-  belongs_to :offer, :class_name => "Admin::Customer::Offer"
   belongs_to :client, :class_name => "MyStudio::Client"
   belongs_to :email, :class_name => "Admin::Customer::Email"
 
   has_one :cart, :class_name => 'Shopping::Cart'
 
-  attr_accessible :offer, :offer_attributes,
-                  :studio, :studio_attributes,
+  attr_accessible :studio, :studio_attributes,
                   :client, :client_attributes,
                   :email, :email_attributes,
-                  :cart, :cart_attributes,
-                  :tracking
+                  :cart, :cart_attributes
 
-  accepts_nested_attributes_for :offer, :studio, :client, :email, :cart
+  accepts_nested_attributes_for :studio, :client, :email, :cart
 
   before_create :setup_shopping_cart
 
-  def self.generate(offer, studio, client, email)
-    tracking = UUID.random_tracking_number
-    Minisite::Showroom.create(:offer    => offer,
-                              :studio   => studio,
+  def self.generate(studio, client, email)
+    Minisite::Showroom.create(:studio   => studio,
                               :client   => client,
-                              :email    => email,
-                              :tracking => tracking)
+                              :email    => email)
   end
 
-  def to_param
-    tracking
-  end
-
-  private
+  private #==============================================================================
 
   def setup_shopping_cart
     self.cart ||= Shopping::Cart.new

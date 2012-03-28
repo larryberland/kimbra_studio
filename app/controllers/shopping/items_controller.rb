@@ -13,7 +13,7 @@ module Shopping
     def create
       params[:cart_id] = params[:shopping_item][:cart_id]
       params[:offer_id] = params[:shopping_item][:offer_id]
-      @showroom = Admin::Customer::Offer.find(params[:offer_id]).showroom
+      @showroom = Admin::Customer::Offer.find(params[:offer_id]).email.showroom
       create!
     end
 

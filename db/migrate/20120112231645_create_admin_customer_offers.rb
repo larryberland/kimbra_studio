@@ -3,7 +3,7 @@ class CreateAdminCustomerOffers < ActiveRecord::Migration
     create_table :admin_customer_offers do |t|
       t.references :email
       t.references :piece
-
+      t.string :tracking
       t.string :image
       t.string :image_front
       t.string :image_back
@@ -23,5 +23,6 @@ class CreateAdminCustomerOffers < ActiveRecord::Migration
     end
     add_index :admin_customer_offers, :email_id
     add_index :admin_customer_offers, :piece_id
+    add_index :admin_customer_offers, :tracking
   end
 end

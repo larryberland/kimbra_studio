@@ -4,6 +4,7 @@ class CreateAdminCustomerEmails < ActiveRecord::Migration
       t.references :my_studio_session
       t.boolean :active, :default => true
       t.text :message
+      t.string :tracking
       t.string :activation_code # time_limit activation code for offer
       t.datetime :generated_at # click_plus created email with offers
       t.datetime :sent_at      # click_plus sent email out
@@ -13,5 +14,6 @@ class CreateAdminCustomerEmails < ActiveRecord::Migration
       t.timestamps
     end
     add_index :admin_customer_emails, :my_studio_session_id
+    add_index :admin_customer_emails, :tracking
   end
 end

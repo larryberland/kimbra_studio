@@ -87,6 +87,7 @@ class MyStudioSeeds
         if my_studio.save
           puts "Finished!Created studio: #{my_studio.name}, with owner: #{my_studio.owner.first_name} #{my_studio.owner.last_name} (login with #{my_studio.owner.email}/#{password}) and background: #{my_studio.minisite.bgcolor}"
           puts "Don't forget to activate the owner using the activation URL spat out earlier in this seeds job."
+          puts "OR check the email that arrived to the store owner and click on the activation link!"
         else
           puts "CRAP! my_studio #{my_studio.name} errors=>#{my_studio.errors.full_messages.join(', ')}"
         end
