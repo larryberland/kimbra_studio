@@ -14,8 +14,9 @@
             <%= item.try(:offer).try(:name) %>
           </td>
           <td>
-            <% total += item.try(:offer).try(:piece).try(:price) %>
-            <%= number_to_currency(item.try(:offer).try(:piece).try(:price)) %>
+            <% item_price = item.price.to_f %>
+            <% total += item_price %>
+            <%= number_to_currency(item_price) %>
           </td>
           <td><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
         </tr>
