@@ -1,6 +1,8 @@
 class MyStudio::Portrait < ActiveRecord::Base
 
-  attr_accessible :image, :remote_image_url, :description, :active, :faces
+  attr_accessible :image, :remote_image_url, :description, :active, :faces,
+                  :my_studio_session, :my_studio_session_id
+
   mount_uploader :image, AmazonUploader
 
   belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => "my_studio_session_id"

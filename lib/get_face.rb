@@ -16,7 +16,8 @@ class GetFace
   end
 
   def perform(portrait)
-    r = request(URI.escape(portrait.image_url(:face)))
+    # We used to escape this and now it doesn't work??url = URI.escape(portrait.image_url(:face))
+    r = request(portrait.image_url(:face))
     puts "error=>#{r['error_code']} msg=>#{r['error_message']}" if r['error_code'].present?
 
     unless r['error_code'].present?
