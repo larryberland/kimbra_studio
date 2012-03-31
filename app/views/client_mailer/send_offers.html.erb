@@ -1,5 +1,9 @@
 <%= render :partial => '/shared/showroom_header', :locals => {:studio => @studio} %>
 
+<p>
+  <%= link_to "Email not displaying nicely? Click here to view as web page.", collection_minisite_showroom_url(offer.email) %>
+</p>
+
 <p><%= @client.name %>,</p>
 <p>
   <%= @email.message %>
@@ -24,3 +28,7 @@
       </tr>
   <% end %>
 </table>
+
+<p>
+  <%= link_to "Email not displaying nicely? Click here to view as web page.", collection_minisite_showroom_url(offer.email) %>
+</p>
