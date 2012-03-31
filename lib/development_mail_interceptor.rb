@@ -7,7 +7,12 @@ class DevelopmentMailInterceptor
       puts message.body.to_s
     end
     message.subject = "[#{message.to}] #{message.subject}"
-    message.to = ["hokahey100@gmail.com", 'jim@jimjames.org']
+    if `hostname`.match(/james|chapterhouse/i)
+      message.to = ['jim@jimjames.org']
+    else
+      message.to = ["hokahey100@gmail.com"]
+    end
+    puts "Sending email to #{message.to}"
   end
 
 end

@@ -1,11 +1,12 @@
-<% studio = @email.my_studio_session.studio %>
+<%= render :partial => '/shared/showroom_header', :locals => {:studio => @studio} %>
+
 <p><%= @client.name %>,</p>
 <p>
   <%= @email.message %>
 </p>
 <p>
   Brought to you by:<br>
-  <%= studio.name %>
+  <%= @studio.name %>
 </p>
 <p>
   Visit us again <%= root_url %>
