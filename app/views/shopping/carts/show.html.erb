@@ -16,6 +16,3 @@
 <div class='cart-show'>
   <%= render('shopping/items/index', :items => @cart.items)if @cart.try(:items).try(:size).to_i > 0 %>
 </div>
-
-<%= link_to 'Edit', edit_shopping_cart_path(@cart.id) %> |
-<%= link_to 'Back', shopping_carts_path %>

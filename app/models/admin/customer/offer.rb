@@ -41,10 +41,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
   #             :face => face within this portrait to use
   def self.generate(email, piece, portrait_parts_list)
     tracking = UUID.random_tracking_number
-    offer = Admin::Customer::Offer.create(:tracking => tracking,
-                                          :email => email,
-                                          :piece => piece,
-                                          :portrait_parts_list => portrait_parts_list)
+    offer    = Admin::Customer::Offer.create(:tracking            => tracking,
+                                             :email               => email,
+                                             :piece               => piece,
+                                             :portrait_parts_list => portrait_parts_list)
     offer.assemble(piece)
     offer
   end
@@ -89,7 +89,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     self
   end
 
-  # span text for Offer
+          # span text for Offer
   def to_image_span
     text = name.to_s
     text = piece.to_image_span if piece.present?
@@ -105,6 +105,27 @@ class Admin::Customer::Offer < ActiveRecord::Base
     # need to redraw the offer image
     create_custom_image
   end
+
+  def price
+    v = if piece
+          if piece.price
+            piece.price
+          else
+            "KBS::Missing price for piece=>#{piece.inspect}"
+          end
+        else
+          "KBS::Missing piece info for offer=>#{self.inspect}"
+        end
+    if v.kind_of? String
+      # tell jim we don't have price data
+      Rails.logger.warn(v)
+      v = 200.0
+    elsif v < 1.0
+      v = 200.0
+    end
+    v
+  end
+
 
   private #===========================================================================
 
@@ -132,8 +153,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
       h << item.part.piece_layout.h
       w << item.part.piece_layout.w
     end
-    height       = h.max
-    width        = w.sum
+    height = h.max
+    width  = w.sum
     puts "size=>#{width}x#{height}"
     custom_piece = image_new(width, height)
     items.each_with_index do |item, index|

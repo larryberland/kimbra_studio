@@ -1,0 +1,45 @@
+<div class="show">
+
+  <% url = @admin_customer_offer.id.nil? ? minisite_offers_path(@admin_customer_email) : minisite_offer_path(@admin_customer_offer) %>
+  <%= form_for(@admin_customer_offer, :url => url, :html => {:multipart => true}) do |f| %>
+      <% if @admin_customer_offer.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@admin_customer_offer.errors.count, "error") %> prohibited this admin_email_offer from
+              being
+              saved:</h2>
+
+            <ul>
+              <% @admin_customer_offer.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+      <% end %>
+
+      <div class="field">
+        <%= f.label :name %>
+        <br/>
+        <%= f.text_field :name, :readonly => true %>
+      </div>
+      <div class="field">
+        <b>Kimbra Piece:</b>
+        <%= cw_div_image(@admin_customer_offer.piece) %>
+      </div>
+      <div class="field">
+        <b>Custom Piece:</b><br>
+        <%= cw_div_image(@admin_customer_offer, :image => 'image_front', :version => :original) %>
+      </div>
+      <% if @admin_customer_offer.back.present? %>
+          <div class="field">
+            <b>Custom Piece Side 2:</b><br>
+            <%= cw_div_image(@admin_customer_offer, :image => 'image_back', :version => :original) %>
+          </div>
+      <% end %>
+
+      <div class="actions">
+        <%= f.submit :id => 'my_submit' %>
+        <span id="spinner" style="display:none"></span>
+      </div>
+  <% end %>
+</div>
+

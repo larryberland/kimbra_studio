@@ -10,7 +10,7 @@
 </head>
 <body>
 <div id='body_wrapper'>
-  <%= render 'shared/showroom_header', :studio => @studio %>
+  <%= render 'shared/minisite_header', :studio => @studio %>
   <div class="bp">
     <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
     <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
@@ -18,13 +18,15 @@
   <table class="showroom_nav" style="border:1px solid white">
     <tr>
       <td style="border:1px solid white;width:25%">
-        <%= link_to t(:minisite_menu_collection_link), collection_minisite_showroom_path(@admin_customer_email.tracking) %>
+        <%= link_to t(:minisite_menu_collection_link), minisite_email_offers_path(@admin_customer_email.tracking) %>
       </td>
       <td style="border:1px solid white;width:25%">
-        <%= link_to t(:minisite_menu_about_link, :studio_name => @studio.name), about_minisite_showroom_path(@admin_customer_email.tracking) %>
+        <%= link_to t(:minisite_menu_about_link, :studio_name => @studio.name), about_minisite_email_path(@admin_customer_email.tracking) %>
       </td>
       <td style="border:1px solid white;width:25%">
-        <%=  link_to t(:minisite_menu_shopping_cart_link), shopping_cart_path(@cart.tracking), :class=>'my-submit' %>
+        <% text = t(:minisite_menu_shopping_cart_link) %>
+        <!-- text += " #{pluralize(@cart.try(:items).try(:size), 'Item')}" -->
+        <%=  link_to text, shopping_cart_path(@cart.tracking), :class=>'my-submit' %>
       </td>
     </tr>
   </table>

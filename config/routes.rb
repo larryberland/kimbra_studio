@@ -13,13 +13,13 @@ KimbraStudio::Application.routes.draw do
   resources :orders
 
   namespace :minisite do
-    resources :showrooms do
+    resources :emails do
       member do
-        get :offer
         get :about
-        get :collection
       end
+      resources :offers
     end
+    resources :offers
   end
 
   resources :image_layouts

@@ -3,12 +3,18 @@
 <table width="500" cellspacing="0" cellpadding="4" border="0" bgcolor="#dee299" align="center">
   <tbody>
   <tr>
-    <td align=center colspan=2>
-      *** TODO imagine thumbs of offers here ***
-    </td>
+    <% span = @admin_customer_email.offers.try(:size) %>
+    <% @admin_customer_email.offers.each do |offer| %>
+        <td align=center>
+          <div>            
+          <%= image_tag_list(offer) %><br>
+          <%= link_to "View", minisite_offer_path(offer) %>
+          </div>
+        </td>
+    <% end if @admin_customer_email.offers %>
   </tr>
   <tr>
-    <td align=center>
+    <td align=center colspan=<%= span %>>
       <div style="text-align:center;width:100%">
         <div style="width:300px; text-align:left;margin:auto;">
           <p>These are hand-crafted individual pieces of photo jewelry. Each piece is solid sterling silver or pewter,

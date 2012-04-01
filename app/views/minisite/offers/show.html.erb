@@ -1,0 +1,65 @@
+<div class="show">
+
+  <%= form_for(@shopping_item, :remote => true) do |f| %>
+      <p>
+        <%= f.hidden_field :offer_id %>
+        <%= f.hidden_field :cart_id %>
+        <%= submit_tag 'Add to Cart', :id => 'my_submit' %>
+        <span id="spinner" style="display:none"></span>
+      </p>
+  <% end %>
+  <div id='shopping_item'></div>
+
+  <p>
+    <b>Name:</b>
+    <%= @admin_customer_offer.name %>
+  </p>
+
+  <p>
+    <b>Price:</b>
+    <%= number_to_currency(@admin_customer_offer.price) %>
+  </p>
+
+
+  <% if @admin_customer_offer.back.present? %>
+
+      <p>
+        <b>Custom Piece Side 1</b>
+        <%= image_tag @admin_customer_offer.image_front_url.to_s %>
+      </p>
+
+      <p>
+        <b>Custom Piece Side 2</b>
+        <%= image_tag @admin_customer_offer.image_back_url.to_s %>
+      </p>
+  <% else %>
+      <p>
+        <b>Custom Piece</b>
+        <%= image_tag @admin_customer_offer.image_url.to_s %>
+      </p>
+  <% end %>
+
+  <p style="width:400px;">
+    <b>Description:</b>
+    <%= @admin_customer_offer.description %>
+  </p>
+
+  <p>
+    <b>Edit My Offer</b>
+    <%= link_to 'Edit', edit_minisite_offer_path(@admin_customer_offer) %>
+  </p>
+
+</div>
+<%= render 'admin/customer/offers/side_menu', :offer => @admin_customer_offer %>
+
+<% if @debug %>
+    <p>
+      <b>Client:</b>
+      <%= render 'my_studio/clients/show', :client => @client %>
+    </p>
+
+    <p>
+      <b>Studio:</b>
+      <%= render "studios/show", :studio => @studio %>
+    </p>
+<% end %>
