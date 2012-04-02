@@ -19,7 +19,11 @@ KimbraStudio::Application.routes.draw do
       end
       resources :offers
     end
-    resources :offers
+    resources :offers do
+      member do
+        get :portrait, :path => 'portrait/:portrait_id(.:format)'
+      end
+    end
   end
 
   resources :image_layouts

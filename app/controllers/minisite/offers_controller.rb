@@ -82,5 +82,9 @@ module Minisite
       end
     end
 
+    # get /minisite/offers/tracking/portrait
+    def portrait
+      @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
+    end
   end
 end

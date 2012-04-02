@@ -126,6 +126,15 @@ class Admin::Customer::Offer < ActiveRecord::Base
     v
   end
 
+  def portraits
+    if email
+      if s = email.my_studio_session
+        portraits = s.portraits
+      end
+    end
+    portraits ||= []
+    portraits
+  end
 
   private #===========================================================================
 

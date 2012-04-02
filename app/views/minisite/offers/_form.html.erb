@@ -1,4 +1,4 @@
-<div class="show">
+<div class="show-all">
 
   <% url = @admin_customer_offer.id.nil? ? minisite_offers_path(@admin_customer_email) : minisite_offer_path(@admin_customer_offer) %>
   <%= form_for(@admin_customer_offer, :url => url, :html => {:multipart => true}) do |f| %>
@@ -15,6 +15,21 @@
             </ul>
           </div>
       <% end %>
+
+      <div class="portraits">
+        <% @admin_customer_offer.portraits.each do |portrait| %>
+            <table class='portrait-pick'>
+              <tr>
+                <td>
+                  <%= link_to cw_div_image(portrait), portrait_minisite_offer_path(@admin_customer_offer, portrait.id), :remote => true %>
+                </td>
+              </tr>
+            </table>
+        <% end %>
+      </div>
+      <div id="portrait_item">
+
+      </div>
 
       <div class="field">
         <%= f.label :name %>
