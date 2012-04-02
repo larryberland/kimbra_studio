@@ -4,7 +4,7 @@
   <% @admin_customer_email.offers.each do |offer| %>
       <tr>
         <td>
-          Offers at <%= link_to "BUY ME!", minisite_offer_path(offer) %>
+          Offers at <%= link_to "BUY ME!", minisite_offer_path(offer), :class=>"likeabutton" %>
         </td>
         <td>
           <%= render 'admin/customer/offers/show', :offer => offer %>

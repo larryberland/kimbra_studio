@@ -9,10 +9,6 @@
 
 require blueprint
 
-/*div#content_wrapper {*/
-  /*width: 800px;*/
-/*}*/
-
 body, button, input, select, textarea {
     font: 13px/17px Arial, sans-serif;
 }
@@ -69,19 +65,19 @@ input[type="submit"] {
     /*background-color: #ffda75; *//* form header */
     /*background:url(button.png);*/
     /*text-indent: -9999em;*/
-    font-size: 1.3em;
+    font-size: 1.0em;
 }
 
 input {
     border: 1px solid #cccccc;
     border-radius: 5px 5px 5px 5px;
     box-shadow: 0 2px 3px 0 #ebebeb inset;
-    font-size: 1.3em;
+    font-size: 1.0em;
     padding: 6px 10px;
 }
 
-.button-link,
-#my_submit {
+.likabutton,
+.button-link{
     padding: 10px 15px;
     background: #4479BA;
     color: #FFF;
@@ -102,15 +98,15 @@ input {
     user-select: none;
 }
 
-.button-link:hover,
-#my_submit:hover {
+.likabutton:hover,
+.button-link:hover{
     background: #356094;
     border: solid 1px #2A4E77;
     text-decoration: none;
 }
 
-.button-link:active,
-#my_submit:active {
+.likeabutton:active
+.button-link:active{
     -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);

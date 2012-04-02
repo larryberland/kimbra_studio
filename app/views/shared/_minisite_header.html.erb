@@ -4,6 +4,22 @@
       font-family: <%= studio.try(:minisite).try(:font_family) %>;
       color: <%= studio.try(:minisite).try(:font_color) %>;
   }
+
+  .likeabutton {
+    background: ButtonFace;
+    color: ButtonText;
+    border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+  }
+  .likeabutton.selected,
+  .likeabutton:hover {
+      border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+      background: #FFDA75;
+  }
+  .likeabutton:active {
+      border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+  }
+
+
 </style>
 
 <% content_for :page_title, "#{studio.name} Photo Jewelry Offer" %>
