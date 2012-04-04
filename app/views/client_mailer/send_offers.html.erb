@@ -1,4 +1,8 @@
-<%= render :partial => '/shared/showroom_header', :locals => {:studio => @studio} %>
+<%= render :partial => '/shared/minisite_header', :locals => {:studio => @studio} %>
+
+<p>
+  <%= link_to "Email not displaying nicely? Click here to view as web page.", minisite_email_url(@email) %>
+</p>
 
 <p><%= @client.name %>,</p>
 <p>
@@ -16,7 +20,6 @@
   <% @email.offers.each do |offer| %>
       <tr>
         <td>
-          <!-- Offers at offer_minisite_showroom_url(offer) -->
           Offers at <%= minisite_offer_url(offer) %>
         </td>
         <td>
@@ -24,4 +27,16 @@
         </td>
       </tr>
   <% end %>
+</table>
+
+<p>
+  <%= link_to "Email not displaying nicely? Click here to view as web page.", minisite_email_url(@email) %>
+</p>
+
+<table background="https://www.google.com/intl/en_com/images/srpr/logo3w.png" width="275" height="95" border="1">
+  <tr>
+    <td>
+      Email Content...
+    </td>
+  </tr>
 </table>
