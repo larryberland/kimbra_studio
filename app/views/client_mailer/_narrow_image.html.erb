@@ -1,0 +1,59 @@
+<layout label="Narrow image">
+  <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580">
+    <tbody>
+    <tr>
+      <td class="w280" valign="top" width="280">
+        <table class="w280" border="0" cellpadding="0" cellspacing="0"
+               width="280">
+          <tbody>
+          <tr>
+            <td class="w280" align="right" width="280">
+              <%= link_to image_tag(offer.image_url.to_s,
+                                    :title => offer.name,
+                                    :alt => offer.name,
+                                    :width => offer.width,
+                                    :height => offer.height,
+                                    :class => "w280",
+                                    :editable => "true",
+                                    :label => "Image",
+                                    :border => 0),
+                          minisite_offer_url(offer),
+                          {:style => "text-decoration: none;"} %>
+            </td>
+          </tr>
+          <tr>
+            <td class="w280" height="10" width="280"></td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+      <td width="20"></td>
+      <td class="w280" valign="middle" width="280">
+        <table class="w280" border="0" cellpadding="0" cellspacing="0"
+               width="280">
+          <tbody>
+          <tr>
+            <td class="w280" height="10" width="280"></td>
+          </tr>
+          <tr>
+            <td class="w280" width="280">
+              <div class="article-content" align="left">
+                <p style="color: <%= studio.minisite.font_color %>;">
+                  Solid sterling silver,<br/>
+                  completely waterproof<br/>
+                  <span class="price">$48</span><br/>
+                  <%= link_to "Details...", minisite_offer_url(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: underline;"} %>
+                </p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="w280" height="10" width="280"></td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</layout>

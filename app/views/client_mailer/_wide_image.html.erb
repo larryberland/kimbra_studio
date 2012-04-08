@@ -1,0 +1,45 @@
+<layout label="Wide image">
+  <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580">
+    <tbody>
+    <tr>
+      <td class="w580" valign="top" width="580">
+        <table class="w580" border="0" cellpadding="0" cellspacing="0"
+               width="580">
+          <tbody>
+          <tr>
+            <td class="w580" align="center" width="580">
+              <%= link_to image_tag(offer.image_url.to_s,
+                                    :title => offer.name,
+                                    :alt => offer.name,
+                                    :width => '500',
+                                    :height => offer.height,
+                                    :class => "w280",
+                                    :editable => "true",
+                                    :label => "Image",
+                                    :border => 0),
+                          minisite_offer_url(offer),
+                          {:style => "text-decoration: none;"} %>
+            </td>
+          </tr>
+          <tr>
+            <td class="w580" width="580">
+              <div class="article-content" align="center">
+                <p style="color: <%= studio.minisite.font_color %>;">
+                  Solid sterling silver •
+                  completely waterproof •
+                  <span class="price">$138</span> •
+                  <%= link_to "Details...", minisite_offer_url(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: underline;"} %>
+                </p>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td class="w580" height="10" width="580"></td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+</layout>

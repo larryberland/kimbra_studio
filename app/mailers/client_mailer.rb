@@ -8,8 +8,11 @@ class ClientMailer < ActionMailer::Base
     @email = email
     @client = email.my_studio_session.client
     @studio = email.my_studio_session.studio
+    attachments.inline['logo.png'] = File.read("public/studios/studio_one/minisite/studiog_logo.png")
+# TODO - fix this path...
+#   attachments.inline['logo.png'] = File.read(@studio.minisite.logo_url)
     mail(:to =>  "#{@client.name} <#{@client.email}>",
-         :subject => t(:client_send_offers_subject, :name => email.my_studio_session.studio.name))
+         :subject => t(:client_send_offers_subject, :name => @studio.name))
   end
 
 end
