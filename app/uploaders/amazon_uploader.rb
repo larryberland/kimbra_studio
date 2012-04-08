@@ -18,25 +18,43 @@ class AmazonUploader < BaseUploader
   #
   # def scale(width, height)
   #   # do something
-  # end
+               # end
 
-  storage :fog  # always use fog for this
+  storage :fog # always use fog for this
 
   # store the width and height into model
   process :store_geometry
 
   # Create different versions of your uploaded files:
   version :thumb do
-     process :resize_to_limit => [100, 100]
+    process :resize_to_limit => [100, 100]
   end
 
   version :list do
-     process :resize_to_limit => [50, 50]
+    process :resize_to_limit => [50, 50]
   end
 
   version :face do
     process :convert => 'jpg'
     process :resize_to_limit => [900, 900]
+  end
+
+  version :portrait do
+    process :crop
+    resize_to_fill(200, 200)
+  end
+
+  def crop
+    if model.crop_x.present?
+      resize_to_limit(600, 600)
+      manipulate! do |img|
+        x = model.crop_x.to_i
+        y = model.crop_y.to_i
+        w = model.crop_w.to_i
+        h = model.crop_h.to_i
+        img.crop(x, y, w, h)
+      end
+    end
   end
 
   #version :best do

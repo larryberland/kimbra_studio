@@ -16,6 +16,10 @@
           </div>
       <% end %>
 
+      <% %w[x y w h].each do |attr| %>
+        <%= f.text_field "crop_#{attr}" %><br>
+      <% end %>
+
       <div class="portraits">
         <% @admin_customer_offer.portraits.each do |portrait| %>
             <table class='portrait-pick'>
@@ -26,6 +30,10 @@
               </tr>
             </table>
         <% end %>
+      </div>
+      <h4>Preview</h4>
+      <div style="width:200px; height:200px; overflow:hidden;">
+        <!-- image_tag @admin_customer_offer.piece.url, :id => 'preview' -->
       </div>
       <div id="portrait_item">
 

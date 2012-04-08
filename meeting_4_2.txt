@@ -1,0 +1,43 @@
+heroku vs MediaTemple
+    50/100 per month
+    response support time?
+
+Edit and setup Domain for GetABetterPrice.com
+
+acadia
+    acadiadailydeals.com
+maincoast
+    maincoastgetabetterprice.com
+
+justthegirls
+    staging.getabetterprice.com
+
+Redirect
+getabetterprice
+
+cliff will get ssh certificate to ryan 3 yr plan
+
+
+Google Analytics signed up for getabetterprice
+
+
+number of people logged on today
+Contest sign up
+  button accept terms
+  extra screen with data?
+  validation of data
+  terms of contest?
+  address, city, state, zip_code required
+  add optional phone.
+
+
+Coupon
+    click back to site shows today's deal for today. on each site.
+    picture of coupon with link back to site:
+    shows today's deal.
+
+
+
+
+
+

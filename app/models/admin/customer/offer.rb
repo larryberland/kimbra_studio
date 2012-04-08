@@ -8,6 +8,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
                   :tracking
 
   attr_accessor :portrait_parts_list                            # parts list having portraits assigned to which part
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
   mount_uploader :image, ImageUploader                          # the final custom kimbra piece
   mount_uploader :image_front, ImageUploader                    # the front side of the final custom kimbra piece
@@ -15,7 +16,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   before_create :piece_create_default_and_tracking
   before_save :piece_default
-  after_update :check_width
+  after_update :check_width, :crop_avatar
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece' # kimbra piece
   belongs_to :email, :class_name => 'Admin::Customer::Email'
@@ -218,6 +219,13 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   def check_width
     puts "#{self} size=>#{width}x#{height}"
+  end
+
+  def crop_avatar
+    # TODO: Need more logic here to rebuild the offer
+    #       based on the new cropping.
+    #       this is going to get really complicated.
+    # image.recreate_versions! if crop_x.present?
   end
 
 end
