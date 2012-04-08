@@ -400,7 +400,7 @@
             </tbody>
           </table>
           <div class="header-content">
-            <%= link_to "Web version", minisite_email_offers_url(@email) %>
+            <%= link_to "Web version", minisite_email_offers_url(@email) -%>
             <span class="hide">&nbsp;&nbsp;</span></div>
           <table class="w325" border="0" cellpadding="0" cellspacing="0" width="350">
             <tbody>
@@ -488,10 +488,10 @@
           <repeater>
 
             <layout label="Introduces">
-              <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580" bgcolor="<%= @studio.minisite.bgcolor %>">
+              <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580" bgcolor="<%= @studio.minisite.bgcolor -%>">
                 <tbody>
                 <tr>
-                  <td class="w580" width="580" bgcolor="<%= @studio.minisite.bgcolor %>">
+                  <td class="w580" width="580" bgcolor="<%= @studio.minisite.bgcolor -%>">
                     <div style="text-align: center;" align="center">
                       <%= image_tag attachments['logo.png'].url,
                                     :alt => "StudioG logo",
@@ -502,7 +502,7 @@
                                     :align => "top" -%>
                     </div>
                     <p class="article-title" align="center" style="color: <%= @studio.minisite.font_color -%>;">
-                      <%= @studio.name %> introduces heirloom jewelry.
+                      <%= @studio.name -%> introduces heirloom jewelry.
                     </p>
                   </td>
                 </tr>
