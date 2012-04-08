@@ -1,0 +1,30 @@
+<%= render :partial => '/shared/minisite_header', :locals => {:studio => @studio} %>
+
+<p>
+  <%= link_to "Email not displaying nicely? Click here to view as web page.", minisite_email_url(@email) %>
+</p>
+
+<p><%= @client.name %>,</p>
+<p>
+  <%= @email.message %>
+</p>
+<p>
+  Brought to you by:<br>
+  <%= @studio.name %>
+</p>
+<p>
+  Visit us again <%= root_url %>
+</p>
+
+<table border='0'>
+  <% @email.offers.each do |offer| %>
+      <tr>
+        <td>
+          Offers at <%= minisite_offer_url(offer) %>
+        </td>
+        <td>
+          <%= render 'admin/customer/offers/show', :offer => offer%>
+        </td>
+      </tr>
+  <% end %>
+</table>
