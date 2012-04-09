@@ -10,7 +10,8 @@
 //= require jcrop
 //= require_tree .
 
-var opts = {
+// Build CSS spinner  =============================
+var spinner_opts = {
     lines:12, // The number of lines to draw
     length:5, // The length of each line
     width:2, // The line thickness
@@ -30,7 +31,7 @@ var opts = {
 $(document).ready(function () {
     var target = document.getElementById('spinner')
     if (target) {
-        var spinner = new Spinner(opts).spin();
+        var spinner = new Spinner(spinner_opts).spin();
         target.appendChild(spinner.el);
     }
 });
@@ -40,3 +41,5 @@ $(function () {
         $("#spinner").toggle();
     });
 });
+
+// ================================================
