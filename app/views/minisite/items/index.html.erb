@@ -1,0 +1,24 @@
+<h1><%= t(:admin_customer_items_index_title) %></h1>
+
+<table>
+  <tr>
+    <th>Image front</th>
+    <th>Image back</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+  <% @items.each do |item| %>
+      <tr>
+        <td><%= image_tag item.front.image_custom_url.to_s %></td>
+        <td><%= item.back.nil? ? '' : (image_tag item.back.image_custom_url.to_s) %></td>
+
+        <% item.item_sides.each do |side| %>
+            <td>
+              <%= link_to t(:edit), edit_minisite_item_side_path(side) %>
+            </td>
+        <% end %>
+      </tr>
+  <% end %>
+</table>
+

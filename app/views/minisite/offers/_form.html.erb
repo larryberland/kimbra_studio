@@ -16,9 +16,6 @@
           </div>
       <% end %>
 
-      <% %w[x y w h].each do |attr| %>
-        <%= f.text_field "crop_#{attr}" %><br>
-      <% end %>
 
       <div class="portraits">
         <% @admin_customer_offer.portraits.each do |portrait| %>
@@ -32,12 +29,27 @@
         <% end %>
       </div>
       <h4>Preview</h4>
-      <div style="width:200px; height:200px; overflow:hidden;">
-        <!-- image_tag @admin_customer_offer.piece.url, :id => 'preview' -->
-      </div>
-      <div id="portrait_item">
 
-      </div>
+      <table>
+        <tr>
+          <td>
+            <div id="portrait_item">
+
+            </div>
+
+          </td>
+          <td align="top">
+            <% %w[x y w h].each do |attr| %>
+              <%= f.text_field "crop_#{attr}" %><br>
+            <% end %>
+
+            <div id='part_item_preview'>
+
+            </div>
+
+          </td>
+        </tr>
+      </table>
 
       <div class="field">
         <%= f.label :name %>

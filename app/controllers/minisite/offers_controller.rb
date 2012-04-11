@@ -1,6 +1,6 @@
 module Minisite
 
-  class Minisite::OffersController < BaseController
+  class OffersController < BaseController
 
     # GET /minisite/offers
     # GET /minisite/offers.json

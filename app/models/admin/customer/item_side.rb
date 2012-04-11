@@ -18,7 +18,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
   belongs_to :face, :class_name => 'MyStudio::Portrait::Face'
 
-  after_update :reposition
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+
+  after_update :reposition, :crop_avatar
 
   # assemble a part side for this item and portrait
   # options => {:photo_part,
@@ -178,4 +180,12 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     end
     true
   end
+
+  def crop_avatar
+    # TODO: Need more logic here to rebuild the offer
+    #       based on the new cropping.
+    #       this is going to get really complicated.
+    image_stock.recreate_versions! if crop_x.present?
+  end
+
 end

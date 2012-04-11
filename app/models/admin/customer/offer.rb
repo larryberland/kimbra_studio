@@ -16,7 +16,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   before_create :piece_create_default_and_tracking
   before_save :piece_default
-  after_update :check_width, :crop_avatar
+  after_update :check_width
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece' # kimbra piece
   belongs_to :email, :class_name => 'Admin::Customer::Email'
@@ -221,11 +221,5 @@ class Admin::Customer::Offer < ActiveRecord::Base
     puts "#{self} size=>#{width}x#{height}"
   end
 
-  def crop_avatar
-    # TODO: Need more logic here to rebuild the offer
-    #       based on the new cropping.
-    #       this is going to get really complicated.
-    # image.recreate_versions! if crop_x.present?
-  end
 
 end

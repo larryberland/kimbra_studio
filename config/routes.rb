@@ -23,6 +23,13 @@ KimbraStudio::Application.routes.draw do
       member do
         get :portrait, :path => 'portrait/:portrait_id(.:format)'
       end
+      resources :items
+    end
+    resources :item_sides do
+      member do
+        get :portrait, :path => 'portrait/:portrait_id(.:format)'
+        get :stock, :path => 'stock/:item_side_id(.:format)'
+      end
     end
   end
 

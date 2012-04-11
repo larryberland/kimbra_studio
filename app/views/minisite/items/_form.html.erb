@@ -1,0 +1,41 @@
+<% url = @item.id.nil? ? admin_customer_email_offer_items_path(@offer.email, @offer, @item) : admin_customer_email_offer_item_path(@offer.email, @offer, @item) %>
+<%= form_for(@item, :url => url, :html => {:multipart => true}) do |f| %>
+    <% if @item.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@item.errors.count, "error") %> prohibited this admin_customer_item from being saved:</h2>
+
+          <ul>
+            <% @item.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <fieldset title="Portrait position">
+      <b>Portrait Position</b>
+      <%= render "part_layout/form", :f => f, :part => @item.part %>
+    </fieldset>
+    <fieldset title="Custom Piece position">
+      <b>Piece Position</b>
+      <%= render "piece_layout/form", :f => f, :part => @item.part %>
+    </fieldset>
+
+    <div class="field">
+      <%= link_to 'Offer', admin_customer_email_offer_path(@item.offer.email, @item.offer) %>
+    </div>
+    <div class="field">
+      <%= link_to 'Part', admin_merchandise_piece_part_path(@item.part.piece, @item.part) %>
+    </div>
+    <% @item.item_sides.each do |side| %>
+        <%= f.fields_for :item_sides, side do |g| %>
+
+            <%= g.hidden_field :changed_layout_at, :value => Time.now %>
+
+        <% end %>
+    <% end %>
+    <div class="actions">
+      <%= f.submit :id => 'my_submit' %>
+      <span id="spinner" style="display:none"></span>
+    </div>
+<% end %>
