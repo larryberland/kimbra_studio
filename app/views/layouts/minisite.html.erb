@@ -2,7 +2,7 @@
 <html>
 <head>
   <title><%= content_for :page_title %></title>
-  <%= stylesheet_link_tag "application" %>
+  <%= stylesheet_link_tag "minisite" %>
   <%= javascript_include_tag "https://js.stripe.com/v1/", "application" %>
   <%= csrf_meta_tags %>
   <%= tag :meta, :name => 'stripe-key', :content => STRIPE_PUBLIC_KEY %>
@@ -15,15 +15,15 @@
     <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
     <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
   </div>
-  <table class="showroom_nav" style="border:1px solid white">
+  <table class="showroom-nav">
     <tr>
-      <td style="border:1px solid white;width:25%">
+      <td>
         <%= link_to t(:minisite_menu_collection_link), minisite_email_offers_path(@admin_customer_email.tracking) %>
       </td>
-      <td style="border:1px solid white;width:25%">
+      <td>
         <%= link_to t(:minisite_menu_about_link, :studio_name => @studio.name), about_minisite_email_path(@admin_customer_email.tracking) %>
       </td>
-      <td style="border:1px solid white;width:25%">
+      <td>
         <% text = t(:minisite_menu_shopping_cart_link) %>
         <!-- text += " #{pluralize(@cart.try(:items).try(:size), 'Item')}" -->
         <%=  link_to text, shopping_cart_path(@cart.tracking), :class=>'my-submit' %>

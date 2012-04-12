@@ -4,18 +4,25 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require jcrop
  *= require_self
- *= require_tree ../stylesheets/admin
- *= require_tree ../stylesheets/my_studio
- *= require_tree ../stylesheets/studio
- *= require_tree ../stylesheets/shopping
+ *= require_tree ../../../vendor/assets/stylesheets
  *= require _main_footer
  *= require _widget
  *= require devise
- *= require scaffolds
- *= require_tree ../../../vendor/assets/stylesheets
+ *= require ../stylesheets/minisite
 */
 
-require blueprint
+.showroom-nav {
+    width: 95%;
+    border: 1px solid white;
+}
+
+.showroom-nav td {
+    width: 33%;
+    border: 1px solid white;
+}
+.container {
+    width: 100%;
+}
 
 body, button, input, select, textarea {
     font: 13px/17px Arial, sans-serif;
@@ -24,7 +31,7 @@ body, button, input, select, textarea {
 div#body_wrapper {
     margin-left: auto;
     margin-right: auto;
-    width: 80%
+    width: 800px;
 }
 
 textarea {
@@ -161,8 +168,4 @@ table.shopping-item-index {
 
 .portrait-pick a div.image-thumb {
     display: inline;
-}
-
-p {
-    margin: 0 0 0.8em;
 }
