@@ -8,7 +8,7 @@
  *= require _main_footer
  *= require _widget
  *= require devise
- *= require ../stylesheets/minisite
+ *= require_tree ../stylesheets/minisite
 */
 
 .showroom-nav {

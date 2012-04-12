@@ -1,0 +1,19 @@
+div.item-side-edit {
+  width: 100%;
+  table {
+    width: 100%;
+  }
+}
+
+div.preview {
+  width: 100%;
+  table {
+    width: 100%;
+    #part_item_preview {
+      width: 300px;
+      height: 300px;
+      overflow: hidden;
+    }
+  }
+
+}

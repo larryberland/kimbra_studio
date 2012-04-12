@@ -12,43 +12,28 @@
         </div>
     <% end %>
 
-    <table>
+    <table style="width:100%;">
       <tr>
         <td>
-          <%= cw_div_image(@item_side, :image => 'image_stock', :version => :original) %><br/>
-          <%= @item_side.image_title(@item_side.image_stock)%>
+          <%= cw_div_image(@item_side, :image => 'image_stock', :version => :original) %>
+          <br/>
+          <%= @item_side.image_title(@item_side.image_stock) %>
         </td>
         <td>
-          <%= cw_div_image(@item_side, :image => 'image_custom', :version => :original) %><br>
-          <%= @item_side.image_title(@item_side.image_custom)%>
+          <%= cw_div_image(@item_side, :image => 'image_custom', :version => :original) %>
+          <br>
+          <%= @item_side.image_title(@item_side.image_custom) %>
         </td>
       </tr>
+
+      <% if @item_side.try(:item).try(:offer).try(:items).try(:size).to_i > 1 %>
       <tr>
         <td colspan="2">
           <%= cw_div_image(@item_side.item.offer, :version => :original) %>
         </td>
-
       </tr>
+      <% end %>
     </table>
-    <div class="field">
-      <%= f.label :item %>
-      <br/>
-      <%= f.text_field :item %>
-    </div>
-    <div class="field">
-      <%= f.label :part %>
-      <br/>
-      <%= f.text_field :part %>
-    </div>
-
-    <div class="field">
-      <%= f.label :image_custom, 'Custom Kimbra Part:' %>
-      <%= f.file_field :image_custom %>
-      <br/>
-      <%= f.label :remote_image_custom_url, 'or Part URL' %>
-      <%= f.text_field :remote_image_custom_url %>
-    </div>
-    <%= f.hidden_field :image_custom_cache %>
 
     <div class="field">
       <%= f.label :image_stock, 'Portrait:' %>
@@ -74,32 +59,35 @@
         </tr>
       </table>
     </div>
-    <h4>Preview</h4>
 
-    <table>
-      <tr>
-        <td>
-          <div id="portrait_item">
-            <%= image_tag @item_side.image_stock_url(:croppable), :id => 'cropbox' %>
-          </div>
+    <div class='preview'>
 
-        </td>
-        <td align="top">
+      <h4>Preview</h4>
+      <table>
+        <tr>
+          <td>
+            <div id="portrait_item">
+              <%= image_tag @item_side.image_stock_url(:croppable), :id => 'cropbox' %>
+            </div>
 
-          <% v = @item_side.part.piece_layout.layout.size.inspect %>
-          <%= f.text_field @item_side.part.piece_layout.layout.size, :value => v %>
-          <div id='part_item_preview' style="width:300px; height:300px; overflow:hidden;">
-            <%= image_tag @item_side.image_stock_url(:croppable), :id => 'preview' %>
-          </div>
+          </td>
+          <td align="top">
 
-          <% %w[x y w h].each do |attr| %>
-              <%= f.text_field "crop_#{attr}" %>
-              <br>
-          <% end %>
+            <% v = @item_side.part.piece_layout.layout.size.inspect %>
+            <%= f.text_field @item_side.part.piece_layout.layout.size, :value => v %>
+            <div id='part_item_preview'>
+              <%= image_tag @item_side.image_stock_url(:croppable), :id => 'preview' %>
+            </div>
 
-        </td>
-      </tr>
-    </table>
+            <% %w[x y w h].each do |attr| %>
+                <%= f.text_field "crop_#{attr}" %>
+                <br>
+            <% end %>
+
+          </td>
+        </tr>
+      </table>
+    </div>
 
 
     <div class="actions">
