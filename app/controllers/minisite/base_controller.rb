@@ -2,7 +2,7 @@ module Minisite
 
   class BaseController < ApplicationController
 
-    skip_filter :authenticate_user!
+    skip_before_filter :authenticate_user!
     layout 'minisite'
 
     before_filter :load_email
@@ -19,6 +19,7 @@ module Minisite
       @admin_customer_offer = Admin::Customer::Offer.find_by_tracking(params[:id]) if params[:id]
       @admin_customer_email ||= @admin_customer_offer.email if @admin_customer_offer
     end
+
 
     def set_cart_and_client_and_studio
       if session[:cart_id]
