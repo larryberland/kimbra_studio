@@ -1,0 +1,15 @@
+<%
+   footer_tabs = {
+           'Terms & Conditions'  => terms_path,
+           'About'               => about_path#,
+           #'Customer Service'    => faq_customer_service_path
+   }
+%>
+
+<div id="footer_minisite_wrapper" class='bp'>
+  <div class="centered_container" id="footer">
+    <ul id='main-footer-tabs'>
+      <%= format_for_nav footer_tabs %>
+    </ul>
+  </div>
+</div>

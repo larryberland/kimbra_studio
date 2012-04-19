@@ -43,3 +43,10 @@ $(function () {
 });
 
 // ================================================
+
+jQuery(window).ready(
+    function () {
+        jQuery('.flash_notice').delay(6000).slideUp('slow');
+        jQuery('.flash_error').delay(6000).slideUp('slow');
+    }
+);

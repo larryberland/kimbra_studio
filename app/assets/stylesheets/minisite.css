@@ -169,3 +169,69 @@ table.shopping-item-index {
 .portrait-pick a div.image-thumb {
     display: inline;
 }
+
+div.offer_show {
+    width: auto;
+    margin: 0px auto;
+}
+
+div.offer_show p {
+    text-align: center;
+}
+
+div.offer_show img {
+    text-align: center
+}
+
+.price {
+    font-size: 1.3em;
+}
+
+#nav_minisite_wrapper {
+
+    font-variant: small-caps;
+    font-weight: bold;
+    height: 3em;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    margin-botton: 20px;
+}
+
+.centered_container {
+    margin: 0 auto;
+    margin-top: 10px;
+    text-align: center;
+}
+
+.centered_container li {
+    display: inline;
+    list-style: none;
+    padding: 3px 8px 3px 8px;
+}
+
+.centered_container ul {
+    padding: 0px;
+}
+
+#footer_minisite_wrapper {
+    font-variant: small-caps;
+    font-weight: bold;
+    height: 3em;
+    border-top: 1px solid;
+    text-align: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%
+}
+
+#footer_buffer {
+    height: 0.8em;
+    margin-top: 50px;
+}
+
+#logo {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}

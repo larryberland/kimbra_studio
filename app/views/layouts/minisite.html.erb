@@ -9,48 +9,26 @@
   <%= yield :head %>
 </head>
 <body>
+
 <div id='body_wrapper'>
+
   <%= render 'shared/minisite_header', :studio => @studio %>
-  <div class="bp">
-    <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
-    <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
-  </div>
-  <table class="showroom-nav">
-    <tr>
-      <td>
-        <%= link_to t(:minisite_menu_collection_link), minisite_email_offers_path(@admin_customer_email.tracking) %>
-      </td>
-      <td>
-        <%= link_to t(:minisite_menu_about_link, :studio_name => @studio.name), about_minisite_email_path(@admin_customer_email.tracking) %>
-      </td>
-      <td>
-        <% text = t(:minisite_menu_shopping_cart_link) %>
-        <!-- text += " #{pluralize(@cart.try(:items).try(:size), 'Item')}" -->
-        <%=  link_to text, shopping_cart_path(@cart.tracking), :class=>'my-submit' %>
-      </td>
-    </tr>
-  </table>
+
   <div id='content_wrapper' class='container'>
     <%= yield %>
   </div>
+
 </div>
+
 <div id="footer_buffer" class='bp'>
   &nbsp;
 </div>
+
 </div>
-<%= render 'shared/main_footer' %>
+
+<%= render 'shared/minisite_footer' %>
 <%= yield :bottom %>
-<script>
-    jQuery(window).ready(
-            function () {
-                jQuery('.flash_notice').delay(6000).slideUp('slow');
-                jQuery('.flash_error').delay(6000).slideUp('slow');
-            }
-    );
-</script>
-<%# javascript_include_tag :defaults %>
-<%#= javascript_include_tag 'jquery-1.4.2.min', 'rails' %>
-<%#= javascript_include_tag :all, :cache => true %>
+
 </body>
 <%= yield :below_body %>
 </html>

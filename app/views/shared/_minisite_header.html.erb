@@ -1,23 +1,55 @@
 <style type="text/css">
-  body {
-      background-color: <%= studio.try(:minisite).try(:bgcolor) %>;
-      font-family: <%= studio.try(:minisite).try(:font_family) %>;
-      color: <%= studio.try(:minisite).try(:font_color) %>;
-  }
+    body {
+        background-color: <%= studio.try(:minisite).try(:bgcolor) %>;
+        font-family: <%= studio.try(:minisite).try(:font_family) %>;
+        color: <%= studio.try(:minisite).try(:font_color) %>;
+    }
 
-  .likeabutton {
-    background: ButtonFace;
-    color: ButtonText;
-    border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
-  }
-  .likeabutton.selected,
-  .likeabutton:hover {
-      border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
-      background: #FFDA75;
-  }
-  .likeabutton:active {
-      border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
-  }
+    .likeabutton {
+        background: ButtonFace;
+        color: ButtonText;
+        border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+    }
+
+    .likeabutton.selected,
+    .likeabutton:hover {
+        border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+        background: #FFDA75;
+    }
+
+    .likeabutton:active {
+        border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+    }
+
+    a {
+        color: <%= studio.try(:minisite).try(:font_color) %>;
+        text-decoration: none;
+        border-bottom: 1px dotted;
+    }
+
+    a.link {
+        color: <%= studio.try(:minisite).try(:font_color) %>;
+        text-decoration: none;
+        border-bottom: 1px dotted;
+    }
+
+    a.visited {
+        color: <%= studio.try(:minisite).try(:font_color) %>;
+        text-decoration: none;
+        border-bottom: 1px dotted;
+    }
+
+    a.focus, a.hover {
+        color: <%= studio.try(:minisite).try(:font_color) %>;
+        text-decoration: none;
+        border-bottom: 1px dotted;
+    }
+
+    a.active {
+        color: <%= studio.try(:minisite).try(:font_color) %>;
+        text-decoration: none;
+        border-bottom: 1px dotted;
+    }
 
 
 </style>
@@ -25,3 +57,23 @@
 <% content_for :page_title, "#{studio.name} Photo Jewelry Offer" %>
 
 <img id="logo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+
+<div class="bp">
+  <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
+  <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
+</div>
+
+<%
+   loop_nav_tabs = {
+           t(:minisite_menu_collection_link) => minisite_email_offers_path(@admin_customer_email.tracking),
+           t(:minisite_menu_about_link, :studio_name => @studio.name) => about_minisite_email_path(@admin_customer_email.tracking),
+           t(:minisite_menu_shopping_cart_link) + " (#{pluralize(@cart.try(:items).try(:size), 'piece')})" => shopping_cart_path(@cart.tracking)}
+%>
+
+<div id="nav_minisite_wrapper" class='bp'>
+  <div class="centered_container">
+    <ul id='main-footer-tabs'>
+      <%= format_for_nav loop_nav_tabs %>
+    </ul>
+  </div>
+</div>

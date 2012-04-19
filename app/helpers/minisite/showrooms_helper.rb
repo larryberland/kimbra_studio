@@ -1,2 +1,0 @@
-module Minisite::ShowroomsHelper
-end

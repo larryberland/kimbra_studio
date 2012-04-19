@@ -49,4 +49,13 @@ module ApplicationHelper
     end
   end
 
+  # Returns a nice set of <li> elements separated by bars (aren't these called verticules?).
+  def format_for_nav(tabs={})
+    array_of_tabs = []
+    tabs.each do |tab_name, tab_path|
+      array_of_tabs << content_tag(:li, link_to_unless_current(tab_name, tab_path))
+    end
+    array_of_tabs.join("|").html_safe
+  end
+
 end
