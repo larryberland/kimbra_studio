@@ -1,5 +1,5 @@
 /*
- * This is a manifest file that'll automatically include all the stylesheets available in this directory
+ * This is a manifest file that will automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require jcrop
@@ -7,7 +7,6 @@
  *= require_tree ../stylesheets/admin
  *= require_tree ../stylesheets/my_studio
  *= require_tree ../stylesheets/studio
- *= require_tree ../stylesheets/shopping
  *= require _main_footer
  *= require _widget
  *= require devise

@@ -3,7 +3,6 @@
         <div id="error_explanation">
           <h2><%= pluralize(@item_side.errors.count, "error") %> prohibited this admin_customer_item_side
             from being saved:</h2>
-
           <ul>
             <% @item_side.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
@@ -12,7 +11,7 @@
         </div>
     <% end %>
 
-    <table style="width:100%;">
+    <table>
       <tr>
         <td>
           <%= cw_div_image(@item_side, :image => 'image_stock', :version => :original) %>
@@ -89,7 +88,9 @@
       </table>
     </div>
 
+    <div id="portrait_form">
 
+    </div>
     <div class="actions">
       <%= f.submit :id => 'my_submit' %>
       <span id="spinner" style="display:none"></span>

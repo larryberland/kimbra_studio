@@ -37,6 +37,9 @@
       <p><%= sentence.strip %><%= "." unless sentence.strip.last == '.' %></p>
   <% end %>
 
-  <p><%= link_to 'Make adjustments to this piece', edit_minisite_offer_path(@admin_customer_offer) %></p>
+  <p> <%= link_to t(:minisite_items_show_link), minisite_offer_items_path(@admin_customer_offer) %></p>
 
+  <!-- jim version
+  <p>  link_to , edit_minisite_offer_path(@admin_customer_offer) </p>
+  -->
 </div>

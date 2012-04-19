@@ -86,6 +86,9 @@ en:
   # minisite/showrooms/show
   minisite_showrooms_show_add_to_cart: 'Add to Cart'
 
+  # minisite/items/show
+  minisite_items_show_link: 'Make adjustments to this piece'
+
   # my_studio/clients
   my_studio_clients_show_title: 'Client Info'
   my_studio_clients_form_title: 'Client Info'

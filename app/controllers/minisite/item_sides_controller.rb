@@ -4,8 +4,26 @@ class Minisite::ItemSidesController < InheritedResources::Base
 
   layout 'minisite'
 
+  def update
+    success = @item_side.update_attributes(params[:item_side])
+    respond_to do |format|
+      if success
+        format.html { redirect_to @item_side, notice: 'Client was successfully updated.' }
+        format.json { head :ok }
+      else
+        format.html { render action: "edit" }
+        format.json { render json: @item_side.errors, status: :unprocessable_entity }
+      end
+    end
+
+  end
+
   # get /minisite/offers/tracking/portrait
   def portrait
+    @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
+  end
+
+  def stock
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
   end
 
