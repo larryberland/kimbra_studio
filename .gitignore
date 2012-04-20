@@ -9,6 +9,7 @@
 
 # ignore editor settings
 /.idea/*
+/app/.idea/*
 
 # Ignore bundler config
 /.bundle
