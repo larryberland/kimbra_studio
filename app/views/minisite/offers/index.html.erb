@@ -1,14 +1,7 @@
-<h1>Collection</h1>
-
-<table border='0'>
-  <% @admin_customer_email.offers.each do |offer| %>
-      <tr>
-        <td>
-          Offers at <%= link_to "BUY ME!", minisite_offer_path(offer), :class=>"likeabutton" %>
-        </td>
-        <td>
-          <%= render 'admin/customer/offers/show', :offer => offer %>
-        </td>
-      </tr>
-  <% end %>
-</table>
+<% @admin_customer_email.offers.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
+    <% if offer.width.to_i < 250 %>
+        <%= render :partial => 'minisite/narrow_image', :locals => {:offer => offer, :studio => @studio} %>
+    <% else %>
+        <%= render :partial => 'minisite/wide_image', :locals => {:offer => offer, :studio => @studio} %>
+    <% end %>
+<% end %>

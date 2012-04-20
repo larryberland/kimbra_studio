@@ -3,11 +3,11 @@ module Minisite
   class BaseController < ApplicationController
 
     skip_before_filter :authenticate_user!
-    layout 'minisite'
-
     before_filter :load_email
     before_filter :set_by_tracking
     before_filter :set_cart_and_client_and_studio
+
+    layout 'minisite'
 
     private #===========================================================================
 
@@ -20,12 +20,10 @@ module Minisite
       @admin_customer_email ||= @admin_customer_offer.email if @admin_customer_offer
     end
 
-
     def set_cart_and_client_and_studio
       if session[:cart_id]
         @cart = Shopping::Cart.find(session[:cart_id]) rescue nil
       end
-
       if @cart.nil?
         @cart             = Shopping::Cart.create(:email => @admin_customer_email)
         session[:cart_id] = @cart.id
@@ -37,6 +35,6 @@ module Minisite
       session[:studio_id]               ||= @studio.id
     end
 
-
   end
+
 end

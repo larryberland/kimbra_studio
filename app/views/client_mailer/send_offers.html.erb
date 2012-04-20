@@ -515,10 +515,9 @@
 
             <% @email.offers.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| -%>
                 <% if offer.width.to_i < 250 %>
-                    <%= render :partial => 'narrow_image', :locals => {:offer => offer, :studio => @studio} -%>
+                    <%= render :partial => 'minisite/narrow_image', :locals => {:offer => offer, :studio => @studio} -%>
                 <% else %>
-
-                    <%= render :partial => 'wide_image', :locals => {:offer => offer, :studio => @studio} -%>
+                    <%= render :partial => 'minisite/wide_image', :locals => {:offer => offer, :studio => @studio} -%>
                 <% end -%>
             <% end -%>
 
@@ -550,7 +549,7 @@
         <td class="w30" width="30"></td>
         <td class="w580" valign="top" width="360">
           <p id="permission-reminder" class="footer-content-left" align="left" style="color: #e2e2e2">
-            <span>You're receiving this because you are a customer of <%= @studio.name -%>.</span>
+            <span>We sent you this email this because you are a customer of <%= @studio.name -%>.</span>
           </p>
 
           <p class="footer-content-left" align="left" style="color: #e2e2e2">

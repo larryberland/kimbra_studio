@@ -10,6 +10,7 @@ module Minisite
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
+      @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @admin_customer_offers }

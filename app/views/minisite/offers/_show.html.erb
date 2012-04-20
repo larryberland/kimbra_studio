@@ -1,0 +1,42 @@
+<div class="offer_show">
+
+  <p>
+    <i>The setting for this piece is the  <%= @admin_customer_offer.name %>.</i>
+  </p>
+
+  <% if @admin_customer_offer.back.present? %>
+      <p>
+        <b>Front</b>
+        <%= image_tag @admin_customer_offer.image_front_url.to_s %>
+      </p>
+
+      <p>
+        <b>Back</b>
+        <%= image_tag @admin_customer_offer.image_back_url.to_s %>
+      </p>
+  <% else %>
+      <p>
+        <%= image_tag @admin_customer_offer.image_url.to_s %>
+      </p>
+  <% end %>
+
+  <p class="price"><%= number_to_currency(@admin_customer_offer.price) %></p>
+
+  <%= form_for(@shopping_item, :remote => true) do |f| %>
+      <p>
+        <%= f.hidden_field :offer_id %>
+        <%= f.hidden_field :cart_id %>
+        <%= submit_tag 'Add to Cart', :id => 'my_submit', :class => 'likeabutton' %>
+        <span id="spinner" style="display:none"></span>
+      </p>
+  <% end %>
+
+  <div id='shopping_item'></div>
+
+  <% @admin_customer_offer.description.split(". ").each do |sentence| %>
+      <p><%= sentence.strip %><%= "." unless sentence.strip.last == '.' %></p>
+  <% end %>
+
+  <p> <%= link_to t(:minisite_items_show_link), minisite_offer_items_path(@admin_customer_offer) %></p>
+
+</div>
