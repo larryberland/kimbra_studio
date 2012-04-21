@@ -16,6 +16,8 @@ KimbraStudio::Application.routes.draw do
     resources :emails do
       member do
         get :about
+        get :privacy
+        get :contact
       end
       resources :offers
     end

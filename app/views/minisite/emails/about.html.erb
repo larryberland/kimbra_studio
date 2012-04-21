@@ -1,13 +1,13 @@
 <h2>About <%= @studio.name %></h2>
 
-<table width="500" cellspacing="0" cellpadding="4" border="0" bgcolor="#dee299" align="center">
+<table width="500" cellspacing="0" cellpadding="4" border="0" align="center">
   <tbody>
   <tr>
     <% span = @admin_customer_email.offers.try(:size) %>
     <% @admin_customer_email.offers.each do |offer| %>
         <td align=center>
           <div>            
-          <%= image_tag_list(offer) %><br>
+          <%= link_to image_tag_list(offer), minisite_offer_path(offer), :class => :no_border %><br>
           <%= link_to "View", minisite_offer_path(offer) %>
           </div>
         </td>

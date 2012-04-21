@@ -1,8 +1,8 @@
 <%
    footer_tabs = {
-           'Terms & Conditions'  => terms_path,
-           'About'               => about_path#,
-           #'Customer Service'    => faq_customer_service_path
+           'We care about your privacy'  => privacy_minisite_email_path(@admin_customer_email.tracking),
+           'Contact us'  => contact_minisite_email_path(@admin_customer_email.tracking)
+          # 'Customer Service'    => faq_customer_service_path
    }
 %>
 
