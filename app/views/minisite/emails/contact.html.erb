@@ -5,11 +5,19 @@
   <tr>
     <td align=center>
       <div style="text-align:center;width:100%">
-
-        <p>Contact for <%= @studio.name %>...</p>
-
-        <p>Contact for Kimbra Studios Click+ Program...</p>
-
+        <p>
+          Would you like to schedule another photography session?
+          Or would you like a different piece of custom photo jewelry prepared?
+          We look forward to chatting with you about it.
+        </p>
+        <p>
+          <%= @studio.name %><br/>
+          <%= @studio.owner.name %> (<%= mail_to @studio.owner.email, nil, {:encode =>:javascript } %>)<br/>
+          <%= @studio.phone_number %><br/>
+          <%= @studio.address_1 %><br/>
+          <%= "#{@studio.address_2}<br/>".html_safe if @studio.address_2 %>
+          <%= @studio.city %>, <%= @studio.state %> <%= @studio.zip_code %>
+        </p>
       </div>
     </td>
   </tr>
