@@ -101,4 +101,8 @@ KimbraStudio::Application.routes.draw do
     resource :overview, :only => [:show]
   end
 
+  match "stories/fetch", :controller => :stories, :action => :fetch
+
+  resources :stories
+
 end
