@@ -33,6 +33,8 @@ KimbraStudio::Application.routes.draw do
         get :stock, :path => 'stock/:item_side_id(.:format)'
       end
     end
+    match "stories/fetch", :controller => :stories, :action => :fetch
+    resources :stories
   end
 
   resources :image_layouts
@@ -45,7 +47,7 @@ KimbraStudio::Application.routes.draw do
   match 'admin' => 'admin/overviews#index'
   #match 'login' => 'user_sessions#new'
   #match 'logout' => 'user_sessions#destroy'
-                        #match 'signup' => 'my_studio/registrations#new'
+  #match 'signup' => 'my_studio/registrations#new'
 
   root :to => "welcome#index"
 
@@ -100,9 +102,5 @@ KimbraStudio::Application.routes.draw do
     resource :store_credit, :only => [:show]
     resource :overview, :only => [:show]
   end
-
-  match "stories/fetch", :controller => :stories, :action => :fetch
-
-  resources :stories
 
 end

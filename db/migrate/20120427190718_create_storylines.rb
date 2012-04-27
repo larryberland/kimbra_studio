@@ -1,25 +1,23 @@
 class CreateStorylines < ActiveRecord::Migration
   def up
     create_table :stories, :force => true do |t|
-      t.string :session_id      # We'll get these when the session is created.
-      t.text :referer           #
-      t.string :ip_address      #
-      t.string :marketing_code  #
-      t.string :browser         #
-      t.string :version         #
-      t.string :os              #
-      t.string :landing         #
-      t.string :first_name  # These only appear when the consumer fills in the credit form.
-      t.string :last_name  #
-      t.string :city       #
-      t.string :state      #
+      t.string :session_id
+      t.text :referer
+      t.string :ip_address
+      t.string :browser
+      t.string :version
+      t.string :os
+      t.string :name
+      t.integer :studio_id
+      t.integer :client_id
       t.timestamps
     end
     add_index :stories, :session_id
-    add_index :stories, [:last_name,:first_name]
-    add_index :stories, :marketing_code
+    add_index :stories, :name
     add_index :stories, :created_at
     add_index :stories, :ip_address
+    add_index :stories, :studio_id
+    add_index :stories, :client_id
 
     create_table :storylines, :force => true do |t|
       t.references :story

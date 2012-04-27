@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_story
-    @story, @storyline = Story.setup(request, controller_name, action_name, params[:marketing_code])
+    @story, @storyline = Story.setup(request, controller_name, action_name, @client, @studio)
   end
 
 end
