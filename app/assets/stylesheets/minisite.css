@@ -242,3 +242,15 @@ div.offer_show img {
     margin-left: auto;
     margin-right: auto
 }
+
+ul.story {
+    list-style: inside disc none;
+}
+
+.story span.highlight {
+    background-color: honeydew;
+}
+
+p.story_name_line {
+    font-weight: bold;
+}

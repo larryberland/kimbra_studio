@@ -11,4 +11,8 @@ class ApplicationController < ActionController::Base
     !current_user
   end
 
+  def setup_story
+    @story, @storyline = Story.setup(request, controller_name, action_name, params[:marketing_code])
+  end
+
 end

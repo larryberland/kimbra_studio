@@ -2,6 +2,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
 
   skip_before_filter :authenticate_user!
   before_filter :set_by_tracking, :set_cart_and_client_and_studio
+  before_filter :setup_story
 
   layout 'minisite'
 

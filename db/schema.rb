@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120325022414) do
+ActiveRecord::Schema.define(:version => 20120427190718) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -475,6 +475,43 @@ ActiveRecord::Schema.define(:version => 20120325022414) do
   end
 
   add_index "store_credits", ["user_id"], :name => "index_store_credits_on_user_id"
+
+  create_table "stories", :force => true do |t|
+    t.string   "session_id"
+    t.text     "referer"
+    t.string   "ip_address"
+    t.string   "marketing_code"
+    t.string   "browser"
+    t.string   "version"
+    t.string   "os"
+    t.string   "landing"
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "city"
+    t.string   "state"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "stories", ["created_at"], :name => "index_stories_on_created_at"
+  add_index "stories", ["ip_address"], :name => "index_stories_on_ip_address"
+  add_index "stories", ["last_name", "first_name"], :name => "index_stories_on_last_name_and_first_name"
+  add_index "stories", ["marketing_code"], :name => "index_stories_on_marketing_code"
+  add_index "stories", ["session_id"], :name => "index_stories_on_session_id"
+
+  create_table "storylines", :force => true do |t|
+    t.integer  "story_id"
+    t.string   "session_id"
+    t.string   "url"
+    t.string   "description"
+    t.integer  "seconds"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "storylines", ["session_id"], :name => "index_storylines_on_session_id"
+  add_index "storylines", ["story_id"], :name => "index_storylines_on_story_id"
+  add_index "storylines", ["url"], :name => "index_storylines_on_url"
 
   create_table "studios", :force => true do |t|
     t.string   "name"

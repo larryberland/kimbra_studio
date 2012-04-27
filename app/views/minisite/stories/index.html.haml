@@ -1,0 +1,16 @@
+%h2 Stories
+
+%table{:border => 1, :id => :story_table}
+  %tr
+    %th{:style => 'width:150px'} &nbsp;
+    %th{:style => 'width:200px; text-align:right'} Anonymous
+    %th{:style => 'width:200px; text-align:right'} Named
+  - @dates.each do |date|
+    %tr
+      %td{:style => 'text-align:right'}= date.to_s
+      %td{:style => 'text-align:right'}= remote_link_for_fetching_stories(date, @without_names, :without)
+      %td{:style => 'text-align:right'}= remote_link_for_fetching_stories(date, @with_names, :with)
+%hr
+
+%div{:id => 'stories_display'}
+  =render 'stories', :object => @stories, :locals => {:heading => @heading}

@@ -6,6 +6,7 @@ module Minisite
     before_filter :load_email
     before_filter :set_by_tracking
     before_filter :set_cart_and_client_and_studio
+    before_filter :setup_story
 
     layout 'minisite'
 

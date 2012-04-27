@@ -1,3 +1,9 @@
+GIT
+  remote: https://github.com/jilion/useragent.git
+  revision: 923ab1e668bc60389ab1e7a983ca72c5b4a14a6f
+  specs:
+    useragent (0.2.3)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -191,4 +197,5 @@ DEPENDENCIES
   test-unit
   turn (= 0.8.2)
   uglifier (>= 1.0.3)
+  useragent!
   web-app-theme

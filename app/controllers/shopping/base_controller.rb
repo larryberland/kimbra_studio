@@ -2,6 +2,7 @@ class Shopping::BaseController < InheritedResources::Base
 
   skip_filter :authenticate_user!
   before_filter :set_client_and_cart
+  before_filter :setup_story
 
   layout 'minisite'
 
