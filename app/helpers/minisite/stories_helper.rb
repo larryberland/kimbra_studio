@@ -3,7 +3,7 @@ module Minisite::StoriesHelper
   def remote_link_for_fetching_stories(date, collection, type)
     figure = collection[date.to_s(:db)]
     if type == :with
-      title = Story.on_date(date).with_name.group(&:last_name).collect(&:last_name).collect(&:titleize).sort.join(', ')
+      title = Story.on_date(date).with_name.group(&:name).collect(&:name).collect(&:titleize).sort.join(', ')
     else
       title = ''
     end

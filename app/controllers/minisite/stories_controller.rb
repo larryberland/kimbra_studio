@@ -4,13 +4,15 @@ module Minisite
     skip_before_filter :setup_story
     skip_before_filter :authenticate_user!
 
+    layout nil
+
     def index
-      @dates = ('2012-04-14'.to_date..Date.today)
-      @with_names = Story.with_name.group("date(created_at)").size
-      @without_names = Story.without_name.group("date(created_at)").size
+      @dates = (7.days.ago.to_date..Date.today)
+      @with_names = Story.with_name.group("date(created_at), name, created_at").select("name,date(created_at)").size
+      @without_names = Story.without_name.group("date(created_at), name, created_at").select("name,date(created_at)").size
       @stories = Story.today
       @heading = "Stories for today"
-      render :layout => 'brief'
+      render :layout => 'application'
     end
 
     def fetch
