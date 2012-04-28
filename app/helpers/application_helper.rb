@@ -6,6 +6,7 @@ module ApplicationHelper
   def image_tag_title(image_url)
 
   end
+
   # show.html
   def image_tag_thumb(model_with_carrier_wave_image)
     url = model_with_carrier_wave_image.image_url(:thumb).to_s rescue ''
@@ -39,7 +40,7 @@ module ApplicationHelper
   #</div>
   def cw_div_image(model_with_carrier_wave_image, options={})
     if model_with_carrier_wave_image
-      options[:image]   ||= 'image'
+      options[:image] ||= 'image'
       options[:version] ||= :thumb
       content_tag(:div, :class => 'image-thumb') do
         cw_span(model_with_carrier_wave_image) +
@@ -49,12 +50,27 @@ module ApplicationHelper
     end
   end
 
-  def link_for_shopping_cart_nav(cart)
+  def link_for_shopping_cart_nav
     cart_numericality = content_tag :span, :id => :cart_numericality do
-      pluralize(cart.try(:items).try(:size), 'piece')
+      pluralize(@cart.try(:items).try(:size), 'piece')
     end
     link_to_unless_current (t(:minisite_menu_shopping_cart_link) + " (#{ cart_numericality })").html_safe,
-                                       shopping_cart_path(@cart.tracking)
+                           shopping_cart_path(@cart.tracking)
+  end
+
+  # Show a link to the current offer - no need for this if we are at the Collection page or if there's no current offer.
+  def link_back_to_current_offer
+    if @admin_customer_offer
+      at_collection_page = controller_name == 'offers' && action_name == 'index'
+      at_offer_page = controller_name == 'offers' && action_name == 'show'
+      link_text = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
+      unless at_collection_page
+        link = content_tag :li do
+          link_to_unless_current link_text, minisite_offer_url(@offer)
+        end
+        (" | " + link).html_safe
+      end
+    end
   end
 
 end
