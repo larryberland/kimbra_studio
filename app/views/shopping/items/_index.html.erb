@@ -1,5 +1,5 @@
-<div id="shopping_item_index">
-  <table class='shopping-item-index'>
+<div id='shopping_item_index'>
+  <table class='shopping-item-index' align='center'>
 
     <thead>
     <th>Name</th>
@@ -10,15 +10,27 @@
     <% total = 0 %>
     <% items.each do |item| %>
         <tr>
-          <td>
+          <td class='shopping-item-index'>
+            <%= link_to image_tag(item.offer.image_url.to_s,
+                                  :title => item.offer.name,
+                                  :alt => item.offer.name,
+                                  :width => item.offer.width/3,
+                                  :height => item.offer.height/3,
+                                  :class => "w280",
+                                  :editable => "true",
+                                  :label => "Image",
+                                  :border => 0),
+                        minisite_offer_url(item.offer),
+                        {:style => "text-decoration: none;"} %>
+            <br/>
             <%= item.try(:offer).try(:name) %>
           </td>
-          <td>
+          <td class='shopping-item-index'>
             <% item_price = item.price.to_f %>
             <% total += item_price %>
             <%= number_to_currency(item_price) %>
           </td>
-          <td><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
+          <td class='shopping-item-index'><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
         </tr>
     <% end if items and items.present? %>
     <% if total %>
@@ -34,5 +46,4 @@
     <% end %>
     </tbody>
   </table>
-
 </div>

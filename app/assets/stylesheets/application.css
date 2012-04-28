@@ -127,10 +127,6 @@ div.shopping-item-index {
     padding: 10px;
 }
 
-table.shopping-item-index {
-
-}
-
 #stripe_error {
     display: none;
 }

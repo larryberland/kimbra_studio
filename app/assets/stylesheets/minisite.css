@@ -138,12 +138,13 @@ input {
 
 div.shopping-item-index {
     overflow: hidden;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
     padding: 10px;
 }
 
-table.shopping-item-index {
-
+td.shopping-item-index {
+    padding: 5px 10px 5px 10px;
 }
 
 #shopping_item {
