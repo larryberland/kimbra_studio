@@ -51,7 +51,7 @@
         border-bottom: 1px dotted;
     }
 
-    a.no_border  {
+    a.no_border {
         text-decoration: none;
         border-bottom: none;
     }
@@ -67,17 +67,22 @@
   <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
 </div>
 
-<%
-   loop_nav_tabs = {
-           t(:minisite_menu_collection_link) => minisite_email_offers_path(@admin_customer_email.tracking),
-           t(:minisite_menu_about_link, :studio_name => @studio.name) => about_minisite_email_path(@admin_customer_email.tracking),
-           t(:minisite_menu_shopping_cart_link) + " (#{pluralize(@cart.try(:items).try(:size), 'piece')})" => shopping_cart_path(@cart.tracking)}
-%>
-
 <div id="nav_minisite_wrapper" class='bp'>
   <div class="centered_container">
-    <ul id='main-footer-tabs'>
-      <%= format_for_nav loop_nav_tabs %>
+    <ul id='main-header-tabs'>
+      <li>
+        <%= link_to_unless_current t(:minisite_menu_collection_link),
+                                   minisite_email_offers_path(@admin_customer_email.tracking) %>
+      </li>
+      |
+      <li>
+        <%= link_to_unless_current t(:minisite_menu_about_link, :studio_name => @studio.name),
+                                   about_minisite_email_path(@admin_customer_email.tracking) %>
+      </li>
+      |
+      <li>
+        <%= link_for_shopping_cart_nav(@cart) %>
+      </li>
     </ul>
   </div>
 </div>

@@ -1,15 +1,15 @@
-<%
-   footer_tabs = {
-           'Privacy'  => privacy_minisite_email_path(@admin_customer_email.tracking),
-           'Contact us'  => contact_minisite_email_path(@admin_customer_email.tracking)
-          # 'Customer Service'    => faq_customer_service_path
-   }
-%>
-
 <div id="footer_minisite_wrapper" class='bp'>
   <div class="centered_container" id="footer">
     <ul id='main-footer-tabs'>
-      <%= format_for_nav footer_tabs %>
+      <li>
+        <%= link_to_unless_current 'Privacy',
+                                   privacy_minisite_email_path(@admin_customer_email.tracking) %>
+      </li>
+      |
+      <li>
+        <%= link_to_unless_current 'Contact us',
+                                   contact_minisite_email_path(@admin_customer_email.tracking) %>
+      </li>
     </ul>
   </div>
 </div>

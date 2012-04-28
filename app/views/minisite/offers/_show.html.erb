@@ -31,7 +31,7 @@
       </p>
   <% end %>
 
-  <div id='shopping_item'></div>
+  <span id='shopping_item'></span>
 
   <% @admin_customer_offer.description.split(". ").each do |sentence| %>
       <p><%= sentence.strip %><%= "." unless sentence.strip.last == '.' %></p>
