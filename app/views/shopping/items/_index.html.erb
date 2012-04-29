@@ -11,7 +11,7 @@
     <% total = 0 %>
     <% items.each do |item| %>
         <tr>
-          <td class='shopping-item-index' align='left'>
+          <td class='shopping-item-index left'>
             <%= item.try(:offer).try(:name) %>
           </td>
           <td class='shopping-item-index'>
@@ -27,26 +27,26 @@
                         minisite_offer_url(item.offer),
                         {:style => "text-decoration: none;"} %>
           </td>
-          <td class='shopping-item-index' align='right'>
+          <td class='shopping-item-index right'>
             <% item_price = item.price.to_f %>
             <% total += item_price %>
             <%= number_to_currency(item_price) %>
           </td>
-          <td class='shopping-item-index' align='right'><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
+          <td class='shopping-item-index right'><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
         </tr>
     <% end if items and items.present? %>
     <% if total %>
         <tr>
-          <td class='shopping-item-index' align='left'>Shipping:</td>
+          <td class='shopping-item-index left'>Shipping</td>
           <td class='shopping-item-index'>&nbsp;</td>
-          <td class='shopping-item-index' align='right'><%= number_to_currency(15.00) %></td>
+          <td class='shopping-item-index right'><%= number_to_currency(15.00) %></td>
           <td class='shopping-item-index'>&nbsp;</td>
         </tr>
         <tr>
           <% total += 15.00 %>
-          <td class='shopping-item-index' align='left'>Total:</td>
+          <td class='shopping-item-index left total'>Total</td>
           <td class='shopping-item-index'>&nbsp;</td>
-          <td class='shopping-item-index' align='right'><%= number_to_currency(total) %></td>
+          <td class='shopping-item-index right total'><%= number_to_currency(total) %></td>
           <td class='shopping-item-index'>&nbsp;</td>
         </tr>
     <% end %>
