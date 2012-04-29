@@ -423,9 +423,14 @@
             <tbody>
             <tr>
               <td valign="middle">
-                <fblike><img
-                src="https://img.createsend1.com/img/templatebuilder/like-glyph.png"
-                alt="Facebook icon" border="0" height="14" width="8">
+                <fblike>
+                  <%= link_to image_tag(
+                                      'https://img.createsend1.com/img/templatebuilder/like-glyph.png',
+                                      :alt => 'Go to our Facebook page',
+                                      :border => '0',
+                                      :height => '14',
+                                      :width => '8'),
+                              'http://www.facebook.com/kimbrastudiosjewelry' %>
                 </fblike>
               </td>
               <td width="3"></td>
@@ -436,27 +441,20 @@
               </td>
               <td class="w10" width="10"></td>
               <td valign="middle">
-                <tweet><img
-                src="https://img.createsend1.com/img/templatebuilder/tweet-glyph.png"
-                alt="Twitter icon" border="0" height="13" width="17"></tweet>
+                <tweet>
+                  <%= link_to image_tag(
+                                      'https://img.createsend1.com/img/templatebuilder/tweet-glyph.png',
+                                      :alt => 'Go to our Twitter page',
+                                      :border => '0',
+                                      :height => '13',
+                                      :width => '17'),
+                              'http://twitter.com/kimbraclickplus' %>
+                </tweet>
               </td>
               <td width="3"></td>
               <td valign="middle">
                 <div class="header-content">
                   <tweet>Tweet</tweet>
-                </div>
-              </td>
-              <td class="w10" width="10"></td>
-              <td valign="middle">
-                <forwardtoafriend><img
-                src="https://img.createsend1.com/img/templatebuilder/forward-glyph.png"
-                alt="Forward icon" border="0" height="14" width="19">
-                </forwardtoafriend>
-              </td>
-              <td width="3"></td>
-              <td valign="middle">
-                <div class="header-content">
-                  <forwardtoafriend>Forward</forwardtoafriend>
                 </div>
               </td>
             </tr>
