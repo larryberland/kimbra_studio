@@ -259,3 +259,15 @@ ul.story {
 p.story_name_line {
     font-weight: bold;
 }
+
+.left {
+    text-align: left;
+}
+
+.right {
+    text-align: right;
+}
+
+td.total {
+    border-top: 1px dotted;
+}
