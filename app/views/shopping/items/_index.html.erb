@@ -2,7 +2,8 @@
   <table class='shopping-item-index' align='center'>
 
     <thead>
-    <th>Name</th>
+    <th>Piece</th>
+    <th>&nbsp;</th>
     <th>Price</th>
     <th>Actions</th>
     </thead>
@@ -10,6 +11,9 @@
     <% total = 0 %>
     <% items.each do |item| %>
         <tr>
+          <td class='shopping-item-index' align='left'>
+            <%= item.try(:offer).try(:name) %>
+          </td>
           <td class='shopping-item-index'>
             <%= link_to image_tag(item.offer.image_url.to_s,
                                   :title => item.offer.name,
@@ -22,26 +26,28 @@
                                   :border => 0),
                         minisite_offer_url(item.offer),
                         {:style => "text-decoration: none;"} %>
-            <br/>
-            <%= item.try(:offer).try(:name) %>
           </td>
-          <td class='shopping-item-index'>
+          <td class='shopping-item-index' align='right'>
             <% item_price = item.price.to_f %>
             <% total += item_price %>
             <%= number_to_currency(item_price) %>
           </td>
-          <td class='shopping-item-index'><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
+          <td class='shopping-item-index' align='right'><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
         </tr>
     <% end if items and items.present? %>
     <% if total %>
         <tr>
-          <td>Shipping:</td>
-          <td><%= number_to_currency(15.00) %></td>
+          <td class='shopping-item-index' align='left'>Shipping:</td>
+          <td class='shopping-item-index'>&nbsp;</td>
+          <td class='shopping-item-index' align='right'><%= number_to_currency(15.00) %></td>
+          <td class='shopping-item-index'>&nbsp;</td>
         </tr>
         <tr>
           <% total += 15.00 %>
-          <td>Total:</td>
-          <td><%= number_to_currency(total) %></td>
+          <td class='shopping-item-index' align='left'>Total:</td>
+          <td class='shopping-item-index'>&nbsp;</td>
+          <td class='shopping-item-index' align='right'><%= number_to_currency(total) %></td>
+          <td class='shopping-item-index'>&nbsp;</td>
         </tr>
     <% end %>
     </tbody>

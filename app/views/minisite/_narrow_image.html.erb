@@ -1,3 +1,4 @@
+<%# This layout is for email as well and must retain primitive email-based layout and styles. %>
 <layout label="Narrow image">
   <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580">
     <tbody>
@@ -41,7 +42,7 @@
                 <p style="color: <%= studio.minisite.font_color %>;">
                   Solid sterling silver,<br/>
                   completely waterproof<br/>
-                  <span class="price">$48</span><br/>
+                  <span class="price"><%= number_to_currency(offer.price) %></span><br/>
                   <%= link_to "Details...", minisite_offer_url(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: underline;"} %>
                 </p>
               </div>

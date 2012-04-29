@@ -62,9 +62,10 @@ module ApplicationHelper
   def link_back_to_current_offer
     if @admin_customer_offer
       at_collection_page = controller_name == 'offers' && action_name == 'index'
-      at_offer_page = controller_name == 'offers' && action_name == 'show'
+      at_shopping_page   = %w(carts addresses items purchases strip_cards).include?(controller_name)
+      at_offer_page      = controller_name == 'offers' && action_name == 'show'
       link_text = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
-      unless at_collection_page
+      unless at_collection_page or at_shopping_page
         link = content_tag :li do
           link_to_unless_current link_text, minisite_offer_url(@offer)
         end
