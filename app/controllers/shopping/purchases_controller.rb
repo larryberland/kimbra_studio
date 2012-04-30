@@ -8,7 +8,7 @@ module Shopping
     def new
       new! do
         @purchase.cart        = @cart
-        @purchase.total       = @cart.to_total
+        @purchase.total       = @cart.total
         @purchase.total_cents = @purchase.total * 100.0
       end
     end

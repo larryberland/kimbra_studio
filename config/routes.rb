@@ -4,7 +4,11 @@ KimbraStudio::Application.routes.draw do
     resources :carts do
       resource :purchase
     end
-    resources :items
+    resources :items do
+      member do
+        post :remove_one
+      end
+    end
     resources :addresses
     resources :stripe_cards
   end

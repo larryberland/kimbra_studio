@@ -5,7 +5,9 @@
     <th>Piece</th>
     <th>&nbsp;</th>
     <th>Price</th>
-    <th>Actions</th>
+    <th>Quantity</th>
+    <th>Total</th>
+    <th>&nbsp;</th>
     </thead>
     <tbody>
     <% total = 0 %>
@@ -28,26 +30,35 @@
                         {:style => "text-decoration: none;"} %>
           </td>
           <td class='shopping-item-index right'>
-            <% item_price = item.price.to_f %>
-            <% total += item_price %>
-            <%= number_to_currency(item_price) %>
+            <%= number_to_currency item.price.to_f %>
           </td>
-          <td class='shopping-item-index right'><%= link_to t(:shopping_item_destroy_link), shopping_item_path(item), confirm: 'Are you sure?', method: :delete, :remote => true %></td>
+          <td class='shopping-item-index right'>
+            <%= item.quantity.to_i %>
+          </td>
+          <td class='shopping-item-index right'>
+            <%= number_to_currency(item.price.to_f * item.quantity.to_i) %>
+          </td>
+          <td class='shopping-item-index right'>
+            <%= link_to 'Remove 1', remove_one_shopping_item_path(item), :method => :post, confirm: 'Are you sure?', :remote => true %>&nbsp; &nbsp;
+            <%= link_to 'Remove all', shopping_item_path(item), :method => :delete, confirm: 'Are you sure?', :remote => true %>
+          </td>
         </tr>
     <% end if items and items.present? %>
     <% if total %>
         <tr>
           <td class='shopping-item-index left'>Shipping</td>
           <td class='shopping-item-index'>&nbsp;</td>
-          <td class='shopping-item-index right'><%= number_to_currency(15.00) %></td>
+          <td class='shopping-item-index right'><%= number_to_currency(9.95) %></td>
           <td class='shopping-item-index'>&nbsp;</td>
         </tr>
         <tr>
           <% total += 15.00 %>
           <td class='shopping-item-index left total'>Total</td>
-          <td class='shopping-item-index'>&nbsp;</td>
-          <td class='shopping-item-index right total'><%= number_to_currency(total) %></td>
-          <td class='shopping-item-index'>&nbsp;</td>
+          <td class='shopping-item-index total'>&nbsp;</td>
+          <td class='shopping-item-index total'>&nbsp;</td>
+          <td class='shopping-item-index right total'><%= @cart.quantity %></td>
+          <td class='shopping-item-index right total'><%= number_to_currency(@cart.total) %></td>
+          <td class='shopping-item-index total'>&nbsp;</td>
         </tr>
     <% end %>
     </tbody>

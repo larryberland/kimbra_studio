@@ -1,6 +1,16 @@
 class Shopping::Cart < ActiveRecord::Base
 
-  SHIPPING_PRICE = 10.0
+  SHIPPING_PRICE = 9.95
+
+  # TODO add real shipping options.
+  #Regular Ground Shipping USA   $9.95
+  #2nd Day Air Shipping USA    $24.95
+  #Next Day Air Shipping USA     $32.95
+  #Alaska Shipping  $25.00
+  #Canada Shipping  $26.95
+  #Hawaii Shipping  $25.00
+  #Mexico Shipping $32.95
+  #Outside USA, Mexico and Canada $48.00
 
   belongs_to :email, :class_name => 'Admin::Customer::Email'
   has_many :items, :class_name => 'Shopping::Item'
@@ -21,13 +31,17 @@ class Shopping::Cart < ActiveRecord::Base
     tracking
   end
 
-  def to_total
+  def total
     items.each do |item|
       raise 'missing price in offer=>#{item.offer.inspect) piece=>#{item.offer.piece.id}' if item.offer.piece.price.nil?
     end
-    total = items.collect { |item| item.offer.piece.price }.sum
+    total = items.inject(0) { |result, item| result + (item.offer.piece.price * item.quantity.to_i) }
     total += SHIPPING_PRICE
     total
+  end
+
+  def quantity
+    items.inject(0) { |result, item| result + item.quantity.to_i }
   end
 
   private #========================================================================

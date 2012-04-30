@@ -52,7 +52,7 @@ module ApplicationHelper
 
   def link_for_shopping_cart_nav
     cart_numericality = content_tag :span, :id => :cart_numericality do
-      pluralize(@cart.try(:items).try(:size), 'piece')
+      pluralize(@cart.quantity, 'piece')
     end
     link_to_unless_current (t(:minisite_menu_shopping_cart_link) + " (#{ cart_numericality })").html_safe,
                            shopping_cart_path(@cart.tracking)

@@ -1,5 +1,5 @@
 <div class='shopping-item-index'>
-  You have <span id="cart_count"><%= @cart.try(:items).try(:size) %></span> pieces in your cart.
+  You have <span id="cart_count"><%= @cart.quantity %></span> pieces in your cart.
 
   <% url = if @cart.purchase.present?
              edit_shopping_cart_purchase_path(@cart)

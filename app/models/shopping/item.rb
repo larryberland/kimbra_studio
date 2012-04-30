@@ -8,6 +8,9 @@ class Shopping::Item < ActiveRecord::Base
 
   accepts_nested_attributes_for :offer, :cart
 
+  before_create :ensure_qty_1
+
+
   def price
     v =if offer
          if offer.piece
@@ -31,4 +34,11 @@ class Shopping::Item < ActiveRecord::Base
     end
     v
   end
+
+  private #================================================
+
+  def ensure_qty_1
+    self.quantity = 1 unless quantity
+  end
+
 end

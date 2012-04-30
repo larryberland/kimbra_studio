@@ -21,7 +21,7 @@ class Shopping::Purchase < ActiveRecord::Base
   end
 
   def cart_total
-    cart.to_total
+    cart.total
   end
 
   def calculate_total
@@ -30,7 +30,7 @@ class Shopping::Purchase < ActiveRecord::Base
     cart_total + self.tax
   end
 
-  private
+  private #=================================================================================
 
   def stripe_info
     errors.add(:card_number, "Missing stripe token") if stripe_card_token.nil?

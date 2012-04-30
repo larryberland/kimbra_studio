@@ -14,11 +14,32 @@ module Shopping
     def create
       params[:cart_id] = params[:shopping_item][:cart_id]
       params[:offer_id] = params[:shopping_item][:offer_id]
-      create!
+      item_already_in_cart = @cart.items.where(:offer_id => params[:offer_id]).first
+      if item_already_in_cart
+        item_already_in_cart.update_attribute :quantity, item_already_in_cart.quantity.to_i + 1
+        @item = item_already_in_cart
+      else
+        create!
+      end
     end
 
     def destroy
+      @item = Shopping::Item.find(params[:id])
+      @storyline.describe "Removing all #{@item.offer.name}"
       destroy!
+      respond_to do |format|
+        format.js {render(:update)}
+      end
+    end
+
+    def remove_one
+      @item = Shopping::Item.find(params[:id])
+      @storyline.describe "Removing one #{@item.offer.name}"
+      @item.update_attribute :quantity, @item.quantity.to_i - 1
+      @item.destroy if @item.quantity.to_i == 0
+      respond_to do |format|
+        format.js {render(:update)}
+      end
     end
 
   end

@@ -1,4 +1,4 @@
 $("#shopping_item").html( "<%= escape_javascript(render(@item))%>" );
-$("#cart_numericality").html( '<%= pluralize(@cart.try(:items).try(:size), 'piece') %>'  )
+$("#cart_numericality").html( '<%= pluralize(@cart.quantity, 'piece') %>' )
 $("#shopping_item").effect("highlight", {}, 1500);
 $("#spinner").toggle();

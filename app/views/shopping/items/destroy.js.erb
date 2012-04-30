@@ -1,2 +1,0 @@
-$("#shopping_item_index").html("<%= escape_javascript(render 'shopping/items/index', :items => @cart.items)%>");
-$('#cart_count').text(<%= escape_javascript(@cart.items.count.to_s) %>)
