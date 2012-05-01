@@ -1,22 +1,48 @@
-<h1><%= t(:admin_customer_items_index_title) %></h1>
+<h1><%= t(:minisite_admin_customer_items_index_title) %></h1>
 
 <table>
   <tr>
-    <th>Image front</th>
-    <th>Image back</th>
+    <th></th>
+    <th></th>
     <th></th>
     <th></th>
   </tr>
 
-  <% @items.each do |item| %>
-      <tr>
-        <td><%= image_tag item.front.image_custom_url.to_s %></td>
-        <td><%= item.back.nil? ? '' : (image_tag item.back.image_custom_url.to_s) %></td>
+  <tr>
+    <td colspan="<%= @items.size %>">
+      <h4>Custom Piece Front</h4>
+    </td>
+  </tr>
+  <tr>
+    <% @items.each do |item| %>
+        <td>
+          <%= image_tag item.front.image_custom_url(:list).to_s %>
+          <br>
+          <%= link_to t(:edit), edit_minisite_item_side_path(item.front) %>
+        </td>
+    <% end %>
+  </tr>
 
-        <% item.item_sides.each do |side| %>
-            <td>
-              <%= link_to t(:edit), edit_minisite_item_side_path(side) %>
-            </td>
+  <% has_back = false %>
+  <% @items.each do |item| %>
+      <% has_back = true if item.back.present? %>
+  <% end %>
+
+  <% if has_back %>
+      <tr>
+        <td colspan="<%= @items.size %>">
+          <h4>Custom Piece Back</h4>
+        </td>
+      </tr>
+      <tr>
+        <% @items.each do |item| %>
+            <% if item.back.present? %>
+                <td>
+                  <%= image_tag item.back.image_custom_url(:list).to_s %>
+                  <br>
+                  <%= link_to t(:edit), edit_minisite_item_side_path(item.back) %>
+                </td>
+            <% end %>
         <% end %>
       </tr>
   <% end %>

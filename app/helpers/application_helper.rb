@@ -40,12 +40,26 @@ module ApplicationHelper
   #</div>
   def cw_div_image(model_with_carrier_wave_image, options={})
     if model_with_carrier_wave_image
-      options[:image] ||= 'image'
+      options[:image]   ||= 'image'
       options[:version] ||= :thumb
       content_tag(:div, :class => 'image-thumb') do
         cw_span(model_with_carrier_wave_image) +
             content_tag(:br) +
             image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]))
+      end
+    end
+  end
+
+  #<div class='image-thumb'>
+  #  <span><%= model.to_image_span %></span><br/>
+  #  <%= image_tag_version(model) %>
+  #</div>
+  def cw_div_image_only(model_with_carrier_wave_image, options={})
+    if model_with_carrier_wave_image
+      options[:image]   ||= 'image'
+      options[:version] ||= :thumb
+      content_tag(:div, :class => 'image-thumb') do
+        image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]))
       end
     end
   end
@@ -64,7 +78,7 @@ module ApplicationHelper
       at_collection_page = controller_name == 'offers' && action_name == 'index'
       at_shopping_page   = %w(carts addresses items purchases strip_cards).include?(controller_name)
       at_offer_page      = controller_name == 'offers' && action_name == 'show'
-      link_text = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
+      link_text          = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
       unless at_collection_page or at_shopping_page
         link = content_tag :li do
           link_to_unless_current link_text, minisite_offer_url(@offer)

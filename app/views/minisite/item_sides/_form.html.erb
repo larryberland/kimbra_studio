@@ -1,4 +1,5 @@
 <%= form_for(@item_side, :url => minisite_item_side_path(@item_side)) do |f| %>
+
     <% if @item_side.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@item_side.errors.count, "error") %> prohibited this admin_customer_item_side
@@ -11,57 +12,11 @@
         </div>
     <% end %>
 
-    <table>
-      <tr>
-        <td>
-          <%= cw_div_image(@item_side, :image => 'image_stock', :version => :original) %>
-          <br/>
-          <%= @item_side.image_title(@item_side.image_stock) %>
-        </td>
-        <td>
-          <%= cw_div_image(@item_side, :image => 'image_custom', :version => :original) %>
-          <br>
-          <%= @item_side.image_title(@item_side.image_custom) %>
-        </td>
-      </tr>
-
-      <% if @item_side.try(:item).try(:offer).try(:items).try(:size).to_i > 1 %>
-      <tr>
-        <td colspan="2">
-          <%= cw_div_image(@item_side.item.offer, :version => :original) %>
-        </td>
-      </tr>
-      <% end %>
-    </table>
-
-    <div class="field">
-      <%= f.label :image_stock, 'Portrait:' %>
-      <%= f.file_field :image_stock %>
-      <br/>
-      <%= f.label :remote_image_stock_url, 'or Portrait URL' %>
-      <%= f.text_field :remote_image_stock_url %>
-    </div>
-    <%= f.hidden_field :image_stock_cache %>
-
-    <div class="portraits">
-      <h4>My Photos</h4>
-      <table class='portrait-pick'>
-        <tr>
-          <td>
-            <%= link_to cw_div_image(@item_side, :image => 'image_stock'), stock_minisite_item_side_path(@item_side, 1), :remote => true %>
-          </td>
-          <% @admin_customer_offer.portraits.each do |portrait| %>
-              <td>
-                <%= link_to cw_div_image(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
-              </td>
-          <% end %>
-        </tr>
-      </table>
-    </div>
-
     <div class='preview'>
 
-      <h4>Preview</h4>
+      <h1>Preview Custom Image</h1>
+      <p>Jim, you should probably add some helpful text about how to do their edit process</p>
+      <p>in File=>minisite/item_sides/_form.html.erb</p>
       <table>
         <tr>
           <td>
@@ -73,14 +28,13 @@
           <td align="top">
 
             <% v = @item_side.part.piece_layout.layout.size.inspect %>
-            <%= f.text_field @item_side.part.piece_layout.layout.size, :value => v %>
+            <%= f.hidden_field @item_side.part.piece_layout.layout.size, :value => v %>
             <div id='part_item_preview'>
               <%= image_tag @item_side.image_stock_url(:croppable), :id => 'preview' %>
             </div>
 
             <% %w[x y w h].each do |attr| %>
-                <%= f.text_field "crop_#{attr}" %>
-                <br>
+                <%= f.hidden_field "crop_#{attr}" %>
             <% end %>
 
           </td>
@@ -91,6 +45,34 @@
     <div id="portrait_form">
 
     </div>
+
+    <!-- Studio Portraits and current charm portrait -->
+    <div class="portraits">
+      <h1>My Photos</h1>
+      <table class='portrait-pick'>
+        <tr>
+          <td>
+            <%= link_to cw_div_image_only(@item_side, :image => 'image_stock'), stock_minisite_item_side_path(@item_side, 1), :remote => true %>
+          </td>
+          <% @admin_customer_offer.portraits.each do |portrait| %>
+              <td>
+                <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
+              </td>
+          <% end %>
+        </tr>
+      </table>
+    </div>
+
+    <!-- upload a file for new portrait -->
+    <div class="field">
+      <%= f.label :image_stock, 'Portrait:' %>
+      <%= f.file_field :image_stock %>
+      <br/>
+      <%= f.label :remote_image_stock_url, 'or Portrait URL' %>
+      <%= f.text_field :remote_image_stock_url %>
+    </div>
+    <%= f.hidden_field :image_stock_cache %>
+
     <div class="actions">
       <%= f.submit :id => 'my_submit' %>
       <span id="spinner" style="display:none"></span>

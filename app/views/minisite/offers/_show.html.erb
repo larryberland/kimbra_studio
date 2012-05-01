@@ -37,6 +37,15 @@
       <p><%= sentence.strip %><%= "." unless sentence.strip.last == '.' %></p>
   <% end %>
 
-  <p> <%= link_to t(:minisite_items_show_link), minisite_offer_items_path(@admin_customer_offer) %></p>
+  <p>
+    <% if @admin_customer_offer.has_picture? %>
+        <% if @admin_customer_offer.items.size > 1 %>
+            <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
+        <% else %>
+            <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
+        <% end %>
+        <%= link_to t(:minisite_items_show_link), edit_url %>
+    <% end %>
+  </p>
 
 </div>

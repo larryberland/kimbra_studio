@@ -137,6 +137,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
     portraits
   end
 
+  def has_picture?
+    piece.photo_parts.present?
+  end
+
   private #===========================================================================
 
   def piece_create_default_and_tracking

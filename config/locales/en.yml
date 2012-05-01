@@ -67,6 +67,8 @@ en:
   # stripe
   stripe_description_prefix: 'Kimbra Studio via ClickPlus1'
 
+  minisite_admin_customer_items_index_title: 'Edit Your Custom Items'
+
   # minisite menu buttons
   minisite_menu_collection_link: 'The Collection'
   minisite_menu_custom_work_link: 'Custom Work'

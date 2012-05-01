@@ -176,6 +176,7 @@ td.shopping-item-index {
 
 .portrait-pick a {
     display: inline;
+    padding: 10px;
 }
 
 .portrait-pick a div.image-thumb {

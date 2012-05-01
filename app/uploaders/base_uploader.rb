@@ -8,7 +8,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  puts "setting storage=>#{KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]}"
+  # puts "setting storage=>#{KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]}"
   storage KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]
 
   # helper method to store image from a full_path filename
@@ -25,11 +25,11 @@ class BaseUploader < CarrierWave::Uploader::Base
 
   def to_image(version=nil)
     image = if file.kind_of?(CarrierWave::SanitizedFile)
-              puts "using storage file"
+              # puts "using storage file"
               Magick::Image.read(current_path)
             else
               p = model.send("#{mounted_as}_url", version)
-              puts "#{model.class.name} for #{mounted_as} using amazon file#{p}"
+              # puts "#{model.class.name} for #{mounted_as} using amazon file#{p}"
               raise "#{model.class.name} for #{mounted_as} using amazon file#{p}" if p.blank?
               Magick::Image.read(p)
             end
