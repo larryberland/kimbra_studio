@@ -1,4 +1,4 @@
-<%= form_for(@item_side, :url => minisite_item_side_path(@item_side)) do |f| %>
+<%= form_for(@item_side, :url => minisite_item_side_path(@item_side), html: {multipart: true}) do |f| %>
 
     <% if @item_side.errors.any? %>
         <div id="error_explanation">
@@ -11,6 +11,12 @@
           </ul>
         </div>
     <% end %>
+
+    <div id='hidden_fields'>
+      <%= f.fields_for :portrait, @item_side.portrait do |p| %>
+          <%= p.hidden_field :id, :value => @item_side.portrait.id %>
+      <% end %>
+    </div>
 
     <div class='preview'>
 
@@ -63,15 +69,17 @@
       </table>
     </div>
 
-    <!-- upload a file for new portrait -->
+    <!-- remove for now, think should go on different page
+    <!-- upload a file for new portrait
     <div class="field">
-      <%= f.label :image_stock, 'Portrait:' %>
-      <%= f.file_field :image_stock %>
+       f.label :image_stock, 'Portrait:' %>
+       f.file_field :image_stock %>
       <br/>
-      <%= f.label :remote_image_stock_url, 'or Portrait URL' %>
-      <%= f.text_field :remote_image_stock_url %>
+       f.label :remote_image_stock_url, 'or Portrait URL' %>
+       f.text_field :remote_image_stock_url %>
     </div>
-    <%= f.hidden_field :image_stock_cache %>
+     f.hidden_field :image_stock_cache %>
+    -->
 
     <div class="actions">
       <%= f.submit :id => 'my_submit' %>

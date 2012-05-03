@@ -7,7 +7,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
   layout 'minisite'
 
   def update
-    success = @item_side.update_attributes(params[:item_side])
+    success = @item_side.update_assembly(params[:item_side])
     respond_to do |format|
       if success
         format.html { redirect_to @item_side, notice: 'Client was successfully updated.' }

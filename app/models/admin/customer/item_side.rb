@@ -37,6 +37,21 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     my_item_side
   end
 
+  # user has updated the item_side's assembly
+  #  with new_picture or new_cropping.
+  # equivalent to update_attributes with functionality
+  def update_assembly(attrs)
+
+    # may upload a new file or url link to picture
+
+    # cropped the current portrait image
+
+
+
+
+
+  end
+
   def on_layout_change
     # redraw the item_side
     puts "layout_change begin"
