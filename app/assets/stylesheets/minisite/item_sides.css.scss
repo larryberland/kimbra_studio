@@ -10,10 +10,27 @@ div.preview {
   table {
     width: 100%;
     #part_item_preview {
-      width: 300px;
-      height: 300px;
       overflow: hidden;
+      position: relative;
     }
   }
+}
 
+#cropbox {
+  width: 300px;
+}
+
+#part_template {
+  position: absolute;
+  width: 300px;
+  top: 0px;
+  left: 0px;
+  z-index: 10;
+}
+
+#preview {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 0;
 }

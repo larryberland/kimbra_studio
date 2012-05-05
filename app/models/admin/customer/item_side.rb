@@ -1,4 +1,5 @@
 class Admin::Customer::ItemSide < ActiveRecord::Base
+
   attr_accessible :image_stock, :remote_image_stock_url, :image_stock_cache,
                   :image_custom, :remote_image_custom_url, :image_custom_cache,
                   :changed_layout_at,
@@ -114,7 +115,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     "size #{img.columns} x #{img.rows}"
   end
 
-  private
+  private #===============================================================================
 
   # used in CarrierWave process center_in_area
   def get_dest_area

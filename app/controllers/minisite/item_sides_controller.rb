@@ -29,7 +29,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
   end
 
-  private
+  private #==========================================================================
 
   def set_by_tracking
     @item_side = Admin::Customer::ItemSide.find(params[:id]) if params[:id]

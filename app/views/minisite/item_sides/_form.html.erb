@@ -27,6 +27,7 @@
         <tr>
           <td>
             <div id="portrait_item">
+              <!-- Constrain stock image to be 300px wide. Height varies according to part. This is done in the css. -->
               <%= image_tag @item_side.image_stock_url(:croppable), :id => 'cropbox' %>
             </div>
 
@@ -35,7 +36,9 @@
 
             <% v = @item_side.part.piece_layout.layout.size.inspect %>
             <%= f.hidden_field @item_side.part.piece_layout.layout.size, :value => v %>
-            <div id='part_item_preview'>
+            <!-- Constrain preview images to be 300px wide in this div. Height varies according to part. Can't do this bit in the css. -->
+            <div id='part_item_preview' style='width:300px; height:<%= 300.0 / @item_side.part.width * @item_side.part.height %>px;'>
+              <%= image_tag @item_side.part.image_part_url, :id => 'part_template' %>
               <%= image_tag @item_side.image_stock_url(:croppable), :id => 'preview' %>
             </div>
 
@@ -85,4 +88,14 @@
       <%= f.submit :id => 'my_submit' %>
       <span id="spinner" style="display:none"></span>
     </div>
+<% end %>
+
+<!-- Pass dimensions of piece template to javascript for portraits.js to pick up. -->
+<%= javascript_tag do %>
+    window.pieceWidth    = <%= @item_side.part.width %>
+    window.pieceHeight   = <%= @item_side.part.height %>
+    window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>
+    window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>
+    window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>
+    window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>
 <% end %>

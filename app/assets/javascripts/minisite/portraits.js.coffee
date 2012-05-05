@@ -2,10 +2,30 @@ jQuery ->
   new AvatarCropper()
 
 class @AvatarCropper
+
   constructor: ->
+    partLayoutAspectRatio = partLayoutWidth / partLayoutHeight
+
+    # Is the part layout a portrait or landscape?
+    layoutIsPortrait = partLayoutHeight >=  partLayoutWidth
+
+    # Position initial select box one-sixth inside principal dimension of cropbox.
+    # Sixths seems pleasing since the resultant selection box will be two-thirds the principal dimension.
+    if layoutIsPortrait
+      x1 = ($('#cropbox').width() / 6) + 0.5 * ($('#cropbox').width() * 4 / 6 - $('#cropbox').height() * 4 / 6 * partLayoutAspectRatio)
+      y1 = $('#cropbox').height() / 6 # one-sixth the way down
+      x2 = ($('#cropbox').width() * 5 / 6) - 0.5 * ($('#cropbox').width() * 4 / 6 - $('#cropbox').height() * 4 / 6 * partLayoutAspectRatio)
+      y2 = $('#cropbox').height() * 5 / 6 # five-sixths the way down
+    else # landscape style
+      x1 = $('#cropbox').width() / 6 # one-sixth the way across
+      y1 = ($('#cropbox').height() / 6) + 0.5 * ($('#cropbox').height() * 4 / 6 - $('#cropbox').width() * 4 / 6 / partLayoutAspectRatio)
+      x2 = $('#cropbox').width() * 5 / 6 # five-sixths the way across
+      y2 = ($('#cropbox').height() * 5 / 6) - 0.5 * ($('#cropbox').height() * 4 / 6 - $('#cropbox').width() * 4 / 6 / partLayoutAspectRatio)
+
+    # Configure the Jcrop box.
     $('#cropbox').Jcrop
-      aspectRatio: 1
-      setSelect: [150, 150, 450, 450]
+      aspectRatio: partLayoutAspectRatio
+      setSelect: [x1, y1, x2, y2]
       onSelect: @update
       onChange: @update
 
@@ -17,8 +37,16 @@ class @AvatarCropper
     @updatePreview(coords)
 
   updatePreview: (coords) =>
+    # This is how much we reduced the part image to fit in the 300px wide view. Use this to scale down the preview image by this factor.
+    previewScalingFactor =
+      width:  $('#part_template').width()  / pieceWidth
+      height: $('#part_template').height() / pieceHeight
+    # Notice cropScalingFactor gets bigger as you zoom in! Use this to scale up the preview image by this factor.
+    cropScalingFactor =
+      width:  $('#cropbox').width()  / coords.w
+      height: $('#cropbox').height() / coords.h
     $('#preview').css
-      width: Math.round(300 / coords.w * $('#cropbox').width()) + 'px'
-      height: Math.round(300 / coords.h * $('#cropbox').height()) + 'px'
-      marginLeft: '-' + Math.round(300 / coords.w * coords.x) + 'px'
-      marginTop: '-' + Math.round(300 / coords.h * coords.y) + 'px'
+      width:  Math.round( partLayoutWidth  * cropScalingFactor.width  * previewScalingFactor.width  ) + 'px'
+      height: Math.round( partLayoutHeight * cropScalingFactor.height * previewScalingFactor.height ) + 'px'
+      marginLeft: Math.round( partLayoutOffsetX * previewScalingFactor.width  - coords.x * cropScalingFactor.width  * previewScalingFactor.width ) + 'px'
+      marginTop:  Math.round( partLayoutOffsetY * previewScalingFactor.height - coords.y * cropScalingFactor.height * previewScalingFactor.height) + 'px'
