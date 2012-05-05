@@ -353,7 +353,7 @@
       - :image_part: part0.png
         order: 0
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
-        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 300, h: 300}}
 
   - category: Photo Charms
     name: Evalina Charm
