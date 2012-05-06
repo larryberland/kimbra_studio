@@ -21,7 +21,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
-  after_update :reposition, :crop_avatar
+  after_update :reposition, :crop_portrait
 
   # assemble a part side for this item and portrait
   # options => {:photo_part,
@@ -42,15 +42,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   #  with new_picture or new_cropping.
   # equivalent to update_attributes with functionality
   def update_assembly(attrs)
-
     # may upload a new file or url link to picture
-
     # cropped the current portrait image
-
-
-
-
-
   end
 
   def on_layout_change
@@ -197,7 +190,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     true
   end
 
-  def crop_avatar
+  def crop_portrait
     # TODO: Need more logic here to rebuild the offer
     #       based on the new cropping.
     #       this is going to get really complicated.

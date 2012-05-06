@@ -1,7 +1,7 @@
 jQuery ->
-  new AvatarCropper()
+  new PortraitCropper()
 
-class @AvatarCropper
+class @PortraitCropper
 
   constructor: ->
     partLayoutAspectRatio = partLayoutWidth / partLayoutHeight
@@ -38,6 +38,7 @@ class @AvatarCropper
 
   updatePreview: (coords) =>
     # This is how much we reduced the part image to fit in the 300px wide view. Use this to scale down the preview image by this factor.
+    # If we choose a different part image width, that can be done in the css without changing any values here.
     previewScalingFactor =
       width:  $('#part_template').width()  / pieceWidth
       height: $('#part_template').height() / pieceHeight

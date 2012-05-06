@@ -3,4 +3,4 @@ $("#portrait_item").html("<%= escape_javascript(render(@portrait))%>");
 $("#portrait_item").effect("highlight", {}, 1500);
 $("#admin_customer_item_side_my_studio_portrait_id").val(<%= @portrait.id %>);
 $("#spinner").toggle();
-new AvatarCropper();
+new PortraitCropper();
