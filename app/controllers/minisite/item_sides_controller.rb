@@ -17,7 +17,6 @@ class Minisite::ItemSidesController < InheritedResources::Base
         format.json { render json: @item_side.errors, status: :unprocessable_entity }
       end
     end
-
   end
 
   # get /minisite/offers/tracking/portrait
@@ -27,6 +26,10 @@ class Minisite::ItemSidesController < InheritedResources::Base
 
   def stock
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
+  end
+
+  def edit
+    @storyline.describe "Editing item side"
   end
 
   private #==========================================================================
@@ -42,7 +45,6 @@ class Minisite::ItemSidesController < InheritedResources::Base
     if session[:cart_id]
       @cart = Shopping::Cart.find(session[:cart_id]) rescue nil
     end
-
     if @cart.nil?
       @cart             = Shopping::Cart.create(:email => @email)
       session[:cart_id] = @cart.id

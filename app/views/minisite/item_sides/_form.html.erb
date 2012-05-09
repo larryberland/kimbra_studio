@@ -19,10 +19,7 @@
     </div>
 
     <div class='preview'>
-
-      <h1>Preview Custom Image</h1>
-      <p>Jim, you should probably add some helpful text about how to do their edit process</p>
-      <p>in File=>minisite/item_sides/_form.html.erb</p>
+      <h3>Move or resize selection by dragging</h3>
       <table>
         <tr>
           <td>
@@ -51,13 +48,18 @@
       </table>
     </div>
 
+    <div class="actions">
+      <%= f.submit :id => 'my_submit' %>
+      <span id="spinner" style="display:none"></span>
+    </div>
+
     <div id="portrait_form">
 
     </div>
 
     <!-- Studio Portraits and current charm portrait -->
     <div class="portraits">
-      <h1>My Photos</h1>
+      <h3><i>Click to replace with different portrait</i></h3>
       <table class='portrait-pick'>
         <tr>
           <td>
@@ -84,10 +86,6 @@
      f.hidden_field :image_stock_cache %>
     -->
 
-    <div class="actions">
-      <%= f.submit :id => 'my_submit' %>
-      <span id="spinner" style="display:none"></span>
-    </div>
 <% end %>
 
 <!-- Pass dimensions of piece template to javascript for portraits.js to pick up. -->

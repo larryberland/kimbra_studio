@@ -1,5 +1,7 @@
 jQuery ->
   new PortraitCropper()
+  callback = -> window.jcrop.animateTo setSelect
+  setTimeout callback, 1000
 
 class @PortraitCropper
 
@@ -21,13 +23,15 @@ class @PortraitCropper
       y1 = ($('#cropbox').height() / 6) + 0.5 * ($('#cropbox').height() * 4 / 6 - $('#cropbox').width() * 4 / 6 / partLayoutAspectRatio)
       x2 = $('#cropbox').width() * 5 / 6 # five-sixths the way across
       y2 = ($('#cropbox').height() * 5 / 6) - 0.5 * ($('#cropbox').height() * 4 / 6 - $('#cropbox').width() * 4 / 6 / partLayoutAspectRatio)
+    window.setSelect = [x1,y1,x2,y2]
 
     # Configure the Jcrop box.
-    $('#cropbox').Jcrop
+    $('#cropbox').Jcrop(
       aspectRatio: partLayoutAspectRatio
-      setSelect: [x1, y1, x2, y2]
       onSelect: @update
       onChange: @update
+      , ->
+        window.jcrop = this)
 
   update: (coords) =>
     $('#admin_customer_item_side_crop_x').val(coords.x)

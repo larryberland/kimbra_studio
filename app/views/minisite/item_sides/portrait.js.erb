@@ -1,6 +1,12 @@
-$("#part_item_preview").html("<%= escape_javascript(render('minisite/my_studio/portraits/part_item', portrait: @portrait))%>");
-$("#portrait_item").html("<%= escape_javascript(render(@portrait))%>");
-$("#portrait_item").effect("highlight", {}, 1500);
-$("#admin_customer_item_side_my_studio_portrait_id").val(<%= @portrait.id %>);
-$("#spinner").toggle();
+$("#cropbox").attr('src', "<%= @portrait.image_url(:croppable).html_safe %>");
+$("#preview").attr('src', "<%= @portrait.image_url(:croppable).html_safe %>");
+$("#admin_customer_item_side_portrait_id").val(<%= @portrait.id %>);
+window.jcrop.destroy();
+window.pieceWidth    = <%= @item_side.part.width %>
+window.pieceHeight   = <%= @item_side.part.height %>
+window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>
+window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>
+window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>
+window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>
 new PortraitCropper();
+setTimeout(function() {jcrop.animateTo(setSelect)} , 1000);
