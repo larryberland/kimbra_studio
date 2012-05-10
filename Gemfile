@@ -29,6 +29,8 @@ gem 'stripe'
 gem "useragent", :git => "https://github.com/jilion/useragent.git"
 gem 'haml'
 
+gem 'jquery-rails'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
@@ -37,7 +39,17 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-gem 'jquery-rails'
+group :development, :test do
+  gem 'rspec-rails'
+end
+
+group :test do
+  gem 'factory_girl_rails'  # replaces fixtures
+  gem 'capybara'      # simulate user awesome gem
+  gem 'guard-rspec'   # auto-run spec after save
+  # Pretty printed test output
+  gem 'turn', '0.8.2', :require => false
+end
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
@@ -51,9 +63,3 @@ gem 'jquery-rails'
 # To use debugger
 # gem 'ruby-debug19', :require => 'ruby-debug'
 
-group :test do
-  # Pretty printed test output
-  gem 'turn', '0.8.2', :require => false
-  gem 'test-unit'
-  gem 'shoulda'
-end

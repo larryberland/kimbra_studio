@@ -34,6 +34,7 @@ development: &non_production_settings
 
 test:
   <<: *non_production_settings
+
 production:
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
   :s3:

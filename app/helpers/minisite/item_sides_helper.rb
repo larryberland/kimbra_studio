@@ -1,0 +1,2 @@
+module Minisite::ItemSidesHelper
+end
