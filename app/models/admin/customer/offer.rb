@@ -7,12 +7,12 @@ class Admin::Customer::Offer < ActiveRecord::Base
                   :custom_layout, :portrait_parts_list,
                   :tracking
 
-  attr_accessor :portrait_parts_list                            # parts list having portraits assigned to which part
+  attr_accessor :portrait_parts_list # parts list having portraits assigned to which part
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
-  mount_uploader :image, ImageUploader                          # the final custom kimbra piece
-  mount_uploader :image_front, ImageUploader                    # the front side of the final custom kimbra piece
-  mount_uploader :image_back, ImageUploader                     # the back side of the final custom kimbra piece
+  mount_uploader :image, ImageUploader # the final custom kimbra piece
+  mount_uploader :image_front, ImageUploader # the front side of the final custom kimbra piece
+  mount_uploader :image_back, ImageUploader # the back side of the final custom kimbra piece
 
   before_create :piece_create_default_and_tracking
   before_save :piece_default
@@ -21,7 +21,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece' # kimbra piece
   belongs_to :email, :class_name => 'Admin::Customer::Email'
 
-  has_many :items, :class_name => 'Admin::Customer::Item'       # Items that make up the custom piece
+  has_many :items, :class_name => 'Admin::Customer::Item' # Items that make up the custom piece
 
   has_one :shopping_item, :class_name => 'Shopping::Item'
 
@@ -42,10 +42,11 @@ class Admin::Customer::Offer < ActiveRecord::Base
   #             :face => face within this portrait to use
   def self.generate(email, piece, portrait_parts_list)
     tracking = UUID.random_tracking_number
-    offer    = Admin::Customer::Offer.create(:tracking            => tracking,
-                                             :email               => email,
-                                             :piece               => piece,
-                                             :portrait_parts_list => portrait_parts_list)
+    offer = Admin::Customer::Offer.create(
+        :tracking => tracking,
+        :email => email,
+        :piece => piece,
+        :portrait_parts_list => portrait_parts_list)
     offer.assemble(piece)
     offer
   end
@@ -90,7 +91,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     self
   end
 
-          # span text for Offer
+  # span text for Offer
   def to_image_span
     text = name.to_s
     text = piece.to_image_span if piece.present?
@@ -145,8 +146,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   def piece_create_default_and_tracking
     if piece
-      self.description   = piece.short_description
-      self.name          = piece.to_offer_name
+      self.description = piece.short_description
+      self.name = piece.to_offer_name
       self.custom_layout = piece.custom_layout
     end
     self.tracking = UUID.random_tracking_number if tracking.nil?
@@ -168,7 +169,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
       w << item.part.piece_layout.w
     end
     height = h.max
-    width  = w.sum
+    width = w.sum
     puts "size=>#{width}x#{height}"
     custom_piece = image_new(width, height)
     items.each_with_index do |item, index|
@@ -224,6 +225,5 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def check_width
     puts "#{self} size=>#{width}x#{height}"
   end
-
 
 end

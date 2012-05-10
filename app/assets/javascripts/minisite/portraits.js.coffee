@@ -1,7 +1,7 @@
 jQuery ->
   new PortraitCropper()
   callback = -> window.jcrop.animateTo setSelect
-  setTimeout callback, 1000
+  setTimeout callback, 500
 
 class @PortraitCropper
 

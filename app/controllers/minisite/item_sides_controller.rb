@@ -25,7 +25,8 @@ class Minisite::ItemSidesController < InheritedResources::Base
   end
 
   def stock
-    @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
+    @portrait = MyStudio::Portrait.find(params[:item_side_id]) rescue nil
+    render :portrait
   end
 
   def edit

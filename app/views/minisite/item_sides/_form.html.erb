@@ -63,7 +63,7 @@
       <table class='portrait-pick'>
         <tr>
           <td>
-            <%= link_to cw_div_image_only(@item_side, :image => 'image_stock'), stock_minisite_item_side_path(@item_side, 1), :remote => true %>
+            <%= link_to cw_div_image_only(@item_side, :image => 'image_stock'), stock_minisite_item_side_path(@item_side, @item_side.portrait.id), :remote => true %>
           </td>
           <% @admin_customer_offer.portraits.each do |portrait| %>
               <td>
