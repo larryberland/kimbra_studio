@@ -2,7 +2,7 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
-jQuery ->
+$ ->
   Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
   subscription.setupForm()
 
@@ -55,10 +55,9 @@ CreditCard =
       total += n
     total % 10 == 0
 
-jQuery ->
+$ ->
   $("#card_number").blur ->
     if CreditCard.validNumber(@value)
       $("#card_number_error").text("")
     else
       $("#card_number_error").text("Invalid credit card number.")
-

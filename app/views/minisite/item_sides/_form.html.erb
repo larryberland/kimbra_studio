@@ -2,8 +2,9 @@
 
     <% if @item_side.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@item_side.errors.count, "error") %> prohibited this admin_customer_item_side
-            from being saved:</h2>
+          <h2>
+            <%= pluralize(@item_side.errors.count, "error") %> prohibited this admin_customer_item_side from being saved:
+          </h2>
           <ul>
             <% @item_side.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
@@ -20,14 +21,13 @@
 
     <div class='preview'>
       <h3>Move or resize selection by dragging</h3>
-      <table>
+      <table cellpadding='20px'>
         <tr>
-          <td>
+          <td align='right'>
             <div id="portrait_item">
               <!-- Constrain stock image to be 300px wide. Height varies according to part. This is done in the css. -->
               <%= image_tag @item_side.image_stock_url(:croppable), :id => 'cropbox' %>
             </div>
-
           </td>
           <td align="top">
 
@@ -88,12 +88,18 @@
 
 <% end %>
 
-<!-- Pass dimensions of piece template to javascript for portraits.js to pick up. -->
 <%= javascript_tag do %>
-    window.pieceWidth    = <%= @item_side.part.width %>
-    window.pieceHeight   = <%= @item_side.part.height %>
+    // Pass dimensions of the piece template to javascript for PortraitCropper in portraits.js to pick up.
+    window.pieceWidth        = <%= @item_side.part.width %>
     window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>
     window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>
     window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>
     window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>
+
+    // Create the jCrop object on the page.
+    $(document).ready(function() {
+        new PortraitCropper();
+        setTimeout('jcrop.animateTo(setSelect)',500)
+    })
+
 <% end %>

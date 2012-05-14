@@ -1,8 +1,3 @@
-jQuery ->
-  new PortraitCropper()
-  callback = -> window.jcrop.animateTo setSelect
-  setTimeout callback, 500
-
 class @PortraitCropper
 
   constructor: ->
@@ -43,15 +38,12 @@ class @PortraitCropper
   updatePreview: (coords) =>
     # This is how much we reduced the part image to fit in the 300px wide view. Use this to scale down the preview image by this factor.
     # If we choose a different part image width, that can be done in the css without changing any values here.
-    previewScalingFactor =
-      width:  $('#part_template').width()  / pieceWidth
-      height: $('#part_template').height() / pieceHeight
+    # In both scaling factors the aspect ratio is preserved so we can use only the width for the calcs. Let the browser do the height.
+    previewScalingFactor = $('#part_template').width() / pieceWidth
     # Notice cropScalingFactor gets bigger as you zoom in! Use this to scale up the preview image by this factor.
-    cropScalingFactor =
-      width:  $('#cropbox').width()  / coords.w
-      height: $('#cropbox').height() / coords.h
+    cropScalingFactor = $('#cropbox').width()  / coords.w
+    # Zoom and move underlying preview image.
     $('#preview').css
-      width:  Math.round( partLayoutWidth  * cropScalingFactor.width  * previewScalingFactor.width  ) + 'px'
-      height: Math.round( partLayoutHeight * cropScalingFactor.height * previewScalingFactor.height ) + 'px'
-      marginLeft: Math.round( partLayoutOffsetX * previewScalingFactor.width  - coords.x * cropScalingFactor.width  * previewScalingFactor.width ) + 'px'
-      marginTop:  Math.round( partLayoutOffsetY * previewScalingFactor.height - coords.y * cropScalingFactor.height * previewScalingFactor.height) + 'px'
+      width:  Math.round( partLayoutWidth  * cropScalingFactor * previewScalingFactor ) + 'px'
+      marginLeft: Math.round( partLayoutOffsetX * previewScalingFactor - coords.x * cropScalingFactor * previewScalingFactor ) + 'px'
+      marginTop:  Math.round( partLayoutOffsetY * previewScalingFactor - coords.y * cropScalingFactor * previewScalingFactor ) + 'px'
