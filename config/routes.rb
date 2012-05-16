@@ -107,4 +107,6 @@ KimbraStudio::Application.routes.draw do
     resource :overview, :only => [:show]
   end
 
+  match 'tracking/:id', :to => 'tracking#image', :as => "tracking_image"
+
 end
