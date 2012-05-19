@@ -10,12 +10,14 @@ class Minisite::ItemSidesController < InheritedResources::Base
   def update
     puts "params=>#{params.inspect}"
     #attrs = {}
-    attrs[:portrait_attributes] = params[:admin_customer_item_side].delete(:portrait)
-    #success = @item_side.update_assembly(params[:admin_customer_item_side])
-    success = @item_side.update_attributes(params[:admin_customer_item_side])
-    if success
-      @item_side.assemble_new_side
-      @item_side.item.save
+    @portrait = Portrait.find(params[:admin_customer_item_side_portrait_id]) rescue nil
+    if @portrait
+      attrs[:portrait_attributes] = params[:admin_customer_item_side].delete(:portrait)
+      success                     = @item_side.update_attributes(params[:admin_customer_item_side])
+      if success
+        @item_side.assemble_new_side
+        @item_side.item.save
+      end
     end
 
     respond_to do |format|
@@ -30,7 +32,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     end
   end
 
-  # get /minisite/offers/tracking/portrait
+          # get /minisite/offers/tracking/portrait
   def portrait
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
   end

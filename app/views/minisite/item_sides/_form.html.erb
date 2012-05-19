@@ -3,7 +3,8 @@
     <% if @item_side.errors.any? %>
         <div id="error_explanation">
           <h2>
-            <%= pluralize(@item_side.errors.count, "error") %> prohibited this admin_customer_item_side from being saved:
+            <%= pluralize(@item_side.errors.count, "error") %> prohibited this admin_customer_item_side from being
+            saved:
           </h2>
           <ul>
             <% @item_side.errors.full_messages.each do |msg| %>
@@ -13,12 +14,6 @@
         </div>
     <% end %>
 
-    <div id='hidden_fields'>
-      <%= f.fields_for :portrait, @item_side.portrait do |p| %>
-          <%= p.hidden_field :id, :value => @item_side.portrait.id %>
-      <% end %>
-    </div>
-
     <div class='preview'>
       <h3>Move or resize selection by dragging</h3>
       <table cellpadding='20px'>
@@ -26,7 +21,7 @@
           <td align='right'>
             <div id="portrait_item">
               <!-- Constrain stock image to be 300px wide. Height varies according to part. This is done in the css. -->
-              <%= image_tag @item_side.image_stock_url(:croppable), :id => 'cropbox' %>
+              <%= image_tag @item_side.portrait.image_url(:face), id: 'cropbox' %>
             </div>
           </td>
           <td align="top">
@@ -35,13 +30,9 @@
             <%= f.hidden_field @item_side.part.piece_layout.layout.size, :value => v %>
             <!-- Constrain preview images to be 300px wide in this div. Height varies according to part. Can't do this bit in the css. -->
             <div id='part_item_preview' style='width:300px; height:<%= 300.0 / @item_side.part.width * @item_side.part.height %>px;'>
-              <%= image_tag @item_side.part.image_part_url, :id => 'part_template' %>
-              <%= image_tag @item_side.image_stock_url(:croppable), :id => 'preview' %>
+              <%= image_tag @item_side.part.image_part_url, id: 'part_template' %>
+              <%= image_tag @item_side.portrait.image_url(:face), id: 'preview' %>
             </div>
-
-            <% %w[x y w h].each do |attr| %>
-                <%= f.hidden_field "crop_#{attr}" %>
-            <% end %>
 
           </td>
         </tr>
@@ -62,9 +53,6 @@
       <h3><i>Click to replace with different portrait</i></h3>
       <table class='portrait-pick'>
         <tr>
-          <td>
-            <%= link_to cw_div_image_only(@item_side, :image => 'image_stock'), stock_minisite_item_side_path(@item_side, @item_side.portrait.id), :remote => true %>
-          </td>
           <% @admin_customer_offer.portraits.each do |portrait| %>
               <td>
                 <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
@@ -72,6 +60,16 @@
           <% end %>
         </tr>
       </table>
+    </div>
+
+    <div id='hidden_fields'>
+      <%= f.fields_for :portrait, @item_side.portrait do |p| %>
+          <%= p.hidden_field :id, :value => @item_side.portrait.id %>
+      <% end %>
+      <% %w[x y w h].each do |attr| %>
+          <%= f.hidden_field "crop_#{attr}" %>
+      <% end %>
+
     </div>
 
     <!-- remove for now, think should go on different page
@@ -98,8 +96,8 @@
 
     // Create the jCrop object on the page.
     $(document).ready(function() {
-        new PortraitCropper();
-        setTimeout('jcrop.animateTo(setSelect)',2500)
+    new PortraitCropper();
+    setTimeout('jcrop.animateTo(setSelect)',2500)
     })
 
 <% end %>
