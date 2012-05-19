@@ -2,11 +2,10 @@ $("#cropbox").attr('src', "<%= @portrait.image_url(:face).html_safe %>");
 $("#preview").attr('src', "<%= @portrait.image_url(:face).html_safe %>");
 $("#admin_customer_item_side_portrait_id").val(<%= @portrait.id %>);
 window.jcrop.destroy();
-window.pieceWidth    = <%= @item_side.part.width %>
-window.pieceHeight   = <%= @item_side.part.height %>
-window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>
-window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>
-window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>
-window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>
+window.pieceWidth    = <%= @item_side.part.width %>;
+window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>;
+window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>;
+window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>;
+window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>;
 new PortraitCropper();
 setTimeout('jcrop.animateTo(setSelect)', 2500);

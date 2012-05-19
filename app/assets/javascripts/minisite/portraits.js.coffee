@@ -18,7 +18,7 @@ class @PortraitCropper
       y1 = ($('#cropbox').height() / 6) + 0.5 * ($('#cropbox').height() * 4 / 6 - $('#cropbox').width() * 4 / 6 / partLayoutAspectRatio)
       x2 = $('#cropbox').width() * 5 / 6 # five-sixths the way across
       y2 = ($('#cropbox').height() * 5 / 6) - 0.5 * ($('#cropbox').height() * 4 / 6 - $('#cropbox').width() * 4 / 6 / partLayoutAspectRatio)
-    window.setSelect = [x1,y1,x2,y2]
+    window.setSelect = [Math.round(x1), Math.round(y1), Math.round(x2), Math.round(y2)]
     # Configure the Jcrop box.
     $('#cropbox').Jcrop(
       aspectRatio: partLayoutAspectRatio
@@ -38,12 +38,14 @@ class @PortraitCropper
     # This is how much we reduced the part image to fit in the 300px wide view. Use this to scale down the preview image by this factor.
     # If we choose a different part image width, that can be done in the css without changing any values here.
     # In both scaling factors the aspect ratio is preserved so we can use only the width for the calcs. Let the browser do the height.
-    previewScalingFactor = $('#part_template').width() / pieceWidth
+    window.partLayoutScalingFactor = $('#part_template').width() / pieceWidth
+    # This is how much we reduced the portrait to fit in the croppable area on the left.
+    window.portraitScalingFactor = $('#cropbox').width() / portraitWidth
     # Notice cropScalingFactor gets bigger as you zoom in! Use this to scale up the preview image by this factor.
-    cropScalingFactor = $('#cropbox').width()  / coords.w
+    window.cropScalingFactor = partLayoutWidth * partLayoutScalingFactor / coords.w
+
     # Zoom and move underlying preview image.
     $('#preview').css
-      width:  Math.round( partLayoutWidth  * cropScalingFactor * previewScalingFactor ) + 'px'
-      marginLeft: Math.round( partLayoutOffsetX * previewScalingFactor - coords.x * cropScalingFactor * previewScalingFactor ) + 'px'
-      marginTop:  Math.round( partLayoutOffsetY * previewScalingFactor - coords.y * cropScalingFactor * previewScalingFactor ) + 'px'
-
+      width:  Math.round( portraitWidth  * cropScalingFactor  * portraitScalingFactor ) + 'px'
+      marginLeft: Math.round( partLayoutOffsetX * partLayoutScalingFactor - coords.x * cropScalingFactor  ) + 'px'
+      marginTop:  Math.round( partLayoutOffsetY * partLayoutScalingFactor - coords.y * cropScalingFactor  ) + 'px'

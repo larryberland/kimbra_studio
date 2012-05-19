@@ -88,11 +88,12 @@
 
 <%= javascript_tag do %>
     // Pass dimensions of the piece template to javascript for PortraitCropper in portraits.js to pick up.
-    window.pieceWidth        = <%= @item_side.part.width %>
-    window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>
-    window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>
-    window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>
-    window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>
+    window.portraitWidth     = <%= @item_side.portrait.width %>;
+    window.pieceWidth        = <%= @item_side.part.width %>;
+    window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>;
+    window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>;
+    window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>;
+    window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>;
 
     // Create the jCrop object on the page.
     $(document).ready(function() {
