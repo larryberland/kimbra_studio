@@ -21,15 +21,14 @@ class StockUploader < BaseUploader
   # end
 
   # Create different versions of your uploaded files:
-  process :store_geometry  # do we do this before crop or after
   process :model_process   # let the model manipulate the image
   process :convert => 'jpg'
   process :center_in_area
+  process :store_geometry  # do we do this before crop or after
 
   def crop
     if model.cropping?
       puts "#{self} is cropping"
-      #resize_to_limit(300, 300)
       manipulate! do |img|
         x = model.crop_x.to_i
         y = model.crop_y.to_i

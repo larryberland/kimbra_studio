@@ -9,6 +9,10 @@ class CreateAdminMerchandiseParts < ActiveRecord::Migration
       t.boolean :photo, :default => true
       t.integer :width
       t.integer :height
+      t.integer :image_width
+      t.integer :image_height
+      t.integer :image_part_width
+      t.integer :image_part_height
       t.boolean :active, :default => true
 
       t.timestamps

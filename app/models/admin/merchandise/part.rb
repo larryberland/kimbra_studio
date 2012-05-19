@@ -2,6 +2,8 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   attr_accessible :image, :remote_image_url, :image_part, :image_part_url,
                   :piece, :portrait, :width, :height, :photo, :order,
+                  :image_width, :image_height,
+                  :image_part_width, :image_part_height,
                   :part_layout, :part_layout_attributes,
                   :piece_layout, :piece_layout_attributes,
                   :face, :face_attributes
@@ -21,6 +23,8 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   accepts_nested_attributes_for :part_layout, :piece_layout
 
   after_update :reposition
+  attr_accessible :image_width, :image_height,
+                  :image_part_width, :image_part_height;
 
   def self.seed_nested_attributes(info, attr, default)
     key                               = info.key?(attr) ? attr : info.key?(attr.to_s) ? attr.to_s : attr
@@ -70,6 +74,14 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     end
     item_part.copy_image(merchandise_part)
     item_part
+  end
+
+  def width
+    image_part_width
+  end
+
+  def height
+    image_part_height
   end
 
   def copy_image(from_part)

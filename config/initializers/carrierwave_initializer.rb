@@ -4,9 +4,11 @@ module CarrierWave
     def store_geometry
       manipulate! do |img|
         if model
-          puts "store geometry #{model} #{img.columns}x#{img.rows}"
-          model.send('width=', img.columns) if model.respond_to?(:width)
-          model.send('height=', img.rows) if model.respond_to?(:height)
+          puts "store geometry #{model} #{mounted_as} #{img.columns}x#{img.rows}"
+          model.send("#{mounted_as}_width=", img.columns) if model.respond_to?("#{mounted_as}_width".to_sym)
+          model.send("#{mounted_as}_height=", img.rows) if model.respond_to?("#{mounted_as}_height".to_sym)
+          model.send("width=", img.columns) if model.respond_to?(:width)
+          model.send("height=", img.rows) if model.respond_to?(height)
         end
         img = yield(img) if block_given?
         img
