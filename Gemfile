@@ -41,12 +41,14 @@ end
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_girl_rails'  # replaces fixtures
 end
 
 group :test do
-  gem 'factory_girl_rails'  # replaces fixtures
+  gem 'faker'
   gem 'capybara'      # simulate user awesome gem
   gem 'guard-rspec'   # auto-run spec after save
+  gem 'database_cleaner'
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
 end

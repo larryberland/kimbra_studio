@@ -39,10 +39,6 @@ class AmazonUploader < BaseUploader
     process :resize_to_limit => [900, 900]
   end
 
-  version :croppable do
-    resize_to_fill(600, 600)
-  end
-
   #version :best do
   #  process :convert => 'jpg'
   #  process :store_best_geometry

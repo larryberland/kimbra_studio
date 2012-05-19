@@ -18,24 +18,24 @@
     :parts:
       - :image_part: part0.png
         order: 0
-        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
         :piece_layout: {layout: {x: 106, y: 46, w: 69, h: 83}}
+        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
       - :image_part: part1.png
         order: 1
-        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
         :piece_layout: {layout: {x: 225, y: 46, w: 69, h: 83}}
+        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
       - :image_part: part2.png
         order: 2
-        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
         :piece_layout: {layout: {x: 344, y: 46, w: 69, h: 83}}
+        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
       - :image_part: part3.png
         order: 3
-        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
         :piece_layout: {layout: {x: 463, y: 46, w: 69, h: 83}}
+        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
       - :image_part: part4.png
         order: 4
-        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
         :piece_layout: {layout: {x: 582, y: 46, w: 69, h: 83}}
+        :part_layout: {layout: {x: 90, y: 85, w: 245, h: 290}}
 
   - category: Photo Bracelets
     name: Taylor Bracelet

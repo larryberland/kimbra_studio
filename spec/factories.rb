@@ -1,4 +1,5 @@
 # auto loaded by FactoryGirl
+require 'faker'
 
 FactoryGirl.define do
 

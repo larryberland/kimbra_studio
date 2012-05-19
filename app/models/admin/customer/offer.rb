@@ -162,6 +162,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   # draw each part in a horizontal line
   def draw_by_order(front_side=true)
+    puts "  draw_by_order front=>#{front_side}"
     w = []
     h = []
     items.each do |item|
@@ -170,16 +171,18 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
     height = h.max
     width = w.sum
-    puts "size=>#{width}x#{height}"
+    puts "    size=>#{width}x#{height}"
     custom_piece = image_new(width, height)
     items.each_with_index do |item, index|
       custom_piece = item.draw_piece_with_custom(custom_piece, front_side)
     end
     t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
-    puts "custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
+    puts "    custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
     custom_piece.write(t_front_or_back.path)
     i = front_side ? image_front : image_back
     i.store_file!(t_front_or_back.path)
+    puts "    Store custom piece finished"
+    puts ""
     t_front_or_back
   end
 
@@ -202,10 +205,14 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def create_custom_image
+    puts ""
+    puts "create_custom_image #{self}"
     puts "Offer=>#{piece.name} custom_layout=>#{custom_layout}"
     t_front = send("draw_by_#{custom_layout}", front=true)
     puts "front=>#{t_front.path}"
     image.store_file!(t_front.path)
+    puts "#{self} image stored."
+    puts ""
     if baby_got_back
       puts "has back side"
       send("draw_by_#{custom_layout}", front=false)

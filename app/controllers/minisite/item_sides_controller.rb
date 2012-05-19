@@ -1,16 +1,27 @@
 class Minisite::ItemSidesController < InheritedResources::Base
 
   skip_before_filter :authenticate_user!
-  before_filter :set_by_tracking, :set_cart_and_client_and_studio
+  before_filter :set_by_tracking
+  before_filter :set_cart_and_client_and_studio
   before_filter :setup_story
 
   layout 'minisite'
 
   def update
-    success = @item_side.update_assembly(params[:admin_customer_item_side])
+    puts "params=>#{params.inspect}"
+    #attrs = {}
+    attrs[:portrait_attributes] = params[:admin_customer_item_side].delete(:portrait)
+    #success = @item_side.update_assembly(params[:admin_customer_item_side])
+    success = @item_side.update_attributes(params[:admin_customer_item_side])
+    if success
+      @item_side.assemble_new_side
+      @item_side.item.save
+    end
+
     respond_to do |format|
       if success
-        format.html { redirect_to @item_side, notice: 'Client was successfully updated.' }
+
+        format.html { redirect_to minisite_offer_url(@item_side.item.offer), notice: 'Client was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

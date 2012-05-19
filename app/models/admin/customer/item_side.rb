@@ -1,27 +1,30 @@
 class Admin::Customer::ItemSide < ActiveRecord::Base
 
-  attr_accessible :image_stock, :remote_image_stock_url, :image_stock_cache,
-                  :image_custom, :remote_image_custom_url, :image_custom_cache,
-                  :changed_layout_at,
-                  :portrait, :portrait_attributes,
-                  :face, :face_attributes,
-                  :item, :item_attributes,
-                  :part, :part_attributes
-
   mount_uploader :image_stock, StockUploader                  # original portrait scaled for part
   mount_uploader :image_custom, PartCustomUploader            # final image with portrait and part
 
   belongs_to :item, :class_name => 'Admin::Customer::Item'
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # my own copy of merchandise part
 
-  accepts_nested_attributes_for :item, :part
-
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
   belongs_to :face, :class_name => 'MyStudio::Portrait::Face'
 
+  attr_accessible :image_stock, :remote_image_stock_url, :image_stock_cache,
+                  :image_custom, :remote_image_custom_url, :image_custom_cache,
+                  :changed_layout_at,
+                  :portrait, :portrait_attributes, :portrait_id,
+                  :face, :face_attributes,
+                  :item, :item_attributes,
+                  :part, :part_attributes,
+                  :crop_x, :crop_y, :crop_h, :crop_w
+
+  accepts_nested_attributes_for :item, :part, :portrait
+
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
 
-  after_update :reposition, :crop_portrait
+  #after_update :reposition
+
+  after_update :crop_stock_image, if: :cropping?
 
   # assemble a part side for this item and portrait
   # options => {:photo_part,
@@ -38,24 +41,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     my_item_side
   end
 
-  # user has updated the item_side's assembly
-  #  with new_picture or new_cropping.
-  # equivalent to update_attributes with functionality
-  def update_assembly(attrs)
-    # may upload a new file or url link to picture
-    # cropped the current portrait image
-  end
-
-  def on_layout_change
-    # redraw the item_side
-    puts "layout_change begin"
-    #create_side
-    #if item.offer.present?
-    #  item.offer.on_layout_change
-    #end
-    puts "layout change finished"
-  end
-
   # create the image_stock from [portrait | face | part]
   # create the image_custom from stock and merchandise_part
   def create_side
@@ -64,6 +49,10 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     else
       self.image_stock.store_file!(part.image_part.current_path)
     end
+    assemble_new_side
+  end
+
+  def assemble_new_side
     # TODO: still need to figure out the difference between storage stuff
     #self.remote_image_custom_url = part.image_part.url.to_s
     self.image_custom.store_file!(part.image_part.current_path)
@@ -72,6 +61,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   # draw the custom portrait image onto the Kimbra piece image
   def draw_piece_with_custom(piece_image)
+    dump_custom(piece_image)
     part.draw_piece(piece_image, custom_image)
   end
 
@@ -81,19 +71,36 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   end
 
   def image_stock_process(src_image)
-    w = part_layout.w
-    h = part_layout.h
-    if face
-      draw_face(src_image, w, h)
-    elsif portrait
-      src_image.resize_to_fit(w, h)
+
+    puts "CW ItemSide image_stock createImage"
+    if cropping?
+      puts "  for cropping #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
+      c_image = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
+      self.crop_x = nil
+      self.crop_y = nil
+      self.crop_w = nil
+      self.crop_h = nil
+      c_image
     else
-      part.no_photo(w, h)
+      puts "  for NON cropping"
+      w = part_layout.w
+      h = part_layout.h
+      if face
+        draw_face(src_image, w, h)
+      elsif portrait
+        src_image.resize_to_fit(w, h)
+      else
+        part.no_photo(w, h)
+      end
     end
+
   end
 
   # carrier_wave process callback from PartCustomUploader
   def image_custom_process(part_image)
+    puts "running image_custom_process place stock_image onto part."
+    i = stock_image
+    dump_cropped(i)
     part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::DstOverCompositeOp)
   end
 
@@ -108,7 +115,19 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     "size #{img.columns} x #{img.rows}"
   end
 
-  private #===============================================================================
+  def cropping?
+    res = !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
+    puts "cropping=>#{res}"
+    res
+  end
+
+  private
+
+  def crop_stock_image
+    puts "Recreate image with cropping"
+    image_stock.recreate_versions!
+    true
+  end
 
   # used in CarrierWave process center_in_area
   def get_dest_area
@@ -148,6 +167,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   # custom portrait image for this item
   def stock_image
+    puts "grabbing stock_image"
     image_stock.to_image
   end
 
@@ -188,13 +208,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
       #@item.reposition_image
     end
     true
-  end
-
-  def crop_portrait
-    # TODO: Need more logic here to rebuild the offer
-    #       based on the new cropping.
-    #       this is going to get really complicated.
-    image_stock.recreate_versions! if crop_x.present?
   end
 
 end

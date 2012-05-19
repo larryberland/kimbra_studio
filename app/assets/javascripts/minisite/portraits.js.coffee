@@ -19,7 +19,6 @@ class @PortraitCropper
       x2 = $('#cropbox').width() * 5 / 6 # five-sixths the way across
       y2 = ($('#cropbox').height() * 5 / 6) - 0.5 * ($('#cropbox').height() * 4 / 6 - $('#cropbox').width() * 4 / 6 / partLayoutAspectRatio)
     window.setSelect = [x1,y1,x2,y2]
-
     # Configure the Jcrop box.
     $('#cropbox').Jcrop(
       aspectRatio: partLayoutAspectRatio
@@ -47,3 +46,4 @@ class @PortraitCropper
       width:  Math.round( partLayoutWidth  * cropScalingFactor * previewScalingFactor ) + 'px'
       marginLeft: Math.round( partLayoutOffsetX * previewScalingFactor - coords.x * cropScalingFactor * previewScalingFactor ) + 'px'
       marginTop:  Math.round( partLayoutOffsetY * previewScalingFactor - coords.y * cropScalingFactor * previewScalingFactor ) + 'px'
+
