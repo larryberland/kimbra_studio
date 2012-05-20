@@ -8,6 +8,6 @@ CarrierWave.configure do |config|
    }
    config.fog_directory  = info['bucket_name']
    config.fog_public     = false
-   #config.fog_attributes = {'Cache-Control' => 'max-age=315576000'}
-
+   config.fog_attributes = {}
+   #config.fog_attributes = {'Cache-Control' => 'max-age=315576000'} # for static assets that can be cached by the browser for a long time.
 end
