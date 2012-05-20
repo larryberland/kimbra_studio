@@ -115,11 +115,13 @@ ActiveRecord::Schema.define(:version => 20120427190718) do
     t.integer  "portrait_id"
     t.string   "image_part"
     t.string   "image"
-    t.integer  "order",       :default => 0
-    t.boolean  "photo",       :default => true
-    t.integer  "width"
-    t.integer  "height"
-    t.boolean  "active",      :default => true
+    t.integer  "order",             :default => 0
+    t.boolean  "photo",             :default => true
+    t.integer  "image_width"
+    t.integer  "image_height"
+    t.integer  "image_part_width"
+    t.integer  "image_part_height"
+    t.boolean  "active",            :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end

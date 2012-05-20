@@ -1,6 +1,6 @@
 class Admin::Customer::ItemSide < ActiveRecord::Base
 
-  mount_uploader :image_stock, StockUploader                  # original portrait scaled for part
+  mount_uploader :image_stock, StockUploader                  # original portrait cropped for image part
   mount_uploader :image_custom, PartCustomUploader            # final image with portrait and part
 
   belongs_to :item, :class_name => 'Admin::Customer::Item'
@@ -20,7 +20,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   accepts_nested_attributes_for :item, :part, :portrait
 
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :assembly
 
   #after_update :reposition
 
@@ -41,9 +41,13 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     my_item_side
   end
 
+  def assembly?
+    @assembly
+  end
   # create the image_stock from [portrait | face | part]
   # create the image_custom from stock and merchandise_part
   def create_side
+    @assembly = true
     if face or portrait
       self.image_stock = portrait.face_file
     else
@@ -70,18 +74,17 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     part.draw_piece(piece_image, stock_image)
   end
 
+  # carrier_wave callback to process the current image
+  #  for whatever processing we need to do
   def image_stock_process(src_image)
 
     puts "CW ItemSide image_stock createImage"
     if cropping?
-      puts "  for cropping #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
-      c_image = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
-      self.crop_x = nil
-      self.crop_y = nil
-      self.crop_w = nil
-      self.crop_h = nil
-      c_image
-    else
+      img = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
+      clear_cropping
+      puts "  resize to #{part_layout.w}x#{part_layout.h}"
+      img.resize_to_fit!(part_layout.w, part_layout.h)
+    elsif assembly?
       puts "  for NON cropping"
       w = part_layout.w
       h = part_layout.h
@@ -92,8 +95,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
       else
         part.no_photo(w, h)
       end
+    else
+      src_image # no op
     end
-
   end
 
   # carrier_wave process callback from PartCustomUploader
@@ -101,7 +105,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     puts "running image_custom_process place stock_image onto part."
     i = stock_image
     dump_cropped(i)
+    dump_cropped(part_image)
     part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::DstOverCompositeOp)
+    #part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::AtopCompositeOp)
   end
 
   def to_image_span
@@ -115,6 +121,14 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     "size #{img.columns} x #{img.rows}"
   end
 
+  # clear the cropping data so new recreate_versions will not crop
+  def clear_cropping
+    self.crop_x = nil
+    self.crop_y = nil
+    self.crop_w = nil
+    self.crop_h = nil
+  end
+
   def cropping?
     res = !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
     puts "cropping=>#{res}"
@@ -124,8 +138,14 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   private
 
   def crop_stock_image
-    puts "Recreate image with cropping"
+    puts ""
+    puts "#{self} after_update BEG Recreate Versions"
     image_stock.recreate_versions!
+    puts "#{self} image_stock cropped=>#{image_stock.path}"
+    # reset out custom image to the original kimbra part
+    #  this will cause our image_custom_process callback
+    #  which will slap the image_stock into its proper place
+    self.image_custom.store_file!(part.image_part.path)
     true
   end
 

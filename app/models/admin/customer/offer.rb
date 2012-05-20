@@ -142,6 +142,19 @@ class Admin::Customer::Offer < ActiveRecord::Base
     piece.photo_parts.present?
   end
 
+  def update_front_side(item)
+    #custom_piece = item.draw_piece_with_custom(custom_piece, front_side=true)
+    t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
+    #puts "    custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
+    image_front.store_file!(item.front.image_custom.path)
+    image.store_file!(item.front.image_custom.path)
+    image.recreate_versions!
+  end
+
+  def update_back_side
+
+  end
+
   private #===========================================================================
 
   def piece_create_default_and_tracking

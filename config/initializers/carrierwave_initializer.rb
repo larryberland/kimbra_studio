@@ -5,10 +5,14 @@ module CarrierWave
       manipulate! do |img|
         if model
           puts "store geometry #{model} #{mounted_as} #{img.columns}x#{img.rows}"
-          model.send("#{mounted_as}_width=", img.columns) if model.respond_to?("#{mounted_as}_width".to_sym)
-          model.send("#{mounted_as}_height=", img.rows) if model.respond_to?("#{mounted_as}_height".to_sym)
+
+          m = "#{mounted_as}_width".to_sym
+          model.send("#{m}=", img.columns) if model.respond_to?(m)
+          m = "#{mounted_as}_height".to_sym
+          model.send("#{m}=", img.rows) if model.respond_to?(m)
+
           model.send("width=", img.columns) if model.respond_to?(:width)
-          model.send("height=", img.rows) if model.respond_to?(height)
+          model.send("height=", img.rows) if model.respond_to?(:height)
         end
         img = yield(img) if block_given?
         img
@@ -21,7 +25,7 @@ module CarrierWave
       manipulate! do |img|
         if model
           m = "#{mounted_as}_process"
-          img = model.send(m, img) if model.respond_to?(m) if model.respond_to?(m)
+          img = model.send(m, img) if model.respond_to?(m)
         end
         img = yield(img) if block_given?
         img
@@ -50,3 +54,6 @@ module CarrierWave
 
   end
 end
+
+# override of process_uri
+require Rails.root.join('lib/carrier_wave/uploader/download').to_s

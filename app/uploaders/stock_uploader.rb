@@ -23,13 +23,15 @@ class StockUploader < BaseUploader
   # Create different versions of your uploaded files:
   process :model_process   # let the model manipulate the image
   process :convert => 'jpg'
-  process :center_in_area
-  process :store_geometry  # do we do this before crop or after
+  #process :crop
+  # process :center_in_area removed this since we have cropping no more center
+  process :store_geometry  # do after crop so we store current geometry
 
   def crop
     if model.cropping?
-      puts "#{self} is cropping"
+      puts "#{self} is cropping x:#{model.crop_x} y:#{model.crop_y} size: #{model.crop_w}x#{model.crop_h}"
       manipulate! do |img|
+        puts "img width:#{img.columns} height:#{img.rows}"
         x = model.crop_x.to_i
         y = model.crop_y.to_i
         w = model.crop_w.to_i
@@ -41,11 +43,6 @@ class StockUploader < BaseUploader
 
   version :thumb do
      process :resize_to_limit => [100, 100]
-  end
-
-  version :croppable do
-    process :crop
-    resize_to_fill(300, 300)
   end
 
   # Override the filename of the uploaded files:

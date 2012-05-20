@@ -1,7 +1,8 @@
 class Admin::Merchandise::Part < ActiveRecord::Base
 
-  attr_accessible :image, :remote_image_url, :image_part, :image_part_url,
-                  :piece, :portrait, :width, :height, :photo, :order,
+  attr_accessible :image, :remote_image_url,
+                  :image_part, :image_part_url,
+                  :piece, :portrait, :photo, :order,
                   :image_width, :image_height,
                   :image_part_width, :image_part_height,
                   :part_layout, :part_layout_attributes,
@@ -23,8 +24,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   accepts_nested_attributes_for :part_layout, :piece_layout
 
   after_update :reposition
-  attr_accessible :image_width, :image_height,
-                  :image_part_width, :image_part_height;
+  attr_accessor :width, :height # generic form of image_part_width
 
   def self.seed_nested_attributes(info, attr, default)
     key                               = info.key?(attr) ? attr : info.key?(attr.to_s) ? attr.to_s : attr
@@ -77,11 +77,11 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   end
 
   def width
-    image_part_width
+    self.image_part_width # width of the original kimbra image part graphic
   end
 
   def height
-    image_part_height
+    self.image_part_height # height of the original kimbra image part graphic
   end
 
   def copy_image(from_part)
