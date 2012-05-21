@@ -6,6 +6,7 @@
 #= require spinner
 #= require jquery_ui_timepicker_addon
 #= require wait
+#= require imagesloaded
 
 $ ->
   $('.flash_notice').delay(6000).slideUp('slow')

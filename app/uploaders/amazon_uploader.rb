@@ -35,10 +35,10 @@ class AmazonUploader < BaseUploader
   end
 
   version :face do
-    CarrierWave.configure {|config| config.fog_attributes = {'Cache-Control' => 'No-store'} }
+  #  CarrierWave.configure {|config| config.fog_attributes = {'Cache-Control' => 'No-store'} }
     process :convert => 'jpg'
     process :resize_to_limit => [900, 900]
-    CarrierWave.configure {|config| config.fog_attributes = {} } # probably want to set this back to 'max-age=315576000' when we are confident.
+  #  CarrierWave.configure {|config| config.fog_attributes = {} } # probably want to set this back to 'max-age=315576000' when we are confident.
   end
 
   #version :best do

@@ -19,7 +19,7 @@
       <table cellpadding='20px'>
         <tr>
           <td align='right'>
-            <div id="portrait_item">
+            <div id='portrait_item'>
               <!-- Constrain stock image to be 300px wide. Height varies according to part. This is done in the css. -->
               <%= image_tag @item_side.portrait.image_url(:face), id: 'cropbox' %>
             </div>
@@ -94,9 +94,6 @@
     window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>;
     window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>;
 
-    // Create the jCrop object on the page.
-    $(document).ready(function() {
-    new PortraitCropper();
-    })
-
+    // Create the jCrop object on the page when portrait has finished loading.
+    $('#portrait_item').imagesLoaded( wait(500, function(){new PortraitCropper()}) );
 <% end %>

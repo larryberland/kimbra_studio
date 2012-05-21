@@ -7,3 +7,4 @@
 #= require jquery_ui_timepicker_addon
 #= require minisite/portraits
 #= require wait
+#= require imagesloaded
