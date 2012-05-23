@@ -96,4 +96,9 @@
 
     // Create the jCrop object on the page when portrait has finished loading.
     $('#portrait_item').imagesLoaded( wait(500, function(){new PortraitCropper()}) );
+
+    // Show spinner when any portrait clicked.
+    $('.portraits').click(function () {
+        $('#spinner').toggle();
+    });
 <% end %>

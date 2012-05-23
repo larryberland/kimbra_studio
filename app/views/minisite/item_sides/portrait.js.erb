@@ -8,3 +8,4 @@ window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>;
 window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>;
 window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>;
 $('#portrait_item').imagesLoaded( wait(500, function(){new PortraitCropper()}) );
+$('#spinner').toggle();

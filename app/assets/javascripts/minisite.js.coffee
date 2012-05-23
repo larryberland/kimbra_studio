@@ -8,3 +8,7 @@
 #= require minisite/portraits
 #= require wait
 #= require imagesloaded
+
+$ ->
+  $('.flash_notice').delay(6000).slideUp('slow')
+  $('.flash_error').delay(6000).slideUp('slow')

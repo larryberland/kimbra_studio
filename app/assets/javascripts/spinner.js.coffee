@@ -1,5 +1,5 @@
 # Build CSS spinner
-spinner_opts =
+spinnerOpts =
   lines:12, # The number of lines to draw
   length:5, # The length of each line
   width:2, # The line thickness
@@ -17,7 +17,10 @@ spinner_opts =
 
 $ ->
   if $('#spinner')
-    $('#spinner').append(new Spinner(spinner_opts).spin())
+    spinner = new Spinner(spinnerOpts).spin()
+    $('#spinner').append(spinner.el)
+#    $('#spinner').css('top',  "#{Math.round($('#my_submit').position().top)} px")
+#    $('#spinner').css('left', "#{Math.round($('#my_submit').position().left + $('#my_submit').width() + 20)} px")
 
 $('#my_submit').click ->
   $('#spinner').toggle()
