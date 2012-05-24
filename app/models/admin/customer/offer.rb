@@ -143,12 +143,15 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def update_front_side(item)
+    # need to rebuild each item in order to build the custom piece
+
     #custom_piece = item.draw_piece_with_custom(custom_piece, front_side=true)
     t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
     #puts "    custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
-    image_front.store_file!(item.front.image_custom.path)
-    image.store_file!(item.front.image_custom.path)
-    image.recreate_versions!
+    #image_front.store_file!(item.front.image_custom.path)
+    #image.store_file!(item.front.image_custom.path)
+    #image.recreate_versions!
+    create_custom_image
   end
 
   def update_back_side
