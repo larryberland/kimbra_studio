@@ -156,13 +156,24 @@ td.shopping-item-index {
 }
 
 #spinner {
-    padding: 5px 0 0 20px;
-    margin-left: 20px;
+    position: relative;
+    left: 23px;
+    top: 7px;
 }
 
 .portraits {
     width: 800px;
     margin: auto;
+    margin-top: 40px;
+    overflow: hidden;
+    width: 100%
+}
+
+.portraits div {
+    margin: 15px;
+    float:left;
+    width: 100px;
+    height: 100px;
 }
 
 .portrait-pick {
@@ -176,6 +187,7 @@ td.shopping-item-index {
 
 .portrait-pick a div.image-thumb {
     display: inline;
+    border-bottom: 1px dotted;
 }
 
 div.offer_show {
