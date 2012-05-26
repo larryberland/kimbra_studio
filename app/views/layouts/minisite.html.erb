@@ -7,6 +7,11 @@
   <%= csrf_meta_tags %>
   <%= tag :meta, :name => 'stripe-key', :content => STRIPE_PUBLIC_KEY %>
   <%= yield :head %>
+  <!--[if !IE 7]>
+  	<style type="text/css">
+  		#wrap {display:table;height:100%}
+  	</style>
+  <![endif]-->
 </head>
 <body>
 
@@ -26,9 +31,20 @@
 
 </div>
 
-<%= render 'shared/minisite_footer' %>
-<%= yield :bottom %>
+<div id="footer">
+    <ul>
+      <li>
+        <%= link_to_unless_current 'Privacy',
+                                   privacy_minisite_email_path(@admin_customer_email.tracking) %>
+      </li>
+      |
+      <li>
+        <%= link_to_unless_current 'Contact us',
+                                   contact_minisite_email_path(@admin_customer_email.tracking) %>
+      </li>
+    </ul>
+</div>
 
 </body>
-<%= yield :below_body %>
+
 </html>
