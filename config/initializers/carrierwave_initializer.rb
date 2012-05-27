@@ -11,8 +11,16 @@ module CarrierWave
           m = "#{mounted_as}_height".to_sym
           model.send("#{m}=", img.rows) if model.respond_to?(m)
 
-          model.send("width=", img.columns) if model.respond_to?(:width)
-          model.send("height=", img.rows) if model.respond_to?(:height)
+          if (model.kind_of?(Admin::Customer::Offer))
+            if (mounted_as == "image")
+              model.send("width=", img.columns) if model.respond_to?(:width)
+              model.send("height=", img.rows) if model.respond_to?(:height)
+            end
+          else
+            model.send("width=", img.columns) if model.respond_to?(:width)
+            model.send("height=", img.rows) if model.respond_to?(:height)
+          end
+
         end
         img = yield(img) if block_given?
         img
