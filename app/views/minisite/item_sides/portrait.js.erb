@@ -2,10 +2,14 @@ $("#cropbox").attr('src', "<%= @portrait.image_url(:face).html_safe %>");
 $("#preview").attr('src', "<%= @portrait.image_url(:face).html_safe %>");
 $("#admin_customer_item_side_portrait_attributes_id").val(<%= @portrait.id %>);
 window.jcrop.destroy();
-window.pieceWidth        = <%= @item_side.part.width %>;
-window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>;
-window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>;
-window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>;
-window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>;
-$('#portrait_item').imagesLoaded( wait(500, function(){new PortraitCropper()}) );
+window.portraitWidth = <%= @item_side.portrait.width %>;
+window.portraitHeight = <%= @item_side.portrait.height %>;
+window.partWidth       = <%= @item_side.part.width %>;
+window.viewportWidth = <%= @item_side.part.part_layout.layout.w %>;
+window.viewportHeight = <%= @item_side.part.part_layout.layout.h %>;
+window.viewportOffsetX = <%= @item_side.part.part_layout.layout.x %>;
+window.viewportOffsetY = <%= @item_side.part.part_layout.layout.y %>;
+$('#portrait_item').imagesLoaded(wait(500, function () {
+    new PortraitCropper()
+}));
 $('#spinner').toggle();

@@ -93,5 +93,7 @@ class MyStudioSeeds
         end
       end
     end
-  end; true
+    true
+  end
+
 end

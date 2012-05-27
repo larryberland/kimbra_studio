@@ -80,10 +80,14 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
     puts "CW ItemSide image_stock createImage"
     if cropping?
+      puts "src_img size:#{src_image.columns}x#{src_image.rows}"
+
+      puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
       img = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
       clear_cropping
+      puts "img size:#{img.columns}x#{img.rows}"
       puts "  resize to #{part_layout.w}x#{part_layout.h}"
-      img.resize_to_fit!(part_layout.w, part_layout.h)
+      img.resize!(part_layout.w, part_layout.h)
     elsif assembly?
       puts "  for NON cropping"
       w = part_layout.w

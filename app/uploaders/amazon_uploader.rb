@@ -22,9 +22,6 @@ class AmazonUploader < BaseUploader
 
   storage :fog # always use fog for this
 
-  # store the width and height into model
-  process :store_geometry
-
   # Create different versions of your uploaded files:
   version :thumb do
     process :resize_to_limit => [100, 100]
@@ -38,7 +35,9 @@ class AmazonUploader < BaseUploader
   #  CarrierWave.configure {|config| config.fog_attributes = {'Cache-Control' => 'No-store'} }
     process :convert => 'jpg'
     process :resize_to_limit => [900, 900]
-  #  CarrierWave.configure {|config| config.fog_attributes = {} } # probably want to set this back to 'max-age=315576000' when we are confident.
+    #  CarrierWave.configure {|config| config.fog_attributes = {} } # probably want to set this back to 'max-age=315576000' when we are confident.
+    # store the width and height into model
+    process :store_geometry
   end
 
   #version :best do

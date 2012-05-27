@@ -29,7 +29,11 @@
             <% v = @item_side.part.piece_layout.layout.size.inspect %>
             <%= f.hidden_field @item_side.part.piece_layout.layout.size, :value => v %>
             <!-- Constrain preview images to be 300px wide in this div. Height varies according to part. Can't do this bit in the css. -->
-            <div id='part_item_preview' style='width:300px; height:<%= 300.0 / @item_side.part.width * @item_side.part.height %>px;'>
+            <% orig_width = @item_side.part.width.to_f %>
+            <% orig_height = @item_side.part.height.to_f %>
+            <% dest_width = 300.0 %>
+            <% dest_height = (dest_width * orig_height) / orig_width %>
+            <div id='part_item_preview' style='width:300px; height:<%=dest_height%>px;'>
               <%= image_tag @item_side.part.image_part_url, id: 'part_template' %>
               <%= image_tag @item_side.portrait.image_url(:face), id: 'preview' %>
             </div>
@@ -90,11 +94,12 @@
 <%= javascript_tag do %>
     // Pass dimensions of the piece template to javascript for PortraitCropper in portraits.js to pick up.
     window.portraitWidth     = <%= @item_side.portrait.width %>;
-    window.pieceWidth        = <%= @item_side.part.width %>;
-    window.partLayoutWidth   = <%= @item_side.part.part_layout.layout.w %>;
-    window.partLayoutHeight  = <%= @item_side.part.part_layout.layout.h %>;
-    window.partLayoutOffsetX = <%= @item_side.part.part_layout.layout.x %>;
-    window.partLayoutOffsetY = <%= @item_side.part.part_layout.layout.y %>;
+    window.portraitHeight    = <%= @item_side.portrait.height %>;
+    window.partWidth         = <%= @item_side.part.width %>;
+    window.viewportWidth   = <%= @item_side.part.part_layout.layout.w %>;
+    window.viewportHeight  = <%= @item_side.part.part_layout.layout.h %>;
+    window.viewportOffsetX = <%= @item_side.part.part_layout.layout.x %>;
+    window.viewportOffsetY = <%= @item_side.part.part_layout.layout.y %>;
 
     // Create the jCrop object on the page when portrait has finished loading.
     $('#portrait_item').imagesLoaded( wait(500, function(){new PortraitCropper()}) );
