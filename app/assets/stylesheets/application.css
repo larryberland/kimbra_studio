@@ -40,6 +40,8 @@ div#body_wrapper {
     width: 80%
 }
 
+.right {text-align: right;}
+
 textarea {
     height: 100px;
 }
