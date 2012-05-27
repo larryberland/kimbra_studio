@@ -58,9 +58,7 @@ module ApplicationHelper
     if model_with_carrier_wave_image
       options[:image]   ||= 'image'
       options[:version] ||= :thumb
-      content_tag(:div, :class => 'image-thumb') do
-        image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]))
-      end
+      image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]))
     end
   end
 

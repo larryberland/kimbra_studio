@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120427190718) do
+ActiveRecord::Schema.define(:version => 20120527135054) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -202,6 +202,7 @@ ActiveRecord::Schema.define(:version => 20120427190718) do
     t.boolean  "ping_email",         :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "commission_rate",    :default => 0
   end
 
   add_index "my_studio_infos", ["studio_id"], :name => "index_my_studio_infos_on_studio_id"

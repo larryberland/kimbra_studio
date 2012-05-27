@@ -40,7 +40,8 @@
     </div>
 
     <div class="actions">
-      <%= f.submit :id => 'my_submit' %>
+      <%= f.submit :id => 'my_submit', :value => 'Save' %>
+      <%= link_to 'Cancel', minisite_offer_url(@offer), :style=>'margin-left: 15px;' %>
       <span id="spinner" style="display:none"></span>
     </div>
 
@@ -50,16 +51,17 @@
 
     <!-- Studio Portraits and current charm portrait -->
     <div class="portraits">
-      <h3><i>Click to replace with different portrait</i></h3>
-      <table class='portrait-pick'>
-        <tr>
-          <% @admin_customer_offer.portraits.each do |portrait| %>
-              <td>
-                <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
-              </td>
-          <% end %>
-        </tr>
-      </table>
+      <div><br/><br/><i>Click to select a different portrait</i></div>
+      <% @admin_customer_offer.portraits.each do |portrait| %>
+          <div>
+            <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
+          </div>
+      <% end %>
+      <% @admin_customer_offer.portraits.each do |portrait| %>
+          <div>
+            <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
+          </div>
+      <% end %>
     </div>
 
     <div id='hidden_fields'>

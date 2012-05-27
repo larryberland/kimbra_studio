@@ -5,11 +5,35 @@
  *= require jcrop
  *= require_self
  *= require_tree ../../../vendor/assets/stylesheets
- *= require _main_footer
  *= require _widget
  *= require devise
  *= require_tree ../stylesheets/minisite
 */
+
+html, body {
+    height: 100%;
+}
+
+/*Opera Fix*/
+body:before {
+    content: "";
+    height: 100%;
+    float: left;
+    width: 0;
+    margin-top: -32767px;
+/
+}
+
+#body_wrapper {
+    min-height: 100%;
+}
+
+#content_wrapper {
+    overflow: auto;
+    padding-bottom: 50px;
+}
+
+/* must be same height as the footer */
 
 .showroom-nav {
     width: 95%;
@@ -156,13 +180,24 @@ td.shopping-item-index {
 }
 
 #spinner {
-    padding: 5px 0 0 20px;
-    margin-left: 20px;
+    position: relative;
+    left: 23px;
+    top: 7px;
 }
 
 .portraits {
     width: 800px;
     margin: auto;
+    margin-top: 40px;
+    overflow: hidden;
+    width: 100%
+}
+
+.portraits div {
+    margin: 15px;
+    float: left;
+    width: 100px;
+    height: 100px;
 }
 
 .portrait-pick {
@@ -176,6 +211,7 @@ td.shopping-item-index {
 
 .portrait-pick a div.image-thumb {
     display: inline;
+    border-bottom: 1px dotted;
 }
 
 div.offer_show {
@@ -222,20 +258,26 @@ div.offer_show img {
     padding: 0px;
 }
 
-#footer_minisite_wrapper {
+#footer {
+    position: relative;
+    margin-top: -50px; /* negative value of footer height */
+    border-top: 1px solid;
+    height: 50px;
+    clear: both;
     font-variant: small-caps;
     font-weight: bold;
-    height: 3em;
-    border-top: 1px solid;
-    text-align: left;
-    margin-left: auto;
-    margin-right: auto;
-    width: 80%
+    font-size: 106%;
+    text-align: center;
 }
 
-#footer_buffer {
-    height: 0.8em;
-    margin-top: 50px;
+#footer ul {
+    padding: 0;
+}
+
+#footer li {
+    display: inline;
+    list-style: none;
+    padding: 3px;
 }
 
 #logo {
