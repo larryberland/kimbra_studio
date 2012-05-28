@@ -17,26 +17,9 @@ spinnerOpts =
 
 $ ->
   if $('#spinner')
+    # Insert spinner object and append it to the #spinner element.
     spinner = new Spinner(spinnerOpts).spin()
     $('#spinner').append(spinner.el)
-#    $('#spinner').css('top',  "#{Math.round($('#my_submit').position().top)} px")
-#    $('#spinner').css('left', "#{Math.round($('#my_submit').position().left + $('#my_submit').width() + 20)} px")
-
-$('#my_submit').click ->
-  $('#spinner').toggle()
-
-
-
-#$(document).ready(function () {
-#    var target = document.getElementById('spinner')
-#    if (target) {
-#        var spinner = new Spinner(spinner_opts).spin();
-#        target.appendChild(spinner.el);
-#    }
-#});
-
-#$(function () {
-#    $("#my_submit").click(function () {
-#        $("#spinner").toggle();
-#    });
-#});
+    # Add spinner show to #my_submit click event.
+    $('#my_submit').click ->
+      $('#spinner').toggle()
