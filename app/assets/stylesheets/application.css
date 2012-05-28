@@ -15,19 +15,18 @@
  *= require blueprint
 */
 
-html, body {height: 100%;}
+html, body {
+    height: 100%;
+}
 
 /*Opera Fix*/
 body:before {
-	content:"";
-	height:100%;
-	float:left;
-	width:0;
-	margin-top:-32767px;
+    content: "";
+    height: 100%;
+    float: left;
+    width: 0;
+    margin-top: -32767px;
 }
-
-#content_wrapper {overflow:auto;
-	padding-bottom: 50px;}  /* must be same height as the footer */
 
 body, button, input, select, textarea {
     font: 13px/17px Arial, sans-serif;
@@ -40,7 +39,14 @@ div#body_wrapper {
     width: 80%
 }
 
-.right {text-align: right;}
+#content_wrapper {
+    overflow: auto;
+    padding-bottom: 50px; /* must be same height as the footer */
+}
+
+.right {
+    text-align: right;
+}
 
 textarea {
     height: 100px;
