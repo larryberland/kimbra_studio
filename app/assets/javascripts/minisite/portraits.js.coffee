@@ -39,17 +39,12 @@ class @PortraitCropper
     window.portraitScalingFactor = $('#cropbox').width() / portraitWidth
     # Notice cropScalingFactor gets bigger as you zoom in! Use this to scale up the preview image by this factor.
     window.cropScalingFactor = viewportWidth * viewportScalingFactor / coords.w
-    # Stuff crop coords back into hidden fields to pass back to controller. Scale back to original portrait size.
-#    $('#admin_customer_item_side_crop_x').val(Math.round((coords.x * portraitWidth) / $('#cropbox').width()))
-#    $('#admin_customer_item_side_crop_y').val(Math.round((coords.y * portraitWidth) / $('#cropbox').width()))
-#    $('#admin_customer_item_side_crop_w').val(Math.round((coords.w * portraitWidth) / $('#cropbox').width()))
-#    $('#admin_customer_item_side_crop_h').val(Math.round((coords.h * portraitWidth) / $('#cropbox').width()))
+    # Set hidden fields with integer values.
     $('#admin_customer_item_side_crop_x').val(Math.round((coords.x / portraitScalingFactor)))
     $('#admin_customer_item_side_crop_y').val(Math.round((coords.y / portraitScalingFactor)))
     $('#admin_customer_item_side_crop_w').val(Math.round((coords.w / portraitScalingFactor)))
     $('#admin_customer_item_side_crop_h').val(Math.round((coords.h / portraitScalingFactor)))
 
-    console.log("por x=>#{$('#admin_customer_item_side_crop_x').val()} cropbox.x=>#{coords.x} por w=>#{$('#admin_customer_item_side_crop_w').val()} cropbox w=>#{coords.w} port w=>#{portraitWidth} box width=>#{$('#cropbox').width()}")
     @updatePreview(coords)
 
   updatePreview: (coords) =>

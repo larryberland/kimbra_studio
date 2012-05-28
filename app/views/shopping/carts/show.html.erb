@@ -12,7 +12,8 @@
       <%= link_to 'Checkout', url, :class => 'button-link' %>
   <% end %>
 </div>
+
 <br>
 <div class='cart-show'>
-  <%= render('shopping/items/index', :items => @cart.items)if @cart.try(:items).try(:size).to_i > 0 %>
+  <%= render('shopping/items/index', :items => @cart.items) if @cart.try(:items).try(:size).to_i > 0 %>
 </div>

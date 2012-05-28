@@ -27,6 +27,8 @@
             <td style='text-align:right;'><%= email.offers.select{|o| o.purchased_at.present? }.count %></td>
           </tr>
       <% end %>
+
   <% end %>
+
 </table>
 </div>

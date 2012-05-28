@@ -14,6 +14,10 @@ html, body {
     height: 100%;
 }
 
+body {
+    margin: 0;
+}
+
 /*Opera Fix*/
 body:before {
     content: "";
@@ -30,10 +34,11 @@ body:before {
 
 #content_wrapper {
     overflow: auto;
-    padding-bottom: 50px;
+    padding-bottom: 51px;  /* must be same height as the footer */
 }
 
-/* must be same height as the footer */
+p {margin: 0 0 0 0;
+padding: 13px 0 13px 0;}
 
 .showroom-nav {
     width: 95%;
@@ -239,12 +244,12 @@ div.offer_show img {
     text-align: left;
     margin-left: auto;
     margin-right: auto;
-    margin-botton: 20px;
+    padding-bottom: 20px;
 }
 
 .centered_container {
     margin: 0 auto;
-    margin-top: 10px;
+    padding-top: 10px;
     text-align: center;
 }
 
@@ -260,7 +265,7 @@ div.offer_show img {
 
 #footer {
     position: relative;
-    margin-top: -50px; /* negative value of footer height */
+    margin-top: -51px; /* negative value of footer height */
     border-top: 1px solid;
     height: 50px;
     clear: both;
