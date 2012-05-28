@@ -7,9 +7,6 @@ class ImageLayout < ActiveRecord::Base
 
   after_save :set_size
 
-  before_update :before_reposition
-  after_update :reposition
-
   def size
     @size ||= {:w => w, :h => h}
   end
@@ -49,30 +46,8 @@ class ImageLayout < ActiveRecord::Base
   private
 
   def set_size
-    puts "after_save"
     @size = nil
     size
   end
 
-  def before_reposition
-    puts "before_update"
-    @position_changed = (x_changed? or y_changed?) ? true : false
-    @size_changed = (w_changed? or h_changed?) ? true : false
-    #if size?
-    #  layout.part.item_side.on_layout_change if layout.part.item_side
-    #elsif position?
-    #  layout.part.item_side.on_layout_change if layout.part.item_side
-    #end
-    puts "#{self} before_update position=>#{position?} size=>#{size?}"
-    true
-  end
-
-  def reposition
-    puts "after_update size=>#{size?} position=>#{position?}"
-    #if size?
-    #  layout.part.item_side.on_layout_change if layout.part.item_side
-    #elsif position?
-    #  layout.part.item_side.on_layout_change if layout.part.item_side
-    #end
-  end
 end

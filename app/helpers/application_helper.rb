@@ -1,10 +1,19 @@
 module ApplicationHelper
+
+  def is_admin?
+    current_user and current_user.admin?
+  end
+
   def site_name
     I18n.t(:company)
   end
 
   def image_tag_title(image_url)
 
+  end
+
+  def to_size(model)
+    "#{model.try(:width)}x#{model.try(:height)}"
   end
 
   # show.html

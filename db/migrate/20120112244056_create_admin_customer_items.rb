@@ -4,8 +4,6 @@ class CreateAdminCustomerItems < ActiveRecord::Migration
       t.references :offer
       t.references :part
       t.boolean :photo, :default => true # this item needs a photo
-      t.integer :width
-      t.integer :height
 
       t.timestamps
     end

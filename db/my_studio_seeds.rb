@@ -6,7 +6,6 @@ class MyStudioSeeds
     file_to_load = seed_path.join('studios.yml').to_s
     image_path   = Rails.root.join('public', 'studios')
     studios      = YAML::load(File.open(file_to_load))[:studios]
-    #get_face     = GetFace.new
 
     studios.each do |my_studio_attrs|
       puts "processing #{my_studio_attrs['name']}"

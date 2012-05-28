@@ -21,8 +21,6 @@
       </div>
 
       <div class="field">
-        <%= f.label :custom_layout %>
-        <%= f.text_field :custom_layout %>
         <%= f.label :order %>
         <%= f.number_field :order %>
         <%= f.label :width %>
@@ -68,6 +66,23 @@
         <%= f.submit :id => 'my_submit' %>
         <span id="spinner" style="display:none"></span>
       </div>
+      <div style="position:relative;">
+        <div style="border:1px solid red;
+                position: absolute;
+                width:<%=@part.image_part_width%>px;
+                height:<%=@part.image_part_height%>px">
+          <%= image_tag @part.image_part_url %>
+          <div style="border:1px solid green;
+                  position: absolute;
+                  left: <%=@part.part_layout.x%>px;
+                  top: <%=@part.part_layout.y%>px;
+                  width:<%=@part.part_layout.w%>px;
+                  height:<%=@part.part_layout.h%>px">
+            &nbsp;
+          </div>
+        </div>
+      </div>
+
   <% end %>
 
 </div>

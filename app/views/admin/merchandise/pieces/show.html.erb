@@ -4,6 +4,12 @@
     <%= link_to 'Parts', admin_merchandise_piece_parts_path(@admin_merchandise_piece) %>
   </p>
 
+  <% if is_admin? %>
+  <p>
+    <b>Size:</b>
+    <% to_size(@admin_merchandise_piece) %>
+  </p>
+  <% end %>
   <p>
     <b>Name:</b>
     <%= @admin_merchandise_piece.name %>

@@ -31,6 +31,14 @@ roles = Role::ROLES
 roles.each do |role|
   Role.find_or_create_by_name(role)
 end
+admin = User.find_by_email('admin@email.com')
+admin.destroy if admin
+admin = User.create(email: 'admin@email.com',
+                    password: 'password',
+                    role: Role.find_by_name(Role::SUPER_ADMIN))
+if admin.errors.present?
+  puts "create admin errors=>#{admin.errors.full_messages.join('\n')}"
+end
 
 Category::NAMES.each do |category_type|
   Category.find_or_create_by_name(category_type)

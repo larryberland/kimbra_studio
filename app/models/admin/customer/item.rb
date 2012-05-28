@@ -1,19 +1,16 @@
 class Admin::Customer::Item < ActiveRecord::Base
 
-  attr_accessible :width, :height, :photo, :order,
+  attr_accessible :photo, :order,
                   :part, :part_attributes,
                   :offer, :offer_attributes,
                   :item_sides, :item_sides_attributes
 
 
   belongs_to :offer, :class_name => 'Admin::Customer::Offer'  # offer contained in email
-  belongs_to :part, :class_name => 'Admin::Merchandise::Part' # one of many parts that make up a Piece
+  belongs_to :part, :class_name => 'Admin::Merchandise::Part' # kimbra part this item is made from
 
   has_many :item_sides, :class_name => 'Admin::Customer::ItemSide', :dependent => :destroy
   accepts_nested_attributes_for :part, :offer, :item_sides
-
-  before_update :b_update
-  after_update :b_after_update
 
   # assemble an item and its sides
   #  options = [front_side => {:photo_part, :portrait, :face},
@@ -62,32 +59,6 @@ class Admin::Customer::Item < ActiveRecord::Base
     text
   end
 
-  # controller method to resize existing image
-  def resize_image
-    raise 'need to move these to item_side'
-    if offer and offer.portrait and offer.portrait.image
-      image_stock.remove!
-      t_resize = Tempfile.new(['resize', '.jpg'])
-      # TODO: this needs to handle the method that
-      #  was used originally by this item when creating the stock image
-      img      = part.portrait.send(:portrait_image)
-      @resize  = img.resize_to_fit(part.part_layout.w, part.part_layout.h)
-      @resize.write(t_resize.path)
-      image_stock.store_file!(t_resize.path)
-    end
-  end
-
-  def reposition_image
-    raise 'need to move these to item_side'
-    if part and part.image_part.present?
-      image_item.remove!
-      @resize = Magick::Image.read(image_stock_url).first if @resize.nil?
-      custom_part_file = part.send(:create_custom_part, @resize)
-      image_item.store_file!(custom_part_file.path)
-      save
-    end
-  end
-
   private
 
   def get_side(front_side)
@@ -111,13 +82,4 @@ class Admin::Customer::Item < ActiveRecord::Base
     save
   end
 
-  def b_update
-    puts "#{self} before_update"
-    true
-  end
-
-  def b_after_update
-    puts "#{self} after_update"
-    true
-  end
 end

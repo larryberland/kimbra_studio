@@ -2,11 +2,12 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   attr_accessible :image, :remote_image_url,
                   :image_part, :image_part_url,
-                  :piece, :portrait, :photo, :order,
                   :image_width, :image_height,
                   :image_part_width, :image_part_height,
-                  :part_layout, :part_layout_attributes,
+                  :photo, :order,
+                  :piece, :portrait,
                   :piece_layout, :piece_layout_attributes,
+                  :part_layout, :part_layout_attributes,
                   :face, :face_attributes
 
   mount_uploader :image, ImageUploader                  # custom assembled part
@@ -23,7 +24,6 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   has_one :piece_layout
   accepts_nested_attributes_for :part_layout, :piece_layout
 
-  after_update :reposition
   attr_accessor :width, :height # generic form of image_part_width
 
   def self.seed_nested_attributes(info, attr, default)
@@ -156,16 +156,4 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     dump('assembled', img)
   end
 
-  def reposition
-    if piece_layout.size?
-      puts "#{self} #{id} piece size changed"
-    elsif piece_layout.position?
-      puts "#{self} #{id} piece position changed"
-    end
-    if part_layout.size?
-      puts "#{self} #{id} part size changed"
-    elsif part_layout.position?
-      puts "#{self} #{id} part position changed"
-    end
-  end
 end
