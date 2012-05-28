@@ -67,7 +67,9 @@ class Admin::Customer::Item < ActiveRecord::Base
 
   # create an Item with a part for building an offer
   def self.assemble(offer, merchandise_part)
-    raise "missing kimbra part in offer=>#{offer.inspect}" unless merchandise_part.present?
+    unless merchandise_part.present?
+      raise "missing kimbra part in offer=>#{offer.inspect}"
+    end
     my_part = Admin::Merchandise::Part.create_clone(merchandise_part)
     item    = Admin::Customer::Item.create(:offer => offer,
                                            :part  => my_part)

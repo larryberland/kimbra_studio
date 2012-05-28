@@ -44,8 +44,6 @@ class @PortraitCropper
     $('#admin_customer_item_side_crop_y').val(Math.round((coords.y / portraitScalingFactor)))
     $('#admin_customer_item_side_crop_w').val(Math.round((coords.w / portraitScalingFactor)))
     $('#admin_customer_item_side_crop_h').val(Math.round((coords.h / portraitScalingFactor)))
-
-    console.log("por x=>#{$('#admin_customer_item_side_crop_x').val()} cropbox.x=>#{coords.x} por w=>#{$('#admin_customer_item_side_crop_w').val()} cropbox w=>#{coords.w} port w=>#{portraitWidth} box width=>#{$('#cropbox').width()}")
     @updatePreview(coords)
 
   updatePreview: (coords) =>

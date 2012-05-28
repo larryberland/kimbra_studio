@@ -12,11 +12,11 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   scope :pick, lambda{|previous_picks| where('id not in (?)', previous_picks)}
 
   def photo_parts
-    @photo_parts ||= parts.select { |part| part.photo? }
+    parts.select { |part| part.photo? }
   end
 
   def non_photo_parts
-    @non_photo_parts ||= (parts - photo_parts)
+    parts - photo_parts
   end
 
   def get_image

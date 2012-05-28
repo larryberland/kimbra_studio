@@ -75,7 +75,23 @@ class Admin::Customer::Offer < ActiveRecord::Base
     raise "did you forget to assign a portrait_parts_list for this offer?" if portrait_parts_list.nil?
 
     # add an item for every non_photo part
-    merchandise_piece.non_photo_parts.each do |part|
+    merchandise_piece.non_photo_parts.each_with_index do |part, index|
+      if part.nil?
+        raise "how can part be nil"
+      end
+      if index == 0
+        # for parts that are charms there is only one side which does
+        #  not have a photo part so we need to set the photo part to
+        #  the first one in our non_photo_part list.
+        if portrait_parts_list.present?
+          if portrait_parts_list.kind_of?(Array)
+
+            portrait_parts_list.first[:photo_part] = part if portrait_parts_list.first[:photo_part].nil?
+          elsif portrait_parts_list.kind_of?(Hash)
+            portrait_parts_list[:photo_part] = part if portrait_parts_list[:photo_part].nil?
+          end
+        end
+      end
       portrait_parts_list << [{:photo_part => part}] # bad choice on name
                                                      # this is really a non_photo_part
     end

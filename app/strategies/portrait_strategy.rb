@@ -12,7 +12,6 @@ class PortraitStrategy
 
   def portraits_by_parts(merchandise_piece)
     init_strategy(merchandise_piece)
-
     if respond_to?(strategy_method)
       send(strategy_method)
     else

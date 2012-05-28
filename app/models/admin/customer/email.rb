@@ -43,17 +43,22 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   def self.generate(studio_session)
     email = Admin::Customer::Email.new
+
     tracking = UUID.random_tracking_number
     email.tracking = tracking
     email.my_studio_session = studio_session
 
     # setup merchandise piece pick_list strategy
+
+    # for testing each category piece just set the categories array index below
     # Categories
     categories = %w(Necklaces Bracelets Charms Rings ).collect { |e| "Photo #{e}" }
     categories << 'Holiday'
     # Photo Bracelets
     # Photo Necklaces
-    #piece_strategy_list = PieceStrategy.new.pick_category(categories[2]) # testing
+    #piece_strategy_list = PieceStrategy.new.pick_category(categories[4]) # testing
+    # end of test
+
     piece_strategy_list = PieceStrategy.new.pick_pieces
 
     # setup portrait pick_list strategy
