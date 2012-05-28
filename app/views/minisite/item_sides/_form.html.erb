@@ -25,9 +25,6 @@
             </div>
           </td>
           <td align="top">
-
-            <% v = @item_side.part.piece_layout.layout.size.inspect %>
-            <%= f.hidden_field @item_side.part.piece_layout.layout.size, :value => v %>
             <!-- Constrain preview images to be 300px wide in this div. Height varies according to part. Can't do this bit in the css. -->
             <% orig_width = @item_side.part.width.to_f %>
             <% orig_height = @item_side.part.height.to_f %>

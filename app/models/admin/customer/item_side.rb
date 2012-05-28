@@ -81,6 +81,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                         puts "img size:#{img.columns}x#{img.rows}"
                         puts "  resize to #{size[:w]}x#{size[:h]}"
                         img.resize!(size[:w], size[:h])
+                        img
                       elsif assembly?
                         puts "  Assembly"
                         img = if face
@@ -99,7 +100,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                         puts "  NO OP"
                         src_image # no op
                         # need to create a transparent image here somehow
-                        image_transparent(size[:w], size[:h])
+                        #image_transparent(size[:w], size[:h])
                       end
     puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
     new_stock_image
@@ -115,8 +116,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     end
     puts "storing stock_image ontop of the kimbra part background using the Kimbra part viewport"
     puts "#{self} stock_image onto part #{part_image.columns}x#{part_image.rows} viewport #{viewport[:x]} #{viewport[:y]} #{stock_image.columns}x#{stock_image.rows}"
-    operator = Magick::SrcOverCompositeOp
-    #operator = Magick::DstOverCompositeOp
+    #operator = Magick::SrcOverCompositeOp
+    operator = Magick::DstOverCompositeOp
     img = part_image.composite(stock_image, viewport[:x], viewport[:y], operator)
     puts "#{self} custom_image #{img.columns}x#{img.rows}"
     #part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::AtopCompositeOp)
@@ -165,7 +166,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   private
 
   def crop_stock_image
-    raiss "should never be here"
     puts ""
     puts "#{self} after_update BEG Recreate Versions"
     image_stock.recreate_versions!
@@ -202,14 +202,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   def draw_no_photo(width, height)
     part.no_photo(width, height)
   end
-
-  #def piece_layout
-  #  part.piece_layout.layout
-  #end
-  #
-  #def part_layout
-  #  part.part_layout.layout
-  #end
 
   # reversed name means image instead of file
   def custom_image
