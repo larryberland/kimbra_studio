@@ -1,9 +1,7 @@
 class Admin::Merchandise::Part < ActiveRecord::Base
 
-  attr_accessible :image, :remote_image_url,
-                  :image_part, :image_part_url,
-                  :image_width, :image_height,
-                  :image_part_width, :image_part_height,
+  attr_accessible :image, :remote_image_url, :image_width, :image_height,
+                  :image_part, :image_part_url, :image_part_width, :image_part_height,
                   :photo, :order,
                   :piece, :portrait,
                   :piece_layout, :piece_layout_attributes,
@@ -11,7 +9,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
                   :face, :face_attributes
 
   mount_uploader :image, ImageUploader                  # custom assembled part
-  mount_uploader :image_part, ImageUploader             # kimbra part
+  mount_uploader :image_part, ImageUploader             # background Image used to generate the custom assembled part
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece'
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
@@ -20,7 +18,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   has_one :item, :class_name => 'Admin::Customer::Item' # TODO: do we destroy Offer::Item on this?
   has_one :item_side, :class_name => 'Admin::Customer::ItemSide' # TODO: do we destroy Offer::Item on this?
 
-  has_one :part_layout
+  has_one :part_layout # the viewport coordinates for the image_part background
   has_one :piece_layout
   accepts_nested_attributes_for :part_layout, :piece_layout
 
@@ -76,12 +74,26 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     item_part
   end
 
+
   def width
-    self.image_part_width # width of the original kimbra image part graphic
+    self.image_part_width # width of the original kimbra background image part graphic
   end
 
   def height
-    self.image_part_height # height of the original kimbra image part graphic
+    self.image_part_height # height of the original kimbra background image part graphic
+  end
+
+  # the portrait viewport dimensions onto the image_part background image
+  def viewport
+    viewport_offset.merge(viewport_size)
+  end
+
+  def viewport_offset
+    @viewport_offset ||= {x: part_layout.x, y: part_layout.y}
+  end
+
+  def viewport_size
+    @viewport_size ||= {w: part_layout.w, h: part_layout.h}
   end
 
   def copy_image(from_part)
@@ -110,22 +122,6 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     text = piece.to_image_span
     text = "Part #{id}" if text.blank?
     text
-  end
-
-  def item_x
-    part_layout.x
-  end
-
-  def item_y
-    part_layout.y
-  end
-
-  def item_width
-    part_layout.w
-  end
-
-  def item_height
-    part_layout.h
   end
 
   private

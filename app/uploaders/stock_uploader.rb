@@ -22,7 +22,7 @@ class StockUploader < BaseUploader
 
   # Create different versions of your uploaded files:
   process :model_process   # let the model manipulate the image
-  process :convert => 'jpg'
+  process :convert => 'png'
   process :store_geometry  # do after crop so we store current geometry
 
   version :thumb do

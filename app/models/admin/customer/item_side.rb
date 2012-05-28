@@ -22,8 +22,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :assembly
 
-  #after_update :reposition
-
   after_update :crop_stock_image, if: :cropping?
 
   # assemble a part side for this item and portrait
@@ -37,6 +35,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                                                     :part     => my_part,
                                                     :portrait => options[:portrait],
                                                     :face     => options[:face])
+    puts "#{self} my_part=>#{my_item_side.part.inspect}"
+    puts "#{self} my_part=>#{my_item_side.part.part_layout.layout.inspect}"
+    puts "#{self} my_part=>#{my_item_side.part.piece_layout.layout.inspect}"
     my_item_side.create_side
     my_item_side
   end
@@ -44,6 +45,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   def assembly?
     @assembly
   end
+
   # create the image_stock from [portrait | face | part]
   # create the image_custom from stock and merchandise_part
   def create_side
@@ -56,6 +58,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     assemble_new_side
   end
 
+  # store the kimbra background image into our item_side custom_image
   def assemble_new_side
     # TODO: still need to figure out the difference between storage stuff
     #self.remote_image_custom_url = part.image_part.url.to_s
@@ -63,61 +66,81 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     save
   end
 
-  # draw the custom portrait image onto the Kimbra piece image
-  def draw_piece_with_custom(piece_image)
-    dump_custom(piece_image)
-    part.draw_piece(piece_image, custom_image)
-  end
-
-  # draw the image using current part information
-  def draw_piece(piece_image)
-    part.draw_piece(piece_image, stock_image)
-  end
-
-  # carrier_wave callback to process the current image
+  # carrier_wave callback to process the stock_image
   #  for whatever processing we need to do
   def image_stock_process(src_image)
+    puts ""
+    puts "ItemSide create image_stock"
+    size = part.viewport_size
+    puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
 
-    puts "CW ItemSide image_stock createImage"
-    if cropping?
-      puts "src_img size:#{src_image.columns}x#{src_image.rows}"
-
-      puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
-      img = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
-      clear_cropping
-      puts "img size:#{img.columns}x#{img.rows}"
-      puts "  resize to #{part_layout.w}x#{part_layout.h}"
-      img.resize!(part_layout.w, part_layout.h)
-    elsif assembly?
-      puts "  for NON cropping"
-      w = part_layout.w
-      h = part_layout.h
-      if face
-        draw_face(src_image, w, h)
-      elsif portrait
-        src_image.resize_to_fit(w, h)
-      else
-        part.no_photo(w, h)
-      end
-    else
-      src_image # no op
-    end
+    new_stock_image = if cropping?
+                        puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
+                        img = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
+                        clear_cropping
+                        puts "img size:#{img.columns}x#{img.rows}"
+                        puts "  resize to #{size[:w]}x#{size[:h]}"
+                        img.resize!(size[:w], size[:h])
+                      elsif assembly?
+                        puts "  Assembly"
+                        img = if face
+                                puts "  using Face"
+                                draw_face(src_image, size[:w], size[:h])
+                              elsif portrait
+                                puts "  using Full Portrait"
+                                src_image.resize_to_fit(size[:w], size[:h])
+                              else
+                                puts "  using No photo"
+                                image_transparent(size[:w], size[:h])
+                              end
+                        puts " item_side stock_image=>#{img.columns}x#{img.rows}"
+                        img
+                      else
+                        puts "  NO OP"
+                        src_image # no op
+                        # need to create a transparent image here somehow
+                        image_transparent(size[:w], size[:h])
+                      end
+    puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
+    new_stock_image
   end
 
   # carrier_wave process callback from PartCustomUploader
   def image_custom_process(part_image)
-    puts "running image_custom_process place stock_image onto part."
-    i = stock_image
-    dump_cropped(i)
-    dump_cropped(part_image)
-    part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::DstOverCompositeOp)
+    viewport = part.viewport
+    if (viewport[:w] != stock_image.columns) and (viewport[:h] != stock_image.rows)
+      puts "#{self} stock_image onto part #{part_image.columns}x#{part_image.rows} viewport #{viewport[:x]} #{viewport[:y]} #{stock_image.columns}x#{stock_image.rows}"
+      puts "#{self} viewport=>#{viewport.inspect}"
+      raise "something up here "
+    end
+    puts "storing stock_image ontop of the kimbra part background using the Kimbra part viewport"
+    puts "#{self} stock_image onto part #{part_image.columns}x#{part_image.rows} viewport #{viewport[:x]} #{viewport[:y]} #{stock_image.columns}x#{stock_image.rows}"
+    operator = Magick::SrcOverCompositeOp
+    #operator = Magick::DstOverCompositeOp
+    img = part_image.composite(stock_image, viewport[:x], viewport[:y], operator)
+    puts "#{self} custom_image #{img.columns}x#{img.rows}"
     #part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::AtopCompositeOp)
+    img
   end
 
   def to_image_span
     text = part.to_image_span
     text = "Item #{id}" if text.blank?
     text
+  end
+
+  # draw our custom image onto the kimbra piece image
+  def draw_piece_with_custom(piece_image)
+    img = part.draw_piece(piece_image, custom_image)
+    dump('draw_piece_with_custom', img)
+    img
+  end
+
+  # draw the image using current part information
+  def draw_piece(piece_image)
+    img = part.draw_piece(piece_image, stock_image)
+    dump('draw_piece', img)
+    img
   end
 
   def image_title(attr)
@@ -142,6 +165,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   private
 
   def crop_stock_image
+    raiss "should never be here"
     puts ""
     puts "#{self} after_update BEG Recreate Versions"
     image_stock.recreate_versions!
@@ -155,11 +179,14 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   # used in CarrierWave process center_in_area
   def get_dest_area
-    return part_layout.w, part_layout.h
+    raise "not set layout yet" if part.part_layout.nil?
+    size = part.viewport_size
+    raise "no viewport set" if size[:w] < 1 or size[:h] < 1
+    return size[:w], size[:h]
   end
 
-  def draw_face(portrait_image, w, h)
-    info = face.calculate_center_in_area(w, h)
+  def draw_face(portrait_image, viewport_w, viewport_h)
+    info = face.calculate_center_in_area(viewport_w, viewport_h)
 
     crop    = info[:crop]
     cropped = portrait_image.crop(crop[:x], crop[:y], crop[:w], crop[:h])
@@ -168,7 +195,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     cropped = cropped.resize_to_fit(resize[:w], resize[:h]) if resize
 
     # return the cropped image into our destination image
-    img = image_new(w, h)
+    img = image_new(viewport_w, viewport_h)
     img.composite(cropped, 0, 0, Magick::AtopCompositeOp)
   end
 
@@ -176,13 +203,13 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     part.no_photo(width, height)
   end
 
-  def piece_layout
-    part.piece_layout.layout
-  end
-
-  def part_layout
-    part.part_layout.layout
-  end
+  #def piece_layout
+  #  part.piece_layout.layout
+  #end
+  #
+  #def part_layout
+  #  part.part_layout.layout
+  #end
 
   # reversed name means image instead of file
   def custom_image
@@ -191,14 +218,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   # custom portrait image for this item
   def stock_image
-    puts "grabbing stock_image"
     image_stock.to_image
-  end
-
-  # return the blank part_image for this part
-  def part_image
-    raise "did you forget to assign a part? #{self.inspect}" if part.nil?
-    part.send(:part_image)
   end
 
   def dump_filename
@@ -211,27 +231,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   def dump_custom(img)
     dump('custom', img)
-  end
-
-  def reposition
-    if part.piece_layout.size?
-      puts "#{self} #{id} piece size changed"
-      #on_layout_change
-    elsif part.piece_layout.position?
-      puts "#{self} #{id} piece position changed"
-      #@item.reposition_image
-    end
-
-    if part.part_layout.size?
-      puts "#{self} #{id} part size changed"
-
-      #@item.resize_image
-      #@item.reposition_image
-    elsif part.part_layout.position?
-      puts "#{self} #{id} part position changed"
-      #@item.reposition_image
-    end
-    true
   end
 
 end

@@ -25,6 +25,12 @@ module KMagick
       Magick::Image.new(width, height)
     end
 
+    def image_transparent(width, height)
+      Magick::Image.new(width, height) {
+        self.background_color = "transparent";
+      }
+    end
+
     # wrapper around image processing so the image
     #  will be written to a temp file for anlaysis
     #  or loading by another Uploader

@@ -17,13 +17,13 @@
 
 <% @items.each do |item| %>
   <tr>
-    <td><%= link_to 'Offer', admin_customer_email_offer_path(item.offer.email, item.offer) %></td>
-    <td><%= link_to 'Part', admin_merchandise_piece_part_path(item.part.piece, item.part) %></td>
+    <td><%= link_to 'Offer', admin_customer_email_offer_path(item.offer.email.id, item.offer.id) %></td>
+    <td><%= link_to 'Part', admin_merchandise_piece_part_path(item.part.piece.id, item.part.id) %></td>
     <td><%= image_tag item.front.image_custom_url.to_s %></td>
     <td><%= item.back.nil? ? '' : (image_tag item.back.image_custom_url.to_s) %></td>
-    <td><%= link_to t(:show), admin_customer_email_offer_item_path(@offer.email, @offer, item) %></td>
-    <td><%= link_to t(:edit), edit_admin_customer_email_offer_item_path(@offer.email, @offer, item) %></td>
-    <td><%= link_to t(:destroy), admin_customer_email_offer_item_path(@offer.email, @offer, item), confirm: t(:link_destroy_confirm), method: :delete %></td>
+    <td><%= link_to t(:show), admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id) %></td>
+    <td><%= link_to t(:edit), edit_admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id) %></td>
+    <td><%= link_to t(:destroy), admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id), confirm: t(:link_destroy_confirm), method: :delete %></td>
   </tr>
 <% end %>
 </table>

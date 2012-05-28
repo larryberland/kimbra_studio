@@ -64,21 +64,23 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
 
   def center_me(item)
     part  = item.part
-    dx    = (part.item_width - face_width) * 0.50
-    dy    = (part.item_height - face_height) * 0.50
+    viewport = part.viewport
+    dx    = (viewport[:w] - face_width) * 0.50
+    dy    = (viewport[:h] - face_height) * 0.50
     new_x = [face_top_left_x - dx.to_i, 0].max
     new_y = [face_top_left_y - dy.to_i, 0].max
 
-    puts "crop #{new_x} #{new_y} #{part.item_width}x#{part.item_height}"
+    puts "crop #{new_x} #{new_y} #{viewport[:w]}x#{viewport[:h]}"
     img     = portrait.portrait_image
 
     # crop the portrait for the kimbra part
-    cropped = img.crop(new_x, new_y, part.item_width, part.item_height)
-    dump_cropped(cropped, part.item_width, part.item_height)
+    cropped = img.crop(new_x, new_y, viewport[:w], viewport[:h])
+    dump_cropped(cropped, viewport[:w], viewport[:h])
 
     t_assembled = Tempfile.new(['assemble', '.jpg'])
     image_piece = part.image_part.to_image
-    image_piece.composite(cropped, part.item_x, part.item_y, Magick::AtopCompositeOp).write(t_assembled.path)
+    offset = part.viewport_offset
+    image_piece.composite(cropped, offset[:x], offset[:y], Magick::AtopCompositeOp).write(t_assembled.path)
     dump_assembled(image_piece)
     item.image_item.store!(File.open(t_assembled.path))
     item.write_image_item_identifier

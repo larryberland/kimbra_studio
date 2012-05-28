@@ -1,6 +1,7 @@
 <div class='show'>
   <% url = @part.id.nil? ? admin_merchandise_piece_parts_path(@piece) : admin_merchandise_piece_part_path(@piece, @part) %>
   <%= form_for(@part, :url => url, :html => {:multipart => true}) do |f| %>
+
       <% if @part.errors.any? %>
           <div id="error_explanation">
             <h2><%= pluralize(@part.errors.count, "error") %> prohibited this admin_merchandise_part from being
@@ -21,25 +22,8 @@
       </div>
 
       <div class="field">
-        <%= f.label :order %>
+        <%= f.label :order, 'Assemble Process' %>
         <%= f.number_field :order %>
-        <%= f.label :width %>
-        <%= f.number_field :width %>
-        <%= f.label :height %>
-        <%= f.number_field :height %>
-      </div>
-
-      <div class="field">
-        <%= f.label :item_x %>
-        <%= f.number_field :item_x %>
-        <%= f.label :item_y %>
-        <%= f.number_field :item_y %>
-      </div>
-      <div class="field">
-        <%= f.label :item_width %>
-        <%= f.number_field :item_width %>
-        <%= f.label :item_height %>
-        <%= f.number_field :item_height %>
       </div>
 
       <div class="field">
@@ -66,12 +50,68 @@
         <%= f.submit :id => 'my_submit' %>
         <span id="spinner" style="display:none"></span>
       </div>
+      <div class="fieldset">
+        Custom Kimbra Part Background Image Size:
+        <div class="field" style="color:red;">
+          <%= f.label :width %>
+          <%= f.number_field :width %>
+          <%= f.label :height %>
+          <%= f.number_field :height %>
+        </div>
+      </div>
+
+      <%= f.fields_for :part_layout, @part.part_layout do |g| %>
+
+          <%= g.fields_for :layout, @part.part_layout.layout do |l| %>
+              <div class="fieldset">
+                Custom Kimbra Part Picture Viewport for Background Image:
+              <div class="field" style="color:green;">
+                <%= l.label :x %>
+                <%= l.number_field :x %>
+                <%= l.label :y %>
+                <%= l.number_field :y %>
+                <%= l.label :w %>
+                <%= l.number_field :w %>
+                <%= l.label :h %>
+                <%= l.number_field :h %>
+              </div>
+
+              </div>
+
+          <% end %>
+
+      <% end %>
+
+      <%= f.fields_for :piece_layout, @part.piece_layout do |g| %>
+
+          <%= g.fields_for :layout, @part.piece_layout.layout do |l| %>
+              <div class="fieldset">
+                Size of custom part image:
+              <div class="field" style="color:green;">
+                <%= l.label :x %>
+                <%= l.number_field :x %>
+                <%= l.label :y %>
+                <%= l.number_field :y %>
+                <%= l.label :w %>
+                <%= l.number_field :w %>
+                <%= l.label :h %>
+                <%= l.number_field :h %>
+              </div>
+
+              </div>
+
+          <% end %>
+
+      <% end %>
+
       <div style="position:relative;">
+        Part Layout
         <div style="border:1px solid red;
                 position: absolute;
                 width:<%=@part.image_part_width%>px;
                 height:<%=@part.image_part_height%>px">
           <%= image_tag @part.image_part_url %>
+
           <div style="border:1px solid green;
                   position: absolute;
                   left: <%=@part.part_layout.x%>px;
@@ -82,6 +122,27 @@
           </div>
         </div>
       </div>
+
+      <div style="position:relative;">
+        Piece Layout puts item_side part into this piece
+        <div style="border:1px solid red;
+                position: absolute;
+                left: <%=@part.image_part_width+10%>px;
+                width:<%=@part.piece.width%>px;
+                height:<%=@part.piece.height%>px">
+          <%= image_tag @part.piece.image_url %>
+
+          <div style="border:1px solid green;
+                  position: absolute;
+                  left: <%=@part.piece_layout.x%>px;
+                  top: <%=@part.piece_layout.y%>px;
+                  width:<%=@part.piece_layout.w%>px;
+                  height:<%=@part.piece_layout.h%>px">
+            &nbsp;
+          </div>
+        </div>
+      </div>
+
 
   <% end %>
 
