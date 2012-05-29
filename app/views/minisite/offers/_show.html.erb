@@ -16,7 +16,7 @@
       </p>
   <% else %>
       <p>
-        <%= image_tag @admin_customer_offer.image_url.to_s %>
+        <%= image_tag @admin_customer_offer.image_url.to_s + '?' + SecureRandom.hex(8) %>
       </p>
   <% end %>
 
