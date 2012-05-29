@@ -25,11 +25,11 @@ class ImageUploader < BaseUploader
 
   # Create different versions of your uploaded files:
   version :thumb do
-     process :resize_to_limit => [100, 100]
+    process :resize_to_limit => [100, 100]
   end
 
   version :list do
-     process :resize_to_limit => [50, 50]
+    process :resize_to_limit => [50, 50]
   end
 
   #version :best do
@@ -45,8 +45,14 @@ class ImageUploader < BaseUploader
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  # def filename
-  #   "something.jpg" if original_filename
-  # end
+  def filename
+    if original_filename
+      if model && model.read_attribute(:image).present?
+        model.read_attribute(:image)
+      else
+        super
+      end
+    end
+  end
 
 end
