@@ -184,7 +184,7 @@ en:
   shopping_item_destroy_link: 'Remove From Cart'
 
   # shopping/address
-  shopping_submit_address: 'Enter Credit Card'
+  shopping_submit_address: 'Continue'
 
   # shopping/purchase
   shopping_purchases_submit_new: 'Submit Payment'

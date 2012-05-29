@@ -1,4 +1,5 @@
 <%= form_for(@address) do |f| %>
+
   <% if @address.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@address.errors.count, "error") %> prohibited this shopping_address from being saved:</h2>
@@ -46,4 +47,5 @@
     <%= f.submit t(:shopping_submit_address), :id => 'my_submit' %>
     <span id="spinner" style="display:none"></span>
   </div>
+
 <% end %>
