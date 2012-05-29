@@ -99,7 +99,7 @@
     window.viewportOffsetY = <%= @item_side.part.part_layout.layout.y %>;
 
     // Create the jCrop object on the page when portrait has finished loading.
-    $('#portrait_item').imagesLoaded( wait(500, function(){new PortraitCropper()}) );
+    $('#preview').imagesLoaded( wait(500, function(){new PortraitCropper()}) );
 
     // Show spinner when any portrait clicked.
     $('.portraits').click(function () {
