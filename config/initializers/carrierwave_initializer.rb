@@ -12,7 +12,7 @@ module CarrierWave
           model.send("#{m}=", img.rows) if model.respond_to?(m)
 
           if (model.kind_of?(Admin::Customer::Offer))
-            if (mounted_as == "image")
+            if (mounted_as == :image)
               model.send("width=", img.columns) if model.respond_to?(:width)
               model.send("height=", img.rows) if model.respond_to?(:height)
             end
