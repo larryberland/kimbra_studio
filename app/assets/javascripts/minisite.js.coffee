@@ -8,6 +8,7 @@
 #= require minisite/portraits
 #= require wait
 #= require imagesloaded
+#= require shopping/purchases
 
 $ ->
   $('.flash_notice').delay(6000).slideUp('slow')
