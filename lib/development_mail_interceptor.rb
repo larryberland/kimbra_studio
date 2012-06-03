@@ -8,7 +8,7 @@ class DevelopmentMailInterceptor
     end
     message.subject = "[#{message.to}] #{message.subject}"
     if `hostname`.match(/james|chapterhouse/i)
-      message.to = ['jim@jimjames.org']
+      message.to = ['jjames@clarityservices.com']
     else
       message.to = ["hokahey100@gmail.com"]
     end

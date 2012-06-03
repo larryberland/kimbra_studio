@@ -26,10 +26,9 @@
             <td class="w580" width="580">
               <div class="article-content" align="center">
                 <p style="color: <%= studio.minisite.font_color %>;">
-                  Solid sterling silver •
-                  completely waterproof •
+                  <%= offer.piece.short_description %>
                   <span class="price"><%= number_to_currency(offer.price) %></span> •
-                  <%= link_to "Details...", minisite_offer_url(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: underline;"} %>
+                  <%= link_to "Details...", minisite_offer_url(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
                 </p>
               </div>
             </td>

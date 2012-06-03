@@ -21,7 +21,6 @@ module Shopping
           shopping_stripe_card_path(@purchase.stripe_card)
         end
       end
-
     end
 
     def update
@@ -32,7 +31,6 @@ module Shopping
           shopping_stripe_card_path(@purchase.stripe_card)
         end
       end
-
     end
 
   end

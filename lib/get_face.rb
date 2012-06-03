@@ -40,7 +40,8 @@ class GetFace
           face = MyStudio::Portrait::Face.from_tag(tag)
 
           img = portrait.portrait_image
-          if img
+          # TODO make this a method and more robust for missing elements.
+          if img && tag['eye_left'] && tag['eye_right'] && tag['mouth_right']
             face_topleft = {
                 'x' => img.columns * tag['eye_left']['x']/100.0,
                 'y' => img.rows * tag['eye_left']['y']/100.0

@@ -16,6 +16,7 @@
       </p>
   <% else %>
       <p>
+        <%# TODO refactor this cache buster to be more rails-like. %>
         <%= image_tag @admin_customer_offer.image_url.to_s + '?' + SecureRandom.hex(8) %>
       </p>
   <% end %>
@@ -33,7 +34,7 @@
 
   <span id='shopping_item'></span>
 
-  <% @admin_customer_offer.description.split(". ").each do |sentence| %>
+  <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
       <p><%= sentence.strip %><%= "." unless sentence.strip.last == '.' %></p>
   <% end %>
 
