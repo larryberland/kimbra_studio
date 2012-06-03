@@ -16,7 +16,7 @@ module Shopping
     def create
       create! do
         if @purchase.errors.present?
-          edit_shopping_cart_purchase_path(@purchase)
+          edit_shopping_cart_purchase_path(@cart)
         else
           shopping_stripe_card_path(@purchase.stripe_card)
         end
@@ -27,7 +27,7 @@ module Shopping
     def update
       update! do
         if @purchase.errors.present?
-          edit_shopping_cart_purchase_path(@purchase)
+          edit_shopping_cart_purchase_path(@cart)
         else
           shopping_stripe_card_path(@purchase.stripe_card)
         end
