@@ -3,12 +3,12 @@
 }
 .wrapper {
     height: auto !important;
-    margin: 0 auto -9em;
+    margin: 0 auto;
     min-height: 100%;
 }
 
 .wrapper .signup {
-    background: url("images/marketing/tour/white-noise.png") repeat-x scroll 0 0 transparent;
+    background: url("marketing/tour/white-noise.png") repeat-x scroll 0 0 transparent;
 }
 
 body-wrapper {

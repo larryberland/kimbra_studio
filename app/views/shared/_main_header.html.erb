@@ -6,6 +6,13 @@
           <% if user_signed_in? %>
               <strong>Hi <%= current_user.try(:email) %></strong>
               <span>(<%= link_to translate(:not_you), destroy_user_session_path, method: :delete %>)</span>
+              <script type="text/javascript">
+                  $(document).ready(function () {
+                      olark('api.chat.updateVisitorNickname', {
+                          snippet:'<%= current_user.name %>'
+                      });
+                  });
+              </script>
           <% else %>
               <strong><%= link_to translate(:sign_in), new_user_session_path %></strong> or
               <span><%= link_to translate(:sign_up), new_user_registration_path %></span>
@@ -13,6 +20,7 @@
         </div>
       </li>
     </ul>
+
     <table>
       <tr>
         <td>
@@ -29,5 +37,6 @@
         </td>
       </tr>
     </table>
+
   </div>
 </div>
