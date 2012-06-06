@@ -1,4 +1,10 @@
 <div class='container'>
+
+  <span class='motivation'><%= portrait_uploaded_days_ago_text %></span>
+
+    <%= button_to 'Upload some now!', new_my_studio_session_path %>
+
+
   <%= render 'my_studio/dashboards/sessions', :sessions => @last_seven_days %>
 </div>
 <div class='container'>

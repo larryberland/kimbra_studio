@@ -11,6 +11,8 @@ class MyStudio::Portrait < ActiveRecord::Base
   has_many :parts, :class_name => 'Admin::Merchandise::Part'
   has_many :faces, :class_name => 'MyStudio::Portrait::Face', :dependent => :destroy
 
+  scope :last, order('created_at desc').limit(1)
+
   before_save :set_description
   after_save :get_faces
 
