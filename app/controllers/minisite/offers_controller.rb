@@ -6,6 +6,7 @@ module Minisite
     # GET /minisite/offers.json
     def index
       if @admin_customer_email
+        @admin_customer_email.update_attribute :visited_at, Time.now
         @admin_customer_offers = @admin_customer_email.offers
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all

@@ -11,7 +11,7 @@ class MyStudio::Session < ActiveRecord::Base
   scope :by_studio, lambda { |studio_id| where('studio_id = ?', studio_id) }
 
   scope :within_seven_days, lambda {
-    where('created_at >= ?', 7.days.ago(Time.now))
+    where('created_at >= ?', 17.days.ago(Time.now))
   }
 
   def email_ready?

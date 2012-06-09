@@ -1,12 +1,14 @@
 <div class='container'>
+  <div class='motivation'>
+    <%= portrait_uploaded_days_ago_text %>
+  </div>
+  <%= button_to 'Upload some now!', new_my_studio_session_path %>
+</div>
 
-  <span class='motivation'><%= portrait_uploaded_days_ago_text %></span>
-
-    <%= button_to 'Upload some now!', new_my_studio_session_path %>
-
-
+<div class='container'>
   <%= render 'my_studio/dashboards/sessions', :sessions => @last_seven_days %>
 </div>
+
 <div class='container'>
   <%= render 'my_studio/dashboards/emails', :sessions => @last_seven_days %>
 </div>
