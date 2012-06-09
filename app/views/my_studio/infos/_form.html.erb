@@ -22,10 +22,17 @@
       <%= g.email_field :email_notification %>
     </div>
     <div class="field">
-      <%= g.label :tax_ein, 'Tax ID/EIN' %>
+      <%= g.label :tax_ein, 'Tax ID/EIN xx' %>
       <br/>
       <%= g.text_field :tax_ein %>
     </div>
+    <% if current_user.admin? %>
+        <div class="field">
+          <%= g.label :commission_rate, 'Commission rate (%)' %>
+          <br/>
+          <%= g.text_field :commission_rate %>
+        </div>
+    <% end %>
     <div class="field">
       <%= g.label :pictage_member %>
       <%= g.check_box :pictage_member %>

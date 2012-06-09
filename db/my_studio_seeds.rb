@@ -45,6 +45,15 @@ class MyStudioSeeds
           puts "failed to create minisite"
         end
 
+        # create info details
+        attrs = my_studio_attrs.delete('info')
+        info = MyStudio::Info.create(attrs)
+        if info.errors.blank?
+          puts 'created info'
+        else
+          puts 'failed to create info for studio'
+        end
+
         # create Sessions
         puts "now creating sessions"
         index                  = 0

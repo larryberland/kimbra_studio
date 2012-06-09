@@ -14,6 +14,11 @@
       bgcolor: '#2a1907'
       font_color: '#d3b492'
       font_family: Arial
+    info:
+      website: http://www.studio-g-photography.com/
+      commission_rate: 20
+      email: jim@jimjames.org
+      tax_ein: 123123123
     sessions:
       - name: Couples
         client:
