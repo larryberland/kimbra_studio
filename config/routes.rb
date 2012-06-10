@@ -6,7 +6,7 @@ KimbraStudio::Application.routes.draw do
     end
     resources :items do
       member do
-        post :remove_one
+        post :update
       end
     end
     resources :addresses

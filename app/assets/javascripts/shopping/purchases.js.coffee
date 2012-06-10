@@ -61,3 +61,24 @@ $ ->
       $("#card_number_error").text("")
     else
       $("#card_number_error").text("Invalid credit card number.")
+
+# Support for update links on shopping cart page (items/_index.html.erb).
+# This implements an unobtrusive ajax call on the links, but prevents the link itself firing.
+# New links are added to the document by the ajax, so the function needs to be called after the
+# ajax response each time.
+# Sent as a javascript request and the response is evaled into the document.
+# I have no idea what happens if the ajax response is a failure.
+$ ->
+  window.updateQuantityLinks()
+
+window.updateQuantityLinks = ->
+  $('a.update_quantity').click (event) ->
+    event.preventDefault()
+    $.post(
+      $(this).attr('href')
+      quantity: $(this).prev().val()
+      (data) ->
+        eval data
+        updateQuantityLinks()
+      'script'
+    )

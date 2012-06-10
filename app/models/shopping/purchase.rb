@@ -27,7 +27,17 @@ class Shopping::Purchase < ActiveRecord::Base
 
   def calculate_cart_tax
     self.tax = 0
-    self.tax_description = ''
+    self.tax_description = OrderedHash.new(
+        zip_code: zip_code,
+        taxable_amount: cart.taxable_sub_total,
+        state: cart.address.zip_code,
+        region: '',
+        code: '',
+        combined_tax: {rate: 0, amount: 0},
+        state_tax: {rate: 0, amount: 0},
+        county_tax: {rate: 0, amount: 0},
+        city_tax: {rate: 0, amount: 0},
+        special_tax: {rate: 0, amount: 0})
     tax_rate = ZipCodeTax.find_by_zip_code(cart.address.zip_code.strip)
     if tax_rate
       state_tax = (cart.taxable_sub_total * tax_rate.state_rate).round(2)
@@ -35,7 +45,7 @@ class Shopping::Purchase < ActiveRecord::Base
       city_tax = (cart.taxable_sub_total * tax_rate.city_rate).round(2)
       special_tax = (cart.taxable_sub_total * tax_rate.special_rate).round(2)
       combined_tax = state_tax + county_tax + city_tax + special_tax
-      taxes = OrderedHash.new(
+      self.tax_description = OrderedHash.new(
           zip_code: zip_code,
           taxable_amount: cart.taxable_sub_total,
           state: tax_rate.state,
@@ -45,10 +55,8 @@ class Shopping::Purchase < ActiveRecord::Base
           state_tax: {rate: tax_rate.state_rate, amount: state_tax},
           county_tax: {rate: tax_rate.county_rate, amount: county_tax},
           city_tax: {rate: tax_rate.city_rate, amount: city_tax},
-          special_tax: {rate: tax_rate.special_rate, amount: special_tax},
-      )
+          special_tax: {rate: tax_rate.special_rate, amount: special_tax})
       self.tax = combined_tax
-      self.tax_description = taxes
     end
   end
 

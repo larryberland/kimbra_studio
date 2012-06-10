@@ -9,6 +9,7 @@
 #= require imagesloaded
 
 $ ->
-  $('.flash_notice').highlight()
+  $('.flash_notice').each (index, element) ->
+      $(element).highlight()
   $('.flash_notice').delay(6000).slideUp('slow')
   $('.flash_error').delay(6000).slideUp('slow')

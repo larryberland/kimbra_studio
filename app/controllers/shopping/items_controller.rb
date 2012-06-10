@@ -24,22 +24,17 @@ module Shopping
       end
     end
 
-    def destroy
+    def update
       @item = Shopping::Item.find(params[:id])
-      @storyline.describe "Removing all #{@item.offer.name} from cart."
-      @item.destroy
-      respond_to do |format|
-        format.js {render(:update)}
+      quantity = params[:quantity].to_i
+      @storyline.describe "Changing quantity of #{@item.offer.name} to #{quantity} in cart."
+      if quantity == 0
+        @item.destroy
+      else
+        @item.update_attribute :quantity, quantity
       end
-    end
-
-    def remove_one
-      @item = Shopping::Item.find(params[:id])
-      @storyline.describe "Removing one #{@item.offer.name} from cart."
-      @item.update_attribute :quantity, @item.quantity.to_i - 1
-      @item.destroy if @item.quantity.to_i == 0
       respond_to do |format|
-        format.js {render(:update)}
+        format.js { render(:update) }
       end
     end
 
