@@ -10,6 +10,7 @@ KimbraStudio::Application.routes.draw do
       end
     end
     resources :addresses
+    resources :shippings
     resources :stripe_cards
   end
 

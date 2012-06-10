@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120527135054) do
+ActiveRecord::Schema.define(:version => 20120610014618) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -392,6 +392,15 @@ ActiveRecord::Schema.define(:version => 20120527135054) do
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
 
+  create_table "shipping_options", :force => true do |t|
+    t.string   "name"
+    t.string   "description"
+    t.integer  "cost_cents"
+    t.integer  "sort_order"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "shopping_addresses", :force => true do |t|
     t.integer  "cart_id"
     t.string   "first_name"
@@ -442,6 +451,15 @@ ActiveRecord::Schema.define(:version => 20120527135054) do
   end
 
   add_index "shopping_purchases", ["cart_id"], :name => "index_shopping_purchases_on_cart_id"
+
+  create_table "shopping_shippings", :force => true do |t|
+    t.integer  "cart_id"
+    t.string   "shipping_option"
+    t.integer  "total_cents"
+    t.string   "tracking"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "shopping_stripe_cards", :force => true do |t|
     t.integer  "purchase_id"
@@ -582,5 +600,17 @@ ActiveRecord::Schema.define(:version => 20120527135054) do
   add_index "users", ["persistence_token"], :name => "index_users_on_persistence_token", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["studio_id"], :name => "index_users_on_studio_id"
+
+  create_table "zip_code_taxes", :force => true do |t|
+    t.string  "state"
+    t.string  "zipcode"
+    t.string  "tax_region_name"
+    t.string  "tax_region_code"
+    t.decimal "combined_rate",   :precision => 7, :scale => 6
+    t.decimal "state_rate",      :precision => 7, :scale => 6
+    t.decimal "county_rate",     :precision => 7, :scale => 6
+    t.decimal "city_rate",       :precision => 7, :scale => 6
+    t.decimal "special_rate",    :precision => 7, :scale => 6
+  end
 
 end

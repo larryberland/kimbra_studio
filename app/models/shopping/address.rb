@@ -12,9 +12,10 @@ class Shopping::Address < ActiveRecord::Base
 
   before_save :check
 
-  private
+  private #=================================================================================
 
   def check
     puts "save=>#{self.inspect}"
   end
+
 end

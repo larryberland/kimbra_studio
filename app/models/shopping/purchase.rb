@@ -24,13 +24,18 @@ class Shopping::Purchase < ActiveRecord::Base
     cart.total
   end
 
+  # TODO calculate tax if address is in Colorado!
   def calculate_total
-    cart_total
-    self.tax ||= cart_total * 0.067
-    cart_total + self.tax
+    calculate_cart_tax
+    cart_total + tax.to_f + cart.shipping.total_cents.to_i / 100.0
   end
 
   private #=================================================================================
+
+  def calculate_cart_tax
+    tax_rate = ZipCodeTax.find_by_zipcode(cart.address.zip_code.strip).try(:combined_rate)
+    self.tax = (cart_total * tax_rate).round(2) if tax_rate
+  end
 
   def stripe_info
     errors.add(:card_number, "Missing stripe token") if stripe_card_token.nil?
@@ -38,8 +43,8 @@ class Shopping::Purchase < ActiveRecord::Base
   end
 
   def stripe_description
-    "Charge for Kimbra Studios... for #{cart.email}"
     # TODO  "Charge for #{t(:stripe_description_prefix)}... for #{cart.email}"
+    "Charge for Kimbra Studios... for #{cart.email}"
   end
 
   def create_stripe_card(stripe_card_hash)

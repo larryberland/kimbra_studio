@@ -83,7 +83,7 @@ module ApplicationHelper
   def link_back_to_current_offer
     if @admin_customer_offer
       at_collection_page = controller_name == 'offers' && action_name == 'index'
-      at_shopping_page   = %w(carts addresses items purchases strip_cards).include?(controller_name)
+      at_shopping_page   = %w(carts addresses shippings items purchases strip_cards).include?(controller_name)
       at_offer_page      = controller_name == 'offers' && action_name == 'show'
       link_text          = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
       unless at_collection_page or at_shopping_page

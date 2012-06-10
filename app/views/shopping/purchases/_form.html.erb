@@ -1,9 +1,10 @@
 <% url = @purchase.new_record? ? shopping_cart_purchase_path(@cart) : shopping_cart_purchase_path(@cart) %>
+
 <%= form_for(@purchase, :url => url) do |f| %>
+
     <% if @purchase.errors.any? %>
         <div id="error_explanation">
           <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this shopping_purchase from being saved:</h2>
-
           <ul>
             <% @purchase.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
@@ -12,53 +13,64 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= f.label :cart_total %>
-      <br/>
-      <%= f.text_field :cart_total, :readonly => true, :value => number_to_currency(@purchase.cart_total) %>
-    </div>
+    <table align='center' class='field'>
+      <tr>
+        <td><%= f.label :cart_total %></td>
+        <td><%= number_to_currency @purchase.cart_total %></td>
+      </tr>
 
-    <div class="field">
-      <%= f.label :tax %>
-      <br/>
-      <%= f.text_field :tax %>
-    </div>
+      <tr>
+        <td><%= f.label :tax %></td>
+        <td><%= number_to_currency @purchase.tax.to_i %></td>
+      </tr>
 
-    <div class="field">
-      <%= f.label :total %> <br/>
-      <%= f.text_field :total, :readonly => true, :value => number_to_currency(@purchase.calculate_total) %>
-    </div>
+      <tr>
+        <td><%= f.label @purchase.cart.shipping.shipping_option %></td>
+        <td><%= number_to_currency @purchase.cart.shipping.total_cents / 100.0 %></td>
+      </tr>
 
-    <div class="field">
-      <%= label_tag :card_number, 'Credit Card Number' %> <br>
-      <%= text_field_tag :card_number, nil, :name => nil %><div id="card_number_error"></div>
-    </div>
+      <tr>
+        <td><%= f.label :total %></td>
+        <td style="border-top: 1px solid;"><%= number_to_currency @purchase.calculate_total %></td>
+      </tr>
 
-    <div class="field">
-      <%= label_tag :card_code, 'Security Code on Card (CVV)' %> <br>
-      <%= text_field_tag :card_code, nil, :name => nil %>
-    </div>
+      <tr><td colspan=2>&nbsp;</td></tr>
 
-    <div class="field">
-      <%= label_tag :card_month, 'Card Expiration' %> <br>
-      <%= select_month nil, {:add_month_numbers => true}, {:name => nil, :id => 'card_month'} %>
-      <%= select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => 'card_year'} %>
-    </div>
+      <tr>
+        <td><%= label_tag :card_number, 'Credit Card Number' %></td>
+        <td><%= text_field_tag :card_number, nil, :name => nil, :size => 18 %><div id="card_number_error"/></td>
+      </tr>
 
-    <div class="field">
-      <%= f.hidden_field :cart_id, :value => @purchase.cart.id %>
-      <%= f.hidden_field :stripe_card_token %>
-      <%= f.hidden_field :total_cents, :value => (@purchase.total * 100).to_i %>
-    </div>
+      <tr>
+        <td>
+          <%= label_tag :card_code, 'Security Code on Card (CVV)' %></td>
+        <td><%= text_field_tag :card_code, nil, :name => nil, :size => 3 %></td>
+      </tr>
 
-    <div id="stripe_error" class='flash_error'>
+      <tr>
+        <td><%= label_tag :card_month, 'Card Expiration' %></td>
+        <td>
+          <%= select_month Date.today, {:add_month_numbers => true}, {:name => nil, :id => 'card_month'} %>
+          <%= select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => 'card_year'} %>
+          <%= f.hidden_field :cart_id, :value => @purchase.cart.id %>
+          <%= f.hidden_field :stripe_card_token %>
+          <%= f.hidden_field :total_cents, :value => (@purchase.total * 100).to_i %>
+        </td>
+      </tr>
 
-    </div>
+      <tr>
+        <td colspan=2>
+          <div id="stripe_error" class='flash_error'></div>
+        </td>
+      </tr>
 
-    <div class="actions">
-      <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
-      <%= f.submit text, :id => 'my_submit' %>
-      <span id="spinner" style="display:none"></span>
-    </div>
+      <tr>
+        <td>&nbsp;</td>
+        <td>
+          <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
+          <%= f.submit text, :id => 'my_submit' %>
+          <span id="spinner" style="display:none"></span>
+        </td>
+    </table>
 
 <% end %>

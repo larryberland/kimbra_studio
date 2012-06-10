@@ -186,6 +186,9 @@ en:
   # shopping/address
   shopping_submit_address: 'Continue'
 
+  # shopping/shipping
+  shopping_submit_shipping: 'Continue'
+
   # shopping/purchase
   shopping_purchases_submit_new: 'Submit Payment'
   shopping_purchases_submit_edit: 'Submit Payment'

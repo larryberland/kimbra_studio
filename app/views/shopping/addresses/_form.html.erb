@@ -1,51 +1,61 @@
 <%= form_for(@address) do |f| %>
 
-  <% if @address.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@address.errors.count, "error") %> prohibited this shopping_address from being saved:</h2>
+    <% if @address.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@address.errors.count, "error") %> prohibited this shopping_address from being saved:</h2>
+          <ul>
+            <% @address.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-      <ul>
-      <% @address.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <table align='center' class='field'>
+      <tr>
+        <td><%= f.label :first_name %></td>
+        <td><%= f.text_field :first_name %></td>
+      </tr>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
-    <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :address1 %><br />
-    <%= f.text_field :address1 %>
-  </div>
-  <div class="field">
-    <%= f.label :address2 %><br />
-    <%= f.text_field :address2 %>
-  </div>
-  <div class="field">
-    <%= f.label :city %><br />
-    <%= f.text_field :city %>
-  </div>
-  <div class="field">
-    <%= f.label :state_id, 'State' %>
-    <%= f.select :state_id, @states, :include_blank => false %>
-  </div>
-  <div class="field">
-    <%= f.label :zip_code %><br />
-    <%= f.text_field :zip_code %>
-  </div>
-    <div class="field">
-      <%= f.hidden_field :cart_id, :value => @cart.id %>
+      <tr>
+        <td><%= f.label :last_name %></td>
+        <td><%= f.text_field :last_name %></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label :address1 %></td>
+        <td><%= f.text_field :address1 %></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label :address2 %></td>
+        <td><%= f.text_field :address2 %></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label :city %></td>
+        <td><%= f.text_field :city %></td>
+      </tr>
+
+      <tr>
+        <td>&nbsp;</td>
+        <td><%= f.select :state_id, @states, :include_blank => false %></td>
+      </tr>
+
+      <tr>
+        <td><%= f.label :zip_code %></td>
+        <td><%= f.text_field :zip_code, :size=>5 %></td>
+      </tr>
+
+      <div class="field">
+        <%= f.hidden_field :cart_id, :value => @cart.id %>
+      </div>
+
+    </table>
+
+    <div class="actions">
+      <%= f.submit t(:shopping_submit_address), :id => 'my_submit' %>
+      <span id="spinner" style="display:none"></span>
     </div>
-  <div class="actions">
-    <%= f.submit t(:shopping_submit_address), :id => 'my_submit' %>
-    <span id="spinner" style="display:none"></span>
-  </div>
 
 <% end %>

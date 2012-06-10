@@ -1,0 +1,36 @@
+<%= form_for(@shipping) do |f| %>
+
+    <% if @shipping.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@shipping.errors.count, "error") %> prohibited this shipping option from being saved:</h2>
+          <ul>
+            <% @shipping.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <div class="field">
+      <table align='center'>
+        <% @shipping_options.each do |so| %>
+            <tr>
+              <td class='left'>
+                <%= f.radio_button :shipping_option, so.last %>
+                <%= label_tag "shopping_shipping_shipping_option_#{so.last.downcase}", so.first %>
+              </td>
+            </tr>
+        <% end %>
+      </table>
+    </div>
+
+    <div class="field">
+      <%= f.hidden_field :cart_id, :value => @cart.id %>
+    </div>
+
+    <div class="actions">
+      <%= f.submit t(:shopping_submit_shipping), :id => 'my_submit' %>
+      <span id="spinner" style="display:none"></span>
+    </div>
+
+<% end %>

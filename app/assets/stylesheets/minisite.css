@@ -172,7 +172,7 @@ div.shopping-item-index {
     padding: 10px;
 }
 
-td.shopping-item-index {
+td.shopping-item-index, th.shopping-item-index {
     padding: 5px 10px 5px 10px;
 }
 
@@ -314,4 +314,14 @@ p.story_name_line {
 td.total {
     border-top: 1px dotted;
     border-bottom: 1px dotted;
+}
+
+.shopping_heading {
+    border: 1px solid;
+    padding: 5px 0 5px 0;
+    margin: 5px 0 5px 0;
+}
+
+.field {
+    text-align: left;
 }

@@ -11,7 +11,7 @@ module Shopping
         if @address.errors.present?
           edit_shopping_address_path(@address)
         else
-          new_shopping_cart_purchase_path(@cart)
+          new_shopping_shipping_path
         end
       end
     end
@@ -19,6 +19,16 @@ module Shopping
     def edit
       @states = State.form_selector
       edit!
+    end
+
+    def update
+      update! do
+        if @address.errors.present?
+          edit_shopping_address_path(@address)
+        else
+          new_shopping_shipping_path
+        end
+      end
     end
 
   end
