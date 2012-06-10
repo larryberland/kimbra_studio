@@ -33,7 +33,7 @@ class Shopping::Purchase < ActiveRecord::Base
   private #=================================================================================
 
   def calculate_cart_tax
-    tax_rate = ZipCodeTax.find_by_zipcode(cart.address.zip_code.strip).try(:combined_rate)
+    tax_rate = ZipCodeTax.find_by_zip_code(cart.address.zip_code.strip).try(:combined_rate)
     self.tax = (cart_total * tax_rate).round(2) if tax_rate
   end
 

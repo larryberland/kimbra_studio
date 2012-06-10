@@ -1,4 +1,4 @@
-state,zipcode,tax_region_name,tax_region_code,combined_rate,state_rate,county_rate,city_rate,special_rate
+state,zip_code,tax_region_name,tax_region_code,combined_rate,state_rate,county_rate,city_rate,special_rate
 CO,80001,ARVADA (JEFFERSON CO),AKJN,0.079600,0.029000,0.005000,0.034600,0.011000
 CO,80002,ARVADA (JEFFERSON CO),AKJN,0.079600,0.029000,0.005000,0.034600,0.011000
 CO,80003,ARVADA (JEFFERSON CO),AKJN,0.079600,0.029000,0.005000,0.034600,0.011000

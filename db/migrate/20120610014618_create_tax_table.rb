@@ -3,7 +3,7 @@ class CreateTaxTable < ActiveRecord::Migration
   def change
     create_table :zip_code_taxes, :force => true do |t|
       t.string :state
-      t.string :zipcode
+      t.string :zip_code
       t.string :tax_region_name
       t.string :tax_region_code
       t.decimal :combined_rate, :precision => 7, :scale => 6
@@ -13,7 +13,7 @@ class CreateTaxTable < ActiveRecord::Migration
       t.decimal :special_rate, :precision => 7, :scale => 6
     end
 
-    add_index :zip_code_taxes, :zipcode
+    add_index :zip_code_taxes, :zip_code
 
   end
 

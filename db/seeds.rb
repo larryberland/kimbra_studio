@@ -49,11 +49,12 @@ require Rails.root.join('db', 'my_studio_seeds.rb').to_s
 MyStudioSeeds.seeds(seed_path)
 
 # Load up tax rates table for Colorado.
+require 'csv'
 ZipCodeTax.delete_all
 CSV.foreach('TAXRATES_ZIP5_CO201204.csv', headers: true) do |row|
   ZipCodeTax.create(
       state: row['state'].to_s.strip,
-      zipcode: row['zipcode'].to_s.strip,
+      zip_code: row['zip_code'].to_s.strip,
       tax_region_name: row['tax_region_name'].to_s.strip,
       tax_region_code: row['tax_region_code'].to_s.strip,
       combined_rate: row['combined_rate'],

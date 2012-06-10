@@ -603,7 +603,7 @@ ActiveRecord::Schema.define(:version => 20120610014618) do
 
   create_table "zip_code_taxes", :force => true do |t|
     t.string  "state"
-    t.string  "zipcode"
+    t.string  "zip_code"
     t.string  "tax_region_name"
     t.string  "tax_region_code"
     t.decimal "combined_rate",   :precision => 7, :scale => 6
@@ -612,5 +612,7 @@ ActiveRecord::Schema.define(:version => 20120610014618) do
     t.decimal "city_rate",       :precision => 7, :scale => 6
     t.decimal "special_rate",    :precision => 7, :scale => 6
   end
+
+  add_index "zip_code_taxes", ["zip_code"], :name => "index_zip_code_taxes_on_zip_code"
 
 end
