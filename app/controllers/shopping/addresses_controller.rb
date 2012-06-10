@@ -11,7 +11,11 @@ module Shopping
         if @address.errors.present?
           edit_shopping_address_path(@address)
         else
-          new_shopping_shipping_path
+          if @cart.shipping
+            edit_shopping_shipping_path(@cart.shipping)
+          else
+            new_shopping_shipping_path
+          end
         end
       end
     end
@@ -26,7 +30,11 @@ module Shopping
         if @address.errors.present?
           edit_shopping_address_path(@address)
         else
-          new_shopping_shipping_path
+          if @cart.shipping
+            edit_shopping_shipping_path(@cart.shipping)
+          else
+            new_shopping_shipping_path
+          end
         end
       end
     end

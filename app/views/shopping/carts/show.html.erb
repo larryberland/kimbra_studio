@@ -15,5 +15,5 @@
 
 <br>
 <div class='cart-show'>
-  <%= render('shopping/items/index', :items => @cart.items) if @cart.try(:items).try(:size).to_i > 0 %>
+  <%= render('shopping/items/index', cart: @cart) if @cart.try(:items).try(:size).to_i > 0 %>
 </div>

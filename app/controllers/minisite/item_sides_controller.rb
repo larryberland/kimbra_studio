@@ -30,7 +30,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     respond_to do |format|
       if success
 
-        format.html { redirect_to minisite_offer_url(@item_side.item.offer), notice: 'Client was successfully updated.' }
+        format.html { redirect_to minisite_offer_url(@item_side.item.offer), notice: 'Item was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

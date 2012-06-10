@@ -27,7 +27,7 @@ module Shopping
     def destroy
       @item = Shopping::Item.find(params[:id])
       @storyline.describe "Removing all #{@item.offer.name} from cart."
-      destroy!
+      @item.destroy
       respond_to do |format|
         format.js {render(:update)}
       end

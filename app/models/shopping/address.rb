@@ -9,6 +9,10 @@ class Shopping::Address < ActiveRecord::Base
   accepts_nested_attributes_for :cart
 
   validates_presence_of :cart
+  validates_presence_of :address1
+  validates_presence_of :city
+  validates_presence_of :state
+  validates_presence_of :zip_code
 
   before_save :check
 

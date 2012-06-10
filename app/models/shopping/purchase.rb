@@ -6,10 +6,8 @@ class Shopping::Purchase < ActiveRecord::Base
   has_one :stripe_card, :class_name => 'Shopping::StripeCard'
 
   attr_accessible :cart, :cart_id,
-                  :tax, :total, :total_cents, :purchased_at,
-                  :stripe_card_token, :stripe_response_id, :stripe_paid, :stripe_fee, :cart_total
-
-  attr_accessor :cart_total
+                  :total_cents, :purchased_at,
+                  :stripe_card_token, :stripe_response_id, :stripe_paid, :stripe_fee
 
   accepts_nested_attributes_for :stripe_card
 
@@ -25,7 +23,7 @@ class Shopping::Purchase < ActiveRecord::Base
   end
 
   # TODO calculate tax if address is in Colorado!
-  def calculate_total
+  def total
     calculate_cart_tax
     cart_total + tax.to_f + cart.shipping.total_cents.to_i / 100.0
   end

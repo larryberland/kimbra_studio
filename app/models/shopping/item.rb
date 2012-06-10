@@ -10,9 +10,8 @@ class Shopping::Item < ActiveRecord::Base
 
   before_create :ensure_qty_1
 
-
   def price
-    v =if offer
+    p = if offer
          if offer.piece
            if offer.piece.price
              offer.piece.price
@@ -25,14 +24,19 @@ class Shopping::Item < ActiveRecord::Base
        else
          "KBS::Missing offer for item=>#{item.inspect}"
        end
-    if v.kind_of? String
+    # TODO make these exceptions and prevent item from being sold.
+    if p.kind_of? String
       # tell jim we don't have price data
-      Rails.logger.warn(v)
-      v = 200.0
-    elsif v < 1.0
-      v = 200.0
+      Rails.logger.warn(p)
+      p = 200.0
+    elsif p < 1.0
+      p = 200.0
     end
-    v
+    p
+  end
+
+  def extension
+    quantity.to_i * price.to_f
   end
 
   private #================================================

@@ -16,7 +16,7 @@
     <table align='center' class='field'>
       <tr>
         <td><%= f.label :cart_total %></td>
-        <td><%= number_to_currency @purchase.cart_total %></td>
+        <td><%= number_to_currency @cart_total %></td>
       </tr>
 
       <tr>
@@ -25,13 +25,13 @@
       </tr>
 
       <tr>
-        <td><%= f.label @purchase.cart.shipping.shipping_option %></td>
-        <td><%= number_to_currency @purchase.cart.shipping.total_cents / 100.0 %></td>
+        <td><%= f.label @cart.shipping.shipping_option %></td>
+        <td><%= number_to_currency @cart.shipping.total_cents / 100.0 %></td>
       </tr>
 
       <tr>
         <td><%= f.label :total %></td>
-        <td style="border-top: 1px solid;"><%= number_to_currency @purchase.calculate_total %></td>
+        <td style="border-top: 1px solid;"><%= number_to_currency @purchase.total %></td>
       </tr>
 
       <tr><td colspan=2>&nbsp;</td></tr>
