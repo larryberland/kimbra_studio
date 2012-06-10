@@ -28,7 +28,7 @@ class Shopping::Purchase < ActiveRecord::Base
   def calculate_cart_tax
     self.tax = 0
     self.tax_description = Hash.new(
-        zip_code: zip_code,
+        zip_code: cart.address.zip_code,
         taxable_amount: cart.taxable_sub_total,
         state: cart.address.zip_code,
         region: '',
