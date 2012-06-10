@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120610014618) do
+ActiveRecord::Schema.define(:version => 20120610155356) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -448,6 +448,7 @@ ActiveRecord::Schema.define(:version => 20120610014618) do
     t.datetime "purchased_at"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "tax_description"
   end
 
   add_index "shopping_purchases", ["cart_id"], :name => "index_shopping_purchases_on_cart_id"

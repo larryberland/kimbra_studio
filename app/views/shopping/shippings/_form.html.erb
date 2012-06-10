@@ -2,7 +2,7 @@
 
     <% if @shipping.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@shipping.errors.count, "error") %> prohibited this shipping option from being saved:</h2>
+          <h2><%= pluralize(@shipping.errors.count, "error") %> stopped this shipping selection from being saved:</h2>
           <ul>
             <% @shipping.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>

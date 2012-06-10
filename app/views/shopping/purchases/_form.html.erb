@@ -4,7 +4,7 @@
 
     <% if @purchase.errors.any? %>
         <div id="error_explanation">
-          <h2><%= pluralize(@purchase.errors.count, "error") %> prohibited this shopping_purchase from being saved:</h2>
+          <h2><%= pluralize(@purchase.errors.count, "error") %> stopped this purchase:</h2>
           <ul>
             <% @purchase.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
@@ -15,23 +15,23 @@
 
     <table align='center' class='field'>
       <tr>
-        <td><%= f.label :cart_total %></td>
-        <td><%= number_to_currency @cart_total %></td>
+        <td><%= "#{pluralize @cart.quantity, 'item'} in cart" %></td>
+        <td class='right'><%= number_to_currency @cart.taxable_sub_total %></td>
       </tr>
 
       <tr>
-        <td><%= f.label :tax %></td>
-        <td><%= number_to_currency @purchase.tax.to_i %></td>
+        <td><%= :tax %></td>
+        <td class='right'><%= number_to_currency @purchase.tax %></td>
       </tr>
 
       <tr>
-        <td><%= f.label @cart.shipping.shipping_option %></td>
-        <td><%= number_to_currency @cart.shipping.total_cents / 100.0 %></td>
+        <td><%= @cart.shipping.shipping_option %></td>
+        <td class='right'><%= number_to_currency(@cart.shipping.total_cents / 100.0) %></td>
       </tr>
 
       <tr>
-        <td><%= f.label :total %></td>
-        <td style="border-top: 1px solid;"><%= number_to_currency @purchase.total %></td>
+        <td style="border-top: 1px solid;" ><%= f.label :total %></td>
+        <td style="border-top: 1px solid;" class='right'><%= number_to_currency @cart.total %></td>
       </tr>
 
       <tr><td colspan=2>&nbsp;</td></tr>
@@ -54,7 +54,7 @@
           <%= select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => 'card_year'} %>
           <%= f.hidden_field :cart_id, :value => @purchase.cart.id %>
           <%= f.hidden_field :stripe_card_token %>
-          <%= f.hidden_field :total_cents, :value => (@purchase.total * 100).to_i %>
+          <%= f.hidden_field :total_cents, :value => (@cart.total * 100).to_i %>
         </td>
       </tr>
 

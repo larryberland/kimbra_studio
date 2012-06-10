@@ -9,7 +9,8 @@ module Shopping
     def create
       create! do
         if @address.errors.present?
-          edit_shopping_address_path(@address)
+          @states = State.form_selector
+          return render(:new)
         else
           if @cart.shipping
             edit_shopping_shipping_path(@cart.shipping)

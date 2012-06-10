@@ -46,7 +46,7 @@
     <% end if @cart.items and @cart.items.present? %>
     <tr>
       <td class='shopping-item-index left'>Shipping</td>
-      <td class='shopping-item-index'><%= @cart.shipping ? @cart.shipping.shipping_option : 'No shipping selected yet' %> </td>
+      <td class='shopping-item-index'><%= @cart.shipping ? @cart.shipping.shipping_option : 'no shipping selected yet' %> </td>
       <td class='shopping-item-index'>&nbsp;</td>
       <td class='shopping-item-index'>&nbsp;</td>
       <td class='shopping-item-index right'><%= @cart.shipping ? number_to_currency(@cart.shipping.total_cents / 100.0) : 'n/a' %></td>

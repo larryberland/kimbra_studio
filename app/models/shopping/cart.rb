@@ -21,12 +21,17 @@ class Shopping::Cart < ActiveRecord::Base
     tracking
   end
 
-  def total
+  def taxable_sub_total
     items.each do |item|
       raise 'missing price in offer=>#{item.offer.inspect) piece=>#{item.offer.piece.id}' if item.offer.piece.price.nil?
     end
-    total = items.inject(0) { |result, item| result + (item.offer.piece.price * item.quantity.to_i) }
-    total += shipping.total_cents / 100.0
+    items.inject(0) { |result, item| result + item.extension }
+  end
+
+  def total
+    total = taxable_sub_total
+    total += (shipping.total_cents / 100.0) if shipping
+    total += purchase.tax if purchase
     total
   end
 
