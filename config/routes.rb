@@ -23,6 +23,7 @@ KimbraStudio::Application.routes.draw do
         get :about
         get :privacy
         get :contact
+        get :order_status
       end
       resources :offers
     end
