@@ -9,6 +9,7 @@ class CreateShoppingAddresses < ActiveRecord::Migration
       t.string :city
       t.references :state
       t.string :zip_code
+      t.string :email
 
       t.timestamps
     end

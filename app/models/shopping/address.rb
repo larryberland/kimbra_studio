@@ -4,7 +4,8 @@ class Shopping::Address < ActiveRecord::Base
 
   attr_accessible :cart_id, :cart,
                   :first_name, :last_name,
-                  :address1, :address2, :city, :state, :state_id, :zip_code
+                  :address1, :address2, :city, :state, :state_id, :zip_code,
+                  :email
 
   accepts_nested_attributes_for :cart
 
@@ -15,6 +16,7 @@ class Shopping::Address < ActiveRecord::Base
   validates_presence_of :city
   validates_presence_of :state
   validates_presence_of :zip_code
+  validates_presence_of :email
 
   before_save :check
 
