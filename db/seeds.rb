@@ -51,7 +51,8 @@ MyStudioSeeds.seeds(seed_path)
 # Load up tax rates table for Colorado.
 require 'csv'
 ZipCodeTax.delete_all
-CSV.foreach('TAXRATES_ZIP5_CO201204.csv', headers: true) do |row|
+tax_file = Rails.root.join('TAXRATES_ZIP5_CO201204.csv')
+CSV.foreach(tax_file, headers: true) do |row|
   ZipCodeTax.create(
       state: row['state'].to_s.strip,
       zip_code: row['zip_code'].to_s.strip,
@@ -64,4 +65,8 @@ CSV.foreach('TAXRATES_ZIP5_CO201204.csv', headers: true) do |row|
       special_rate: row['special_rate']
   )
 end
-puts "created #{ZipCodeTax.count} tax items for Colorado."
+if ZipCodeTax.count > 600
+  puts "created #{ZipCodeTax.count} tax items for Colorado."
+else
+  puts 'ZIPCODETAX LOADER FAILED!'
+end
