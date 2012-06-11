@@ -20,11 +20,13 @@ module Shopping
           # After the credit card is run (successful create) we need to close out
           # this cart so that the consumer will start a new one if they want to make
           # more purchases.
+          cart_track = @cart.tracking
           @cart = nil
           session[:cart_id] = nil
           @admin_customer_offer = nil
           session[:admin_customer_offer_id] = nil
-          shopping_stripe_card_path(@purchase.stripe_card)
+          order_status_minisite_email_path(@admin_customer_email, cart: cart_track)
+          #shopping_stripe_card_path(@purchase.stripe_card)
         end
       end
     end
@@ -41,7 +43,8 @@ module Shopping
           session[:cart_id] = nil
           @admin_customer_offer = nil
           session[:admin_customer_offer_id] = nil
-          shopping_stripe_card_path(@purchase.stripe_card)
+          order_status_minisite_email_path(@admin_customer_email, cart: cart_track)
+          #shopping_stripe_card_path(@purchase.stripe_card)
         end
       end
     end

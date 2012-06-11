@@ -46,7 +46,7 @@ class Shopping::Purchase < ActiveRecord::Base
       special_tax = (cart.taxable_sub_total * tax_rate.special_rate).round(2)
       combined_tax = state_tax + county_tax + city_tax + special_tax
       self.tax_description = Hash.new(
-          zip_code: zip_code,
+          zip_code: tax_rate.zip_code,
           taxable_amount: cart.taxable_sub_total,
           state: tax_rate.state,
           region: tax_rate.tax_region_name,
