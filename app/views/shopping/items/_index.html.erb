@@ -31,7 +31,7 @@
           <td class='shopping-item-index right'>
             <%= number_to_currency item.price.to_f %>
           </td>
-          <td class='shopping-item-index left'>
+          <td class="shopping-item-index <%= show_status_only ? 'right' : 'left' %>">
             <% if show_status_only %>
                 <%= item.quantity %>
             <% else %>
