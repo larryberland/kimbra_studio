@@ -3,6 +3,7 @@ class CreateShoppingPurchases < ActiveRecord::Migration
     create_table :shopping_purchases do |t|
       t.references :cart
       t.decimal :tax
+      t.text :tax_description
       t.decimal :total
       t.string :stripe_card_token
       t.string :stripe_response_id

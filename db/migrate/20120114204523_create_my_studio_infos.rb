@@ -12,6 +12,7 @@ class CreateMyStudioInfos < ActiveRecord::Migration
       t.boolean :mac_user
       t.boolean :windows_user
       t.boolean :ping_email, :default => true
+      t.integer :commission_rate, :default => 0  # commission percentage, 15 = 15%
 
       t.timestamps
     end

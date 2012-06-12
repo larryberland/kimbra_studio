@@ -1,3 +1,7 @@
 <h2>Order Status</h2>
 
-<%= @cart_order %>
+<p><%= @cart_order.items.length %></p>
+
+<div class='cart-show'>
+  <%= render('shopping/items/index', cart: @cart_order, show_status_only: true) %>
+</div>

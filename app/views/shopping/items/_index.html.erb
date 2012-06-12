@@ -10,7 +10,7 @@
     </thead>
     <tbody>
     <% total = 0 %>
-    <% @cart.items.each do |item| %>
+    <% cart.items.each do |item| %>
         <tr>
           <td class='shopping-item-index left'>
             <%= item.try(:offer).try(:name) %>
@@ -32,34 +32,38 @@
             <%= number_to_currency item.price.to_f %>
           </td>
           <td class='shopping-item-index left'>
-            <%= text_field_tag :quantity, item.quantity, size: 3 %>
-            <%= link_to 'update', shopping_item_path(item),
-                        class: :update_quantity %>
+            <% if show_status_only %>
+                <%= item.quantity %>
+            <% else %>
+                <%= text_field_tag :quantity, item.quantity, size: 3 %>
+                <%= link_to 'update', shopping_item_path(item),
+                            class: :update_quantity %>
+            <% end %>
           </td>
           <td class='shopping-item-index right'>
             <%= number_to_currency item.extension %>
           </td>
         </tr>
-    <% end if @cart.items and @cart.items.present? %>
+    <% end if cart.items and cart.items.present? %>
     <tr>
       <td class='shopping-item-index left'>Shipping</td>
-      <td class='shopping-item-index'><%= @cart.shipping ? @cart.shipping.shipping_option : 'no shipping selected yet' %> </td>
+      <td class='shopping-item-index'><%= cart.shipping ? cart.shipping.shipping_option : 'no shipping selected yet' %> </td>
       <td class='shopping-item-index'>&nbsp;</td>
       <td class='shopping-item-index'>&nbsp;</td>
-      <td class='shopping-item-index right'><%= @cart.shipping ? number_to_currency(@cart.shipping.total_cents / 100.0) : 'n/a' %></td>
+      <td class='shopping-item-index right'><%= cart.shipping ? number_to_currency(cart.shipping.total_cents / 100.0) : 'n/a' %></td>
     </tr>
     <tr>
       <td class='shopping-item-index left'>Tax</td>
-      <td class='shopping-item-index'><%= @cart.purchase ? @cart.purchase.tax_description['region'] : 'tax calculated at checkout' %> </td>
+      <td class='shopping-item-index'><%= cart.purchase ? cart.purchase.tax_description['region'] : 'tax calculated at checkout' %> </td>
       <td class='shopping-item-index'>&nbsp;</td>
       <td class='shopping-item-index'>&nbsp;</td>
-      <td class='shopping-item-index right'><%= @cart.purchase ? number_to_currency(@cart.purchase.tax) : 'n/a' %></td>
+      <td class='shopping-item-index right'><%= cart.purchase ? number_to_currency(cart.purchase.tax) : 'n/a' %></td>
     </tr>
     <tr>
       <td class='shopping-item-index left total'>Total</td>
       <td class='shopping-item-index total'>&nbsp;</td>
       <td class='shopping-item-index total'>&nbsp;</td>
-      <td class='shopping-item-index right total'><%= @cart.quantity %></td>
+      <td class='shopping-item-index right total'><%= cart.quantity %></td>
       <td class='shopping-item-index right total'><%= number_to_currency(@cart.total) %></td>
     </tr>
     </tbody>
