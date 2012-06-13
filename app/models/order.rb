@@ -543,4 +543,5 @@ class Order < ActiveRecord::Base
     end
     invoice_statement
   end
+
 end

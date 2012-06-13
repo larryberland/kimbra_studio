@@ -397,8 +397,8 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
     t.string   "description"
     t.integer  "cost_cents"
     t.integer  "sort_order"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "shopping_addresses", :force => true do |t|
@@ -410,8 +410,9 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
     t.string   "city"
     t.integer  "state_id"
     t.string   "zip_code"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "shopping_addresses", ["state_id"], :name => "index_shopping_addresses_on_state_id"
@@ -458,8 +459,8 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
     t.string   "shipping_option"
     t.integer  "total_cents"
     t.string   "tracking"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "shopping_stripe_cards", :force => true do |t|
@@ -471,8 +472,8 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
     t.string   "last4"
     t.string   "stripe_type"
     t.string   "stripe_object"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",    :null => false
+    t.datetime "updated_at",    :null => false
   end
 
   add_index "shopping_stripe_cards", ["purchase_id"], :name => "index_shopping_stripe_cards_on_purchase_id"
@@ -508,8 +509,8 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
     t.string   "name"
     t.integer  "studio_id"
     t.integer  "client_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   add_index "stories", ["client_id"], :name => "index_stories_on_client_id"
@@ -525,8 +526,8 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
     t.string   "url"
     t.string   "description"
     t.integer  "seconds"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   add_index "storylines", ["session_id"], :name => "index_storylines_on_session_id"
