@@ -55,14 +55,14 @@ class Order < ActiveRecord::Base
   NUMBER_SEED     = 1001001001000
   CHARACTERS_SEED = 21
 
-  state_machine :initial => 'in_progress' do
+  state_machine :initial => :in_progress do
 
     event :complete do
-      transition :to => 'complete', :from => 'in_progress'
+      transition :to => :complete, :from => :in_progress
     end
 
     event :pay do
-      transition :to => 'paid', :from => ['in_progress', 'complete']
+      transition :to => :paid, :from => [:in_progress, :complete]
     end
   end
 

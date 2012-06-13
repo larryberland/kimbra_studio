@@ -58,11 +58,6 @@
             <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
           </div>
       <% end %>
-      <% @admin_customer_offer.portraits.each do |portrait| %>
-          <div>
-            <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
-          </div>
-      <% end %>
     </div>
 
     <div id='hidden_fields'>

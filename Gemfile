@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.1.3'
+gem 'rails', '3.2.5'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
@@ -11,7 +11,7 @@ gem 'devise'
 gem 'pg'
 
 gem 'blueprint-rails'
-gem 'web-app-theme'
+gem 'web-app-theme', :git =>'git://github.com/pilu/web-app-theme.git'
 gem 'rest-client'
 gem 'crack'
 
@@ -22,7 +22,7 @@ gem 'jcrop-rails'
 gem 'dalli'
 
 gem 'friendly_id', '~> 3.3'
-gem 'state_machine', '~> 1.0.1'
+gem 'state_machine', '~> 1.1'
 
 gem 'stripe'
 
@@ -34,9 +34,9 @@ gem 'jquery-rails'
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.5'
-  gem 'coffee-rails', '~> 3.1.1'
-  gem 'uglifier', '>= 1.0.3'
+  gem 'sass-rails',   '~> 3.2'
+  gem 'coffee-rails', '~> 3.2'
+  gem 'uglifier', '>= 1.0'
 end
 
 group :development, :test do

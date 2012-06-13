@@ -44,7 +44,7 @@
             <%= number_to_currency item.extension %>
           </td>
         </tr>
-    <% end if cart.items and cart.items.present? %>
+    <% end if cart.items && cart.items.present? %>
     <tr>
       <td class='shopping-item-index left'>Shipping</td>
       <td class='shopping-item-index'><%= cart.shipping ? cart.shipping.shipping_option : 'no shipping selected yet' %> </td>

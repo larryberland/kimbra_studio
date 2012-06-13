@@ -50,15 +50,15 @@ class Studio < ActiveRecord::Base
   private
 
   def set_user_info
-    if current_user.studio?
+    if current_user.try(:'studio?')
       if owner
         self.owner = current_user if (owner.id != current_user.id)
       else
         self.owner = current_user
       end
-    elsif current_user.studio_staff?
+    elsif current_user.try(:'studio_staff?')
       self.staffers << current_user if staffers.select{|u| u.id == current_user.id}
-    elsif current_user.client?
+    elsif current_user.try(:'client?')
       self.clients << current_user  if clients.select{|u| u.id == current_user.id}
     end
   end

@@ -99,7 +99,8 @@ class User < ActiveRecord::Base
     end
 
     event :cancel do
-      transition :from => any, :to => :canceled
+      # This transition breaks at the latest version of the gem. I raised an issue with the author.
+      #transition :from => any, :to => :canceled
     end
 
   end
