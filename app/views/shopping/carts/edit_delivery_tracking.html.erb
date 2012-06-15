@@ -1,0 +1,24 @@
+<h2>Enter delivery tracking number</h2>
+
+<p>big picture of the shopping cart here for review</p>
+
+<%= form_for @shipping, url: update_delivery_tracking_shopping_cart_path(@cart), method: :post do |f| %>
+
+    <% if @shipping.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@shipping.errors.count, "error") %> stopped this cart from being saved:</h2>
+          <ul>
+            <% @shipping.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= f.label :tracking, 'Delivery tracking number (UPS)' %>
+    <%= f.text_field :tracking, size: 24, placeholder: 'Eg. 1Z A51 47X mm xxxx xxx x (spaces are ok)' %>
+    <p>some feedback on the tracking number here</p>
+    <%= submit_tag 'Save' %>
+    <%= link_to 'Cancel', '/delivery' %>
+
+<% end %>
