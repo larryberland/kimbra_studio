@@ -43,7 +43,9 @@ class Shopping::Shipping < ActiveRecord::Base
   validates_presence_of :cart
   validates_presence_of :shipping_option
   validates_presence_of :total_cents
-  validates :tracking, format: {with: @tracking_regex, message: 'UPS tracking numbers look like 1Z xxx xxx yy zzzz zzz c'}
+  validates :tracking,
+            format: {with: @tracking_regex, message: 'UPS tracking numbers look like 1Z xxx xxx yy zzzz zzz c'},
+            :if => Proc.new { |shipping| shipping.tracking.present? }
 
   def tracking=(trk)
     trk.upcase!

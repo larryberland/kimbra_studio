@@ -20,6 +20,10 @@ class Shopping::Address < ActiveRecord::Base
 
   before_save :check
 
+  def name
+    "#{first_name} #{last_name}"
+  end
+
   private #=================================================================================
 
   def check

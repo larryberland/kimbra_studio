@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <style type="text/css">
+      .left {
+          text-align: left;
+      }
+
+      .right {
+          text-align: right;
+      }
+
+      table {
+          border: 1px solid black;
+          border-collapse: collapse;
+      }
+
+      td {
+          padding: 10px;
+      }
+
+  </style>
+
+<p>Hi <%= @cart.address.name %>,</p>
+
+<p>Thank you for your order. You can check the status
+  of <%= link_to 'your order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart) %>.</p>
+
+<div>
+  Shipping to:
+  <%= render 'shopping/addresses/show', address: @cart.address %>
+</div>
+
+<table border=1>
+
+  <thead>
+  <th class='left'>Piece</th>
+  <th>Price</th>
+  <th>Quantity</th>
+  <th>Total</th>
+  </thead>
+  <tbody>
+  <% total = 0 %>
+  <% @cart.items.each do |item| %>
+      <tr>
+        <td class='left'>
+          <%= item.try(:offer).try(:name) %>
+        </td>
+        <td class='shopping-item-index right'>
+          <%= number_to_currency item.price.to_f %>
+        </td>
+        <td class="shopping-item-index <%= @show_status_only ? 'right' : 'left' %>">
+          <% if @show_status_only %>
+              <%= item.quantity %>
+          <% else %>
+              <%= text_field_tag :quantity, item.quantity, size: 3 %>
+              <%= link_to 'update', shopping_item_path(item),
+                          class: :update_quantity %>
+          <% end %>
+        </td>
+        <td class='shopping-item-index right'>
+          <%= number_to_currency item.extension %>
+        </td>
+      </tr>
+  <% end if @cart.items && @cart.items.present? %>
+  <tr>
+    <td class='shopping-item-index left'>Shipping<br/>@cart.shipping.shipping_option</td>
+    <td class='shopping-item-index'>&nbsp;</td>
+    <td class='shopping-item-index'>&nbsp;</td>
+    <td class='shopping-item-index right'><%= @cart.shipping ? number_to_currency(@cart.shipping.total_cents / 100.0) : 'n/a' %></td>
+  </tr>
+  <tr>
+    <td class='shopping-item-index left'>Tax<br/><%= @cart.purchase.tax_description['region'] %></td>
+    <td class='shopping-item-index'>&nbsp;</td>
+    <td class='shopping-item-index'>&nbsp;</td>
+    <td class='shopping-item-index right'><%= @cart.purchase ? number_to_currency(@cart.purchase.tax) : 'n/a' %></td>
+  </tr>
+  <tr>
+    <td class='shopping-item-index left total'>Total</td>
+    <td class='shopping-item-index total'>&nbsp;</td>
+    <td class='shopping-item-index right total'><%= @cart.quantity %></td>
+    <td class='shopping-item-index right total'><%= number_to_currency(@cart.total) %></td>
+  </tr>
+  </tbody>
+</table>
+
+<p>Purchased on <%= @cart.purchase.purchased_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %b %d %I:%M%p") %> Eastern using credit card xxxx-xxxx-xxxx-<%= @cart.purchase.stripe_card.last4 %>.</p>
+
+<p>INSERT CONTACT INFO HERE!!</p>
+
+
+</body>
+</html>

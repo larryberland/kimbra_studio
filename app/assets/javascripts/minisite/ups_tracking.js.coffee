@@ -16,7 +16,8 @@ examine = ->
         message += 'Using Kimbra\'s UPS number. '
       else
         message += 'NOT Kimbra\'s UPS number. '
-  if tracking.substr(8,2).length == 2
+  service = tracking.substr(8,2)
+  if service.length == 2
     switch tracking.substr(8,2)
       when '01'
         message += 'USA Next Day Air'
@@ -33,7 +34,7 @@ examine = ->
       when '13'
         message += 'USA Next Day Air Saver.'
       else
-        message += 'Not sure what delivery serivce level. '
+        message += 'Don\'t know what delivery service ' + service + ' is.'
   if tracking.length == 18
     message += ' Correct length.'
   $('#feedback').text(message)

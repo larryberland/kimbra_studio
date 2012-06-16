@@ -33,6 +33,7 @@ module Shopping
           @shipping.tracking = tracking
           if @shipping.save
             flash[:notice] = "Delivery tracking number #{@shipping.tracking} saved for #{@cart.address.last_name}."
+
             return redirect_to '/delivery'
           else # errors on save
             return render :edit_delivery_tracking

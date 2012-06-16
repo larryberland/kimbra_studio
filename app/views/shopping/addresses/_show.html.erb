@@ -1,0 +1,13 @@
+<p>
+  <%= address.first_name %> <%= address.last_name %><br/>
+  <% if address.email.present? %>
+      <%= address.email %><br/>
+  <% end %>
+  <%= address.address1 %> <br/>
+  <% if address.address2.present? %>
+      <%= address.address2 %><br/>
+  <% end %>
+  <%= address.city %>,
+  <%= address.state.abbreviation %>
+  <%= address.zip_code %>
+</p>
