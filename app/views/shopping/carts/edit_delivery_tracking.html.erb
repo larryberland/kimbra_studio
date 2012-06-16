@@ -1,6 +1,4 @@
-<h2>Enter delivery tracking number</h2>
-
-<p>big picture of the shopping cart here for review</p>
+<h2>Make sure this is the right order!</h2>
 
 <%= form_for @shipping, url: update_delivery_tracking_shopping_cart_path(@cart), method: :post do |f| %>
 
@@ -16,9 +14,14 @@
     <% end %>
 
     <%= f.label :tracking, 'Delivery tracking number (UPS)' %>
-    <%= f.text_field :tracking, size: 24, placeholder: 'Eg. 1Z A51 47X mm xxxx xxx x (spaces are ok)' %>
-    <p>some feedback on the tracking number here</p>
+    <%= f.text_field :tracking, size: 26, autocomplete: 'off', placeholder: 'Eg. 1Z A51 47X mm xxxx xxx x (spaces are ok)' %>
+    <p id='feedback'></p>
     <%= submit_tag 'Save' %>
     <%= link_to 'Cancel', '/delivery' %>
-
 <% end %>
+
+<hr>
+
+<div class='cart-show'>
+  <%= render 'shopping/items/index', cart: @cart, show_status_only: true %>
+</div>

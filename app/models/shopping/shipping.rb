@@ -38,7 +38,7 @@ class Shopping::Shipping < ActiveRecord::Base
   # 66	UPS United States Worldwide Express
   # zzzz zzz is the package identifier
   # c is a checksum
-  @tracking_regex = /\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/
+  @tracking_regex = /\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/i
 
   validates_presence_of :cart
   validates_presence_of :shipping_option
@@ -47,7 +47,8 @@ class Shopping::Shipping < ActiveRecord::Base
 
   def tracking=(trk)
     trk.upcase!
-    trk.gsub!(/[^\w^\d\s]/,'')
+    trk.gsub!(/[^\w^\d]/,'')
+    trk.gsub!(/\s/,'')
     write_attribute :tracking, trk
   end
 

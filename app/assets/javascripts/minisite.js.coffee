@@ -9,6 +9,7 @@
 #= require wait
 #= require imagesloaded
 #= require shopping/purchases
+#= require minisite/ups_tracking
 
 $ ->
   $('.flash_notice').each (index, element) ->
