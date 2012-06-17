@@ -72,7 +72,7 @@
     <td class='shopping-item-index right'><%= @cart.shipping ? number_to_currency(@cart.shipping.total_cents / 100.0) : 'n/a' %></td>
   </tr>
   <tr>
-    <td class='shopping-item-index left'>Tax<br/><%= @cart.purchase.tax_description['region'] %></td>
+    <td class='shopping-item-index left'>Tax<br/><%= @cart.purchase.tax_short_description %></td>
     <td class='shopping-item-index'>&nbsp;</td>
     <td class='shopping-item-index'>&nbsp;</td>
     <td class='shopping-item-index right'><%= @cart.purchase ? number_to_currency(@cart.purchase.tax) : 'n/a' %></td>
@@ -101,7 +101,7 @@
 
         <p>
           <%= @studio.name %><br/>
-          <%= @studio.owner.name %> (<%= mail_to @studio.owner.email, nil, {:encode => :javascript} %>)<br/>
+          <%= @studio.owner.name %> (<%= mail_to @studio.owner.email %>)<br/>
           <%= @studio.phone_number %><br/>
           <%= @studio.address_1 %><br/>
           <%= "#{@studio.address_2}<br/>".html_safe if @studio.address_2 %>
@@ -115,7 +115,7 @@
       <div style="text-align:center;width:100%">
         <p>
           If you have any questions about your order or any technical questions about the pieces in our offer,
-          please go straight to the people who will be hand-making the pieces!
+          please go straight to the people who are hand-making the pieces!
         </p>
 
         <p>

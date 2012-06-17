@@ -27,7 +27,7 @@ module Shopping
           session[:cart_id] = nil
           @admin_customer_offer = nil
           session[:admin_customer_offer_id] = nil
-          order_status_minisite_email_path(@admin_customer_email, cart: cart_track)
+          order_status_minisite_email_path(@admin_customer_email, cart: cart_track, show_status_only: true)
           #shopping_stripe_card_path(@purchase.stripe_card)
         end
       end
