@@ -26,7 +26,7 @@
 <p>Hi <%= @cart.address.name %>,</p>
 
 <p>Thank you for your order. You can check the status
-  of <%= link_to 'your order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart) %>.</p>
+  of <%= link_to 'your order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart,  show_status_only: true ) %>.</p>
 
 <div>
   Shipping to:
@@ -66,7 +66,7 @@
       </tr>
   <% end if @cart.items && @cart.items.present? %>
   <tr>
-    <td class='shopping-item-index left'>Shipping<br/>@cart.shipping.shipping_option</td>
+    <td class='shopping-item-index left'>Shipping<br/><%= @cart.shipping.shipping_option %></td>
     <td class='shopping-item-index'>&nbsp;</td>
     <td class='shopping-item-index'>&nbsp;</td>
     <td class='shopping-item-index right'><%= @cart.shipping ? number_to_currency(@cart.shipping.total_cents / 100.0) : 'n/a' %></td>

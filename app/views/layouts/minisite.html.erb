@@ -17,7 +17,7 @@
 
 <div id='body_wrapper'>
 
-  <%= render 'shared/minisite_header', :studio => @studio %>
+  <%= render 'shared/minisite_header', studio: @studio, admin_customer_email: @admin_customer_email %>
 
   <div id='content_wrapper' class='container'>
     <%= yield %>
