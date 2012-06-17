@@ -25,8 +25,12 @@
 
 <p>Hi <%= @cart.address.name %>,</p>
 
-<p>Thank you for your order. You can check the status
-  of <%= link_to 'your order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart,  show_status_only: true ) %>.</p>
+<p>
+  Thank you for your order. You can check the status of
+  <%= link_to 'your order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart,  show_status_only: true ) %>.
+</p>
+
+<p>Your order number is <%= @cart.tracking %>.</p>
 
 <div>
   Shipping to:
