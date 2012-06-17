@@ -33,7 +33,8 @@ module Shopping
           @shipping.tracking = tracking
           if @shipping.save
             flash[:notice] = "Delivery tracking number #{@shipping.tracking} saved for #{@cart.address.last_name}."
-
+            @studio = @cart.email.my_studio_session.client
+            ClientMailer.send_shipping_update(@cart, @studio).deliver
             return redirect_to '/delivery'
           else # errors on save
             return render :edit_delivery_tracking

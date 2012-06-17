@@ -25,4 +25,14 @@ class ClientMailer < ActionMailer::Base
          bcc: 'jim@jimjames.org')
   end
 
+  def send_shipping_update(cart, studio)
+    @cart = cart
+    @studio = studio
+    @show_status_only = true
+    mail(to: "#{cart.address.first_name} #{cart.address.first_name} <#{cart.address.email}>",
+         subject: "Your Photo Jewelry order from #{studio.name} has shipped.",
+         #TODO Change this to use service address at Kimbra CLICK+
+         bcc: 'jim@jimjames.org')
+  end
+
 end
