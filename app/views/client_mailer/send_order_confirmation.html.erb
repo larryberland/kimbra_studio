@@ -88,7 +88,53 @@
 
 <p>Purchased on <%= @cart.purchase.purchased_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %b %d %I:%M%p") %> Eastern using credit card xxxx-xxxx-xxxx-<%= @cart.purchase.stripe_card.last4 %>.</p>
 
-<p>INSERT CONTACT INFO HERE!!</p>
+<table width="500" cellspacing="0" cellpadding="4" border="0" align="center">
+  <tbody>
+  <tr>
+    <td align=center>
+      <div style="text-align:center;width:100%">
+        <p>
+          Would you like to schedule another photography session?
+          Or would you like a different piece of custom photo jewelry prepared?
+          We look forward to chatting with you about it.
+        </p>
+
+        <p>
+          <%= @studio.name %><br/>
+          <%= @studio.owner.name %> (<%= mail_to @studio.owner.email, nil, {:encode => :javascript} %>)<br/>
+          <%= @studio.phone_number %><br/>
+          <%= @studio.address_1 %><br/>
+          <%= "#{@studio.address_2}<br/>".html_safe if @studio.address_2 %>
+          <%= @studio.city %>, <%= @studio.state %> <%= @studio.zip_code %>
+        </p>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td align=center>
+      <div style="text-align:center;width:100%">
+        <p>
+          If you have any questions about your order or any technical questions about the pieces in our offer,
+          please go straight to the people who will be hand-making the pieces!
+        </p>
+
+        <p>
+          Kimbra's ClickPLUS program for professional photography studios.<br/>
+          Call us direct 9am - 7pm Eastern<br/>
+          (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
+          <%= mail_to 'Support@KimbraClickPLUS.com' %><br/>
+          <%= link_to 'Kimbra Studios', 'http://KimbraStudios.com' %>
+        </p>
+
+        <p>
+          <%= link_to image_tag("http://badge.facebook.com/badge/333860214613.6156.966267155.png", width: '120', height: 195, style: 'border:0px;'),
+                      'http://www.facebook.com/pages/Littleton-CO/Kimbra-Studios-Custom-Photo-Jewelry/333860214613', title: 'Kimbra Studios : Custom Photo Jewelry', target: '_top' %>
+        </p>
+      </div>
+    </td>
+  </tr>
+  </tbody>
+</table>
 
 
 </body>

@@ -44,7 +44,7 @@
       <tr>
         <td>
           <%= label_tag :card_code, 'Security Code on Card (CVV)' %></td>
-        <td><%= text_field_tag :card_code, nil, :name => nil, :size => 3 %></td>
+        <td><%= text_field_tag :card_code, nil, name: nil, size: 3, autocomplete: 'off' %></td>
       </tr>
 
       <tr>
