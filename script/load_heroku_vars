@@ -32,6 +32,7 @@ if logged_in
   YAML.load_file(sensitive)[options.environment.to_s].each do |top_level_key, top_level_value_hash|
     top_level_value_hash.each do |k, v|
       puts "adding #{top_level_key}_#{k}=#{v}"
+      # TODO need to add check here to confirm this action succeeded, otherwise break and set exit 2
       `heroku config:add #{top_level_key}_#{k}=#{v}`
     end
   end
