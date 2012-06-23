@@ -25,7 +25,6 @@ body:before {
     float: left;
     width: 0;
     margin-top: -32767px;
-/
 }
 
 #body_wrapper {
@@ -106,16 +105,11 @@ textarea {
 select,
 textarea,
 input[type="text"] {
-    /*background:url(button.png);*/
-    /*text-indent: -9999em;*/
     font-family: Verdana, Arial, sans-serif;
     font-size: 0.95em;
 }
 
 input[type="submit"] {
-    /*background-color: #ffda75; *//* form header */
-    /*background:url(button.png);*/
-    /*text-indent: -9999em;*/
     font-size: 1.0em;
 }
 
