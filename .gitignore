@@ -37,6 +37,9 @@
 /public/portraits/*
 /public/kmagick/*
 
+# Ignore asset pipeline
+/public/assets/*
+
 # Ignore temp jpg files
 face*.jpg
 
