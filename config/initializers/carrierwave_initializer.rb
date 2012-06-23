@@ -4,7 +4,7 @@ module CarrierWave
     def store_geometry
       manipulate! do |img|
         if model
-          puts "store geometry #{model} id=>#{model.send(:id)} #{mounted_as} #{img.columns}x#{img.rows}"
+          #puts "store geometry #{model} id=>#{model.send(:id)} #{mounted_as} #{img.columns}x#{img.rows}"
 
           m = "#{mounted_as}_width".to_sym
           model.send("#{m}=", img.columns) if model.respond_to?(m)
