@@ -26,18 +26,23 @@ end
 opt_parser.parse!
 
 puts "processing #{options.environment} environment..."
+puts
 logged_in = `heroku auth:whoami` =~ /clickplus1@gmail.com/
 if logged_in
+  list_of_vars = []
   sensitive = File.dirname(__FILE__) + "/../config/sensitive.yml"
   YAML.load_file(sensitive)[options.environment.to_s].each do |top_level_key, top_level_value_hash|
     top_level_value_hash.each do |k, v|
-      puts "adding #{top_level_key}_#{k}=#{v}"
-      # TODO need to add check here to confirm this action succeeded, otherwise break and set exit 2
-      `heroku config:add #{top_level_key}_#{k}=#{v}`
+      puts "constructing #{top_level_key}_#{k}=#{v}"
+      list_of_vars << "#{top_level_key}_#{k}=#{v}"
     end
   end
+  puts
+  puts `heroku config:add #{list_of_vars.join(' ')}`
+  puts
   puts 'List of heroku vars on kimbra_studio app:'
-  `heroku config`
+  puts `heroku config`
+  puts
   puts 'Finished'
   exit 0
 else
