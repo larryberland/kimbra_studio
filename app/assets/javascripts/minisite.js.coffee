@@ -9,9 +9,10 @@
 #= require wait
 #= require imagesloaded
 #= require shopping/purchases
+#= require minisite/ups_tracking
 
 $ ->
   $('.flash_notice').each (index, element) ->
-    $(element).highlight()
-  $('.flash_notice').delay(6000).slideUp('slow')
-  $('.flash_error').delay(6000).slideUp('slow')
+    $(element).effect('highlight', 4000)
+  $('.flash_notice').delay(4000).slideUp('slow')
+  $('.flash_error').delay(4000).slideUp('slow')

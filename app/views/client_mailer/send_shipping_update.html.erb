@@ -1,4 +1,37 @@
-<h2>Contact us</h2>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head><title></title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <style type="text/css">
+      .left {
+          text-align: left;
+      }
+
+      .right {
+          text-align: right;
+      }
+
+      table {
+          border: 1px solid black;
+          border-collapse: collapse;
+      }
+
+      td, th {
+          padding: 10px;
+      }
+
+  </style>
+
+<p>Hi <%= @cart.address.name %>,</p>
+
+<p>Your order number <%= @cart.tracking %> has been completed and shipped. You can check the status
+  of <%= link_to 'your order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart,  show_status_only: true ) %>.</p>
+
+<div>
+  Shipping to:
+  <%= render 'shopping/addresses/show', address: @cart.address %>
+</div>
 
 <table width="500" cellspacing="0" cellpadding="4" border="0" align="center">
   <tbody>
@@ -34,7 +67,7 @@
           Kimbra's ClickPLUS program for professional photography studios.<br/>
           Call us direct 9am - 7pm Eastern<br/>
           (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
-          <%= mail_to 'Support@KimbraClickPLUS.com', 'Support_at_KimbraClickPLUS.com', encode: :javascript %><br/>
+          <%= mail_to 'Support@KimbraClickPLUS.com' %><br/>
           <%= link_to 'Kimbra Studios', 'http://KimbraStudios.com' %>
         </p>
 
@@ -47,3 +80,7 @@
   </tr>
   </tbody>
 </table>
+
+
+</body>
+</html>

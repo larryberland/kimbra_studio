@@ -192,3 +192,19 @@ en:
   # shopping/purchase
   shopping_purchases_submit_new: 'Submit Payment'
   shopping_purchases_submit_edit: 'Submit Payment'
+
+  # override InheritedResources flash messages
+  # shopping/purchases
+  flash:
+    shopping_purchases:
+      create:
+        notice: "Your purchase was successful. We'll email a receipt in a few moments."
+    shopping_addresses:
+      create:
+        notice: nil
+    shopping_shippings:
+      create:
+        notice: nil
+    minisite:
+      item_sides:
+        notice: 'New picture layout saved.'

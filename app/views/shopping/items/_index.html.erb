@@ -1,6 +1,5 @@
 <div id='shopping_item_index'>
   <table class='shopping-item-index' align='center'>
-
     <thead>
     <th class='shopping-item-index left'>Piece</th>
     <th>&nbsp;</th>
@@ -54,7 +53,7 @@
     </tr>
     <tr>
       <td class='shopping-item-index left'>Tax</td>
-      <td class='shopping-item-index'><%= cart.purchase ? cart.purchase.tax_description['region'] : 'tax calculated at checkout' %> </td>
+      <td class='shopping-item-index'><%= cart.purchase ? cart.purchase.tax_short_description : 'tax calculated at checkout' %> </td>
       <td class='shopping-item-index'>&nbsp;</td>
       <td class='shopping-item-index'>&nbsp;</td>
       <td class='shopping-item-index right'><%= cart.purchase ? number_to_currency(cart.purchase.tax) : 'n/a' %></td>

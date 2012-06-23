@@ -17,6 +17,7 @@ class Shopping::BaseController < InheritedResources::Base
       @admin_customer_offer = Admin::Customer::Offer.find(session[:admin_customer_offer_id]) if session[:admin_customer_offer_id]
     end
 
+#    @studio = @admin_customer_email.my_studio_session.studio
     @studio = Studio.find(session[:studio_id])
     @client = MyStudio::Client.find(session[:client_id]) if session[:client_id].present?
     @cart = Shopping::Cart.find_by_tracking(params[:id]) if params[:id]

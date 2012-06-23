@@ -20,8 +20,10 @@
       </tr>
 
       <tr>
-        <td><%= :tax %></td>
-        <td class='right'><%= number_to_currency @purchase.tax %></td>
+        <td>Tax: <%= @purchase.tax_short_description %></td>
+        <td class='right'>
+          <%= number_to_currency @purchase.tax %>
+        </td>
       </tr>
 
       <tr>
@@ -30,21 +32,24 @@
       </tr>
 
       <tr>
-        <td style="border-top: 1px solid;" ><%= f.label :total %></td>
+        <td style="border-top: 1px solid;"><%= f.label :total %></td>
         <td style="border-top: 1px solid;" class='right'><%= number_to_currency @cart.total %></td>
       </tr>
 
-      <tr><td colspan=2>&nbsp;</td></tr>
+      <tr>
+        <td colspan=2>&nbsp;</td>
+      </tr>
 
       <tr>
         <td><%= label_tag :card_number, 'Credit Card Number' %></td>
-        <td><%= text_field_tag :card_number, nil, :name => nil, :size => 18 %><div id="card_number_error"/></td>
+        <td><%= text_field_tag :card_number, nil, :name => nil, :size => 18 %>
+          <div id="card_number_error"/></td>
       </tr>
 
       <tr>
         <td>
           <%= label_tag :card_code, 'Security Code on Card (CVV)' %></td>
-        <td><%= text_field_tag :card_code, nil, :name => nil, :size => 3 %></td>
+        <td><%= text_field_tag :card_code, nil, name: nil, size: 3, autocomplete: 'off' %></td>
       </tr>
 
       <tr>

@@ -6,20 +6,17 @@ module Shopping
       new! do
         @shipping.shipping_option = @shipping_options.first.last
       end
-      puts "shipping_option: #{@shipping.shipping_option}"
     end
 
     def create
-      create! do
-        shipping_option = ShippingOption.find_by_name(params[:shopping_shipping][:shipping_option])
-        @shipping.shipping_option = shipping_option.name
-        @shipping.total_cents = shipping_option.cost_cents
-        @shipping.save
-        if @shipping.errors.present?
-          edit_shopping_shipping_path(@shipping.id)
-        else
-          new_shopping_cart_purchase_path(@cart)
-        end
+      @cart = Shopping::Cart.find(params[:shopping_shipping][:cart_id])
+      shipping_option = ShippingOption.find_by_name(params[:shopping_shipping][:shipping_option])
+      @shipping = @cart.create_shipping(shipping_option: shipping_option.name, total_cents: shipping_option.cost_cents)
+      if @shipping.errors.present?
+        @shipping_options = ShippingOption.form_selections
+        return render(:edit)
+      else
+        return redirect_to new_shopping_cart_purchase_path(@cart)
       end
     end
 

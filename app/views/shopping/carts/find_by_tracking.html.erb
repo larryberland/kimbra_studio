@@ -1,0 +1,14 @@
+<h2>edit delivery tracking</h2>
+
+<div class="bp">
+  <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
+  <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
+</div>
+
+<%= form_for @cart, :url => shopping_edit_delivery_tracking_path do |f| %>
+
+    <%= f.label 'Order number' %>
+    <%= f.text_field :tracking, placeholder: 'Eg. k2s4f921ms' %>
+    <%= submit_tag 'Fetch' %>
+
+<% end %>

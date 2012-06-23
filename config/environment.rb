@@ -5,17 +5,16 @@ require File.expand_path('../application', __FILE__)
 # Load custom config file for current environment
 begin
 
-  raw_config    = File.read('config/kimbra_studio.yml')
+  raw_config = File.read('config/kimbra_studio.yml')
   KIMBRA_STUDIO_CONFIG = YAML.load(raw_config)[Rails.env]
 
   unless Rails.env.production?
-    sensitive_config = File.read('config/sensitive.yml')
-    data = YAML.load(sensitive_config)[Rails.env]
-    data.each do |k,v|
+    data = YAML.load_file('config/sensitive.yml')[Rails.env]
+    data.each do |k, v|
       KIMBRA_STUDIO_CONFIG[k].merge!(v)
     end
   end
-rescue  Exception => e
+rescue Exception => e
   puts "#{ e } (#{ e.class })!"
   raise "
   ############################################################################################

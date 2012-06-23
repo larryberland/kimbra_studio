@@ -45,7 +45,7 @@ class Shopping::Purchase < ActiveRecord::Base
       city_tax = (cart.taxable_sub_total * tax_rate.city_rate).round(2)
       special_tax = (cart.taxable_sub_total * tax_rate.special_rate).round(2)
       combined_tax = state_tax + county_tax + city_tax + special_tax
-      self.tax_description = Hash.new(
+      self.tax_description = {
           zip_code: tax_rate.zip_code,
           taxable_amount: cart.taxable_sub_total,
           state: tax_rate.state,
@@ -55,8 +55,17 @@ class Shopping::Purchase < ActiveRecord::Base
           state_tax: {rate: tax_rate.state_rate, amount: state_tax},
           county_tax: {rate: tax_rate.county_rate, amount: county_tax},
           city_tax: {rate: tax_rate.city_rate, amount: city_tax},
-          special_tax: {rate: tax_rate.special_rate, amount: special_tax})
+          special_tax: {rate: tax_rate.special_rate, amount: special_tax}
+      }
       self.tax = combined_tax
+    end
+  end
+
+  def tax_short_description
+    if tax.present? && tax != 0
+      "#{tax_description[:region]} @ #{tax_description[:combined_tax][:rate] * 100}%"
+    else
+      'no taxable region'
     end
   end
 

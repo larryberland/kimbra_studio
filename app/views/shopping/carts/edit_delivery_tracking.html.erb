@@ -1,0 +1,31 @@
+<h2>Make sure this is the right order!</h2>
+
+<%= form_for @shipping, url: update_delivery_tracking_shopping_cart_path(@cart), method: :post do |f| %>
+
+    <% if @shipping.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@shipping.errors.count, "error") %> stopped this cart from being saved:</h2>
+          <ul>
+            <% @shipping.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
+
+    <%= f.label :tracking, 'Delivery tracking number (UPS)' %>
+    <%= f.text_field :tracking, size: 26, autocomplete: 'off', placeholder: 'Eg. 1Z A51 47X mm xxxx xxx x (spaces are ok)' %>
+    <p id='feedback'></p>
+    <%= submit_tag 'Save' %>
+    <%= link_to 'Cancel', '/delivery' %>
+<% end %>
+
+<hr>
+
+<div>
+  <%= render 'shopping/addresses/show', address: @cart.address %>
+</div>
+
+<div class='cart-show'>
+  <%= render 'shopping/items/index', cart: @cart, show_status_only: true %>
+</div>

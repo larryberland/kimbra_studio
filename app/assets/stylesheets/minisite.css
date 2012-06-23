@@ -325,3 +325,7 @@ td.total {
 .field {
     text-align: left;
 }
+
+#feedback {
+    font-weight: bold;
+}

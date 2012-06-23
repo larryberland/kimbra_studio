@@ -63,23 +63,26 @@
   <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
 </div>
 
-<div id="nav_minisite_wrapper" class='bp'>
-  <div class="centered_container">
-    <ul id='main-header-tabs'>
-      <li>
-        <%= link_to_unless_current t(:minisite_menu_collection_link),
-                                   minisite_email_offers_path(@admin_customer_email.tracking) %>
-      </li>
-      |
-      <li>
-        <%= link_to_unless_current t(:minisite_menu_about_link, :studio_name => @studio.name),
-                                   about_minisite_email_path(@admin_customer_email.tracking) %>
-      </li>
-      |
-      <li>
-        <%= link_for_shopping_cart_nav %>
-      </li>
-      <%= link_back_to_current_offer %>
-    </ul>
-  </div>
-</div>
+<%# do not show the navigation bar if Kimbra is entering the delivery tracking number  %>
+<% unless controller_name == 'carts' && action_name == 'edit_delivery_tracking' %>
+    <div id="nav_minisite_wrapper" class='bp'>
+      <div class="centered_container">
+        <ul id='main-header-tabs'>
+          <li>
+            <%= link_to_unless_current t(:minisite_menu_collection_link),
+                                       minisite_email_offers_path(admin_customer_email.tracking) %>
+          </li>
+          |
+          <li>
+            <%= link_to_unless_current t(:minisite_menu_about_link, :studio_name => studio.name),
+                                       about_minisite_email_path(admin_customer_email.tracking) %>
+          </li>
+          |
+          <li>
+            <%= link_for_shopping_cart_nav %>
+          </li>
+          <%= link_back_to_current_offer %>
+        </ul>
+      </div>
+    </div>
+<% end %>
