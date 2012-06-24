@@ -29,7 +29,7 @@ module Minisite
     # 3. From bookmarks to any interior page.
     # 4. where else?!? don't forget combinations of the above.
     def set_cart_and_client_and_studio
-      # Pull cart fron incoming link; usually confirmation email order status link.
+      # Pull cart from incoming link; usually confirmation email order status link.
       if params[:cart]
         @cart                 = Shopping::Cart.find_by_tracking(params[:cart])
         @admin_customer_email = @cart.email
@@ -38,10 +38,10 @@ module Minisite
       # Pull cart from current session; usually normal shopping activity.
       if @cart.nil? && session[:cart_id]
         @cart                 = Shopping::Cart.find(session[:cart_id]) rescue nil
-        @admin_customer_email = @cart.email
+        @admin_customer_email = @cart.email if @cart
       end
       # Otherwise create new cart; we are starting a new shopping session.
-      # Offer and eamail are already set.
+      # Offer and email are already set.
       if @cart.nil?
         @cart             = Shopping::Cart.create(:email => @admin_customer_email)
         session[:cart_id] = @cart.id
