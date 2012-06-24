@@ -10,4 +10,5 @@ CarrierWave.configure do |config|
    config.fog_public     = false
    config.fog_attributes = {}
    #config.fog_attributes = {'Cache-Control' => 'max-age=315576000'} # for static assets that can be cached by the browser for a long time.
+   config.cache_dir = "#{Rails.root}/tmp/uploads"
 end

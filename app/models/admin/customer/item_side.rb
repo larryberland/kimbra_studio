@@ -53,7 +53,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     if face or portrait
       self.image_stock = portrait.face_file
     else
-      self.image_stock.store_file!(part.image_part.current_path)
+      #self.image_stock.store_file!(part.image_part.current_path)
+      self.remote_image_stock_url = part.image_part.url.to_s
     end
     assemble_new_side
   end
@@ -61,8 +62,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   # store the kimbra background image into our item_side custom_image
   def assemble_new_side
     # TODO: still need to figure out the difference between storage stuff
-    #self.remote_image_custom_url = part.image_part.url.to_s
-    self.image_custom.store_file!(part.image_part.current_path)
+    self.remote_image_custom_url = part.image_part.url.to_s
+    #self.image_custom.store_file!(part.image_part.current_path)
     save
   end
 

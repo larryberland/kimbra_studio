@@ -1,15 +1,20 @@
-puts "pulling in #{__FILE__}"
 # encoding: utf-8
 
 class BaseUploader < CarrierWave::Uploader::Base
 
   # Include RMagick or MiniMagick support:
   include CarrierWave::RMagick
-  # include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  # puts "setting storage=>#{KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]}"
   storage KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]
+
+  # Provide a default URL as a default if there hasn't been a file uploaded:
+  def default_url
+    version = version_name.downcase if version_name
+    du = "/images/fallback/" + [version, "empty_deal_image.png"].compact.join('_')
+    puts "default_url=>#{du}"
+    du
+  end
 
   # helper method to store image from a full_path filename
   def store_file!(full_path_filename)
@@ -24,30 +29,22 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def to_image(version=nil)
-    image = if file.kind_of?(CarrierWave::SanitizedFile)
+    img = if file.kind_of?(CarrierWave::SanitizedFile)
               # puts "using storage file"
               Magick::Image.read(current_path)
             else
+              puts "#{model.class.name} for #{mounted_as} version=>#{version}"
               p = model.send("#{mounted_as}_url", version)
-              # puts "#{model.class.name} for #{mounted_as} using amazon file#{p}"
               raise "#{model.class.name} for #{mounted_as} using amazon file#{p}" if p.blank?
               Magick::Image.read(p)
             end
-    image.first
+    img.first
   end
 
-  #def center_in_area(img, dest_width, dest_height)
-  #  w = img.columns
-  #  h = img.rows
-  #  x = (dest_width - w) / 2 if w < dest_width
-  #  y = (dest_height - h) / 2 if h < dest_height
-  #  if x or y
-  #    x         ||= 0
-  #    y         ||= 0
-  #    new_image = image_new(dest_width, dest_height).composite(img, x, y, Magick::AtopCompositeOp)
-  #  end
-  #  new_image ||= img
-  #  new_image
-  #end
+  # Add a white list of extensions whih are allowed to be uploaded.
+  # For images you might use something like this:
+  def extension_white_list
+     %w(jpg jpeg gif png)
+  end
 
 end

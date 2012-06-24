@@ -15,9 +15,9 @@
 development: &non_production_settings
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
   :s3:
-    bucket_name: test.mytripscrapbook.com
+    bucket_name: kimbra-studio
   :carrier_wave:
-    :storage: :file
+    :storage: :fog
   :mailer:
     :address: smtp.gmail.com  # C ror_ecommerce
     :domain: 'gmail.com'
@@ -38,7 +38,7 @@ test:
 production:
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
   :s3:
-    bucket_name: test.mytripscrapbook.com
+    bucket_name: kimbra-studio
   :carrier_wave:
     :storage: :fog
   :mailer:

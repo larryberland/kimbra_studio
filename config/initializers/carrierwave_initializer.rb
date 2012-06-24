@@ -65,3 +65,4 @@ end
 
 # override of process_uri
 require Rails.root.join('lib/carrier_wave/uploader/download').to_s
+require Rails.root.join('lib/carrier_wave/uploader/url').to_s

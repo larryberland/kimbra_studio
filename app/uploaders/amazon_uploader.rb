@@ -8,18 +8,6 @@ class AmazonUploader < BaseUploader
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-  # Provide a default URL as a default if there hasn't been a file uploaded:
-  # def default_url
-  #   "/images/fallback/" + [version_name, "default.png"].compact.join('_')
-  # end
-
-  # Process files as they are uploaded:
-  # process :scale => [200, 300]
-  #
-  # def scale(width, height)
-  #   # do something
-               # end
-
   storage :fog # always use fog for this
 
   # Create different versions of your uploaded files:
@@ -39,11 +27,6 @@ class AmazonUploader < BaseUploader
     # store the width and height into model
     process :store_geometry
   end
-
-  #version :best do
-  #  process :convert => 'jpg'
-  #  process :store_best_geometry
-  #end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:

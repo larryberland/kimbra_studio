@@ -31,14 +31,14 @@ module Minisite
     def set_cart_and_client_and_studio
       # Pull cart fron incoming link; usually confirmation email order status link.
       if params[:cart]
-      @cart = Shopping::Cart.find_by_tracking(params[:cart])
-      @admin_customer_email = @cart.email
-      @admin_customer_offer = nil
+        @cart                 = Shopping::Cart.find_by_tracking(params[:cart])
+        @admin_customer_email = @cart.email
+        @admin_customer_offer = nil
       end
       # Pull cart from current session; usually normal shopping activity.
       if @cart.nil? && session[:cart_id]
-      @cart = Shopping::Cart.find(session[:cart_id])
-      @admin_customer_email = @cart.email
+        @cart                 = Shopping::Cart.find(session[:cart_id]) rescue nil
+        @admin_customer_email = @cart.email
       end
       # Otherwise create new cart; we are starting a new shopping session.
       # Offer and eamail are already set.
