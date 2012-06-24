@@ -4,7 +4,7 @@ require File.expand_path('../application', __FILE__)
 
 # Load custom config file for current environment
 begin
-
+  puts 'XXX starting begin block'
   # Base config values common to all environments.
   KIMBRA_STUDIO_CONFIG = YAML.load_file('config/kimbra_studio.yml')[Rails.env]
 
@@ -15,8 +15,10 @@ begin
   end
 
   if Rails.env.production?
+    puts 'XXX yes in production'
     # Load these from heroku ENV vars. Run xxx ruby script to load heroku with any updates to sensitive.yml.
     KIMBRA_STUDIO_CONFIG.each do |top_level_key, top_level_value_hash|
+      puts "XXX processing: #{top_level_key}"
       # Skip keys whose values are not hashes. We want things like :s3=>{:username=>'abc',:pw=>'123'}
       top_level_value_hash.each do |k, v|
         heroku_env_key = "#{top_level_key}_#{k}"
