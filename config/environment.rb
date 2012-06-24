@@ -8,13 +8,7 @@ begin
   # Base config values common to all environments.
   KIMBRA_STUDIO_CONFIG = YAML.load_file('config/kimbra_studio.yml')[Rails.env]
 
-  # Uses local sensitive.yml file - get a copy from Larry or Jim.
-  #sensitive            = YAML.load_file('config/sensitive.yml')[Rails.env]
-  #sensitive.each do |k, v|
-  #  KIMBRA_STUDIO_CONFIG[k].merge!(v)
-  #end
-
-  if Rails.env.production?
+  if Rails.env == 'production'
     puts 'XXX yes in production'
     # Load these from heroku ENV vars. Run xxx ruby script to load heroku with any updates to sensitive.yml.
     KIMBRA_STUDIO_CONFIG.each do |top_level_key, top_level_value_hash|
@@ -26,6 +20,12 @@ begin
           KIMBRA_STUDIO_CONFIG[top_level_key][k] = v
         end
       end if top_level_value_hash.is_a? Hash
+    end
+  else
+    # Uses local sensitive.yml file - get a copy from Larry or Jim.
+    sensitive = YAML.load_file('config/sensitive.yml')[Rails.env]
+    sensitive.each do |k, v|
+      KIMBRA_STUDIO_CONFIG[k].merge!(v)
     end
   end
 rescue Exception => e
