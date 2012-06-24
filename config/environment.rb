@@ -9,10 +9,10 @@ begin
   KIMBRA_STUDIO_CONFIG = YAML.load_file('config/kimbra_studio.yml')[Rails.env]
 
   # Uses local sensitive.yml file - get a copy from Larry or Jim.
-  sensitive            = YAML.load_file('config/sensitive.yml')[Rails.env]
-  sensitive.each do |k, v|
-    KIMBRA_STUDIO_CONFIG[k].merge!(v)
-  end
+  #sensitive            = YAML.load_file('config/sensitive.yml')[Rails.env]
+  #sensitive.each do |k, v|
+  #  KIMBRA_STUDIO_CONFIG[k].merge!(v)
+  #end
 
   if Rails.env.production?
     puts 'XXX yes in production'
