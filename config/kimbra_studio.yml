@@ -40,7 +40,7 @@ production:
   :s3:
     bucket_name: test.mytripscrapbook.com
   :carrier_wave:
-    :storage: :file
+    :storage: :fog
   :mailer:
     :address: smtp.gmail.com  # C ror_ecommerce
     :domain: 'gmail.com'
