@@ -12,14 +12,20 @@ begin
     puts 'XXX yes in production'
     # Load these from heroku ENV vars. Run xxx ruby script to load heroku with any updates to sensitive.yml.
     KIMBRA_STUDIO_CONFIG.each do |top_level_key, top_level_value_hash|
-      puts "XXX processing: #{top_level_key}"
       # Skip keys whose values are not hashes. We want things like :s3=>{:username=>'abc',:pw=>'123'}
-      top_level_value_hash.each do |k, v|
-        heroku_env_key = "#{top_level_key}_#{k}"
-        if ENV[heroku_env_key]
-          KIMBRA_STUDIO_CONFIG[top_level_key][k] = v
+      if top_level_value_hash.is_a? Hash
+        puts "XXX processing: #{top_level_key}"
+        top_level_value_hash.each do |k, v|
+          puts "YYY processing #{k}: #{v}"
+          heroku_env_key = "#{top_level_key}_#{k}"
+          if ENV[heroku_env_key]
+            KIMBRA_STUDIO_CONFIG[top_level_key][k] = v
+            puts "AAA set KIMBRA_STUDIO_CONFIG[#{top_level_key}][#{k}]: #{KIMBRA_STUDIO_CONFIG[top_level_key][k]}"
+          end
         end
-      end if top_level_value_hash.is_a? Hash
+      else
+        puts "skipping #{top_level_key}"
+      end
     end
   else
     # Uses local sensitive.yml file - get a copy from Larry or Jim.
