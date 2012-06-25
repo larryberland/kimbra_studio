@@ -1,4 +1,3 @@
-KIMBRA_STUDIO_CONFIG[:mailer][:password] ||= ENV['KIMBRA_STUDIO_PASSWORD']
 
 mailer_config                    = {
     :address              => KIMBRA_STUDIO_CONFIG[:mailer][:address],
@@ -13,7 +12,8 @@ ActionMailer::Base.smtp_settings = mailer_config
 ActionMailer::Base.default_url_options = KIMBRA_STUDIO_CONFIG[:mailer][:default_url_options]
 #puts "mailer_default_url_options =>#{ActionMailer::Base.default_url_options.inspect}"
 
-if Rails.env.development?
+# LDB:: remove for when ready for real production
+unless Rails.env.test?
   require 'development_mail_interceptor'
   ActionMailer::Base.register_interceptor(DevelopmentMailInterceptor)
 end

@@ -15,14 +15,17 @@
 development: &non_production_settings
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
   :s3:
-    bucket_name: test.mytripscrapbook.com
+    bucket_name: kimbra-studio
+    access_key_id:
+    secret_access_key:
   :carrier_wave:
-    :storage: :file
+    :storage: :fog
   :mailer:
-    :address: smtp.gmail.com  # C ror_ecommerce
+    :address: smtp.gmail.com
     :domain: 'gmail.com'
     :port: 587
-    :user_name: clickplus1@gmail.com  # C ror_ecommerce
+    :user_name: clickplus1@gmail.com
+    :password:
     :authentication: :plain
     :enable_starttls_auto: true
     :perform_deliveries: true
@@ -31,6 +34,8 @@ development: &non_production_settings
   :stripe:
     :name: clickplus1@gmail.com
     :publishable_key_test: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs' # test publishable key
+    :value:
+    :secret_key:
 
 test:
   <<: *non_production_settings
@@ -38,19 +43,25 @@ test:
 production:
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
   :s3:
-    bucket_name: test.mytripscrapbook.com
+    bucket_name: kimbra-studio
+    access_key_id:
+    secret_access_key:
   :carrier_wave:
-    :storage: :file
+    :storage: :fog
   :mailer:
-    :address: smtp.gmail.com  # C ror_ecommerce
+    :address: smtp.gmail.com
     :domain: 'gmail.com'
     :port: 587
-    :user_name: clickplus1@gmail.com  # C ror_ecommerce
+    :user_name: clickplus1@gmail.com
+    :password:
     :authentication: :plain
     :enable_starttls_auto: true
     :perform_deliveries: true
     :default_url_options:
-       :host: 'clickplus.herokuapp.com'
+       :host: 'www.KimbraClickPLUS.com'
   :stripe:
     :name: clickplus1@gmail.com
     :publishable_key_test: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs' # test publishable key
+    :value:
+    :secret_key:
+    :publishable_key:

@@ -1,0 +1,51 @@
+#!/usr/bin/env ruby
+
+require 'optparse'
+require 'ostruct'
+require 'yaml'
+
+options = OpenStruct.new
+options.environment = 'development'
+opt_parser = OptionParser.new do |opt|
+  opt.banner = 'Usage: load_heroku_vars [OPTIONS]'
+  opt.separator ""
+  opt.on('-e', '--environment ENVIRONMENT', [:development, :production],
+         'Select environment (development, production)') do |environment|
+    options.environment = environment
+  end
+  opt.on('-h', '--help', 'help') do
+    puts opt_parser
+    puts
+    puts 'Note. Expects a file called sensitive.yml in config folder.'
+    puts 'Also expects well-formed sensitive.yml. See comments in sensitive.yml.'
+    puts 'Exit codes: 0 = success, 1 = help was displayed, 2 = error'
+    exit 1
+  end
+end
+
+opt_parser.parse!
+
+puts "processing #{options.environment} environment..."
+puts
+logged_in = `heroku auth:whoami` =~ /clickplus1@gmail.com/
+if logged_in
+  list_of_vars = []
+  sensitive = File.dirname(__FILE__) + "/../config/sensitive.yml"
+  YAML.load_file(sensitive)[options.environment.to_s].each do |top_level_key, top_level_value_hash|
+    top_level_value_hash.each do |k, v|
+      puts "constructing #{top_level_key}_#{k}=#{v}"
+      list_of_vars << "#{top_level_key}_#{k}=#{v}"
+    end
+  end
+  puts
+  puts `heroku config:add #{list_of_vars.join(' ')}`
+  puts
+  puts 'List of heroku vars on kimbra_studio app:'
+  puts `heroku config`
+  puts
+  puts 'Finished'
+  exit 0
+else
+  puts 'Not logged in to heroku. Do that first.'
+  exit 2
+end

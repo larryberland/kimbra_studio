@@ -24,8 +24,12 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: kimbra_studio_production
   pool: 5
-  username: postgres
+  #database: kimbra_studio_production
+  #username: postgres
   password:
+  # dev settings for testing assets
+  host: localhost
+  database: kimbra_studio_development
+  username: larryb
 
