@@ -51,20 +51,20 @@ module KimbraStudio
     config.assets.version                  = '1.0'
 
     # Rspec generator functionality
-    #‚Ä¢ :fixtures => true specifies to generate a fixture for each model
+    # :fixtures => true specifies to generate a fixture for each model
     #                   (using a Factory Girl factory, instead of an actual fixture)
-    #‚Ä¢ :view_specs => false says to skip generating view specs.
+    # :view_specs => false says to skip generating view specs.
     #                 instead we‚Äôll use request specs to test interface elements.
-    #‚Ä¢ :helper_specs => false skips generating specs for the helper files
+    # :helper_specs => false skips generating specs for the helper files
     #                   Rails generates with each controller.
     #                   As your comfort level with RSpec improves,
     #                   consider changing this option to true and testing these files.
-    #‚Ä¢ :routing_specs => false omits a spec file for your config/routes.rb file.
+    # :routing_specs => false omits a spec file for your config/routes.rb file.
     #                     If your application is simple, you‚Äôre probably safe
     #                     skipping these specs. As your application grows, however,
     #                     and takes on more complex routing, it‚Äôs a good idea to
     #                     incorporate routing specs.
-    #‚Ä¢ And finally, g.fixture_replacement :factory_girl tells Rails to generate
+    # And finally, g.fixture_replacement :factory_girl tells Rails to generate
     #                     factories instead of fixtures, and to save them in the
     #                     spec/factories directory.
     config.generators do |g|

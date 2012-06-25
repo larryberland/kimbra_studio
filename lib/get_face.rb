@@ -10,9 +10,8 @@ URL_IMAGE = 'http://farm3.staticflickr.com/2751/4204160273_8aa8a03fab_b.jpg'
 class GetFace
 
   def initialize
-    face        = YAML.load_file(Rails.root.join('config', 'click_face.yml'))
-    @api_key    = face[:click_face]['api_key']
-    @api_secret = face[:click_face]['api_secret']
+    @api_key    = KIMBRA_STUDIO_CONFIG[:click_face]['api_key']
+    @api_secret = KIMBRA_STUDIO_CONFIG[:click_face]['api_secret']
   end
 
   def perform(portrait)

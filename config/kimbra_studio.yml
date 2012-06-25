@@ -34,6 +34,12 @@ development: &non_production_settings
   :stripe:
     :name: clickplus1@gmail.com
     :publishable_key_test: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs' # test publishable key
+  :click_face:
+    api_key:
+    api_secret:
+    website:
+      username: 'clickplus1'
+      info:     'facerul3s'
     :value:
     :secret_key:
 
@@ -62,6 +68,9 @@ production:
   :stripe:
     :name: clickplus1@gmail.com
     :publishable_key_test: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs' # test publishable key
-    :value:
-    :secret_key:
-    :publishable_key:
+  :click_face:
+    api_key:
+    api_secret:
+    website:
+      username: 'clickplus1'
+      info:     'facerul3s'
