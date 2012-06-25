@@ -7,5 +7,5 @@
 # (create the session table with "rails generate session_migration")
 # KimbraStudio::Application.config.session_store :active_record_store
 
-require 'action_dispatch/middleware/session/dalli_store'
-KimbraStudio::Application.config.session_store :dalli_store, :key => '_kimbra_session_ugrdr6765745ce4vy'
+#require 'action_dispatch/middleware/session/dalli_store'
+#KimbraStudio::Application.config.session_store :dalli_store, :key => '_kimbra_session_ugrdr6765745ce4vy'
