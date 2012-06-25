@@ -19,7 +19,7 @@ begin
           puts "YYY processing #{k}: #{v}"
           heroku_env_key = "#{top_level_key}_#{k}"
           if ENV[heroku_env_key]
-            KIMBRA_STUDIO_CONFIG[top_level_key][k] = v
+            KIMBRA_STUDIO_CONFIG[top_level_key][k] = ENV[heroku_env_key]
             puts "AAA set KIMBRA_STUDIO_CONFIG[#{top_level_key}][#{k}]: #{KIMBRA_STUDIO_CONFIG[top_level_key][k]}"
           end
         end
