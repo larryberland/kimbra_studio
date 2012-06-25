@@ -21,10 +21,11 @@ development: &non_production_settings
   :carrier_wave:
     :storage: :fog
   :mailer:
-    :address: smtp.gmail.com  # C ror_ecommerce
+    :address: smtp.gmail.com
     :domain: 'gmail.com'
     :port: 587
-    :user_name: clickplus1@gmail.com  # C ror_ecommerce
+    :user_name: clickplus1@gmail.com
+    :password:
     :authentication: :plain
     :enable_starttls_auto: true
     :perform_deliveries: true
@@ -48,10 +49,11 @@ production:
   :carrier_wave:
     :storage: :fog
   :mailer:
-    :address: smtp.gmail.com  # C ror_ecommerce
+    :address: smtp.gmail.com
     :domain: 'gmail.com'
     :port: 587
-    :user_name: clickplus1@gmail.com  # C ror_ecommerce
+    :user_name: clickplus1@gmail.com
+    :password:
     :authentication: :plain
     :enable_starttls_auto: true
     :perform_deliveries: true
