@@ -405,15 +405,15 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
     t.integer  "cart_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "email"
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
     t.integer  "state_id"
     t.string   "zip_code"
+    t.string   "country",    :default => "USA"
     t.string   "email"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                    :null => false
+    t.datetime "updated_at",                    :null => false
   end
 
   add_index "shopping_addresses", ["state_id"], :name => "index_shopping_addresses_on_state_id"

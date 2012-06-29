@@ -52,6 +52,11 @@
         <td><%= f.text_field :zip_code, :size => 5 %></td>
       </tr>
 
+      <tr>
+        <td><%= f.label :country %></td>
+        <td><%= f.text_field :country %></td>
+      </tr>
+
       <div class="field">
         <%= f.hidden_field :cart_id, :value => @cart.id %>
       </div>
