@@ -221,6 +221,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     t_front_or_back = Tempfile.new(["offer_#{id}", 'jpg'])
     custom_piece.write(t_front_or_back.path)
     i = front ? image_front : image_back
+    raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" unless t_front_or_back.path.present?
     i.store_file!(t_front_or_back.path)
     t_front_or_back
   end

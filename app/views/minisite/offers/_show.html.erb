@@ -7,17 +7,17 @@
   <% if @admin_customer_offer.back.present? %>
       <p>
         <b>Front</b>
-        <%= image_tag @admin_customer_offer.image_front_url.to_s + '?' + SecureRandom.hex(8) %>
+        <%= image_tag @admin_customer_offer.image_front_url.to_s + '&' + SecureRandom.hex(8) %>
       </p>
 
       <p>
         <b>Back</b>
-        <%= image_tag @admin_customer_offer.image_back_url.to_s + '?' + SecureRandom.hex(8) %>
+        <%= image_tag @admin_customer_offer.image_back_url.to_s + '&' + SecureRandom.hex(8) %>
       </p>
   <% else %>
       <p>
         <%# TODO refactor this cache buster to be more rails-like. %>
-        <%= image_tag @admin_customer_offer.image_url.to_s + '?' + SecureRandom.hex(8) %>
+        <%= image_tag @admin_customer_offer.image_url.to_s + '&' + SecureRandom.hex(8) %>
       </p>
   <% end %>
 
