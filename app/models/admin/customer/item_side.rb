@@ -83,13 +83,13 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   # carrier_wave callback to process the stock_image
   #  for whatever processing we need to do
   def image_stock_process(src_image)
-    #puts ""
-    #puts "ItemSide create image_stock"
+    # puts ""
+    # puts "ItemSide create image_stock"
     size = part.viewport_size
-    #puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
+    # puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
 
     new_stock_image = if cropping?
-                        #puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
+                        # puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
                         img = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
                         clear_cropping
                         #puts "img size:#{img.columns}x#{img.rows}"
@@ -189,12 +189,13 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   def crop_stock_image
     #puts ""
     #puts "#{self} after_update BEG Recreate Versions"
-    image_stock.recreate_versions!
+    self.remote_image_stock_url = portrait.image_url(:face)
     #puts "#{self} image_stock cropped=>#{image_stock.path}"
     # reset out custom image to the original kimbra part
     #  this will cause our image_custom_process callback
     #  which will slap the image_stock into its proper place
-    self.image_custom.store_file!(part.image_part.path)
+    self.remote_image_custom_url = part.image_part.url.to_s
+    save
     true
   end
 

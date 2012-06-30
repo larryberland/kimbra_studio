@@ -8,21 +8,13 @@ class Minisite::ItemSidesController < InheritedResources::Base
   layout 'minisite'
 
   def update
-    puts "params=>#{params.inspect}"
-    #attrs = {}
     portrait_attrs = params[:admin_customer_item_side].delete(:portrait_attributes)
     @portrait = MyStudio::Portrait.find(portrait_attrs[:id])
     params[:admin_customer_item_side][:portrait] = @portrait
 
-    puts "portrait:url=>#{@portrait.image_url(:face)}"
-
-    @item_side.remote_image_stock_url = @portrait.image_url(:face)
-    @item_side.image_stock.recreate_versions!
-
     success = @item_side.update_attributes(params[:admin_customer_item_side])
 
     if success
-      #@item_side.assemble_new_side
       @offer.update_front_side(@item_side.item)
       success = @offer.save
     end
