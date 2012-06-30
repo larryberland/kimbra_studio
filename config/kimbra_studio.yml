@@ -34,7 +34,7 @@ development: &non_production_settings
        :host: 'localhost:3000'
   :stripe:
     :name: clickplus1@gmail.com
-    :publishable_key_test: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs' # test publishable key
+    :publishable_key: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs'
   :click_face:
     api_key:
     api_secret:
@@ -69,7 +69,7 @@ production:
        :host: 'www.KimbraClickPLUS.com'
   :stripe:
     :name: clickplus1@gmail.com
-    :publishable_key_test: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs' # test publishable key
+    :publishable_key:
   :click_face:
     api_key:
     api_secret:
