@@ -107,7 +107,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   # draw the custom portrait image onto the Kimbra piece image
   def draw_piece(piece_image, portrait_item_image)
-    puts "custom_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
+    # puts "custom_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
     piece_layout.draw_piece(piece_image, portrait_item_image)
   end
 
@@ -136,20 +136,12 @@ class Admin::Merchandise::Part < ActiveRecord::Base
   def create_custom_part(src_image)
     raise "no src_image to make custom part #{self.inspect}" if src_image.nil?
     @custom_part = part_layout.draw_custom_part(part_image, src_image)
-    dump_assembled(@custom_part)
+    dump('assembled', @custom_part) if Rails.env.development?
     image.store_image!(@custom_part)
   end
 
   def dump_filename
     "part_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg"
-  end
-
-  def dump_cropped(img)
-    dump('cropped', img)
-  end
-
-  def dump_assembled(img)
-    dump('assembled', img)
   end
 
 end

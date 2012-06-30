@@ -16,7 +16,7 @@ module CarrierWave
       def process_uri(uri)
         # URI.parse(URI.escape(URI.unescape(uri)))
 
-        puts "USING MY PARSE"
+        #puts "USING MY PARSE"
         # https://github.com/jnicklas/carrierwave/issues/700
         URI.parse(uri) # from internet
 

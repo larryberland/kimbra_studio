@@ -18,8 +18,8 @@ class ImageLayout < ActiveRecord::Base
   # draw the src_image onto an image defined for the offer piece
   def draw_piece(dest_image, src_image)
     # resize the item_side custom piece to fit into our Kimbra background piece
-    puts "draw the item_side custom piece into the Kimbra complete piece background"
-    puts "item_side custom part size:#{src_image.columns}x#{src_image.rows} onto kimbra piece at #{x} #{y} size:#{dest_image.columns}x#{dest_image.rows}"
+    # puts "draw the item_side custom piece into the Kimbra complete piece background"
+    # puts "item_side custom part size:#{src_image.columns}x#{src_image.rows} onto kimbra piece at #{x} #{y} size:#{dest_image.columns}x#{dest_image.rows}"
     image = rotate(resize(src_image))
     dest_image.composite(image, x, y, Magick::SrcOverCompositeOp)
   end

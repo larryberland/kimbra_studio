@@ -62,34 +62,8 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
     return a.min, a.max
   end
 
-  def center_me(item)
-    part  = item.part
-    viewport = part.viewport
-    dx    = (viewport[:w] - face_width) * 0.50
-    dy    = (viewport[:h] - face_height) * 0.50
-    new_x = [face_top_left_x - dx.to_i, 0].max
-    new_y = [face_top_left_y - dy.to_i, 0].max
-
-    puts "crop #{new_x} #{new_y} #{viewport[:w]}x#{viewport[:h]}"
-    img     = portrait.portrait_image
-
-    # crop the portrait for the kimbra part
-    cropped = img.crop(new_x, new_y, viewport[:w], viewport[:h])
-    dump_cropped(cropped, viewport[:w], viewport[:h])
-
-    t_assembled = Tempfile.new(['assemble', '.jpg'])
-    image_piece = part.image_part.to_image
-    offset = part.viewport_offset
-    image_piece.composite(cropped, offset[:x], offset[:y], Magick::AtopCompositeOp).write(t_assembled.path)
-    dump_assembled(image_piece)
-    item.image_item.store!(File.open(t_assembled.path))
-    item.write_image_item_identifier
-    item.save
-    item
-  end
-
   def inspect_f
-    puts "top= x=>#{face_top_left_x} y=>#{face_top_left_y} width=>#{face_width} height=>#{face_height}"
+    puts "top= x=>#{face_top_left_x} y=>#{face_top_left_y} width=>#{face_width} height=>#{face_height}" if Rails.env.test?
   end
 
   def center_in_size(layout, padding=0.38)
@@ -97,13 +71,13 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
   end
 
   def calculate_center_in_area(dest_width, dest_height, padding=0.38)
-    puts "orig x=>#{face_top_left_x} y=#{face_top_left_y} size=>#{face_width}x#{face_height}"
+    # puts "orig x=>#{face_top_left_x} y=#{face_top_left_y} size=>#{face_width}x#{face_height}"
     # add 38% to face width and height
     w     = (face_width / padding).to_i
     h     = (face_height / padding).to_i
     new_x = face_top_left_x - ((w - face_width)/2)
     new_y = face_top_left_y - ((h - face_height)/2)
-    puts "38%  x=>#{new_x} y=#{new_y} size=>#{w}x#{h}"
+    # puts "38%  x=>#{new_x} y=#{new_y} size=>#{w}x#{h}"
 
     # place new area into destination width x height
     if w < dest_width
@@ -123,8 +97,8 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
       resize = true
     end
 
-    puts "face_id=>#{id} dest=>#{dest_width}x#{dest_height} dx=>#{dx} dy=>#{dy}"
-    puts "center in dest x=>#{new_x} y=>#{new_y} size=>#{w}x#{h}"
+    # puts "face_id=>#{id} dest=>#{dest_width}x#{dest_height} dx=>#{dx} dy=>#{dy}"
+    # puts "center in dest x=>#{new_x} y=>#{new_y} size=>#{w}x#{h}"
 
     # calculate crop area so resize will not clip image
     new_width  = w
@@ -188,11 +162,11 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
   end
 
   def dump_cropped(img, width, height)
-    dump('cropped', img, "face_#{id}_portrait_#{portrait.id}_size_#{width}_x_#{height}.jpg")
+    dump('cropped', img, "face_#{id}_portrait_#{portrait.id}_size_#{width}_x_#{height}.jpg") if Rails.env.development?
   end
 
   def dump_assembled(img)
-    dump('assembled', img)
+    dump('assembled', img) if Rails.env.development?
   end
 
 end

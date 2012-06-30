@@ -20,6 +20,7 @@ development: &non_production_settings
     secret_access_key:
   :carrier_wave:
     :storage: :fog
+    :dump_image: true
   :mailer:
     :address: smtp.gmail.com
     :domain: 'gmail.com'
@@ -54,6 +55,7 @@ production:
     secret_access_key:
   :carrier_wave:
     :storage: :fog
+    :dump_image: false
   :mailer:
     :address: smtp.gmail.com
     :domain: 'gmail.com'

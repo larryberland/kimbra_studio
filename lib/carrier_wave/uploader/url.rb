@@ -17,10 +17,14 @@ module CarrierWave
       #
       def url(options = {})
         if file.respond_to?(:url) and not file.url.blank?
-          puts "USING MY URL arity=>#{file.method(:url).arity}"
+          # this should be a remote url where the file is ex Amazon S3
+          #puts "USING MY URL arity=>#{file.method(:url).arity}"
+          # LDB for some reason the options is coming in as nil
+          #     when it is nil then the carrierwave file.url method bombs..
           options ||= {}
           file.method(:url).arity == 0 ? file.url : file.url(options)
         elsif current_path
+          # this should be a local path on the server
           (base_path || "") + File.expand_path(current_path).gsub(File.expand_path(root), '')
         end
       end

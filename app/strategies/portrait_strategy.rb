@@ -129,6 +129,6 @@ class PortraitStrategy
   def dump_list
     @list.each do |entry|
       puts "used=>#{entry[:used]} faces=>#{entry[:portrait].faces.size} portrait=>#{entry[:portrait].id}"
-    end
+    end if Rails.env.development?
   end
 end

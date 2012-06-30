@@ -27,8 +27,12 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   def face_file
     if @face_file.nil?
-      @face_image, @face_file = create_image_temp(base_filename='face') do
-        portrait_image
+      if Rails.env.test?
+        @face_image, @face_file = create_image_temp(base_filename='face') do
+          portrait_image
+        end
+      else
+        portrait_image.url
       end
     end
     @face_file
@@ -41,24 +45,12 @@ class MyStudio::Portrait < ActiveRecord::Base
     text
   end
 
-  def dump_face(img, face)
-    dump('face',img, "portrait_#{id}_face_#{face.id}.jpg")
-  end
-
-  def dump_face_area(img, face, width, height)
-    dump('face', img, "portrait_#{id}_face_#{face.id}_size_#{width}_x_#{height}.jpg")
-  end
-
   # the one and only portrait image scaled to 900x900 for faces.com
   def portrait_image
     @portrait_image ||= image.to_image(:face)
   end
 
   private #===============================================================================
-
-  def dump_resize(img, width, height)
-    dump('resize', img, "portrait_#{id}_size_#{width}_x_#{height}.jpg")
-  end
 
   def set_description
     if description.blank?

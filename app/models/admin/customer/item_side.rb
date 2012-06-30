@@ -35,9 +35,12 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                                                     :part     => my_part,
                                                     :portrait => options[:portrait],
                                                     :face     => options[:face])
-    puts "#{self} my_part=>#{my_item_side.part.inspect}"
-    puts "#{self} my_part=>#{my_item_side.part.part_layout.layout.inspect}"
-    puts "#{self} my_part=>#{my_item_side.part.piece_layout.layout.inspect}"
+    if Rails.env.test?
+      puts "#{self} my_part=>#{my_item_side.part.inspect}"
+      puts "#{self} my_part=>#{my_item_side.part.part_layout.layout.inspect}"
+      puts "#{self} my_part=>#{my_item_side.part.piece_layout.layout.inspect}"
+    end
+
     my_item_side.create_side
     my_item_side
   end
@@ -50,8 +53,12 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   # create the image_custom from stock and merchandise_part
   def create_side
     @assembly = true
+    # LDB? At this point not sure if i want an image or a remote_file reference
+    #      when i start the create side. sure seems like it should be an image
     if face or portrait
-      self.image_stock = portrait.face_file
+      # set the image_stock file to the portrait's remote url
+      #self.image_stock = portrait.face_file
+      self.remote_image_stock_url = portrait.image.url(:face).to_s
     else
       #self.image_stock.store_file!(part.image_part.current_path)
       self.remote_image_stock_url = part.image_part.url.to_s
@@ -61,50 +68,61 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   # store the kimbra background image into our item_side custom_image
   def assemble_new_side
-    # TODO: still need to figure out the difference between storage stuff
+    # LDB? - may not need a complete copy here but rather just go grab the
+    #        image component that is stored on the remote s3 server
+    # grab a copy of the part's image stored on the S3 server
     self.remote_image_custom_url = part.image_part.url.to_s
+
+    # this is how we do it when it isn't remote
     #self.image_custom.store_file!(part.image_part.current_path)
+
+    # this writes our remote image_custom and image_stock to the S3 server
     save
   end
 
   # carrier_wave callback to process the stock_image
   #  for whatever processing we need to do
   def image_stock_process(src_image)
-    puts ""
-    puts "ItemSide create image_stock"
+    #puts ""
+    #puts "ItemSide create image_stock"
     size = part.viewport_size
-    puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
+    #puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
 
     new_stock_image = if cropping?
-                        puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
+                        #puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
                         img = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
                         clear_cropping
-                        puts "img size:#{img.columns}x#{img.rows}"
-                        puts "  resize to #{size[:w]}x#{size[:h]}"
+                        #puts "img size:#{img.columns}x#{img.rows}"
+                        #puts "  resize to #{size[:w]}x#{size[:h]}"
                         img.resize!(size[:w], size[:h])
                         img
                       elsif assembly?
-                        puts "  Assembly"
+                        #puts "  Assembly"
                         img = if face
-                                puts "  using Face"
+                                #puts "  using Face"
                                 draw_face(src_image, size[:w], size[:h])
                               elsif portrait
-                                puts "  using Full Portrait"
+                                #puts "  using Full Portrait"
                                 src_image.resize_to_fit(size[:w], size[:h])
                               else
-                                puts "  using No photo"
+                                #puts "  using No photo"
                                 image_transparent(size[:w], size[:h])
                               end
-                        puts " item_side stock_image=>#{img.columns}x#{img.rows}"
+                        #puts " item_side stock_image=>#{img.columns}x#{img.rows}"
                         img
                       else
                         puts "  NO OP"
                         src_image # no op
-                        # need to create a transparent image here somehow
-                        #image_transparent(size[:w], size[:h])
+                                  # need to create a transparent image here somehow
+                                  #image_transparent(size[:w], size[:h])
                       end
-    puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
+    #puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
     new_stock_image
+  end
+
+  def dump_1(viewport)
+    puts "storing stock_image ontop of the kimbra part background using the Kimbra part viewport"
+    puts "#{self} stock_image onto part #{part_image.columns}x#{part_image.rows} viewport #{viewport[:x]} #{viewport[:y]} #{stock_image.columns}x#{stock_image.rows}"
   end
 
   # carrier_wave process callback from PartCustomUploader
@@ -115,13 +133,15 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
       puts "#{self} viewport=>#{viewport.inspect}"
       raise "something up here "
     end
-    puts "storing stock_image ontop of the kimbra part background using the Kimbra part viewport"
-    puts "#{self} stock_image onto part #{part_image.columns}x#{part_image.rows} viewport #{viewport[:x]} #{viewport[:y]} #{stock_image.columns}x#{stock_image.rows}"
+    dump_1(viewport) if KIMBRA_STUDIO_CONFIG[:dump_image]
+
+    # old method try number 1
     #operator = Magick::SrcOverCompositeOp
-    operator = Magick::DstOverCompositeOp
-    img = part_image.composite(stock_image, viewport[:x], viewport[:y], operator)
-    puts "#{self} custom_image #{img.columns}x#{img.rows}"
     #part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::AtopCompositeOp)
+
+    operator = Magick::DstOverCompositeOp
+    img      = part_image.composite(stock_image, viewport[:x], viewport[:y], operator)
+    #puts "#{self} custom_image #{img.columns}x#{img.rows}"
     img
   end
 
@@ -160,17 +180,17 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   def cropping?
     res = !crop_x.blank? && !crop_y.blank? && !crop_w.blank? && !crop_h.blank?
-    puts "cropping=>#{res}"
+    # puts "cropping=>#{res}"
     res
   end
 
   private
 
   def crop_stock_image
-    puts ""
-    puts "#{self} after_update BEG Recreate Versions"
+    #puts ""
+    #puts "#{self} after_update BEG Recreate Versions"
     image_stock.recreate_versions!
-    puts "#{self} image_stock cropped=>#{image_stock.path}"
+    #puts "#{self} image_stock cropped=>#{image_stock.path}"
     # reset out custom image to the original kimbra part
     #  this will cause our image_custom_process callback
     #  which will slap the image_stock into its proper place
@@ -216,14 +236,6 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   def dump_filename
     "item_side_#{id}_piece_#{item.piece.id}_item_#{item.id}_portrait_#{portrait.id}.jpg"
-  end
-
-  def dump_cropped(img)
-    dump('cropped', img)
-  end
-
-  def dump_custom(img)
-    dump('custom', img)
   end
 
 end

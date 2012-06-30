@@ -29,7 +29,7 @@ module CarrierWave
 
     # let the model do processing on the original image
     def model_process
-      puts "#{self} model_process"
+      puts "#{self} model_process" if Rails.env.test?
       manipulate! do |img|
         if model
           m = "#{mounted_as}_process"

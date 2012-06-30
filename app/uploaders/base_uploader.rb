@@ -6,13 +6,14 @@ class BaseUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   # Choose what kind of storage to use for this uploader:
+  puts "#{self} storage=>#{KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]}"
   storage KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
     version = version_name.downcase if version_name
     du = "/images/fallback/" + [version, "empty_deal_image.png"].compact.join('_')
-    puts "default_url=>#{du}"
+    # puts "default_url=>#{du}"
     du
   end
 
@@ -33,7 +34,7 @@ class BaseUploader < CarrierWave::Uploader::Base
               # puts "using storage file"
               Magick::Image.read(current_path)
             else
-              puts "#{model.class.name} for #{mounted_as} version=>#{version}"
+              #puts "#{model.class.name} for #{mounted_as} version=>#{version}"
               p = model.send("#{mounted_as}_url", version)
               raise "#{model.class.name} for #{mounted_as} using amazon file#{p}" if p.blank?
               Magick::Image.read(p)

@@ -35,6 +35,7 @@ module KMagick
     #  will be written to a temp file for anlaysis
     #  or loading by another Uploader
     def create_image_temp(base_filename='resize')
+      # raise "do i need this"
       t_temp = Tempfile.new([base_filename, '.jpg'])
       img = yield; img.write(t_temp.path) if block_given?
       return img, t_temp
@@ -73,7 +74,7 @@ module KMagick
     end
 
     def dump(dir, img, filename=nil)
-      if Rails.env.development? and img
+      if KIMBRA_STUDIO_CONFIG[:dump_image] and img
         if filename.nil?
           filename = send(:dump_filename) if respond_to?(:dump_filename)
           filename ||= "#{self.class.dump_name}_#{id}.jpg"

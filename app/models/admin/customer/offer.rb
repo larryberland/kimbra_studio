@@ -186,7 +186,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   # draw each part in a horizontal line
   def draw_by_order(front_side=true)
-    puts "  draw_by_order front=>#{front_side}"
+    # puts "  draw_by_order front=>#{front_side}"
     w = []
     h = []
     items.each do |item|
@@ -195,7 +195,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
     height = h.max
     width  = w.sum
-    puts "    size=>#{width}x#{height}"
+    # puts "    size=>#{width}x#{height}"
     # create the custom piece image that is the maximum size based on
     #   all the individual parts
     custom_piece = image_new(width, height)
@@ -203,12 +203,12 @@ class Admin::Customer::Offer < ActiveRecord::Base
       custom_piece = item.draw_piece_with_custom(custom_piece, front_side)
     end
     t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
-    puts "    custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
+    # puts "    custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
     custom_piece.write(t_front_or_back.path)
     i = front_side ? image_front : image_back
     i.store_file!(t_front_or_back.path)
-    puts "    Store custom piece finished"
-    puts ""
+    # puts "    Store custom piece finished"
+    # puts ""
     t_front_or_back
   end
 
@@ -216,7 +216,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     custom_piece = piece.get_image
     items.each_with_index do |item, index|
       custom_piece = item.draw_piece(custom_piece, front)
-      custom_piece.write("public/kmagick/custom_offer_#{id}_index_#{index}.jpeg")
+      custom_piece.write("public/kmagick/custom_offer_#{id}_index_#{index}.jpg")
     end
     t_front_or_back = Tempfile.new(["offer_#{id}", 'jpg'])
     custom_piece.write(t_front_or_back.path)
@@ -231,32 +231,15 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def create_custom_image
-    puts ""
-    puts "create_custom_image #{self}"
-    puts "Offer=>#{piece.name} custom_layout=>#{custom_layout}"
     t_front = send("draw_by_#{custom_layout}", front=true)
-    puts "front=>#{t_front.path}"
     image.store_file!(t_front.path)
-    puts "#{self} image stored."
-    puts ""
-    if baby_got_back
-      puts "has back side"
-      send("draw_by_#{custom_layout}", front=false)
-    else
-      puts "no back side"
-    end
-    dump_custom
+    send("draw_by_#{custom_layout}", front=false) if baby_got_back
+    dump('custom', image.to_image) if Rails.env.development?
     save
   end
 
-  def dump_custom
-    if Rails.env.development? and image_url
-      dump('custom', image.to_image)
-    end
-  end
-
   def check_width
-    puts "#{self} size=>#{width}x#{height}"
+    puts "#{self} size=>#{width}x#{height}" if Rails.env.test?
   end
 
 end
