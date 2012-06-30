@@ -218,10 +218,11 @@ class Admin::Customer::Offer < ActiveRecord::Base
       custom_piece = item.draw_piece(custom_piece, front)
       custom_piece.write("public/kmagick/custom_offer_#{id}_index_#{index}.jpg")
     end
-    t_front_or_back = Tempfile.new(["offer_#{id}", 'jpg'])
+    t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
     custom_piece.write(t_front_or_back.path)
     i = front ? image_front : image_back
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" unless t_front_or_back.path.present?
+    raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" if t_front_or_back.path.blank?
     i.store_file!(t_front_or_back.path)
     t_front_or_back
   end
