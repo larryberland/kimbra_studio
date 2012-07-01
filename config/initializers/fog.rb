@@ -9,6 +9,7 @@ CarrierWave.configure do |config|
    config.fog_directory  = KIMBRA_STUDIO_CONFIG[:s3]['bucket_name']
    config.fog_public     = false
    config.fog_attributes = {}
-   #config.fog_attributes = {'Cache-Control' => 'max-age=315576000'} # for static assets that can be cached by the browser for a long time.
+   time_out = (5 * 24) * 60 * 60 # 5 days worth of seconds
+   config.fog_attributes = {'Cache-Control' => "max-age=#{time_out}"} # for static assets that can be cached by the browser for a long time.
    config.cache_dir = "#{Rails.root}/tmp/uploads"
 end
