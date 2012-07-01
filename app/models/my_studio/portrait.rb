@@ -18,6 +18,7 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   def face_image
     if @face_image.nil?
+      raise "who is calling me face_image"
       @face_image, @face_file = create_image_temp(base_filename='face') do
         portrait_image
       end
@@ -26,13 +27,15 @@ class MyStudio::Portrait < ActiveRecord::Base
   end
 
   def face_file
+    # LDB:? some reason we call this face_file but we are returning
+    #       an image it looks like
     if @face_file.nil?
       if Rails.env.test?
         @face_image, @face_file = create_image_temp(base_filename='face') do
           portrait_image
         end
       else
-        portrait_image.url
+        portrait_image_url
       end
     end
     @face_file

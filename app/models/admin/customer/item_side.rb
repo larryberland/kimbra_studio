@@ -55,26 +55,16 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     @assembly = true
     # LDB? At this point not sure if i want an image or a remote_file reference
     #      when i start the create side. sure seems like it should be an image
-    if face or portrait
-      # set the image_stock file to the portrait's remote url
-      #self.image_stock = portrait.face_file
-      self.remote_image_stock_url = portrait.image.url(:face).to_s
-    else
-      #self.image_stock.store_file!(part.image_part.current_path)
-      self.remote_image_stock_url = part.image_part.url.to_s
-    end
-    assemble_new_side
-  end
+    file_url  = if face or portrait
+                  # set the image_stock file to the portrait's remote url
+                  #self.image_stock = portrait.face_file
+                  portrait.image_url(:face)
+                else
+                  part.image_part_url
+                end
 
-  # store the kimbra background image into our item_side custom_image
-  def assemble_new_side
-    # LDB? - may not need a complete copy here but rather just go grab the
-    #        image component that is stored on the remote s3 server
-    # grab a copy of the part's image stored on the S3 server
-    self.remote_image_custom_url = part.image_part.url.to_s
-
-    # this is how we do it when it isn't remote
-    #self.image_custom.store_file!(part.image_part.current_path)
+    self.remote_image_stock_url  = file_url
+    self.remote_image_custom_url = part.image_part_url
 
     # this writes our remote image_custom and image_stock to the S3 server
     save
@@ -85,7 +75,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   def image_stock_process(src_image)
     # puts ""
     # puts "ItemSide create image_stock"
-    size = part.viewport_size
+    size            = part.viewport_size
     # puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
 
     new_stock_image = if cropping?
@@ -113,8 +103,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                       else
                         puts "  NO OP"
                         src_image # no op
-                                  # need to create a transparent image here somehow
-                                  #image_transparent(size[:w], size[:h])
+                        # need to create a transparent image here somehow
+                        #image_transparent(size[:w], size[:h])
                       end
     #puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
     new_stock_image
@@ -166,7 +156,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   end
 
   def image_title(attr)
-    img = attr.to_image
+    u   = send("#{attr}_url")
+    img = Magick::Image.read(u).first
+    #img = attr.to_image
     "size #{img.columns} x #{img.rows}"
   end
 
@@ -189,12 +181,12 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   def crop_stock_image
     #puts ""
     #puts "#{self} after_update BEG Recreate Versions"
-    self.remote_image_stock_url = portrait.image_url(:face)
+    self.remote_image_stock_url  = portrait.image_url(:face)
     #puts "#{self} image_stock cropped=>#{image_stock.path}"
     # reset out custom image to the original kimbra part
     #  this will cause our image_custom_process callback
     #  which will slap the image_stock into its proper place
-    self.remote_image_custom_url = part.image_part.url.to_s
+    self.remote_image_custom_url = part.image_part_url
     save
     true
   end
@@ -227,12 +219,14 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   # reversed name means image instead of file
   def custom_image
-    image_custom.to_image
+    #image_custom.to_image
+    Magick::Image.read(image_custom_url).first
   end
 
   # custom portrait image for this item
   def stock_image
-    image_stock.to_image
+    #image_stock.to_image
+    Magick::Image.read(image_stock_url).first
   end
 
   def dump_filename

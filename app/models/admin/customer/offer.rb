@@ -236,7 +236,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     t_front = send("draw_by_#{custom_layout}", front=true)
     image.store_file!(t_front.path)
     send("draw_by_#{custom_layout}", front=false) if baby_got_back
-    dump('custom', image.to_image) if Rails.env.development?
+    dump('custom', image.to_image) if Rails.env.test?
     save
   end
 

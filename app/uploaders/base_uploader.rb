@@ -29,11 +29,14 @@ class BaseUploader < CarrierWave::Uploader::Base
     t_file
   end
 
+  # returns a Magick Image from the current carrierwave file
+  #   could be fog or local file?
   def to_image(version=nil)
     img = if file.kind_of?(CarrierWave::SanitizedFile)
               # puts "using storage file"
               Magick::Image.read(current_path)
-            else
+          else
+            # fog file?
               #puts "#{model.class.name} for #{mounted_as} version=>#{version}"
               p = model.send("#{mounted_as}_url", version)
               raise "#{model.class.name} for #{mounted_as} using amazon file#{p}" if p.blank?
