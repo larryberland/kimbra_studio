@@ -12,5 +12,4 @@ CarrierWave.configure do |config|
    # TODO Set max-age high for all static assets (portraits and offer blanks) but short for updateable offer images.
    #config.fog_attributes = {'Cache-Control' => 'max-age=315576000'} # for static assets that can be cached by the browser for a long time.
    config.cache_dir = "#{Rails.root}/tmp/uploads"
-   config.s3_access = :public
 end
