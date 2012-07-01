@@ -15,7 +15,7 @@
 development: &non_production_settings
   encryption_key: "\xC1\x1D\x19\x10\xAB\xF4*\x81\x85C\xD0\xE7z\xDD>\x89"
   :s3:
-    bucket_name: kimbra-studio
+    bucket_name: kimbra-development
     access_key_id:
     secret_access_key:
   :carrier_wave:
