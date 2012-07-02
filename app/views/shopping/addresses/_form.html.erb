@@ -28,6 +28,11 @@
       </tr>
 
       <tr>
+        <td><%= f.label :phone %></td>
+        <td><%= f.text_field :phone, placeholder: 'In case we have questions about your order' %></td>
+      </tr>
+
+      <tr>
         <td><%= f.label :address1 %></td>
         <td><%= f.text_field :address1 %></td>
       </tr>
@@ -44,12 +49,12 @@
 
       <tr>
         <td>&nbsp;</td>
-        <td><%= f.select :state_id, @states, :include_blank => false %></td>
+        <td><%= f.select :state_id, @states, include_blank: false %></td>
       </tr>
 
       <tr>
         <td><%= f.label :zip_code %></td>
-        <td><%= f.text_field :zip_code, :size => 5 %></td>
+        <td><%= f.text_field :zip_code, size: 10 %></td>
       </tr>
 
       <tr>
@@ -58,13 +63,13 @@
       </tr>
 
       <div class="field">
-        <%= f.hidden_field :cart_id, :value => @cart.id %>
+        <%= f.hidden_field :cart_id, value: @cart.id %>
       </div>
 
     </table>
 
     <div class="actions">
-      <%= f.submit t(:shopping_submit_address), :id => 'my_submit' %>
+      <%= f.submit t(:shopping_submit_address), id: 'my_submit' %>
       <span id="spinner" style="display:none"></span>
     </div>
 
