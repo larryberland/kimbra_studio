@@ -135,7 +135,7 @@ class MyStudio::Portrait::Face < ActiveRecord::Base
     my_portrait.composite(area, face_top_left_x, face_top_left_y, Magick::AtopCompositeOp)
   end
 
-  private
+  private #==============================================================
 
   def my_portrait
     @my_portrait ||= portrait.portrait_image

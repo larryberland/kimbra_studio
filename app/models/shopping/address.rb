@@ -24,6 +24,10 @@ class Shopping::Address < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def phone=(ph)
+    phone = ph.gsub(/\D/, '')
+  end
+
   private #=================================================================================
 
   def check
