@@ -95,4 +95,22 @@ module ApplicationHelper
     end
   end
 
+  # Dynamically constrain image size to 500px wide.
+  # offer must respond to #width and #height
+  # dimension must be :width or :height
+  def constrain_to_500_px_wide(offer, dimension)
+    if offer.width.to_i <= 500
+      return "#{offer.width}px" if dimension == :width
+      return "#{offer.height}px" if dimension == :height
+    else
+      case dimension
+        when :width
+          "500px"
+        when :height
+          height = (500.0 / offer.width.to_i * offer.height.to_i).to_i
+          "#{height}px"
+      end
+    end
+  end
+
 end
