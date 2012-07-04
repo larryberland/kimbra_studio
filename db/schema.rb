@@ -273,7 +273,7 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
 
   create_table "my_studio_sessions", :force => true do |t|
     t.string   "name"
-    t.datetime "session_at"
+    t.date     "session_at"
     t.boolean  "active",      :default => true
     t.integer  "studio_id"
     t.integer  "client_id"
