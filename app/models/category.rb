@@ -4,29 +4,25 @@ class Category < ActiveRecord::Base
   CHILDREN   = 'Children'
   FAMILY     = 'Family'
   MATERNITY  = 'Maternity'
-  HOLIDAY    = 'Holiday Portraits'
-  COUPLES    = 'Couples'
+  ENGAGEMENT = 'Engagement'
+  WEDDING    = 'Wedding'
   GRADUATION = 'Graduation'
   MILITARY   = 'Military'
-  SPORTS     = 'Sports & Activities'
-  RELIGIOUS  = 'Religious & Special Occasions'
-  BUSINESS   = 'Business'
+  GLAMOR     = 'Glamor and Makeover'
   PETS       = 'Pets'
-  STORY      = 'Story Booth Portraits'
+  OTHER      = 'Other'
 
   NAMES = [BABIES,
            CHILDREN,
            FAMILY,
            MATERNITY,
-           HOLIDAY,
-           COUPLES,
+           ENGAGEMENT,
+           WEDDING,
            GRADUATION,
            MILITARY,
-           SPORTS,
-           RELIGIOUS,
-           BUSINESS,
+           GLAMOR,
            PETS,
-           STORY]
+           OTHER]
 
   has_many :shoots
 

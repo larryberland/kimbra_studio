@@ -1,4 +1,5 @@
 class MyStudio::Session < ActiveRecord::Base
+
   belongs_to :studio
   belongs_to :category
   belongs_to :client, :class_name => 'MyStudio::Client'
@@ -11,7 +12,7 @@ class MyStudio::Session < ActiveRecord::Base
   scope :by_studio, lambda { |studio_id| where('studio_id = ?', studio_id) }
 
   scope :within_seven_days, lambda {
-    where('created_at >= ?', 17.days.ago(Time.now))
+    where('session_at >= ?', 7.days.ago(Date.today))
   }
 
   def email_ready?
@@ -27,7 +28,7 @@ class MyStudio::Session < ActiveRecord::Base
     category.name if category
   end
 
-  private
+  private #===============================================================
 
   def set_name
     self.name = "#{category.name} for #{client.name}" if name.blank?

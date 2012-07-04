@@ -9,13 +9,12 @@
           <%= g.text_field :name %>
           <%= g.label :email %>
           <%= g.email_field :email %>
-          <%= g.label :phone_number %>
-          <%= g.text_field :phone_number %>
         </div>
         <div class="field">
           <%= g.label :active, 'Client active?' %>
-          <%= g.check_box :active %>
+          <%= g.check_box :active %> Uncheck this to remove all sessions for this client from active email marketing.
         </div>
     <% end %>
+
   </div>
 </div>

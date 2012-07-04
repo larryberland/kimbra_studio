@@ -15,7 +15,7 @@
     <div class="field">
       <%= f.label :name %>
       <br/>
-      <%= f.text_field :name %>
+      <%= f.text_field :name, placeholder: 'Son Tom\'s graduation' %> Short descriptive text when you have multiple sessions with one client.
     </div>
 
     <div class="field ui-widget">
@@ -26,12 +26,12 @@
 
     <div class="field">
       <%= f.label :active %>
-      <%= f.check_box :active %>
+      <%= f.check_box :active %> Uncheck this to remove all pictures for this Session from active email marketing.
     </div>
 
     <div class="field">
       <%= f.label :category_id %>
-      <%= f.select :category_id, @categories %>
+      <%= f.select :category_id, @categories %> This helps us find candidate pictures for special event marketing, such as Mothers Day, Christmas, etc.
     </div>
 
     <%= render "my_studio/clients/form", :f => f, :client => @my_studio_session.client %>

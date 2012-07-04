@@ -2,7 +2,7 @@ class CreateMyStudioSessions < ActiveRecord::Migration
   def change
     create_table :my_studio_sessions do |t|
       t.string :name
-      t.datetime :session_at
+      t.date :session_at
       t.boolean :active, :default => true
       t.references :studio
       t.references :client
