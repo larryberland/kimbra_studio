@@ -38,6 +38,19 @@
       <p><%= sentence.strip %><%= "." unless sentence.strip.last == '.' %></p>
   <% end %>
 
+  <%= content_tag :p do %>
+      <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
+          <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %><br/>
+      <% end %>
+  <% end if short_description.present? %>
+
+  <%= content_tag :p do %>
+      <% @admin_customer_offer.piece.try(:description_markup).to_s.split(". ").each do |sentence| %>
+          <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
+          <br/>
+      <% end %>
+  <% end if description_markup.present? %>
+
   <p>
     <% if @admin_customer_offer.has_picture? %>
         <% if @admin_customer_offer.items.size > 1 %>

@@ -11,8 +11,8 @@
     name: Alexis Bracelet
     price: 265.00
     image: alexis_bracelet.jpeg
-    short_description: "Measuring: 7-1/2\" length. Photo charms measuring: 3/4\"w x 7/8\"h. Solid Sterling Silver. Completely waterproof. Specify longer length if needed. The Alexis Bracelet is an exclusive, copyrighted design of Kimbra Studios."
-    description_markup:
+    short_description: 'Measuring: 7-1/2" length. Photo charms measuring: 3/4"w x 7/8"h. Solid Sterling Silver. Completely waterproof.'
+    description_markup: 'The Alexis Bracelet is an exclusive, copyrighted design of Kimbra Studios.'
     custom_layout: composite
     sku:
     :parts:
@@ -40,8 +40,8 @@
   - category: Photo Bracelets
     name: Taylor Bracelet
     price: 28.00
-    short_description: "Measuring: 7-1/2\" x 9-1/4\" in length. Photo measuring: 1\" square. Genuine Leather and Pewter. Completely waterproof. The Taylor Bracelet is an exclusive, copyrighted design of Kimbra Studios."
-    description_markup:
+    short_description: 'Measuring: 7-1/2" x 9-1/4" in length. Photo measuring: 1" square. Genuine Leather and Pewter. Completely waterproof.'
+    description_markup: 'The Taylor Bracelet is an exclusive, copyrighted design of Kimbra Studios.'
     sku:
     custom_layout: composite
     :parts:
@@ -52,8 +52,8 @@
 
   - category: Photo Bracelets
     name: Large Oval Link Bracelet
-    short_description: "Measuring: 7-8\" in length. Three adjustable rings. Large Solid Sterling Silver Oval Link Chain."
-    description_markup: "Photos measuring: 7/16\" square. Solid Sterling Silver. Completely waterproof. Offered with 1-6 photo links, with 1 or 2 sided photos."
+    short_description: 'Measuring: 7-8" in length. Three adjustable rings. Large Solid Sterling Silver Oval Link Chain.'
+    description_markup: 'Photos measuring: 7/16" square. Solid Sterling Silver. Completely waterproof.'
     sku:
     custom_layout: 'order'
     price:
@@ -82,8 +82,8 @@
   - category: Photo Bracelets
     name: Leota Collection
     price:
-    short_description: "Photos measuring: 7/16\" square. Solid Sterling Silver. Completely waterproof. Offered with 1-6 photo links, with 1 or 2 sided photos."
-    description_markup: "Photos measuring: 7/16\" square. Solid Sterling Silver. Completely waterproof. Offered with 1-6 photo links, with 1 or 2 sided photos."
+    short_description: 'Photos measuring: 7/16\" square. Solid Sterling Silver. Completely waterproof.'
+    description_markup:
     sku:
     custom_layout: 'order'
     :parts:
@@ -107,8 +107,8 @@
   - category: Photo Bracelets
     name: Eileen Bracelet
     price: 245.00
-    short_description: "4 round photos measuring: 7/16\" round. 4 oval photos measuring: 9/16\"w x 7/16\"h. 8\" length. Solid Sterling Silver. Completely waterproof. We will reproduce your treasured photos"
-    description_markup: "4 round photos measuring: 7/16\" round. 4 oval photos measuring: 9/16\"w x 7/16\"h. 8\" length. Solid Sterling Silver. Completely waterproof. We will reproduce your treasured photos, handwritten notes, monograms or initials, special dates or whatever reminds you of family!"
+    short_description: '4 round photos measuring: 7/16" round. 4 oval photos measuring: 9/16"w x 7/16"h. 8" length. Solid Sterling Silver. Completely waterproof.'
+    description_markup:
     sku:
     custom_layout: 'order'
     :parts:
@@ -148,8 +148,8 @@
   - category: Photo Bracelets
     name: Black Onyx Bracelet
     price: 245.00
-    short_description: "4 photos measuring: 9/16\"w x 7/16\"h. 8\" length. Solid Sterling Silver and black onyx. We will reproduce your treasured photos."
-    description_markup: "4 photos measuring: 9/16\"w x 7/16\"h. 8\" length. Solid Sterling Silver and black onyx. We will reproduce your treasured photos, handwritten notes, monograms or initials, special dates or whatever reminds you of family!"
+    short_description: '4 photos measuring: 9/16"w x 7/16"h. 8" length. Solid Sterling Silver and black onyx. We will reproduce your treasured photos.'
+    description_markup:
     sku:
     custom_layout: 'order'
     :parts:
@@ -193,7 +193,7 @@
   - category: Photo Necklaces
     name: Madelyn Necklace
     price: 38.00
-    short_description: "Solid pewter photo charm measuring 1\" square. Available on either an 18\" 2 strand ball chain or black ribbon and 3 cord chain."
+    short_description: 'Solid pewter photo charm measuring 1" square. The Madelyn Necklace is an 18" 2 strand ball chain.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -205,8 +205,8 @@
   - category: Photo Necklaces
     name: The Embrace Necklace
     price: 120.00
-    short_description: "Photo measuring: 9/16\"w x 3/4\"h. The Embrace Necklace is made up of a Taneka photo charm, a hammered ring, the \"Mom\" charm, an angel wing charm, a crystal bead charm. All charms are solid sterling silver. Completely waterproof."
-    description_markup: "Photo measuring: 9/16\"w x 3/4\"h. The Embrace Necklace is made up of a Taneka photo charm, a hammered ring, the \"Mom\" charm, an angel wing charm, a crystal bead charm, and a 24\" solid sterling silver link chain. All charms are solid sterling silver. Completely waterproof."
+    short_description: 'Photo measuring: 9/16"w x 3/4"h. The Embrace Necklace is made up of a Taneka photo charm, a hammered ring, the "Mom" charm, an angel wing charm, a crystal bead charm.'
+    description_markup: 'All charms are solid sterling silver. Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -217,9 +217,9 @@
 
   - category: Photo Necklaces
     name: Josephine Pendant
-    price: 64.00
+    price: 76.00
     short_description: "Measuring: 1-1/4\"w x 3/4\"h. Solid Sterling Silver. Completely waterproof."
-    description_markup: "Measuring: 1-1/4\"w x 3/4\"h. Solid Sterling Silver. Completely waterproof. Choose a necklace style from the menu below. All chains are 18\" in length except for the $42 link chain which is 24\". Please view chain choices from photo below and not from the link called chain style examples."
+    description_markup: 'Josephine Necklace is 18" black ribbon and 3 black cords.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -230,9 +230,9 @@
 
   - category: Photo Necklaces
     name: Chloe Pendant
-    price: 80.00
-    short_description: "Photo measuring: 1 1/4\"w x 7/8\"h. White Bronze. Completely waterproof."
-    description_markup: "Photo measuring: 1 1/4\"w x 7/8\"h. White Bronze. Completely waterproof. Choose a necklace style from the menu below. All chains are 18\" in length except for the $42 link chain which is 24\". Please view chain choices from photo below and not from the link called chain style examples."
+    price: 92.00
+    short_description: 'Photo measuring: 1 1/4"w x 7/8"h. White Bronze. Completely waterproof.'
+    description_markup: 'Chloe Necklace is 18" black ribbon and 3 black cords.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -244,7 +244,7 @@
   - category: Photo Necklaces
     name: Linda Pendant
     price: 60.00
-    short_description: "Photo measuring: 13/16\"w x 1-1/8\"h. Solid Sterling Silver. Completely waterproof."
+    short_description: 'Photo measuring: 13/16"w x 1-1/8"h. Solid Sterling Silver. Completely waterproof.'
     description_markup:
     sku:
     custom_layout: 'order'
@@ -257,7 +257,7 @@
   - category: Photo Necklaces
     name: Roseanne Pendant
     price: 32.00
-    short_description: "Photo measuring: 1-1/8\"w x 13/16\"h. Stainless Steel. Completely waterproof."
+    short_description: 'Photo measuring: 1-1/8"w x 13/16"h. Stainless Steel. Completely waterproof.'
     description_markup:
     sku:
     custom_layout: 'order'
@@ -271,7 +271,7 @@
   - category: Photo Necklaces
     name: Denise Pendant
     price: 68.00
-    short_description: "Photo measuring: 9/16\"w x 3/4\"h. Solid Sterling Silver. Completely waterproof. "
+    short_description: 'Photo measuring: 9/16"w x 3/4"h. Solid Sterling Silver. Completely waterproof.'
     description_markup:
     sku:
     custom_layout: 'order'
@@ -284,7 +284,7 @@
   - category: Photo Necklaces
     name: My Love Necklace
     price: 78.00
-    short_description: "Measuring: 9/16\"w x 3/4\"h. Includes My Love charm and 18\" small bead chain. Solid Sterling Silver. Completely waterproof. "
+    short_description: 'Measuring: 9/16"w x 3/4"h. Includes My Love charm and 18" small bead chain. Solid Sterling Silver. Completely waterproof.'
     description_markup:
     sku:
     custom_layout: 'order'
@@ -296,7 +296,7 @@
   - category: Photo Necklaces
     name: Bailey Necklace
     price: 28.00
-    short_description: "Photo measuring: 1\"w x 1-7/8\"h. Stainless 27\" ball chain included. Black silencer included. Completely waterproof."
+    short_description: 'Photo measuring: 1"w x 1-7/8"h. Stainless 27" ball chain included. Black silencer included. Completely waterproof.'
     description_markup:
     sku:
     custom_layout: 'order'
@@ -308,8 +308,8 @@
   - category: Photo Necklaces
     name: Awareness Necklace
     price: 65.00
-    short_description: "Honor a survivor, a loved one who has passed on, or show your support for breast cancer with this stunning necklace. It features a Kayda charm measuring 5/8\" square and a 1/2\" x 1/4\" sterling silver and pink Swarovksi crystal awareness ribbon charm."
-    description_markup:
+    short_description: 'Honor a survivor, a loved one who has passed on, or show your support for breast cancer with this stunning necklace.'
+    description_markup: 'Features a Kayda charm measuring 5/8" square and a 1/2" x 1/4" sterling silver and pink Swarovksi crystal awareness ribbon charm.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -321,7 +321,7 @@
   - category: Photo Necklaces
     name: The Sophie
     price: 42.00
-    short_description: "Photo measuring: 5/16\"w x 3/8\"h. Solid Sterling Silver. Completely waterproof."
+    short_description: 'Photo measuring: 5/16"w x 3/8"h. Solid Sterling Silver. Completely waterproof.'
     description_markup:
     sku:
     custom_layout: 'order'
@@ -331,34 +331,10 @@
         :part_layout: {layout: {x: 141, y: 124, w: 215, h: 240}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Photo Rings
-    name: Emma Ring
-    price: 98.00
-    short_description: "Oval measuring: 1\"h x 3/4\"w. Available in sizes 6-9. Solid Sterling Silver. Completely waterproof."
-    sku:
-    custom_layout: 'order'
-    :parts:
-      - :image_part: part0.png
-        order: 0
-        :part_layout: {layout: {x: 30, y: 25, w: 213, h: 297}}
-        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
-
-  - category: Photo Rings
-    name: Cadence Ring
-    price: 98.00
-    short_description: "Photo measuring: 9/16\"w x 3/4\"h. Available in sizes 6-8. Solid Sterling Silver. Completely waterproof."
-    sku:
-    custom_layout: 'order'
-    :parts:
-      - :image_part: part0.png
-        order: 0
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
-        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
-
-  - category: Photo Charms
+   - category: Photo Charms
     name: Evalina Charm
     price: 58.00
-    short_description: "New! Our sweet 1/2\" round cz Evalina charm."
+    short_description: 'New! Our sweet 1/2" round CZ Evalina charm.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -369,7 +345,7 @@
   - category: Photo Charms
     name: Annika
     price: 60.00
-    short_description: "Measuring: 1-1/16\" round. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 1-1/16" round. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -380,7 +356,7 @@
   - category: Photo Charms
     name: Kayda
     price: 60.00
-    short_description: "Measuring: 5/8\" square. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 5/8" square. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -391,7 +367,7 @@
   - category: Photo Charms
     name: Harper
     price: 64.00
-    short_description: "Measuring: 7/8\"w x 5/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 7/8"w x 5/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -402,7 +378,7 @@
   - category: Photo Charms
     name: 2-Sided Harper
     price: 80.00
-    short_description: "Measuring: 7/8\"w x 13/16\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 7/8"w x 13/16"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -413,7 +389,7 @@
   - category: Photo Charms
     name: Sela
     price: 64.00
-    short_description: "Measuring: 5/8\"w x 7/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 5/8"w x 7/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -424,7 +400,7 @@
   - category: Photo Charms
     name: 2-Sided Sela
     price: 80.00
-    short_description: "Measuring: 13/16\"w x 7/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 13/16"w x 7/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -435,7 +411,7 @@
   - category: Photo Charms
     name: Margaret
     price: 64.00
-    short_description: "Photo Measuring: 13/16\"w x 7/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Photo Measuring: 13/16"w x 7/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -447,7 +423,8 @@
   - category: Photo Charms
     name: Nicole
     price: 46.00
-    short_description: "Measuring: 3/8\"w x 1/2\"h. Solid Sterling Silver (includes jump ring). Completely waterproof. One of our exclusive, copyrighted Kimbra Studios designs!"
+    short_description: 'Measuring: 3/8"w x 1/2"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
+    description_markup: 'The Nicole Charm is an exclusive, copyrighted Kimbra Studios design.'
     :parts:
       - :image_part: nicole_part0.png
         order: 0
@@ -457,7 +434,7 @@
   - category: Photo Charms
     name: Karrie
     price: 46.00
-    short_description: "Measuring: 1/2w\" x 3/8h\". Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 1/2"w x 3/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     :parts:
       - :image_part: karrie_part0.png
         order: 0
@@ -467,7 +444,7 @@
   - category: Photo Charms
     name: Taneka
     price: 46.00
-    short_description: "Measuring: 7/16\"w x 5/8\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 7/16"w x 5/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     :parts:
       - :image_part: taneka_part0.png
         order: 0
@@ -477,7 +454,7 @@
   - category: Photo Charms
     name: Shelise
     price: 46.00
-    short_description: "Measuring: 5/8\" round. Solid Sterling Silver (includes jump ring). Completely waterproof. "
+    short_description: 'Measuring: 5/8" round. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     custom_layout: order
     :parts:
       - :image_part: shelise_part0.png
@@ -488,7 +465,8 @@
   - category: Photo Charms
     name: Tucker
     price: 46.00
-    short_description: "Measuring: 3/8\"w x 7/16\"h. Solid Sterling Silver (includes jump ring). Completely waterproof. A Kimbra Studios' exclusive copyrighted design."
+    short_description: 'Measuring: 3/8"w x 7/16"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
+    description_markup: 'The Tucker Charm is an exclusive, copyrighted design of Kimbra Studios.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -499,7 +477,7 @@
 
   - category: Photo Charms
     name: Rachel
-    short_description: "Photo measuring: 7/16\" square. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Photo measuring: 7/16" square. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     price: 46.00
     custom_layout: 'order'
     :parts:
@@ -511,7 +489,7 @@
   - category: Photo Charms
     name: 2-Sided Rachel
     price: 70.00
-    short_description: "Photo measuring: 7/16\" square. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Photo measuring: 7/16" square. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -522,7 +500,7 @@
   - category: Photo Charms
     name: Sadie
     price: 64.00
-    short_description: "Measuring: 5/8\"w x 1-1/4\"h. Solid Sterling Silver (includes jump ring). Completely waterproof."
+    short_description: 'Measuring: 5/8"w x 1-1/4"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -533,7 +511,7 @@
   - category: Photo Charms
     name: Baby Foot Bead Charm
     price: 32.00
-    short_description: "Photo measuring: 5/16\"w x 3/8\"h. Solid Sterling Silver. Completely waterproof."
+    short_description: 'Photo measuring: 5/16"w x 3/8"h. Solid Sterling Silver. Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -544,7 +522,7 @@
   - category: Photo Charms
     name: Paw Print Bead Charm
     price: 32.00
-    short_description: "Photo measuring: 5/16\"w x 3/8\"h. Solid Sterling Silver. Completely waterproof."
+    short_description: 'Photo measuring: 5/16"w x 3/8"h. Solid Sterling Silver. Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -555,7 +533,7 @@
   - category: Photo Charms
     name: Wendy Bead Charm
     price: 32.00
-    short_description: "Photo measuring: 5/16\"w x 3/8\"h. Solid Sterling Silver. Completely waterproof."
+    short_description: 'Photo measuring: 5/16"w x 3/8"h. Solid Sterling Silver. Completely waterproof.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -566,7 +544,7 @@
   - category: Photo Charms
     name: Camera Charm
     price: 24.00
-    short_description: "Solid Sterling Silver"
+    short_description: 'Solid Sterling Silver.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -578,7 +556,7 @@
   - category: Photo Charms
     name: Faith Charm
     price: 18.00
-    short_description: "Solid Sterling Silver Occasion Charm \"Faith\""
+    short_description: 'Solid Sterling Silver.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -590,7 +568,7 @@
   - category: Photo Charms
     name: Peace Sign Charm
     price: 18.00
-    short_description: "Solid Sterling Silver Peace Sign. 5/8\" round"
+    short_description: 'Solid Sterling Silver. Peace Sign 5/8" round.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -602,7 +580,7 @@
   - category: Photo Charms
     name: Angel Wing Charm
     price: 18.00
-    short_description: "Solid Sterling Silver"
+    short_description: 'Solid Sterling Silver.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -614,7 +592,7 @@
   - category: Photo Charms
     name: Mom Charm
     price: 18.00
-    short_description: "Solid Sterling Silver"
+    short_description: 'Solid Sterling Silver.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -626,7 +604,7 @@
   - category: Photo Charms
     name: Cut Out Heart Charm
     price: 18.00
-    short_description: "Solid Sterling Silver Occasion Charm - cut out heart."
+    short_description: 'Solid Sterling Silver Occasion Charm - with a cut-out heart.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -638,7 +616,7 @@
   - category: Photo Charms
     name: Plain Heart Charm
     price: 28.00
-    short_description: "Measuring: 5/8\"w. Solid Sterling Silver."
+    short_description: 'Measuring: 5/8"w. Solid Sterling Silver.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -650,7 +628,7 @@
   - category: Photo Charms
     name: Filigree Heart Charm
     price: 18.00
-    short_description: "Solid Sterling Silver"
+    short_description: 'Solid Sterling Silver.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -662,7 +640,7 @@
   - category: Photo Charms
     name: Fleur de lis Charm
     price: 18.00
-    short_description: "Solid Sterling Silver"
+    short_description: 'Solid Sterling Silver.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -675,7 +653,8 @@
   - category: Holiday
     name: Joy Love Peace Ornament
     price: 42.00
-    short_description: "Solid pewter, photo measuring 2\" round, comes with gray satin ribbon and 2011 oval year tag. The back of the ornament says Joy Love Peace ©KIMBRA. MADE IN THE USA. Copyrighted design of Kimbra Studios."
+    short_description: 'Solid pewter, photo measuring 2" round, comes with gray satin ribbon and 2012 oval year tag. The back of the ornament says" "Joy Love Peace".'
+    description_markup: 'Exclusive copyrighted design of Kimbra Studios.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -686,7 +665,8 @@
   - category: Holiday
     name: Fairchild Ornament
     price: 42.00
-    short_description: "Solid pewter, photo measuring 2\" round, comes with gray satin ribbon and 2011 oval year tag. The back of the ornament says Joy Love Peace ©KIMBRA. MADE IN THE USA. Copyrighted design of Kimbra Studios."
+    short_description: 'Solid pewter, photo measuring 2" round, comes with gray satin ribbon and 2012 oval year tag. The back of the ornament says" "Joy Love Peace".'
+    description_markup: 'Exclusive copyrighted design of Kimbra Studios.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -708,7 +688,8 @@
   - category: Holiday
     name: Evergreen Ornament
     price: 32.00
-    short_description: "Photo measuring: 1\" round. Pewter ornament. Completely waterproof. Gray satin ribbon included. MADE IN USA"
+    short_description: 'Solid pewter, photo measuring 7/8"" round, comes with gray satin ribbon'
+    description_markup: 'Exclusive copyrighted design of Kimbra Studios.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -719,7 +700,7 @@
   - category: Holiday
     name: Keepsake Year Frame
     price: 32.00
-    short_description: "Photo measuring: 1-1/4\"w x 1-3/4\"h. Pewter ornament. Completely waterproof. Gray satin ribbon included."
+    short_description: 'Photo measuring: 1-1/4"w x 1-3/4"h. Pewter ornament. Completely waterproof. Gray satin ribbon included.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -730,7 +711,7 @@
   - category: Holiday
     name: Keepsake Year Frame Horizontal
     price: 32.00
-    short_description: "Photo measuring: 1-3/4\"w x 1-1/4\"h. Pewter ornament. Completely waterproof. Gray satin ribbon included."
+    short_description: 'Photo measuring: 1-3/4"w x 1-1/4"h. Pewter ornament. Completely waterproof. Gray satin ribbon included.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -741,7 +722,8 @@
   - category: Holiday
     name: Awareness Ornament
     price: 40.00
-    short_description: "Honor a Breast Cancer Survivor or memorialize a loved one with this beautiful Pewter Ornament. Photo measures 1-1/4\" w x 1-3/4\" h. Includes pink ribbon and and 1/2\" x 1/4\" sterling silver and pink Swarovski crystal awareness ribbon charm."
+    short_description: 'Honor a Breast Cancer Survivor or memorialize a loved one with this beautiful pewter ornament. Photo measures 1-1/4" w x 1-3/4" h.'
+    description_markup: 'Includes pink ribbon and and 1/2" x 1/4" sterling silver and pink Swarovski crystal awareness ribbon charm.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -752,7 +734,7 @@
   - category: Holiday
     name: Memorial Ornament
     price: 32.00
-    short_description: "Photo measuring: 1-1/2\"w X 2-1/4\"h. Solid Pewter ornament. Completely waterproof. Gray satin ribbon included. MADE IN USA."
+    short_description: 'Photo measuring: 1-1/2"w X 2-1/4"h. Solid Pewter ornament. Completely waterproof. Gray satin ribbon included. Made in USA.'
     sku:
     custom_layout: 'order'
     :parts:
