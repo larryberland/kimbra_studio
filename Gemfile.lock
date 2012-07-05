@@ -258,6 +258,7 @@ DEPENDENCIES
   client_side_validations
   coffee-rails
   crack
+  daemons
   dalli
   database_cleaner
   delayed_job_active_record
