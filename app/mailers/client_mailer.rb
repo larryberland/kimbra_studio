@@ -2,7 +2,7 @@ class ClientMailer < ActionMailer::Base
 
   helper :application
 
-  default from: "clickplus1@gmail.com"
+  default from: "support@KimbraClickPLUS.com"
 
   def send_offers(email)
     @email = email
@@ -22,7 +22,7 @@ class ClientMailer < ActionMailer::Base
     mail(to: "#{cart.address.first_name} #{cart.address.first_name} <#{cart.address.email}>",
          subject: "Photo Jewelry order from #{studio.name}",
          #TODO Change this to use service address at Kimbra CLICK+
-         bcc: 'jim@jimjames.org')
+         bcc: ['support@kimbraclickplus.com','jim@jimjames.org'])
   end
 
   def send_shipping_update(cart, studio)
@@ -32,7 +32,7 @@ class ClientMailer < ActionMailer::Base
     mail(to: "#{cart.address.first_name} #{cart.address.first_name} <#{cart.address.email}>",
          subject: "Your Photo Jewelry order from #{studio.name} has shipped.",
          #TODO Change this to use service address at Kimbra CLICK+
-         bcc: 'jim@jimjames.org')
+         bcc: ['support@kimbraclickplus.com','jim@jimjames.org'])
   end
 
 end

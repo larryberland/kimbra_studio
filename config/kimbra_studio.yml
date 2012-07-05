@@ -25,7 +25,7 @@ development: &non_production_settings
     :address: smtp.gmail.com
     :domain: 'gmail.com'
     :port: 587
-    :user_name: clickplus1@gmail.com
+    :user_name: support@KimbraClickPLUS.com
     :password:
     :authentication: :plain
     :enable_starttls_auto: true
@@ -61,7 +61,7 @@ production:
     :address: smtp.gmail.com
     :domain: 'gmail.com'
     :port: 587
-    :user_name: clickplus1@gmail.com
+    :user_name: support@KimbraClickPLUS.com
     :password:
     :authentication: :plain
     :enable_starttls_auto: true
