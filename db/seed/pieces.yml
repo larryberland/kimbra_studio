@@ -1,5 +1,3 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
-
 :default:
   :parts:
     - :image_part: part_charm.png
@@ -267,7 +265,6 @@
         :part_layout: {layout: {x: 104, y: 110, w: 300, h: 203}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-
   - category: Photo Necklaces
     name: Denise Pendant
     price: 68.00
@@ -293,6 +290,7 @@
         order: 0
         :part_layout: {layout: {x: 142, y: 117, w: 231, h: 351}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Necklaces
     name: Bailey Necklace
     price: 28.00
@@ -305,6 +303,7 @@
         order: 0
         :part_layout: {layout: {x: 139, y: 90, w: 211, h: 390}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Necklaces
     name: Awareness Necklace
     price: 65.00
@@ -331,7 +330,7 @@
         :part_layout: {layout: {x: 141, y: 124, w: 215, h: 240}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-   - category: Photo Charms
+  - category: Photo Charms
     name: Evalina Charm
     price: 58.00
     short_description: 'New! Our sweet 1/2" round CZ Evalina charm.'
@@ -342,6 +341,7 @@
         order: 0
         :part_layout: {layout: {x: 63, y: 91, w: 165, h: 165}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Annika
     price: 60.00
@@ -353,6 +353,7 @@
         order: 0
         :part_layout: {layout: {x: 46, y: 57, w: 180, h: 180}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Kayda
     price: 60.00
@@ -364,6 +365,7 @@
         order: 0
         :part_layout: {layout: {x: 126, y: 178, w: 434, h: 424}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Harper
     price: 64.00
@@ -375,6 +377,7 @@
         order: 0
         :part_layout: {layout: {x: 17, y: 42, w: 168, h: 115}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: 2-Sided Harper
     price: 80.00
@@ -386,6 +389,7 @@
         order: 0
         :part_layout: {layout: {x: 17, y: 42, w: 168, h: 115}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Sela
     price: 64.00
@@ -397,6 +401,7 @@
         order: 0
         :part_layout: {layout: {x: 51, y: 36, w: 100, h: 145}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: 2-Sided Sela
     price: 80.00
@@ -408,6 +413,7 @@
         order: 0
         :part_layout: {layout: {x: 51, y: 36, w: 100, h: 145}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Margaret
     price: 64.00
@@ -497,6 +503,7 @@
         order: 0
         :part_layout: {layout: {x: 125, y: 143, w: 260, h: 260}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Sadie
     price: 64.00
@@ -508,6 +515,7 @@
         order: 0
         :part_layout: {layout: {x: 67, y: 27, w: 72, h: 158}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Baby Foot Bead Charm
     price: 32.00
@@ -519,6 +527,7 @@
         order: 0
         :part_layout: {layout: {x: 75, y: 102, w: 38, h: 49}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Paw Print Bead Charm
     price: 32.00
@@ -530,6 +539,7 @@
         order: 0
         :part_layout: {layout: {x: 112, y: 157, w: 56, h: 67}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Wendy Bead Charm
     price: 32.00
@@ -541,6 +551,7 @@
         order: 0
         :part_layout: {layout: {x: 206, y: 280, w: 96, h: 128}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Camera Charm
     price: 24.00
@@ -553,6 +564,7 @@
         photo: false
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Faith Charm
     price: 18.00
@@ -565,6 +577,7 @@
         photo: false
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Peace Sign Charm
     price: 18.00
@@ -577,6 +590,7 @@
         photo: false
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Angel Wing Charm
     price: 18.00
@@ -589,6 +603,7 @@
         photo: false
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Mom Charm
     price: 18.00
@@ -601,6 +616,7 @@
         photo: false
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Cut Out Heart Charm
     price: 18.00
@@ -613,6 +629,7 @@
         photo: false
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Plain Heart Charm
     price: 28.00
@@ -625,6 +642,7 @@
         photo: false
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Filigree Heart Charm
     price: 18.00
@@ -637,6 +655,7 @@
         photo: false
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Photo Charms
     name: Fleur de lis Charm
     price: 18.00
@@ -662,6 +681,7 @@
         order: 0
         :part_layout: {layout: {x: 138, y: 205, w: 178, h: 178}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Holiday
     name: Fairchild Ornament
     price: 42.00
@@ -674,10 +694,12 @@
         order: 0
         :part_layout: {layout: {x: 145, y: 222, w: 168, h: 168}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Holiday
     name: Aspen Ornament
     price: 28.00
-    short_description: "Photo measuring: 7/8\" round. Pewter ornament. Gray satin ribbon included. Completely waterproof. This beautiful design is exclusively copyrighted by Kimbra Studios."
+    short_description: 'Photo measuring: 7/8" round. Pewter ornament. Gray satin ribbon included. Completely waterproof.'
+    description_markup: 'Exclusive copyrighted design of Kimbra Studios.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -685,10 +707,11 @@
         order: 0
         :part_layout: {layout: {x: 201, y: 251, w: 90, h: 90}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Holiday
     name: Evergreen Ornament
     price: 32.00
-    short_description: 'Solid pewter, photo measuring 7/8"" round, comes with gray satin ribbon'
+    short_description: 'Solid pewter, photo measuring 7/8" round, comes with gray satin ribbon'
     description_markup: 'Exclusive copyrighted design of Kimbra Studios.'
     sku:
     custom_layout: 'order'
@@ -697,6 +720,7 @@
         order: 0
         :part_layout: {layout: {x: 169, y: 309, w: 166, h: 166}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Holiday
     name: Keepsake Year Frame
     price: 32.00
@@ -708,6 +732,7 @@
         order: 0
         :part_layout: {layout: {x: 111, y: 100, w: 149, h: 196}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Holiday
     name: Keepsake Year Frame Horizontal
     price: 32.00
@@ -719,6 +744,7 @@
         order: 0
         :part_layout: {layout: {x: 127, y: 168, w: 236, h: 179}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Holiday
     name: Awareness Ornament
     price: 40.00
@@ -731,6 +757,7 @@
         order: 0
         :part_layout: {layout: {x: 88, y: 61, w: 114, h: 151}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
   - category: Holiday
     name: Memorial Ornament
     price: 32.00
