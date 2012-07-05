@@ -9,8 +9,6 @@ class MyStudio::Session < ActiveRecord::Base
 
   before_save :set_name
 
-  scope :by_studio, lambda { |studio_id| where('studio_id = ?', studio_id) }
-
   scope :within_seven_days, lambda {
     where('session_at >= ?', 7.days.ago(Date.today))
   }
