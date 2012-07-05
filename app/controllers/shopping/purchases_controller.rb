@@ -18,7 +18,7 @@ module Shopping
           edit_shopping_cart_purchase_path(@cart)
         else
           # TODO Convert this to sending mailer in background.
-          ClientMailer.send_order_confirmation(@cart, @studio).deliver
+          ClientMailer.delay.send_order_confirmation(@cart, @studio)
           # After the credit card is run (successful create) we need to close out
           # this cart so that the consumer will start a new one if they want to make
           # more purchases.

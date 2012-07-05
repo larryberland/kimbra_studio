@@ -79,6 +79,11 @@ GEM
     daemons (1.1.8)
     dalli (2.0.5)
     database_cleaner (0.8.0)
+    delayed_job (3.0.3)
+      activesupport (~> 3.0)
+    delayed_job_active_record (0.3.2)
+      activerecord (> 2.1.0)
+      delayed_job (~> 3.0.0)
     devise (2.1.2)
       bcrypt-ruby (~> 3.0)
       orm_adapter (~> 0.1)
@@ -255,6 +260,7 @@ DEPENDENCIES
   crack
   dalli
   database_cleaner
+  delayed_job_active_record
   devise
   factory_girl_rails
   faker

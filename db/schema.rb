@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120610155356) do
+ActiveRecord::Schema.define(:version => 20120705120003) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -162,6 +162,22 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
 
   add_index "countries", ["name"], :name => "index_countries_on_name"
 
+  create_table "delayed_jobs", :force => true do |t|
+    t.integer  "priority",   :default => 0
+    t.integer  "attempts",   :default => 0
+    t.text     "handler"
+    t.text     "last_error"
+    t.datetime "run_at"
+    t.datetime "locked_at"
+    t.datetime "failed_at"
+    t.string   "locked_by"
+    t.string   "queue"
+    t.datetime "created_at",                :null => false
+    t.datetime "updated_at",                :null => false
+  end
+
+  add_index "delayed_jobs", ["priority", "run_at"], :name => "delayed_jobs_priority"
+
   create_table "image_layouts", :force => true do |t|
     t.string   "layout_type"
     t.integer  "layout_id"
@@ -273,7 +289,7 @@ ActiveRecord::Schema.define(:version => 20120610155356) do
 
   create_table "my_studio_sessions", :force => true do |t|
     t.string   "name"
-    t.date     "session_at"
+    t.datetime "session_at"
     t.boolean  "active",      :default => true
     t.integer  "studio_id"
     t.integer  "client_id"

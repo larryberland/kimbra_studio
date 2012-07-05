@@ -35,7 +35,7 @@ class Studio < ActiveRecord::Base
   # @param  [ none ]
   # @return [ none ]
   def deliver_activation_instructions!
-    Notifier.signup_notification(self).deliver
+    Notifier.delay.signup_notification(self)
   end
 
   # name and email string for the user

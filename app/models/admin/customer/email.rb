@@ -83,7 +83,7 @@ class Admin::Customer::Email < ActiveRecord::Base
   end
 
   def send_offers
-    ClientMailer.send_offers(self).deliver
+    ClientMailer.delay.send_offers(self)
     update_attributes(:sent_at => Time.now.to_s(:db))
   end
 

@@ -10,6 +10,7 @@ class MyStudio::PasswordResetsController < ApplicationController
   def create
     @user = User.find_by_email(params[:user][:email])
     if @user
+      # TODO add .delay to this call somehow for DJ.
       @user.deliver_password_reset_instructions!
       flash[:notice] = 'Instructions to reset your password have been emailed.'
       render :template => '/customer/password_resets/confirmation'
