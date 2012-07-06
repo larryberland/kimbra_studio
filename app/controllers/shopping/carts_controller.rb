@@ -34,7 +34,7 @@ module Shopping
           if @shipping.save
             flash[:notice] = "Delivery tracking number #{@shipping.tracking} saved for #{@cart.address.last_name}. Sent them an email with shipping update."
             @studio = @cart.email.my_studio_session.studio
-            ClientMailer.delay.send_shipping_update(@cart, @studio)
+            ClientMailer.delay.send_shipping_update(@cart.id, @studio.id)
             return redirect_to '/delivery'
           else # errors on save
             return render :edit_delivery_tracking

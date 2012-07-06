@@ -5,6 +5,8 @@ class MyStudio::DashboardsController < MyStudio::BaseController
   def show
     @last_seven_days = @my_studio.sessions.within_seven_days
     @sum_purchases = @my_studio.carts.collect{ |c| c.purchase.total_cents.to_i / 100.0 }.sum
+    @commission_rate = @my_studio.info.commission_rate.to_i
+    @total_commissions = @my_studio.carts.collect{ |c| c.taxable_sub_total}.sum * @commission_rate
     #@my_studio_dashboards = MyStudio::Dashboard.all
     respond_to do |format|
       format.html # show.html.erb

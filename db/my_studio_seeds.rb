@@ -36,13 +36,13 @@ class MyStudioSeeds
         attrs = my_studio_attrs.delete('minisite')
         minisite = MyStudio::Minisite.create(attrs)
         if minisite.errors.blank?
-          puts "created minisite"
+          puts 'created minisite'
           # Add logo from public/studios/studio_one/minisite.
           logo_path   = Rails.root.join('public', 'studios','studio_one', 'minisite','studiog_logo.png')
           minisite.image.store!(File.open(logo_path))
           minisite.save
         else
-          puts "failed to create minisite"
+          puts 'failed to create minisite'
         end
 
         # create info details
@@ -92,6 +92,7 @@ class MyStudioSeeds
         my_studio.owner        = owner
         my_studio.sessions     = sessions
         my_studio.minisite     = minisite
+        my_studio.info         = info
         if my_studio.save
           puts "Finished!Created studio: #{my_studio.name}, with owner: #{my_studio.owner.first_name} #{my_studio.owner.last_name} (login with #{my_studio.owner.email}/#{password}) and background: #{my_studio.minisite.bgcolor}"
           puts "Don't forget to activate the owner using the activation URL spat out earlier in this seeds job."

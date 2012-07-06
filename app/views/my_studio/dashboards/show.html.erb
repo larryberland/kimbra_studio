@@ -3,6 +3,9 @@
     <%= portrait_uploaded_days_ago_text %>
   </div>
   <%= button_to 'Upload some now!', new_my_studio_session_path, method: :get %>
+  <div class='motivation'>
+      Total revenue so far: <%= number_to_currency @sum_purchases %> Your commmission (at <%= @commission_rate %>%): <%= number_to_currency @total_commissions %>
+    </div>
 </div>
 
 <div class='container'>

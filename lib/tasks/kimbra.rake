@@ -13,8 +13,6 @@ namespace 'kimbra' do
     else
       puts "No Studio Clients scheduled"
     end
-
   end
-
 
 end
