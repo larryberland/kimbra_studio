@@ -421,6 +421,7 @@ ActiveRecord::Schema.define(:version => 20120705120003) do
     t.integer  "cart_id"
     t.string   "first_name"
     t.string   "last_name"
+    t.string   "phone"
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
