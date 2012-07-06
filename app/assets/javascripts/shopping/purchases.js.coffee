@@ -36,8 +36,8 @@ subscription =
       frm[0].submit()
     else
       $('#stripe_error').text(response.error.message)
-      $('#stripe_error').show();
-      $('.flash_error').delay(60000).slideUp('slow');
+      $('#stripe_error').show().effect('highlight', 4000)
+      $('.flash_error').delay(10000).slideUp('slow')
       $('#spinner').toggle()
       $('input[type=submit]').attr('disabled', false)
 
