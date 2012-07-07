@@ -27,10 +27,7 @@
         <td><%= f.text_field :email %></td>
       </tr>
 
-      <tr>
-        <td><%= f.label :phone %></td>
-        <td><%= f.text_field :phone, placeholder: 'For questions about your order' %></td>
-      </tr>
+
 
       <tr>
         <td><%= f.label :address1 %></td>
@@ -57,10 +54,7 @@
         <td><%= f.text_field :zip_code, size: 10 %></td>
       </tr>
 
-      <tr>
-        <td><%= f.label :country %></td>
-        <td><%= f.text_field :country %></td>
-      </tr>
+
 
       <div class="field">
         <%= f.hidden_field :cart_id, value: @cart.id %>
@@ -73,4 +67,20 @@
       <span id="spinner" style="display:none"></span>
     </div>
 
+    <div id="QadBusy"></div>
+
+<% end %>
+
+<%= javascript_tag do %>
+    QadApi(
+        {timeout: 10, key: 99020784, busySubmit: false, autoClean: true},
+        {busyId: 'QadBusy', busyText: 'Validating address...'},
+        [{name: "Delivery Address",
+        street: 'shopping_address_address1',
+        street2: 'shopping_address_address2',
+        unit: 'shopping_address_address2',
+        city: 'shopping_address_city',
+        state: 'shopping_address_state',
+        zip: 'shopping_address_zip_code',
+        country: 'shopping_address_country'}]);
 <% end %>
