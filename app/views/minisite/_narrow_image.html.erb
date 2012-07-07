@@ -9,7 +9,8 @@
           <tbody>
           <tr>
             <td class="w280" align="right" width="280">
-              <%= link_to image_tag(offer.image_url.to_s,
+              <%# TODO refactor this cache buster to be more rails-like. %>
+              <%= link_to image_tag(offer.image_url.to_s + '?' + SecureRandom.hex(8),
                                     :title => offer.name,
                                     :alt => offer.name,
                                     :width => offer.width,
