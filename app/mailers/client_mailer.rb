@@ -8,11 +8,9 @@ class ClientMailer < ActionMailer::Base
     @email = Admin::Customer::Email.find(email_id)
     @client = @email.my_studio_session.client
     @studio = @email.my_studio_session.studio
-    attachments.inline['logo.png'] = File.read("public/studios/studio_one/minisite/studiog_logo.png")
-# TODO - fix this path...
-#   attachments.inline['logo.png'] = File.read(@studio.minisite.logo_url)
+    attachments.inline['logo.png'] = File.read(@studio.minisite.image_url)
     mail(to: "#{@client.name} <#{@client.email}>",
-         subject: t(:client_send_offers_subject, :name => @studio.name))
+         subject: "Photo Jewelry from #{@studio.name}")
   end
 
   def send_order_confirmation(cart_id, studio_id)
