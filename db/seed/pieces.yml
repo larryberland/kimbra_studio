@@ -80,7 +80,7 @@
   - category: Photo Bracelets
     name: Leota Collection
     price:
-    short_description: 'Photos measuring: 7/16\" square. Solid Sterling Silver. Completely waterproof.'
+    short_description: 'Photos measuring: 7/16" square. Solid Sterling Silver. Completely waterproof.'
     description_markup:
     sku:
     custom_layout: 'order'
@@ -216,7 +216,7 @@
   - category: Photo Necklaces
     name: Josephine Pendant
     price: 76.00
-    short_description: "Measuring: 1-1/4\"w x 3/4\"h. Solid Sterling Silver. Completely waterproof."
+    short_description: 'Measuring: 1-1/4"w x 3/4"h. Solid Sterling Silver. Completely waterproof.'
     description_markup: 'Josephine Necklace is 18" black ribbon and 3 black cords.'
     sku:
     custom_layout: 'order'
