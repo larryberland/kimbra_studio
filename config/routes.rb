@@ -35,6 +35,7 @@ KimbraStudio::Application.routes.draw do
         get :contact
         get :order_status, path: 'order_status/:cart'
         get :privacy
+        get :unsubscribe
       end
       resources :offers
     end

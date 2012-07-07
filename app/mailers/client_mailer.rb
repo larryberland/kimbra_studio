@@ -8,7 +8,11 @@ class ClientMailer < ActionMailer::Base
     @email = Admin::Customer::Email.find(email_id)
     @client = @email.my_studio_session.client
     @studio = @email.my_studio_session.studio
-    attachments.inline['logo.png'] = File.read(@studio.minisite.image_url)
+    logo = ''
+    open('image.jpg', 'w') do |file|
+      logo << open(@studio.minisite.image_url).read
+    end
+    attachments.inline['logo.png'] = logo
     mail(to: "#{@client.name} <#{@client.email}>",
          subject: "Photo Jewelry from #{@studio.name}")
   end
@@ -19,7 +23,7 @@ class ClientMailer < ActionMailer::Base
     @show_status_only = true
     mail(to: "#{@cart.address.first_name} #{@cart.address.last_name} <#{@cart.address.email}>",
          subject: "Photo Jewelry order from #{@studio.name}",
-         bcc: ['support@kimbraclickplus.com','jim@jimjames.org'])
+         bcc: ['support@kimbraclickplus.com', 'jim@jimjames.org'])
   end
 
   def send_shipping_update(cart_id, studio_id)
@@ -28,7 +32,7 @@ class ClientMailer < ActionMailer::Base
     @show_status_only = true
     mail(to: "#{@cart.address.first_name} #{@cart.address.last_name} <#{@cart.address.email}>",
          subject: "Your Photo Jewelry order from #{@studio.name} has shipped.",
-         bcc: ['support@kimbraclickplus.com','jim@jimjames.org'])
+         bcc: ['support@kimbraclickplus.com', 'jim@jimjames.org'])
   end
 
 end

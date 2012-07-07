@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120705120003) do
+ActiveRecord::Schema.define(:version => 20120707152350) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -421,7 +421,6 @@ ActiveRecord::Schema.define(:version => 20120705120003) do
     t.integer  "cart_id"
     t.string   "first_name"
     t.string   "last_name"
-    t.string   "phone"
     t.string   "address1"
     t.string   "address2"
     t.string   "city"
@@ -431,6 +430,7 @@ ActiveRecord::Schema.define(:version => 20120705120003) do
     t.string   "email"
     t.datetime "created_at",                    :null => false
     t.datetime "updated_at",                    :null => false
+    t.string   "phone"
   end
 
   add_index "shopping_addresses", ["state_id"], :name => "index_shopping_addresses_on_state_id"
@@ -564,6 +564,14 @@ ActiveRecord::Schema.define(:version => 20120705120003) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "unsubscribes", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "unsubscribes", ["email"], :name => "index_unsubscribes_on_email"
 
   create_table "user_roles", :force => true do |t|
     t.integer "role_id", :null => false

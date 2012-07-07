@@ -21,6 +21,12 @@ module Minisite
       session[:cart_id] = @cart.id
     end
 
+    def unsubscribe
+      address = @admin_customer_email.my_studio_session.client.email
+      Unsubscribe.create(email: address) unless Unsubscribe.exists?(email: address)
+      @storyline.describe 'Unsubscribing from emails.'
+    end
+
     private #================================================
 
     def set_by_tracking

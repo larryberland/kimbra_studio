@@ -7,7 +7,7 @@ namespace 'kimbra' do
     if list and list.size > 0
       puts "#{list.size} emails to send."
       list.each do |email|
-        email.send_offers
+        email.send_offers unless Unsubscribe.exists?(email: email.my_studio_session.client.email)
       end
       puts "finished sending daily offers for #{today}"
     else
