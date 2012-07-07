@@ -23,8 +23,13 @@ module Minisite
 
     def unsubscribe
       address = @admin_customer_email.my_studio_session.client.email
-      Unsubscribe.create(email: address) unless Unsubscribe.exists?(email: address)
-      @storyline.describe 'Unsubscribing from emails.'
+      if address
+        Unsubscribe.create(email: address) unless Unsubscribe.exists?(email: address)
+        @storyline.describe 'Unsubscribing from emails.'
+      else
+        @storyline.describe 'Cannot unsubscribe. No email found with that tracking number.'
+        return render(text: 'No email found with that tracking number.')
+      end
     end
 
     private #================================================
