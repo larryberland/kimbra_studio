@@ -31,10 +31,10 @@ roles = Role::ROLES
 roles.each do |role|
   Role.find_or_create_by_name(role)
 end
-admin = User.find_by_email('admin@email.com')
+admin = User.find_by_email('admin@kimbraclickplus.com')
 admin.destroy if admin
-admin = User.create(email: 'admin@email.com',
-                    password: 'password',
+admin = User.create(email: 'admin@kimbraclickplus.com',
+                    password: 'kimbrarul3s',
                     role: Role.find_by_name(Role::SUPER_ADMIN))
 if admin.errors.present?
   puts "create admin errors=>#{admin.errors.full_messages.join('\n')}"
