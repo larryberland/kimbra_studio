@@ -19,7 +19,7 @@
       <% session.emails.each do |email| %>
           <tr>
             <td><%= link_to session.name, my_studio_session_path(session) %></td>
-            <td><%= session.try(:client).try(:name) %> <%= '(unsubscribed from emails)' if Unsubscribe.exists?(email: client.email) %></td>
+            <td><%= session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %></td>
             <td style='text-align:right;'><%= email.try(:offers).try(:count) %></td>
             <td><%= email.sent_at ? "#{time_ago_in_words email.sent_at} ago" : 'not yet'  %></td>
             <td><%= email.opened_at ? "#{time_ago_in_words email.opened_at} ago" : 'not yet'  %></td>
