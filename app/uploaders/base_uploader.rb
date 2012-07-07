@@ -6,7 +6,6 @@ class BaseUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   # Choose what kind of storage to use for this uploader:
-  puts "#{self} storage=>#{KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]}"
   storage KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
