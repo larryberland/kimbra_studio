@@ -10,6 +10,7 @@ class Shopping::BaseController < InheritedResources::Base
 
   # We don't support changing between multiple clients or emails in one session.
   def set_client_and_cart
+    puts "SESSION: #{session.inspect}"
     if params[:shopping_item] && params[:shopping_item][:offer_id]
       @admin_customer_offer = Admin::Customer::Offer.find(params[:shopping_item][:offer_id])
       session[:admin_customer_offer_id] = @admin_customer_offer.id

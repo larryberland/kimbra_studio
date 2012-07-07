@@ -14,6 +14,7 @@ module Minisite
 
     # TODO See TODO below.
     def load_email
+      puts "SESSION: #{session.inspect}"
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id]) if params[:email_id]
     end
 
