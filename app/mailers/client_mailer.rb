@@ -2,7 +2,7 @@ class ClientMailer < ActionMailer::Base
 
   helper :application
 
-  default from: "support@KimbraClickPLUS.com"
+  default from: "Jennifer Gordon <support@KimbraClickPLUS.com>"
 
   def send_offers(email_id)
     @email = Admin::Customer::Email.find(email_id)
@@ -14,6 +14,7 @@ class ClientMailer < ActionMailer::Base
     end
     attachments.inline['logo.png'] = logo
     mail(to: "#{@client.name} <#{@client.email}>",
+         bcc: ['support@kimbraclickplus.com', 'jim@jimjames.org'],
          subject: "Photo Jewelry from #{@studio.name}")
   end
 
