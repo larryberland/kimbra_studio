@@ -1,12 +1,17 @@
 module MyStudio::DashboardsHelper
 
   def portrait_uploaded_days_ago_text
-    days_ago = (Date.today - current_user.studio.sessions.last.portraits.last.created_at.to_date).to_i
-    case days_ago
-      when 0
-        'You haven\'t uploaded any portraits yet!'
-      else
-        "No pictures uploaded in the last #{content_tag :span,  pluralize(days_ago, 'day'), :class => 'days_ago'}!".html_safe
+    most_recent_portrait = user.studio.sessions.collect { |s| s.portraits.collect { |p| p.created_at.to_date } }.flatten
+    if most_recent_portrait.is_a? Date
+      days_ago = (Date.today - most_recent_portrait).to_i
+      case days_ago
+        when 0
+          'Pictures uploaded earlier today.'
+        else
+          "No pictures uploaded in the last #{content_tag :span, pluralize(days_ago, 'day'), :class => 'days_ago'}!".html_safe
+      end
+    else
+      'You haven\'t uploaded any portraits yet!'
     end
   end
 
