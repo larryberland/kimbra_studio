@@ -216,7 +216,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
     custom_piece = piece.get_image
     items.each_with_index do |item, index|
       custom_piece = item.draw_piece(custom_piece, front)
-      custom_piece.write("public/kmagick/custom_offer_#{id}_index_#{index}.jpg")
+# Jim commented this out to see if it works without.
+#      custom_piece.write("public/kmagick/custom_offer_#{id}_index_#{index}.jpg")
     end
     t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
     custom_piece.write(t_front_or_back.path)
