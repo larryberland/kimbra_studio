@@ -10,5 +10,4 @@ CarrierWave.configure do |config|
   time_out = (15 * 24) * 60 * 60 # 15 days worth of seconds
   config.fog_attributes = {'Cache-Control' => "max-age=#{time_out}"} # for static assets that can be cached by the browser for a long time.
   config.cache_dir = "#{Rails.root}/tmp/uploads"
-  config.move_to_cache = true
 end

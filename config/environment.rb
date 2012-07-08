@@ -1,7 +1,6 @@
 # Load the rails application
 require File.expand_path('../application', __FILE__)
 
-
 # Load custom config file for current environment
 begin
   # Base config values common to all environments.

@@ -37,7 +37,7 @@ class Studio < ActiveRecord::Base
   # @param  [ none ]
   # @return [ none ]
   def deliver_activation_instructions!
-    Notifier.delay.signup_notification(self)
+    Notifier.delay.signup_notification(self.id)
   end
 
   # name and email string for the user
@@ -49,7 +49,7 @@ class Studio < ActiveRecord::Base
     "\"#{name}\" <#{info.email}>"
   end
 
-  private
+  private #===================================================================
 
   def set_user_info
     if current_user.try(:'studio?')

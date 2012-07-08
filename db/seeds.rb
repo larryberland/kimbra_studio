@@ -31,7 +31,7 @@ roles = Role::ROLES
 roles.each do |role|
   Role.find_or_create_by_name(role)
 end
-admin = User.find_by_email('admin@kimbraclickplus.com')
+admin = User.find_by_email ('admin@kimbraclickplus.com')
 admin.destroy if admin
 admin = User.create(email: 'admin@kimbraclickplus.com',
                     password: 'kimbrarul3s',

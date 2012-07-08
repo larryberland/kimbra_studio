@@ -67,12 +67,9 @@ module KMagick
 
     #noinspection RubyArgCount
     def path(dir)
-      #p = Rails.root.join('public', 'kmagick', self.class.dump_dir, dir)
-      # mkpath does not seem to be working on heroku. use tmp to see if that works.
       p = Rails.root.join('tmp', self.class.dump_dir, dir)
       p.mkpath unless File.exists?(p.to_s)
       p
-
     end
 
     def dump(dir, img, filename=nil)

@@ -34,10 +34,6 @@
 
   <span id='shopping_item'></span>
 
-  <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
-      <p><%= sentence.strip %><%= "." unless sentence.strip.last == '.' %></p>
-  <% end %>
-
   <%= content_tag :p do %>
       <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
           <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %><br/>

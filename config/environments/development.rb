@@ -35,4 +35,17 @@ KimbraStudio::Application.configure do
 
   # suppress the Served asset log messages
   config.assets.logger = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = {host: 'localhost:3000'}
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.gmail.com',
+      domain: 'gmail.com',
+      port: 587,
+      user_name: 'support@KimbraClickPLUS.com',
+      password: YAML.load_file('config/sensitive.yml')['development'][:mailer][:password],
+      authentication: :plain,
+      enable_starttls_auto: true,
+      perform_deliveries: true}
+
 end

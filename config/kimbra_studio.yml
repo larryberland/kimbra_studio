@@ -21,17 +21,8 @@ development: &non_production_settings
   :carrier_wave:
     :storage: :fog
     :dump_image: true
-  :mailer: # use gmail relay for development on laptops
-    :address: smtp.gmail.com
-    :domain: 'gmail.com'
-    :port: 587
-    :user_name: support@KimbraClickPLUS.com
+  :mailer:
     :password:
-    :authentication: :plain
-    :enable_starttls_auto: true
-    :perform_deliveries: true
-    :default_url_options:
-       :host: 'localhost:3000'
   :stripe:
     :name: clickplus1@gmail.com
     :secret_key: '4osP7DgGMXX3Z4CWgkvT5q3EPBldxfss'
@@ -57,16 +48,6 @@ production:
   :carrier_wave:
     :storage: :fog
     :dump_image: false
-  :mailer:
-    :address:        'smtp.sendgrid.net',
-    :port:           '587',
-    :authentication: :plain,
-    :user_name:      ENV['SENDGRID_USERNAME'],
-    :password:       ENV['SENDGRID_PASSWORD'],
-    :domain:         'heroku.com',
-    :perform_deliveries: true
-    :default_url_options:
-       :host: 'www.KimbraClickPLUS.com'
   :stripe:
     :name: clickplus1@gmail.com
     :secret_key:

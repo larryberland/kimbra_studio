@@ -35,3 +35,8 @@
           name: charlie smith
           email: testclient@kimbraclickplus.com
           phone_number: 813 333 1234
+      - name: Wedding
+        client:
+          name: danielle smith
+          email: testclient@kimbraclickplus.com
+          phone_number: 813 333 1234

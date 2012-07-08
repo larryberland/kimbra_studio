@@ -5,7 +5,6 @@ class MyStudio::RegistrationsController < MyStudio::BaseController
   def new
     @registration = true
     @studio       = Studio.new(:info => MyStudio::Info.new, :minisite => MyStudio::Minisite.new)
-    #render :template => 'user_sessions/new'
   end
 
   def create
@@ -31,7 +30,7 @@ class MyStudio::RegistrationsController < MyStudio::BaseController
     end
   end
 
-  private
+  private #========================================================
 
   def form_info
     @countries = Country.form_selector

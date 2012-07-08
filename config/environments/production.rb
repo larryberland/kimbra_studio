@@ -5,7 +5,7 @@ KimbraStudio::Application.configure do
   config.cache_classes = true
 
   # Full error reports are disabled and caching is turned on
-  config.consider_all_requests_local       = false
+  config.consider_all_requests_local = false
   config.action_controller.perform_caching = true
 
   # Disable Rails static asset server (Apache or nginx will already do this)
@@ -57,4 +57,15 @@ KimbraStudio::Application.configure do
 
   # Send deprecation notices to registered listeners
   config.active_support.deprecation = :notify
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.default_url_options = {host: 'www.KimbraClickPLUS.com'}
+  config.action_mailer.smtp_settings = {
+      address: 'smtp.sendgrid.net',
+      port: '587',
+      authentication: :plain,
+      user_name: ENV['SENDGRID_USERNAME'],
+      password: ENV['SENDGRID_PASSWORD'],
+      domain: 'heroku.com'}
+
 end
