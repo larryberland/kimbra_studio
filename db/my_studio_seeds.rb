@@ -60,7 +60,7 @@ class MyStudioSeeds
         sessions               = my_studio_attrs.delete('sessions').collect do |session_attrs|
           index  += 1
           client = MyStudio::Client.create(session_attrs.delete('client'))
-          puts "mystudio client=>#{client.email}"
+          puts "mystudio client=>#{client.name}"
 
           # load portraits
           client_path = path.join(client.name.underscore.gsub(' ', '_'))
@@ -70,7 +70,8 @@ class MyStudioSeeds
               if File.basename(p).split('.').last.match(/JPG|jpg/)
                 portrait = MyStudio::Portrait.create
                 portrait.image.store!(File.open(p.to_s))
-                portrait.save
+                r = portrait.save
+                puts "portrait saved: #{portrait.id} #{portrait.image_url} #{r}"
                 #get_face.perform(portrait) # process for faces
                 portrait
               end
@@ -78,7 +79,6 @@ class MyStudioSeeds
           end
 
           portraits.compact! unless portraits.nil?
-          puts "portraits compacted."
           s = MyStudio::Session.create(session_attrs.merge(:client => client, :session_at => index.days.ago))
           s.portraits = portraits unless portraits.nil?
           s.category = Category.find_by_name(session_attrs['name'])
