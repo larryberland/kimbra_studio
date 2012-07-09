@@ -20,7 +20,7 @@ class ClientMailer < ActionMailer::Base
 
   def send_order_confirmation(cart_id, studio_id)
     @cart = Shopping::Cart.find(cart_id)
-    @studio = Studio.find.(studio_id)
+    @studio = Studio.find(studio_id)
     @show_status_only = true
     mail(to: "#{@cart.address.first_name} #{@cart.address.last_name} <#{@cart.address.email}>",
          subject: "Photo Jewelry order from #{@studio.name}",
