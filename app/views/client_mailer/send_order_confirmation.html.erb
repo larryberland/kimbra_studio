@@ -26,7 +26,9 @@
 <p>Hi <%= @cart.address.name %>,</p>
 
 <p>
-  Thank you for your order. You can check the status of
+  Thank you for your order. Please note that each piece is made by hand in Littleton, Colorado.
+  Please allow us 10 - 15 business days to complete the work on your order. Rush services are not available yet. We rarely run late.
+  You can check the status of
   <%= link_to 'your order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart,  show_status_only: true ) %>.
 </p>
 
