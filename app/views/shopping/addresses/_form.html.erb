@@ -49,8 +49,8 @@
       </tr>
 
       <tr>
-        <td>&nbsp;</td>
-        <td><%= f.select :state_id, @states, include_blank: false %></td>
+        <td><%= f.label :state_id %></td>
+        <td><%= f.select :state_id, @states, include_blank: false, style: 'height:30px important!; line-height:30px important!;' %></td>
       </tr>
 
       <tr>
