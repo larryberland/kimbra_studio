@@ -4,7 +4,9 @@
       <%= address.email %><br/>
   <% end %>
   <%= address.address1 %> <br/>
-  <%= number_to_phone address.phone %> <br/>
+  <% if address.phone %>
+      <%= number_to_phone address.phone %> <br/>
+  <% end %>
   <% if address.address2.present? %>
       <%= address.address2 %><br/>
   <% end %>
