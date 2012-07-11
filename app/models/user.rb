@@ -49,9 +49,7 @@ class User < ActiveRecord::Base
 
   accepts_nested_attributes_for :addresses, :phones, :user_roles
 
-  validates :email, :presence => true,
-            :format           => {:with => CustomValidators::Emails.email_validator},
-            :length           => {:maximum => 255}
+  validates :email, presence: true, email: true
 
   before_create :set_roles
   after_create :update_studio

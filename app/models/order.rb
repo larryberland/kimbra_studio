@@ -49,8 +49,7 @@ class Order < ActiveRecord::Base
 
   #validates :number,     :presence => true
   validates :user_id,     :presence => true
-  validates :email,       :presence => true,
-                          :format   => { :with => CustomValidators::Emails.email_validator }
+  validates :email,        presence: true, email: true
 
   NUMBER_SEED     = 1001001001000
   CHARACTERS_SEED = 21

@@ -27,6 +27,7 @@ gem 'stripe'
 
 gem "useragent", :git => "https://github.com/jilion/useragent.git"
 gem 'haml'
+gem 'valid_email'
 
 gem 'jquery-rails'
 gem 'client_side_validations'

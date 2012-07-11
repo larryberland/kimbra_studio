@@ -16,7 +16,7 @@ class Shopping::Address < ActiveRecord::Base
   validates_presence_of :city
   validates_presence_of :state
   validates_presence_of :zip_code
-  validates_presence_of :email
+  validates_presence_of :email, :email => true
 
   before_save :check
 
