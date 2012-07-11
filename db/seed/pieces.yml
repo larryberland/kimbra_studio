@@ -78,7 +78,7 @@
         :piece_layout: {layout: {x: 340, y: 0, w: 85, h: 66}}
 
   - category: Photo Bracelets
-    name: Leota Collection
+    name: Leota Bracelet
     price:
     short_description: 'Photos measuring: 7/16" square. Solid Sterling Silver. Completely waterproof.'
     description_markup:
@@ -201,7 +201,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Necklaces
-    name: The Embrace Necklace
+    name: Embrace Necklace
     price: 120.00
     short_description: 'Photo measuring: 9/16"w x 3/4"h. The Embrace Necklace is made up of a Taneka photo charm, a hammered ring, the "Mom" charm, an angel wing charm, a crystal bead charm.'
     description_markup: 'All charms are solid sterling silver. Completely waterproof.'
@@ -318,7 +318,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Necklaces
-    name: The Sophie
+    name: Sophie Necklace
     price: 42.00
     short_description: 'Photo measuring: 5/16"w x 3/8"h. Solid Sterling Silver. Completely waterproof.'
     description_markup:
@@ -343,7 +343,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Annika
+    name: Annika Charm
     price: 60.00
     short_description: 'Measuring: 1-1/16" round. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -355,7 +355,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Kayda
+    name: Kayda Charm
     price: 60.00
     short_description: 'Measuring: 5/8" square. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -367,7 +367,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Harper
+    name: Harper Charm
     price: 64.00
     short_description: 'Measuring: 7/8"w x 5/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -379,7 +379,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: 2-Sided Harper
+    name: Harper Charm (two sided)
     price: 80.00
     short_description: 'Measuring: 7/8"w x 13/16"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -391,7 +391,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Sela
+    name: Sela Charm
     price: 64.00
     short_description: 'Measuring: 5/8"w x 7/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -403,7 +403,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: 2-Sided Sela
+    name: Sela Charm (two sided)
     price: 80.00
     short_description: 'Measuring: 13/16"w x 7/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -415,7 +415,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Margaret
+    name: Margaret Charm
     price: 64.00
     short_description: 'Photo Measuring: 13/16"w x 7/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -427,7 +427,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Nicole
+    name: Nicole Charm
     price: 46.00
     short_description: 'Measuring: 3/8"w x 1/2"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     description_markup: 'The Nicole Charm is an exclusive, copyrighted Kimbra Studios design.'
@@ -438,7 +438,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Karrie
+    name: Karrie Charm
     price: 46.00
     short_description: 'Measuring: 1/2"w x 3/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     :parts:
@@ -448,7 +448,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Taneka
+    name: Taneka Charm
     price: 46.00
     short_description: 'Measuring: 7/16"w x 5/8"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     :parts:
@@ -458,7 +458,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Shelise
+    name: Shelise Charm
     price: 46.00
     short_description: 'Measuring: 5/8" round. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     custom_layout: order
@@ -469,7 +469,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Tucker
+    name: Tucker Charm
     price: 46.00
     short_description: 'Measuring: 3/8"w x 7/16"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     description_markup: 'The Tucker Charm is an exclusive, copyrighted design of Kimbra Studios.'
@@ -482,7 +482,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Rachel
+    name: Rachel Charm
     short_description: 'Photo measuring: 7/16" square. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     price: 46.00
     custom_layout: 'order'
@@ -493,7 +493,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: 2-Sided Rachel
+    name: Rachel Charm (two sided)
     price: 70.00
     short_description: 'Photo measuring: 7/16" square. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -505,7 +505,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Photo Charms
-    name: Sadie
+    name: Sadie Charm
     price: 64.00
     short_description: 'Measuring: 5/8"w x 1-1/4"h. Solid Sterling Silver (includes jump ring). Completely waterproof.'
     sku:
@@ -734,7 +734,7 @@
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
   - category: Holiday
-    name: Keepsake Year Frame Horizontal
+    name: Keepsake Year Frame (horizontal)
     price: 32.00
     short_description: 'Photo measuring: 1-3/4"w x 1-1/4"h. Pewter ornament. Completely waterproof. Gray satin ribbon included.'
     sku:

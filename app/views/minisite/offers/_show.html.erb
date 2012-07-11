@@ -1,23 +1,31 @@
 <div class="offer_show">
 
+  <% if @admin_customer_offer.has_picture? %>
+          <% if @admin_customer_offer.items.size > 1 %>
+              <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
+          <% else %>
+              <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
+          <% end %>
+      <% end %>
+
   <p>
-    <i>The setting for this piece is the  <%= @admin_customer_offer.name %>.</i>
+    <i><%= @admin_customer_offer.name %></i>
   </p>
 
   <% if @admin_customer_offer.back.present? %>
       <p>
         <b>Front</b>
-        <%= image_tag @admin_customer_offer.image_front_url.to_s + '?' + SecureRandom.hex(8) %>
+        <%= link_to (image_tag @admin_customer_offer.image_front_url.to_s + '?' + SecureRandom.hex(8)), edit_url %>
       </p>
 
       <p>
         <b>Back</b>
-        <%= image_tag @admin_customer_offer.image_back_url.to_s + '?' + SecureRandom.hex(8) %>
+        <%= link_to (image_tag @admin_customer_offer.image_back_url.to_s + '?' + SecureRandom.hex(8)), edit_url %>
       </p>
   <% else %>
       <p>
         <%# TODO refactor this cache buster to be more rails-like. %>
-        <%= image_tag @admin_customer_offer.image_url.to_s + '?' + SecureRandom.hex(8) %>
+        <%= link_to (image_tag @admin_customer_offer.image_url.to_s + '?' + SecureRandom.hex(8)), edit_url %>
       </p>
   <% end %>
 
@@ -31,6 +39,7 @@
         <span id="spinner" style="display:none"></span>
       </p>
   <% end %>
+  <%= button_to 'Adjust picture', edit_url, method: :get %>
 
   <span id='shopping_item'></span>
 
@@ -46,16 +55,5 @@
           <br/>
       <% end %>
   <% end if @admin_customer_offer.piece.try(:description_markup).present? %>
-
-  <p>
-    <% if @admin_customer_offer.has_picture? %>
-        <% if @admin_customer_offer.items.size > 1 %>
-            <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
-        <% else %>
-            <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
-        <% end %>
-        <%= link_to t(:minisite_items_show_link), edit_url %>
-    <% end %>
-  </p>
 
 </div>

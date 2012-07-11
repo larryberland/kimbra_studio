@@ -80,6 +80,7 @@ module ApplicationHelper
   end
 
   # Show a link to the current offer - no need for this if we are at the Collection page or if there's no current offer.
+  # NOT USED ANYMORE.
   def link_back_to_current_offer
     if @admin_customer_offer
       at_collection_page = controller_name == 'offers' && action_name == 'index'
