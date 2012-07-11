@@ -1,10 +1,10 @@
 class Shopping::Cart < ActiveRecord::Base
 
   belongs_to :email, :class_name => 'Admin::Customer::Email'
-  has_many :items, :class_name => 'Shopping::Item'
-  has_one :purchase, :class_name => 'Shopping::Purchase'
-  has_one :address, :class_name => 'Shopping::Address'
-  has_one :shipping, :class_name => 'Shopping::Shipping'
+  has_many :items, :class_name => 'Shopping::Item', dependent: :destroy
+  has_one :purchase, :class_name => 'Shopping::Purchase', dependent: :destroy
+  has_one :address, :class_name => 'Shopping::Address', dependent: :destroy
+  has_one :shipping, :class_name => 'Shopping::Shipping', dependent: :destroy
 
   attr_accessible :items, :items_attributes,
                   :purchase, :purchase_attributes,
@@ -14,6 +14,8 @@ class Shopping::Cart < ActiveRecord::Base
                   :tracking
 
   accepts_nested_attributes_for :items, :purchase, :address, :email, :shipping
+
+  scope :not_recent, lambda {where(" created_at < ? ", 2.hours.ago)}
 
   before_create :set_tracking
 
