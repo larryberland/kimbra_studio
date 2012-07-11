@@ -87,7 +87,7 @@
     <td class='shopping-item-index left total'>Total</td>
     <td class='shopping-item-index total'>&nbsp;</td>
     <td class='shopping-item-index right total' align='right'><%= @cart.quantity %></td>
-    <td class='shopping-item-index right total' align='right'><%= number_to_currency(@cart.total) %></td>
+    <td class='shopping-item-index right total' align='right'><%= number_to_currency(@cart.purchase.total) %></td>
   </tr>
   </tbody>
 </table>

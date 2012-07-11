@@ -1,11 +1,13 @@
 <h2>Order Status</h2>
 
-<p>Your order number is <%= @cart.tracking %>.</p>
+<p>Your order number is <%= @cart_order.tracking %>.</p>
 
 <p><%= status_for_cart(@cart_order) %></p>
 
 <div>
+  <div style='width:50%;margin:0px auto;'>
   <%= render 'shopping/addresses/show', address: @cart_order.address %>
+  </div>
 </div>
 
 <div class='cart-show'>
