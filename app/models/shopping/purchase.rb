@@ -65,7 +65,7 @@ class Shopping::Purchase < ActiveRecord::Base
     if tax.present? && tax != 0
       "#{tax_description[:region]} @ #{tax_description[:combined_tax][:rate] * 100}%"
     else
-      'no taxable region'
+      'no sales tax'
     end
   end
 
