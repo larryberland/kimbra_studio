@@ -1,12 +1,12 @@
 <div class="offer_show">
 
   <% if @admin_customer_offer.has_picture? %>
-          <% if @admin_customer_offer.items.size > 1 %>
-              <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
-          <% else %>
-              <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
-          <% end %>
+      <% if @admin_customer_offer.items.size > 1 %>
+          <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
+      <% else %>
+          <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
       <% end %>
+  <% end %>
 
   <p>
     <i><%= @admin_customer_offer.name %></i>
@@ -45,7 +45,8 @@
 
   <%= content_tag :p do %>
       <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
-          <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %><br/>
+          <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
+          <br/>
       <% end %>
   <% end if @admin_customer_offer.piece.try(:short_description).present? %>
 
