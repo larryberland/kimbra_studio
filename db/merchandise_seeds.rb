@@ -1,5 +1,9 @@
 class MerchandiseSeeds
 
+  def self.to_filename(name)
+    name.gsub(' ', '_').gsub('(','').gsub(')','').underscore
+  end
+
   #noinspection RubyArgCount
   def self.seeds(seed_path)
     file_to_load = seed_path.join('pieces.yml').to_s
@@ -28,11 +32,15 @@ class MerchandiseSeeds
           puts "missing Piece image fname=>#{piece_image_fname} in #{piece['category']}/#{piece['name']} image=>#{fname}"
         end
       else
-        # look for an image
-        fname = piece['name'].underscore.gsub(' ', '_')
+        # look for an image using the name
+        fname = to_filename(piece['name'])
         ['jpeg', 'png'].each do |ext|
-          if File.exists?(path.join("#{fname}.#{ext}").to_s)
-            p.image.store!(File.open(path.join("#{fname}.#{ext}").to_s))
+          fname_path = path.join("#{fname}.#{ext}").to_s
+          if File.exists?(fname_path)
+            p.image.store!(File.open(fname_path))
+            break
+          else
+            puts "missing Piece image fname=>#{fname} for image=>#{fname_path}"
           end
         end
         if p.image_url.blank?
@@ -47,7 +55,8 @@ class MerchandiseSeeds
         parts = default[:parts]
         path  = image_path
       else
-        path = path.join(piece['name'].underscore.gsub(' ', '_'))
+        sub_dir = to_filename(piece['name'])
+        path = path.join(sub_dir)
         path.mkpath unless path.directory?
       end
 
