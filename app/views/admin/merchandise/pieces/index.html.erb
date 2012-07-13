@@ -27,7 +27,7 @@
     <td><%= image_tag_list(admin_merchandise_piece) %></td>
     <td><%= admin_merchandise_piece.short_description %></td>
     <td><%= admin_merchandise_piece.sku %></td>
-    <td><%= admin_merchandise_piece.price %></td>
+    <td><%= number_to_currency(admin_merchandise_piece.price) %></td>
     <td><%= admin_merchandise_piece.active %></td>
     <td><%= admin_merchandise_piece.featured %></td>
     <td><%= admin_merchandise_piece.deleted_at %></td>
