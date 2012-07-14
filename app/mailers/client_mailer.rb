@@ -24,7 +24,7 @@ class ClientMailer < ActionMailer::Base
     @studio = Studio.find(studio_id)
     @show_status_only = true
     mail(to: "#{@cart.address.first_name} #{@cart.address.last_name} <#{@cart.address.email}>",
-         subject: "Photo Jewelry order (#{@cart.tracking})",
+         subject: "Photo Jewelry receipt from #{@studio.name} (Order number: #{@cart.tracking})",
          bcc: ['support@kimbraclickplus.com', 'jim@jimjames.org'],
          from: "#{@studio.name} <support@KimbraClickPLUS.com>")
   end
@@ -34,7 +34,7 @@ class ClientMailer < ActionMailer::Base
     @studio = Studio.find(studio_id)
     @show_status_only = true
     mail(to: "#{@cart.address.first_name} #{@cart.address.last_name} <#{@cart.address.email}>",
-         subject: "Your Photo Jewelry order from #{@studio.name} has shipped.",
+         subject: "Your Photo Jewelry order has shipped. #{@studio.name}",
          bcc: ['support@kimbraclickplus.com', 'jim@jimjames.org'],
          from: "#{@studio.name} <support@KimbraClickPLUS.com>")
   end
