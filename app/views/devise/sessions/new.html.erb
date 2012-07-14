@@ -2,18 +2,16 @@
   <div class='body-wrapper'>
 
     <div class='signup-box shadow openid'>
-
-      <div class='box-header private-labeled'>
-
-      </div>
+      <div class='box-header private-labeled'></div>
       <div class='box-body'>
+
         <div class='signup-headline'>
           <h2 class='custom-header'> <%= translate(:sessions_new_title) %></h2>
           <%= t(:welcome) %>
         </div>
         <div class='latest-features login-area'>
-          Log in to collaborate on projects, download files, and stay in the loop on our project progress.
-          Email Address
+          Login to upload offer portraits, view commission earnings, monitor clients' activity.
+          Use your email address to login.
         </div>
         <div id='login' class='signup-form login-area'>
 
@@ -29,7 +27,6 @@
                   </fieldset>
 
                   <fieldset>
-
                     <%= f.label :password, 'Password' %>
                     <br/>
                     <%= f.password_field :password %>
@@ -44,13 +41,11 @@
                 </div>
 
                 <div class='remember'>
-
                   <% if devise_mapping.rememberable? -%>
                       <%= f.check_box :remember_me %> <%= f.label :remember_me, 'Remember me' %>
                   <% end -%>
                   <br>
                   <%= render :partial => "devise/shared/links" %>
-
                 </div>
               </fieldset>
 
@@ -61,5 +56,6 @@
 
       </div>
     </div>
+
   </div>
 </div>
