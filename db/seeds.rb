@@ -35,9 +35,12 @@ admin = User.find_by_email ('admin@kimbraclickplus.com')
 admin.destroy if admin
 admin = User.create(email: 'admin@kimbraclickplus.com',
                     password: 'kimbrarul3s',
-                    role: Role.find_by_name(Role::SUPER_ADMIN))
+                    first_name: 'Super',
+                    last_name: 'Admin')
 if admin.errors.present?
   puts "create admin errors=>#{admin.errors.full_messages.join('\n')}"
+else
+  admin.roles << Role.find_by_name(Role::SUPER_ADMIN)
 end
 
 Category::NAMES.each do |category_type|
