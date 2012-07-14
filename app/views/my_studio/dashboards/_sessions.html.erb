@@ -10,7 +10,7 @@
       <th>Client</th>
       <th>Emails</th>
       <th>Portraits</th>
-      <th></th>
+      <% if current_user.admin? %><th>&nbsp;</th><% end %>
       <th>Session Date</th>
     </tr>
 
@@ -26,9 +26,11 @@
                 <%= session.portraits.count %>
             <% end %>
           </td>
-          <td>
-            <%= session.email_ready? ? link_to('Generate Email', generate_admin_customer_email_path(session.id), :method => :post) : '' %>
-          </td>
+          <% if current_user.admin? %>
+              <td>
+                <%= session.email_ready? ? link_to('Generate Email', generate_admin_customer_email_path(session.id), :method => :post) : '' %>
+              </td>
+          <% end %>
           <td><%= session.session_at %></td>
         </tr>
     <% end %>
