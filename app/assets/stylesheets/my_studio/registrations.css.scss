@@ -13,12 +13,10 @@ div #signup {
 }
 
 div #signup, div #login {
-  text-align:left;
-  padding: 14px;
+  padding: 14px 0 14px 14px;
   display: inline;
   float: right;
-
-  width: 280px;
+  text-align: right;
 
   fieldset {
     border: none;
