@@ -11,8 +11,10 @@
 $ ->
   $('.flash_notice').each (index, element) ->
       $(element).effect('highlight', 4000)
-  $('.flash_notice').delay(4000).slideUp('slow')
-  $('.flash_error').delay(4000).slideUp('slow')
+  $('.flash_notice').delay(2000).slideUp('slow')
+  $('.flash_error').each (index, element) ->
+        $(element).effect('highlight', 4000)
+  $('.flash_error').delay(2000).slideUp('slow')
 
 $ ->
   $('.datepicker').each (index, element) ->

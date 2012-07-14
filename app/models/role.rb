@@ -1,9 +1,9 @@
 class Role < ActiveRecord::Base
 
-  has_many :user_roles, :dependent => :destroy
-  has_many :users, :through => :user_roles
+  has_many :user_roles, dependent: :destroy
+  has_many :users, through: :user_roles
 
-  validates :name, :presence => true, :length => {:maximum => 55}
+  validates :name, presence: true, uniqueness: true, length: {maximum: 55}
 
   SUPER_ADMIN      = 'super_administrator'
   ADMIN            = 'administrator'
@@ -56,7 +56,7 @@ class Role < ActiveRecord::Base
     is_role?(CUSTOMER_SERVICE)
   end
 
-  private
+  private #============================================================
 
   def self.find_role_id(id)
     Rails.cache.fetch("role-#{id}") do #, :expires_in => 30.minutes
@@ -73,4 +73,5 @@ class Role < ActiveRecord::Base
   def is_role?(this_role_name)
     name.present? and (name == this_role_name)
   end
+
 end

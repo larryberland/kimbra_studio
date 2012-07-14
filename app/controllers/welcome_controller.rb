@@ -1,8 +1,7 @@
 class WelcomeController < ApplicationController
 
-  # no special layout right now layout 'welcome'
-
   def index
+    puts "XXX user: #{current_user.name} role: #{current_user.roles.collect(&:name).join(', ')}"
     #@featured_piece = Piece.featured
     #@best_selling_pieces = Piece.limit(3)
     #@other_pieces  ## search 2 or 3 categories (maybe based on the user)
@@ -15,6 +14,7 @@ class WelcomeController < ApplicationController
             redirect_to my_studio_dashboard_url
           end
         elsif current_user.admin?
+          puts "XXX redirecting to #{admin_overview_url}"
           redirect_to admin_overview_url
         end
       end
@@ -38,4 +38,5 @@ class WelcomeController < ApplicationController
       end
     end
   end
+
 end
