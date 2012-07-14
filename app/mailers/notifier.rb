@@ -3,7 +3,6 @@ class Notifier < ActionMailer::Base
   default from: "Kimbra Support <support@KimbraClickPLUS.com>"
 
   def signup_notification(studio_id)
-    puts "HOORAY WE ARE IN SIGNUP_NOTIFICATION"
     recipient = Studio.find(studio_id)
     mail(:to => recipient.email_address_with_name,
          :subject => "New account information") do |format|
