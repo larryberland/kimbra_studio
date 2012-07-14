@@ -39,8 +39,6 @@ admin = User.create(email: 'admin@kimbraclickplus.com',
                     last_name: 'Admin')
 if admin.errors.present?
   puts "create admin errors=>#{admin.errors.full_messages.join('\n')}"
-else
-  admin.roles << Role.find_by_name(Role::SUPER_ADMIN)
 end
 
 Category::NAMES.each do |category_type|
