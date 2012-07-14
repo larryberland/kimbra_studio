@@ -1,6 +1,6 @@
 class Notifier < ActionMailer::Base
 
-  default from: "Jennifer Gordon <support@KimbraClickPLUS.com>"
+  default from: "Kimbra Support <support@KimbraClickPLUS.com>"
 
   def signup_notification(studio_id)
     puts "HOORAY WE ARE IN SIGNUP_NOTIFICATION"
