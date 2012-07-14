@@ -189,10 +189,9 @@ p {
 }
 
 .motivation {
-  font-size: 28px;
+  font-size: 26px;
   color: silver;
-  margin-bottom: 30px;
-  padding-right: 20px;
+  padding: 10px 20px 10px 0;
   float: left;
   clear: left;
 }
@@ -206,4 +205,24 @@ form.button_to {
 
 form.button_to div, form.button_to div input {
 /*   display:inline;    */
+}
+
+div#main_nav {
+  clear: both;
+  background-color: silver;
+  color: slategrey;
+  font-style: bold;
+  font-size: 1.1em;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 15px;
+}
+
+div.menu_item {
+  float: left;
+  padding: 3px 20px 3px 5px;
+}
+
+#upload_more_portraits_button {
+  padding-top: 15px;
 }

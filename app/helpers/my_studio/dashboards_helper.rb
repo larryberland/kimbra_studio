@@ -6,12 +6,12 @@ module MyStudio::DashboardsHelper
       days_ago = (Date.today - most_recent_portrait).to_i
       case days_ago
         when 0
-          'Pictures uploaded earlier today. Got any more?'
+          '&#x2713; Portraits uploaded earlier today. Got any more?'.html_safe
         else
-          "No pictures uploaded in the last #{content_tag :span, pluralize(days_ago, 'day'), :class => 'days_ago'}!".html_safe
+          "&#x2718; No portraits uploaded in the last #{content_tag :span, pluralize(days_ago, 'day'), :class => 'days_ago'}!".html_safe
       end
     else
-      'You haven\'t uploaded any portraits yet!'
+      '&#x2718; You haven\'t uploaded any portraits yet!'.html_safe
     end
   end
 

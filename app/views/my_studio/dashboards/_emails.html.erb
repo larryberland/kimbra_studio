@@ -3,6 +3,7 @@
  </div>
 <div class='panel_contents'>
 
+  <% if sessions.count == 0 %>
 <table id='dashboard_emails'>
   <tr>
     <th>photo session</th>
@@ -28,6 +29,9 @@
           </tr>
       <% end %>
 
+  <% end %>
+  <% else %>
+  <h2 class='motivation'>No emails this past week - no portraits uploaded?</h2>
   <% end %>
 
 </table>

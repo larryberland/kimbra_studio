@@ -1,16 +1,26 @@
-<h1 style='text-align:left;'> <%=t(:my_studio_overview_title)%> </h1>
-<p>
-  <b>Name:</b>
-  <%= @my_studio.try(:name) %>
-  <b>Phone number:</b>
-  <%= @my_studio.try(:phone_number) %>
-</p>
+<h1 style='text-align:left;'> <%= @my_studio.try(:name) %> </h1>
+<p>Phone: <%= @my_studio.try(:phone_number) %></p>
+
+<div class='container'>
+  <div class='motivation'>
+    <%= portrait_uploaded_days_ago_text %>
+  </div>
+  <%= button_to 'Upload some now!', new_my_studio_session_path, method: :get %>
+  <div class='motivation'>
+    Total revenue so far: <%= number_to_currency @sum_purchases %> Your commmission (at <%= @commission_rate %>%):
+    <%= number_to_currency @total_commissions %>
+  </div>
+</div>
+
+<div class='container'>
+  <%= render 'my_studio/dashboards/sessions', :sessions => @last_seven_days %>
+</div>
+
+<div class='container'>
+  <%= render 'my_studio/dashboards/emails', :sessions => @last_seven_days %>
+</div>
 
 <div class='span-18 column' style='width:708px;'>
-  <div class='ar-widget'>
-    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_dashboard)%> </h3>
-    <%= link_to t(:my_studio_overview_link_dashboard), my_studio_dashboard_path %>
-  </div>
   <div class='ar-widget'>
     <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_session)%> </h3>
     <%= link_to t(:my_studio_overview_link_session), my_studio_sessions_path %>

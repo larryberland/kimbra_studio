@@ -8,4 +8,5 @@ class MyStudio::OverviewsController < MyStudio::BaseController
       format.json { render json: @my_studio_overview }
     end
   end
+
 end
