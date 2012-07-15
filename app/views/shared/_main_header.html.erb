@@ -25,7 +25,7 @@
       <div class='menu_item'>
         <%= link_to t(:my_studio_overview_link), my_studio_dashboard_url %>
       </div>
-      <% if user_signed_in? && current_user.admin? %>
+      <% if admin_signed_in? %>
           <div class='menu_item'>
             <%= link_to 'ClickPLUS Admin', admin_overview_url %>
           </div>
