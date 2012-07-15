@@ -14,7 +14,6 @@ class WelcomeController < ApplicationController
             redirect_to my_studio_dashboard_url
           end
         elsif current_user.admin?
-          puts "XXX redirecting to #{admin_overview_url}"
           redirect_to admin_overview_url
         end
       end

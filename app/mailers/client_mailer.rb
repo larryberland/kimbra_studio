@@ -39,4 +39,24 @@ class ClientMailer < ActionMailer::Base
          from: "#{@studio.name} <support@KimbraClickPLUS.com>")
   end
 
+  def send_offer_herald(session_id, studio_id)
+    @session = MyStudio::Session.find(session_id)
+    @client = @session.client
+    @studio = Studio.find(studio_id)
+    logo = ''
+    open('image.jpg', 'w') do |file|
+      logo << open(@studio.minisite.image_url).read
+    end
+    attachments.inline['logo.png'] = logo
+    sample = ''
+    open('sample.jpg', 'w') do |file|
+      sample << open(File.join(Rails.root, '/app/assets/images/kimbra_sample.jpg')).read
+    end
+    attachments.inline['sample.jpg'] = sample
+    mail(to: "#{@client.name} <#{@client.email}>",
+         subject: "Heirloom jewelry from your recent photo shoot with #{@studio.name}",
+         bcc: ['support@kimbraclickplus.com', 'jim@jimjames.org'],
+         from: "#{@studio.name} <support@KimbraClickPLUS.com>")
+  end
+
 end
