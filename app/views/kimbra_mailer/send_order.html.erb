@@ -23,99 +23,18 @@
 
   </style>
 
-<p>Hi <%= @cart.address.name %>,</p>
+<p>Hi Kimbra,</p>
 
 <p>
-  Thank you for your order. Please note that each piece is made by hand in Littleton, Colorado.
-  Please allow us 10 - 15 business days to complete the work on your order. Rush services are not available yet. We rarely run late.
-  You can check the status of
-  <%= link_to 'your order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart,  show_status_only: true ) %>.
+  Can you please make a pretty piece of jewlery.
+
+  And send us a commision check.
+
+  thanks,
+  ClickPlus Team
 </p>
-
-<p>Your order number is <%= @cart.tracking %>.</p>
-
-<div>
-  Shipping to:
-  <%= render 'shopping/addresses/show', address: @cart.address %>
-</div>
-
-<table border=1 cellpadding=5>
-
-  <thead>
-  <th class='left'>Piece</th>
-  <th align='right'>Price</th>
-  <th align='right'>Quantity</th>
-  <th align='right'>Total</th>
-  </thead>
-  <tbody>
-  <% total = 0 %>
-  <% @cart.items.each do |item| %>
-      <tr>
-        <td class='left'>
-          <%= item.try(:offer).try(:name) %>
-        </td>
-        <td class='shopping-item-index right' align='right'>
-          <%= number_to_currency item.price.to_f %>
-        </td>
-        <td class="shopping-item-index <%= @show_status_only ? 'right' : 'left' %> align='right'">
-          <% if @show_status_only %>
-              <%= item.quantity %>
-          <% else %>
-              <%= text_field_tag :quantity, item.quantity, size: 3 %>
-              <%= link_to 'update', shopping_item_path(item),
-                          class: :update_quantity %>
-          <% end %>
-        </td>
-        <td class='shopping-item-index right' align='right'>
-          <%= number_to_currency item.extension %>
-        </td>
-      </tr>
-  <% end if @cart.items && @cart.items.present? %>
-  <tr>
-    <td class='shopping-item-index left'>Shipping<br/><%= @cart.shipping.shipping_option %></td>
-    <td class='shopping-item-index'>&nbsp;</td>
-    <td class='shopping-item-index'>&nbsp;</td>
-    <td class='shopping-item-index right' align='right'><%= @cart.shipping ? number_to_currency(@cart.shipping.total_cents / 100.0) : 'n/a' %></td>
-  </tr>
-  <tr>
-    <td class='shopping-item-index left'>Tax<br/><%= @cart.purchase.tax_short_description %></td>
-    <td class='shopping-item-index'>&nbsp;</td>
-    <td class='shopping-item-index'>&nbsp;</td>
-    <td class='shopping-item-index right' align='right' align='right'><%= @cart.purchase ? number_to_currency(@cart.purchase.tax) : 'n/a' %></td>
-  </tr>
-  <tr>
-    <td class='shopping-item-index left total'>Total</td>
-    <td class='shopping-item-index total'>&nbsp;</td>
-    <td class='shopping-item-index right total' align='right'><%= @cart.quantity %></td>
-    <td class='shopping-item-index right total' align='right'><%= number_to_currency(@cart.purchase.total) %></td>
-  </tr>
-  </tbody>
-</table>
-
-<p>Purchased on <%= @cart.purchase.purchased_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %b %d %I:%M%p") %> Eastern using credit card xxxx-xxxx-xxxx-<%= @cart.purchase.stripe_card.last4 %>.</p>
-
-<table width="500" cellspacing="0" cellpadding="4" border="0" align="center">
-  <tbody>
-  <tr>
-    <td align=center>
-      <div style="text-align:center;width:100%">
-        <p>
-          Would you like to schedule another photography session?
-          Or would you like a different piece of custom photo jewelry prepared?
-          We look forward to chatting with you about it.
-        </p>
-
-        <p>
-          <%= @studio.name %><br/>
-          <%= @studio.owner.name %> (<%= mail_to @studio.owner.email %>)<br/>
-          <%= @studio.phone_number %><br/>
-          <%= @studio.address_1 %><br/>
-          <%= "#{@studio.address_2}<br/>".html_safe if @studio.address_2 %>
-          <%= @studio.city %>, <%= @studio.state %> <%= @studio.zip_code %>
-        </p>
-      </div>
-    </td>
-  </tr>
+<table>
+   <tbody>
   <tr>
     <td align=center>
       <div style="text-align:center;width:100%">
