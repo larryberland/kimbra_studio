@@ -48,6 +48,7 @@ production:
   :carrier_wave:
     :storage: :fog
     :dump_image: false
+  :mailer:
   :stripe:
     :name: clickplus1@gmail.com
     :secret_key:
