@@ -3,7 +3,7 @@
 
 en:
   hello: "Hello world"
-  company: 'Kimbra Studios Click Plus'
+  company: 'Kimbra Studios ClickPLUS'
 
   welcome: 'Welcome!'
 
@@ -17,7 +17,7 @@ en:
   # customer_mailer/send_offer.html.erb
   client_send_offers_subject: "%{name} custom jewelry offer"
 
-  email_message: "Kimbra Studio Click Plus+ has created this special offer just for %{name}."
+  email_message: "Kimbra Studio Kimbra ClickPLUS has created this special offer just for %{name}."
 
   # credit card profile
   new_credit_card_title: 'Credit Card Profile name'
@@ -77,13 +77,13 @@ en:
 
   # studios
   studios_new_title: 'Your Studio'
-  studios_new_link: 'New Click Plus+ Studio'
-  studios_index_title: 'Listing Click Plus+ Studios'
+  studios_new_link: 'New Kimbra ClickPLUS Studio'
+  studios_index_title: 'Listing Kimbra ClickPLUS Studios'
 
   # users
   users_new_title: ''
-  users_new_link: 'New Click Plus+ User'
-  users_index_title: 'Listing Click Plus+ Users'
+  users_new_link: 'New Kimbra ClickPLUS User'
+  users_index_title: 'Listing Kimbra ClickPLUS Users'
 
   # minisite/showrooms/show
   minisite_showrooms_show_add_to_cart: 'Add to Cart'
@@ -134,16 +134,16 @@ en:
   my_studio_staffers_index_title: 'Listing My Studio Staff'
 
   # admin/overview
-  admin_overview_title: 'Click Plus+ Admin'
-  admin_overview_link: 'Click Plus+ Admin'
+  admin_overview_title: 'Kimbra ClickPLUS Admin'
+  admin_overview_link: 'Kimbra ClickPLUS Admin'
   admin_overview_label_emails: "Customer Emails"
   admin_overview_link_emails: "View Customer Emails"
   admin_overview_label_merchandise: "Merchandise"
   admin_overview_link_merchandise: "View Merchandise Pieces"
-  admin_overview_label_studios: "Click Plus+ Studios"
-  admin_overview_link_studios: "View Click Plus+ Studios"
-  admin_overview_label_users: "Click Plus+ Users"
-  admin_overview_link_users: "View Click Plus+ Users"
+  admin_overview_label_studios: "Kimbra ClickPLUS Studios"
+  admin_overview_link_studios: "View Kimbra ClickPLUS Studios"
+  admin_overview_label_users: "Kimbra ClickPLUS Users"
+  admin_overview_link_users: "View Kimbra ClickPLUS Users"
   
   # admin/customer/emails
   admin_customer_emails_new_title: 'New Customer Email'
