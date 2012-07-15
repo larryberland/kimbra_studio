@@ -23,3 +23,7 @@ $ ->
     # Add spinner show to #my_submit click event.
     $('#my_submit').click ->
       $('#spinner').toggle()
+    $('#my_submit').on(
+      'invalid'
+      , ->
+      $('#spinner').toggle())
