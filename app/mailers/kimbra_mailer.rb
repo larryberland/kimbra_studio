@@ -1,8 +1,9 @@
 class KimbraMailer < ActionMailer::Base
+
   helper :application
 
-  default from: "Sales ClickPlus <sales@KimbraClickPLUS.com>"
-  default to: KIMBRA_STUDIO_CONFIG[:mailer][:kimbra_studio][:to_order_email]
+  default from: "Sales KimbraClickPlus <sales@KimbraClickPLUS.com>"
+  default to: KIMBRA_STUDIO_CONFIG[:mailer][:to_order_email]
 
   def send_order(email_id)
     @email = Admin::Customer::Email.find(email_id)
@@ -16,6 +17,5 @@ class KimbraMailer < ActionMailer::Base
     mail(bcc: ['jim@jimjames.org'],
          subject: 'Another Order from KimbraClickPLUS.')
   end
-
 
 end
