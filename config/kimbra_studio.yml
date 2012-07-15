@@ -49,6 +49,7 @@ production:
     :storage: :fog
     :dump_image: false
   :mailer:
+    :dummy:
   :stripe:
     :name: clickplus1@gmail.com
     :secret_key:
