@@ -12,6 +12,7 @@ class MyStudio::Portrait < ActiveRecord::Base
   has_many :faces, :class_name => 'MyStudio::Portrait::Face', :dependent => :destroy
 
   scope :last, order('created_at desc').limit(1)
+  scope :last_2_hours, where(created_at: 2.hours.ago..Time.now)
 
   before_save :set_description
   after_save :get_faces

@@ -16,5 +16,11 @@ end
 
 desc 'Herald emails are sent a couple of hours after a studio uploads a set of portraits'
 task :send_herald_emails => :environment do
+  # walk each studio
+  MyStudio::Portraits.last_2_hours.group(:client_id).each do |client_id, portraits|
 
+  end
+  # check if more than 3 portraits uploaded in previous couple hours
+  # check we haven't sent a herald email in the past month
+  # send the email
 end
