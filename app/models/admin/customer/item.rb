@@ -37,6 +37,12 @@ class Admin::Customer::Item < ActiveRecord::Base
     item_sides[1]
   end
 
+  def portrait_list
+    item_sides.collect do |item_side|
+      item_side.portrait
+    end
+  end
+
   def draw_piece_with_custom(piece_image, front_side)
     if side = get_side(front_side)
       side.draw_piece_with_custom(piece_image)

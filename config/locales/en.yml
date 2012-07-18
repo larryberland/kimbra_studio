@@ -65,7 +65,7 @@ en:
   # devise views end
 
   # stripe
-  stripe_description_prefix: 'Kimbra Studio via ClickPlus1'
+  stripe_description_prefix: 'Kimbra Studio via ClickPLUS'
 
   minisite_admin_customer_items_index_title: 'Edit Your Custom Items'
 

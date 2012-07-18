@@ -23,44 +23,58 @@
 
   </style>
 
-<p>Hi Kimbra,</p>
+<p>Hi Kimbra Studios,</p>
 
 <p>
-  Can you please make a pretty piece of jewlery.
-
-  And send us a commision check.
-
-  thanks,
-  ClickPlus Team
+  <%= t(:company) %> order number is <%= @cart.tracking %>.<br/>
+  You can view the
+  <%= link_to 'ClickPLUS order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart,  show_status_only: true ) %>.
 </p>
-<table>
-   <tbody>
-  <tr>
-    <td align=center>
-      <div style="text-align:center;width:100%">
-        <p>
-          If you have any questions about your order or any technical questions about the pieces in our offer,
-          please go straight to the people who are hand-making the pieces!
-        </p>
 
-        <p>
-          Kimbra's ClickPLUS program for professional photography studios.<br/>
-          Call us direct 9am - 7pm Eastern<br/>
-          (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
-          <%= mail_to 'Support@KimbraClickPLUS.com' %><br/>
-          <%= link_to 'Kimbra Studios', 'http://KimbraStudios.com' %>
-        </p>
+<div>
+  Shipping to:
+  <%= render 'shopping/addresses/show', address: @cart.address %>
+</div>
 
-        <p>
-          <%= link_to image_tag("http://badge.facebook.com/badge/333860214613.6156.966267155.png", width: '120', height: 195, style: 'border:0px;'),
-                      'http://www.facebook.com/pages/Littleton-CO/Kimbra-Studios-Custom-Photo-Jewelry/333860214613', title: 'Kimbra Studios : Custom Photo Jewelry', target: '_top' %>
-        </p>
-      </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<div>
+  From Partner Studio:
+  <% studio = @cart.email.my_studio_session.studio %>
+  <%= studio.name %><br>
+  <%= studio.phone_number %><br>
+  <%= render 'shared/addresses/show', resource: studio %>
+</div>
 
+<%= render 'shared/mailers/cart_items'%>
+
+<p>
+ STRIPE CREDIT CARD RESPONSE: <%= link_to @cart.purchase.stripe_cart_token,  "https://manage.stripe.com/#test/payments/#{@cart.purchase.stripe_cart_token}" %>
+</p>
+
+<% if (@cart.purchase.tax > 0) %>
+<p>
+  <%= @cart.purchase.tax_description.inspect %>
+</p>
+<% end %>
+
+<% @cart.items.each_with_index do |shopping_item, idx| %>
+
+   <%= "ITEM:#{idx}" %>
+   <% @admin_customer_offer = shopping_item.offer %>
+   <%= render 'minisite/offers/show' %>
+
+   <% @admin_customer_offer.items.each do |admin_customer_item| %>
+    <% @item = admin_customer_item %>
+    <%= render 'admin/customer/items/show' %>
+   <% end %>
+
+   <% @admin_customer_offer.portrait_list.each do |portrait| %>
+    <%= link_to "portrait", portrait.image_url(:face) %>
+   <% end %>
+
+<% end %>
+
+not quite sure how to format this route helper, but you need to put the order tracking number in here as shopping_shipping/tracking/number)
+ <%= link_to 'Click HERE to add UPS tracking number when shipping.', shopping_edit_delivery_tracking(@cart) %>
 
 </body>
 </html>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120707152350) do
+ActiveRecord::Schema.define(:version => 20120716104322) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -285,6 +285,7 @@ ActiveRecord::Schema.define(:version => 20120707152350) do
     t.datetime "updated_at"
   end
 
+  add_index "my_studio_portraits", ["created_at"], :name => "index_my_studio_portraits_on_created_at"
   add_index "my_studio_portraits", ["my_studio_session_id"], :name => "index_my_studio_portraits_on_my_studio_session_id"
 
   create_table "my_studio_sessions", :force => true do |t|
@@ -407,6 +408,17 @@ ActiveRecord::Schema.define(:version => 20120707152350) do
   end
 
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "sent_emails", :force => true do |t|
+    t.integer  "client_id"
+    t.string   "email"
+    t.string   "mailer_name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
+
+  add_index "sent_emails", ["client_id"], :name => "index_sent_emails_on_client_id"
+  add_index "sent_emails", ["email"], :name => "index_sent_emails_on_email"
 
   create_table "shipping_options", :force => true do |t|
     t.string   "name"

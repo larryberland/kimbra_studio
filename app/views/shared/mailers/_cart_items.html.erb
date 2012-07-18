@@ -1,0 +1,52 @@
+<table border=1 cellpadding=5>
+
+  <thead>
+  <th class='left'>Piece</th>
+  <th align='right'>Price</th>
+  <th align='right'>Quantity</th>
+  <th align='right'>Total</th>
+  </thead>
+  <tbody>
+  <% total = 0 %>
+  <% @cart.items.each do |item| %>
+      <tr>
+        <td class='left'>
+          <%= item.try(:offer).try(:name) %>
+        </td>
+        <td class='shopping-item-index right' align='right'>
+          <%= number_to_currency item.price.to_f %>
+        </td>
+        <td class="shopping-item-index <%= @show_status_only ? 'right' : 'left' %> align='right'">
+          <% if @show_status_only %>
+              <%= item.quantity %>
+          <% else %>
+              <%= text_field_tag :quantity, item.quantity, size: 3 %>
+              <%= link_to 'update', shopping_item_path(item),
+                          class: :update_quantity %>
+          <% end %>
+        </td>
+        <td class='shopping-item-index right' align='right'>
+          <%= number_to_currency item.extension %>
+        </td>
+      </tr>
+  <% end if @cart.items && @cart.items.present? %>
+  <tr>
+    <td class='shopping-item-index left'>Shipping<br/><%= @cart.shipping.shipping_option %></td>
+    <td class='shopping-item-index'>&nbsp;</td>
+    <td class='shopping-item-index'>&nbsp;</td>
+    <td class='shopping-item-index right' align='right'><%= @cart.shipping ? number_to_currency(@cart.shipping.total_cents / 100.0) : 'n/a' %></td>
+  </tr>
+  <tr>
+    <td class='shopping-item-index left'>Tax<br/><%= @cart.purchase.tax_short_description %></td>
+    <td class='shopping-item-index'>&nbsp;</td>
+    <td class='shopping-item-index'>&nbsp;</td>
+    <td class='shopping-item-index right' align='right' align='right'><%= @cart.purchase ? number_to_currency(@cart.purchase.tax) : 'n/a' %></td>
+  </tr>
+  <tr>
+    <td class='shopping-item-index left total'>Total</td>
+    <td class='shopping-item-index total'>&nbsp;</td>
+    <td class='shopping-item-index right total' align='right'><%= @cart.quantity %></td>
+    <td class='shopping-item-index right total' align='right'><%= number_to_currency(@cart.purchase.total) %></td>
+  </tr>
+  </tbody>
+</table>

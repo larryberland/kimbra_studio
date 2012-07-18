@@ -114,6 +114,11 @@ class Admin::Customer::Offer < ActiveRecord::Base
     text
   end
 
+  # return all portraits that make up this offer
+  def portrait_list
+    items.collect {|item| item.portrait_list}.flatten.compact
+  end
+
   def back
     image_back
   end

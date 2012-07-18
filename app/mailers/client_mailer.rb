@@ -2,7 +2,7 @@ class ClientMailer < ActionMailer::Base
 
   helper :application
 
-  default from: "Support <support@KimbraClickPLUS.com>"
+  default from: KIMBRA_STUDIO_CONFIG[:mailer][:support]
 
   def send_offers(email_id)
     @email = Admin::Customer::Email.find(email_id)

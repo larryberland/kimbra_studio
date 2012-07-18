@@ -8,8 +8,8 @@
   <%= studio.phone_number %>
 </p>
 
-<%= render 'my_studio/infos/show', :info => studio.info %>
+<%= render 'my_studio/infos/show', info: studio.info %>
 
-<%= render 'shared/addresses/show', :resource => studio %>
+<%= render 'shared/addresses/show', resource: studio %>
 
-<%= render "my_studio/minisites/show", :minisite => studio.minisite %>
+<%= render "my_studio/minisites/show", minisite: studio.minisite %>

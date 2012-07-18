@@ -3,11 +3,11 @@ module Shopping
 
     belongs_to :cart,
                :parent_class => Shopping::Cart,
-               :singleton => true
+               :singleton    => true
 
     def new
       new! do
-        @purchase.cart = @cart
+        @purchase.cart        = @cart
         @purchase.total_cents = @purchase.total * 100.0
       end
     end
@@ -18,13 +18,14 @@ module Shopping
           edit_shopping_cart_purchase_path(@cart)
         else
           ClientMailer.delay.send_order_confirmation(@cart.id, @studio.id)
+          KimbraMailer.delay.send_order(@cart.id, @studio.id)
           # After the credit card is run (successful create) we need to close out
           # this cart so that the consumer will start a new one if they want to make
           # more purchases.
-          cart_track = @cart.tracking
-          @cart = nil
-          session[:cart_id] = nil
-          @admin_customer_offer = nil
+          cart_track                        = @cart.tracking
+          @cart                             = nil
+          session[:cart_id]                 = nil
+          @admin_customer_offer             = nil
           session[:admin_customer_offer_id] = nil
           order_status_minisite_email_path(@admin_customer_email, cart: cart_track, show_status_only: true)
           #shopping_stripe_card_path(@purchase.stripe_card)
@@ -40,9 +41,9 @@ module Shopping
           # After the credit card is run (successful create) we need to close out
           # this cart so that the consumer will start a new one if they want to make
           # more purchases.
-          @cart = nil
-          session[:cart_id] = nil
-          @admin_customer_offer = nil
+          @cart                             = nil
+          session[:cart_id]                 = nil
+          @admin_customer_offer             = nil
           session[:admin_customer_offer_id] = nil
           order_status_minisite_email_path(@admin_customer_email, cart: cart_track)
           #shopping_stripe_card_path(@purchase.stripe_card)
