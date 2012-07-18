@@ -460,7 +460,7 @@ class Order < ActiveRecord::Base
 
   end
 
-  private
+  private #==========================================================================
 
   # prices to charge of all items before taxes and coupons and shipping
   #

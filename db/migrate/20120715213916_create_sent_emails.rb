@@ -5,15 +5,13 @@ class CreateSentEmails < ActiveRecord::Migration
   # This means we have an easy way to verify that we are not spamming consumers with too much email too often.
   def change
     create_table :sent_emails, force:true do |t|
-      t.integer :client_id
       t.string :email
-      t.string :mailer_name
+      t.string :subject
       t.timestamps
     end
 
-    add_index :sent_emails, :client_id
     add_index :sent_emails, :email
-
+    add_index :sent_emails, :created_at
   end
 
 end

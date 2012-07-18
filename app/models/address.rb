@@ -1,8 +1,10 @@
 class Address < ActiveRecord::Base
+
   belongs_to :address_type
   belongs_to :addressable, :polymorphic => true
   belongs_to :state
   has_many :phones, :as => :phoneable
+
   # First and last name of the person on the address
   #
   # @example first_name == 'John', last_name == 'Doe'
@@ -142,7 +144,8 @@ class Address < ActiveRecord::Base
     [city_state_name, zip_code].join(' ')
   end
 
-  private
+  private #=============================================================
+
   # This method is called to ensure data is formatted without extra white space before_validation
   def sanitize_data
     self.first_name = self.first_name.strip unless self.first_name.blank?
