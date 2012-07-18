@@ -16,11 +16,18 @@ end
 
 desc 'Herald emails are sent a couple of hours after a studio uploads a set of portraits'
 task :send_herald_emails => :environment do
-  # walk each studio
-  MyStudio::Portraits.last_2_hours.group(:client_id).each do |client_id, portraits|
-
+  emails_sent = 0
+  # Check all the portraits uploaded in the last 2 hours.
+  MyStudio::Portrait.last_2_hours.select('distinct my_studio_session_id').collect(&:my_studio_session_id).uniq.compact.each do |session_id|
+    session = MyStudio::Session.find(session_id)
+    # Skip any clients we've already sent emails in the past month. They don't need to be told.
+    if SentEmail.are_we_spamming(session.client.email)
+      puts "Skipping sending herald email to #{session.client.email} because we already sent email this month."
+    else
+      ClientMailer.send_offer_herald(session.id).deliver
+      puts "Sending herald email to #{session.client.email}"
+      emails_sent += 1
+    end
   end
-  # check if more than 3 portraits uploaded in previous couple hours
-  # check we haven't sent a herald email in the past month
-  # send the email
+  puts "Sent #{emails_sent} herald emails to consumers."
 end
