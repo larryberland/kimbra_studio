@@ -39,10 +39,10 @@ class ClientMailer < ActionMailer::Base
          from: "#{@studio.name} <support@KimbraClickPLUS.com>")
   end
 
-  def send_offer_herald(session_id, studio_id)
+  def send_offer_herald(session_id)
     @session = MyStudio::Session.find(session_id)
     @client = @session.client
-    @studio = Studio.find(studio_id)
+    @studio = @session.studio
     logo = ''
     open('image.jpg', 'w') do |file|
       logo << open(@studio.minisite.image_url).read
