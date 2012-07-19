@@ -9,6 +9,7 @@
     <th>Name</th>
     <th>Phone number</th>
     <th>Owner</th>
+    <th></th>
     <th>City</th>
     <th>State</th>
     <th></th>
@@ -21,6 +22,7 @@
         <td><%= studio.name %></td>
         <td><%= studio.phone_number %></td>
         <td><%= studio.try(:owner).try(:email) %></td>
+        <td><%= link_to 'Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}" %></td>
         <td><%= studio.try(:city) %></td>
         <td><%= studio.try(:state).try(:abbrev_and_name) %></td>
         <td><%= link_to t(:show), studio %></td>

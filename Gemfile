@@ -7,6 +7,7 @@ gem 'thin'
 gem 'rmagick'
 gem 'carrierwave'
 gem 'devise'
+gem 'switch_user'
 gem 'pg'
 
 gem 'blueprint-rails'

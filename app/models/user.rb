@@ -14,37 +14,37 @@ class User < ActiveRecord::Base
   has_many :user_roles, :dependent => :destroy
   has_many :roles, :through => :user_roles
 
-  has_one     :store_credit
-  has_many    :orders
-  has_many    :completed_orders,          :class_name => 'Order',
-                                          :conditions => {:orders => { :state => 'complete'}}
+  has_one :store_credit
+  has_many :orders
+  has_many :completed_orders, :class_name => 'Order',
+           :conditions => {:orders => {:state => 'complete'}}
 
-  has_many    :phones,                    :dependent => :destroy,
-                                          :as => :phoneable
+  has_many :phones, :dependent => :destroy,
+           :as => :phoneable
 
-  has_one     :primary_phone,             :conditions => {:phones => { :primary => true}},
-                                          :as => :phoneable,
-                                          :class_name => 'Phone'
+  has_one :primary_phone, :conditions => {:phones => {:primary => true}},
+          :as => :phoneable,
+          :class_name => 'Phone'
 
 
   has_many :addresses, :dependent => :destroy,
-           :as                    => :addressable
+           :as => :addressable
 
   has_one :default_billing_address, :conditions => {:addresses => {:billing_default => true, :active => true}},
-          :as                                   => :addressable,
-          :class_name                           => 'Address'
+          :as => :addressable,
+          :class_name => 'Address'
 
   has_many :billing_addresses, :conditions => {:addresses => {:active => true}},
-           :as                             => :addressable,
-           :class_name                     => 'Address'
+           :as => :addressable,
+           :class_name => 'Address'
 
   has_one :default_shipping_address, :conditions => {:addresses => {:default => true, :active => true}},
-          :as                                    => :addressable,
-          :class_name                            => 'Address'
+          :as => :addressable,
+          :class_name => 'Address'
 
   has_many :shipping_addresses, :conditions => {:addresses => {:active => true}},
-           :as                              => :addressable,
-           :class_name                      => 'Address'
+           :as => :addressable,
+           :class_name => 'Address'
   has_many :payment_profiles
 
   accepts_nested_attributes_for :addresses, :phones, :user_roles
@@ -74,6 +74,18 @@ class User < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
+  def self.with_studio_role
+    User.includes(:roles).where("roles.name = 'studio' OR roles.name = 'studio_staff'")
+  end
+
+  def impersonate!
+    @impersonated = true
+  end
+
+  def active?
+    !@impersonated && super
+  end
+
   state_machine :user_state, :initial => :active do
     state :inactive
     state :active
@@ -89,11 +101,11 @@ class User < ActiveRecord::Base
 
     event :register do
       #transition :to => 'registered', :from => :all
-      transition :from => :active,                 :to => :registered
-      transition :from => :inactive,               :to => :registered
-      transition :from => :unregistered,           :to => :registered
+      transition :from => :active, :to => :registered
+      transition :from => :inactive, :to => :registered
+      transition :from => :unregistered, :to => :registered
       transition :from => :registered_with_credit, :to => :registered
-      transition :from => :canceled,               :to => :registered
+      transition :from => :canceled, :to => :registered
     end
 
     event :cancel do
@@ -109,11 +121,11 @@ class User < ActiveRecord::Base
     # TODO: set roles based on some new logic
     # TODO Gotta get rid of this when we think through how studio users get created.
     if roles.empty?
-      role_name  = if email == 'jim@jimjames.org' || email == 'larryberland@gmail.com' || last_name.to_s.downcase == 'admin'
-                     Role::SUPER_ADMIN
-                   else
-                     Role::STUDIO
-                   end
+      role_name = if email == 'jim@jimjames.org' || email == 'larryberland@gmail.com' || last_name.to_s.downcase == 'admin'
+                    Role::SUPER_ADMIN
+                  else
+                    Role::STUDIO
+                  end
       self.roles = [Role.where('name = ?', role_name).first]
     end
   end

@@ -1,9 +1,12 @@
 class Admin::OverviewsController < ApplicationController
 
+  helper SwitchUserHelper
+
   # GET /admin/overview
   # GET /admin/overview.json
   def show
     @sessions = MyStudio::Session.all
+    @studio_users = User.with_studio_role
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @admin_overview }

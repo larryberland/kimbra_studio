@@ -11,7 +11,7 @@ class MerchandiseSeeds
     info         = YAML::load(File.open(file_to_load))
     pieces_list  = info[:pieces]
     default      = info[:default]
-    image_stub   = Rails.root.join('app', 'assets', 'images', 'home.png')
+    image_stub   = Rails.root.join('app', 'assets', 'images', 'kimbra_logo.png')
 
     puts "storing #{pieces_list.size} Pieces"
     pieces_list.each do |piece|

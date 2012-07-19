@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_filter :form_info
+  before_filter :authenticate_admin!, only: :impersonate
 
   # GET /users
   # GET /users.json
@@ -84,9 +85,14 @@ class UsersController < ApplicationController
     end
   end
 
-  private
+  def impersonate
+    @user.impersonate!
+  end
+
+  private #===================================================================================
 
   def form_info
     @states = State.form_selector
   end
+
 end

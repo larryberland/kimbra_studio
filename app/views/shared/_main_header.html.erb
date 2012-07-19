@@ -22,17 +22,31 @@
     <% end %>
 
     <div id='main_nav'>
-      <div class='menu_item'>
-        <%= link_to t(:my_studio_overview_link), my_studio_dashboard_url %>
-      </div>
       <% if is_admin? %>
           <div class='menu_item'>
             <%= link_to 'ClickPLUS Admin', admin_overview_url %>
           </div>
+          <div class='menu_item'>
+            <%= link_to 'Emails', admin_customer_emails_path %>
+          </div>
+          <div class='menu_item'>
+            <%= link_to 'Merchandise', admin_merchandise_pieces_path %>
+          </div>
+          <div class='menu_item'>
+            <%= link_to 'Studios', studios_path %>
+          </div>
+          <div class='menu_item'>
+            <%= link_to 'Users', users_path %>
+          </div>
+      <% else %>
+          <div class='menu_item'>
+            <%= link_to t(:my_studio_overview_link), my_studio_dashboard_path %>
+          </div>
+          <div class='menu_item'>
+            <%= link_to t(:myaccount_overview_link), myaccount_overview_path %>
+          </div>
       <% end %>
-      <div class='menu_item'>
-        <%= link_to t(:myaccount_overview_link), myaccount_overview_url %>
-      </div>
+
     </div>
 
   </div>

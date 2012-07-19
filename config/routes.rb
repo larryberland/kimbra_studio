@@ -103,7 +103,9 @@ KimbraStudio::Application.routes.draw do
   resources :studios
   resources :terms, :only => [:index]
   devise_for :users, path_names: {sign_up: 'register'}
-  resources :users
+  resources :users do
+
+  end
 
   match 'admin' => 'admin/overviews#index'
   match 'delivery' => 'shopping/carts#find_by_tracking'

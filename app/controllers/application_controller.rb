@@ -17,4 +17,10 @@ class ApplicationController < ActionController::Base
     @story, @storyline = Story.setup(request, controller_name, action_name, @client, @studio)
   end
 
+  private #=========================================================================
+
+  def authenticate_admin!
+    current_user && current_user.admin?
+  end
+
 end
