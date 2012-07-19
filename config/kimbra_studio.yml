@@ -24,7 +24,7 @@ development: &non_production_settings
   :mailer:
     :password:
   :stripe:
-    :name: clickplus1@gmail.com
+    :name: admin@kimbraclickplus.com
     :secret_key: '4osP7DgGMXX3Z4CWgkvT5q3EPBldxfss'
     :publishable_key: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs'
   :click_face:
@@ -51,7 +51,7 @@ production:
   :mailer:
     :dummy:
   :stripe:
-    :name: clickplus1@gmail.com
+    :name: admin@kimbraclickplus.com
     :secret_key:
     :publishable_key:
   :click_face:
