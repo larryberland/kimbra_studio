@@ -8,12 +8,8 @@ class KimbraMailer < ActionMailer::Base
   def send_order(cart_id, studio_id)
     @cart   = Shopping::Cart.find(cart_id)
     @studio = Studio.find(studio_id)
-
-    logo = ''
-    open('image.jpg', 'w') do |file|
-      logo << open(@studio.minisite.image_url).read
-    end
-    attachments.inline['logo.png'] = logo
+    @admin_customer_email = @cart.email
+    @show_status_only = true
     mail(bcc:     ['jim@jimjames.org'],
          subject: 'Another Order from KimbraClickPLUS.')
   end

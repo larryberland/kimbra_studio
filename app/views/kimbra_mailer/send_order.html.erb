@@ -26,55 +26,67 @@
 <p>Hi Kimbra Studios,</p>
 
 <p>
-  <%= t(:company) %> order number is <%= @cart.tracking %>.<br/>
+  <%= t(:company) %> order number is <%= @cart.tracking %><br/>
   You can view the
-  <%= link_to 'ClickPLUS order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart,  show_status_only: true ) %>.
+  <%= link_to 'ClickPLUS order at any time', order_status_minisite_email_url(id: @cart.email.id, cart: @cart, show_status_only: true) %>
+  .
 </p>
 
 <div>
-  Shipping to:
+  Ship to:
   <%= render 'shopping/addresses/show', address: @cart.address %>
 </div>
 
 <div>
   From Partner Studio:
   <% studio = @cart.email.my_studio_session.studio %>
-  <%= studio.name %><br>
-  <%= studio.phone_number %><br>
+  <%= studio.name %>
+  <br>
+  <%= studio.phone_number %>
+  <br>
   <%= render 'shared/addresses/show', resource: studio %>
 </div>
 
-<%= render 'shared/mailers/cart_items'%>
+<%= render 'shared/mailers/cart_items' %>
 
 <p>
- STRIPE CREDIT CARD RESPONSE: <%= link_to @cart.purchase.stripe_cart_token,  "https://manage.stripe.com/#test/payments/#{@cart.purchase.stripe_cart_token}" %>
+  STRIPE CREDIT CARD
+  RESPONSE: <%= link_to @cart.purchase.stripe_card_token, "https://manage.stripe.com/#test/payments/#{@cart.purchase.stripe_card_token}" %>
 </p>
 
 <% if (@cart.purchase.tax > 0) %>
-<p>
-  <%= @cart.purchase.tax_description.inspect %>
-</p>
+    <p>
+      <%= @cart.purchase.tax_description.inspect %>
+    </p>
 <% end %>
 
 <% @cart.items.each_with_index do |shopping_item, idx| %>
 
-   <%= "ITEM:#{idx}" %>
-   <% @admin_customer_offer = shopping_item.offer %>
-   <%= render 'minisite/offers/show' %>
+    <%= "ITEM: #{idx + 1}" %>
+    <% @admin_customer_offer = shopping_item.offer %>
+    <%= render 'minisite/offers/show',
+               admin_customer_offer: @admin_customer_offer,
+               admin_customer_email: @admin_customer_email,
+               shopping_item: shopping_item %>
 
-   <% @admin_customer_offer.items.each do |admin_customer_item| %>
-    <% @item = admin_customer_item %>
-    <%= render 'admin/customer/items/show' %>
-   <% end %>
+    <% @admin_customer_offer.items.each do |admin_customer_item| %>
+        <% @item = admin_customer_item %>
+        <%= render 'admin/customer/items/show' %>
+    <% end %>
 
-   <% @admin_customer_offer.portrait_list.each do |portrait| %>
-    <%= link_to "portrait", portrait.image_url(:face) %>
-   <% end %>
+    <% @admin_customer_offer.portrait_list.each do |portrait| %>
+        <p><%= link_to "Original portrait", portrait.image_url(:face) %></p>
+    <% end %>
 
 <% end %>
 
-not quite sure how to format this route helper, but you need to put the order tracking number in here as shopping_shipping/tracking/number)
- <%= link_to 'Click HERE to add UPS tracking number when shipping.', shopping_edit_delivery_tracking(@cart) %>
+<p>
+  <%= link_to 'Add the UPS tracking number to this order when shipping.', shopping_edit_delivery_tracking_url(shopping_cart: {tracking: @cart.tracking}) %>
+</p>
+
+<p>
+  <%= link_to 'Add UPS tracking number to any order.', delivery_url %>
+</p>
 
 </body>
 </html>

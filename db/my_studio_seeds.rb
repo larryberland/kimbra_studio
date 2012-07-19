@@ -88,6 +88,7 @@ class MyStudioSeeds
 
         # tie them all up into studio
         my_studio              = Studio.new(my_studio_attrs)
+        my_studio.state_id     = State.where(abbreviation: 'FL').first.id
         my_studio.current_user = owner
         my_studio.owner        = owner
         my_studio.sessions     = sessions

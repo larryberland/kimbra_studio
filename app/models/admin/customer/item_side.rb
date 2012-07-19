@@ -156,7 +156,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   end
 
   def image_title(attr)
-    u   = send("#{attr}_url")
+#    u   = send("#{attr}_url")
+    u = attr
     img = Magick::Image.read(u).first
     #img = attr.to_image
     "size #{img.columns} x #{img.rows}"
@@ -176,7 +177,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     res
   end
 
-  private
+  private #================================================================================================
 
   def crop_stock_image
     #puts ""

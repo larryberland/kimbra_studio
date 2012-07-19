@@ -1,8 +1,5 @@
 <p>
-  <b>Address:</b>
-  <%= resource.address_1 %>
-  <%= resource.address_2 %>
-</p>
-<p>
-  <%= "#{resource.city} #{resource.try(:state).try(:abbrev_and_name)} #{resource.zip_code}" %>
+  <%= resource.address_1 %><%= '<br/>'.html_safe if resource.address_2.present? %>
+  <%= resource.address_2 %><br/>
+  <%= "#{resource.city}, #{resource.try(:state).try(:abbrev_and_name)} #{resource.zip_code}" %>
 </p>
