@@ -27,7 +27,7 @@ opt_parser.parse!
 
 puts "processing #{options.environment} environment..."
 puts
-logged_in = `heroku auth:whoami` =~ /clickplus1@gmail.com/
+logged_in = `heroku auth:whoami` =~ /admin@kimbraclickplus.com/
 if logged_in
   list_of_vars = []
   sensitive = File.dirname(__FILE__) + "/../config/sensitive.yml"
