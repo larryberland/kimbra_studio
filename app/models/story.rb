@@ -18,12 +18,12 @@ class Story < ActiveRecord::Base
     where("created_at between '#{start_of_day}' and '#{start_of_next_day}'").
         order('created_at ASC') }
 
-  scope :with_name, where("last_name is not NULL").order('created_at ASC')
+  scope :with_name, where("name is not NULL")
 
-  scope :with_name_grouped_by_day, with_name.group("DATE(CONVERT_TZ(created_at,'+00:00','#{ActiveSupport::TimeZone.new("Eastern Time (US & Canada)").formatted_offset}'))")
+  scope :with_name_grouped_by_day, with_name.group("DATE(created_at)")
 
-  scope :without_name, where("last_name is NULL").order('created_at ASC')
-  scope :without_name_grouped_by_day, without_name.group("DATE(CONVERT_TZ(created_at,'+00:00','#{ActiveSupport::TimeZone.new("Eastern Time (US & Canada)").formatted_offset}'))")
+  scope :without_name, where("name is NULL")
+  scope :without_name_grouped_by_day, without_name.group("DATE(created_at)")
 
   def self.setup(request, controller_name, action_name, client, studio)
     user_agent = UserAgent.parse(request.user_agent)
