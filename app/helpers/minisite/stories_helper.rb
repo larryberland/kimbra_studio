@@ -18,7 +18,7 @@ module Minisite::StoriesHelper
   end
 
   def remote_link_for_ip_related_stories(story)
-    related = Story.where(:ip_address => story.ip_address)
+    related = Story.where(:ip_address => story.ip_address).where('ip_address is not NULL')
     if related.size > 1
       result = link_to story.name,
                        url_for(:controller => :stories, :action => :fetch, :ip_address => story.ip_address, :type => :related),

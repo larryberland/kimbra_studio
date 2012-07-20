@@ -8,10 +8,11 @@ module Minisite
 
     def index
       @dates = (7.days.ago.to_date..Date.today)
-      @with_names = Story.with_name.group("date(created_at), name, created_at").select("name,date(created_at)").size
-      @without_names = Story.without_name.group("date(created_at), name, created_at").select("name,date(created_at)").size
+      @with_names = Story.with_name_grouped_by_day.size
+      @without_names = Story.without_name_grouped_by_day.size
       @stories = Story.today
       @heading = "Stories for today"
+      @stats = Story.stats
       render :layout => 'application'
     end
 

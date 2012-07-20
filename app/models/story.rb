@@ -9,7 +9,7 @@ class Story < ActiveRecord::Base
   # We want these scopes to use Eastern time.
   scope :today, where("created_at between " +
                           " '#{ActiveSupport::TimeZone["Eastern Time (US & Canada)"].parse(Date.today.to_s).in_time_zone('UTC').strftime('%Y-%m-%d %H:%M')}' and " +
-                          " '#{Time.now.strftime('%Y-%m-%d %H:%M')}'").
+                          " '#{Time.now.strftime('%Y-%m-%d')} 23:59'").
       order('created_at ASC')
 
   scope :on_date, lambda { |date_obj|
@@ -18,9 +18,12 @@ class Story < ActiveRecord::Base
     where("created_at between '#{start_of_day}' and '#{start_of_next_day}'").
         order('created_at ASC') }
 
-  scope :with_name, where("name is not NULL").order('created_at ASC')
+  scope :with_name, where("last_name is not NULL").order('created_at ASC')
 
-  scope :without_name, where("name is NULL").order('created_at ASC')
+  scope :with_name_grouped_by_day, with_name.group("DATE(CONVERT_TZ(created_at,'+00:00','#{ActiveSupport::TimeZone.new("Eastern Time (US & Canada)").formatted_offset}'))")
+
+  scope :without_name, where("last_name is NULL").order('created_at ASC')
+  scope :without_name_grouped_by_day, without_name.group("DATE(CONVERT_TZ(created_at,'+00:00','#{ActiveSupport::TimeZone.new("Eastern Time (US & Canada)").formatted_offset}'))")
 
   def self.setup(request, controller_name, action_name, client, studio)
     user_agent = UserAgent.parse(request.user_agent)

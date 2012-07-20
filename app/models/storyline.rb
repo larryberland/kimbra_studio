@@ -17,9 +17,9 @@ class Storyline < ActiveRecord::Base
 
   def seconds_comment
     if seconds
-      "For #{seconds} seconds."
+      "#{seconds} seconds"
     else
-      "For unknown time."
+      "unknown"
     end
   end
 
