@@ -12,7 +12,6 @@ module Minisite
       @without_names = Story.without_name_grouped_by_day.size
       @stories = Story.today
       @heading = "Stories for today"
-      @stats = Story.stats
       render :layout => 'application'
     end
 

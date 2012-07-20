@@ -60,41 +60,8 @@ class Story < ActiveRecord::Base
     return story, storyline
   end
 
-  def identify(params)
-    self.update_attributes(
-        :first_name => params[:first_name],
-        :last_name => params[:last_name],
-        :city => params[:city],
-        :state => params[:state]) unless crawler
-  end
-
-  def referer_source
-    case referer
-      when /\?gclid=/i
-        'Google Adwords'
-      when /doubleclick/i
-        'Doubleclick'
-      when /74\.55\.82\./, /softpopads/i
-        'Softpop Ads'
-      when /ask\.com/i
-        query_string = referer.to_s.match(/q=.*?&/).to_s
-        qs_len = query_string.length
-        'Ask.com query: ' + query_string[2, qs_len - 3]
-      when nil
-        '(no referer)'
-      else
-        urlstring = referer.to_s.match(/:\/\/.*?\//).to_s
-        urlstring_len = urlstring.length
-        urlstring[3, urlstring_len - 4]
-    end
-  end
-
   def date
     created_at.to_date
-  end
-
-  def arrival_story
-    "arrived from #{referer_source}"
   end
 
 end
