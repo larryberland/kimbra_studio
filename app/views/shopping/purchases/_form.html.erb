@@ -13,6 +13,18 @@
         </div>
     <% end %>
 
+    <%= f.fields_for :cart, @cart do |g| %>
+        <%= g.fields_for :address, @cart.address do |h| %>
+            <%= h.hidden_field :name %>
+            <%= h.hidden_field :address1 %>
+            <%= h.hidden_field :address2 %>
+            <%= h.hidden_field :city %>
+            <%= h.hidden_field :state_name %>
+            <%= h.hidden_field :zip_code %>
+            <%= h.hidden_field :country_name %>
+        <% end %>
+    <% end %>
+
     <table align='center' class='field'>
       <tr>
         <td><%= "#{pluralize @cart.quantity, 'item'} in cart" %></td>

@@ -200,7 +200,6 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
     height = h.max
     width  = w.sum
-    # puts "    size=>#{width}x#{height}"
     # create the custom piece image that is the maximum size based on
     #   all the individual parts
     custom_piece = image_new(width, height)
