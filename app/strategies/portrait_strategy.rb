@@ -6,8 +6,9 @@ class PortraitStrategy
   def initialize(my_studio_session)
     raise "no portraits in session=>#{my_studio_session.inspect}" if my_studio_session.portraits.nil?
     @list = my_studio_session.portraits.collect do |portrait|
-      {:portrait => portrait, :used => false}
+      (portrait.active? and (portrait.faces.size > 0)) ?  {:portrait => portrait, :used => false} : {}
     end
+    @list.compact!
   end
 
   def portraits_by_parts(merchandise_piece)

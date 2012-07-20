@@ -25,6 +25,12 @@ subscription =
       cvc: $('#card_code').val()
       expMonth: $('#card_month').val()
       expYear: $('#card_year').val()
+      name: $('#shopping_purchase_cart_address_attributes_name').val()
+      address_line1: $('#shopping_purchase_cart_address_attributes_address1').val()
+      address_line2: $('#shopping_purchase_cart_address_attributes_address2').val()
+      address_state: $('#shopping_purchase_cart_address_attributes_state_name').val()
+      address_zip: $('#shopping_purchase_cart_address_attributes_zip_code').val()
+      address_country: $('#shopping_purchase_cart_address_attributes_country_name').val()
     Stripe.createToken(card, $('#shopping_purchase_total_cents').val(), subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->

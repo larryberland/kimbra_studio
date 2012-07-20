@@ -7,6 +7,8 @@ class Shopping::Address < ActiveRecord::Base
                   :address1, :address2, :city, :state, :state_id, :zip_code,
                   :email
 
+  attr_accessor :name, :state_name, :country_name
+
   accepts_nested_attributes_for :cart
 
   validates_presence_of :cart
@@ -26,6 +28,14 @@ class Shopping::Address < ActiveRecord::Base
 
   def phone=(ph)
     phone = ph.gsub(/\D/, '')
+  end
+
+  def state_name
+    state.try(:name)
+  end
+
+  def country_name
+    state.try(:country).try(:name)
   end
 
   private #=================================================================================
