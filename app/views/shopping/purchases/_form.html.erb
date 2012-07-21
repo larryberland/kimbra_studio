@@ -13,15 +13,16 @@
         </div>
     <% end %>
 
+    <%= f.hidden_field :stripe_create_token_response %>
+    <%= f.hidden_field :stripe_create_token_status %>
     <%= f.fields_for :cart, @cart do |g| %>
         <%= g.fields_for :address, @cart.address do |h| %>
             <%= h.hidden_field :name %>
             <%= h.hidden_field :address1 %>
             <%= h.hidden_field :address2 %>
-            <%= h.hidden_field :city %>
-            <%= h.hidden_field :state_name %>
+            <%= h.hidden_field :state_stripe %>
             <%= h.hidden_field :zip_code %>
-            <%= h.hidden_field :country_name %>
+            <%= h.hidden_field :country_stripe %>
         <% end %>
     <% end %>
 
@@ -55,7 +56,8 @@
       <tr>
         <td><%= label_tag :card_number, 'Credit Card Number' %></td>
         <td><%= text_field_tag :card_number, nil, :name => nil, :size => 18 %>
-          <div id="card_number_error"/></td>
+          <div id="card_number_error"/>
+        </td>
       </tr>
 
       <tr>

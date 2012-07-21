@@ -10,6 +10,14 @@ class State < ActiveRecord::Base
   validates :country_id,        :presence => true
   #validates :shipping_zone_id,  :presence => true
 
+  def stripe
+    abbreviation.to_s
+  end
+
+  def country_stripe
+    country.try(:stripe)
+  end
+
   # the abbreviation and name of the state separated by '-' and optionally appended by characters
   #
   # @param [none]

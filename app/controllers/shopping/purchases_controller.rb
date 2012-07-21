@@ -13,6 +13,10 @@ module Shopping
     end
 
     def create
+      # inherited resources doesn't seem to like having the cart info in here
+      logger.info "purchase/create shopping_purchase=>#{params[:shopping_purchase].inspect}"
+      cart_info = params[:shopping_purchase].delete(:cart)
+      logger.info "purchase/create params_after_delete=>#{params.inspect}"
       create! do
         if @purchase.errors.present?
           edit_shopping_cart_purchase_path(@cart)
@@ -34,6 +38,9 @@ module Shopping
     end
 
     def update
+      # inherited resources doesn't seem to like having the cart info in here
+      logger.info "purchase/update=>#{params[:shopping_purchase].inspect}"
+      cart_info = params[:shopping_purchase].delete(:cart)
       update! do
         if @purchase.errors.present?
           edit_shopping_cart_purchase_path(@cart)

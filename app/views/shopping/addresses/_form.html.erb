@@ -69,11 +69,11 @@
       </tr>
 
 
-      <div class="field">
-        <%= f.hidden_field :cart_id, value: @cart.id %>
-      </div>
-
     </table>
+
+    <div class="field">
+      <%= f.hidden_field :cart_id, value: @cart.id %>
+    </div>
 
     <div class="actions">
       <%= f.submit t(:shopping_submit_address), id: 'my_submit' %>

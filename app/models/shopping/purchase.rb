@@ -4,12 +4,17 @@ class Shopping::Purchase < ActiveRecord::Base
 
   serialize :tax_description
 
+  attr_accessor :stripe_create_token_response, :stripe_create_token_status
+
+
   belongs_to :cart, :class_name => 'Shopping::Cart'
   has_one :stripe_card, :class_name => 'Shopping::StripeCard'
 
   attr_accessible :cart, :cart_id,
                   :total_cents, :purchased_at,
-                  :stripe_card_token, :stripe_response_id, :stripe_paid, :stripe_fee
+                  :stripe_card_token, :stripe_response_id, :stripe_paid, :stripe_fee,
+                  :stripe_create_token_response,
+                  :stripe_create_token_status
 
   accepts_nested_attributes_for :stripe_card
 
@@ -77,8 +82,7 @@ class Shopping::Purchase < ActiveRecord::Base
   end
 
   def stripe_description
-    # TODO  "Charge for #{t(:stripe_description_prefix)}... for #{cart.email}"
-    "Charge for Kimbra Studios... for #{cart.email}"
+    "studio:#{cart.try(:email).try(:my_studio_session).try(:studio).try(:name)} for #{cart.try(:address).try(:email)} purchase:#{id}"
   end
 
   def create_stripe_card(stripe_card_hash)

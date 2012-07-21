@@ -10,6 +10,10 @@ class Country < ActiveRecord::Base
 
   ACTIVE_COUNTRY_IDS = [CANADA_ID, USA_ID]
 
+  def stripe
+    abbreviation.to_s
+  end
+
   # Call this method to display the country_abbreviation - country with and appending name
   #
   # @example abbreviation == USA, country == 'United States'

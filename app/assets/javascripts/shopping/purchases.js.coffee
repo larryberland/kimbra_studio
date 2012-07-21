@@ -28,12 +28,14 @@ subscription =
       name: $('#shopping_purchase_cart_address_attributes_name').val()
       address_line1: $('#shopping_purchase_cart_address_attributes_address1').val()
       address_line2: $('#shopping_purchase_cart_address_attributes_address2').val()
-      address_state: $('#shopping_purchase_cart_address_attributes_state_name').val()
+      address_state: $('#shopping_purchase_cart_address_attributes_state_stripe').val()
       address_zip: $('#shopping_purchase_cart_address_attributes_zip_code').val()
-      address_country: $('#shopping_purchase_cart_address_attributes_country_name').val()
+      address_country: $('#shopping_purchase_cart_address_attributes_country_stripe').val()
     Stripe.createToken(card, $('#shopping_purchase_total_cents').val(), subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
+    $('#shopping_purchase_stripe_create_token_status').val(status)
+    $('#shopping_purchase_stripe_create_token_response').val(response)
     if status == 200
       $('#shopping_purchase_stripe_card_token').val(response.id)
       frm = $('form.new_shopping_purchase')

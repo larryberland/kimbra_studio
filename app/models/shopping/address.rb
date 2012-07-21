@@ -5,9 +5,9 @@ class Shopping::Address < ActiveRecord::Base
   attr_accessible :cart_id, :cart,
                   :first_name, :last_name,
                   :address1, :address2, :city, :state, :state_id, :zip_code,
-                  :email
+                  :email, :phone, :country
 
-  attr_accessor :name, :state_name, :country_name
+  attr_accessor :name, :state_stripe, :country_stripe
 
   accepts_nested_attributes_for :cart
 
@@ -30,12 +30,12 @@ class Shopping::Address < ActiveRecord::Base
     phone = ph.gsub(/\D/, '')
   end
 
-  def state_name
-    state.try(:name)
+  def state_stripe
+    state.try(:stripe)
   end
 
-  def country_name
-    state.try(:country).try(:name)
+  def country_stripe
+    state.try(:country).try(:stripe)
   end
 
   private #=================================================================================
