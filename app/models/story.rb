@@ -18,12 +18,12 @@ class Story < ActiveRecord::Base
     where("created_at between '#{start_of_day}' and '#{start_of_next_day}'").
         order('created_at ASC') }
 
-  scope :with_name, where("last_name is not NULL").order('created_at ASC')
+  scope :with_name, where("name is not NULL")
 
-  scope :with_name_grouped_by_day, with_name.group("DATE(CONVERT_TZ(created_at,'+00:00','#{ActiveSupport::TimeZone.new("Eastern Time (US & Canada)").formatted_offset}'))")
+  scope :with_name_grouped_by_day, with_name.group("DATE(created_at)")
 
-  scope :without_name, where("last_name is NULL").order('created_at ASC')
-  scope :without_name_grouped_by_day, without_name.group("DATE(CONVERT_TZ(created_at,'+00:00','#{ActiveSupport::TimeZone.new("Eastern Time (US & Canada)").formatted_offset}'))")
+  scope :without_name, where("name is NULL")
+  scope :without_name_grouped_by_day, without_name.group("DATE(created_at)")
 
   def self.setup(request, controller_name, action_name, client, studio)
     user_agent = UserAgent.parse(request.user_agent)
@@ -60,41 +60,8 @@ class Story < ActiveRecord::Base
     return story, storyline
   end
 
-  def identify(params)
-    self.update_attributes(
-        :first_name => params[:first_name],
-        :last_name => params[:last_name],
-        :city => params[:city],
-        :state => params[:state]) unless crawler
-  end
-
-  def referer_source
-    case referer
-      when /\?gclid=/i
-        'Google Adwords'
-      when /doubleclick/i
-        'Doubleclick'
-      when /74\.55\.82\./, /softpopads/i
-        'Softpop Ads'
-      when /ask\.com/i
-        query_string = referer.to_s.match(/q=.*?&/).to_s
-        qs_len = query_string.length
-        'Ask.com query: ' + query_string[2, qs_len - 3]
-      when nil
-        '(no referer)'
-      else
-        urlstring = referer.to_s.match(/:\/\/.*?\//).to_s
-        urlstring_len = urlstring.length
-        urlstring[3, urlstring_len - 4]
-    end
-  end
-
   def date
     created_at.to_date
-  end
-
-  def arrival_story
-    "arrived from #{referer_source}"
   end
 
 end
