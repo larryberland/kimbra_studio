@@ -3,10 +3,12 @@ module Shopping
 
     def new
       @states = State.form_selector
+      @storyline.describe "Entering new address."
       new!
     end
 
     def create
+      @storyline.describe "Creating new address."
       create! do
         if @address.errors.present?
           @states = State.form_selector
@@ -22,11 +24,13 @@ module Shopping
     end
 
     def edit
+      @storyline.describe "Editing the address."
       @states = State.form_selector
       edit!
     end
 
     def update
+      @storyline.describe "Updating the address."
       update! do
         if @address.errors.present?
           edit_shopping_address_path(@address)

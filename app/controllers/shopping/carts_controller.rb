@@ -11,6 +11,10 @@ module Shopping
       render layout: false
     end
 
+    def show
+      @storyline.describe "Viewing cart (#{@cart.quantity} pieces present)."
+    end
+
     def edit_delivery_tracking
       if params[:shopping_cart] && params[:shopping_cart][:tracking].present?
         if @cart = Shopping::Cart.find_by_tracking(params[:shopping_cart][:tracking])

@@ -5,37 +5,32 @@
 
       %table#story_table.table.table-condensed
         %thead
-          %tr
-            %th{style: 'width:75px;'}
-            %th Anonymous
-            %th Named
         %tbody
           - @dates.each do |date|
             %tr
-              %td= date.to_s
-              %td= remote_link_for_fetching_stories(date, @without_names, :without)
-              %td= remote_link_for_fetching_stories(date, @with_names, :with)
+              %td= date_with_day(date)
+              %td.right= remote_link_for_fetching_stories(date, @with_names, :with)
 
       %table#story_table.table.table-condensed
         %thead
           %tr
-            %th Browser
+            %th Browsers
             %th
         %tbody
           - @stats[:browsers].each do |browser,count|
             %tr
               %td= browser
-              %td= "#{((count.to_f / @stats[:total]) * 100).round(0)}%"
+              %td.right= "#{((count.to_f / @stats[:total]) * 100).round(0)}%"
 
       %table#story_table.table.table-condensed
         %thead
           %tr
-            %th Operating System
+            %th PCs or Macs
             %th
         %tbody
           - @stats[:oses].each do |os,count|
             %tr
               %td= os
-              %td= "#{((count.to_f / @stats[:total]) * 100).round(0)}%"
+              %td.right= "#{((count.to_f / @stats[:total]) * 100).round(0)}%"
   .span11#stories_display
     =render 'stories', :object => @stories, :locals => {:heading => @heading}

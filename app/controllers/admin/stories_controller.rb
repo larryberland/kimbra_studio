@@ -23,10 +23,10 @@ module Admin
       case type
         when 'with'
           @stories = Story.with_name.on_date(date)
-          @heading = "Named Stories for #{date.to_s(:db)}"
+          @heading = "Stories for #{view_context.date_with_day(date)}".html_safe
         when 'without'
           @stories = Story.without_name.on_date(date)
-          @heading = "Anonymous Stories for #{date.to_s(:db)}"
+          @heading = "Anonymous Stories for #{view_context.date_with_day(date)}".html_safe
         when 'related'
           @stories = Story.where(:ip_address => ip).order("date DESC")
           @heading = "Stories from #{ip}"

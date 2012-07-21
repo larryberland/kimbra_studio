@@ -12,7 +12,7 @@ module Minisite
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
       @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
-      @storyline.describe "Viewing offers page."
+      @storyline.describe 'Viewing collection page.'
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @admin_customer_offers }
@@ -24,7 +24,7 @@ module Minisite
     def show
       @admin_customer_offer.update_attribute :visited_at, Time.now
       @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
-      @storyline.describe "Viewing offer #{@admin_customer_offer.name}"
+      @storyline.describe "Viewing #{@admin_customer_offer.name} offer."
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @admin_customer_offer }

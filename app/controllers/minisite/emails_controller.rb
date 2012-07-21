@@ -6,12 +6,22 @@ module Minisite
     def about
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
       set_cart_and_client_and_studio
+      @storyline.describe "Viewing About #{@studio.name}."
+    end
+
+    def contact
+      @storyline.describe 'Viewing Contact Us.'
+    end
+
+    def privacy
+      @storyline.describe 'Viewing Privacy statement.'
     end
 
     # Accepts cart tracking.
     def order_status
       @cart_order = Shopping::Cart.find_by_tracking(params[:cart])
       return render(text: "No cart found with tracking number: #{params[:cart]}.") unless @cart_order
+      @storyline.describe 'Viewing completed order receipt page.'
       # Because we are skipping before_filters, need to set these up here.
       @admin_customer_email = @cart_order.email
       @studio = @admin_customer_email.my_studio_session.studio
@@ -25,9 +35,9 @@ module Minisite
       address = @admin_customer_email.my_studio_session.client.email
       if address
         Unsubscribe.create(email: address) unless Unsubscribe.exists?(email: address)
-        @storyline.describe 'Unsubscribing from emails.'
+        @storyline.describe "Unsubscribing #{@client.name} from emails (#{address})."
       else
-        @storyline.describe 'Cannot unsubscribe. No email found with that tracking number.'
+        @storyline.describe "Cannot unsubscribe. No email found with tracking number #{params[:id]}."
         return render(text: 'No email found with that tracking number.')
       end
     end
