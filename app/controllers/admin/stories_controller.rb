@@ -1,10 +1,11 @@
-module Minisite
+module Admin
   class StoriesController < ApplicationController
 
     skip_before_filter :setup_story
-    skip_before_filter :authenticate_user!
+    before_filter :authenticate_user!
+    before_filter :authenticate_admin!
 
-    layout nil
+    layout 'story'
 
     def index
       @dates = (7.days.ago.to_date..Date.today)
@@ -12,7 +13,7 @@ module Minisite
       @without_names = Story.without_name_grouped_by_day.size
       @stories = Story.today
       @heading = "Stories for today"
-      render :layout => 'application'
+      @stats = Story.stats
     end
 
     def fetch

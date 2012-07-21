@@ -1,0 +1,13 @@
+.whitebox
+  %h2= @heading
+
+  - @stories.includes(:storylines).each do |story|
+    %p.story_name_line
+      = remote_link_for_ip_related_stories(story)
+      %span{ :title => "#{story.browser} (#{story.version}) on #{story.os}" }
+        = "at #{story.created_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %b %d %I:%M%p")}"
+    %dl.dl-horizontal
+      - story.storylines.sort{|a,b| a.created_at <=> b.created_at}.each do |storyline|
+        %dt= storyline.seconds_comment
+        %dd{ :title=> storyline.url}= storyline.description.html_safe
+    %hr

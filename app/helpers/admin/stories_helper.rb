@@ -1,4 +1,4 @@
-module Minisite::StoriesHelper
+module Admin::StoriesHelper
 
   def remote_link_for_fetching_stories(date, collection, type)
     figure = collection[date.to_s(:db)]

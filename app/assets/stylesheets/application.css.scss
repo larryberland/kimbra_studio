@@ -13,6 +13,7 @@
  *= require scaffolds
  *= require_tree ../../../vendor/assets/stylesheets
  *= require blueprint
+ *= require stories
 */
 
 html, body {
@@ -220,6 +221,11 @@ div#main_nav {
 
 div.menu_item {
   float: left;
+  padding: 3px 20px 3px 5px;
+}
+
+div.menu_item_right {
+  float: right;
   padding: 3px 20px 3px 5px;
 }
 

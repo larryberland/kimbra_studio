@@ -38,6 +38,9 @@
           <div class='menu_item'>
             <%= link_to 'Users', users_path %>
           </div>
+          <div class='menu_item_right'>
+            <%= link_to 'Stories', admin_stories_path %>
+          </div>
       <% else %>
           <div class='menu_item'>
             <%= link_to t(:my_studio_overview_link), my_studio_dashboard_path %>
