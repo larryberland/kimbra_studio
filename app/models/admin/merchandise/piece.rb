@@ -14,15 +14,26 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   scope :under_price, lambda { |price_value| where('price < ?', price_value) }
   scope :by_name, lambda { |name| where('name like ?', name) }
 
+  scope :by_category, lambda { |category| where('active=? and category IN(?)', true, category) }
+  scope :for_strategy, lambda { |categories| where('active=? and category IN(?)', true, categories) }
+  scope :for_bracelets, lambda { by_category('Photo Bracelets') }
+
+  # determines both the number of offers we send out and from which category
+  #  when the Holiday's start we can just add to this array
+  def self.strategy_categories
+    ['Photo Necklaces', 'Photo Charms']
+  end
+
+  def self.to_strategy_category(category)
+    by_category(category).all.select{|r| r.photo_parts.present?}
+  end
 
   # return a hash of all pieces to use when deciding
   #   on a strategy for sending offers to prospective clients
   def self.to_strategy
     # currently using everything except Holiday category
     #   and the admin has set Active in the database
-    by_category = are_active.all.group_by { |r| r.category }
-    by_category.delete('Holiday')
-    by_category
+    strategy_categories.collect{|category| to_strategy_category(category)}.flatten.group_by{|r| r.category}
   end
 
   def photo_parts
