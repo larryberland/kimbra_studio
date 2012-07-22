@@ -13,11 +13,18 @@ class MyStudio::Session < ActiveRecord::Base
     where('session_at >= ?', 7.days.ago(Date.today))
   }
 
+  def previous_offers
+    if @previous_offers.nil?
+      @previous_offers = emails.collect{ |r| r.offers}.flatten if emails
+    end
+    @previous_offers
+  end
+
   def email_ready?
     portraits.count > 2
   end
 
-  # allow the forms to send in a text name
+          # allow the forms to send in a text name
   def category_name=(category_name)
     self.category = Category.find_or_initialize_by_name(category_name)
   end

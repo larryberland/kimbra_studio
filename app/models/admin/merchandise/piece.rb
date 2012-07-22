@@ -9,7 +9,21 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   has_many :offers, :class_name => 'Admin::Email::Offer'
   has_many :parts, :class_name => 'Admin::Merchandise::Part', :dependent => :destroy
 
-  scope :pick, lambda{|previous_picks| where('id not in (?)', previous_picks)}
+  scope :pick, lambda { |previous_picks| where('id not in (?)', previous_picks) }
+  scope :are_active, lambda { where('active = ?', true) }
+  scope :under_price, lambda { |price_value| where('price < ?', price_value) }
+  scope :by_name, lambda { |name| where('name like ?', name) }
+
+
+  # return a hash of all pieces to use when deciding
+  #   on a strategy for sending offers to prospective clients
+  def self.to_strategy
+    # currently using everything except Holiday category
+    #   and the admin has set Active in the database
+    by_category = are_active.all.group_by { |r| r.category }
+    by_category.delete('Holiday')
+    by_category
+  end
 
   def photo_parts
     parts.select { |part| part.photo? }

@@ -1,8 +1,8 @@
 class Admin::Customer::Email < ActiveRecord::Base
 
-  attr_accessible :description, :message, :generated_at, :sent_at, :active, :tracking
+  attr_accessible :description, :message, :generated_at, :sent_at, :active, :tracking,
+                  :my_studio_session
 
-  before_create :set_tracking
   before_save :set_message
 
   belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => 'my_studio_session_id'
@@ -11,16 +11,17 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   scope :by_session, lambda { |studio_session_id| where('my_studio_session_id = ?', studio_session_id) }
 
+  after_initialize do |email|
+    email.tracking = UUID.random_tracking_number
+  end
+
   # So that tracking number will be the id in params.
     def to_param
       tracking
     end
 
   def self.test_piece(piece)
-    email = Admin::Customer::Email.new
-    tracking = UUID.random_tracking_number
-    email.tracking = tracking
-    email.my_studio_session = MyStudio::Session.first
+    email = Admin::Customer::Email.new(my_studio_session: MyStudio::Session.first)
 
     piece_strategy_list = [piece]
 
@@ -42,11 +43,7 @@ class Admin::Customer::Email < ActiveRecord::Base
   end
 
   def self.generate(studio_session)
-    email = Admin::Customer::Email.new
-
-    tracking = UUID.random_tracking_number
-    email.tracking = tracking
-    email.my_studio_session = studio_session
+    email = Admin::Customer::Email.new(my_studio_session: studio_session)
 
     # setup merchandise piece pick_list strategy
 
@@ -59,7 +56,7 @@ class Admin::Customer::Email < ActiveRecord::Base
     #piece_strategy_list = PieceStrategy.new.pick_category(categories[4]) # testing
     # end of test
 
-    piece_strategy_list = PieceStrategy.new.pick_pieces
+    piece_strategy_list = PieceStrategy.new(email).pick_pieces
 
     # setup portrait pick_list strategy
     portrait_strategy_list = PortraitStrategy.new(studio_session)
@@ -78,6 +75,18 @@ class Admin::Customer::Email < ActiveRecord::Base
     email
   end
 
+  def previous_emails
+    raise "did you forget to set my_studio_session" if my_studio_session.nil?
+    @previous_emails = my_studio_session.emails if @previous_emails.nil?
+    @previous_emails
+  end
+
+  # list of all previous offers sent to the studio_session's clients
+  def previous_offers
+    raise "did you forget to set my_studio_session" if my_studio_session.nil?
+    my_studio_session.previous_offers
+  end
+
   def sort_session_name
     my_studio_session.name
   end
@@ -93,8 +102,5 @@ class Admin::Customer::Email < ActiveRecord::Base
     self.message = I18n.translate(:email_message, :name => my_studio_session.client.name.titleize) unless message
   end
 
-  def set_tracking
-    self.tracking = UUID.random_tracking_number unless tracking
-  end
 
 end
