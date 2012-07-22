@@ -10,7 +10,9 @@
       <th>Client</th>
       <th>Emails</th>
       <th>Portraits</th>
-      <% if current_user.admin? %><th>&nbsp;</th><% end %>
+      <% if current_user.admin? %>
+          <th>Actions</th>
+      <% end %>
       <th>Session Date</th>
     </tr>
 

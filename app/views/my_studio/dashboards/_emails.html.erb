@@ -3,11 +3,14 @@
 </div>
 <div class='panel_contents'>
 
-  <% if sessions.collect{|s| s.emails.count}.sum.to_i == 0 %>
+  <% if sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
       <h2 class='motivation'>&#x2718; No emails this past week - no portraits uploaded?</h2>
   <% else %>
       <table id='dashboard_emails'>
         <tr>
+          <% if current_user.admin? %>
+              <th>studio</th>
+          <% end %>
           <th>photo session</th>
           <th>client</th>
           <th class='right'>how many<br/>offers</th>
@@ -19,6 +22,9 @@
         <% sessions.each do |session| %>
             <% session.emails.each do |email| %>
                 <tr>
+                  <% if current_user.admin? %>
+                      <td><%= session.studio.name %></td>
+                  <% end %>
                   <td><%= link_to session.name, my_studio_session_path(session) %></td>
                   <td><%= session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %></td>
                   <td style='text-align:right;'><%= email.try(:offers).try(:count) %></td>

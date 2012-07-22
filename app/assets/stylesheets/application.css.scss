@@ -192,15 +192,12 @@ p {
   font-size: 26px;
   color: silver;
   padding: 10px 20px 10px 0;
-  float: left;
-  clear: left;
 }
 
 form.button_to {
   margin: 0;
   padding: 0;
-  float: left;
-/*   display:inline;   */
+  display: inline;
 }
 
 form.button_to div, form.button_to div input {

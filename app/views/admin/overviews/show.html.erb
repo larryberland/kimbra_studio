@@ -1,11 +1,11 @@
 <h1 style='text-align:left;'> <%= t(:admin_overview_title) %> </h1>
 
-<div class='span-18 column' style='width:708px;'>
+<div class='span-24 column'>
   <div class='container'>
     <%= render 'my_studio/dashboards/sessions', sessions: @sessions %>
   </div>
   <div class='ar-widget'>
-    <h3 style='text-align:left;'> <%= t(:admin_overview_label_emails) %> </h3>
+    <%= render 'my_studio/dashboards/emails', sessions: @sessions %>
     <%= link_to t(:admin_overview_link_emails), admin_customer_emails_path %>
   </div>
   <div class='ar-widget'>

@@ -140,9 +140,9 @@ en:
   admin_overview_link_emails: "View Customer Emails"
   admin_overview_label_merchandise: "Merchandise"
   admin_overview_link_merchandise: "View Merchandise Pieces"
-  admin_overview_label_studios: "Kimbra ClickPLUS Studios"
+  admin_overview_label_studios: "Studios"
   admin_overview_link_studios: "View Kimbra ClickPLUS Studios"
-  admin_overview_label_users: "Kimbra ClickPLUS Users"
+  admin_overview_label_users: "Users"
   admin_overview_link_users: "View Kimbra ClickPLUS Users"
   
   # admin/customer/emails
