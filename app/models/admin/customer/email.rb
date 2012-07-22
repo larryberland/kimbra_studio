@@ -16,9 +16,20 @@ class Admin::Customer::Email < ActiveRecord::Base
   end
 
   # So that tracking number will be the id in params.
-    def to_param
-      tracking
+  def to_param
+    tracking
+  end
+
+  # Typically called as a rake task from the cron hourly.
+  def self.send_offer_emails
+    sent = 0
+    Admin::Customer::Email.where('sent_at is NULL and active = ?', true).each do |email|
+      email.send_offers unless Unsubscribe.exists?(email: email.my_studio_session.client.email)
+      puts "Sent daily offer for #{Date.today} to #{}"
+      sent += 1
     end
+    puts "Sent #{sent} offer emails."
+  end
 
   def self.test_piece(piece)
     email = Admin::Customer::Email.new(my_studio_session: MyStudio::Session.first)

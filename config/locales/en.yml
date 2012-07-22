@@ -148,7 +148,7 @@ en:
   # admin/customer/emails
   admin_customer_emails_new_title: 'New Customer Email'
   admin_customer_emails_new_link: 'New Email'
-  admin_customer_emails_index_title: 'Listing Customer Emails'
+  admin_customer_emails_index_title: 'Listing all sent and unsent Customer Emails'
   admin_customer_emails_edit_title: 'Editing Customer Email'
 
   # admin/customer/items
