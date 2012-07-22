@@ -14,7 +14,7 @@ module Shopping
     def create
       params[:cart_id] = params[:shopping_item][:cart_id]
       params[:offer_id] = params[:shopping_item][:offer_id]
-      @storyline.describe "Adding offer #{Admin::Customer::Offer.find(params[:offer_id])} to cart."
+      @storyline.describe "Adding #{@admin_customer_offer.name} to cart."
       item_already_in_cart = @cart.items.where(:offer_id => params[:offer_id]).first
       if item_already_in_cart
         item_already_in_cart.update_attribute :quantity, item_already_in_cart.quantity.to_i + 1

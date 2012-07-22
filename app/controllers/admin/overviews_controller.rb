@@ -1,7 +1,5 @@
 class Admin::OverviewsController < ApplicationController
 
-  helper SwitchUserHelper
-
   # GET /admin/overview
   # GET /admin/overview.json
   def show

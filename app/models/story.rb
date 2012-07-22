@@ -64,4 +64,10 @@ class Story < ActiveRecord::Base
     created_at.to_date
   end
 
+  def self.stats
+      {:total => Story.count,
+       :browsers => Story.group(:browser).count,
+       :oses => Story.group(:os).count}
+    end
+
 end

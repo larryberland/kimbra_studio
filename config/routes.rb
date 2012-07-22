@@ -22,6 +22,8 @@ KimbraStudio::Application.routes.draw do
       end
     end
     resource :overview, :only => [:show]
+    match "stories/fetch", controller: :stories, action: :fetch
+    resources :stories
   end
 
   resources :categories # studio session categories
@@ -51,8 +53,6 @@ KimbraStudio::Application.routes.draw do
       end
       resources :items
     end
-    match "stories/fetch", controller: :stories, action: :fetch
-    resources :stories
   end
 
   namespace :myaccount do

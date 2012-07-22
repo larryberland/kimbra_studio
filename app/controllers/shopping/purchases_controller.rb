@@ -6,6 +6,7 @@ module Shopping
                :singleton    => true
 
     def new
+      @storyline.describe 'Viewing credit card purchase page.'
       new! do
         @purchase.cart        = @cart
         @purchase.total_cents = @purchase.total * 100.0
@@ -19,8 +20,10 @@ module Shopping
       logger.info "purchase/create params_after_delete=>#{params.inspect}"
       create! do
         if @purchase.errors.present?
+          @storyline.describe "Errors in cart: #{@purchase.errors.full_messages}."
           edit_shopping_cart_purchase_path(@cart)
         else
+          @storyline.describe "Cart purchased!"
           ClientMailer.delay.send_order_confirmation(@cart.id, @studio.id)
           KimbraMailer.delay.send_order(@cart.id, @studio.id)
           # After the credit card is run (successful create) we need to close out
@@ -43,8 +46,10 @@ module Shopping
       cart_info = params[:shopping_purchase].delete(:cart)
       update! do
         if @purchase.errors.present?
+          @storyline.describe "Errors in updated cart: #{@purchase.errors.full_messages}."
           edit_shopping_cart_purchase_path(@cart)
         else
+          @storyline.describe 'Edited cart purchased!'
           # After the credit card is run (successful create) we need to close out
           # this cart so that the consumer will start a new one if they want to make
           # more purchases.

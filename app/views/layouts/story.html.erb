@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>KimbraClickPLUS loves photographers!</title>
+  <title>Mindreading</title>
 
-  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'application', 'stories' %>
 
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
@@ -25,12 +25,12 @@
 
   <%= render 'shared/main_header' %>
 
-  <div id='content_wrapper' class='container marketing'>
+  <div id='content' class='container'>
     <%= yield %>
   </div>
 </div>
 
-<div id='footer' class='bp'>
+<div id="footer" class='bp'>
   <ul id='main-footer-tabs'>
     <li><%= link_to_unless_current 'Terms & Conditions', terms_path %></li>
     |

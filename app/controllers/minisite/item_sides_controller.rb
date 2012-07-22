@@ -11,21 +11,18 @@ class Minisite::ItemSidesController < InheritedResources::Base
     portrait_attrs = params[:admin_customer_item_side].delete(:portrait_attributes)
     @portrait = MyStudio::Portrait.find(portrait_attrs[:id])
     params[:admin_customer_item_side][:portrait] = @portrait
-
     success = @item_side.update_attributes(params[:admin_customer_item_side])
-
     if success
+      @storyline.describe 'Saved item side.'
       @offer.update_front_side(@item_side.item)
       success = @offer.save
     end
-
     respond_to do |format|
       if success
-
         format.html { redirect_to minisite_offer_url(@item_side.item.offer), notice: 'Item was successfully updated.' }
         format.json { head :ok }
       else
-        format.html { render action: "edit" }
+        format.html { render action: 'edit' }
         format.json { render json: @item_side.errors, status: :unprocessable_entity }
       end
     end
@@ -33,16 +30,18 @@ class Minisite::ItemSidesController < InheritedResources::Base
 
           # get /minisite/offers/tracking/portrait
   def portrait
+    @storyline.describe 'Selecting a new portrait.'
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
   end
 
   def stock
+    @storyline.describe 'Selecting stock portrait.'
     @portrait = MyStudio::Portrait.find(params[:item_side_id]) rescue nil
     render :portrait
   end
 
   def edit
-    @storyline.describe "Editing item side"
+    @storyline.describe 'Editing item side.'
   end
 
   private #==========================================================================
