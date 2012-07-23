@@ -1,0 +1,36 @@
+<div id='title_bar'>
+  <h3>Emails ready to be sent</h3>
+</div>
+<div class='panel_contents'>
+  <% ready_emails = sessions.collect { |s| s.emails.where('sent_at is NULL and active = ?', true) }.flatten %>
+  <% if ready_emails.present? %>
+      <table>
+        <tr>
+          <% if current_user.admin? %>
+              <th>studio</th>
+          <% end %>
+          <th>photo session</th>
+          <th>client</th>
+          <th class='right'>how many<br/>offers</th>
+          <th>Actions</th>
+        </tr>
+        <% ready_emails.each do |email| %>
+            <% session.emails.each do |email| %>
+                <tr>
+                  <% if current_user.admin? %>
+                      <td><%= email.session.studio.name %></td>
+                  <% end %>
+                  <td><%= link_to email.session.name, my_studio_session_path(session) %></td>
+                  <td><%= email.session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.session.client.email) %></td>
+                  <td style='text-align:right;'><%= email.try(:offers).try(:count) %></td>
+                  <td><%= link_to 'Send email', send_offers_admin_customer_email_url(email), confirm: 'xxx', remote: true %></td>
+                </tr>
+            <% end %>
+        <% end %>
+      </table>
+      <br/>
+      <%= link_to 'Send all ready emails', 'xxx' %>
+  <% else %>
+      <p>None</p>
+  <% end %>
+</div>

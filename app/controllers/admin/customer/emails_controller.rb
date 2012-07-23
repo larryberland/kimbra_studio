@@ -84,6 +84,11 @@ class Admin::Customer::EmailsController < ApplicationController
     render :edit
   end
 
+  def send_offers
+    Admin::Customer::Email.find(params[:id]).send_offers
+    render text: 'email will be sent soon'
+  end
+
   # GET /admin/customer/emails/session_id/session
   # GET /admin/customer/emails/session_id/session/.json
   def session_list

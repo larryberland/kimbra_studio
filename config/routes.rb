@@ -10,6 +10,7 @@ KimbraStudio::Application.routes.draw do
         member do
           post :generate
           get :session_list
+          get :send_offers
         end
         resources :offers do
           resources :items
