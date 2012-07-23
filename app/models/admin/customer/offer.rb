@@ -106,6 +106,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
     self
   end
 
+  # list of portrait's used by all items in this offer
+  def item_portrait_list
+    items.each.collect{|item|item.portrait_list}.compact if items.present?
+  end
           # span text for Offer
   def to_image_span
     text = name.to_s

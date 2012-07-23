@@ -29,6 +29,11 @@ class Admin::Customer::Item < ActiveRecord::Base
     item
   end
 
+  # list of portraits used in this item
+  def portrait_list
+    item_sides.collect{|item_side| item_side.try(:portrait)} if item_sides.present?
+  end
+
   def front
     item_sides[0]
   end

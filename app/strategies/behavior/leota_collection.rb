@@ -120,11 +120,11 @@ module LeotaCollection
   end
 
   def select_from_unused_matches(number_of_faces)
-    select_from_face_list(match_faces_to_parts(number_of_faces))
+    select_from_face_list(faces_to_parts_strategy(number_of_faces))
   end
 
   def select_from_used_matches(number_of_faces)
-    select_from_face_list(match_faces_to_parts(number_of_faces, used=true))
+    select_from_face_list(faces_to_parts_strategy(number_of_faces, used=true))
   end
 
 end

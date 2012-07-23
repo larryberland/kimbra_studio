@@ -13,9 +13,25 @@ class MyStudio::Session < ActiveRecord::Base
     where('session_at >= ?', 7.days.ago(Date.today))
   }
 
+  def to_strategy_portrait
+    raise "did you forget to upload portraits?" if portraits.empty?
+    used_list = previous_offers.collect { |offer| offer.item_portrait_list }.flatten.compact.uniq
+    used_ids  = used_list.collect(&:id)
+    list      = portraits.collect do |portrait|
+      if (portrait.active? and (portrait.faces.size > 0))
+        {portrait:      portrait,
+         used:          false,
+         used_previous: used_ids.include?(portrait.id)}
+      else
+        nil
+      end
+    end
+    list.compact
+  end
+
   def previous_offers
     if @previous_offers.nil?
-      @previous_offers = emails.collect{ |r| r.offers}.flatten if emails
+      @previous_offers = emails.collect { |r| r.offers }.flatten if emails
     end
     @previous_offers
   end
