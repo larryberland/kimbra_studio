@@ -1,7 +1,7 @@
 module Minisite
   class EmailsController < BaseController
 
-    skip_before_filter :set_by_tracking, :set_cart_and_client_and_studio, only: :order_status
+    skip_before_filter :set_by_tracking, :set_cart_and_client_and_studio, only: [:order_status, :about]
 
     def about
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
