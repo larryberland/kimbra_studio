@@ -4,7 +4,6 @@ class PortraitStrategy
   include LeotaCollection
 
   def initialize(my_studio_session)
-    puts "#{self}"
     raise "no portraits in session=>#{my_studio_session.inspect}" if my_studio_session.portraits.nil?
     @list     = my_studio_session.to_strategy_portrait
     # Hash of portrait info grouped_by number of faces for quicker access
@@ -194,7 +193,15 @@ class PortraitStrategy
 
   # Face information that doesn't care if they match the number of parts
   def grab_faces_not_used(faces_needed)
-    grab_faces_current(used=false, faces_needed)
+    faces = grab_faces_current(used=false, faces_needed)
+    if faces.present?
+      #  mark as being used
+      portrait_ids = faces.collect { |r| r.portrait.id }.compact
+      @list.each do |entry|
+        entry[:used] = true if portrait_ids.include?(entry[:portrait].id)
+      end
+    end
+    faces
   end
 
   def grab_faces_used(faces_needed)
@@ -202,7 +209,16 @@ class PortraitStrategy
   end
 
   def grab_faces_not_used_previously(faces_needed)
-    grab_faces_previous(previously_used=false, faces_needed)
+    faces = grab_faces_previous(previously_used=false, faces_needed)
+
+    if faces.present?
+      #  mark as being used
+      portrait_ids = faces.collect { |r| r.portrait.id }.compact
+      @list.each do |entry|
+        entry[:used_previous] = true if portrait_ids.include?(entry[:portrait].id)
+      end
+    end
+    faces
   end
 
   def grab_faces_used_previously(faces_needed)
@@ -217,18 +233,11 @@ class PortraitStrategy
 
   def grab_faces_current(used, faces_needed)
     list    = @list.select { |entry| (entry[:used] == used) and (entry[:portrait].faces.size.to_i > 0) }
-    grabbed = 0
-    faces   = list.collect do |entry|
-      if (used == false) and (grabbed <= faces_needed)
-        entry[:used] = true # mark portrait as used
-      end
-      grabbed += entry[:portrait].faces.size
-      entry[:portrait].faces
-    end.flatten
+    faces   = list.collect {|entry| entry[:portrait].faces}.flatten
     faces[0...faces_needed]
   end
 
-  # all faces regardless of used or not
+# all faces regardless of used or not
   def grab_faces
     list = @list.select { |entry| (entry[:portrait].faces.size.to_i > 0) }
     list.collect { |entry| entry[:portrait].faces }.flatten.compact
@@ -247,4 +256,5 @@ class PortraitStrategy
       puts "used=>#{entry[:used]} faces=>#{entry[:portrait].faces.size} portrait=>#{entry[:portrait].id}"
     end if Rails.env.development?
   end
+
 end
