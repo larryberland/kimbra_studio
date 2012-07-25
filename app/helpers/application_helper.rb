@@ -118,4 +118,7 @@ module ApplicationHelper
     end
   end
 
+  def link_to_destroy(url)
+    is_admin? ? link_to( t(:destroy), url, confirm: t(:link_destroy_confirm), method: :delete) : ''
+  end
 end

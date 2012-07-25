@@ -1,8 +1,6 @@
-<h1><%=t(:my_studio_sessions_index_title, name: studio_name)%></h1>
+<h1><%= t(:my_studio_sessions_index_title, name: studio_name) %></h1>
 
 <%= link_to t(:my_studio_sessions_new_link), new_my_studio_session_path %>
-<br/>
-<%= link_to t(:my_studio_overview_link), my_studio_overview_path %>
 
 <table>
   <tr>
@@ -17,19 +15,19 @@
     <th></th>
   </tr>
 
-<% @my_studio_sessions.each do |my_studio_session| %>
-  <tr>
-    <td><%= my_studio_session.name %></td>
-    <td><%= my_studio_session.session_at %></td>
-    <td><%= my_studio_session.active %></td>
-    <td><%= my_studio_session.category_name %></td>
-    <td><%= my_studio_session.client.try(:name) %></td>
-    <% text = my_studio_session.portraits.size.to_s  %>
-    <% text = t(:my_studio_portraits_new_link) if text == '0'  %>
-    <td><%= link_to text, my_studio_session_portraits_path(my_studio_session) %></td>
-    <td><%= link_to t(:show), my_studio_session %></td>
-    <td><%= link_to t(:edit), edit_my_studio_session_path(my_studio_session) %></td>
-    <td><%= link_to t(:destroy), my_studio_session, confirm: t(:link_destroy_confirm), method: :delete %></td>
-  </tr>
-<% end %>
+  <% @my_studio_sessions.each do |my_studio_session| %>
+      <tr>
+        <td><%= my_studio_session.name %></td>
+        <td><%= my_studio_session.session_at %></td>
+        <td><%= my_studio_session.active %></td>
+        <td><%= my_studio_session.category_name %></td>
+        <td><%= my_studio_session.client.try(:name) %></td>
+        <% text = my_studio_session.portraits.size.to_s %>
+        <% text = t(:my_studio_portraits_new_link) if text == '0' %>
+        <td><%= link_to text, my_studio_session_portraits_path(my_studio_session) %></td>
+        <td><%= link_to t(:show), my_studio_session %></td>
+        <td><%= link_to t(:edit), edit_my_studio_session_path(my_studio_session) %></td>
+        <td><%= link_to_destroy(my_studio_session) %></td>
+      </tr>
+  <% end %>
 </table>
