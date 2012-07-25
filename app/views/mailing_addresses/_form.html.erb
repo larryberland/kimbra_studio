@@ -1,17 +1,8 @@
 <%= form_for(@mailing_address) do |f| %>
-  <% if @mailing_address.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@mailing_address.errors.count, "error") %> prohibited this mailing_address from being saved:</h2>
 
-      <ul>
-      <% @mailing_address.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <%= render 'shared/error_messages', record: @mailing_address %>
+
+    <div class="actions">
+      <%= f.submit %>
     </div>
-  <% end %>
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
 <% end %>

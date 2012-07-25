@@ -1,15 +1,6 @@
 <%= form_for(@order_item) do |f| %>
-    <% if @order_item.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@order_item.errors.count, "error") %> prohibited this order_item from being saved:</h2>
 
-          <ul>
-            <% @order_item.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages', record: @order_item %>
 
     <div class="field">
       <%= f.label :price %>

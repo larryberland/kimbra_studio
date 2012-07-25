@@ -1,15 +1,8 @@
 <%= form_for(@shipping) do |f| %>
 
-    <% if @shipping.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@shipping.errors.count, "error") %> stopped this shipping selection from being saved:</h2>
-          <ul>
-            <% @shipping.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages',
+               record: @shipping,
+               h2_msg: 'stopped this shipping selection from being saved:' %>
 
     <div class="field">
       <table align='center'>

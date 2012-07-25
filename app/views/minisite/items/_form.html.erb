@@ -1,16 +1,7 @@
 <% url = @item.id.nil? ? admin_customer_email_offer_items_path(@offer.email, @offer, @item) : admin_customer_email_offer_item_path(@offer.email, @offer, @item) %>
 <%= form_for(@item, :url => url, :html => {:multipart => true}) do |f| %>
-    <% if @item.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@item.errors.count, "error") %> prohibited this admin_customer_item from being saved:</h2>
 
-          <ul>
-            <% @item.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages', record: @item %>
 
     <fieldset title="Portrait position">
       <b>Portrait Position</b>

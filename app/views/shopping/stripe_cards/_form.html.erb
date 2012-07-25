@@ -1,49 +1,50 @@
 <%= form_for(@stripe_card) do |f| %>
-  <% if @stripe_card.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@stripe_card.errors.count, "error") %> prohibited this shopping_stripe_card from being saved:</h2>
 
-      <ul>
-      <% @stripe_card.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+    <%= render 'shared/error_messages',
+               record: @stripe_card,
+               h2_msg: 'stopped this card transaction from being saved:' %>
+
+    <div class="field">
+      <%= f.label :purchase %>
+      <br/>
+      <%= f.text_field :purchase %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :purchase %><br />
-    <%= f.text_field :purchase %>
-  </div>
-  <div class="field">
-    <%= f.label :country %><br />
-    <%= f.text_field :country %>
-  </div>
-  <div class="field">
-    <%= f.label :cvc_check %><br />
-    <%= f.text_field :cvc_check %>
-  </div>
-  <div class="field">
-    <%= f.label :exp_month %><br />
-    <%= f.number_field :exp_month %>
-  </div>
-  <div class="field">
-    <%= f.label :exp_year %><br />
-    <%= f.number_field :exp_year %>
-  </div>
-  <div class="field">
-    <%= f.label :last4 %><br />
-    <%= f.text_field :last4 %>
-  </div>
-  <div class="field">
-    <%= f.label :stripe_type %><br />
-    <%= f.text_field :stripe_type %>
-  </div>
-  <div class="field">
-    <%= f.label :stripe_object %><br />
-    <%= f.text_field :stripe_object %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+    <div class="field">
+      <%= f.label :country %>
+      <br/>
+      <%= f.text_field :country %>
+    </div>
+    <div class="field">
+      <%= f.label :cvc_check %>
+      <br/>
+      <%= f.text_field :cvc_check %>
+    </div>
+    <div class="field">
+      <%= f.label :exp_month %>
+      <br/>
+      <%= f.number_field :exp_month %>
+    </div>
+    <div class="field">
+      <%= f.label :exp_year %>
+      <br/>
+      <%= f.number_field :exp_year %>
+    </div>
+    <div class="field">
+      <%= f.label :last4 %>
+      <br/>
+      <%= f.text_field :last4 %>
+    </div>
+    <div class="field">
+      <%= f.label :stripe_type %>
+      <br/>
+      <%= f.text_field :stripe_type %>
+    </div>
+    <div class="field">
+      <%= f.label :stripe_object %>
+      <br/>
+      <%= f.text_field :stripe_object %>
+    </div>
+    <div class="actions">
+      <%= f.submit %>
+    </div>
 <% end %>

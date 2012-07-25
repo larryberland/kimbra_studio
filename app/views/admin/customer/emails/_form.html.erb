@@ -3,18 +3,8 @@
   <h3><%= t(:my_studio_portraits_session, :name => @admin_customer_email.try(:my_studio_session).try(:name)) %></h3>
 
   <%= form_for(@admin_customer_email) do |f| %>
-      <% if @admin_customer_email.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@admin_customer_email.errors.count, "error") %> prohibited this admin_customer_email from
-              being saved:</h2>
 
-            <ul>
-              <% @admin_customer_email.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-      <% end %>
+      <%= render 'shared/error_messages', record: @admin_customer_email %>
 
       <div class="field">
         <%= f.label :message %>

@@ -1,0 +1,15 @@
+<% if record and record.errors.present? %>
+    <div id="error_explanation">
+      <% if h2_msg.nil? %>
+          <% h2_msg = "prohibited this #{record.class.model_name.human} from being saved:" %>
+      <% end %>
+      <h2><%= pluralize(record.errors.count, "error") %> <%= h2_msg.to_s %>> </h2>
+      <ul>
+        <% record.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+<% end %>
+
+

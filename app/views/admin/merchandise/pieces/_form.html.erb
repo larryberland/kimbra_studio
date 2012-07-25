@@ -1,16 +1,5 @@
 <%= form_for(@admin_merchandise_piece, :html => {:multipart => true}) do |f| %>
-    <% if @admin_merchandise_piece.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@admin_merchandise_piece.errors.count, "error") %> prohibited this admin_merchandise_piece
-            from being saved:</h2>
-
-          <ul>
-            <% @admin_merchandise_piece.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages', record: @admin_merchandise_piece %>
 
     <div class="field">
       <%= f.label :name %>

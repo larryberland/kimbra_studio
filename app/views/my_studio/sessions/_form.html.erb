@@ -1,21 +1,12 @@
 <%= form_for(@my_studio_session) do |f| %>
-    <% if @my_studio_session.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@my_studio_session.errors.count, "error") %> prohibited this my_studio_session from being
-            saved:</h2>
 
-          <ul>
-            <% @my_studio_session.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages', record: @my_studio_session %>
 
     <div class="field">
       <%= f.label :name %>
       <br/>
-      <%= f.text_field :name, placeholder: 'Son Tom\'s graduation' %> Short descriptive text when you have multiple sessions with one client.
+      <%= f.text_field :name, placeholder: 'Son Tom\'s graduation' %> Short descriptive text when you have multiple
+      sessions with one client.
     </div>
 
     <div class="field ui-widget">
@@ -31,7 +22,8 @@
 
     <div class="field">
       <%= f.label :category_id %>
-      <%= f.select :category_id, @categories %> This helps us find candidate pictures for special event marketing, such as Mothers Day, Christmas, etc.
+      <%= f.select :category_id, @categories %> This helps us find candidate pictures for special event marketing, such
+      as Mothers Day, Christmas, etc.
     </div>
 
     <%= render "my_studio/clients/form", :f => f, :client => @my_studio_session.client %>

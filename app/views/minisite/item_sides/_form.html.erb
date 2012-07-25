@@ -1,18 +1,6 @@
 <%= form_for(@item_side, :url => minisite_item_side_path(@item_side), html: {multipart: true}) do |f| %>
 
-    <% if @item_side.errors.any? %>
-        <div id="error_explanation">
-          <h2>
-            <%= pluralize(@item_side.errors.count, "error") %> prohibited this admin_customer_item_side from being
-            saved:
-          </h2>
-          <ul>
-            <% @item_side.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages', record: @item_side %>
 
     <div class='preview'>
       <h3>Move or resize selection by dragging</h3>
@@ -42,7 +30,7 @@
 
     <div class="actions">
       <%= f.submit :id => 'my_submit', :value => 'Save' %>
-      <%= link_to 'Cancel', minisite_offer_url(@offer), :style=>'margin-left: 15px;' %>
+      <%= link_to 'Cancel', minisite_offer_url(@offer), :style => 'margin-left: 15px;' %>
       <span id="spinner" style="display:none"></span>
     </div>
 
@@ -98,6 +86,6 @@
 
     // Show spinner when any portrait clicked.
     $('.portraits').click(function () {
-        $('#spinner').toggle();
+    $('#spinner').toggle();
     });
 <% end %>

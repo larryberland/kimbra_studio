@@ -2,16 +2,7 @@
 
 <%= form_for(@purchase, :url => url) do |f| %>
 
-    <% if @purchase.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@purchase.errors.count, "error") %> stopped this purchase:</h2>
-          <ul>
-            <% @purchase.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+    <%= render 'shared/error_messages', record: @purchase, h2_msg: 'stopped this purchase:' %>
 
     <%= f.hidden_field :stripe_create_token_response %>
     <%= f.hidden_field :stripe_create_token_status %>

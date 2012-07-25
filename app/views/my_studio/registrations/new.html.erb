@@ -7,17 +7,7 @@
     <%= stylesheet_link_tag 'cupertino/jquery-ui-1.8.12.custom' %>
 <% end %>
 
-<% if @studio.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@studio.errors.count, "error") %> prohibited you from logging in:</h2>
-
-      <ul>
-        <% @studio.errors.full_messages.each do |msg| %>
-            <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-<% end %>
+<%= render 'shared/error_messages', record: @studio, h2_msg: 'prohibited you from logging in:' %>
 
 <div id='login-wrapper' class='hadean-login'>
   <div id='login' class='hadean-login span-8 '>

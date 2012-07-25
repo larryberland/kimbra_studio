@@ -1,16 +1,5 @@
 <% url = my_studio_staffers_path(@my_studio_staffer) %>
 <%= form_for(@my_studio_staffer, :url => url) do |f| %>
-  <% if @my_studio_staffer.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@my_studio_staffer.errors.count, "error") %> prohibited this my_studio_staffer from being saved:</h2>
-
-      <ul>
-      <% @my_studio_staffer.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
   <% @user = @my_studio_staffer %>
   <%= render 'users/form', :f => f %>

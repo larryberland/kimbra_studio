@@ -1,16 +1,7 @@
 <% url = @my_studio_portrait.id.nil? ? my_studio_session_portraits_path(@my_studio_session) : my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %>
 <%= form_for(@my_studio_portrait, :url => url, :html => {:multipart => true}) do |f| %>
-    <% if @my_studio_portrait.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@my_studio_portrait.errors.count, "error") %> prohibited this my_studio_portrait from being
-            saved:</h2>
-          <ul>
-            <% @my_studio_portrait.errors.full_messages.each do |msg| %>
-                <li><%= msg %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
+
+    <%= render 'shared/error_messages', record: @my_studio_portrait %>
 
     <div class="field">
       <%= f.label :description %>

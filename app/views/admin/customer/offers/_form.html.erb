@@ -2,19 +2,8 @@
 
   <% url = @admin_customer_offer.id.nil? ? admin_customer_email_offers_path(@email) : admin_customer_email_offer_path(@email, @admin_customer_offer) %>
   <%= form_for(@admin_customer_offer, :url => url, :html => {:multipart => true}) do |f| %>
-      <% if @admin_customer_offer.errors.any? %>
-          <div id="error_explanation">
-            <h2><%= pluralize(@admin_customer_offer.errors.count, "error") %> prohibited this admin_email_offer from
-              being
-              saved:</h2>
 
-            <ul>
-              <% @admin_customer_offer.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-              <% end %>
-            </ul>
-          </div>
-      <% end %>
+      <%= render 'shared/error_messages', record: @admin_customer_offer %>
 
       <div class="field">
         <%= f.label :name %>
