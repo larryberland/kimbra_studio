@@ -12,6 +12,12 @@ module ApplicationHelper
     I18n.t(:company)
   end
 
+  def time_short(time)
+    # TODO: add time_zone entry to user table so we can display users time_zone
+    at = time.nil? ? Time.now : time
+    l(at.in_time_zone("Eastern Time (US & Canada)"), format: :show)
+  end
+
   def image_tag_title(image_url)
 
   end

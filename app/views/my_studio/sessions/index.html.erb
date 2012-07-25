@@ -14,10 +14,9 @@
   </tr>
 
   <% @my_studio_sessions.each do |my_studio_session| %>
-      <% at = my_studio_session.session_at.nil? ? Time.now : my_studio_session.session_at %>
       <tr>
         <td><%= my_studio_session.name %></td>
-        <td><%= l(at.in_time_zone("Eastern Time (US & Canada)"), format: :show)%></td>
+        <td><%= time_short(my_studio_session.session_at)%></td>
         <td><%= my_studio_session.active %></td>
         <td><%= my_studio_session.category_name %></td>
         <td><%= my_studio_session.client.try(:name) %></td>

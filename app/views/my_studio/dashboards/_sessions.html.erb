@@ -33,8 +33,7 @@
                 <%= session.email_ready? ? link_to('Generate Email', generate_admin_customer_email_path(session.id), :method => :post) : '' %>
               </td>
           <% end %>
-          <% at = session.session_at.nil? ? Time.now : session.session_at  %>
-          <td><%= l(at.in_time_zone("Eastern Time (US & Canada)"), format: :show)%></td>
+          <td><%= time_short(session.session_at)%></td>
         </tr>
     <% end %>
   </table>
