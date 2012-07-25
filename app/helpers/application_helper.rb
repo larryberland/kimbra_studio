@@ -4,6 +4,10 @@ module ApplicationHelper
     current_user and current_user.admin?
   end
 
+  def studio_name
+    @my_studio.try(:name)
+  end
+
   def site_name
     I18n.t(:company)
   end

@@ -1,0 +1,14 @@
+@mixin rounded-corners($radius){
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  border-radius: $radius;
+}
+div.field_with_errors {
+  @include rounded-corners(5px);
+  label {
+    color: white;
+  }
+  &.message {
+    padding: 3px 5px;
+  }
+}

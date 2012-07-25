@@ -4,6 +4,7 @@
 en:
   hello: "Hello world"
   company: 'Kimbra Studios ClickPLUS'
+  company_brand: 'Kimbra ClickPLUS'
 
   welcome: 'Welcome!'
 
@@ -103,7 +104,7 @@ en:
   my_studio_overview_link: 'My Studio'
   my_studio_overview_label_dashboard: "My Dashboard"
   my_studio_overview_link_dashboard: "View My Dashboard"
-  my_studio_overview_label_session: "My Sessions"
+  my_studio_overview_label_session: "My clickPLUS Touchpoints"
   my_studio_overview_link_session: "View My Sessions"
   my_studio_overview_label_staff: "My Staff"
   my_studio_overview_link_staff: "View My Staff"
@@ -122,10 +123,10 @@ en:
   my_studio_portraits_session: "For %{name}"
 
   # my_studio/sessions
-  my_studio_sessions_new_title: 'New Studio Session'
-  my_studio_sessions_new_link: 'New Studio Session'
-  my_studio_sessions_edit_title: 'Editing My Studio Sessions'
-  my_studio_sessions_index_title: 'Listing My Studio Sessions'
+  my_studio_sessions_new_title: 'New %{name} clickPLUS Touchpoint'
+  my_studio_sessions_new_link: 'New clickPLUS Touchpoint'
+  my_studio_sessions_edit_title: 'Editing %{name} clickPLUS Touchpoint'
+  my_studio_sessions_index_title: 'Listing %{name} clickPLUS Touchpoints'
 
   # my_studio/staffers
   my_studio_staffers_new_title: 'New Studio Staff'

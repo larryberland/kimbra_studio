@@ -10,6 +10,7 @@
 #= require imagesloaded
 #= require shopping/purchases
 #= require minisite/ups_tracking
+#= require rails.validations
 
 $ ->
   $('.flash_notice').each (index, element) ->

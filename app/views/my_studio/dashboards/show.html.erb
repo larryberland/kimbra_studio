@@ -18,25 +18,6 @@
   <%= render 'my_studio/dashboards/emails', sessions: @sessions %>
 </div>
 
-<div class='span-24 column'>
-  <div class='ar-widget'>
-    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_session)%> </h3>
-    <%= link_to t(:my_studio_overview_link_session), my_studio_sessions_path %>
-  </div>
-  <div class='ar-widget'>
-    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_staff)%> </h3>
-    <%= link_to t(:my_studio_overview_link_staff, :action => 'View '), my_studio_staffers_path %>
-  </div>
-  <div class='ar-widget'>
-    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_info)%> </h3>
-    <%= link_to t(:my_studio_overview_link_info, :action => 'View '), user_path(current_user) %>
-  </div>
-  <div class='ar-widget'>
-    <h3 style='text-align:left;'> <%=t(:my_studio_overview_label_studio)%> </h3>
-    <%= link_to t(:my_studio_overview_link_studio, :action => 'View '), studio_path(current_user.studio) %>
-  </div>
-</div>
-
 <div class='span-6 last ar-widget'>
   <!-- This is groovy and I think we'll use it for something. -->
   <%= image_tag 'kimbra_logo.png' %>

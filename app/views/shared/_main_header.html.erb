@@ -33,7 +33,8 @@
             <%= link_to 'Merchandise', admin_merchandise_pieces_path %>
           </div>
           <div class='menu_item'>
-            <%= link_to 'Studios', studios_path %>
+            <%= link_to 'Studios', studios_
+                path %>
           </div>
           <div class='menu_item'>
             <%= link_to 'Users', users_path %>
@@ -42,13 +43,27 @@
             <%= link_to 'Stories', admin_stories_path %>
           </div>
       <% else %>
-          <div class='menu_item'>
-            <%= link_to t(:my_studio_overview_link), my_studio_dashboard_path %>
-          </div>
-          <!--<div class='menu_item'>-->
-          <!-- LDB: moved myaccount_overview into my_studio_dashboard -->
-            <!--<%= link_to t(:myaccount_overview_link), myaccount_overview_path %>-->
-          <!--</div>-->
+          <% if current_user and !current_user.client?%>
+              <div class='menu_item'>
+                <%= link_to t(:my_studio_overview_link), my_studio_dashboard_path %>
+              </div>
+              <div class='menu_item'>
+                <%= link_to t(:my_studio_overview_label_session), my_studio_sessions_path %>
+              </div>
+              <div class='menu_item'>
+                <%= link_to t(:my_studio_overview_label_staff, :action => 'View '), my_studio_staffers_path %>
+              </div>
+              <div class='menu_item'>
+                <%= link_to t(:my_studio_overview_label_info, :action => 'View '), user_path(current_user) %>
+              </div>
+              <div class='menu_item'>
+                <%= link_to t(:my_studio_overview_label_studio, :action => 'View '), studio_path(current_user.studio) %>
+              </div>
+          <% else %>
+              <div class='menu_item'>
+                <%= t(:company_brand)%>
+              </div>
+          <% end %>
       <% end %>
 
     </div>

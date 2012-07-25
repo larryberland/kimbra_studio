@@ -9,6 +9,7 @@
  *= require_tree ../stylesheets/studio
  *= require _footer
  *= require _widget
+ *= require _common
  *= require devise
  *= require scaffolds
  *= require_tree ../../../vendor/assets/stylesheets
@@ -232,3 +233,4 @@ div.menu_item_right {
 .flash_notice, .flash_error {
   font-size: 1.5em;
 }
+

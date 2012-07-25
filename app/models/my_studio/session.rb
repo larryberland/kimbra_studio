@@ -7,6 +7,9 @@ class MyStudio::Session < ActiveRecord::Base
   has_many :portraits, :class_name => 'MyStudio::Portrait', :foreign_key => 'my_studio_session_id', :dependent => :destroy
   has_many :emails, :class_name => 'Admin::Customer::Email', :foreign_key => 'my_studio_session_id', :dependent => :destroy
 
+  # need some validations presence here
+  validates_associated :client, :studio
+
   before_save :set_name
 
   scope :within_seven_days, lambda {

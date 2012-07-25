@@ -1,6 +1,8 @@
-<%= form_for(@my_studio_session) do |f| %>
+<%= form_for(@my_studio_session, validate: true) do |f| %>
 
     <%= render 'shared/error_messages', record: @my_studio_session %>
+
+    <%= render "my_studio/clients/form", :f => f, :client => @my_studio_session.client %>
 
     <div class="field">
       <%= f.label :name %>
@@ -25,8 +27,6 @@
       <%= f.select :category_id, @categories %> This helps us find candidate pictures for special event marketing, such
       as Mothers Day, Christmas, etc.
     </div>
-
-    <%= render "my_studio/clients/form", :f => f, :client => @my_studio_session.client %>
 
     <div class="actions">
       <%= f.submit :id => 'my_submit' %>
