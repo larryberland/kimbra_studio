@@ -1,8 +1,5 @@
 class MyStudio::Portrait < ActiveRecord::Base
 
-  attr_accessible :image, :remote_image_url, :description, :active, :faces,
-                  :my_studio_session, :my_studio_session_id
-
   mount_uploader :image, AmazonUploader
 
   belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => "my_studio_session_id"
@@ -10,6 +7,10 @@ class MyStudio::Portrait < ActiveRecord::Base
   has_many :offers, :class_name => 'Admin::Customer::Offer'
   has_many :parts, :class_name => 'Admin::Merchandise::Part'
   has_many :faces, :class_name => 'MyStudio::Portrait::Face', :dependent => :destroy
+
+  attr_accessible :image, :remote_image_url, :description, :active, :faces,
+                  :my_studio_session, :my_studio_session_id
+
 
   scope :last, order('created_at desc').limit(1)
   scope :last_2_hours, where(created_at: 2.hours.ago..Time.now)

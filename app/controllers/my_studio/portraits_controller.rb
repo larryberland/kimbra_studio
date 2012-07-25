@@ -47,7 +47,7 @@ class MyStudio::PortraitsController < MyStudio::BaseController
 
     respond_to do |format|
       if @my_studio_portrait.save
-        format.html { redirect_to my_studio_session_portrait_url(@my_studio_session, @my_studio_portrait), notice: 'Portrait was successfully created.' }
+        format.html { redirect_to my_studio_session_portraits_url(@my_studio_session), notice: 'Portrait was successfully created.' }
         format.json { render json: my_studio_session_portrait_url(@my_studio_session, @my_studio_portrait), status: :created, location: @my_studio_portrait }
       else
         format.html { render action: "new" }
@@ -64,7 +64,7 @@ class MyStudio::PortraitsController < MyStudio::BaseController
 
     respond_to do |format|
       if @my_studio_portrait.update_attributes(params[:my_studio_portrait])
-        format.html { redirect_to my_studio_session_portrait_url(@my_studio_session, @my_studio_portrait), notice: 'Portrait was successfully updated.' }
+        format.html { redirect_to my_studio_session_portraits_url(@my_studio_session), notice: 'Portrait was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

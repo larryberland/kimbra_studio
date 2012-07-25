@@ -10,19 +10,19 @@
     <th>Category</th>
     <th>Client</th>
     <th>Portraits</th>
-    <th colspan="3">Actions</th>
+    <th colspan="4">Actions</th>
   </tr>
 
   <% @my_studio_sessions.each do |my_studio_session| %>
+      <% at = my_studio_session.session_at.nil? ? Time.now : my_studio_session.session_at %>
       <tr>
         <td><%= my_studio_session.name %></td>
-        <td><%= my_studio_session.session_at %></td>
+        <td><%= l(at.in_time_zone("Eastern Time (US & Canada)"), format: :show)%></td>
         <td><%= my_studio_session.active %></td>
         <td><%= my_studio_session.category_name %></td>
         <td><%= my_studio_session.client.try(:name) %></td>
-        <% text = my_studio_session.portraits.size.to_s %>
-        <% text = t(:my_studio_portraits_new_link) if text == '0' %>
-        <td><%= link_to text, my_studio_session_portraits_path(my_studio_session) %></td>
+        <td><%= my_studio_session.portraits.size.to_s%></td>
+        <td><%= link_to "Upload Now!", my_studio_session_portraits_path(my_studio_session) %></td>
         <td><%= link_to t(:show), my_studio_session %></td>
         <td><%= link_to t(:edit), edit_my_studio_session_path(my_studio_session) %></td>
         <td><%= link_to_destroy(my_studio_session) %></td>
