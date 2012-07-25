@@ -8,27 +8,30 @@ class Studio < ActiveRecord::Base
   has_many :carts, class_name: 'Shopping::Cart', through: :emails
 
   has_one :owner, dependent: :destroy,
-          class_name: 'User'
+          class_name:        'User'
 
   has_many :clients, dependent: :destroy,
-           conditions: Proc.new { User.where('roles.name = ?', Role::CLIENT).includes(:roles) },
-           class_name: 'User'
+           conditions:          Proc.new { User.where('roles.name = ?', Role::CLIENT).includes(:roles) },
+           class_name:          'User'
 
   has_many :staffers, dependent: :destroy,
-           conditions: Proc.new { User.where('roles.name = ?', Role::STUDIO_STAFF).includes(:roles) },
-           class_name: 'User'
+           conditions:           Proc.new { User.where('roles.name = ?', Role::STUDIO_STAFF).includes(:roles) },
+           class_name:           'User'
 
   has_one :info, class_name: 'MyStudio::Info', dependent: :destroy
   has_one :minisite, class_name: 'MyStudio::Minisite', dependent: :destroy
 
   attr_accessor :current_user
 
-  attr_accessible :name, :phone_number,
-                  :address_1, :address_2, :city, :state_id, :zip_code, :sessions,
+  attr_accessible :sessions, :name, :phone_number,
+                  :address_1, :address_2, :city, :state_id, :zip_code,
                   :info, :info_attributes,
-                  :minisite, :minisite_attributes
+                  :minisite, :minisite_attributes,
+                  :owner, :owner_attributes
 
-  accepts_nested_attributes_for :info, :minisite
+  accepts_nested_attributes_for :info, :minisite, :owner
+
+  validates :name, :address_1, :state_id, :zip_code, presence: true
 
   before_save :set_user_info
 
@@ -44,7 +47,7 @@ class Studio < ActiveRecord::Base
   # ex. '"John Wayne" "jwayne@badboy.com"'
   #
   # @param  [ none ]
-  # @return [ String ]
+          # @return [ String ]
   def email_address_with_name
     "\"#{name}\" <#{info.email}>"
   end

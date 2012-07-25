@@ -27,11 +27,9 @@ class StudiosController < ApplicationController
   # GET /studios/new
   # GET /studios/new.json
   def new
-    @studio           = Studio.new
-    @studio.info      = MyStudio::Info.new(:email => current_user.email)
-    @studio.minisite = MyStudio::Minisite.new
-    @studio.owner     = current_user
-
+    @studio       = Studio.new(info:     MyStudio::Info.new(:email => current_user.email),
+                               minisite: MyStudio::Minisite.new)
+    @studio.owner = current_user
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @studio }
@@ -46,14 +44,13 @@ class StudiosController < ApplicationController
   # POST /studios
   # POST /studios.json
   def create
-    @my_studio_info      = MyStudio::Info.new(params[:studio].delete(:info))
-    @my_studio_minisite = MyStudio::Minisite.new(params[:studio].delete(:minisite))
+    # coming from admin or new user this may be different
+    owner_info           = params[:studio].delete(:owner_attributes)
     @studio              = Studio.new(params[:studio])
-    @studio.info         = @my_studio_info
-    @studio.minisite    = @my_studio_minisite
-    @studio.owner        = current_user
+    @studio.owner        = User.find(owner_info[:id])
+    # little concerned about using current_user here
+    #   when Admin Creates Studio probably don't want current_user
     @studio.current_user = current_user
-
     respond_to do |format|
       if @studio.save
         format.html { redirect_to @studio, notice: 'Studio was successfully created.' }
@@ -68,14 +65,7 @@ class StudiosController < ApplicationController
   # PUT /studios/1
   # PUT /studios/1.json
   def update
-    @studio = Studio.find(params[:id])
-
-    #@studio.info ||= MyStudio::Info.new()
-    #@studio.info.update_attributes(params[:studio].delete(:info))
-    #
-    #@studio.minisite ||= MyStudio::Minisite.new()
-    #@studio.minisite.update_attributes(params[:studio].delete(:minisite))
-
+    @studio              = Studio.find(params[:id])
     @studio.current_user = current_user
     @studio.update_attributes(params[:studio])
 

@@ -7,6 +7,7 @@
 #= require jquery_ui_timepicker_addon
 #= require wait
 #= require imagesloaded
+#= require rails.validations
 
 $ ->
   $('.flash_notice').each (index, element) ->

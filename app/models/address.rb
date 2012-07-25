@@ -139,7 +139,7 @@ class Address < ActiveRecord::Base
   # Use this method to represent the "city, state.abbreviation zip_code"
   #
   # @param [none]
-  # @return [String] "city, state.abbreviation zip_code"
+          # @return [String] "city, state.abbreviation zip_code"
   def city_state_zip
     [city_state_name, zip_code].join(' ')
   end
