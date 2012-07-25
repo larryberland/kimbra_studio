@@ -7,6 +7,11 @@ class MyStudio::Session < ActiveRecord::Base
   has_many :portraits, :class_name => 'MyStudio::Portrait', :foreign_key => 'my_studio_session_id', :dependent => :destroy
   has_many :emails, :class_name => 'Admin::Customer::Email', :foreign_key => 'my_studio_session_id', :dependent => :destroy
 
+  attr_accessible :name, :session_at, :active,
+                  :studio_id, :client_id, :category_id,
+                  :studio, :client, :category,
+                  :created_at, :updated_at
+
   # need some validations presence here
   validates_associated :client, :studio
 
@@ -56,6 +61,7 @@ class MyStudio::Session < ActiveRecord::Base
 
   def set_name
     self.name = "#{category.name} for #{client.name}" if name.blank?
+    self.session_at = Time.now if session_at.nil?
   end
 
 end

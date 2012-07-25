@@ -94,7 +94,7 @@ en:
 
   # my_studio/clients
   my_studio_clients_show_title: 'Client Info'
-  my_studio_clients_form_title: 'Client Info'
+  my_studio_clients_form_title: 'Send a Touchpoint to Client'
 
   # my_studio/dashboard
   my_studio_dashboards_index_title: 'My Studio Dashboard'
