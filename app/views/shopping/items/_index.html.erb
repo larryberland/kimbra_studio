@@ -1,11 +1,11 @@
 <div id='shopping_item_index'>
-  <table class='shopping-item-index' align='center'>
+  <table class='shopping-item-index' align='center' width='100%'>
     <thead>
     <th class='shopping-item-index left'>Piece</th>
-    <th>&nbsp;</th>
-    <th>Price</th>
-    <th>Quantity</th>
-    <th>Total</th>
+    <th class='shopping-item-index'>&nbsp;</th>
+    <th class='shopping-item-index'>Price</th>
+    <th class='shopping-item-index'>Quantity</th>
+    <th class='shopping-item-index'>Total</th>
     </thead>
     <tbody>
     <% total = 0 %>
@@ -18,11 +18,11 @@
             <%= link_to image_tag(item.offer.image_url.to_s,
                                   :title => item.offer.name,
                                   :alt => item.offer.name,
-                                  :width => '30%',
-                                  :height => '30%',
-                                  :class => "w280",
-                                  :editable => "true",
-                                  :label => "Image",
+                                  :width => 150,
+                               #   :height => '30%',
+                               #   :class => "w280",
+                               #   :editable => "true",
+                               #   :label => "Image",
                                   :border => 0),
                         minisite_offer_url(item.offer),
                         {:style => "text-decoration: none;"} %>
@@ -44,6 +44,7 @@
           </td>
         </tr>
     <% end if cart.items && cart.items.present? %>
+    <tr><td colspan=5>&nbsp;</td></tr>
     <tr>
       <td class='shopping-item-index left'>Shipping</td>
       <td class='shopping-item-index'><%= cart.shipping ? cart.shipping.shipping_option : 'no shipping selected yet' %> </td>
