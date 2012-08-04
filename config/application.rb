@@ -77,6 +77,9 @@ module KimbraStudio
                        :request_specs    => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
+    #
+    # Include middleware in autoload paths.
+    config.autoload_paths += %W( #{ config.root }/lib/middleware )
 
   end
 end

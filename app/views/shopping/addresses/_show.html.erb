@@ -5,7 +5,7 @@
   <% end %>
   <%= address.address1 %> <br/>
   <% if address.phone %>
-      <%= number_to_phone address.phone %> <br/>
+      <%= number_to_phone address.phone, area_code: true %> <br/>
   <% end %>
   <% if address.address2.present? %>
       <%= address.address2 %><br/>

@@ -1,9 +1,23 @@
 <div class='shopping_heading'>
   <h2>1. Delivery Details</h2>
+  <table align='center'>
+    <tr>
+      <td>
+        <%= render 'shopping/addresses/show', address: @cart.address %>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <div class='shopping_heading'>
   <h2>2. Shipping Options</h2>
+  <table align='center'>
+    <tr>
+      <td>
+        <%= render 'shopping/shippings/show', shipping: @cart.shipping %>
+      </td>
+    </tr>
+  </table>
 </div>
 
 <div class='shopping_heading'>

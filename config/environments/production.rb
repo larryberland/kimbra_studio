@@ -68,4 +68,7 @@ KimbraStudio::Application.configure do
       password: ENV['SENDGRID_PASSWORD'],
       domain: 'heroku.com'}
 
+  # Force all requests to use SSL.
+  config.middleware.use "ForceSSL"
+
 end

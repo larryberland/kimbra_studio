@@ -8,4 +8,7 @@
 # KimbraStudio::Application.config.session_store :active_record_store
 
 require 'action_dispatch/middleware/session/dalli_store'
-KimbraStudio::Application.config.session_store :dalli_store, :key => '_kimbra_session_ugrdr6765745ce4vy'
+KimbraStudio::Application.config.session_store :dalli_store,
+                                               :key => '_kimbra_session_ugrdr6765745ce4vy',
+                                               :secure => Rails.env.production?, # Only send cookie over SSL when in production mode
+                                               :http_only => true # Don't allow Javascript to access the cookie (mitigates cookie-based XSS exploits)
