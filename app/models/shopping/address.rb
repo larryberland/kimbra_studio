@@ -16,7 +16,7 @@ class Shopping::Address < ActiveRecord::Base
   validates_presence_of :last_name
   validates_presence_of :address1
   validates_presence_of :phone
-  validates_presence_of :phone
+  validates :phone, length: {minimum: 10, too_short: 'needs area code and country code outside US/Canada'}
   validates_presence_of :city
   validates_presence_of :state
   validates_presence_of :zip_code
@@ -30,7 +30,7 @@ class Shopping::Address < ActiveRecord::Base
   end
 
   def phone=(ph)
-    phone = ph.gsub(/\D/, '')
+    self[:phone] = ph.gsub(/\D/, '')
   end
 
   def state_stripe
