@@ -17,3 +17,4 @@ $ ->
     $(element).effect('highlight', 4000)
   $('.flash_notice').delay(4000).slideUp('slow')
   $('.flash_error').delay(4000).slideUp('slow')
+  $('#error_explanation').effect('highlight', 4000)

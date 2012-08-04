@@ -33,6 +33,7 @@ module Shopping
       @storyline.describe "Updating the address."
       update! do
         if @address.errors.present?
+          @states = State.form_selector
           edit_shopping_address_path(@address)
         else
           if @cart.shipping
