@@ -1,10 +1,10 @@
 class Shopping::Cart < ActiveRecord::Base
 
-  belongs_to :email, :class_name => 'Admin::Customer::Email'
-  has_many :items, :class_name => 'Shopping::Item', dependent: :destroy
-  has_one :purchase, :class_name => 'Shopping::Purchase', dependent: :destroy
-  has_one :address, :class_name => 'Shopping::Address', dependent: :destroy
-  has_one :shipping, :class_name => 'Shopping::Shipping', dependent: :destroy
+  belongs_to :email, class_name: 'Admin::Customer::Email'
+  has_many :items, class_name: 'Shopping::Item', dependent: :destroy, order: 'offer_id DESC'
+  has_one :purchase, class_name: 'Shopping::Purchase', dependent: :destroy
+  has_one :address, class_name:'Shopping::Address', dependent: :destroy
+  has_one :shipping, class_name: 'Shopping::Shipping', dependent: :destroy
 
   attr_accessible :items, :items_attributes,
                   :purchase, :purchase_attributes,

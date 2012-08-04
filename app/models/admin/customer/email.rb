@@ -5,9 +5,9 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   before_save :set_message
 
-  belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => 'my_studio_session_id'
-  has_many :offers, :class_name => 'Admin::Customer::Offer', :dependent => :destroy
-  has_many :carts, :class_name => 'Shopping::Cart'
+  belongs_to :my_studio_session, class_name: 'MyStudio::Session', foreign_key: 'my_studio_session_id'
+  has_many :offers, class_name: 'Admin::Customer::Offer', dependent: :destroy, order: 'id DESC'
+  has_many :carts, class_name: 'Shopping::Cart'
 
   scope :by_session, lambda { |studio_session_id| where('my_studio_session_id = ?', studio_session_id) }
 
