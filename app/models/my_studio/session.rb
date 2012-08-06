@@ -14,6 +14,7 @@ class MyStudio::Session < ActiveRecord::Base
 
   # need some validations presence here
   validates_associated :client, :studio
+  validates_presence_of :category
 
   before_save :set_name
 

@@ -19,4 +19,4 @@ $ ->
 
 $ ->
   $('.datepicker').each (index, element) ->
-    $(element).datepicker()
+    $(element).datepicker({ dateFormat: "yyyy-mm-dd" })

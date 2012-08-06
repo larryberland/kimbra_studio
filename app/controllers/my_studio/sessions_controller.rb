@@ -88,7 +88,7 @@ class MyStudio::SessionsController < MyStudio::BaseController
     end
   end
 
-  private
+  private #==================================================================================
 
   def form_info
     @categories = Category.order(:name).all.map { |c| [c.name, c.id] }

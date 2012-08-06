@@ -1,6 +1,6 @@
 <%= form_for(@my_studio_session, validate: true) do |f| %>
 
-    <%= render 'shared/error_messages', record: @my_studio_session %>
+    <%= render 'shared/error_messages', record: @my_studio_session, h2_msg:'stopped this Session' %>
 
     <%= render "my_studio/clients/form", :f => f, :client => @my_studio_session.client %>
 
@@ -24,7 +24,7 @@
 
     <div class="field">
       <%= f.label :category_id %>
-      <%= f.select :category_id, @categories %> This helps us find candidate pictures for special event marketing, such
+      <%= f.select :category_id, @categories, include_blank: true %> This helps us find candidate pictures for special event marketing, such
       as Mothers Day, Christmas, etc.
     </div>
 
