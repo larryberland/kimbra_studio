@@ -20,7 +20,7 @@
       email: teststudio@kimbraclickplus.com
       tax_ein: 123123123
     sessions:
-      - name: Couples
+      - name: Family
         client:
           name: acme smith
           email: testclient@kimbraclickplus.com
