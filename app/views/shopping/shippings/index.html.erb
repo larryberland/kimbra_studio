@@ -21,7 +21,7 @@
     <td><%= shopping_address.address1 %></td>
     <td><%= shopping_address.address2 %></td>
     <td><%= shopping_address.city %></td>
-    <td><%= shopping_address.state %></td>
+    <td><%= shopping_address.state.abbreviation %></td>
     <td><%= shopping_address.zip_code %></td>
     <td><%= link_to 'Show', shopping_address %></td>
     <td><%= link_to 'Edit', edit_shopping_address_path(shopping_address) %></td>
