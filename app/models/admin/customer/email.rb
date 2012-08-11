@@ -28,7 +28,7 @@ class Admin::Customer::Email < ActiveRecord::Base
       puts "Sent daily offer for #{Date.today} to #{}"
       sent += 1
     end
-    puts "Sent #{sent} offer emails."
+    puts "Prepared #{sent} offer emails to be sent."
   end
 
   def self.test_piece(piece)
