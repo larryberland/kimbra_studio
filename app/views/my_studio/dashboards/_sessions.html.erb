@@ -12,7 +12,7 @@
       <th>Portraits</th>
       <% if current_user.admin? %>
           <th>New Portrait?</th>
-          <th>Actions</th>
+          <th><span class='explainer' title='Need at least 2 portraits to generate an email.'>Actions</span></th>
       <% end %>
       <th>Session Date</th>
     </tr>
@@ -34,7 +34,9 @@
                 <%= session.portraits.last_day.count > 0 ? 'yes' : 'no' %>
               </td>
               <td>
-                <%= session.email_ready? ? link_to('Generate Email', generate_admin_customer_email_path(session.id), :method => :post) : '' %>
+                <span id="generate_email_<%= session.id %>">
+                <%= session.email_ready? ? link_to('Generate Email', generate_admin_customer_email_path(session.id), method: :post, remote: true) : '' %>
+                </span>
               </td>
           <% end %>
           <td><%= time_short_now(session.session_at) %></td>

@@ -80,8 +80,13 @@ class Admin::Customer::EmailsController < ApplicationController
   # GET /admin/customer/emails/session_id/generate/.json
   def generate
     puts "Generate params=>#{params.inspect}"
-    @admin_customer_email = Admin::Customer::Email.generate(MyStudio::Session.find(params[:id]))
-    render :edit
+    @admin_customer_email = Admin::Customer::Email.delay.generate(params[:id])
+    respond_to do |format|
+      format.html { render :edit }
+      format.js do
+        render text: "$('#generate_email_#{params[:id]}').html('generating...')"
+      end
+    end
   end
 
   def send_offers

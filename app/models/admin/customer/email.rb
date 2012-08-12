@@ -53,7 +53,8 @@ class Admin::Customer::Email < ActiveRecord::Base
     email
   end
 
-  def self.generate(studio_session)
+  def self.generate(studio_session_id)
+    studio_session = MyStudio::Session(studio_session_id)
     email = Admin::Customer::Email.new(my_studio_session: studio_session)
 
     # setup merchandise piece pick_list strategy
