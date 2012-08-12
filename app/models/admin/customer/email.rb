@@ -12,7 +12,7 @@ class Admin::Customer::Email < ActiveRecord::Base
   scope :by_session, lambda { |studio_session_id| where('my_studio_session_id = ?', studio_session_id) }
 
   after_initialize do |email|
-    email.tracking = UUID.random_tracking_number
+    email.tracking = UUID.random_tracking_number if email.tracking.nil?
   end
 
   # So that tracking number will be the id in params.

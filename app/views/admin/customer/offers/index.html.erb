@@ -1,4 +1,4 @@
-<h1><%=t(:admin_customer_offers_index_title)%></h1>
+<h1><%= t(:admin_customer_offers_index_title) %></h1>
 
 <%= link_to t(:admin_customer_offers_new_link), new_admin_customer_email_offer_path(@email) %>
 <br/>
@@ -17,20 +17,18 @@
     <th></th>
   </tr>
 
-<% @admin_customer_offers.each do |admin_customer_offer| %>
-  <tr>
-    <td><%= admin_customer_offer.name %></td>
-    <td><%= image_tag_list(admin_customer_offer.piece) %></td>
-    <td><%= image_tag_list(admin_customer_offer) %></td>
-    <td><%= admin_customer_offer.description %></td>
-    <td><%= admin_customer_offer.activation_code %></td>
-    <td><%= admin_customer_offer.active %></td>
+  <% @admin_customer_offers.each do |admin_customer_offer| %>
+      <tr>
+        <td><%= admin_customer_offer.name %></td>
+        <td><%= image_tag_list(admin_customer_offer.piece) %></td>
+        <td><%= image_tag_list(admin_customer_offer) %></td>
+        <td><%= admin_customer_offer.description %></td>
+        <td><%= admin_customer_offer.activation_code %></td>
+        <td><%= admin_customer_offer.active %></td>
 
-
-    <td><%= link_to t(:show), admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
-    <td><%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
-    <td><%= link_to t(:destroy), admin_customer_email_offer_path(@email, admin_customer_offer), confirm: t(:link_destroy_confirm), method: :delete %></td>
-  </tr>
-<% end %>
+        <td><%= link_to t(:show), admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
+        <td><%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, admin_customer_offer) %></td>
+        <td><%= link_to t(:destroy), admin_customer_email_offer_path(@email, admin_customer_offer), confirm: t(:link_destroy_confirm), method: :delete %></td>
+      </tr>
+  <% end %>
 </table>
-
