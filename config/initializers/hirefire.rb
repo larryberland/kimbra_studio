@@ -1,6 +1,6 @@
 HireFire::Resource.configure do |config|
 
-  config.dyno(:all) do
+  config.dyno(:worker) do
     HireFire::Macro::Delayed::Job.queue()
   end
 
