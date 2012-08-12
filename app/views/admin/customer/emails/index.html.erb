@@ -19,7 +19,7 @@
       <tr>
         <td><%= admin_customer_email.message %></td>
         <td><%= time_short(admin_customer_email.generated_at) %></td>
-        <td><%= time_short(admin_customer_email.sent_at) %></td>
+        <td><%= sent_or_queue(admin_customer_email) %></td>
         <td><%= admin_customer_email.active %></td>
         <td><%= link_to t(:offers), admin_customer_email_offers_path(admin_customer_email) %></td>
         <td><%= link_to t(:show), admin_customer_email %></td>

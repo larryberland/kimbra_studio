@@ -1,9 +1,11 @@
 <div class='span-24 column'>
-  <div class='container'>
+  <div class='ar-widget'>
     <%= render 'my_studio/dashboards/sessions', sessions: @sessions %>
   </div>
   <div class='ar-widget'>
     <%= render 'my_studio/dashboards/emails', sessions: @sessions %>
+  </div>
+  <div class='ar-widget'>
     <%= render 'my_studio/dashboards/ready', sessions: @sessions %>
     <%= link_to t(:admin_overview_link_emails), admin_customer_emails_path %>
   </div>
