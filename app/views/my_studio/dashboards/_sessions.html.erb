@@ -18,7 +18,7 @@
 
     <% sessions.each do |session| %>
         <tr>
-          <td><%= link_to session.name, my_studio_session_path(session) %></td>
+          <td><%= link_to session.display_name(current_user.admin?), my_studio_session_path(session) %></td>
           <td><%= session.try(:client).try(:name) %></td>
           <td><%= (session.emails.count > 0) ? link_to(number_to_human(session.emails.count), session_list_admin_customer_email_path(session)) : '' %></td>
           <td>

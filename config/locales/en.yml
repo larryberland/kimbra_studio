@@ -126,7 +126,7 @@ en:
   my_studio_sessions_new_title: 'New %{name} clickPLUS Touchpoint'
   my_studio_sessions_new_link: 'New clickPLUS Touchpoint'
   my_studio_sessions_edit_title: 'Editing %{name} clickPLUS Touchpoint'
-  my_studio_sessions_index_title: 'Listing %{name} clickPLUS Touchpoints'
+  my_studio_sessions_index_title: 'My clickPLUS Touchpoints'
 
   # my_studio/staffers
   my_studio_staffers_new_title: 'New Studio Staff'
