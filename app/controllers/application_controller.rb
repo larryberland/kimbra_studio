@@ -5,6 +5,33 @@ class ApplicationController < ActionController::Base
 
   layout 'application'
 
+  # override devise url reference
+  #  based on user's current roles
+  def after_sign_in_path_for(resource)
+    u = stored_location_for(resource)
+    u2 = signed_in_root_path(resource)
+    puts "u=>#{u}\nu2=>#{u2}"
+    u || u2
+    #u = if resource.acadia_staff?
+    #      admin_merchant_accounts_url
+    #    elsif resource.merchant?
+    #      if resource.respond_to?(:account)
+    #        if resource.account.nil?
+    #          new_merchant_account_url
+    #        else
+    #          merchant_account_daily_deals_url(resource.account)
+    #        end
+    #
+    #      else
+    #
+    #      end
+    #
+    #    else
+    #      nil
+    #    end
+    #u || root_url
+  end
+
   def require_user
     redirect_to login_url and return if logged_out?
   end

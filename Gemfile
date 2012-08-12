@@ -38,6 +38,8 @@ gem 'daemons'
 gem 'exceptional'
 gem 'hirefire-resource'
 
+gem 'numbers_and_words'
+
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do

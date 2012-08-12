@@ -104,9 +104,11 @@ en:
   my_studio_clients_form_title: 'Send a Touchpoint to Client'
 
   # my_studio/dashboard
+  my_studio_dashboards_sessions_title: 'Photo Session Activity this past week'
   my_studio_dashboards_index_title: 'My Studio Dashboard'
   my_studio_dashboards_ready_title: 'Touchpoint Emails ready to be sent'
   my_studio_dashboards_emails_title: 'clickPLUS Touchpoints this past week'
+  my_studio_dashboards_recent_portraits_title: 'Photo Portraits Activity this past day'
 
   # my_studio/overviews/new
   my_studio_overview_title: 'My Studio'

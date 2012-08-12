@@ -14,6 +14,7 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   scope :last, order('created_at desc').limit(1)
   scope :last_2_hours, where(created_at: 2.hours.ago..Time.now)
+  scope :last_day, where(created_at: 24.hours.ago..Time.now)
 
   before_save :set_description
   after_save :get_faces
