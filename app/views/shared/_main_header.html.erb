@@ -31,22 +31,22 @@
     <div id='main_nav'>
       <% if is_admin? %>
           <div class='menu_item'>
-            <%= link_to 'ClickPLUS Admin', admin_overview_url %>
+            <%= link_to t(:admin_menu_overview), admin_overview_url %>
           </div>
           <div class='menu_item'>
-            <%= link_to 'Emails', admin_customer_emails_path %>
+            <%= link_to t(:admin_menu_emails), admin_customer_emails_path %>
           </div>
           <div class='menu_item'>
-            <%= link_to 'Merchandise', admin_merchandise_pieces_path %>
+            <%= link_to t(:admin_menu_merchandise), admin_merchandise_pieces_path %>
           </div>
           <div class='menu_item'>
-            <%= link_to 'Studios', studios_path %>
+            <%= link_to t(:admin_menu_studios), studios_path %>
           </div>
           <div class='menu_item'>
-            <%= link_to 'Users', users_path %>
+            <%= link_to t(:admin_menu_users), users_path %>
           </div>
           <div class='menu_item_right'>
-            <%= link_to 'Stories', admin_stories_path %>
+            <%= link_to t(:admin_menu_stories), admin_stories_path %>
           </div>
       <% else %>
           <% if current_user and !current_user.client? %>

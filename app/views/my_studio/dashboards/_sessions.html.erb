@@ -33,7 +33,7 @@
                 <%= session.email_ready? ? link_to('Generate Email', generate_admin_customer_email_path(session.id), :method => :post) : '' %>
               </td>
           <% end %>
-          <td><%= time_short(session.session_at)%></td>
+          <td><%= time_short_now(session.session_at)%></td>
         </tr>
     <% end %>
   </table>

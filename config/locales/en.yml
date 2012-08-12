@@ -76,6 +76,13 @@ en:
   minisite_menu_shopping_cart_link: 'Shopping Cart'
   minisite_menu_about_link: "About %{studio_name}"
 
+  admin_menu_overview: 'clickPLUS Overview'
+  admin_menu_emails:   'Touchpoint Emails'
+  admin_menu_merchandise: 'Kimbra Merchandise'
+  admin_menu_studios: 'Studios'
+  admin_menu_users:   'Users'
+  admin_menu_stories: 'clickPLUS Stories'
+
   # studios
   studios_new_title: 'Your Studio'
   studios_new_link: 'New Kimbra ClickPLUS Studio'
@@ -98,6 +105,8 @@ en:
 
   # my_studio/dashboard
   my_studio_dashboards_index_title: 'My Studio Dashboard'
+  my_studio_dashboards_ready_title: 'Touchpoint Emails ready to be sent'
+  my_studio_dashboards_emails_title: 'clickPLUS Touchpoints this past week'
 
   # my_studio/overviews/new
   my_studio_overview_title: 'My Studio'
@@ -147,10 +156,10 @@ en:
   admin_overview_link_users: "View Kimbra ClickPLUS Users"
   
   # admin/customer/emails
-  admin_customer_emails_new_title: 'New Customer Email'
-  admin_customer_emails_new_link: 'New Email'
-  admin_customer_emails_index_title: 'Listing all sent and unsent Customer Emails'
-  admin_customer_emails_edit_title: 'Editing Customer Email'
+  admin_customer_emails_new_title: 'New Touchpoint Email'
+  admin_customer_emails_new_link: 'New Touchpoint Email'
+  admin_customer_emails_index_title: 'Listing all sent and unsent Touchpoint Emails'
+  admin_customer_emails_edit_title: 'Editing Touchpoint Email'
 
   # admin/customer/items
   admin_customer_items_new_title: 'New Offer Item'

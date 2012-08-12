@@ -1,5 +1,5 @@
 <div id='title_bar'>
-  <h3>Emails ready to be sent</h3>
+  <h3><%= t(:my_studio_dashboards_ready_title) %></h3>
 </div>
 <div class='panel_contents'>
   <% ready_emails = sessions.collect { |s| s.emails.where('sent_at is NULL and active = ?', true) }.flatten %>
