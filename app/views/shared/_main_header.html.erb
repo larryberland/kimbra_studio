@@ -17,9 +17,16 @@
       <% end %>
     </div>
 
+    <% display_h1 = t(:company_brand) %>
     <% if user_signed_in? %>
-        <h1 style='text-align:left;'> <%= @my_studio.try(:name) %> </h1>
+        <% if is_admin? %>
+            <% display_h1 = t(:admin_overview_title) %>
+        <% else %>
+            <% display_h1 = @my_studio.try(:name) %>
+        <% end %>
     <% end %>
+
+    <h1 style='text-align:left;'> <%= display_h1 %> </h1>
 
     <div id='main_nav'>
       <% if is_admin? %>
