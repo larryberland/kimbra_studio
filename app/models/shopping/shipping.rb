@@ -46,12 +46,43 @@ class Shopping::Shipping < ActiveRecord::Base
   validates :tracking,
             format: {with: @tracking_regex, message: 'UPS tracking numbers look like 1Z xxx xxx yy zzzz zzz c'},
             :if => Proc.new { |shipping| shipping.tracking.present? }
+  validate :valid_checksum_for_tracking
 
   def tracking=(trk)
     trk.upcase!
-    trk.gsub!(/[^\w^\d]/,'')
-    trk.gsub!(/\s/,'')
+    trk.gsub!(/[^\w^\d]/, '')
+    trk.gsub!(/\s/, '')
     write_attribute :tracking, trk
+  end
+
+  def valid_checksum_for_tracking
+    unless valid_checksum?
+      errors.add(:tracking, 'number digits do not agree with checksum - check your number')
+    end if tracking.present?
+  end
+
+  def checksum
+      sequence = tracking.slice(2...17)
+      total = 0
+      sequence.chars.each_with_index do |c, i|
+        x = if c[/[0-9]/] # numeric
+              c.to_i
+            else
+              (c[0].ord - 3) % 10
+            end
+        x *= 2 if i.odd?
+        total += x
+      end
+      check = (total % 10)
+      check = (10 - check) unless (check.zero?)
+      check.to_i
+    end
+
+  private #====================================================================================
+
+  def valid_checksum?
+    check_digit = tracking.slice(17, 18)
+    checksum == check_digit.to_i
   end
 
 end
