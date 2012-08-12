@@ -105,7 +105,12 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   def send_offers
     ClientMailer.delay.send_offers(self.id)
-    update_attributes(:sent_at => Time.now.to_s(:db))
+  end
+
+  def in_send_offers_queue?
+    # Look for a send_offer job waiting.
+    jobs = DelayedJob.where(" handler like '%:send_offers%' ")
+    jobs.detect { |job| YAML.load(job.handler).args.include? self.id }.present?
   end
 
   private #================================================
@@ -113,6 +118,5 @@ class Admin::Customer::Email < ActiveRecord::Base
   def set_message
     self.message = I18n.translate(:email_message, :name => my_studio_session.client.name.titleize) unless message
   end
-
 
 end

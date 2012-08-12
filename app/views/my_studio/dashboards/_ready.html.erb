@@ -1,6 +1,7 @@
 <div id='title_bar'>
   <h3><%= t(:my_studio_dashboards_ready_title) %></h3>
 </div>
+
 <div class='panel_contents'>
   <% ready_emails = sessions.collect { |s| s.emails.where('sent_at is NULL and active = ?', true) }.flatten %>
   <% if ready_emails.present? %>
@@ -19,10 +20,10 @@
               <% if current_user.admin? %>
                   <td><%= email.my_studio_session.studio.name %></td>
               <% end %>
-              <td><%= link_to email.my_studio_session.name, my_studio_session_path(session) %></td>
+              <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session) %></td>
               <td><%= email.my_studio_session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
               <td style='text-align:right;'><%= email.try(:offers).try(:count).to_words %></td>
-              <td><%= link_to 'Send email', send_offers_admin_customer_email_url(email), confirm: 'xxx', remote: true %></td>
+              <td><span id="send_email_<%= email.id %>"><%= actions_for_email(email) %></span></td>
             </tr>
         <% end %>
       </table>

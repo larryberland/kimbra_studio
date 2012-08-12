@@ -15,4 +15,29 @@ module MyStudio::DashboardsHelper
     end
   end
 
+  def actions_for_session(session)
+    if session.email_ready? # need 2 or more portraits
+      if session.emails.present? # already have an email
+        'email already generated'
+      else
+        if session.in_generate_queue? # look in the queue for pending email generation
+          'in queue'
+        else
+          link_to 'Generate Email', generate_admin_customer_email_path(session.id), method: :post, remote: true # enough portraits and ready to generate!
+        end
+      end
+    else
+      'not enough portraits yet'
+    end
+  end
+
+  def actions_for_email(email)
+    # We already selected for emails that have no sent_at date, therefore they are either ready to be sent or are sitting in the queue.
+    if email.in_send_offers_queue?
+      'in queue'
+    else
+      link_to 'Send Email', send_offers_admin_customer_email_url(email.id), method: :post, remote: true
+    end
+  end
+
 end

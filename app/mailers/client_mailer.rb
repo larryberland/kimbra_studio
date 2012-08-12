@@ -17,6 +17,8 @@ class ClientMailer < ActionMailer::Base
          bcc: ['support@kimbraclickplus.com', 'jim@jimjames.org'],
          subject: 'Your recent photos in heirloom jewelry.',
          from: "#{@studio.name} <support@KimbraClickPLUS.com>")
+    # Mark this email with the datetime sent.
+    @email.update_attributes(:sent_at => Time.now.to_s(:db))
   end
 
   def send_order_confirmation(cart_id, studio_id)

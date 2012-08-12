@@ -79,25 +79,27 @@ class Admin::Customer::EmailsController < ApplicationController
   # GET /admin/customer/emails/session_id/generate
   # GET /admin/customer/emails/session_id/generate/.json
   def generate
-    puts "Generate params=>#{params.inspect}"
-    @admin_customer_email = Admin::Customer::Email.delay.generate(params[:id])
+    Admin::Customer::Email.delay.generate(params[:id].to_i)
     respond_to do |format|
       format.html { render :edit }
       format.js do
-        render text: "$('#generate_email_#{params[:id]}').html('generating...')"
+        render text: "$('#generate_email_#{params[:id]}').html('generating...').effect('highlight', 2000)"
       end
     end
   end
 
   def send_offers
     Admin::Customer::Email.find(params[:id]).send_offers
-    render text: 'email will be sent soon'
+    respond_to do |format|
+      format.js do
+        render text: "$('#send_email_#{params[:id]}').html('queueing...').effect('highlight', 2000)"
+      end
+    end
   end
 
   # GET /admin/customer/emails/session_id/session
   # GET /admin/customer/emails/session_id/session/.json
   def session_list
-    puts "Session params=>#{params.inspect}"
     @admin_customer_emails = Admin::Customer::Email.by_session(MyStudio::Session.find(params[:id])).all
     render :index
   end

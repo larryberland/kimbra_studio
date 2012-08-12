@@ -21,18 +21,18 @@ class MyStudio::Session < ActiveRecord::Base
   scope :within_seven_days, lambda {
     where('session_at >= ? or created_at >= ?', 7.days.ago(Date.today), 7.days.ago(Date.today))
   }
-  scope :portraits_last_day, lambda{
+  scope :portraits_last_day, lambda {
     joins(:portraits).where('my_studio_portraits.created_at >= ?', 24.hours.ago())
   }
 
   def to_strategy_portrait
     raise "did you forget to upload portraits?" if portraits.empty?
     used_list = previous_offers.collect { |offer| offer.item_portrait_list }.flatten.compact.uniq
-    used_ids  = used_list.collect(&:id)
-    list      = portraits.collect do |portrait|
+    used_ids = used_list.collect(&:id)
+    list = portraits.collect do |portrait|
       if (portrait.active? and (portrait.faces.size > 0))
-        {portrait:      portrait,
-         used:          false,
+        {portrait: portrait,
+         used: false,
          used_previous: used_ids.include?(portrait.id)}
       else
         nil
@@ -52,7 +52,7 @@ class MyStudio::Session < ActiveRecord::Base
     portraits.count > 2
   end
 
-          # allow the forms to send in a text name
+  # allow the forms to send in a text name
   def category_name=(category_name)
     self.category = Category.find_or_initialize_by_name(category_name)
   end
@@ -67,6 +67,11 @@ class MyStudio::Session < ActiveRecord::Base
     display_name
   end
 
+  def in_generate_queue?
+    # Look for a generate job waiting.
+    jobs = DelayedJob.where(" handler like '%:generate%' ")
+    jobs.detect { |job| YAML.load(job.handler).args == [self.id] }.present?
+  end
 
   private #===============================================================
 

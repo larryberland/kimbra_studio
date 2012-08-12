@@ -3,7 +3,6 @@
 </div>
 
 <div class="panel_contents">
-
   <table id='dashboard_sessions'>
     <tr>
       <th>Session</th>
@@ -34,9 +33,7 @@
                 <%= session.portraits.last_day.count > 0 ? 'yes' : 'no' %>
               </td>
               <td>
-                <span id="generate_email_<%= session.id %>">
-                <%= session.email_ready? ? link_to('Generate Email', generate_admin_customer_email_path(session.id), method: :post, remote: true) : '' %>
-                </span>
+                <span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span>
               </td>
           <% end %>
           <td><%= time_short_now(session.session_at) %></td>
