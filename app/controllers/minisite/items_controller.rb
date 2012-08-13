@@ -10,23 +10,27 @@ class Minisite::ItemsController < InheritedResources::Base
   layout 'minisite'
 
   def index
+    @storyline.describe 'Viewing item list.'
     index!
   end
 
   def update
-    puts "params=>#{params.inspect}"
     @item  = Admin::Customer::Item.find(params[:id])
     offset = [@item.part.part_layout.x, @item.part.part_layout.y]
     size   = [@item.part.part_layout.w, @item.part.part_layout.h]
-
     update! do |success, failure|
-
-      success.html { render action: "edit" }
-      failure.html { render action: "edit" }
+      success.html do
+        @storyline.describe 'Saved item.'
+        render action: "edit"
+      end
+      failure.html do
+        @storyline.describe 'Failed saving item.'
+        render action: "edit"
+      end
     end
   end
 
-  private
+  private #=================================================================
 
   def set_by_tracking
     @offer = Admin::Customer::Offer.find_by_tracking(params[:id]) if params[:id]

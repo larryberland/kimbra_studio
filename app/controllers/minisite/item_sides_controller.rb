@@ -28,7 +28,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     end
   end
 
-          # get /minisite/offers/tracking/portrait
+  # get /minisite/offers/tracking/portrait
   def portrait
     @storyline.describe 'Selecting a new portrait.'
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
