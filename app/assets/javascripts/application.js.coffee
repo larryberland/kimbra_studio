@@ -8,6 +8,7 @@
 #= require wait
 #= require imagesloaded
 #= require rails.validations
+#= require jquery.orbit-1.2.3.min
 
 $ ->
   $('.flash_notice').each (index, element) ->
@@ -20,3 +21,6 @@ $ ->
 $ ->
   $('.datepicker').each (index, element) ->
     $(element).datepicker({ dateFormat: "yy-mm-dd" })
+
+$ ->
+  $('#slides').orbit({captions: true, captionAnimation: 'fade'})

@@ -2,7 +2,10 @@ KimbraStudio::Application.routes.draw do
 
   root :to => "welcome#index"
 
-  resource :about, :only => [:show]
+  resource :about do
+    get :show
+    get :signup
+  end
 
   namespace :admin do
     namespace :customer do
@@ -81,6 +84,7 @@ KimbraStudio::Application.routes.draw do
   resources :order_items
   resources :orders
   resources :payment_profiles
+  resources :prospects
 
   namespace :shopping do
     match 'edit_delivery_tracking' => 'carts#edit_delivery_tracking'

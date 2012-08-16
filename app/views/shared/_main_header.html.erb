@@ -12,8 +12,12 @@
               });
           </script>
       <% else %>
-          <strong><%= link_to translate(:sign_in), new_user_session_path %></strong> or
+          <strong><%= link_to translate(:sign_in), new_user_session_path %></strong>
+          <!--
+          or
           <span><%= link_to translate(:sign_up), new_user_registration_path %></span>
+          -->
+          or <span><%= link_to translate(:sign_up), signup_about_path %></span>
       <% end %>
     </div>
 

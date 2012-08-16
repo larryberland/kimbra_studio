@@ -38,6 +38,6 @@
   </ul>
 </div>
 
-<%= render 'shared/olark' %>
+<%= render('shared/olark') if user_signed_in? %>
 </body>
 </html>

@@ -1,7 +1,8 @@
 class WelcomeController < ApplicationController
 
+  skip_before_filter :authenticate_user!, only: :index
+
   def index
-    puts "XXX user: #{current_user.name} role: #{current_user.roles.collect(&:name).join(', ')}"
     #@featured_piece = Piece.featured
     #@best_selling_pieces = Piece.limit(3)
     #@other_pieces  ## search 2 or 3 categories (maybe based on the user)

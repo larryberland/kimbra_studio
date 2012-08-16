@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120716104322) do
+ActiveRecord::Schema.define(:version => 20120816223330) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -402,6 +402,12 @@ ActiveRecord::Schema.define(:version => 20120716104322) do
   end
 
   add_index "piece_layouts", ["part_id"], :name => "index_piece_layouts_on_part_id"
+
+  create_table "prospects", :force => true do |t|
+    t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "roles", :force => true do |t|
     t.string "name", :limit => 30, :null => false
