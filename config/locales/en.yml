@@ -26,7 +26,7 @@ en:
   # devise views
   sign_in: 'Sign in'
   sign_up: 'Register'
-  not_you: 'Not you?'
+  not_you: 'Not you? or Logout'
   link_destroy_confirm: 'Are you sure?'
 
   # confirmations/new
