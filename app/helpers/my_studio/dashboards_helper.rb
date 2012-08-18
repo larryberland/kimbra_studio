@@ -1,6 +1,6 @@
 module MyStudio::DashboardsHelper
 
-  def portrait_uploaded_days_ago_text
+  def new_sessions_days_ago_text
     most_recent_portrait = current_user.studio.sessions.collect { |s| s.portraits.collect { |p| p.created_at.to_date } }.flatten.max
     if most_recent_portrait.is_a? Date
       days_ago = (Date.today - most_recent_portrait).to_i

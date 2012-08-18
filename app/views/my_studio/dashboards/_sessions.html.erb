@@ -22,11 +22,7 @@
           <td><%= session.try(:client).try(:name) %></td>
           <td><%= (session.emails.count > 0) ? link_to(session.emails.count.to_words, session_list_admin_customer_email_path(session)) : '' %></td>
           <td>
-            <% if session.portraits.count < 3 %>
-                <%= link_to 'Upload portraits', my_studio_session_portraits_path(session) %>
-            <% else %>
-                <%= link_to session.portraits.count.to_words, my_studio_session_portraits_path(session) %>
-            <% end %>
+            <%= upload_link(session) %>
           </td>
           <% if current_user.admin? %>
               <td>

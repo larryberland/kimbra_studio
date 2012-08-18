@@ -1,20 +1,25 @@
 <div class='sub-form' title='Client Info'>
-  <div>
-    <h3><%=t(:my_studio_clients_form_title)%></h3>
 
     <%= f.fields_for :client, client do |g| %>
 
         <div class="field">
-          <%= g.label :name %>
-          <%= g.text_field :name %>
-          <%= g.label :email %>
+          <%= g.label :name, 'First and Last Name' %><br/>
+          <%= g.text_field :name, placeholder: 'Sue Ellen Ewing' %> Enter the name as you'd like it to appear in emails.
+        </div>
+
+        <div class="field">
+          <%= g.label :email %><br/>
           <%= g.email_field :email %>
         </div>
-        <div class="field">
-          <%= g.label :active, 'Client active?' %>
-          <%= g.check_box :active %> Uncheck this to remove all sessions for this client from active email marketing.
-        </div>
+
+        <% unless action_name == 'new' %>
+            <div class="field">
+              <%= g.label :active, 'Client active?' %>
+              <%= g.check_box :active %> Uncheck this to remove all sessions for this client from active email
+              marketing.
+            </div>
+        <% end %>
+
     <% end %>
 
-  </div>
 </div>

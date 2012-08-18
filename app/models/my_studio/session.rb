@@ -19,10 +19,11 @@ class MyStudio::Session < ActiveRecord::Base
   before_save :set_name
 
   scope :within_seven_days, lambda {
-    where('session_at >= ? or created_at >= ?', 7.days.ago(Date.today), 7.days.ago(Date.today))
+    where('session_at >= ? or created_at >= ?', 7.days.ago(Date.today), 7.days.ago(Date.today)).
+        order('created_at desc')
   }
   scope :portraits_last_day, lambda {
-    joins(:portraits).where('my_studio_portraits.created_at >= ?', 24.hours.ago())
+    joins(:portraits).where('my_studio_portraits.created_at >= ?', 24.hours.ago()).order('created_at desc')
   }
 
   def to_strategy_portrait

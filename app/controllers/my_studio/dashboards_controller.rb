@@ -1,5 +1,6 @@
 class MyStudio::DashboardsController < MyStudio::BaseController
 
+  helper MyStudio::SessionsHelper
 
   # GET /my_studio/dashboard
   # GET /my_studio/dashboard.json

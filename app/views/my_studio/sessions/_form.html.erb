@@ -1,30 +1,33 @@
 <%= form_for(@my_studio_session, validate: true) do |f| %>
 
-    <%= render 'shared/error_messages', record: @my_studio_session, h2_msg:'stopped this Session' %>
+    <%= render 'shared/error_messages', record: @my_studio_session, h2_msg: 'stopped this Session' %>
 
     <%= render "my_studio/clients/form", :f => f, :client => @my_studio_session.client %>
 
+    <!-- remove for now - probably not necessary
     <div class="field">
       <%= f.label :name %>
-      <br/>
       <%= f.text_field :name, placeholder: 'Son Tom\'s graduation' %> Short descriptive text when you have multiple
-      sessions with one client.
+      sessions with one client (optional).
     </div>
+    -->
 
     <div class="field ui-widget">
-      <%= f.label :session_at, 'Session Date:' %>
-      <br/>
+      <%= f.label :session_at, 'Session Date' %><br/>
       <%= f.text_field :session_at, class: :datepicker %>
     </div>
 
-    <div class="field">
-      <%= f.label :active %>
-      <%= f.check_box :active %> Uncheck this to remove all pictures for this Session from active email marketing.
-    </div>
+    <% unless action_name == 'new' %>
+        <div class="field">
+          <%= f.label :active %>
+          <%= f.check_box :active %> Uncheck this to remove all pictures for this Session from active email marketing.
+        </div>
+    <% end %>
 
     <div class="field">
-      <%= f.label :category_id %>
-      <%= f.select :category_id, @categories, include_blank: true %> This helps us find candidate pictures for special event marketing, such
+      <%= f.label :category_id %><br/>
+      <%= f.select :category_id, @categories, include_blank: true %> This helps us find candidate pictures for special
+      event marketing, such
       as Mothers Day, Christmas, etc.
     </div>
 
