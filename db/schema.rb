@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120816223330) do
+ActiveRecord::Schema.define(:version => 20120818134018) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -290,7 +290,7 @@ ActiveRecord::Schema.define(:version => 20120816223330) do
 
   create_table "my_studio_sessions", :force => true do |t|
     t.string   "name"
-    t.datetime "session_at"
+    t.date     "session_at"
     t.boolean  "active",      :default => true
     t.integer  "studio_id"
     t.integer  "client_id"

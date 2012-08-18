@@ -36,7 +36,7 @@
                 <span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span>
               </td>
           <% end %>
-          <td><%= time_short_now(session.session_at) %></td>
+          <td><%= session.session_at.to_s(:short) %></td>
         </tr>
     <% end %>
   </table>
