@@ -12,7 +12,7 @@
           <% end %>
           <th>photo session</th>
           <th>client</th>
-          <th class='right'>how many<br/>offers</th>
+          <th>how many<br/>offers</th>
           <th>Actions</th>
         </tr>
         <% ready_emails.each do |email| %>
@@ -22,7 +22,7 @@
               <% end %>
               <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session) %></td>
               <td><%= email.my_studio_session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
-              <td style='text-align:right;'><%= email.try(:offers).try(:count).to_words %></td>
+              <td><%= email.try(:offers).try(:count).to_words %></td>
               <td><span id="send_email_<%= email.id %>"><%= actions_for_email(email) %></span></td>
             </tr>
         <% end %>
