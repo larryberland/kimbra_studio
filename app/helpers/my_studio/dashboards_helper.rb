@@ -8,7 +8,7 @@ module MyStudio::DashboardsHelper
         when 0
           '&#x2713; Portraits uploaded earlier today. Got any more?'.html_safe
         else
-          "&#x2718; No portraits uploaded in the last #{content_tag :span, pluralize(days_ago, 'day'), :class => 'days_ago'}!".html_safe
+          "&#x2718; No portraits uploaded in the last #{pluralize days_ago, 'day'}!".html_safe
       end
     else
       '&#x2718; You haven\'t uploaded any portraits yet!'.html_safe

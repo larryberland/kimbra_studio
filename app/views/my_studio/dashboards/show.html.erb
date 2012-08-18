@@ -1,8 +1,16 @@
 <div class='container'>
   <div class='motivation'>
-    <%= portrait_uploaded_days_ago_text %>
+    <table style='margin-bottom:0px;width:auto;'>
+      <tr>
+        <td>
+          <%= portrait_uploaded_days_ago_text %>
+        </td>
+        <td align='left'>
+          <%= button_to 'Upload some now!', new_my_studio_session_path, method: :get, form: {id: 'upload_more_portraits_button'}, style: 'font-size:10pt' %>
+        </td>
+      </tr>
+    </table>
   </div>
-  <%= button_to 'Upload some now!', new_my_studio_session_path, method: :get, form: {id: 'upload_more_portraits_button'} %>
 
   <div class='motivation'>
     Total revenue so far: <%= number_to_currency @sum_purchases %> Your commmission (at <%= @commission_rate %>%):
@@ -19,6 +27,6 @@
 </div>
 
 <div class='span-6 last ar-widget'>
-  <!-- This is groovy and I think we'll use it for something. -->
+  powered by
   <%= image_tag 'kimbra_logo.png' %>
 </div>
