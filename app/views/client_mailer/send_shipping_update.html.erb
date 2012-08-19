@@ -50,7 +50,7 @@
           <%= @studio.phone_number %><br/>
           <%= @studio.address_1 %><br/>
           <%= "#{@studio.address_2}<br/>".html_safe if @studio.address_2 %>
-          <%= @studio.city %>, <%= @studio.state %> <%= @studio.zip_code %>
+          <%= @studio.city %>, <%= @studio.state.abbreviation %> <%= @studio.zip_code %>
         </p>
       </div>
     </td>

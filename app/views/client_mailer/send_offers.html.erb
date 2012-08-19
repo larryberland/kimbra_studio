@@ -569,7 +569,7 @@
           <p id="street-address" class="footer-content-right" align="right" style="color: #e2e2e2">
             <%= @studio.name -%> •
             <%= @studio.address_1 -%> •
-            <%= @studio.city %>, <%= @studio.state -%> •
+            <%= @studio.city %>, <%= @studio.state.abbreviation -%> •
             <%= @studio.phone_number -%>
           </p>
         </td>
