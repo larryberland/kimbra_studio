@@ -8,7 +8,7 @@ module Admin
     layout 'story'
 
     def index
-      @dates = (7.days.ago.to_date..Date.today)
+      @dates = (10.days.ago.to_date..Date.today)
       @with_names = Story.with_name_grouped_by_day.size
       @without_names = Story.without_name_grouped_by_day.size
       @stories = Story.today

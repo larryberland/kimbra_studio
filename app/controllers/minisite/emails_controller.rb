@@ -18,6 +18,10 @@ module Minisite
       @storyline.describe 'Viewing Privacy statement.'
     end
 
+    def returns
+      @storyline.describe 'Viewing Returns statement.'
+    end
+
     # Accepts cart tracking.
     def order_status
       @cart_order = Shopping::Cart.find_by_tracking(params[:cart])

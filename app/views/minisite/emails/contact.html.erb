@@ -17,7 +17,7 @@
           <%= @studio.phone_number %><br/>
           <%= @studio.address_1 %><br/>
           <%= "#{@studio.address_2}<br/>".html_safe if @studio.address_2 %>
-          <%= @studio.city %>, <%= @studio.state %> <%= @studio.zip_code %>
+          <%= @studio.city %>, <%= @studio.state.abbreviation %> <%= @studio.zip_code %>
         </p>
       </div>
     </td>
@@ -34,7 +34,7 @@
           Kimbra's ClickPLUS program for professional photography studios.<br/>
           Call us direct 9am - 7pm Eastern<br/>
           (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
-          <%= mail_to 'Support@KimbraClickPLUS.com', 'Support_at_KimbraClickPLUS.com', encode: :javascript %><br/>
+          <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com', encode: :javascript %><br/>
           <%= link_to 'Kimbra Studios', 'http://KimbraStudios.com' %>
         </p>
 
