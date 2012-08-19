@@ -1,11 +1,11 @@
 class MyStudio::PortraitsController < MyStudio::BaseController
+
   before_filter :load_my_studio_session
 
   # GET /my_studio/portraits
   # GET /my_studio/portraits.json
   def index
-    @my_studio_portraits = MyStudio::Portrait.where('my_studio_session_id=?', @my_studio_session).all
-
+    @my_studio_portraits = MyStudio::Portrait.where('my_studio_session_id=?', @my_studio_session).order('created_at desc')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @my_studio_portraits }
@@ -23,14 +23,11 @@ class MyStudio::PortraitsController < MyStudio::BaseController
     end
   end
 
-  # GET /my_studio/portraits/new
-  # GET /my_studio/portraits/new.json
   def new
     @my_studio_portrait = MyStudio::Portrait.new(:my_studio_session => @my_studio_session)
-
     respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @my_studio_portrait }
+      format.html
+      format.js
     end
   end
 
@@ -85,11 +82,10 @@ class MyStudio::PortraitsController < MyStudio::BaseController
     end
   end
 
-  private
+  private #=====================================================================================
 
   def load_my_studio_session
     @my_studio_session = MyStudio::Session.find(params[:session_id]) if params[:session_id]
-    @my_studio_session
   end
 
 end

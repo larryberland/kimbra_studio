@@ -1,4 +1,5 @@
-<h1>Listing my_studio_portrait_faces</h1>
+<h1><%=t(:my_studio_faces_index_title)%></h1>
+<h3><%=t(:my_studio_faces, :name => @my_studio_session.try(:name)) %></h3>
 
 <table>
   <tr>
@@ -55,6 +56,6 @@
 
 <br />
 
-<%= link_to 'New Face', new_my_studio_session_portrait_face_path(@portrait.my_studio_session, @portrait) %>
+<%# link_to 'New Face', new_my_studio_session_portrait_face_path(@portrait.my_studio_session, @portrait) %>
 <%= link_to t(:back), my_studio_session_portraits_path(@portrait.my_studio_session) %>
 

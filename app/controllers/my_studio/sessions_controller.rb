@@ -5,8 +5,7 @@ class MyStudio::SessionsController < MyStudio::BaseController
   # GET /my_studio/sessions
   # GET /my_studio/sessions.json
   def index
-    @my_studio_sessions = MyStudio::Session.where('studio_id=?', @my_studio).all
-
+    @my_studio_sessions = MyStudio::Session.where('studio_id=?', @my_studio).order('created_at desc')
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @my_studio_sessions }

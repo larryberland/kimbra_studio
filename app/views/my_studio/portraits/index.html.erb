@@ -1,9 +1,8 @@
-<h1><%=t(:my_studio_portraits_index_title)%></h1>
-<h3><%=t(:my_studio_portraits_session, :name => @my_studio_session.try(:name)) %></h3>
+<h2><%=t(:my_studio_portraits_index_title, name: @my_studio_session.name)%></h2>
 
-<%= link_to t(:my_studio_portraits_new_link), new_my_studio_session_portrait_path(@my_studio_session) %>
+<%= link_to t(:my_studio_portraits_new_link), new_my_studio_session_portrait_path(@my_studio_session), remote: true %>
 <br/>
-<%= link_to t(:back), my_studio_sessions_path %>
+<div id='new_portrait'>&nbsp;</div>
 
 <table>
   <tr>
@@ -12,10 +11,8 @@
     <th>Width</th>
     <th>Height</th>
     <th>Faces</th>
-    <th></th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th>Thumb</th>
+    <th>Actions</th>
   </tr>
 
   <% @my_studio_portraits.each do |my_studio_portrait| %>
@@ -25,9 +22,11 @@
         <td><%= my_studio_portrait.width %></td>
         <td><%= my_studio_portrait.height %></td>
         <td><%= link_to my_studio_portrait.faces.size, my_studio_session_portrait_faces_path(@my_studio_session, my_studio_portrait)%></td>
-        <td><%= image_tag_list(my_studio_portrait) %></td>
+        <td><%= link_to image_tag_list(my_studio_portrait), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
+        <!--
         <td><%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
         <td><%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
+        -->
         <td><%= link_to t(:destroy), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait), confirm: t(:link_destroy_confirm), method: :delete %></td>
       </tr>
   <% end %>

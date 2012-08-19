@@ -110,6 +110,9 @@ en:
   my_studio_dashboards_emails_title: 'Emails this past week'
   my_studio_dashboards_recent_portraits_title: 'Photo Portraits Activity this past day'
 
+  # my_studio_faces
+  my_studio_faces_index_title: 'Faces Data'
+
   # my_studio/overviews/new
   my_studio_overview_title: 'Studio Dashboard'
   my_studio_overview_link: 'Studio Dashboard'
@@ -128,9 +131,9 @@ en:
 
   # my_studio/portraits
   my_studio_portraits_new_title: "Upload Session Portrait for %{name}"
-  my_studio_portraits_new_link: 'Upload Session Portrait'
+  my_studio_portraits_new_link: 'Upload New Session Portrait'
   my_studio_portraits_edit_title: 'Editing Session portraits'
-  my_studio_portraits_index_title: 'Listing Session Portraits'
+  my_studio_portraits_index_title: "Session Portraits for %{name}"
   my_studio_portraits_session: "For %{name}"
 
   # my_studio/sessions
