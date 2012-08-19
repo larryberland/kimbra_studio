@@ -7,7 +7,7 @@
     <tr>
       <th>Session</th>
       <th>Client</th>
-      <th>Touchpoint Emails</th>
+      <th>Offer Emails</th>
       <th>Portraits</th>
       <% if current_user.admin? %>
           <th>New Portrait?</th>
@@ -18,19 +18,13 @@
 
     <% sessions.each do |session| %>
         <tr>
-          <td><%= link_to session.display_name(current_user.admin?), my_studio_session_path(session) %></td>
+          <td><%= link_to session.display_name(current_user.admin?), edit_my_studio_session_path(session) %></td>
           <td><%= session.try(:client).try(:name) %></td>
-          <td><%= (session.emails.count > 0) ? link_to(session.emails.count.to_words, session_list_admin_customer_email_path(session)) : '' %></td>
-          <td>
-            <%= upload_link(session) %>
-          </td>
+          <td><%= (session.emails.count > 0) ? link_to(session.emails.count.to_words, session_list_admin_customer_email_path(session)) : 'none yet' %></td>
+          <td><%= upload_link(session) %></td>
           <% if current_user.admin? %>
-              <td>
-                <%= session.portraits.last_day.count > 0 ? 'yes' : 'no' %>
-              </td>
-              <td>
-                <span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span>
-              </td>
+              <td><%= session.portraits.last_day.count > 0 ? 'yes' : 'no' %></td>
+              <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
           <% end %>
           <td><%= session.session_at.to_s(:short) %></td>
         </tr>

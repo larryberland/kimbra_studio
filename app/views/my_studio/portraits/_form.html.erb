@@ -1,7 +1,7 @@
 <% url = @my_studio_portrait.id.nil? ? my_studio_session_portraits_path(@my_studio_session) : my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %>
 <%= form_for(@my_studio_portrait, :url => url, :html => {:multipart => true}) do |f| %>
 
-    <%= render 'shared/error_messages', record: @my_studio_portrait %>
+    <%= render 'shared/error_messages', record: @my_studio_portrait, h2_msg: 'prohibited new portrait:' %>
 
     <!-- remove for now - not necessary
     <div class="field">
@@ -18,7 +18,7 @@
       <%= f.text_field :remote_image_url %>
     </div>
 
-    <% unless action_name == 'new' %>
+    <% unless %w(new create).include? action_name %>
         <div class="field">
           <%= f.label :active %>
           <%= f.check_box :active %>
@@ -26,7 +26,7 @@
     <% end %>
 
     <div class="actions">
-      <%= f.submit :id => 'my_submit' %>
+      <%= f.submit t(:create), :id => 'my_submit' %>
       <span id="spinner" style="display:none"></span>
     </div>
 

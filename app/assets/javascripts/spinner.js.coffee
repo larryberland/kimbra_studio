@@ -1,11 +1,11 @@
 # Build CSS spinner
-spinnerOpts =
+window.spinnerOpts =
   lines:12, # The number of lines to draw
   length:5, # The length of each line
   width:2, # The line thickness
   radius:5, # The radius of the inner circle
   rotate:0, # The rotation offset
-  color:'#eee', # #rgb or #rrggbb
+  color:'#AAA', # #rgb or #rrggbb
   speed:1, # Rounds per second
   trail:60, # Afterglow percentage
   shadow:false, # Whether to render a shadow

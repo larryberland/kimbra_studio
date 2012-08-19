@@ -3,7 +3,7 @@
     <%= f.fields_for :client, client do |g| %>
 
         <div class="field">
-          <%= g.label :name, 'First and Last Name' %><br/>
+          <%= g.label :name, 'Client first and last name' %><br/>
           <%= g.text_field :name, placeholder: 'Sue Ellen Ewing' %> Enter the name as you'd like it to appear in emails.
         </div>
 
@@ -12,7 +12,7 @@
           <%= g.email_field :email %>
         </div>
 
-        <% unless action_name == 'new' %>
+        <% unless %w(new create).include? action_name %>
             <div class="field">
               <%= g.label :active, 'Client active?' %>
               <%= g.check_box :active %> Uncheck this to remove all sessions for this client from active email

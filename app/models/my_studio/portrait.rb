@@ -19,6 +19,8 @@ class MyStudio::Portrait < ActiveRecord::Base
   before_save :set_description
   after_save :get_faces
 
+  validates_presence_of :image
+
   def face_image
     if @face_image.nil?
       raise "who is calling me face_image"

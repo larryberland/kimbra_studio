@@ -41,14 +41,15 @@ class MyStudio::PortraitsController < MyStudio::BaseController
   def create
     @my_studio_portrait = MyStudio::Portrait.new(params[:my_studio_portrait])
     @my_studio_portrait.my_studio_session = @my_studio_session
-
     respond_to do |format|
       if @my_studio_portrait.save
         format.html { redirect_to my_studio_session_portraits_url(@my_studio_session), notice: 'Portrait was successfully created.' }
         format.json { render json: my_studio_session_portrait_url(@my_studio_session, @my_studio_portrait), status: :created, location: @my_studio_portrait }
+        format.js { redirect_to my_studio_session_portraits_url(@my_studio_session), notice: 'Portrait was successfully created.' }
       else
-        format.html { render action: "new" }
+        format.html { render action: 'new' }
         format.json { render json: @my_studio_portrait.errors, status: :unprocessable_entity }
+        format.js { render action: 'new' }
       end
     end
   end

@@ -60,6 +60,7 @@
               <div class='menu_item'>
                 <%= link_to t(:my_studio_overview_label_session), my_studio_sessions_path %>
               </div>
+              <!-- remove for now until we have studios with staff
               <div class='menu_item'>
                 <%= link_to t(:my_studio_overview_label_staff, :action => 'View '), my_studio_staffers_path %>
               </div>
@@ -71,6 +72,7 @@
                     <%= link_to t(:my_studio_overview_label_studio, :action => 'View '), studio_path(current_user.studio) %>
                   </div>
               <% end %>
+              -->
           <% else %>
               <div class='menu_item'>
                 <%= t(:company_brand) %>

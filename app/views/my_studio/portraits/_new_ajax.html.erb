@@ -1,15 +1,25 @@
 <% url = @my_studio_portrait.id.nil? ? my_studio_session_portraits_path(@my_studio_session) : my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %>
-<%= form_for(@my_studio_portrait, :url => url, :html => {:multipart => true}) do |f| %>
+<%= form_for(@my_studio_portrait, url: url, html: {multipart: true}, remote: true) do |f| %>
 
-    <%= render 'shared/error_messages', record: @my_studio_portrait %>
+    <%= render 'shared/error_messages', record: @my_studio_portrait, h2_msg: 'prohibited new portrait:' %>
 
     <div class="field">
       <%= f.label :image, 'Portrait:' %>
       <%= f.file_field :image %>
       <%= f.label :remote_image_url, 'or Portrait URL' %>
       <%= f.text_field :remote_image_url %>
-      <%= f.submit :id => 'my_submit' %>
+      <%= f.submit t(:create), id: 'my_submit' %>
       <span id="spinner" style="display:none"></span>
     </div>
 
+<% end %>
+
+<%# TODO if we used jQuery's #live method to bind events, we wouldn't have to keep binding them on every ajax load. %>
+<%= coffee_script_tag do %>
+    # Insert spinner object and append it to the #spinner element.
+    spinner = new Spinner(spinnerOpts).spin()
+    $('#spinner').append(spinner.el)
+    # Add spinner show to #my_submit click event.
+    $('#my_submit').click ->
+      $('#spinner').toggle()
 <% end %>

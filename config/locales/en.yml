@@ -8,11 +8,12 @@ en:
 
   welcome: 'Welcome!'
 
+  create: 'Add'
   show: 'Show'
   back: 'Back'
   edit: 'Edit'
   update: 'Update'
-  destroy: 'Destroy'
+  destroy: 'Delete'
   offers: 'Offers'
 
   # customer_mailer/send_offer.html.erb
