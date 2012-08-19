@@ -6,7 +6,7 @@ class DevelopmentMailInterceptor
     if `hostname`.match(/james|chapterhouse/i)
       message.to = ['jim@jimjames.org']
     else
-      message.to = ['jim@jimjames.org',"hokahey100@gmail.com"]
+      message.to = ['hokahey100@gmail.com']
     end
     puts "Sending email to #{message.to}"
   end
