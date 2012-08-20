@@ -191,7 +191,7 @@
   - category: Photo Necklaces
     name: Madelyn Necklace
     price: 38.00
-    short_description: 'Solid pewter photo charm measuring 1" square. The Madelyn Necklace is an 18" 2 strand ball chain.'
+    short_description: 'Solid pewter photo charm measuring 1" square. The Madelyn Necklace is on an 18" 2 strand ball chain.'
     sku:
     custom_layout: 'order'
     :parts:
@@ -203,7 +203,7 @@
   - category: Photo Necklaces
     name: Embrace Necklace
     price: 120.00
-    short_description: 'Photo measuring: 9/16"w x 3/4"h. The Embrace Necklace is made up of a Taneka photo charm, a hammered ring, the "Mom" charm, an angel wing charm, a crystal bead charm.'
+    short_description: 'Photo measuring: 9/16"w x 3/4"h. The Embrace Necklace is made up of a Taneka photo charm, a hammered ring, the Mom charm, an angel wing charm, a crystal bead charm.'
     description_markup: 'All charms are solid sterling silver. Completely waterproof.'
     sku:
     custom_layout: 'order'

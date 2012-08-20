@@ -50,4 +50,10 @@ class ApplicationController < ActionController::Base
     current_user && current_user.admin?
   end
 
+  def do_not_cache
+    response.headers['Cache-Control'] = 'no-chache, no-store, max-age=0, must-revalidate'
+    response.headers['Pragma'] = 'no-cache'
+    response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
+  end
+
 end

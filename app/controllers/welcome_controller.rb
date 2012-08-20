@@ -1,6 +1,7 @@
 class WelcomeController < ApplicationController
 
   skip_before_filter :authenticate_user!, only: :index
+  before_filter :do_not_cache, only: :index
 
   def index
     #@featured_piece = Piece.featured

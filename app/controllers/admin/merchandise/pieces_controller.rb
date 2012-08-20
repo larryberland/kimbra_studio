@@ -2,7 +2,7 @@ class Admin::Merchandise::PiecesController < ApplicationController
   # GET /admin/merchandise/pieces
   # GET /admin/merchandise/pieces.json
   def index
-    @admin_merchandise_pieces = Admin::Merchandise::Piece.all
+    @admin_merchandise_pieces = Admin::Merchandise::Piece.order('active desc, category desc, name asc')
 
     respond_to do |format|
       format.html # index.html.erb
