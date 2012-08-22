@@ -18,9 +18,9 @@ $ ->
         $(element).effect('highlight', 4000)
   $('.flash_error').delay(2000).slideUp('slow')
 
-$ ->
   $('.datepicker').each (index, element) ->
     $(element).datepicker({ dateFormat: "yy-mm-dd" })
 
-$ ->
   $('#slides').orbit()
+
+  $('input:enabled:first').focus()
