@@ -5,10 +5,11 @@ class MyStudio::SessionsController < MyStudio::BaseController
   # GET /my_studio/sessions
   # GET /my_studio/sessions.json
   def index
-    @my_studio_sessions = MyStudio::Session.where('studio_id=?', @my_studio).order('created_at desc')
+    @sessions = MyStudio::Session.where('studio_id=?', @my_studio).order('session_at desc')
+    @sessions = MyStudio::Session.order('session_at desc') if current_user.admin?
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @my_studio_sessions }
+      format.json { render json: @sessions }
     end
   end
 

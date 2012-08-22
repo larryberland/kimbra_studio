@@ -1,32 +1,5 @@
 <h1><%= t(:my_studio_sessions_index_title, name: '') %></h1>
 
-<%= button_to t(:my_studio_sessions_new_link), new_my_studio_session_path, method: :get %>
+<%= button_to(t(:my_studio_sessions_new_link), new_my_studio_session_path, method: :get) unless current_user.admin? %>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th>When</th>
-    <th>Active?</th>
-    <th>Category</th>
-    <th>Client</th>
-    <th>Portraits</th>
-    <th>Actions</th>
-  </tr>
-
-  <% @my_studio_sessions.each do |my_studio_session| %>
-      <tr>
-        <td><%= link_to my_studio_session.name, edit_my_studio_session_path(my_studio_session) %></td>
-        <td><%= my_studio_session.session_at.to_s(:short) %></td>
-        <td><%= my_studio_session.active ? 'active' : 'inactive' %></td>
-        <td><%= my_studio_session.category_name %></td>
-        <td><%= my_studio_session.client.try(:name) %></td>
-        <td><%= link_to my_studio_session.portraits.size.to_words, my_studio_session_portraits_path(my_studio_session) %></td>
-        <td><%= upload_link(my_studio_session) %></td>
-        <!--
-        <td><%= link_to t(:show), my_studio_session %></td>
-        <td><%= link_to t(:edit), edit_my_studio_session_path(my_studio_session) %></td>
-        <td><%= link_to_destroy(my_studio_session) %></td>
-        -->
-      </tr>
-  <% end %>
-</table>
+<%= render 'my_studio/sessions/index', sessions: @sessions %>

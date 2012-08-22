@@ -1,0 +1,30 @@
+<div class="panel_contents">
+  <table id='dashboard_sessions'>
+    <tr>
+      <th>Session</th>
+      <th>Client</th>
+      <th>Offer Emails</th>
+      <th>Portraits</th>
+      <% if current_user.admin? %>
+          <th>New Portrait?</th>
+          <th><span class='explainer' title='Need at least 2 portraits to generate an email.'>Actions</span></th>
+      <% end %>
+      <th>Session Date</th>
+    </tr>
+
+    <% sessions.each do |session| %>
+        <tr>
+          <td><%= link_to session.display_name(current_user.admin?), edit_my_studio_session_path(session) %></td>
+          <td><%= session.try(:client).try(:name) %></td>
+          <td><%= (session.emails.count > 0) ? link_to(session.emails.count.to_words, session_list_admin_customer_email_path(session)) : 'none yet' %></td>
+          <td><%= upload_link(session) %></td>
+          <% if current_user.admin? %>
+              <td><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
+              <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
+          <% end %>
+          <td><%= session.session_at.to_s(:short) %></td>
+        </tr>
+    <% end %>
+  </table>
+  <%= link_to('all sessions...', my_studio_sessions_path) if MyStudio::Session.count > sessions.length %>
+</div>
