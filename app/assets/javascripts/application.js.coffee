@@ -23,4 +23,4 @@ $ ->
 
   $('#slides').orbit()
 
-  $('input:enabled:first').focus()
+  $('#user_email').focus()
