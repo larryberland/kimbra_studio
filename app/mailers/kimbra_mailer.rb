@@ -2,8 +2,8 @@ class KimbraMailer < ActionMailer::Base
 
   helper :application
 
-  default from: KIMBRA_STUDIO_CONFIG[:mailer][:sales]
-  default to: KIMBRA_STUDIO_CONFIG[:mailer][:kimbra_order]
+  default from: 'ClickPLUS Support <support@kimbraclickplus.com>'
+  default to: 'kimbra@kimbrastudios.com'
 
   def send_order(cart_id, studio_id)
     @cart   = Shopping::Cart.find(cart_id)

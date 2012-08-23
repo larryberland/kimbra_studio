@@ -49,8 +49,6 @@ production:
     :storage: :fog
     :dump_image: false
   :mailer:
-    :sales: support@kimbraclickplus.com
-    :kimbra_order: kimbra@kimbrastudios.com
     :dummy:
   :stripe:
     :name: admin@kimbraclickplus.com
