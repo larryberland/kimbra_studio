@@ -14,7 +14,7 @@
 
 $ ->
   $('.flash_notice').each (index, element) ->
-    $(element).effect('highlight', 4000)
-  $('.flash_notice').delay(4000).slideUp('slow')
-  $('.flash_error').delay(4000).slideUp('slow')
+      $(element).effect('highlight', 4000).delay(4000).slideUp('slow')
+  $('.flash_error').each (index, element) ->
+      $(element).effect('highlight', 4000).delay(4000).slideUp('slow')
   $('#error_explanation').effect('highlight', 4000)

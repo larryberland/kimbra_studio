@@ -7,12 +7,12 @@
  *= require_tree ../stylesheets/admin
  *= require_tree ../stylesheets/my_studio
  *= require_tree ../stylesheets/studio
+ *= require_tree ../stylesheets/jcrop
  *= require _footer
  *= require _widget
  *= require _common
  *= require devise
  *= require scaffolds
- *= require_tree ../../../vendor/assets/stylesheets
  *= require blueprint
 */
 
