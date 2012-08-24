@@ -68,14 +68,10 @@ class Shopping::Purchase < ActiveRecord::Base
 
   def tax_short_description
     if tax.present? && tax != 0
-      "#{tax_description[:region]} @ #{tax_description[:combined_tax][:rate] * 100}%"
+      "#{tax_description[:region]} @ #{(tax_description[:combined_tax][:rate] * 100).round(2)}%"
     else
       'no sales tax'
     end
-  end
-
-  def zip_code_5_digit
-    zip_code.to_s.strip[0..4]
   end
 
   private #=================================================================================
