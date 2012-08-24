@@ -82,7 +82,7 @@ class Shopping::Purchase < ActiveRecord::Base
   end
 
   def stripe_description
-    "studio:#{cart.try(:email).try(:my_studio_session).try(:studio).try(:name)} for #{cart.try(:address).try(:email)} purchase:#{id}"
+    "#{cart.try(:email).try(:my_studio_session).try(:studio).try(:name)} for #{cart.try(:address).try(:email)} order:#{cart.try(:tracking)}"
   end
 
   def create_stripe_card(stripe_card_hash)

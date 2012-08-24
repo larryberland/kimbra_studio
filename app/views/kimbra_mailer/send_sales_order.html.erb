@@ -48,7 +48,7 @@
 
 <p>
   STRIPE CREDIT CARD
-  RESPONSE: <%= link_to @cart.purchase.stripe_card_token, "https://manage.stripe.com/#test/payments/#{@cart.purchase.stripe_card_token}" %>
+  RESPONSE: <%= link_to @cart.purchase.stripe_response_id, "https://manage.stripe.com/#test/payments/#{@cart.purchase.stripe_response_id}" %>
 </p>
 
 <% if (@cart.purchase.tax > 0) %>
