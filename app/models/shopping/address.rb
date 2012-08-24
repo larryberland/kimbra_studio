@@ -41,6 +41,10 @@ class Shopping::Address < ActiveRecord::Base
     state.try(:country).try(:stripe)
   end
 
+  def zip_code_5_digit
+    zip_code.to_s.strip[0..4]
+  end
+
   private #=================================================================================
 
   def check
