@@ -43,7 +43,7 @@ class Shopping::Purchase < ActiveRecord::Base
         county_tax:     {rate: 0, amount: 0},
         city_tax:       {rate: 0, amount: 0},
         special_tax:    {rate: 0, amount: 0})
-    tax_rate             = ZipCodeTax.find_by_zip_code(cart.address.zip_code.strip)
+    tax_rate             = ZipCodeTax.find_by_zip_code(cart.address.zip_code_5_digit)
     if tax_rate
       state_tax            = (cart.taxable_sub_total * tax_rate.state_rate).round(2)
       county_tax           = (cart.taxable_sub_total * tax_rate.county_rate).round(2)
@@ -72,6 +72,10 @@ class Shopping::Purchase < ActiveRecord::Base
     else
       'no sales tax'
     end
+  end
+
+  def zip_code_5_digit
+    zip_code.to_s.strip[0..4]
   end
 
   private #=================================================================================
