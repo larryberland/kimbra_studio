@@ -1,5 +1,5 @@
 <p>
   <%= resource.address_1 %><%= '<br/>'.html_safe if resource.address_2.present? %>
   <%= resource.address_2 %><br/>
-  <%= "#{resource.city}, #{resource.try(:state).try(:abbrev)} #{resource.zip_code}" %>
+  <%= "#{resource.city}, #{resource.try(:state).try(:abbreviation)} #{resource.zip_code}" %>
 </p>

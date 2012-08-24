@@ -1,11 +1,13 @@
 class KimbraMailer < ActionMailer::Base
 
+  include Shopping::PurchasesHelper
   helper :application
+  helper 'shopping/purchases'
 
   default from: 'ClickPLUS Support <support@kimbraclickplus.com>'
-  default to: 'kimbra@kimbrastudios.com'
+  default to: 'jim@jimjames.org'
 
-  def send_order(cart_id, studio_id)
+  def send_sales_order(cart_id, studio_id)
     @cart   = Shopping::Cart.find(cart_id)
     @studio = Studio.find(studio_id)
     @admin_customer_email = @cart.email

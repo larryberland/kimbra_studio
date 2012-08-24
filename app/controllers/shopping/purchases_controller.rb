@@ -25,7 +25,7 @@ module Shopping
         else
           @storyline.describe "Cart purchased!"
           ClientMailer.delay.send_order_confirmation(@cart.id, @studio.id)
-          KimbraMailer.delay.send_order(@cart.id, @studio.id)
+          KimbraMailer.delay.send_sales_order(@cart.id, @studio.id)
           # After the credit card is run (successful create) we need to close out
           # this cart so that the consumer will start a new one if they want to make
           # more purchases.

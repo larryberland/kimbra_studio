@@ -53,7 +53,9 @@
 
 <% if (@cart.purchase.tax > 0) %>
     <p>
-      <%= @cart.purchase.tax_description.inspect %>
+      TAXES<br/>
+      <%= tax_text(@cart.purchase.tax_description) %>
+      <br/>
     </p>
 <% end %>
 
