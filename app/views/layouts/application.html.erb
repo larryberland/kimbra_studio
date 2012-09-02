@@ -23,11 +23,12 @@
 
   <%= render 'shared/main_header' %>
 
+  <div id="flash_wrapper" class="bp">
+    <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
+    <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
+  </div>
+
   <div id='content_wrapper' class='container marketing'>
-    <div class='bp'>
-      <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
-      <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
-    </div>
     <%= yield %>
   </div>
 </div>

@@ -1,33 +1,45 @@
-<h2>
-  you make beautiful pictures -- we make beautiful jewelry.
-</h2>
-<h2>
-  let's get together and make delighted clients.
-</h2>
-
-<div id='slides'>
-  <%= image_tag 'new1.png' %>
-  <%= image_tag 'new2.png' %>
-  <%= image_tag 'new3.png' %>
-</div>
-
-<div style='position:relative; top:-320px; left:580px; width:350px'>
-  <h3>
-    KimbraClickPLUS helps photography studios offer their clients gorgeous photo jewelry in a super easy way.
-  </h3>
-  <h3>
-    You upload choice portraits from a client's photo session,
-    and we create a direct email offer for them with your branding.
-  </h3>
-  <h3>
-    It's gorgeous and compelling. Clients want to forward these emails to all their friends
-    (and post to FB and Twitter) - and share their excitement about the work your studio has done.
-  </h3>
-  <h3>
-    <%= link_to 'Register today.', signup_about_path %>
-  </h3>
-</div>
-
 <% content_for :head do %>
     <%= stylesheet_link_tag 'orbit-1.2.3' %>
 <% end %>
+
+<div id="index_container">
+
+  <h2>
+    you make beautiful pictures -- we make beautiful jewelry.
+    <br/>let's get together and make delighted clients.
+  </h2>
+
+  <div class="left-side">
+    <div id='slides'>
+      <%= image_tag 'new1.png' %>
+      <%= image_tag 'new2.png' %>
+      <%= image_tag 'new3.png' %>
+    </div>
+
+  </div>
+  <div class="right-side">
+
+    <div id="index_text">
+      <h3>
+        KimbraClickPLUS helps photography studios offer their clients gorgeous photo jewelry in a super easy way.
+      </h3>
+
+      <h3>
+        You upload choice portraits from a client's photo session,
+        and we create a direct email offer for them with your branding.
+      </h3>
+
+      <h3>
+        It's gorgeous and compelling. Clients want to forward these emails to all their friends
+        (and post to FB and Twitter) - and share their excitement about the work your studio has done.
+      </h3>
+
+      <h3>
+        <%= link_to 'Register today.', signup_about_path %>
+      </h3>
+    </div>
+  </div>
+  <div class="clear-both"/>
+
+</div>
+
