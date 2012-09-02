@@ -3,7 +3,6 @@
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require jcrop
- *= require_self
  *= require_tree ../stylesheets/admin
  *= require_tree ../stylesheets/my_studio
  *= require_tree ../stylesheets/studio
@@ -14,6 +13,7 @@
  *= require devise
  *= require scaffolds
  *= require blueprint
+ *= require_self
 */
 
 html, body {
@@ -30,14 +30,8 @@ body:before {
 }
 
 body, button, input, select, textarea {
-  font: 13px/17px Arial, sans-serif;
+  /*font: 13px/17px Arial, sans-serif;*/
 }
-h1 { font-size: 1.6em;  margin: .2em  0; }
-h2 { font-size: 1.2em;  margin: .2em  0; }
-h3 { font-size: 1.1em;  margin: .2em  0; }
-h4 { font-size: 1.0em;  margin: .2em  0; }
-h5 { font-size: .8em;   margin: .2em  0; }
-h6 { font-size: .6em;   margin: .2em  0; }
 p  { font-size: 1em;    margin: .8em  0; }
 
 .bp {

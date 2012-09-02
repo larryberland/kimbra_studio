@@ -10,6 +10,9 @@ KimbraStudio::Application.routes.draw do
   namespace :admin do
     namespace :customer do
       resources :emails do
+        collection do
+          post :send_all_offers
+        end
         member do
           post :generate
           get :session_list
