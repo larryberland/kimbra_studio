@@ -48,7 +48,7 @@ class Story < ActiveRecord::Base
             :version => user_agent.version,
             :os => user_agent.os,
             :ip_address => request.remote_ip,
-            :name => client.name,
+            :name => client.try(:name),
             :client => client,
             :studio => studio)
       end
