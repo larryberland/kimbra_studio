@@ -23,7 +23,7 @@
     <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
   </div>
 
-  <%= render 'shared/main_header' %>
+  <%= render 'shared/main_header', selected: params['controller']%>
 
   <div id='content' class='container'>
     <%= yield %>

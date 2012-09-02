@@ -135,4 +135,15 @@ module ApplicationHelper
   def link_to_destroy(url)
     is_admin? ? link_to( t(:destroy), url, confirm: t(:link_destroy_confirm), method: :delete) : ''
   end
+
+  def css_button(selected)
+    css = ''  # usually likeabutton
+    css += ' selected' if selected
+    css
+  end
+
+  def link_to_button(label, url, selected, title="")
+    css = css_button(selected)
+    link_to label, url, class: css, title: title
+  end
 end
