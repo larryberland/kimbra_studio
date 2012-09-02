@@ -1,30 +1,47 @@
-<h2>
-  powered by Kimbra Studios
-</h2>
+<% content_for :head do %>
+    <%= stylesheet_link_tag 'orbit-1.2.3' %>
+<% end %>
 
-<div id='slides'>
-  <%= image_tag 'larry_and_jim.jpg' %>
-</div>
+<div id="about_container">
+  <h2>
+    powered by Kimbra Studios
+  </h2>
 
-<div style='position:relative; top:-15px; left:380px; width:350px'>
-  <h3>
-    Kimbra's heirloom photo jewelry has been around for over a decade since she started her business in Littleton, Colorado.
-    Her eye for design and love for photographers has forged many creative partnerships.
-  </h3>
-  <h3>
-    She has been looking for a way to help photo studios for many years.
-  </h3>
-  <h3>
-    Larry and Jim helped her build a platform that makes it easy for studios to reach out to their clients in several ways:
-    <ol>
-      <li>create personal jewelry offers</li>
-      <li>Kimbra manages and supports the entire process</li>
-      <li>these gorgeous offer emails get posted to FB and tweeted about</li>
-      <li>extending the studio's brand and expertise by word of mouth</li>
-      <li>support for ongoing offers for important holidays and anniversaries</li>
-    </ol>
-  </h3>
-  <h3>
-    Larry and Jim live in Land O'Lakes and Clearwater, Florida. Larry rides a Harley Ultra Classic; Jim rides a Honda VTX 1300R.
-  </h3>
+  <div class="left-side">
+    <div id='slides_about'>
+      <%= image_tag 'larry_and_jim.jpg' %>
+    </div>
+
+  </div>
+
+  <div class="right-side">
+    <div id="index_text">
+      <h3>
+        Kimbra's heirloom photo jewelry has been around for over a decade since she started her business in Littleton,
+        Colorado.
+        Her eye for design and love for photographers has forged many creative partnerships.
+      </h3>
+
+      <h3>
+        She has been looking for a way to help photo studios for many years.
+      </h3>
+
+      <h3>
+        Larry and Jim helped her build a platform that makes it easy for studios to reach out to their clients in
+        several ways:
+        <ol>
+          <li>create personal jewelry offers</li>
+          <li>Kimbra manages and supports the entire process</li>
+          <li>these gorgeous offer emails get posted to FB and tweeted about</li>
+          <li>extending the studio's brand and expertise by word of mouth</li>
+          <li>support for ongoing offers for important holidays and anniversaries</li>
+        </ol>
+      </h3>
+      <h3>
+        Larry and Jim live in Land O'Lakes and Clearwater, Florida. Larry rides a Harley Ultra Classic; Jim rides a
+        Honda VTX 1300R.
+      </h3>
+    </div>
+  </div>
+  <div class="clear-both"/>
 </div>
