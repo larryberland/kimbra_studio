@@ -25,7 +25,7 @@ module Minisite
     # Accepts cart tracking.
     def order_status
       @cart_order = Shopping::Cart.find_by_tracking(params[:cart])
-      return render(text: "No cart found with tracking number: #{params[:cart]}.") unless @cart_order
+      if @cart_order
       @storyline.describe 'Viewing completed order receipt page.'
       # Because we are skipping before_filters, need to set these up here.
       @admin_customer_email = @cart_order.email
@@ -34,6 +34,10 @@ module Minisite
       # Set up a new cart in case the consumer wants to purchase more from this offer email.
       @cart = Shopping::Cart.create(:email => @admin_customer_email)
       session[:cart_id] = @cart.id
+      else
+        @storyline.describe "Try to view order status for non-existent cart: #{params[:cart]}"
+        return render(text: "No cart found with tracking number: #{params[:cart]}.")
+      end
     end
 
     def unsubscribe
