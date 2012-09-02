@@ -99,8 +99,7 @@ class Admin::Customer::EmailsController < ApplicationController
 
   def send_all_offers
     Admin::Customer::Email.unsent.each do |email|
-      #email.send_offers
-      puts 'NOTHING!'
+      email.send_offers
     end
     respond_to do |format|
       format.js do
