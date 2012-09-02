@@ -97,6 +97,18 @@ class Admin::Customer::EmailsController < ApplicationController
     end
   end
 
+  def send_all_offers
+    Admin::Customer::Email.unsent.each do |email|
+      #email.send_offers
+      puts 'NOTHING!'
+    end
+    respond_to do |format|
+      format.js do
+        render text: "$('#send_all_emails').html('queueing all unsent emails...').effect('highlight', 2000)"
+      end
+    end
+  end
+
   # GET /admin/customer/emails/session_id/session
   # GET /admin/customer/emails/session_id/session/.json
   def session_list

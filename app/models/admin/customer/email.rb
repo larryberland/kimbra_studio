@@ -11,6 +11,8 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   scope :by_session, lambda { |studio_session_id| where('my_studio_session_id = ?', studio_session_id) }
 
+  scope :unsent, where('sent_at is NULL and active = ?', true)
+
   after_initialize do |email|
     email.tracking = UUID.random_tracking_number if email.tracking.nil?
   end

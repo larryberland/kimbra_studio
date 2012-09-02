@@ -3,8 +3,7 @@
 </div>
 
 <div class='panel_contents'>
-  <% ready_emails = sessions.collect { |s| s.emails.where('sent_at is NULL and active = ?', true) }.flatten %>
-  <% if ready_emails.present? %>
+  <% if emails.present? %>
       <table>
         <tr>
           <% if current_user.admin? %>
@@ -15,7 +14,7 @@
           <th>how many<br/>offers</th>
           <th>Actions</th>
         </tr>
-        <% ready_emails.each do |email| %>
+        <% emails.each do |email| %>
             <tr>
               <% if current_user.admin? %>
                   <td><%= email.my_studio_session.studio.name %></td>
@@ -28,7 +27,9 @@
         <% end %>
       </table>
       <br/>
-      <%= link_to 'Send all ready emails', 'xxx' %>
+      <span id='send_all_emails'>
+        <%= link_to "Send all #{pluralize(emails.size, 'ready email')}", send_all_offers_admin_customer_emails_url, method: :post, remote: true %>
+      </span>
   <% else %>
       <p>None</p>
   <% end %>
