@@ -32,17 +32,38 @@ body:before {
 body, button, input, select, textarea {
   font: 13px/17px Arial, sans-serif;
 }
+h1 { font-size: 1.6em;  margin: .2em  0; }
+h2 { font-size: 1.2em;  margin: .2em  0; }
+h3 { font-size: 1.1em;  margin: .2em  0; }
+h4 { font-size: 1.0em;  margin: .2em  0; }
+h5 { font-size: .8em;   margin: .2em  0; }
+h6 { font-size: .6em;   margin: .2em  0; }
+p  { font-size: 1em;    margin: .8em  0; }
+
+.bp {
+  /*height: 27px; LDB:? do we need this height here?*/
+}
 
 div#body_wrapper {
   min-height: 100%;
   margin-left: auto;
   margin-right: auto;
-  width: 80%
-}
+  width: 960px;  /* was 80% */
 
-#content_wrapper {
-  overflow: auto;
-  padding-bottom: 50px; /* must be same height as the footer */
+  div#header_wrapper,
+  div#footer_wrapper {
+
+  }
+  div#header_wrapper {
+  }
+
+  div#flash_wrapper {
+    padding: 5px 0 0 5px;
+
+  }
+  div#content_wrapper {
+    padding: 5px 0 50px 5px;
+  }
 }
 
 .align_right {
@@ -181,14 +202,6 @@ div.shopping-item-index {
   display: inline;
 }
 
-p {
-  margin: 0 0 0.8em;
-}
-
-.container {
-  clear: left;
-}
-
 .motivation {
   font-size: 26px;
   color: silver;
@@ -234,6 +247,15 @@ h1.logo a {
   text-decoration: none;
 }
 
-.bp {
-  height: 27px;
+/* generic div allowing a left and right side to fill container */
+div {
+  .left-side {
+    float: left;
+  }
+  .right-side {
+    float: right;
+  }
+  .clear-both {
+    clear: both;
+  }
 }

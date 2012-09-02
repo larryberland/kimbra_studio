@@ -28,6 +28,10 @@
   display: none;
 }
 
+#index_text{
+  position: relative;
+  float:right;
+}
 /* CONTAINER
 ================================================== */
 
@@ -232,11 +236,22 @@ div.slider-nav span.left {
 /* LOADING
    ================================================== */
 
+#index_container {
+  width: 95%;
+  padding: 5px 0px 50px 0px;
+  div.left-side{
+    width:55%;
+  }
+  div.right-side{
+    width:38%;
+  }
+}
 #slides {
   width: 540px;
   height: 320px;
   background: #000 url('orbit/loading.gif') no-repeat center center;
   overflow: hidden;
+  float: left;
 }
 
 #slides img, #slides div {
