@@ -7,6 +7,9 @@ class MyStudio::SessionsController < MyStudio::BaseController
   def index
     @sessions = MyStudio::Session.where('studio_id=?', @my_studio).order('session_at desc')
     @sessions = MyStudio::Session.order('session_at desc') if current_user.admin?
+    @record_count = @sessions.count
+    @sessions = @sessions.page(params[:page])
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @sessions }
