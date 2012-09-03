@@ -1,9 +1,18 @@
-<h1><%=t(:users_index_title)%></h1>
+<h1>
+  <%=t(:users_index_title)%>
+  <span class="hint">
+      record set count: <%= number_to_human @record_count %>
+  </span>
+
+</h1>
 
 <!-- Should not create new user here -->
 <!--<%= link_to 'New User', new_user_path %> -->
 <br/>
 <%= link_to t(:admin_overview_link), admin_overview_path %>
+<div class="paginate">
+<%= paginate @users %>
+</div>
 
 <table>
   <tr>
@@ -19,7 +28,7 @@
     <th></th>
   </tr>
 
-<% @users.each do |user| %>
+<% @users.all.each do |user| %>
   <tr>
     <td><%= user.try(:studio).try(:name) %></td>
     <td><%= user.email %></td>
@@ -34,3 +43,6 @@
   </tr>
 <% end %>
 </table>
+<div class="paginate">
+<%= paginate @users %>
+</div>

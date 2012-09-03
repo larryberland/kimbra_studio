@@ -5,7 +5,9 @@ class StudiosController < ApplicationController
   # GET /studios
   # GET /studios.json
   def index
-    @studios = Studio.all
+    @studios      = Studio.order('updated_at desc, name asc')
+    @record_count = @studios.count
+    @studios      = @studios.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

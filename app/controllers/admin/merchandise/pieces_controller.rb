@@ -3,6 +3,8 @@ class Admin::Merchandise::PiecesController < ApplicationController
   # GET /admin/merchandise/pieces.json
   def index
     @admin_merchandise_pieces = Admin::Merchandise::Piece.order('active desc, category desc, name asc')
+    @record_count             = @admin_merchandise_pieces.count
+    @admin_merchandise_pieces = @admin_merchandise_pieces.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

@@ -34,7 +34,11 @@ body:before {
 body, button, input, select, textarea {
   /*font: 13px/17px Arial, sans-serif;*/
 }
-p  { font-size: 1em;    margin: .8em  0; }
+
+p {
+  font-size: 1em;
+  margin: .8em 0;
+}
 
 .bp {
   /*height: 27px; LDB:? do we need this height here?*/
@@ -44,7 +48,7 @@ div#body_wrapper {
   min-height: 100%;
   margin-left: auto;
   margin-right: auto;
-  width: 960px;  /* was 80% */
+  width: 960px; /* was 80% */
 
   div#header_wrapper,
   div#footer_wrapper {
@@ -102,16 +106,16 @@ textarea {
 select,
 textarea,
 input[type="text"] {
-/*background:url(button.png);*/
-/*text-indent: -9999em;*/
+  /*background:url(button.png);*/
+  /*text-indent: -9999em;*/
   font-family: Verdana, Arial, sans-serif;
   font-size: 0.95em;
 }
 
 input[type="submit"] {
-/*background-color: #ffda75; *//* form header */
-/*background:url(button.png);*/
-/*text-indent: -9999em;*/
+  /*background-color: #ffda75; *//* form header */
+  /*background:url(button.png);*/
+  /*text-indent: -9999em;*/
   font-size: 1.0em;
 }
 
@@ -211,7 +215,7 @@ form.button_to {
 }
 
 form.button_to div, form.button_to div input {
-/*   display:inline;    */
+  /*   display:inline;    */
 }
 
 div#main_nav {
@@ -253,21 +257,21 @@ div.menu_item, div.menu_item_right {
     font-size: 1.0em;
     text-decoration: none;
   }
-  a:hover{
+  a:hover {
     background: #f1f359; /*#356094;*/
     border: solid 1px #2A4E77;
     text-decoration: none;
     color: #000;
   }
 
-  a:active{
+  a:active {
     -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
     background: #2E5481;
     border: solid 1px #203E5F;
   }
-  a.selected{
+  a.selected {
     background: #f1f359 !important;
     color: #000;
   }
@@ -282,11 +286,20 @@ div.menu_item_right {
   font-size: 1.5em;
 }
 
-h1.logo a {
-  text-decoration: none;
-  color: #4479BA;
-}
+h1 {
 
+  .logo a {
+    text-decoration: none;
+    color: #4479BA;
+  }
+  span.hint {
+    font-size: 0.4em;
+    color: slateblue;
+  }
+}
+.paginate {
+  padding-top: 5px;
+}
 /* generic div allowing a left and right side to fill container */
 div {
   .left-side {

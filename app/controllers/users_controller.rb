@@ -6,7 +6,9 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users = User.all
+    @users        = User.order('updated_at desc, last_name asc')
+    @record_count = @users.count
+    @users        = @users.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -74,7 +76,7 @@ class UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  # DELETE /users/1.json
+          # DELETE /users/1.json
   def destroy
     @user = User.find(params[:id])
     @user.destroy

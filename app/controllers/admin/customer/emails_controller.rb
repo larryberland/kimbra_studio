@@ -5,7 +5,10 @@ class Admin::Customer::EmailsController < ApplicationController
   # GET /admin/customer/emails
   # GET /admin/customer/emails.json
   def index
-    @admin_customer_emails = Admin::Customer::Email.all
+    @admin_customer_emails = Admin::Customer::Email.order('generated_at desc')
+    @record_count          = @admin_customer_emails.count
+    @admin_customer_emails = @admin_customer_emails.page(params[:page])
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @admin_customer_emails }
@@ -109,7 +112,7 @@ class Admin::Customer::EmailsController < ApplicationController
   end
 
   # GET /admin/customer/emails/session_id/session
-  # GET /admin/customer/emails/session_id/session/.json
+          # GET /admin/customer/emails/session_id/session/.json
   def session_list
     @admin_customer_emails = Admin::Customer::Email.by_session(MyStudio::Session.find(params[:id])).all
     render :index
