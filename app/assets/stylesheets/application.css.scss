@@ -216,8 +216,8 @@ form.button_to div, form.button_to div input {
 
 div#main_nav {
   clear: both;
-  background-color: lightgrey;
-  color: slategrey;
+  background-color: #e5e5f9;
+  color: #fff;
   font-style: bold;
   font-size: 1.1em;
   width: 100%;
@@ -230,7 +230,7 @@ div#main_nav {
 
 div.menu_item, div.menu_item_right {
   float: left;
-  padding: 3px 20px 3px 5px;
+  padding: 3px 0px 3px 5px;
   a {
     padding: 10px 15px;
     background: #4479BA;
@@ -251,6 +251,7 @@ div.menu_item, div.menu_item_right {
     -ms-user-select: none;
     user-select: none;
     font-size: 1.0em;
+    text-decoration: none;
   }
   a:hover{
     background: #356094;
@@ -266,7 +267,8 @@ div.menu_item, div.menu_item_right {
     border: solid 1px #203E5F;
   }
   a.selected{
-    background: #2E5481 !important;
+    background: #f1f359 !important;
+    color: #000;
   }
 }
 
