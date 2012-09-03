@@ -9,6 +9,9 @@ div.platypus-form-container {
   @include rounded-corners(10px);
   border: 2px outset black;
 
+  label{
+    vertical-align: top;
+  }
   label,
   span {
     color: $base-form-label-color;

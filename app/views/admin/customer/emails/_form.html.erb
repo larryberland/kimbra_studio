@@ -2,13 +2,12 @@
 
   <h3><%= t(:my_studio_portraits_session, :name => @admin_customer_email.try(:my_studio_session).try(:name)) %></h3>
 
+  <%= render 'shared/error_messages', record: @admin_customer_email %>
+
   <%= form_for(@admin_customer_email) do |f| %>
 
-      <%= render 'shared/error_messages', record: @admin_customer_email %>
-
-      <div class="field">
+      <div class="text-field">
         <%= f.label :message %>
-        <br/>
         <%= f.text_area :message %>
       </div>
       <div class="field">
@@ -18,7 +17,6 @@
 
       <div class="field ui-widget">
         <%= f.label :sent_at %>
-        <br/>
         <%= f.text_field :sent_at %>
       </div>
       <div class="field">
@@ -45,3 +43,4 @@
 <% if @admin_customer_email.id %>
     <%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
 <% end %>
+<div class="clear-both"/>

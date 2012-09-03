@@ -1,5 +1,6 @@
-<h2><%=t(:admin_customer_emails_new_title)%></h2>
+<h2><%= t(:admin_customer_emails_new_title) %></h2>
 
-<%= render 'form' %>
-
+<div class="platypus-form-container large">
+  <%= render 'form' %>
+</div>
 <%= link_to t(:back), admin_customer_emails_path %>
