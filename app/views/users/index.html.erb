@@ -1,5 +1,5 @@
 <h1>
-  <%=t(:users_index_title)%>
+  <%= t(:users_index_title) %>
   <span class="hint">
       record set count: <%= number_to_human @record_count %>
   </span>
@@ -11,10 +11,11 @@
 <br/>
 <%= link_to t(:admin_overview_link), admin_overview_path %>
 <div class="paginate">
-<%= paginate @users %>
+  <%= paginate @users %>
 </div>
 
 <table>
+  <thead>
   <tr>
     <th>Studio</th>
     <th>Email</th>
@@ -27,22 +28,24 @@
     <th></th>
     <th></th>
   </tr>
-
-<% @users.all.each do |user| %>
-  <tr>
-    <td><%= user.try(:studio).try(:name) %></td>
-    <td><%= user.email %></td>
-    <td><%= full_name(user) %></td>
-    <td><%= link_to 'Impersonate', "/switch_user?scope_identifier=user_#{user.id}" %></td>
-    <td><%= user.phone_number %></td>
-    <td><%= user.try(:city) %></td>
-    <td><%= user.try(:state).try(:abbrev_and_name) %></td>
-    <td><%= link_to t(:show), user %></td>
-    <td><%= link_to t(:edit), edit_user_path(user) %></td>
-    <td><%= link_to t(:destroy), user, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @users.all.each do |user| %>
+      <tr>
+        <td><%= user.try(:studio).try(:name) %></td>
+        <td><%= user.email %></td>
+        <td><%= full_name(user) %></td>
+        <td><%= link_to 'Impersonate', "/switch_user?scope_identifier=user_#{user.id}" %></td>
+        <td><%= user.phone_number %></td>
+        <td><%= user.try(:city) %></td>
+        <td><%= user.try(:state).try(:abbrev_and_name) %></td>
+        <td><%= link_to t(:show), user %></td>
+        <td><%= link_to t(:edit), edit_user_path(user) %></td>
+        <td><%= link_to t(:destroy), user, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 <div class="paginate">
-<%= paginate @users %>
+  <%= paginate @users %>
 </div>

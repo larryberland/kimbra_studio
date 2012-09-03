@@ -1,5 +1,6 @@
 <div class="panel_contents">
   <table id='dashboard_sessions'>
+    <thead>
     <tr>
       <th>Session</th>
       <th>Client</th>
@@ -11,7 +12,8 @@
       <% end %>
       <th>Session Date</th>
     </tr>
-
+    </thead>
+    <tbody>
     <% sessions.each do |session| %>
         <tr>
           <td><%= link_to session.display_name(current_user.admin?), edit_my_studio_session_path(session) %></td>
@@ -25,6 +27,7 @@
           <td><%= session.session_at.to_s(:short) %></td>
         </tr>
     <% end %>
+    </tbody>
   </table>
   <%= link_to('all sessions...', my_studio_sessions_path) if MyStudio::Session.count > sessions.length %>
 </div>

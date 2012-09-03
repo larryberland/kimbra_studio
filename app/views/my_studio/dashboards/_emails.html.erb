@@ -7,6 +7,7 @@
       <h2 class='motivation'>&#x2718; No emails this past week - no portraits uploaded?</h2>
   <% else %>
       <table id='dashboard_emails'>
+        <thead>
         <tr>
           <% if current_user.admin? %>
               <th>studio</th>
@@ -19,6 +20,8 @@
           <th>clicked through</th>
           <th>purchased</th>
         </tr>
+        </thead>
+        <tbody>
         <% sessions.each do |session| %>
             <% session.emails.each do |email| %>
                 <tr>
@@ -35,7 +38,8 @@
                 </tr>
             <% end %>
         <% end %>
+        </tbody>
+      </table>
   <% end %>
 
-  </table>
 </div>

@@ -5,6 +5,7 @@
 <%= link_to t(:my_studio_overview_link), my_studio_overview_path %>
 
 <table>
+  <thead>
   <tr>
     <th>Name</th>
     <th>Email</th>
@@ -15,18 +16,20 @@
     <th></th>
     <th></th>
   </tr>
-
-<% @my_studio_clients.each do |my_studio_client| %>
-  <tr>
-    <td><%= my_studio_client.name %></td>
-    <td><%= my_studio_client.email %></td>
-    <td><%= my_studio_client.phone_number %></td>
-    <td><%= my_studio_client.active %></td>
-    <td><%= my_studio_client.address %></td>
-    <td><%= link_to t(:show), my_studio_client %></td>
-    <td><%= link_to t(:edit), edit_my_studio_client_path(my_studio_client) %></td>
-    <td><%= link_to t(:destroy), my_studio_client, confirm: t(:link_destroy_confirm), method: :delete %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @my_studio_clients.each do |my_studio_client| %>
+      <tr>
+        <td><%= my_studio_client.name %></td>
+        <td><%= my_studio_client.email %></td>
+        <td><%= my_studio_client.phone_number %></td>
+        <td><%= my_studio_client.active %></td>
+        <td><%= my_studio_client.address %></td>
+        <td><%= link_to t(:show), my_studio_client %></td>
+        <td><%= link_to t(:edit), edit_my_studio_client_path(my_studio_client) %></td>
+        <td><%= link_to t(:destroy), my_studio_client, confirm: t(:link_destroy_confirm), method: :delete %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 

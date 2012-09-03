@@ -1,10 +1,11 @@
-<h1><%=t(:admin_customer_items_index_title)%></h1>
+<h1><%= t(:admin_customer_items_index_title) %></h1>
 
 <%= link_to t(:admin_customer_items_new_link), new_admin_customer_email_offer_item_path(@offer.email, @offer) %>
 <br/>
 <%= link_to t(:back), admin_customer_email_offer_path(@offer.email, @offer) %>
 
 <table>
+  <thead>
   <tr>
     <th>Offer</th>
     <th>Part</th>
@@ -14,17 +15,19 @@
     <th></th>
     <th></th>
   </tr>
-
-<% @items.each do |item| %>
-  <tr>
-    <td><%= link_to 'Offer', admin_customer_email_offer_path(item.offer.email.id, item.offer.id) %></td>
-    <td><%= link_to 'Part', admin_merchandise_piece_part_path(item.part.piece.id, item.part.id) %></td>
-    <td><%= image_tag item.front.image_custom_url.to_s %></td>
-    <td><%= item.back.nil? ? '' : (image_tag item.back.image_custom_url.to_s) %></td>
-    <td><%= link_to t(:show), admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id) %></td>
-    <td><%= link_to t(:edit), edit_admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id) %></td>
-    <td><%= link_to t(:destroy), admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id), confirm: t(:link_destroy_confirm), method: :delete %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @items.each do |item| %>
+      <tr>
+        <td><%= link_to 'Offer', admin_customer_email_offer_path(item.offer.email.id, item.offer.id) %></td>
+        <td><%= link_to 'Part', admin_merchandise_piece_part_path(item.part.piece.id, item.part.id) %></td>
+        <td><%= image_tag item.front.image_custom_url.to_s %></td>
+        <td><%= item.back.nil? ? '' : (image_tag item.back.image_custom_url.to_s) %></td>
+        <td><%= link_to t(:show), admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id) %></td>
+        <td><%= link_to t(:edit), edit_admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id) %></td>
+        <td><%= link_to t(:destroy), admin_customer_email_offer_item_path(@offer.email.id, @offer.id, item.id), confirm: t(:link_destroy_confirm), method: :delete %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 

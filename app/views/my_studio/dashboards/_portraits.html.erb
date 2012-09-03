@@ -1,5 +1,6 @@
 <table id='dashboard_portraits'>
   <tr>
+    <thead>
     <th>Session</th>
     <th>Portrait</th>
     <th>created_at</th>
@@ -7,7 +8,8 @@
     <th></th>
     <th></th>
   </tr>
-
+  </thead>
+  <tbody>
   <% sessions.each do |session| %>
       <tr>
         <td><%= link_to session.name, my_studio_session_path(session) %></td>
@@ -15,4 +17,5 @@
         <td><%= session.created_at %></td>
       </tr>
   <% end %>
+  </tbody>
 </table>

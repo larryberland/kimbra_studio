@@ -1,6 +1,7 @@
 <h1>Listing orders</h1>
 
 <table>
+  <thead>
   <tr>
     <th>Number</th>
     <th>Ip address</th>
@@ -19,29 +20,31 @@
     <th></th>
     <th></th>
   </tr>
-
-<% @orders.each do |order| %>
-  <tr>
-    <td><%= order.number %></td>
-    <td><%= order.ip_address %></td>
-    <td><%= order.email %></td>
-    <td><%= order.state %></td>
-    <td><%= order.user %></td>
-    <td><%= order.bill_address %></td>
-    <td><%= order.ship_address %></td>
-    <td><%= order.coupon %></td>
-    <td><%= order.active %></td>
-    <td><%= order.shipped %></td>
-    <td><%= order.shipment_counter %></td>
-    <td><%= order.calculated_at %></td>
-    <td><%= order.completed_at %></td>
-    <td><%= link_to 'Show', order %></td>
-    <td><%= link_to 'Edit', edit_order_path(order) %></td>
-    <td><%= link_to 'Destroy', order, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @orders.each do |order| %>
+      <tr>
+        <td><%= order.number %></td>
+        <td><%= order.ip_address %></td>
+        <td><%= order.email %></td>
+        <td><%= order.state %></td>
+        <td><%= order.user %></td>
+        <td><%= order.bill_address %></td>
+        <td><%= order.ship_address %></td>
+        <td><%= order.coupon %></td>
+        <td><%= order.active %></td>
+        <td><%= order.shipped %></td>
+        <td><%= order.shipment_counter %></td>
+        <td><%= order.calculated_at %></td>
+        <td><%= order.completed_at %></td>
+        <td><%= link_to 'Show', order %></td>
+        <td><%= link_to 'Edit', edit_order_path(order) %></td>
+        <td><%= link_to 'Destroy', order, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Order', new_order_path %>

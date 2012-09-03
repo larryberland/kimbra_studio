@@ -1,6 +1,7 @@
 <h1>Listing my_studio_minisites</h1>
 
 <table>
+  <thead>
   <tr>
     <th>Studio</th>
     <th>Bgcolor</th>
@@ -12,22 +13,24 @@
     <th></th>
     <th></th>
   </tr>
-
-<% @my_studio_minisites.each do |my_studio_minisite| %>
-  <tr>
-    <td><%= my_studio_minisite.studio %></td>
-    <td><%= my_studio_minisite.bgcolor %></td>
-    <td><%= my_studio_minisite.image %></td>
-    <td><%= my_studio_minisite.font_family %></td>
-    <td><%= my_studio_minisite.font_color %></td>
-    <td><%= my_studio_minisite.theme %></td>
-    <td><%= link_to t(:show), my_studio_minisite %></td>
-    <td><%= link_to t(:edit), edit_my_studio_minisite_path(my_studio_minisite) %></td>
-    <td><%= link_to t(:destroy), my_studio_minisite, confirm: t(:link_destroy_confirm), method: :delete %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @my_studio_minisites.each do |my_studio_minisite| %>
+      <tr>
+        <td><%= my_studio_minisite.studio %></td>
+        <td><%= my_studio_minisite.bgcolor %></td>
+        <td><%= my_studio_minisite.image %></td>
+        <td><%= my_studio_minisite.font_family %></td>
+        <td><%= my_studio_minisite.font_color %></td>
+        <td><%= my_studio_minisite.theme %></td>
+        <td><%= link_to t(:show), my_studio_minisite %></td>
+        <td><%= link_to t(:edit), edit_my_studio_minisite_path(my_studio_minisite) %></td>
+        <td><%= link_to t(:destroy), my_studio_minisite, confirm: t(:link_destroy_confirm), method: :delete %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Mini site', new_my_studio_minisite_path %>

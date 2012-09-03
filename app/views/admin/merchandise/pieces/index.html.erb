@@ -1,15 +1,16 @@
 <h2>
-  <%=t(:admin_merchandise_pieces_index_title)%>
+  <%= t(:admin_merchandise_pieces_index_title) %>
   <span class="hint">
       record set count: <%= number_to_human @record_count %>
   </span>
 </h2>
 <%= button_to t(:admin_merchandise_pieces_new_link), new_admin_merchandise_piece_path, method: :get %>
 <div class="paginate">
-<%= paginate @admin_merchandise_pieces %>
+  <%= paginate @admin_merchandise_pieces %>
 </div>
 
 <table>
+  <thead>
   <tr>
     <th>Category</th>
     <th>Name</th>
@@ -25,27 +26,30 @@
     <th></th>
     <th></th>
   </tr>
-<% @admin_merchandise_pieces.all.each do |admin_merchandise_piece| %>
-  <tr>
-    <td><%= admin_merchandise_piece.category %></td>
-    <td><%= admin_merchandise_piece.name %></td>
-    <td><%= image_tag_list(admin_merchandise_piece) %></td>
-    <td><%= admin_merchandise_piece.short_description %></td>
-    <td><%= admin_merchandise_piece.sku %></td>
-    <td><%= number_to_currency(admin_merchandise_piece.price) %></td>
-    <td><%= admin_merchandise_piece.active %></td>
-    <td><%= admin_merchandise_piece.featured %></td>
-    <td><%= admin_merchandise_piece.deleted_at %></td>
-    <td>
-      <% text = (admin_merchandise_piece.parts.size > 0) ? admin_merchandise_piece.parts.size : t(:admin_merchandise_parts_new_link)%>
-      <%= link_to text, admin_merchandise_piece_parts_path(admin_merchandise_piece) %>
-    </td>
-    <td><%= link_to t(:show), admin_merchandise_piece %></td>
-    <td><%= link_to t(:edit), edit_admin_merchandise_piece_path(admin_merchandise_piece) %></td>
-    <td><%= link_to t(:destroy), admin_merchandise_piece, confirm: t(:link_destroy_confirm), method: :delete %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @admin_merchandise_pieces.all.each do |admin_merchandise_piece| %>
+      <tr>
+        <td><%= admin_merchandise_piece.category %></td>
+        <td><%= admin_merchandise_piece.name %></td>
+        <td><%= image_tag_list(admin_merchandise_piece) %></td>
+        <td><%= admin_merchandise_piece.short_description %></td>
+        <td><%= admin_merchandise_piece.sku %></td>
+        <td><%= number_to_currency(admin_merchandise_piece.price) %></td>
+        <td><%= admin_merchandise_piece.active %></td>
+        <td><%= admin_merchandise_piece.featured %></td>
+        <td><%= admin_merchandise_piece.deleted_at %></td>
+        <td>
+          <% text = (admin_merchandise_piece.parts.size > 0) ? admin_merchandise_piece.parts.size : t(:admin_merchandise_parts_new_link) %>
+          <%= link_to text, admin_merchandise_piece_parts_path(admin_merchandise_piece) %>
+        </td>
+        <td><%= link_to t(:show), admin_merchandise_piece %></td>
+        <td><%= link_to t(:edit), edit_admin_merchandise_piece_path(admin_merchandise_piece) %></td>
+        <td><%= link_to t(:destroy), admin_merchandise_piece, confirm: t(:link_destroy_confirm), method: :delete %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 <div class="paginate">
-<%= paginate @admin_merchandise_pieces %>
+  <%= paginate @admin_merchandise_pieces %>
 </div>

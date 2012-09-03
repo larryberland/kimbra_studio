@@ -5,6 +5,7 @@
 <div class='panel_contents'>
   <% if emails.present? %>
       <table>
+        <thead>
         <tr>
           <% if current_user.admin? %>
               <th>studio</th>
@@ -14,6 +15,8 @@
           <th>how many<br/>offers</th>
           <th>Actions</th>
         </tr>
+        </thead>
+        <tbody>
         <% emails.each do |email| %>
             <tr>
               <% if current_user.admin? %>
@@ -25,6 +28,7 @@
               <td><span id="send_email_<%= email.id %>"><%= actions_for_email(email) %></span></td>
             </tr>
         <% end %>
+        </tbody>
       </table>
       <br/>
       <span id='send_all_emails'>

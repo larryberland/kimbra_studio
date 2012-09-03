@@ -1,6 +1,7 @@
 <h2><%= t(:admin_customer_offers_index_title) %></h2>
 
 <table>
+  <thead>
   <tr>
     <th>Name</th>
     <th>Kimbra Piece</th>
@@ -12,7 +13,8 @@
     <th></th>
     <th></th>
   </tr>
-
+  </thead>
+  <tbody>
   <% @admin_customer_offers.each do |admin_customer_offer| %>
       <tr>
         <td><%= admin_customer_offer.name %></td>
@@ -27,4 +29,5 @@
         <td><%= link_to t(:destroy), admin_customer_email_offer_path(@email, admin_customer_offer), confirm: t(:link_destroy_confirm), method: :delete %></td>
       </tr>
   <% end %>
+  </tbody>
 </table>
