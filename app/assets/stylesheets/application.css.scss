@@ -254,9 +254,10 @@ div.menu_item, div.menu_item_right {
     text-decoration: none;
   }
   a:hover{
-    background: #356094;
+    background: #f1f359; /*#356094;*/
     border: solid 1px #2A4E77;
     text-decoration: none;
+    color: #000;
   }
 
   a:active{
