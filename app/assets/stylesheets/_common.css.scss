@@ -3,6 +3,12 @@
   -moz-border-radius: $radius;
   border-radius: $radius;
 }
+@mixin rounded_top {
+  border-radius: 10px 10px 0 0;
+  -webkit-border-radius: 10px 10 0 0;
+  -moz-border-radius: 10px 10px 0 0;
+}
+
 div.field_with_errors {
   @include rounded-corners(5px);
   label {

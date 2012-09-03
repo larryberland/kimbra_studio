@@ -218,70 +218,6 @@ form.button_to div, form.button_to div input {
   /*   display:inline;    */
 }
 
-div#main_nav {
-  clear: both;
-  background-color: #e5e5f9;
-  color: #000;
-  font-style: bold;
-  font-size: 1.1em;
-  width: 100%;
-  height: 30px;
-  margin-bottom: 15px;
-  @include rounded-corners(5px);
-  padding: 1.2em 1em;
-
-}
-
-div.menu_item, div.menu_item_right {
-  float: left;
-  padding: 3px 0px 3px 5px;
-  a {
-    padding: 10px 15px;
-    background: #4479BA;
-    color: #FFF;
-    -webkit-border-radius: 4px;
-    -moz-border-radius: 4px;
-    border-radius: 4px;
-    border: solid 1px #20538D;
-    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);
-    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
-    -webkit-transition-duration: 0.2s;
-    -moz-transition-duration: 0.2s;
-    transition-duration: 0.2s;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    font-size: 1.0em;
-    text-decoration: none;
-  }
-  a:hover {
-    background: #f1f359; /*#356094;*/
-    border: solid 1px #2A4E77;
-    text-decoration: none;
-    color: #000;
-  }
-
-  a:active {
-    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
-    background: #2E5481;
-    border: solid 1px #203E5F;
-  }
-  a.selected {
-    background: #f1f359 !important;
-    color: #000;
-  }
-}
-
-div.menu_item_right {
-  float: right;
-  padding: 3px 20px 3px 5px;
-}
-
 .flash_notice, .flash_error {
   font-size: 1.5em;
 }
@@ -318,3 +254,87 @@ div {
     clear: both;
   }
 }
+
+$base-table-color: #4479BA;
+$base-active-color: $base-table-color; /*#f1f359;*/
+
+table {
+  border-style: outset;
+  border-width: 2px;
+  border-color: darken($base-table-color, 20%);
+
+  @include rounded_top;
+
+  thead th {
+    @include rounded_top;
+    background-color: $base-active-color;
+    color: white;
+  }
+}
+
+div#main_nav {
+  clear: both;
+  background-color: lighten($base-table-color, 45%);
+  color: #000;
+  font-style: bold;
+  font-size: 1.1em;
+  width: 100%;
+  height: 30px;
+  margin-bottom: 15px;
+  @include rounded-corners(5px);
+  padding: 1.2em 1em;
+}
+
+div.menu_item, div.menu_item_right {
+  float: left;
+  padding: 3px 0px 3px 5px;
+  a {
+    background: lighten($base-table-color, 30%);
+    color: #000;
+    font-size: 1.0em;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 10px 15px;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    border: solid 1px #20538D;
+    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);*/
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
+    -webkit-transition-duration: 0.2s;
+    -moz-transition-duration: 0.2s;
+    transition-duration: 0.2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  a:active {
+    -webkit-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    -moz-box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    box-shadow: inset 0 1px 4px rgba(0, 0, 0, 0.6);
+    background: #2E5481;
+    border: solid 1px #203E5F;
+  }
+  a:hover {
+    background: $base-active-color; /*#356094;*/
+    border: solid 1px #2A4E77;
+    text-decoration: none;
+    color: #fff;
+    font-weight: bold;
+  }
+
+  a.selected {
+    background: $base-active-color !important;
+    color: #fff;
+    font-weight: bold;
+  }
+}
+
+div.menu_item_right {
+  float: right;
+  padding: 3px 20px 3px 5px;
+}
+
