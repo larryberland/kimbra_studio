@@ -1,23 +1,26 @@
-<h1>Listing categories</h1>
+<h2>Listing categories</h2>
 
 <table>
+  <thead>
   <tr>
     <th>String</th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
-
-<% @categories.each do |category| %>
-  <tr>
-    <td><%= category.string %></td>
-    <td><%= link_to t(:show), category %></td>
-    <td><%= link_to t(:edit), edit_category_path(category) %></td>
-    <td><%= link_to t(:destroy), category, confirm: t(:link_destroy_confirm), method: :delete %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @categories.each do |category| %>
+      <tr>
+        <td><%= category.string %></td>
+        <td><%= link_to t(:show), category %></td>
+        <td><%= link_to t(:edit), edit_category_path(category) %></td>
+        <td><%= link_to t(:destroy), category, confirm: t(:link_destroy_confirm), method: :delete %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Category', new_category_path %>

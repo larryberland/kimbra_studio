@@ -1,25 +1,26 @@
-<h1>Listing address_types</h1>
+<h2>Listing address_types</h2>
 
 <table>
+  <thead>
   <tr>
     <th>Name</th>
     <th>Description</th>
-    <th></th>
-    <th></th>
-    <th></th>
+    <th colspan="3"></th>
   </tr>
-
-<% @address_types.each do |address_type| %>
-  <tr>
-    <td><%= address_type.name %></td>
-    <td><%= address_type.description %></td>
-    <td><%= link_to 'Show', address_type %></td>
-    <td><%= link_to 'Edit', edit_address_type_path(address_type) %></td>
-    <td><%= link_to 'Destroy', address_type, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
-<% end %>
+  </thead>
+  <tbody>
+  <% @address_types.each do |address_type| %>
+      <tr>
+        <td><%= address_type.name %></td>
+        <td><%= address_type.description %></td>
+        <td><%= link_to 'Show', address_type %></td>
+        <td><%= link_to 'Edit', edit_address_type_path(address_type) %></td>
+        <td><%= link_to 'Destroy', address_type, confirm: 'Are you sure?', method: :delete %></td>
+      </tr>
+  <% end %>
+  </tbody>
 </table>
 
-<br />
+<br/>
 
 <%= link_to 'New Address type', new_address_type_path %>
