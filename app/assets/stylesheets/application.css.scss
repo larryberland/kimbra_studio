@@ -217,7 +217,7 @@ form.button_to div, form.button_to div input {
 div#main_nav {
   clear: both;
   background-color: #e5e5f9;
-  color: #fff;
+  color: #000;
   font-style: bold;
   font-size: 1.1em;
   width: 100%;
@@ -284,6 +284,7 @@ div.menu_item_right {
 
 h1.logo a {
   text-decoration: none;
+  color: #4479BA;
 }
 
 /* generic div allowing a left and right side to fill container */
