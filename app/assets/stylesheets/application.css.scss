@@ -33,19 +33,71 @@ body:before {
 }
 
 body, button, input, select, textarea {
-  font: 13px/17px "Helvetica Neue",​Arial,​Helvetica,​sans-serif;
+  font: 13px/17px "Helvetica Neue", ​ Arial, ​ Helvetica, ​ sans-serif;
 }
 
-h1 { font-size: 3.0em;  margin-bottom: .5em; }
-h2 { font-size: 2.0em;  margin-bottom: .75em; }
-h3 { font-size: 1.5em;  margin: .2em  0; }
-h4 { font-size: 1.0em;  margin: .2em  0; }
-h5 { font-size: .8em;   margin: .2em  0; }
-h6 { font-size: .6em;   margin: .2em  0; }
-p  { font-size: 1em;    margin: .8em  0; }
+h1 {
+  font-size: 3.0em;
+  margin-bottom: .5em;
+}
+
+h2 {
+  font-size: 2.0em;
+  margin-bottom: .75em;
+}
+
+h3 {
+  font-size: 1.5em;
+  margin: .2em 0;
+}
+
+h4 {
+  font-size: 1.0em;
+  margin: .2em 0;
+}
+
+h5 {
+  font-size: .8em;
+  margin: .2em 0;
+}
+
+h6 {
+  font-size: .6em;
+  margin: .2em 0;
+}
+
+p {
+  font-size: 1em;
+  margin: .8em 0;
+}
+
+h3 {
+  font-size: 1.1em;
+  margin: .2em 0;
+}
+
+h4 {
+  font-size: 1.0em;
+  margin: .2em 0;
+}
+
+h5 {
+  font-size: .8em;
+  margin: .2em 0;
+}
+
+h6 {
+  font-size: .6em;
+  margin: .2em 0;
+}
+
+p {
+  font-size: 1em;
+  margin: .8em 0;
+}
 
 .bp {
-  /*height: 27px; LDB:? do we need this height here?*/
+/*height: 27px; LDB:? do we need this height here?*/
 }
 
 div#body_wrapper {
@@ -63,7 +115,13 @@ div#body_wrapper {
 
   div#flash_wrapper {
     padding: 5px 0 0 5px;
+    margin: 0;
+    height: 1.5em;
 
+    .flash_notice, .flash_error {
+      font-size: 1.5em;
+      margin: 0;
+    }
   }
   div#content_wrapper {
     padding: 5px 0 50px 5px;
@@ -110,16 +168,16 @@ textarea {
 select,
 textarea,
 input[type="text"] {
-  /*background:url(button.png);*/
-  /*text-indent: -9999em;*/
+/*background:url(button.png);*/
+/*text-indent: -9999em;*/
   font-family: Verdana, Arial, sans-serif;
   font-size: 0.95em;
 }
 
 input[type="submit"] {
-  /*background-color: #ffda75; *//* form header */
-  /*background:url(button.png);*/
-  /*text-indent: -9999em;*/
+/*background-color: #ffda75; *//* form header */
+/*background:url(button.png);*/
+/*text-indent: -9999em;*/
   font-size: 1.0em;
 }
 
@@ -219,11 +277,7 @@ form.button_to {
 }
 
 form.button_to div, form.button_to div input {
-  /*   display:inline;    */
-}
-
-.flash_notice, .flash_error {
-  font-size: 1.5em;
+/*   display:inline;    */
 }
 
 h1 {
@@ -237,15 +291,18 @@ h1 {
     color: slateblue;
   }
 }
+
 h2 {
   span.hint {
     font-size: 0.5em;
     color: slateblue;
   }
 }
+
 .paginate {
   padding-top: 5px;
 }
+
 /* generic div allowing a left and right side to fill container */
 div {
   .left-side {
@@ -260,7 +317,8 @@ div {
 }
 
 $base-table-color: #4479BA;
-$base-active-color: $base-table-color; /*#f1f359;*/
+$base-active-color: $base-table-color;
+/*#f1f359;*/
 
 table {
   border-style: outset;
@@ -304,7 +362,7 @@ div.menu_item, div.menu_item_right {
     -moz-border-radius: 4px;
     border-radius: 4px;
     border: solid 1px #20538D;
-    /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);*/
+  /*text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.4);*/
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.4), 0 1px 1px rgba(0, 0, 0, 0.2);
@@ -345,6 +403,6 @@ div.menu_item_right {
 
 table.plain {
   border: none;
-  margin-bottom:0px;
-  width:auto;
+  margin-bottom: 0px;
+  width: auto;
 }
