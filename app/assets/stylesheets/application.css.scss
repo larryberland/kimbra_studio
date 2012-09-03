@@ -17,6 +17,7 @@
 */
 
 @import "_common";
+@import "global/form";
 
 html, body {
   height: 100%;
@@ -32,13 +33,16 @@ body:before {
 }
 
 body, button, input, select, textarea {
-  /*font: 13px/17px Arial, sans-serif;*/
+  font: 13px/17px "Helvetica Neue",​Arial,​Helvetica,​sans-serif;
 }
 
-p {
-  font-size: 1em;
-  margin: .8em 0;
-}
+/*h1 { font-size: 1.6em;  margin: .2em  0; }*/
+h2 { font-size: 1.2em;  margin: .2em  0; }
+h3 { font-size: 1.1em;  margin: .2em  0; }
+h4 { font-size: 1.0em;  margin: .2em  0; }
+h5 { font-size: .8em;   margin: .2em  0; }
+h6 { font-size: .6em;   margin: .2em  0; }
+p  { font-size: 1em;    margin: .8em  0; }
 
 .bp {
   /*height: 27px; LDB:? do we need this height here?*/

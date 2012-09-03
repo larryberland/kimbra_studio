@@ -1,6 +1,6 @@
-<%= form_for(@my_studio_session, validate: true) do |f| %>
+<%= render 'shared/error_messages', record: @my_studio_session, h2_msg: 'stopped this Session' %>
 
-    <%= render 'shared/error_messages', record: @my_studio_session, h2_msg: 'stopped this Session' %>
+<%= form_for(@my_studio_session, validate: true) do |f| %>
 
     <%= render "my_studio/clients/form", :f => f, :client => @my_studio_session.client %>
 

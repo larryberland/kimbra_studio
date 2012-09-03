@@ -1,48 +1,42 @@
+<%= render 'shared/error_messages', record: @admin_merchandise_piece %>
 <%= form_for(@admin_merchandise_piece, :html => {:multipart => true}) do |f| %>
-    <%= render 'shared/error_messages', record: @admin_merchandise_piece %>
 
-    <div class="field">
+    <div class="text-field">
       <%= f.label :name %>
-      <br/>
       <%= f.text_field :name %>
     </div>
 
-    <div class="field">
+    <div class="text-field">
       <%= f.label :image %>
       <%= f.file_field :image %>
       <%= f.label :remote_image_url, 'or image URL' %>
       <%= f.text_field :remote_image_url %>
     </div>
 
-    <div class="field">
+    <div class="text-field">
       <%= f.label :short_description %>
-      <br/>
       <%= f.text_field :short_description %>
     </div>
-    <div class="field">
+    <div class="text-field">
       <%= f.label :description_markup, 'Description' %>
-      <br/>
       <%= f.text_area :description_markup %>
     </div>
-    <div class="field">
+    <div class="text-field">
       <%= f.label :sku %>
-      <br/>
       <%= f.text_field :sku %>
     </div>
-    <div class="field">
+    <div class="text-field">
       <%= f.label :price %>
-      <br/>
       <%= f.text_field :price %>
     </div>
-    <div class="field">
+    <div class="text-field">
       <%= f.label :active %>
       <%= f.check_box :active %>
       <%= f.label :featured %>
       <%= f.check_box :featured %>
     </div>
-    <div class="field">
+    <div class="text-field">
       <%= f.label :deleted_at %>
-      <br/>
       <%= f.text_field :deleted_at %>
     </div>
     <div class="actions">

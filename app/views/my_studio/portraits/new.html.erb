@@ -1,7 +1,9 @@
 <h2>
-  <%=t(:my_studio_portraits_new_title, :name => @my_studio_session.try(:name))%>
+  <%= t(:my_studio_portraits_new_title, :name => @my_studio_session.try(:name)) %>
 </h2>
+<div class="platypus-form-container">
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to t(:back), my_studio_session_portraits_path(@my_studio_session) %>
+  <%= link_to t(:back), my_studio_session_portraits_path(@my_studio_session) %>
+</div>

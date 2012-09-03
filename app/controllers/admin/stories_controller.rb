@@ -2,7 +2,6 @@ module Admin
   class StoriesController < ApplicationController
 
     skip_before_filter :setup_story
-    before_filter :authenticate_user!
     before_filter :authenticate_admin!
 
     layout 'story'

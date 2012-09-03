@@ -1,5 +1,7 @@
-<h2><%=t(:admin_merchandise_parts_new_title)%></h2>
+<h2><%= t(:admin_merchandise_parts_new_title) %></h2>
+<div class="platypus-form-container">
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<%= link_to t(:back), admin_merchandise_piece_parts_path(@piece) %>
+  <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece) %>
+</div>
