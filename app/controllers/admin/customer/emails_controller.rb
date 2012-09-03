@@ -114,7 +114,9 @@ class Admin::Customer::EmailsController < ApplicationController
   # GET /admin/customer/emails/session_id/session
           # GET /admin/customer/emails/session_id/session/.json
   def session_list
-    @admin_customer_emails = Admin::Customer::Email.by_session(MyStudio::Session.find(params[:id])).all
+    @admin_customer_emails = Admin::Customer::Email.by_session(MyStudio::Session.find(params[:id]))
+    @record_count = @admin_customer_emails.count
+    @admin_customer_emails = @admin_customer_emails.page(params[:page])
     render :index
   end
 

@@ -1,23 +1,26 @@
 <h3>We are excited about our launch date coming soon!</h3>
 
-<p>
-  Until then, we are in limited rollout with a few selected studios. We are starting first in the Tampa, FL region.
-</p>
+<div class="platypus-form-container">
 
-<p>
-  Please give us your email address to be notified about our launch.
-</p>
+  <p>
+    Until then, we are in limited rollout with a few selected studios. We are starting first in the Tampa, FL region.
+  </p>
 
-<%= form_for(@prospect) do |f| %>
+  <p>
+    Please give us your email address to be notified about our launch.
+  </p>
 
-    <div class="field">
-      <%= f.label :email %>
-      <br/>
-      <%= f.text_field :email %>
-    </div>
+  <%= form_for(@prospect) do |f| %>
 
-    <div class="actions">
-      <%= f.submit 'Submit' %>
-    </div>
+      <div class="field">
+        <%= f.label :email %>
+        <br/>
+        <%= f.text_field :email %>
+      </div>
 
-<% end %>
+      <div class="actions">
+        <%= f.submit 'Submit' %>
+      </div>
+
+  <% end %>
+</div>

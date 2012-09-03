@@ -1,7 +1,9 @@
 <h2><%= t(:admin_customer_offers_new_title) %></h2>
 
-<%= render 'form' %>
+<div class="platypus-form-container">
+  <%= render 'form' %>
 
-<div class='show'>
-  <%= link_to t(:back), admin_customer_email_offers_path(@email) %>
+  <div class='show'>
+    <%= link_to t(:back), admin_customer_email_offers_path(@email) %>
+  </div>
 </div>
