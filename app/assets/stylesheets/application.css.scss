@@ -260,7 +260,7 @@ $base-active-color: $base-table-color; /*#f1f359;*/
 
 table {
   border-style: outset;
-  border-width: 2px;
+  border-width: 0px 2px 2px 2px;
   border-color: darken($base-table-color, 20%);
 
   @include rounded_top;
