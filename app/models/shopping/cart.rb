@@ -41,6 +41,11 @@ class Shopping::Cart < ActiveRecord::Base
     items.inject(0) { |result, item| result + item.quantity.to_i }
   end
 
+  # Display this like:  "$%.2f" % Shopping::Cart.first.commission  => "$2.80"
+  def commission
+    (taxable_sub_total * email.my_studio_session.studio.info.commission_rate.to_i).round(2)
+  end
+
   private #========================================================================
 
   def set_tracking
