@@ -1,9 +1,9 @@
-<h2>
+<h1>
   <%= t(:admin_merchandise_pieces_index_title) %>
   <span class="hint">
       record set count: <%= number_to_human @record_count %>
   </span>
-</h2>
+</h1>
 <%= button_to t(:admin_merchandise_pieces_new_link), new_admin_merchandise_piece_path, method: :get %>
 <div class="paginate">
   <%= paginate @admin_merchandise_pieces %>

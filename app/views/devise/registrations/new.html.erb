@@ -1,7 +1,7 @@
 <% if Rails.env.development? %>
 <h3>devise/registrations/new.html</h3>
 <% end %>
-<h2><%=translate(:registrations_new_title)%></h2>
+<h1><%=translate(:registrations_new_title)%></h1>
 
 <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>

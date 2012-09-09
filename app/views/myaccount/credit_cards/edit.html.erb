@@ -1,4 +1,4 @@
-<h2> <%= I18n.t :edit_credit_card_title %> </h2>
+<h1> <%= I18n.t :edit_credit_card_title %> </h1>
 
 <%= form_for(@credit_card, :url => myaccount_credit_card_path(@credit_card)) do |f| %>
   <%= render :partial => 'form', :locals => {:f => f} %>

@@ -1,4 +1,4 @@
-<h2><%=translate(:passwords_edit_title)%></h2>
+<h1><%=translate(:passwords_edit_title)%></h1>
 
 <%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :put }) do |f| %>
   <%= devise_error_messages! %>

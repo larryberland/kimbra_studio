@@ -1,9 +1,9 @@
-<h2>
+<h1>
   <%= t(:my_studio_sessions_index_title, name: '') %>
   <span class="hint">
       record set count: <%= number_to_human @record_count %>
   </span>
-</h2>
+</h1>
 
 <%= button_to(t(:my_studio_sessions_new_link), new_my_studio_session_path, method: :get) unless current_user.admin? %>
 <div class="paginate">
