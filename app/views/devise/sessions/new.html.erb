@@ -41,10 +41,10 @@
 
                 <div class='remember'>
                   <% if devise_mapping.rememberable? -%>
-                      <%= f.check_box :remember_me %> <%= f.label :remember_me, 'Remember me' %>
+                      <%= f.check_box :remember_me %> <%= f.label :remember_me, 'Remember me for 2 weeks' %>
                   <% end -%>
                   <br>
-                  <%# render :partial => "devise/shared/links" %>
+                  <%= render :partial => "devise/shared/links" %>
                 </div>
               </fieldset>
 

@@ -43,8 +43,8 @@ class Studio < ActiveRecord::Base
     Notifier.delay.signup_notification(self.id)
   end
 
-  # name and email string for the user
-  # ex. '"John Wayne" "jwayne@badboy.com"'
+  # name and email string for the user suitable for a mailer
+  # ex. '"John Wayne" <jwayne@badboy.com>'
   #
   # @param  [ none ]
           # @return [ String ]

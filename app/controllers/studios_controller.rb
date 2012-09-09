@@ -52,7 +52,7 @@ class StudiosController < ApplicationController
     @studio.owner        = User.find(owner_info[:id])
     # little concerned about using current_user here
     #   when Admin Creates Studio probably don't want current_user
-    @studio.current_user = current_user
+    # @studio.current_user = current_user
     respond_to do |format|
       if @studio.save
         format.html { redirect_to @studio, notice: 'Studio was successfully created.' }
@@ -67,13 +67,21 @@ class StudiosController < ApplicationController
   # PUT /studios/1
   # PUT /studios/1.json
   def update
-    @studio              = Studio.find(params[:id])
-    @studio.current_user = current_user
+    @studio = Studio.find(params[:id])
     @studio.update_attributes(params[:studio])
-
+    email = params[:studio][:info_attributes][:email]
+    # @studio.current_user = current_user
+    # Create new owner user if the studio email was just added and we don't have that user already created.
+    if email && !User.exists?(email: email) && @studio.owner.blank?
+      password = User.generate_random_text
+        owner = User.new(email: email, password: password, first_name: params[:first_name], last_name: params[:last_name])
+        owner.skip_confirmation!
+        @studio.owner = owner
+        Notifier.delay.studio_signup_confirmation(@studio.id, email, password)
+    end
     respond_to do |format|
       if @studio.save
-        format.html { redirect_to @studio, notice: 'Studio was successfully updated.' }
+        format.html { redirect_to @studio, notice: "Studio was successfully updated. #{ ('Confirmation email sent to ' + email) if email.present? }" }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -94,7 +102,7 @@ class StudiosController < ApplicationController
     end
   end
 
-  private
+  private #==========================================================================
 
   def form_info
     @states = State.form_selector

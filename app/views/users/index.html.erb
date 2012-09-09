@@ -6,10 +6,8 @@
 
 </h1>
 
-<!-- Should not create new user here -->
-<!--<%= link_to 'New User', new_user_path %> -->
-<br/>
-<%= link_to t(:admin_overview_link), admin_overview_path %>
+<%= link_to 'New User', new_user_path %>
+
 <div class="paginate">
   <%= paginate @users %>
 </div>
@@ -44,6 +42,7 @@
   <% end %>
   </tbody>
 </table>
+
 <div class="paginate">
   <%= paginate @users %>
 </div>

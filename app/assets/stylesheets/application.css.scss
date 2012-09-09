@@ -321,15 +321,14 @@ div#main_nav {
   font-style: bold;
   font-size: 1.1em;
   width: 100%;
-  height: 30px;
+  height: 60px;
   margin-bottom: 5px;
   @include rounded-corners(5px);
-  padding: 1.2em 1em;
 }
 
 div.menu_item, div.menu_item_right {
   float: left;
-  padding: 3px 0px 3px 5px;
+  padding: 20px 0px 10px 10px;
   a {
     background: lighten($base-table-color, 30%);
     color: #000;
@@ -377,7 +376,7 @@ div.menu_item, div.menu_item_right {
 
 div.menu_item_right {
   float: right;
-  padding: 3px 20px 3px 5px;
+  padding: 20px 10px 10px 0px;
 }
 
 table.plain {

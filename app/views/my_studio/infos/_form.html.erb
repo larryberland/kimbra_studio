@@ -1,28 +1,33 @@
 <h3> Studio Info</h3>
 <%= f.fields_for :info, info do |g| %>
 
-    <div class="field">
-      <%= g.label :active %>
-      <br/>
-      <%= g.check_box :active %>
-    </div>
+    <% if current_user.admin? %>
+        <div class="field">
+          <%= g.check_box :active %> <%= g.label :active %>
+        </div>
+    <% end %>
     <div class="field">
       <%= g.label :website %>
       <br/>
-      <%= g.text_field :website %>
+      <%= g.text_field :website %> paste from browser address bar. eg, http://my_photographer.com
+    </div>
+    <div class="field">
+      <%= label_tag :name, "Studio owner's first and last name" %>
+      <br/>
+      <%= text_field_tag :first_name %> <%= text_field_tag :last_name %>
     </div>
     <div class="field">
       <%= g.label :email, "Studio's Email" %>
       <br/>
-      <%= g.email_field :email %>
+      <%= g.email_field :email %> will send activation email - only enter when you know it
     </div>
     <div class="field">
       <%= g.label :email_notification %>
       <br/>
-      <%= g.email_field :email_notification %>
+      <%= g.email_field :email_notification %> leave blank while setting up studio
     </div>
     <div class="field">
-      <%= g.label :tax_ein, 'Tax ID/EIN xx' %>
+      <%= g.label :tax_ein, 'Tax ID/EIN' %>
       <br/>
       <%= g.text_field :tax_ein %>
     </div>
@@ -30,27 +35,23 @@
         <div class="field">
           <%= g.label :commission_rate, 'Commission rate (%)' %>
           <br/>
-          <%= g.text_field :commission_rate %>
+          <%= g.text_field :commission_rate, disabled: !current_user.admin? %>
         </div>
     <% end %>
     <div class="field">
-      <%= g.label :pictage_member %>
-      <%= g.check_box :pictage_member %>
+      <%= g.check_box :pictage_member %> <%= g.label :pictage_member %>
     </div>
     <div class="field">
-      <%= g.label :smug_mug_member %>
-      <%= g.check_box :smug_mug_member %>
+      <%= g.check_box :smug_mug_member %> <%= g.label :smug_mug_member %>
     </div>
     <div class="field">
-      <%= g.label :mac_user %>
-      <%= g.check_box :mac_user %>
+      <%= g.check_box :mac_user %> <%= g.label :mac_user %>
     </div>
     <div class="field">
-      <%= g.label :windows_user %>
-      <%= g.check_box :windows_user %>
+      <%= g.check_box :windows_user %> <%= g.label :windows_user %>
     </div>
     <div class="field">
-      <%= g.label :ping_email, 'Would you like email notifications?' %>
-      <%= g.check_box :ping_email %>
+      <%= g.check_box :ping_email %> <%= g.label :ping_email, 'Would you like email notifications?' %>
     </div>
+
 <% end %>

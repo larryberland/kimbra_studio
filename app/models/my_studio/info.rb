@@ -15,11 +15,17 @@ class MyStudio::Info < ActiveRecord::Base
                   :created_at,
                   :updated_at
 
+  # Email not required yet while we are setting up studios manually.
+  # validates :email, presence: true, email: true
 
-  validates :email, presence: true, email: true
+  validates :website, presence: true
 
   validates :commission_rate,
-            presence:     true,
+            presence: true,
             numericality: {only_integer: true, less_than: 100, greater_than_or_equal_to: 0}
+
+  def commission_rate=(rate)
+    self[:commission_rate] = rate.to_i.to_s
+  end
 
 end

@@ -6,11 +6,9 @@
 </h1>
 
 <%= link_to t(:studios_new_link), new_studio_path %>
-<br/>
-<%= link_to t(:admin_overview_link), admin_overview_path %>
 
 <div class="paginate">
-<%= paginate @studios %>
+  <%= paginate @studios %>
 </div>
 
 <table>
@@ -31,7 +29,7 @@
         <td><%= studio.name %></td>
         <td><%= studio.phone_number %></td>
         <td><%= studio.try(:owner).try(:email) %></td>
-        <td><%= link_to 'Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}" %></td>
+        <td><%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %></td>
         <td><%= studio.try(:city) %></td>
         <td><%= studio.try(:state).try(:abbrev_and_name) %></td>
         <td><%= link_to t(:show), studio %></td>
@@ -41,7 +39,7 @@
   <% end %>
   </tbody>
 </table>
-<div class="paginate">
-<%= paginate @studios %>
-</div>
 
+<div class="paginate">
+  <%= paginate @studios %>
+</div>

@@ -5,6 +5,8 @@ class MyStudio::Minisite < ActiveRecord::Base
 
   belongs_to :studio
 
+  validates_presence_of :bgcolor, :font_color, :font_family
+
   mount_uploader :image, ImageUploader
 
 end

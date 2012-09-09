@@ -4,7 +4,7 @@ module Shopping
     skip_before_filter :authenticate_user!,
                        only: [:find_by_tracking, :edit_delivery_tracking, :update_delivery_tracking]
     skip_before_filter :set_client_and_cart, :setup_story,
-                       only: [:find_by_tracking]
+                       only: [:find_by_tracking, :commissions]
 
     def find_by_tracking
       @cart = Shopping::Cart.new

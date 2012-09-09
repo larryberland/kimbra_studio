@@ -14,7 +14,7 @@
     <div class="field">
       <%= f.label :phone_number %>
       <br/>
-      <%= f.text_field :phone_number %>
+      <%= f.text_field :phone_number %> for clients to contact
     </div>
 
     <%= render "shared/addresses/form", :f => f %>
@@ -29,4 +29,5 @@
       <%= f.submit :id => 'my_submit' %>
       <span id="spinner" style="display:none"></span>
     </div>
+
 <% end %>
