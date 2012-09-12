@@ -2,7 +2,7 @@ class Story < ActiveRecord::Base
 
   attr_accessor :crawler
 
-  has_many :storylines
+  has_many :storylines, dependent: :destroy
   belongs_to :client, :class_name => 'MyStudio::Client'
   belongs_to :studio
 

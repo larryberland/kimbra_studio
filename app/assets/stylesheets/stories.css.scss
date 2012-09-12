@@ -249,6 +249,15 @@ a.close {
   }
 }
 
+#story_table {
+  border: none;
+  margin-bottom: 0px;
+  width: auto;
+    th {
+      border-radius: 0;
+    }
+}
+
 #content h1 {
   margin-bottom: 10px;
   font-size: 30px;
