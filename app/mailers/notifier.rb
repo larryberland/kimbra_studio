@@ -16,6 +16,11 @@ class Notifier < ActionMailer::Base
     @name = name
     @email = email
     @studio = Studio.find(studio_id)
+    logo = ''
+        open('image.jpg', 'w') do |file|
+          logo << open(File.join(Rails.root, '/app/assets/images/kimbra_logo.png')).read
+        end
+        attachments.inline['logo.png'] = logo
     mail(to: email,
          subject: "New KimbraClickPLUS account",
          bcc: 'candi@jimjames.org')
