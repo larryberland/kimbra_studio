@@ -2,6 +2,7 @@
   %h2= @heading
 
   - @stories.includes(:storylines).each do |story|
+    = next if story.nil
     %p.story_name_line
       = remote_link_for_ip_related_stories(story)
       %span{ :title => "#{story.browser} (#{story.version}) on #{story.os}" }
