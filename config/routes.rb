@@ -77,6 +77,7 @@ KimbraStudio::Application.routes.draw do
     resources :infos do
       collection do
         get :samples
+        get :faq
       end
     end
     resources :minisites

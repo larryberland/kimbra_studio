@@ -130,8 +130,9 @@ en:
   my_studio_overview_label_minisite: "Studio Minisite Info"
   my_studio_overview_link_minisite: "View Studio Minisite Info"
 
-  #my_studio/infos/samples
+  #my_studio/infos/samples, faq
   my_studio_info_label_samples: 'Samples'
+  my_studio_info_label_faq: 'FAQ'
 
   # my_studio/portraits
   my_studio_portraits_new_title: "Upload Session Portrait for %{name}"

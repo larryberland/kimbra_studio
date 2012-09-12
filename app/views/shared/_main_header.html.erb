@@ -30,7 +30,7 @@
         <% if is_admin? %>
             <% display_h1 = t(:admin_overview_title) %>
         <% else %>
-            <% display_h1 = @my_studio.try(:name) %>
+            <% display_h1 = @my_studio.try(:name) || 'KimbraClickPLUS' %>
         <% end %>
     <% end %>
 
@@ -59,6 +59,9 @@
           <div class='menu_item_right'>
             <%= link_to_button t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
           </div>
+          <div class='menu_item'>
+            <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
+          </div>
       <% else %>
           <% if current_user and !current_user.client? %>
               <div class='menu_item'>
@@ -69,6 +72,9 @@
               </div>
               <div class='menu_item'>
                 <%= link_to_button t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
+              </div>
+              <div class='menu_item'>
+                <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
               </div>
               <!-- remove for now until we have studios with staff
               <div class='menu_item'>

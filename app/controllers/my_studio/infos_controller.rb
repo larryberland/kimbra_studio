@@ -85,5 +85,9 @@ class MyStudio::InfosController < MyStudio::BaseController
       # TODO must make these dynamic so they look custom to the studio.
     end
 
+    def faq
+          # Static text.
+        end
+
   end
 end
