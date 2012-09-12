@@ -77,12 +77,12 @@ en:
   minisite_menu_shopping_cart_link: 'Shopping Cart'
   minisite_menu_about_link: "About %{studio_name}"
 
-  admin_menu_overview: 'ClickPLUS Overview'
+  admin_menu_overview: 'Overview'
   admin_menu_emails:   'Offer Emails'
-  admin_menu_merchandise: 'Kimbra Merchandise'
+  admin_menu_merchandise: 'Merchandise'
   admin_menu_studios: 'Studios'
   admin_menu_users:   'Users'
-  admin_menu_stories: 'ClickPLUS Stories'
+  admin_menu_stories: 'Stories'
 
   # studios
   studios_new_title: 'Your Studio'

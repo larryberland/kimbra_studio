@@ -77,7 +77,7 @@ class StudiosController < ApplicationController
         owner = User.new(email: email, password: password, first_name: params[:first_name], last_name: params[:last_name])
         owner.skip_confirmation!
         @studio.owner = owner
-        Notifier.delay.studio_signup_confirmation(@studio.id, email, password)
+        Notifier.delay.studio_signup_confirmation(@studio.id, owner.name, owner.email, password)
     end
     respond_to do |format|
       if @studio.save
