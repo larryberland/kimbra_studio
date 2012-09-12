@@ -36,8 +36,9 @@ module ApplicationHelper
 
   # show.html
   def image_tag_thumb(model_with_carrier_wave_image)
-    url = model_with_carrier_wave_image.image_url(:thumb).to_s rescue ''
-    image_tag url
+    url = model_with_carrier_wave_image.image_url(:thumb).to_s rescue nil
+    url = 'spacer.gif' if url.blank?
+      image_tag url, alt: 'studio logo'
   end
 
   def image_tag_list(model_with_carrier_wave_image)
