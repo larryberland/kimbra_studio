@@ -13,6 +13,7 @@
  *= require devise
  *= require scaffolds
  *= require blueprint
+ *= require lightbox
  *= require_self
 */
 
@@ -383,4 +384,8 @@ table.plain {
   border: none;
   margin-bottom: 0px;
   width: auto;
+}
+
+td.top {
+  vertical-align: top;
 }

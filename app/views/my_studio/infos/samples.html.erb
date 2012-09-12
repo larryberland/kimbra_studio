@@ -1,0 +1,60 @@
+<% content_for :head do %>
+    <script type="text/javascript" src="http://gettopup.com/releases/latest/top_up-min.js"></script>
+<% end %>
+
+<h1>Samples</h1>
+
+<p>
+  These samples show a dummy studio called Studio One and illustrate how the key pieces of client communication use your
+  branding (your logo, your website colors, your website fonts, your website font colors). For now, the samples show
+  Studio One's branding but all your client communications show <i><b>your branding</b></i>.
+</p>
+
+<p>
+  We plan to show mockups using your branding soon!
+</p>
+
+<table class='plain'>
+  <thead></thead>
+  <tbody>
+  <tr>
+    <td class='top'>
+      <%= link_to image_tag('herald_t.png', alt: 'sample herald email'), '/assets/herald.png', class: 'lb_sample' %>
+      <br/>
+      Herald emails are sent to your client after you upload some portraits but before the personalized offer email is
+      sent.
+    </td>
+    <td class='top'>
+      <%= link_to image_tag('email_t.png', alt: 'sample personalized offer email'), '/assets/email.png', class: 'lb_sample' %>
+      <br/>
+      Personalized offer email is sent after you have uploaded at least 5 portraits and we have custom cropped and
+      positioned each portrait into selected jewelry pieces.
+    </td>
+    <td class='top'>
+      <%= link_to image_tag('collection_t.png', alt: 'sample collections page'), '/assets/collection.png', class: 'lb_sample' %>
+      <br/>
+      Your client clicks through their email offer to a specific piece on your branded minisite. The Collections page
+      displays all of the pieces in the current offer email.
+    </td>
+    <td class='top'>
+      <%= link_to image_tag('cart_t.png', alt: 'sample shopping cart'), '/assets/cart.png', class: 'lb_sample' %>
+      <br/>
+      Your client adds items to their cart. KimbraClickPLUS takes care of all credit card processing, coordinating the
+      crafting of the pieces, handling any questions from your client, and delivery direct to your client.
+    </td>
+    <td class='top'>
+      <%= link_to image_tag('about_t.png', alt: 'sample About page'), '/assets/about.png', class: 'lb_sample' %>
+      <br/>
+      We describe the exact relationship between your studio and the KimbraClickPLUS program for your clients. This
+      eliminates any confusion and makes it easy for them to make their purchase.
+    </td>
+    <td class='top'>
+      <%= link_to image_tag('contact_t.png', alt: 'sample Contact page'), '/assets/contact.png', class: 'lb_sample' %>
+      <br/>
+      Your client (and all their friends they forward their offer emails to) should contact you directly to set up
+      new sessions, inquire about your services, etc. They would contact KimbraClickPLUS directly to ask questions about
+      their order.
+    </td>
+  </tr>
+  </tbody>
+</table>

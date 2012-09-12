@@ -74,7 +74,11 @@ KimbraStudio::Application.routes.draw do
   namespace :my_studio do
     resources :clients
     resource :dashboard, :only => [:show]
-    resources :infos
+    resources :infos do
+      collection do
+        get :samples
+      end
+    end
     resources :minisites
     resource :overview, :only => [:show]
     resources :sessions do

@@ -1,6 +1,8 @@
 #= require jquery
 #= require jquery-ui
 #= require jquery_ujs
+#= require jquery.ui.widget
+#= require jquery.ui.rlightbox.min
 #= require jcrop
 #= require spin
 #= require spinner
@@ -22,3 +24,5 @@ $ ->
   $('#slides').orbit()
 
   $('#user_email').focus()
+
+  $('.lb_sample').rlightbox();

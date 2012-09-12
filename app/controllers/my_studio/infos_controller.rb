@@ -79,5 +79,11 @@ class MyStudio::InfosController < MyStudio::BaseController
       format.html { redirect_to my_studio_infos_url }
       format.json { head :ok }
     end
+
+    def samples
+      # Static images of various pages.
+      # TODO must make these dynamic so they look custom to the studio.
+    end
+
   end
 end
