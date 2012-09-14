@@ -1,4 +1,3 @@
-puts "pulling in #{__FILE__}"
 module CustomValidators
   
   class Emails
