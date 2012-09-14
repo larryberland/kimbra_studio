@@ -5,6 +5,7 @@ KimbraStudio::Application.routes.draw do
   resource :about do
     get :show
     get :signup
+    get :contact
   end
 
   namespace :admin do
