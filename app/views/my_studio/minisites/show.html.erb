@@ -1,22 +1,30 @@
-<p id="notice"><%= notice %></p>
+<h2>Branding for your offer emails and minisite</h2>
+
+<p>Want to change any of these items? Shoot us an email with your changes!</p>
+
+<div style="border:black 1px solid;width:800px;text-align:center;background-color:<%= @my_studio_minisite.bgcolor %>">
+  <div style="margin:0px auto;width:800px"><%= image_tag @my_studio_minisite.image %></div>
+  <h3 style="padding:10px 0 20px 0;font-family:<%= @my_studio_minisite.font_family %>;color:<%= @my_studio_minisite.font_color %>">
+    <%= @my_studio_minisite.studio.name %> welcomes you.
+  </h3>
+  <p style="padding-bottom:20px;font-family:<%= @my_studio_minisite.font_family %>;color:<%= @my_studio_minisite.font_color %>">
+    Quick brown fox jumped over the lazy dog.
+  </p>
+</div>
 
 <p>
-  <b>Studio:</b>
-  <%= @my_studio_minisite.studio %>
+  <b>Studio name:</b>
+  <%= @my_studio_minisite.studio.name %>
 </p>
 
 <p>
-  <b>Bgcolor:</b>
-  <%= @my_studio_minisite.bgcolor %>
-</p>
-
-<p>
-  <b>Logo:</b>
+  <b>Studio logo:</b>
+  <br/>
   <%= image_tag @my_studio_minisite.image %>
 </p>
 
 <p>
-  <b>Font family:</b>
+  <b>Page font:</b>
   <%= @my_studio_minisite.font_family %>
 </p>
 
@@ -26,10 +34,10 @@
 </p>
 
 <p>
-  <b>Theme:</b>
-  <%= @my_studio_minisite.theme %>
+  <b>Page background color:</b>
+  <%= @my_studio_minisite.bgcolor %>
 </p>
 
-
+<!--
 <%= link_to t(:edit), edit_my_studio_minisite_path(@my_studio_minisite) %> |
-<%= link_to t(:back), my_studio_minisites_path %>
+-->

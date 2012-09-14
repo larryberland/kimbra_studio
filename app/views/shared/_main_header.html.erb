@@ -74,6 +74,9 @@
                 <%= link_to_button t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
               </div>
               <div class='menu_item'>
+                <%= link_to_button t(:my_studio_minisite_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/infos/samples' %>
+              </div>
+              <div class='menu_item'>
                 <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
               </div>
               <!-- remove for now until we have studios with staff
