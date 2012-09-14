@@ -1,4 +1,5 @@
 class MyStudio::InfosController < MyStudio::BaseController
+
   # GET /my_studio/infos
   # GET /my_studio/infos.json
   def index
@@ -79,15 +80,21 @@ class MyStudio::InfosController < MyStudio::BaseController
       format.html { redirect_to my_studio_infos_url }
       format.json { head :ok }
     end
-
-    def samples
-      # Static images of various pages.
-      # TODO must make these dynamic so they look custom to the studio.
-    end
-
-    def faq
-          # Static text.
-        end
-
   end
+
+  def samples
+    # Static images of various pages.
+    # TODO must make these dynamic so they look custom to the studio.
+  end
+
+  def faq
+    # Static text.
+  end
+
+  # Non-functioning mockup of the Your Collection page.
+  def mock_collection
+    @studio = @my_studio
+    render layout: false
+  end
+
 end

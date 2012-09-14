@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title><%= "#{@studio.name} Photo Jewelry Offer" %></title>
+  <%= stylesheet_link_tag 'minisite' %>
+  <%= javascript_include_tag :minisite %>
+  <%= csrf_meta_tags %>
+  <!--[if !IE 7]>
+  <style type='text/css'>
+      #wrap {
+          display: table;
+          height: 100%
+      }
+  </style>
+  <![endif]-->
+  <style type="text/css">
+      body {
+          background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+          font-family: <%= @studio.try(:minisite).try(:font_family) %>;
+          color: <%= @studio.try(:minisite).try(:font_color) %>;
+      }
+
+      .likeabutton {
+          background: ButtonFace;
+          color: ButtonText;
+          border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+      }
+
+      .likeabutton.selected,
+      .likeabutton:hover {
+          border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+          background: #FFDA75;
+      }
+
+      .likeabutton:active {
+          border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+      }
+
+      a {
+          color: <%= @studio.try(:minisite).try(:font_color) %>;
+          text-decoration: none;
+          border-bottom: 1px dotted;
+      }
+
+      a.link {
+          color: <%= @studio.try(:minisite).try(:font_color) %>;
+          text-decoration: none;
+      }
+
+      a.visited {
+          color: <%= @studio.try(:minisite).try(:font_color) %>;
+          text-decoration: none;
+      }
+
+      a.focus, a.hover {
+          color: <%= @studio.try(:minisite).try(:font_color) %>;
+          text-decoration: none;
+      }
+
+      a.active {
+          color: <%= @studio.try(:minisite).try(:font_color) %>;
+          text-decoration: none;
+      }
+
+      a.no_border {
+          text-decoration: none;
+          border-bottom: none;
+      }
+
+  </style>
+</head>
+<body>
+
+<div id='body_wrapper'>
+
+  <div id='content_wrapper' class='container'>
+
+    <img id="logo" src="<%= @studio.minisite.image %>" title="<%= @studio.name %>">
+
+    <div id="nav_minisite_wrapper" class='bp'>
+      <div class="centered_container">
+        <ul id='main-header-tabs'>
+          <li>
+            Your Collection
+          </li>
+          |
+          <li>
+            <%= link_to t(:minisite_menu_about_link, :studio_name => @studio.name), '#' %>
+          </li>
+          |
+          <li>
+            <%= link_to 'Shopping Cart (0 items)', '#' %>
+          </li>
+          |
+          <li>
+            <%= link_to 'Back to Samples', samples_my_studio_infos_path %>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580">
+      <tbody>
+      <tr>
+        <td class="w280" valign="top" width="280">
+          <table class="w280" border="0" cellpadding="0" cellspacing="0"
+                 width="280">
+            <tbody>
+            <tr>
+              <td class="w280" align="right" width="280">
+                <%# TODO refactor this cache buster to be more rails-like. %>
+                <%= image_tag('pic1.png',
+                                      :title => 'Embrace Necklace',
+                                      :alt => 'Embrace Necklace',
+                                      :width => 200,
+                                      :height => 200,
+                                      :class => "w280",
+                                      :editable => "true",
+                                      :label => "Image",
+                                      :border => 0) %>
+              </td>
+            </tr>
+            <tr>
+              <td class="w280" height="10" width="280"></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+        <td width="20"></td>
+        <td class="w280" valign="middle" width="280">
+          <table class="w280" border="0" cellpadding="0" cellspacing="0"
+                 width="280">
+            <tbody>
+            <tr>
+              <td class="w280" height="10" width="280"></td>
+            </tr>
+            <tr>
+              <td class="w280" width="280">
+                <div class="article-content" align="left">
+                  <p style="color: <%= @studio.minisite.font_color %>;">
+                    Photo measuring: 13/16"w x 1-1/8"h. Solid Sterling Silver. Completely waterproof.
+                    <br/>
+                    <span class="price">$60.00</span><br/>
+                    <%= link_to "Details...", '#', {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="w280" height="10" width="280"></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580">
+      <tbody>
+      <tr>
+        <td class="w280" valign="top" width="280">
+          <table class="w280" border="0" cellpadding="0" cellspacing="0"
+                 width="280">
+            <tbody>
+            <tr>
+              <td class="w280" align="right" width="280">
+                <%# TODO refactor this cache buster to be more rails-like. %>
+                <%= image_tag('pic2.png',
+                              :title => 'Nicole Charm',
+                              :alt => 'Nicole Charm',
+                              :width => 200,
+                              :height => 200,
+                              :class => "w280",
+                              :editable => "true",
+                              :label => "Image",
+                              :border => 0) %>
+              </td>
+            </tr>
+            <tr>
+              <td class="w280" height="10" width="280"></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+        <td width="20"></td>
+        <td class="w280" valign="middle" width="280">
+          <table class="w280" border="0" cellpadding="0" cellspacing="0"
+                 width="280">
+            <tbody>
+            <tr>
+              <td class="w280" height="10" width="280"></td>
+            </tr>
+            <tr>
+              <td class="w280" width="280">
+                <div class="article-content" align="left">
+                  <p style="color: <%= @studio.minisite.font_color %>;">
+                    Photo measuring: 5/16"w x 3/8"h. Solid Sterling Silver. Completely waterproof.
+                    <br/>
+                    <span class="price">$32.00</span><br/>
+                    <%= link_to "Details...", '#', {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="w280" height="10" width="280"></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+    <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580">
+      <tbody>
+      <tr>
+        <td class="w580" valign="top" width="580">
+          <table class="w580" border="0" cellpadding="0" cellspacing="0"
+                 width="580">
+            <tbody>
+            <tr>
+              <td class="w580" align="center" width="580">
+                <%# TODO refactor this cache buster to be more rails-like. %>
+                <%= image_tag('pic3.png',
+                                      :title => 'Alexis Bracelet',
+                                      :alt => 'Alexis Bracelet',
+                                      :width => 500,
+                                      :height => 100,
+                                      :class => "w280",
+                                      :editable => "true",
+                                      :label => "Image",
+                                      :border => 0) %>
+              </td>
+            </tr>
+            <tr>
+              <td class="w580" width="580">
+                <div class="article-content" align="center">
+                  <p style="color: <%= @studio.minisite.font_color %>;">
+                    Length: 7-1/2". Solid Sterling Silver. Completely waterproof. •
+                    <span class="price">$265.00</span> •
+                    <%= link_to "Details...", '#' %>
+                  </p>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="w580" height="10" width="580"></td>
+            </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+
+
+  </div>
+
+</div>
+
+<div id='footer'>
+  <ul>
+    <li>
+      <%= link_to_unless_current 'Privacy', '#' %>
+    </li>
+    |
+    <li>
+      <%= link_to_unless_current 'Returns', '#' %>
+    </li>
+    |
+    <li>
+      <%= link_to_unless_current 'Contact us', '#' %>
+    </li>
+  </ul>
+</div>
+
+</body>
+
+</html>

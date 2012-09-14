@@ -78,6 +78,7 @@ KimbraStudio::Application.routes.draw do
       collection do
         get :samples
         get :faq
+        get :mock_collection
       end
     end
     resources :minisites
