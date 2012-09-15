@@ -2,9 +2,9 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :lockable, :trackable, :timeoutable and :omniauthable
-  devise :confirmable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable
+  devise :confirmable, :database_authenticatable, :registerable, :recoverable, :rememberable, :validatable, :trackable
 
-  belongs_to :studio
+  belongs_to :studio, inverse_of: :owner
   belongs_to :state
 
   has_many :user_roles, :dependent => :destroy
