@@ -148,17 +148,17 @@ textarea {
 select,
 textarea,
 input[type="text"] {
-/*background:url(button.png);*/
-/*text-indent: -9999em;*/
   font-family: Verdana, Arial, sans-serif;
   font-size: 0.95em;
 }
 
 input[type="submit"] {
-/*background-color: #ffda75; *//* form header */
-/*background:url(button.png);*/
-/*text-indent: -9999em;*/
   font-size: 1.0em;
+  background-color: #b4c9e3;
+}
+
+input[type="submit"]:hover {
+  background-color: #a1bcdc;
 }
 
 input {

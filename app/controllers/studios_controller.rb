@@ -1,13 +1,14 @@
 class StudiosController < ApplicationController
 
   before_filter :form_info
+  before_filter :load_my_studio
 
   # GET /studios
   # GET /studios.json
   def index
-    @studios      = Studio.order('updated_at desc, name asc')
+    @studios = Studio.order('updated_at desc, name asc')
     @record_count = @studios.count
-    @studios      = @studios.page(params[:page])
+    @studios = @studios.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -29,10 +30,11 @@ class StudiosController < ApplicationController
   # GET /studios/new
   # GET /studios/new.json
   def new
-    @studio       = Studio.new(info:     MyStudio::Info.new(:email => current_user.email),
-                               minisite: MyStudio::Minisite.new)
+    @studio = Studio.new(info: MyStudio::Info.new(:email => current_user.email),
+                         minisite: MyStudio::Minisite.new)
+    #@studio.build_owner
     @studio.owner = current_user
-    respond_to do |format|
+    respond_to do |format|#
       format.html # new.html.erb
       format.json { render json: @studio }
     end
@@ -47,12 +49,12 @@ class StudiosController < ApplicationController
   # POST /studios.json
   def create
     # coming from admin or new user this may be different
-    owner_info           = params[:studio].delete(:owner_attributes)
-    @studio              = Studio.new(params[:studio])
-    @studio.owner        = User.find(owner_info[:id])
+    owner_info = params[:studio].delete(:owner_attributes)
+    @studio = Studio.new(params[:studio])
+    @studio.owner = User.find(owner_info[:id])
     # little concerned about using current_user here
     #   when Admin Creates Studio probably don't want current_user
-    # @studio.current_user = current_user
+    @studio.current_user = current_user
     respond_to do |format|
       if @studio.save
         format.html { redirect_to @studio, notice: 'Studio was successfully created.' }
@@ -66,22 +68,14 @@ class StudiosController < ApplicationController
 
   # PUT /studios/1
   # PUT /studios/1.json
+  # Assumes only the studio owner will be updating here.
   def update
     @studio = Studio.find(params[:id])
+    @studio.current_user = current_user
     @studio.update_attributes(params[:studio])
-    email = params[:studio][:info_attributes][:email]
-    # @studio.current_user = current_user
-    # Create new owner user if the studio email was just added and we don't have that user already created.
-    if email && !User.exists?(email: email) && @studio.owner.blank?
-      password = User.generate_random_text
-        owner = User.new(email: email, password: password, first_name: params[:first_name], last_name: params[:last_name])
-        owner.skip_confirmation!
-        @studio.owner = owner
-        Notifier.delay.studio_signup_confirmation(@studio.id, owner.name, owner.email, password)
-    end
     respond_to do |format|
       if @studio.save
-        format.html { redirect_to @studio, notice: "Studio was successfully updated. #{ ('Confirmation email sent to ' + email) if email.present? }" }
+        format.html { redirect_to my_studio_minisite_path(@studio), notice: "Studio was successfully updated." }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -89,6 +83,31 @@ class StudiosController < ApplicationController
       end
     end
   end
+
+  # PUT /studios/1
+    # PUT /studios/1.json
+    def update_from_admin_edit
+      @studio = Studio.find(params[:id])
+      @studio.update_attributes(params[:studio])
+      email = params[:studio][:info_attributes][:email]
+      # Create new owner user if the studio email was just added and we don't have that user already created.
+      if email && !User.exists?(email: email) && @studio.owner.blank?
+        password = User.generate_random_text
+        owner = User.new(email: email, password: password, first_name: params[:first_name], last_name: params[:last_name])
+        owner.skip_confirmation!
+        @studio.owner = owner
+        Notifier.delay.studio_signup_confirmation(@studio.id, owner.name, owner.email, password)
+      end
+      respond_to do |format|
+        if @studio.save
+          format.html { redirect_to @studio, notice: "Studio was successfully updated. #{ ('Confirmation email sent to ' + email) if email.present? }" }
+          format.json { head :ok }
+        else
+          format.html { render action: "edit" }
+          format.json { render json: @studio.errors, status: :unprocessable_entity }
+        end
+      end
+    end
 
   # DELETE /studios/1
   # DELETE /studios/1.json

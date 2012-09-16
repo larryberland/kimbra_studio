@@ -1,17 +1,17 @@
 <div>
-  <h3>Mini Site Info</h3>
+  <h3>Minisite Info</h3>
   <%= f.fields_for :minisite, minisite do |g| %>
       <div class="field">
-        <%= g.label :bgcolor %>
+        <%= g.label 'Page background color' %>
         <br/>
-        <%= g.text_field :bgcolor %>
+        <%= g.text_field :bgcolor, class: 'short' %>
       </div>
 
       <div class="image-thumb">
         <%= image_tag_thumb(minisite) %>
       </div>
       <div class="field">
-        <%= g.label :image, 'Logo' %>
+        <%= g.label :image, 'Studio logo' %>
         <%= g.file_field :image %>
         <%= g.label :remote_image_url, 'or Logo URL' %>
         <%= g.text_field :remote_image_url %>
@@ -20,18 +20,18 @@
       <div class="field">
         <%= g.label :font_family %>
         <br/>
-        <%= g.text_field :font_family %>
+        <%= g.text_field :font_family, class: 'short' %>
       </div>
       <div class="field">
         <%= g.label :font_color %>
         <br/>
-        <%= g.text_field :font_color %>
+        <%= g.text_field :font_color, class: 'short' %>
       </div>
       <!--
       <div class="field">
-        <%= g.label :theme %>
+        <%# g.label :theme %>
         <br/>
-        <%= g.text_field :theme %>
+        <%# g.text_field :theme %>
       </div>
       -->
   <% end %>

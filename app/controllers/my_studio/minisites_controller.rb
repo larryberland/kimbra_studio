@@ -1,4 +1,5 @@
 class MyStudio::MinisitesController < MyStudio::BaseController
+
   # GET /my_studio/minisites
   # GET /my_studio/minisites.json
   def index
@@ -80,4 +81,5 @@ class MyStudio::MinisitesController < MyStudio::BaseController
       format.json { head :ok }
     end
   end
+
 end

@@ -1,11 +1,16 @@
 <p>
-  <b>Name:</b>
-  <%= @studio.name %>
+  <b>Studio Name:</b>
+  <%= @studio.name %> (studio_id: <%= @studio.id %>)
 </p>
 
 <p>
   <b>Phone number:</b>
   <%= @studio.phone_number %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @studio.owner.first_name %> <%= @studio.owner.last_name %> (user_id:<%= @studio.owner.id %>)
 </p>
 
 <%= render 'my_studio/infos/show', :info => @studio.info %>

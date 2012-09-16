@@ -56,6 +56,10 @@ class User < ActiveRecord::Base
   before_create :set_roles
   after_create :update_studio
 
+  def phone_number=(num)
+    super num.to_s.gsub(/\D/,'')[0,10]
+  end
+
   def admin?
     @admin ||= roles.select { |r| r.is_admin? }.present?
   end
@@ -100,7 +104,7 @@ class User < ActiveRecord::Base
     # TODO: set roles based on some new logic
     # TODO Gotta get rid of this when we think through how studio users get created.
     if roles.empty?
-      role_name  = if email == 'jim@jimjames.org' || email == 'larryberland@gmail.com' || last_name.to_s.downcase == 'admin'
+      role_name  = if email == 'larryberland@gmail.com' || last_name.to_s.downcase == 'admin'
                      Role::SUPER_ADMIN
                    else
                      Role::STUDIO

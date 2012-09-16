@@ -10,5 +10,8 @@ class MyStudio::Client < ActiveRecord::Base
             format:   {with: CustomValidators::Emails.email_validator},
             length:   {maximum: 50}
 
+  def phone_number=(num)
+    super num.to_s.gsub(/\D/,'')[0,10]
+  end
 
 end

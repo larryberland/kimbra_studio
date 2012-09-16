@@ -1,6 +1,6 @@
 class MyStudio::Info < ActiveRecord::Base
 
-  belongs_to :studio
+  belongs_to :studio, inverse_of: :info
 
   attr_accessible :active,
                   :website,
@@ -13,7 +13,8 @@ class MyStudio::Info < ActiveRecord::Base
                   :windows_user,
                   :ping_email,
                   :created_at,
-                  :updated_at
+                  :updated_at,
+                  :commission_rate
 
   # Email not required yet while we are setting up studios manually.
   # validates :email, presence: true, email: true

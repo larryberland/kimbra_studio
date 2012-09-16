@@ -4,17 +4,22 @@
 
     <%= f.fields_for :owner, @studio.owner do |g| %>
         <%= g.hidden_field :id %>
+        <div class="field">
+              <%= g.label 'Owner\'s name' %>
+              <br/>
+              <%= g.text_field :first_name %> <%= g.text_field :last_name %>
+            </div>
     <% end %>
 
     <div class="field">
-      <%= f.label :name %>
+      <%= f.label 'Studio name' %>
       <br/>
       <%= f.text_field :name %>
     </div>
     <div class="field">
       <%= f.label :phone_number %>
       <br/>
-      <%= f.text_field :phone_number %> for clients to contact
+      <%= f.text_field :phone_number, {value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/,''), area_code: true), class: 'short'} %> for clients to contact
     </div>
 
     <%= render "shared/addresses/form", :f => f %>

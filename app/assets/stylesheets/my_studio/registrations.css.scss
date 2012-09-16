@@ -49,10 +49,14 @@ label {
 
 input.text, input.title, input[type="text"], input[type="password"] {
   margin-bottom: 10px;
-  width: 208px;
+  width: 300px;
   background: -moz-linear-gradient(center top, #E6E6E6 0%, #FFFFFF 100%) repeat-x scroll center top #FFFFFF;
   border: 1px solid #CCCCCC;
   height: 16px;
   font-size: 13px;
   padding: 6px 5px;
+}
+
+.short {
+  width: 100px !important;
 }

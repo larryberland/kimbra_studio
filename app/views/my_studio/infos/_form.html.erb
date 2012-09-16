@@ -12,46 +12,41 @@
       <%= g.text_field :website %> paste from browser address bar. eg, http://my_photographer.com
     </div>
     <div class="field">
-      <%= label_tag :name, "Studio owner's first and last name" %>
-      <br/>
-      <%= text_field_tag :first_name %> <%= text_field_tag :last_name %>
-    </div>
-    <div class="field">
       <%= g.label :email, "Studio's Email" %>
       <br/>
-      <%= g.email_field :email %> will send activation email - only enter when you know it
+      <%= g.email_field :email %> displayed on your Contact page
     </div>
+    <!--
     <div class="field">
-      <%= g.label :email_notification %>
+      <%# g.label :email_notification %>
       <br/>
-      <%= g.email_field :email_notification %> leave blank while setting up studio
+      <%# g.email_field :email_notification %> intended as a secondary email address for alerts to go to
     </div>
+    -->
     <div class="field">
-      <%= g.label :tax_ein, 'Tax ID/EIN' %>
+      <%= g.label :tax_ein, 'Tax ID/EIN', class: 'short' %>
       <br/>
-      <%= g.text_field :tax_ein %>
-    </div>
-    <% if current_user.admin? %>
-        <div class="field">
-          <%= g.label :commission_rate, 'Commission rate (%)' %>
-          <br/>
-          <%= g.text_field :commission_rate, disabled: !current_user.admin? %>
-        </div>
-    <% end %>
-    <div class="field">
-      <%= g.check_box :pictage_member %> <%= g.label :pictage_member %>
+      <%= g.text_field :tax_ein %> we need this before we can cut you a commission check
     </div>
     <div class="field">
-      <%= g.check_box :smug_mug_member %> <%= g.label :smug_mug_member %>
+      <%= g.label :commission_rate, 'Commission rate (%)' %>
+      <br/>
+      <%= g.text_field :commission_rate, disabled: !current_user.admin?, class: 'short' %> base rate is 10%
     </div>
     <div class="field">
-      <%= g.check_box :mac_user %> <%= g.label :mac_user %>
+      <%= g.check_box :pictage_member %> <%= g.label 'Pictage member?' %>
     </div>
     <div class="field">
-      <%= g.check_box :windows_user %> <%= g.label :windows_user %>
+      <%= g.check_box :smug_mug_member %> <%= g.label 'SmugMug member?' %>
     </div>
     <div class="field">
-      <%= g.check_box :ping_email %> <%= g.label :ping_email, 'Would you like email notifications?' %>
+      <%= g.check_box :mac_user %> <%= g.label 'use Macs?' %>
+    </div>
+    <div class="field">
+      <%= g.check_box :windows_user %> <%= g.label 'use PCs?' %>
+    </div>
+    <div class="field">
+      <%= g.check_box :ping_email %> <%= g.label :ping_email, 'receive emails about commissions, new features, etc' %>
     </div>
 
 <% end %>

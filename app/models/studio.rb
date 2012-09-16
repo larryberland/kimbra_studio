@@ -8,18 +8,19 @@ class Studio < ActiveRecord::Base
   has_many :carts, class_name: 'Shopping::Cart', through: :emails
 
   has_one :owner, dependent: :destroy,
-          class_name:        'User'
+          class_name: 'User',
+          inverse_of: :studio
 
   has_many :clients, dependent: :destroy,
-           conditions:          Proc.new { User.where('roles.name = ?', Role::CLIENT).includes(:roles) },
-           class_name:          'User'
+           conditions: Proc.new { User.where('roles.name = ?', Role::CLIENT).includes(:roles) },
+           class_name: 'User'
 
   has_many :staffers, dependent: :destroy,
-           conditions:           Proc.new { User.where('roles.name = ?', Role::STUDIO_STAFF).includes(:roles) },
-           class_name:           'User'
+           conditions: Proc.new { User.where('roles.name = ?', Role::STUDIO_STAFF).includes(:roles) },
+           class_name: 'User'
 
-  has_one :info, class_name: 'MyStudio::Info', dependent: :destroy
-  has_one :minisite, class_name: 'MyStudio::Minisite', dependent: :destroy
+  has_one :info, class_name: 'MyStudio::Info', dependent: :destroy, inverse_of: :studio
+  has_one :minisite, class_name: 'MyStudio::Minisite', dependent: :destroy, inverse_of: :studio
 
   attr_accessor :current_user
 
@@ -35,6 +36,10 @@ class Studio < ActiveRecord::Base
 
   before_save :set_user_info
 
+  def phone_number=(num)
+    super num.to_s.gsub(/\D/,'')[0,10]
+  end
+
   # email activation instructions after a user signs up
   #
   # @param  [ none ]
@@ -47,7 +52,7 @@ class Studio < ActiveRecord::Base
   # ex. '"John Wayne" <jwayne@badboy.com>'
   #
   # @param  [ none ]
-          # @return [ String ]
+  # @return [ String ]
   def email_address_with_name
     "\"#{name}\" <#{info.email}>"
   end

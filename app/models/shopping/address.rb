@@ -16,7 +16,7 @@ class Shopping::Address < ActiveRecord::Base
   validates_presence_of :last_name
   validates_presence_of :address1
   validates_presence_of :phone
-  validates :phone, length: {minimum: 10, too_short: 'needs area code and country code outside US/Canada'}
+  validates :phone, length: {minimum: 10, too_short: 'needs area code', maximum: 10, too_long: 'no extensions or numbers outside US/Canada'}
   validates_presence_of :city
   validates_presence_of :state
   validates_presence_of :zip_code
@@ -29,8 +29,8 @@ class Shopping::Address < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def phone=(ph)
-    self[:phone] = ph.gsub(/\D/, '')
+  def phone_number=(num)
+    super num.to_s[0,10].gsub(/\D/,'')
   end
 
   def state_stripe
