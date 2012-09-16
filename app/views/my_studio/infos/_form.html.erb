@@ -7,14 +7,14 @@
         </div>
     <% end %>
     <div class="field">
-      <%= g.label :website %>
+      <%= g.label :website %> - paste from browser address bar. eg, http://my_photographer.com
       <br/>
-      <%= g.text_field :website %> paste from browser address bar. eg, http://my_photographer.com
+      <%= g.text_field :website %>
     </div>
     <div class="field">
-      <%= g.label :email, "Studio's Email" %>
+      <%= g.label :email, "Studio's Email" %> - displayed on your Contact page
       <br/>
-      <%= g.email_field :email %> displayed on your Contact page
+      <%= g.email_field :email %>
     </div>
     <!--
     <div class="field">
@@ -24,9 +24,9 @@
     </div>
     -->
     <div class="field">
-      <%= g.label :tax_ein, 'Tax ID/EIN', class: 'short' %>
+      <%= g.label :tax_ein, 'Tax ID/EIN', class: 'short' %> - we need this before we can cut you a commission check
       <br/>
-      <%= g.text_field :tax_ein %> we need this before we can cut you a commission check
+      <%= g.text_field :tax_ein %>
     </div>
     <div class="field">
       <%= g.label :commission_rate, 'Commission rate (%)' %>

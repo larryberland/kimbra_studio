@@ -26,3 +26,7 @@ $ ->
   $('#user_email').focus()
 
   $('.lb_sample').rlightbox();
+
+  clientSideValidations.callbacks.form.fail = (element, message, callback) ->
+    callback()
+    $('#spinner').hide()

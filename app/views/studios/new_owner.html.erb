@@ -1,0 +1,27 @@
+<h2><%= @studio.name %></h2>
+
+<%= form_for(@studio, validate: true, url: create_owner_studio_path(@studio)) do |f| %>
+
+    <%= render 'shared/error_messages', record: @studio, h2_msg: 'prohibited studio owner:' %>
+
+    <%= f.fields_for :owner, @studio.owner do |g| %>
+        <%= g.hidden_field :id %>
+        <%= g.hidden_field :password %>
+        <div class="field">
+          <%= g.label 'Owner\'s name' %> - clients see this name on the studio's Contact page
+          <br/>
+          <%= g.text_field :first_name %> <%= g.text_field :last_name %>
+        </div>
+        <div class="field">
+          <%= g.label 'Owner\'s email' %>
+          <br/>
+          <%= g.text_field :email %>
+        </div>
+    <% end %>
+
+    <div class="actions">
+      <%= f.submit :id => 'my_submit' %>
+      <span id="spinner" style="display:none"></span>
+    </div>
+
+<% end %>

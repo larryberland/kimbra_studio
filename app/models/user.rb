@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me,
                   :first_name, :last_name, :friendly_name, :phone_number,
                   :address_1, :address_2,
-                  :city, :state_id, :zip_code
+                  :city, :state_id, :zip_code, :id
 
   accepts_nested_attributes_for :addresses, :phones, :user_roles
 

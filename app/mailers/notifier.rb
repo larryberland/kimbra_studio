@@ -23,7 +23,7 @@ class Notifier < ActionMailer::Base
         attachments.inline['logo.png'] = logo
     mail(to: email,
          subject: "New KimbraClickPLUS account",
-         bcc: 'candi@jimjames.org')
+         bcc: 'support@KimbraClickPLUS.com')
   end
 
 end

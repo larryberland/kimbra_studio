@@ -1,14 +1,22 @@
 <%= form_for(@studio, validate: true) do |f| %>
 
-    <%= render 'shared/error_messages', record: @studio %>
+    <%= render 'shared/error_messages', record: @studio, h2_msg: 'prohibited new studio:' %>
 
     <%= f.fields_for :owner, @studio.owner do |g| %>
         <%= g.hidden_field :id %>
+        <%= g.hidden_field :password %>
         <div class="field">
-              <%= g.label 'Owner\'s name' %>
+          <%= g.label 'Owner\'s first and last name' %> - clients see this on the studio's Contact page
+          <br/>
+          <%= g.text_field :first_name %> <%= g.text_field :last_name %>
+        </div>
+        <% if current_user.admin? %>
+            <div class="field">
+              <%= g.label 'Owner\'s email' %> -  owner's email - might not be studio email below
               <br/>
-              <%= g.text_field :first_name %> <%= g.text_field :last_name %>
+              <%= g.text_field :email %>
             </div>
+        <% end %>
     <% end %>
 
     <div class="field">
@@ -19,7 +27,8 @@
     <div class="field">
       <%= f.label :phone_number %>
       <br/>
-      <%= f.text_field :phone_number, {value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/,''), area_code: true), class: 'short'} %> for clients to contact
+      <%= f.text_field :phone_number, {value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true), class: 'short'} %>
+      for clients to contact
     </div>
 
     <%= render "shared/addresses/form", :f => f %>

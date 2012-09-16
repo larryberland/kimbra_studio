@@ -28,7 +28,7 @@
       <tr>
         <td><%= studio.name %></td>
         <td><%= studio.phone_number %></td>
-        <td><%= studio.try(:owner).try(:email) %></td>
+        <td><%= email_or_link(studio) %></td>
         <td><%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %></td>
         <td><%= studio.try(:city) %></td>
         <td><%= studio.try(:state).try(:abbrev_and_name) %></td>

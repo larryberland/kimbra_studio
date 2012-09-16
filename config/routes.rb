@@ -116,7 +116,13 @@ KimbraStudio::Application.routes.draw do
   end
 
   resources :states, :only => [:index]
-  resources :studios
+  resources :studios do
+    member do
+      get :new_owner
+      put :create_owner
+      post :send_new_account_email
+    end
+  end
   resources :terms, :only => [:index]
   devise_for :users, path_names: {sign_up: 'register'}
   resources :users do

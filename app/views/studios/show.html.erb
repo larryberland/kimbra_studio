@@ -10,7 +10,11 @@
 
 <p>
   <b>Owner:</b>
-  <%= @studio.owner.first_name %> <%= @studio.owner.last_name %> (user_id:<%= @studio.owner.id %>)
+  <% if @studio.owner %>
+      <%= @studio.owner.first_name %> <%= @studio.owner.last_name %> (user_id:<%= @studio.owner.id %>)
+  <% else %>
+      No owner created yet.
+  <% end %>
 </p>
 
 <%= render 'my_studio/infos/show', :info => @studio.info %>
