@@ -528,7 +528,7 @@
             <%= @studio.name -%> •
             <%= @studio.address_1 -%> •
             <%= @studio.city %>, <%= @studio.state.abbreviation -%> •
-            <%= @studio.phone_number -%>
+            <%= number_to_phone @studio.phone_number, area_code: true -%>
           </p>
         </td>
         <td class="w30" width="30"></td>

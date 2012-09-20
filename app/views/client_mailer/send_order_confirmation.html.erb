@@ -108,7 +108,7 @@
         <p>
           <%= @studio.name %><br/>
           <%= @studio.owner.name %> (<%= mail_to @studio.owner.email %>)<br/>
-          <%= @studio.phone_number %><br/>
+          <%= number_to_phone @studio.phone_number, area_code: true %><br/>
           <%= @studio.address_1 %><br/>
           <%= "#{@studio.address_2}<br/>".html_safe if @studio.address_2 %>
           <%= @studio.city %>, <%= @studio.state.abbreviation %> <%= @studio.zip_code %>

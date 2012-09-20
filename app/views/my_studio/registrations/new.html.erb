@@ -52,7 +52,7 @@
             </li>
             <li>
               <%= form.label :phone_number, 'phone_number' %>
-              <%= form.text_field :phone_number %>
+              <%= form.text_field :phone_number, number_to_phone(@studio.phone_number, area_code: true) %>
             </li>
             <%= render 'my_studio/infos/form', :f => form, :info => @studio.info %>
           </ol>

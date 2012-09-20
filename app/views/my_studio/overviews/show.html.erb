@@ -1,5 +1,5 @@
 <h1 style='text-align:left;'> <%= @my_studio.try(:name) %> </h1>
-<p>Phone: <%= @my_studio.try(:phone_number) %></p>
+<p>Phone: <%= number_to_phone @my_studio.phone_number, area_code: true %></p>
 
 <div class='container'>
   <div class='motivation'>

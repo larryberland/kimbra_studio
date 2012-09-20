@@ -27,7 +27,7 @@
   <% @studios.all.each do |studio| %>
       <tr>
         <td><%= studio.name %></td>
-        <td><%= studio.phone_number %></td>
+        <td><%= number_to_phone studio.phone_number, area_code: true %></td>
         <td><%= email_or_link(studio) %></td>
         <td><%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %></td>
         <td><%= studio.try(:city) %></td>

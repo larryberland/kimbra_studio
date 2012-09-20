@@ -40,7 +40,7 @@
   From Partner Studio:
   <% studio = @cart.email.my_studio_session.studio %>
   <%= studio.name %>
-  <br> <%= studio.phone_number %>
+  <br> <%= number_to_phone studio.phone_number, area_code: true %>
   <%= render 'shared/addresses/show', resource: studio %>
 </div>
 

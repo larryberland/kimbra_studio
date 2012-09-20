@@ -32,7 +32,7 @@
         <td><%= user.email %></td>
         <td><%= full_name(user) %></td>
         <td><%= link_to 'Impersonate', "/switch_user?scope_identifier=user_#{user.id}" %></td>
-        <td><%= user.phone_number %></td>
+        <td><%= number_to_phone user.phone_number, area_code: true %></td>
         <td><%= user.try(:city) %></td>
         <td><%= user.try(:state).try(:abbrev_and_name) %></td>
         <td><%= link_to t(:show), user %></td>
