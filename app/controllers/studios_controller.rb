@@ -2,6 +2,7 @@ class StudiosController < ApplicationController
 
   before_filter :form_info
   before_filter :load_my_studio
+  before_filter :authenticate_admin!
 
   # GET /studios
   # GET /studios.json
@@ -141,11 +142,16 @@ class StudiosController < ApplicationController
   def destroy
     @studio = Studio.find(params[:id])
     @studio.destroy
-
     respond_to do |format|
       format.html { redirect_to studios_url }
       format.json { head :ok }
     end
+  end
+
+  def show_branding
+    @my_studio = Studio.find(params[:id])
+    @my_studio_minisite = @my_studio.minisite
+    render 'my_studio/minisites/show'
   end
 
   private #==========================================================================

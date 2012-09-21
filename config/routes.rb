@@ -121,6 +121,7 @@ KimbraStudio::Application.routes.draw do
       get :new_owner
       put :create_owner
       post :send_new_account_email
+      get :show_branding
     end
   end
   resources :terms, :only => [:index]
