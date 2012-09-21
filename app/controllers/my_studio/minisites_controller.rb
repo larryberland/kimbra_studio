@@ -15,7 +15,7 @@ class MyStudio::MinisitesController < MyStudio::BaseController
   # GET /my_studio/minisites/1.json
   def show
     @my_studio_minisite = MyStudio::Minisite.find(params[:id])
-
+    @my_studio = @my_studio_minisite.studio unless @my_studio
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @my_studio_minisite }
