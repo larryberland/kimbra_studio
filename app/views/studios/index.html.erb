@@ -31,7 +31,7 @@
         <td><%= email_or_link(studio) %></td>
         <td><%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %></td>
         <td><%= studio.try(:city) %></td>
-        <td><%= studio.try(:state).try(:abbrev_and_name) %></td>
+        <td><%= studio.try(:state).try(:abbreviation) %></td>
         <td><%= link_to t(:show), studio %></td>
         <td><%= link_to t(:edit), edit_studio_path(studio) %></td>
         <td><%= link_to t(:destroy), studio, confirm: t(:link_destroy_confirm), method: :delete %></td>
