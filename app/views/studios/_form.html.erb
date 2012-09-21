@@ -2,23 +2,6 @@
 
     <%= render 'shared/error_messages', record: @studio, h2_msg: 'prohibited new studio:' %>
 
-    <%= f.fields_for :owner, @studio.owner do |g| %>
-        <%= g.hidden_field :id %>
-        <%= g.hidden_field :password %>
-        <div class="field">
-          <%= g.label 'Owner\'s first and last name' %> - clients see this on the studio's Contact page
-          <br/>
-          <%= g.text_field :first_name, class: :short %> <%= g.text_field :last_name %>
-        </div>
-        <% if current_user.admin? %>
-            <div class="field">
-              <%= g.label 'Owner\'s email' %> - might not be the same as the studio email below
-              <br/>
-              <%= g.text_field :email %>
-            </div>
-        <% end %>
-    <% end %>
-
     <div class="field">
       <%= f.label 'Studio name' %>
       <br/>
@@ -30,6 +13,23 @@
       <%= f.text_field :phone_number, {value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true), class: 'short'} %>
       for clients to contact
     </div>
+
+    <%= f.fields_for :owner, @studio.owner do |g| %>
+        <%= g.hidden_field :id %>
+        <%= g.hidden_field :password %>
+        <div class="field">
+          <%= g.label 'Owner\'s first and last name' %> - clients see this on the studio's Contact page
+          <br/>
+          <%= g.text_field :first_name, class: :short %> <%= g.text_field :last_name %>
+        </div>
+        <% if current_user.admin? %>
+            <div class="field">
+              <%= g.label 'Owner\'s email' %> - can be different from the studio email
+              <br/>
+              <%= g.text_field :email %>
+            </div>
+        <% end %>
+    <% end %>
 
     <%= render "shared/addresses/form", :f => f %>
 
