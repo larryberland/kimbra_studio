@@ -16,7 +16,6 @@
 
     <%= f.fields_for :owner, @studio.owner do |g| %>
         <%= g.hidden_field :id %>
-        <%= g.hidden_field :password %>
         <div class="field">
           <%= g.label 'Owner\'s first and last name' %> - clients see this on the studio's Contact page
           <br/>
