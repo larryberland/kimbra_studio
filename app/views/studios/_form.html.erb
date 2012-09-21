@@ -8,11 +8,11 @@
         <div class="field">
           <%= g.label 'Owner\'s first and last name' %> - clients see this on the studio's Contact page
           <br/>
-          <%= g.text_field :first_name %> <%= g.text_field :last_name %>
+          <%= g.text_field :first_name, class: :short %> <%= g.text_field :last_name %>
         </div>
         <% if current_user.admin? %>
             <div class="field">
-              <%= g.label 'Owner\'s email' %> -  owner's email - might not be studio email below
+              <%= g.label 'Owner\'s email' %> - might not be the same as the studio email below
               <br/>
               <%= g.text_field :email %>
             </div>
