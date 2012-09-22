@@ -1,32 +1,29 @@
+<% if @user and @user.errors.present? %>
+   <%= render 'shared/error_messages', record: @user %>
+<% end %>
 <%= form_for(@user) do |f| %>
-
-    <% if @user and @user.errors.present? %>
-       <%= render 'shared/error_messages', record: @user %>
-   <% end %>
 
     <div class="field">
       <%= f.label :email %>
-      <br/>
       <%= f.email_field :email %>
     </div>
 
-    <div class="field column">
+    <div class="field">
       <%= f.label :first_name %>
-      <br/>
       <%= f.text_field :first_name %>
     </div>
-    <div class="field column">
+
+    <div class="field">
       <%= f.label :last_name %>
-      <br/>
       <%= f.text_field :last_name %>
     </div>
+
     <div class="field">
       <%= f.label :friendly_name %>
-      <br/>
       <%= f.text_field :friendly_name %>
     </div>
     <div class="field">
-      <%= f.label :phone_number %><br />
+      <%= f.label :phone_number %>
       <%= f.text_field :phone_number %>
     </div>
 

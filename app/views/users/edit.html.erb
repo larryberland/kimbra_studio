@@ -1,7 +1,9 @@
 <h1>Editing user</h1>
 
-<%= render 'form' %>
+<div class="platypus-form-container large">
+  <%= render 'form' %>
 
-<%= link_to translate(:show), @user %> |
-<% url = current_user.admin? ? users_path : my_studio_overview_path%>
-<%= link_to translate(:back), url %>
+  <%= link_to translate(:show), @user %> |
+  <% url = current_user.admin? ? users_path : my_studio_overview_path %>
+  <%= link_to translate(:back), url %>
+</div>
