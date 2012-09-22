@@ -12,6 +12,10 @@ module Minisite
 
     private #===========================================================================
 
+    # TODO - REMEMBER THIS! This logic is not multi-session safe. Meaning that if you flit from one
+    # offer email to another, only the first offer email data is kept in the rails session. Unlikely
+    # to be a problem in real life, but worth refactoring away some time.
+
     # TODO See TODO below.
     def load_email
       puts "SESSION: #{session.inspect}"
