@@ -29,4 +29,9 @@ class MyStudio::Info < ActiveRecord::Base
     self[:commission_rate] = rate.to_i.to_s
   end
 
+  # Ensure website starts with http://...
+  def website=(site)
+    self[:website] = "http://#{site}" unless site =~ /^http:\/\/|^https:\/\//
+  end
+
 end

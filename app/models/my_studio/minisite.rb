@@ -5,8 +5,14 @@ class MyStudio::Minisite < ActiveRecord::Base
 
   belongs_to :studio, inverse_of: :minisite
 
-  validates_presence_of :bgcolor, :font_color, :font_family
+  validates_presence_of :font_family
 
   mount_uploader :image, ImageUploader
+
+  validates :bgcolor, :presence => true,
+            :format => {:with => CustomValidators::Colors.css_color_validator}
+
+  validates :font_color, :presence => true,
+              :format => {:with => CustomValidators::Colors.css_color_validator}
 
 end
