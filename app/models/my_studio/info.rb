@@ -31,7 +31,11 @@ class MyStudio::Info < ActiveRecord::Base
 
   # Ensure website starts with http://...
   def website=(site)
-    self[:website] = "http://#{site}" unless site =~ /^http:\/\/|^https:\/\//i
+    if site =~ /^http:\/\/|^https:\/\//i
+      self[:website] = site
+    else
+      self[:website] = "http://#{site}"
+    end
   end
 
 end

@@ -67,7 +67,7 @@ class StudiosController < ApplicationController
       notice = 'Studio was successfully created with no owner.'
       if owner_info[:email].present?
         # create the user, make them owner, don't send email (yet)
-        owner = User.new(owner_info)
+        owner = User.new(owner_info.merge(password: User.generate_random_text))
         owner.skip_confirmation!
         @studio.owner = owner
         notice = 'Studio created with owner but no email sent.'

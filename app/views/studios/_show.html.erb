@@ -5,7 +5,7 @@
 
 <p>
   <b>Phone number:</b>
-  <%= studio.phone_number %>
+  <%= number_to_phone studio.phone_number, area_code: true %>
 </p>
 
 <%= render 'my_studio/infos/show', info: studio.info %>
