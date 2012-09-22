@@ -1,11 +1,15 @@
 <div class='side-menu'>
   <table>
-
+    <thead>
+    <th colspan="2">Offers</th>
+    </thead>
+    <tbody>
     <% offers.each_with_index do |offer, index| %>
         <tr>
           <td><%= index+1 %></td>
           <td><%= cw_div_image(offer, :image => 'image_front') %></td>
         </tr>
     <% end unless offers.nil? %>
+    </tbody>
   </table>
 </div>

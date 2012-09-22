@@ -1,31 +1,34 @@
-<% url = @item.id.nil? ? admin_customer_email_offer_items_path(@offer.email, @offer, @item) : admin_customer_email_offer_item_path(@offer.email, @offer, @item) %>
-<%= form_for(@item, :url => url, :html => {:multipart => true}) do |f| %>
-    <%= render 'shared/error_messages', record: @item %>
+<%= render 'shared/error_messages', record: @item %>
+<div class='show'>
 
-    <fieldset title="Portrait position">
-      <b>Portrait Position</b>
-      <%= render "part_layout/form", :f => f, :part => @item.part %>
-    </fieldset>
-    <fieldset title="Custom Piece position">
-      <b>Piece Position</b>
-      <%= render "piece_layout/form", :f => f, :part => @item.part %>
-    </fieldset>
+  <% url = @item.id.nil? ? admin_customer_email_offer_items_path(@offer.email, @offer, @item) : admin_customer_email_offer_item_path(@offer.email, @offer, @item) %>
+  <%= form_for(@item, :url => url, :html => {:multipart => true}) do |f| %>
 
-    <div class="field">
-      <%= link_to 'Offer', admin_customer_email_offer_path(@item.offer.email, @item.offer) %>
-    </div>
-    <div class="field">
-      <%= link_to 'Part', admin_merchandise_piece_part_path(@item.part.piece, @item.part) %>
-    </div>
-    <% @item.item_sides.each do |side| %>
-        <%= f.fields_for :item_sides, side do |g| %>
+      <fieldset title="Portrait position">
+        <b>Portrait Position</b>
+        <%= render "part_layout/form", :f => f, :part => @item.part %>
+      </fieldset>
+      <fieldset title="Custom Piece position">
+        <b>Piece Position</b>
+        <%= render "piece_layout/form", :f => f, :part => @item.part %>
+      </fieldset>
 
-            <%= g.hidden_field :changed_layout_at, :value => Time.now %>
+      <div class="field">
+        <%= link_to 'Offer', admin_customer_email_offer_path(@item.offer.email, @item.offer) %>
+      </div>
+      <div class="field">
+        <%= link_to 'Part', admin_merchandise_piece_part_path(@item.part.piece, @item.part) %>
+      </div>
+      <% @item.item_sides.each do |side| %>
+          <%= f.fields_for :item_sides, side do |g| %>
 
-        <% end %>
-    <% end %>
-    <div class="actions">
-      <%= f.submit :id => 'my_submit' %>
-      <span id="spinner" style="display:none"></span>
-    </div>
-<% end %>
+              <%= g.hidden_field :changed_layout_at, :value => Time.now %>
+
+          <% end %>
+      <% end %>
+      <div class="actions">
+        <%= f.submit :id => 'my_submit' %>
+        <span id="spinner" style="display:none"></span>
+      </div>
+  <% end %>
+</div>

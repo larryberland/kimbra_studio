@@ -1,0 +1,49 @@
+<div style="width:100%;">
+  <div class="left-side" style="width:50%; overflow: auto;">
+    <div style="position:relative;">
+      Part Layout
+      <div style="border:1px solid red;
+              width:<%=@part.image_part_width%>px;
+              height:<%=@part.image_part_height%>px">
+        <%= image_tag @part.image_part_url %>
+
+        <div style="border:1px solid green;
+                position: absolute;
+                left: <%=@part.part_layout.x%>px;
+                top: <%=@part.part_layout.y%>px;
+                width:<%=@part.part_layout.w%>px;
+                height:<%=@part.part_layout.h%>px">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="right-side" style="width:45%; overflow:auto;">
+    <div style="position:relative;">
+      Piece Layout puts item_side part into this piece
+      <div style="border:1px solid red;
+              left: <%=@part.image_part_width+10%>px;
+              width:<%=@part.piece.width%>px;
+              height:<%=@part.piece.height%>px">
+        <%= image_tag @part.piece.image_url %>
+
+        <div style="border:1px solid green;
+                position: absolute;
+                left: <%=@part.piece_layout.x%>px;
+                top: <%=@part.piece_layout.y%>px;
+                width:<%=@part.piece_layout.w%>px;
+                height:<%=@part.piece_layout.h%>px">
+          &nbsp;
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="clear-both">
+    &nbsp;
+  </div>
+
+</div>
+
+

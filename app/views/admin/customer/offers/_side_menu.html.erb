@@ -1,18 +1,21 @@
 <div class='side-menu'>
   <table>
+    <thead>
+    <th colspan="2"><%= offer.try(:to_image_span) %></th>
+    </thead>
     <tbody>
     <tr>
       <td>Kimbra Piece:</td>
-      <td><%= cw_div_image(offer.piece) %></td>
+      <td><%= cw_div_image_only(offer.piece) %></td>
     </tr>
     <tr>
       <td>Custom Piece:</td>
-      <td><%= cw_div_image(offer, :image => 'image_front') %></td>
+      <td><%= cw_div_image_only(offer, :image => 'image_front') %></td>
     </tr>
     <% if offer.back.present? %>
         <tr>
           <td>Custom Piece Side 2:</td>
-          <td><%= cw_div_image(offer, :image => 'image_back') %></td>
+          <td><%= cw_div_image_only(offer, :image => 'image_back') %></td>
         </tr>
     <% end %>
     </tbody>

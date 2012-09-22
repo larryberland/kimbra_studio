@@ -1,10 +1,17 @@
 <h1><%= t(:admin_merchandise_parts_edit_title, :piece_name => @piece.name) %></h1>
-<div class="platypus-form-container">
+<div class="platypus-form-container large" style="overflow:auto;">
 
   <%= render 'form' %>
 
-  <div class='show'>
+  <div class="clear-both">
+    &nbsp;
+  </div>
+
+  <%= render 'admin/merchandise/parts/position', :part => @part %>
+
+  <div class="show">
     <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, @part) %> |
     <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece) %>
   </div>
+
 </div>
