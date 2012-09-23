@@ -1,50 +1,56 @@
-<div class='show'>
-  <p>
-    <b>Offers:</b>
-    <%= link_to 'Offers', admin_customer_email_offers_path(@admin_customer_email) %>
-  </p>
-  <p>
-    <b>Message:</b>
-    <%= @admin_customer_email.message %>
-  </p>
+<div class="platypus-show-container">
+  <div class='show'>
+    <p>
+      <b>Offers:</b>
+      <%= link_to 'Offers', admin_customer_email_offers_path(@admin_customer_email) %>
+    </p>
+    <p>
+      <b>Session:</b>
+      <%= link_to 'Session', my_studio_session_path(@admin_customer_email.my_studio_session) %>
+    </p>
 
-  <p>
-    <b>Generated at:</b>
-    <%= @admin_customer_email.generated_at %>
-  </p>
+    <p>
+      <b>Message:</b>
+      <%= @admin_customer_email.message %>
+    </p>
 
-  <p>
-    <b>Sent at:</b>
-    <%= @admin_customer_email.sent_at %>
-  </p>
+    <p>
+      <b>Generated at:</b>
+      <%= time_short @admin_customer_email.generated_at %>
+    </p>
 
-  <p>
-    <b>Opened at:</b>
-    <%= @admin_customer_email.opened_at %>
-  </p>
+    <p>
+      <b>Sent at:</b>
+      <%= time_short @admin_customer_email.sent_at %>
+    </p>
 
-  <p>
-    <b>Visited at:</b>
-    <%= @admin_customer_email.visited_at %>
-  </p>
+    <p>
+      <b>Opened at:</b>
+      <%= time_short @admin_customer_email.opened_at %>
+    </p>
 
-  <p>
-    <b>Updated at:</b>
-    <%= @admin_customer_email.updated_at %>
-  </p>
+    <p>
+      <b>Visited at:</b>
+      <%= time_short @admin_customer_email.visited_at %>
+    </p>
 
-  <p>
-    <b>Active:</b>
-    <%= @admin_customer_email.active %>
-  </p>
+    <p>
+      <b>Updated at:</b>
+      <%= time_short @admin_customer_email.updated_at %>
+    </p>
 
-  <p>
-    <b>Session:</b>
-    <%= link_to 'Session', my_studio_session_path(@admin_customer_email.my_studio_session) %> |
-  </p>
+    <p>
+      <b>Active:</b>
+      <%= @admin_customer_email.active %>
+    </p>
+
+  </div>
+
+  <%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
+
+  <div class="clear-both"></div>
   <%= link_to t(:edit), edit_admin_customer_email_path(@admin_customer_email) %> |
   <%= link_to t(:back), admin_customer_emails_path %>
 
 </div>
-<%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
 

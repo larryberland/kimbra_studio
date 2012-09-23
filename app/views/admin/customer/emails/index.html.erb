@@ -27,7 +27,7 @@
         <td><%= time_short(admin_customer_email.generated_at) %></td>
         <td><%= sent_or_queue(admin_customer_email) %></td>
         <td><%= admin_customer_email.active %></td>
-        <td><%= link_to t(:offers), admin_customer_email_offers_path(admin_customer_email.tracking) %></td>
+        <td><%= link_to t(:offers), admin_customer_email_offers_path(admin_customer_email.tracking), title: 'View All Offers for this Email' %></td>
         <td><%= link_to t(:show), admin_customer_email %></td>
         <td><%= link_to t(:edit), edit_admin_customer_email_path(admin_customer_email) %></td>
         <td><%= link_to t(:destroy), admin_customer_email, confirm: t(:link_destroy_confirm), method: :delete %></td>

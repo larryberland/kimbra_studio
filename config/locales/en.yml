@@ -148,6 +148,7 @@ en:
   my_studio_sessions_new_title: 'New %{name} ClickPLUS Photo Session'
   my_studio_sessions_new_link: 'New ClickPLUS Photo Session'
   my_studio_sessions_edit_title: 'Editing %{name} ClickPLUS Photo Session'
+  my_studio_sessions_edit_link: 'Edit ClickPLUS Photo Session'
   my_studio_sessions_index_title: 'My ClickPLUS Photo Sessions'
 
   # my_studio/staffers

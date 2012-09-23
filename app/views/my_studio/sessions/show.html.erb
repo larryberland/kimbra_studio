@@ -1,25 +1,27 @@
-<p>
-  <b>Session Active:</b>
-  <%= @my_studio_session.active %>
-</p>
+<div class="platypus-show-container">
+  <p>
+    <span>Session Active:</span>
+    <%= @my_studio_session.active %>
+  </p>
 
-<p>
-  <b>Name:</b>
-  <%= @my_studio_session.name %>
-</p>
+  <p>
+    <span>Name:</span>
+    <%= @my_studio_session.name %>
+  </p>
 
-<p>
-  <b>Session at:</b>
-  <%= @my_studio_session.session_at %>
-</p>
+  <p>
+    <span>Session at:</span>
+    <%= @my_studio_session.session_at %>
+  </p>
 
-<p>
-  <b>Category:</b>
-  <%= @my_studio_session.category_name %>
-</p>
+  <p>
+    <span>Category:</span>
+    <%= @my_studio_session.category_name %>
+  </p>
 
-<% @my_studio_client = @my_studio_session.client %>
-<%= render 'my_studio/clients/show', :client => @my_studio_session.client %>
+  <% @my_studio_client = @my_studio_session.client %>
+  <%= render 'my_studio/clients/show', :client => @my_studio_session.client %>
 
-<%= link_to t(:edit), edit_my_studio_session_path(@my_studio_session) %> |
-<%= link_to t(:back), my_studio_sessions_path %>
+  <%= link_to t(:edit), edit_my_studio_session_path(@my_studio_session) %> |
+  <%= link_to t(:back), my_studio_sessions_path %>
+</div>

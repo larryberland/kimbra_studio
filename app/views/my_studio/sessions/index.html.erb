@@ -7,10 +7,11 @@
 
 <%= button_to(t(:my_studio_sessions_new_link), new_my_studio_session_path, method: :get) unless current_user.admin? %>
 <div class="paginate">
-<%= paginate @sessions %>
+  <%= paginate @sessions %>
 </div>
 
 <%= render 'my_studio/sessions/index', sessions: @sessions %>
+
 <div class="paginate">
-<%= paginate @sessions %>
+  <%= paginate @sessions %>
 </div>

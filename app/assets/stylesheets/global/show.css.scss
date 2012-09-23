@@ -1,0 +1,21 @@
+@import "colors";
+
+div.platypus-show-container {
+  width: 95%;
+  text-align: left;
+  padding: 10px 15px;
+  background-color: $base-background-container;
+  @include rounded-corners(10px);
+  border: 2px groove black;
+
+  h3,
+  b,
+  span,
+  label {
+    color: $base-form-label-color;
+  }
+
+  label {
+    text-align: left;
+  }
+}
