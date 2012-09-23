@@ -3,7 +3,6 @@
   <%= f.fields_for :minisite, minisite do |g| %>
       <div class="field">
         <%= g.label 'Page background color' %>
-        <br/>
         <%= g.text_field :bgcolor, class: 'short' %>
       </div>
 
@@ -19,12 +18,10 @@
       <div><%= g.hidden_field :image_cache %></div>
       <div class="field">
         <%= g.label :font_family %>
-        <br/>
         <%= g.text_field :font_family, class: 'short' %>
       </div>
       <div class="field">
         <%= g.label :font_color %>
-        <br/>
         <%= g.text_field :font_color, class: 'short' %>
       </div>
       <!--
