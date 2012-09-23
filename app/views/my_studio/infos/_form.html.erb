@@ -9,7 +9,7 @@
     <div class="field">
       <%= g.label :website %> - paste from browser address bar. eg, http://my_photographer.com
       <br/>
-      <%= g.text_field :website %>
+      <%= g.text_field :website, size: 60 %>
     </div>
     <div class="field">
       <%= g.label :email, "Studio's Email" %> - displayed on your Contact page
@@ -43,7 +43,7 @@
       <%= g.check_box :mac_user %> <%= g.label 'use Macs?' %>
     </div>
     <div class="field">
-      <%= g.check_box :windows_user %> <%= g.label 'use PCs?' %>
+      <%= g.check_box :windows_user %> <%= g.label 'use PCs running Microsoft Windows?' %>
     </div>
     <div class="field">
       <%= g.check_box :ping_email %> <%= g.label :ping_email, 'receive emails about commissions, new features, etc' %>
