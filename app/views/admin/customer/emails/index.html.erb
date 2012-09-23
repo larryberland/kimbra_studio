@@ -12,29 +12,34 @@
 <table>
   <thead>
   <tr>
-    <th>Message</th>
     <th>Generated</th>
     <th>Sent at</th>
     <th>Active</th>
-    <th>Offers</th>
+    <% if current_user.admin? %>
+        <th>Offers</th>
+    <% end %>
     <th colspan="4">Actions</th>
   </tr>
   </thead>
   <tbody>
   <% @admin_customer_emails.all.each do |admin_customer_email| %>
       <tr>
-        <td><%= admin_customer_email.message %></td>
         <td><%= time_short(admin_customer_email.generated_at) %></td>
         <td><%= sent_or_queue(admin_customer_email) %></td>
         <td><%= admin_customer_email.active %></td>
-        <td><%= link_to t(:offers), admin_customer_email_offers_path(admin_customer_email.tracking), title: 'View All Offers for this Email' %></td>
-        <td><%= link_to t(:show), admin_customer_email %></td>
-        <td><%= link_to t(:edit), edit_admin_customer_email_path(admin_customer_email) %></td>
-        <td><%= link_to t(:destroy), admin_customer_email, confirm: t(:link_destroy_confirm), method: :delete %></td>
+        <% if current_user.admin? %>
+            <td><%= link_to t(:offers), admin_customer_email_offers_path(admin_customer_email.tracking), title: 'View All Offers for this Email' %></td>
+        <% end %>
+        <td><%= link_to t(:show), show_collection_my_studio_minisite_path(admin_customer_email.tracking) %></td>
+        <% if current_user.admin? %>
+            <td><%= link_to t(:edit), edit_admin_customer_email_path(admin_customer_email) %></td>
+            <td><%= link_to t(:destroy), admin_customer_email, confirm: t(:link_destroy_confirm), method: :delete %></td>
+        <% end %>
       </tr>
   <% end %>
   </tbody>
 </table>
+
 <div class="paginate">
   <%= paginate @admin_customer_emails %>
 </div>

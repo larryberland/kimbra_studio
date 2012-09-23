@@ -82,7 +82,11 @@ KimbraStudio::Application.routes.draw do
         get :mock_collection
       end
     end
-    resources :minisites
+    resources :minisites do
+      member do
+        get :show_collection
+      end
+    end
     resource :overview, :only => [:show]
     resources :sessions do
       resources :portraits do

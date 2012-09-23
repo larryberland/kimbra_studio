@@ -1,6 +1,7 @@
 class Admin::Customer::EmailsController < ApplicationController
 
   before_filter :set_by_tracking
+  before_filter :authenticate_admin!, only: [:edit, :create, :update, :destroy]
 
   # GET /admin/customer/emails
   # GET /admin/customer/emails.json
@@ -22,6 +23,11 @@ class Admin::Customer::EmailsController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @admin_customer_email }
     end
+  end
+
+  def show_collection
+    @studio = @my_studio
+    render layout: false
   end
 
   # GET /admin/customer/emails/new

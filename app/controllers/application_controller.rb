@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
 
   protect_from_forgery
+  before_filter :log_session
   before_filter :authenticate_user!
   before_filter :load_my_studio
 
@@ -59,6 +60,11 @@ class ApplicationController < ActionController::Base
 
   def load_my_studio
     @my_studio = current_user.studio if current_user
+  end
+
+  def log_session
+    puts "RAILS SESSION: #{session.inspect}"
+    logger.info "RAILS SESSION: #{session.inspect}"
   end
 
 end
