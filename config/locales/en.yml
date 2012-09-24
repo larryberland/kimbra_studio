@@ -100,6 +100,9 @@ en:
   # minisite/items/show
   minisite_items_show_link: 'Make adjustments to this piece'
 
+  # minisite/emails/show
+  minisite_your_collection: 'Your Collection'
+
   # my_studio/clients
   my_studio_clients_show_title: 'Client Info'
   my_studio_clients_form_title: 'Send an Email to Client'

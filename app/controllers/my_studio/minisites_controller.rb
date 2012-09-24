@@ -86,6 +86,7 @@ class MyStudio::MinisitesController < MyStudio::BaseController
     @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
     @admin_customer_offers = @admin_customer_email.offers
     @studio = @admin_customer_email.my_studio_session.studio
+    render layout: 'layouts/minisite'
   end
 
 end

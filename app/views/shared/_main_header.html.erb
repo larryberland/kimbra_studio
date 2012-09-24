@@ -61,7 +61,7 @@
             <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
           </div>
       <% else %>
-          <% if current_user and !current_user.client? %>
+          <% if current_user and current_user.studio? %>
               <div class='menu_item'>
                 <%= link_to_button t(:my_studio_overview_link), my_studio_dashboard_path, selected == 'my_studio/dashboards' %>
               </div>

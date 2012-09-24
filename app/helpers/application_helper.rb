@@ -91,11 +91,29 @@ module ApplicationHelper
   end
 
   def link_for_shopping_cart_nav
+    url = current_user.studio? ? '#' : shopping_cart_path(@cart.tracking)
     cart_numericality = content_tag :span, :id => :cart_numericality do
-      pluralize(@cart.quantity, 'piece')
+      pluralize(@cart.try(:quantity), 'piece')
     end
-    link_to_unless_current (t(:minisite_menu_shopping_cart_link) + " (#{ cart_numericality })").html_safe,
-                           shopping_cart_path(@cart.tracking)
+    cart_numericality = '0 pieces' if current_user.studio?
+    link_to_unless_current (t(:minisite_menu_shopping_cart_link) + " (#{ cart_numericality })").html_safe, url
+  end
+
+  def url_for_offer_or_not(offer)
+    if current_user.studio?
+      '#'
+    else
+      minisite_offer_url(offer)
+    end
+  end
+
+  def link_to_your_collection_or_not(admin_customer_email)
+    if current_user.studio?
+      link_to t(:minisite_your_collection), show_collection_my_studio_minisite_path(admin_customer_email.tracking)
+    else
+      link_to_unless_current t(:minisite_your_collection), minisite_email_offers_path(admin_customer_email.tracking)
+    end
+
   end
 
   # Show a link to the current offer - no need for this if we are at the Collection page or if there's no current offer.

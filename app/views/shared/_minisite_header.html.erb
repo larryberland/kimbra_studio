@@ -69,8 +69,7 @@
       <div class="centered_container">
         <ul id='main-header-tabs'>
           <li>
-            <%= link_to_unless_current 'Your Collection',
-                                       minisite_email_offers_path(admin_customer_email.tracking) %>
+            <%= link_to_your_collection_or_not(admin_customer_email) %>
           </li>
           |
           <li>
@@ -81,6 +80,12 @@
           <li>
             <%= link_for_shopping_cart_nav %>
           </li>
+          <% if current_user.studio? %>
+              |
+              <li>
+                <%= link_to 'Return to sessions list', my_studio_sessions_path %>
+              </li>
+          <% end %>
         </ul>
       </div>
     </div>

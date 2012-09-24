@@ -19,7 +19,7 @@
                                     :editable => "true",
                                     :label => "Image",
                                     :border => 0),
-                          minisite_offer_url(offer),
+                          url_for_offer_or_not(offer),
                           {:style => "text-decoration: none;"} %>
             </td>
           </tr>
@@ -29,7 +29,7 @@
                 <p style="color: <%= studio.minisite.font_color %>;">
                   <%= offer.piece.short_description %>
                   <span class="price"><%= number_to_currency(offer.price) %></span> •
-                  <%= link_to "Details...", minisite_offer_url(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
+                  <%= link_to "Details...", url_for_offer_or_not(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
                 </p>
               </div>
             </td>
