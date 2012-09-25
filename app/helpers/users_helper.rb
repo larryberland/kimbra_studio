@@ -1,5 +1,7 @@
 module UsersHelper
+
   def full_name(user)
-    [user.last_name, user.first_name].join(", ").to_s
+    [user.first_name, user.last_name].join(" ").to_s
   end
+
 end

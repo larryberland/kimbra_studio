@@ -1,7 +1,6 @@
-
 <p>
-  <b>Studio:</b>
-  <%= @user.try(:studio).try(:name) %>
+  <b>Name: </b>
+  <%= full_name(@user) %>
 </p>
 
 <p>
@@ -10,8 +9,8 @@
 </p>
 
 <p>
-  <b>Name: </b>
-  <%= full_name(@user) %>
+  <b>Studio:</b>
+  <%= @user.try(:studio).try(:name) %>
 </p>
 
 <p>
@@ -23,8 +22,13 @@
   <%= @user.phone_number %>
 </p>
 
-<%= render 'shared/addresses/show', :resource => @user %>
+<p>Address:</p>
+<% if addresses.present? %>
+    <%= render 'shared/addresses/show', :resource => @user %>
+<% else %>
+    no addresses
+<% end %>
 
 <%= link_to translate(:edit), edit_user_path(@user) %> |
-<% url = current_user.admin? ? users_path : my_studio_overview_path%>
+<% url = current_user.admin? ? users_path : my_studio_overview_path %>
 <%= link_to translate(:back), url %>
