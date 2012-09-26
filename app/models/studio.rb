@@ -36,6 +36,17 @@ class Studio < ActiveRecord::Base
 
   before_save :set_user_info
 
+  scope :by_search, lambda { |text|
+    v = text.gsub('%', '\%').gsub('_', '\_')
+    where("studios.name like '%#{v}%' OR phone_number like '%#{v}%' OR city like '%#{v}%' OR states.name like ?", v).
+        joins(:state).
+        order('id DESC')
+  }
+
+  def self.search(search_by_email_or_fname_or_lname_or_key)
+    search_by_email_or_fname_or_lname_or_key ? by_search(search_by_email_or_fname_or_lname_or_key) : scoped
+  end
+
   def phone_number=(num)
     super num.to_s.gsub(/\D/,'')[0,10]
   end

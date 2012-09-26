@@ -17,6 +17,14 @@ class StudiosController < ApplicationController
     end
   end
 
+  # GET /studios/search
+  def search
+    set           = Studio.search(params[:search])
+    @record_count = set.count
+    @studios      = set.page(params[:page])
+    render :action => "index"
+  end
+
   # GET /studios/1
   # GET /studios/1.json
   def show

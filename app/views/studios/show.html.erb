@@ -1,28 +1,30 @@
-<p>
-  <b>Studio Name:</b>
-  <%= @studio.name %> (studio_id: <%= @studio.id %>)
-</p>
+<div class="platypus-show-container">
+  <p>
+    <b>Studio Name:</b>
+    <%= @studio.name %> (studio_id: <%= @studio.id %>)
+  </p>
 
-<p>
-  <b>Phone number:</b>
-  <%= @studio.phone_number %>
-</p>
+  <p>
+    <b>Phone number:</b>
+    <%= number_to_phone @studio.phone_number, area_code: true %>
+  </p>
 
-<p>
-  <b>Owner:</b>
-  <% if @studio.owner %>
-      <%= @studio.owner.first_name %> <%= @studio.owner.last_name %> (user_id:<%= @studio.owner.id %>)
-  <% else %>
-      No owner created yet.
-  <% end %>
-</p>
+  <p>
+    <b>Owner:</b>
+    <% if @studio.owner %>
+        <%= @studio.owner.first_name %> <%= @studio.owner.last_name %> (user_id:<%= @studio.owner.id %>)
+    <% else %>
+        No owner created yet.
+    <% end %>
+  </p>
 
-<%= render 'my_studio/infos/show', :info => @studio.info %>
+  <%= render 'my_studio/infos/show', :info => @studio.info %>
 
-<%= render "my_studio/minisites/show", :minisite => @studio.minisite %>
+  <%= render "my_studio/minisites/show", :minisite => @studio.minisite %>
 
-<%= render 'shared/addresses/show', :resource => @studio %>
+  <%= render 'shared/addresses/show', :resource => @studio %>
 
-<%= link_to translate(:edit), edit_studio_path(@studio) %> |
-<% url = current_user.admin? ? studios_path : my_studio_overview_path %>
-<%= link_to translate(:back), url %>
+  <%= link_to translate(:edit), edit_studio_path(@studio) %> |
+  <% url = current_user.admin? ? studios_path : my_studio_overview_path %>
+  <%= link_to translate(:back), url %>
+</div>

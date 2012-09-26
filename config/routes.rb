@@ -127,6 +127,9 @@ KimbraStudio::Application.routes.draw do
       post :send_new_account_email
       get :show_branding
     end
+    collection do
+      get :search
+    end
   end
   resources :terms, :only => [:index]
   devise_for :users, path_names: {sign_up: 'register'}

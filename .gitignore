@@ -23,6 +23,7 @@
 /config/click_face.yml
 /config/database.yml
 /config/sensitive.yml
+/config/kimbra_studios.csv
 
 # Ignore vendor gems
 /vendor/ruby/*

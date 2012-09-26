@@ -1,9 +1,26 @@
 <h1>
   <%=t(:studios_index_title)%>
-  <span class="hint">
-      record set count: <%= number_to_human @record_count %>
-  </span>
 </h1>
+
+<div class="dd-form">
+  <fieldset class='search'>
+    <%= form_tag search_studios_path, :method => :get do %>
+        <p>
+          <%= text_field_tag(:search, params[:search]) %>
+          <%= submit_tag "Search", name: nil %>
+          <span class="hint">
+            By Name, Phone Number, City, or State
+          </span>
+        </p>
+        <p>
+          <span class="hint">
+              Record Set Count:<%= number_to_human @record_count %>
+          </span>
+        </p>
+    <% end %>
+
+  </fieldset>
+</div>
 
 <%= link_to t(:studios_new_link), new_studio_path %>
 
@@ -17,6 +34,7 @@
     <th>Name</th>
     <th>Phone number</th>
     <th>Owner</th>
+    <th>Website</th>
     <th></th>
     <th>City</th>
     <th>State</th>
@@ -29,6 +47,7 @@
         <td><%= studio.name %></td>
         <td><%= number_to_phone studio.phone_number, area_code: true %></td>
         <td><%= email_or_link(studio) %></td>
+        <td><%= link_to studio.try(:info).try(:website), studio.try(:info).try(:website), target: '_blank'%></td>
         <td><%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %></td>
         <td><%= studio.try(:city) %></td>
         <td><%= studio.try(:state).try(:abbreviation) %></td>
