@@ -80,7 +80,7 @@
           <li>
             <%= link_for_shopping_cart_nav %>
           </li>
-          <% if current_user.studio? %>
+          <% if current_user && current_user.studio? %>
               |
               <li>
                 <%= link_to 'Return to sessions list', my_studio_sessions_path %>
