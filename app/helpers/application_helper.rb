@@ -91,16 +91,16 @@ module ApplicationHelper
   end
 
   def link_for_shopping_cart_nav
-    url = current_user.studio? ? '#' : shopping_cart_path(@cart.tracking)
+    url = (current_user && current_user.studio?) ? '#' : shopping_cart_path(@cart.tracking)
     cart_numericality = content_tag :span, :id => :cart_numericality do
       pluralize(@cart.try(:quantity), 'piece')
     end
-    cart_numericality = '0 pieces' if current_user.studio?
+    cart_numericality = '0 pieces' if (current_user && current_user.studio?)
     link_to_unless_current (t(:minisite_menu_shopping_cart_link) + " (#{ cart_numericality })").html_safe, url
   end
 
   def url_for_offer_or_not(offer)
-    if current_user.studio?
+    if current_user && current_user.studio?
       '#'
     else
       minisite_offer_url(offer)
@@ -108,7 +108,7 @@ module ApplicationHelper
   end
 
   def link_to_your_collection_or_not(admin_customer_email)
-    if current_user.studio?
+    if current_user && current_user.studio?
       link_to t(:minisite_your_collection), show_collection_my_studio_minisite_path(admin_customer_email.tracking)
     else
       link_to_unless_current t(:minisite_your_collection), minisite_email_offers_path(admin_customer_email.tracking)
