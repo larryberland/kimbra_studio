@@ -16,7 +16,6 @@ namespace 'kimbra' do
       attrs = {address_1:           row["BADDR2"],
                address_2:           row["BADDR3"],
                phone_number:        row["PHONE1"],
-               owner_attributes:    {},
                minisite_attributes: {bgcolor:     '#2a1907',
                                      font_color:  '#d3b492',
                                      font_family: 'Arial'},
@@ -24,81 +23,93 @@ namespace 'kimbra' do
 
       attrs[:name] = row["COMPANYNAME"] || row["NAME"] || row["CONT1"] || row["CONT2"]
 
-      attrs[:owner_attributes][:email]      = row["EMAIL"] || row["EMAIL2"]
-      attrs[:owner_attributes][:password]   = attrs[:owner_attributes][:email].downcase if attrs[:owner_attributes][:email]
-      attrs[:owner_attributes][:first_name] = row["FIRSTNAME"]
-      attrs[:owner_attributes][:last_name]  = row["LASTNAME"]
 
-      attrs[:info_attributes][:website] = row["WEBSITE"]
-      attrs[:info_attributes][:tax_ein] = row["TAX_ID"]
-      attrs[:info_attributes][:commission_rate] = 10
+      user_attrs = {email:      row["EMAIL"] || row["EMAIL2"],
+                    first_name: row["FIRSTNAME"],
+                    last_name:  row["LASTNAME"],
+                    password:   User.generate_random_text}
+      if (user_attrs[:email].present?)
+        user_attrs[:email].downcase!
 
-      if (row["BAADR4"])
-        info = row["BAADR4"].split(',')
+        attrs[:owner] = User.find_by_email(user_attrs[:email]) || User.new(user_attrs)
+        attrs[:owner].skip_confirmation!
 
-        if (info.size < 2)
-          info = row["BAADR4"].split('/') # Vancouver/BC V6R2L3
-        end
+        attrs[:info_attributes][:website]         = row["WEBSITE"]
+        attrs[:info_attributes][:tax_ein]         = row["TAX_ID"]
+        attrs[:info_attributes][:commission_rate] = 10
 
-        if (info.size < 2)
-          info = row["BAADR4"].split(' ') # Vancouver V6R2L3
-        end
+        if (row["BAADR4"])
+          info = row["BAADR4"].split(',')
 
-        attrs[:city]     = info[0].strip
-        state_and_zip    = info[1].strip.split(" ")
-        #puts "city:#{attrs[:city]} state_and_zip=>#{state_and_zip.inspect}"
+          if (info.size < 2)
+            info = row["BAADR4"].split('/') # Vancouver/BC V6R2L3
+          end
 
-        state_abbrev     = state_and_zip.shift
-        attrs[:zip_code] = state_and_zip.join(" ")
+          if (info.size < 2)
+            info = row["BAADR4"].split(' ') # Vancouver V6R2L3
+          end
 
-        abbrev = if (state_abbrev == 'Vancouver')
-                   'BC'
-                 elsif (state_abbrev == 'Ontario')
-                   'ON'
-                 elsif (state_abbrev == 'Manitoba')
-                   'MB'
-                 elsif (state_abbrev == 'b.c.')
-                   'BC'
-                 elsif (attrs[:city].downcase == 'manitoba')
-                   attrs[:zip_code] = info[1].strip
-                   'MB'
-                 elsif (attrs[:city].downcase == 'vancouver')
-                   attrs[:zip_code] = info[1].strip
-                   'BC'
-                 elsif (attrs[:city].downcase == 'quebec')
-                   attrs[:zip_code] = info[1].strip
-                   'QC'
-                 else
-                   state_abbrev
-                 end
-        state  = State.find_by_abbreviation(abbrev)
-        if (state.nil?)
-          puts "missing State:#{state_abbrev}"
+          attrs[:city]     = info[0].strip
+          state_and_zip    = info[1].strip.split(" ")
+          #puts "city:#{attrs[:city]} state_and_zip=>#{state_and_zip.inspect}"
+
+          state_abbrev     = state_and_zip.shift
+          attrs[:zip_code] = state_and_zip.join(" ")
+
+          abbrev = if (state_abbrev == 'Vancouver')
+                     'BC'
+                   elsif (state_abbrev == 'Ontario')
+                     'ON'
+                   elsif (state_abbrev == 'Manitoba')
+                     'MB'
+                   elsif (state_abbrev == 'b.c.')
+                     'BC'
+                   elsif (attrs[:city].downcase == 'manitoba')
+                     attrs[:zip_code] = info[1].strip
+                     'MB'
+                   elsif (attrs[:city].downcase == 'vancouver')
+                     attrs[:zip_code] = info[1].strip
+                     'BC'
+                   elsif (attrs[:city].downcase == 'quebec')
+                     attrs[:zip_code] = info[1].strip
+                     'QC'
+                   else
+                     state_abbrev
+                   end
+          state  = State.find_by_abbreviation(abbrev)
+          if (state.nil?)
+            puts "missing State:#{state_abbrev}"
+          else
+            attrs[:state_id] = state.id
+          end
+
         else
-          attrs[:state_id] = state.id
+          puts "[#{idx}] missing BAADR4 #{row.inspect}"
         end
 
+        studio = if (attrs[:owner].new_record?)
+                   s = Studio.create(attrs)
+                   s
+                 else
+                   if (attrs[:owner].studio(true).present?)
+                     attrs[:owner].studio.update_attributes(attrs)
+                     attrs[:owner].studio
+                   else
+                     s = Studio.create(attrs)
+                     s
+                   end
+                 end
+        if (studio.errors.present?)
+          puts "INVALID studio[#{idx}]:#{studio.errors.full_messages}"
+          puts "studio[#{idx}]:#{studio.inspect}"
+          puts "studio[#{idx}]:#{row.inspect}"
+        end
       else
-        puts "[#{idx}] missing BAADR4 #{row.inspect}"
-      end
-
-
-      studio = Studio.new(attrs)
-      if (!studio.valid?)
-        puts "INVALID studio[#{idx}]:#{studio.errors.full_messages}"
-        puts "studio[#{idx}]:#{studio.inspect}"
+        puts "INVALID email[#{idx}]"
         puts "studio[#{idx}]:#{row.inspect}"
-      else
-        studio.save
       end
-      #Script.create!(:name => row[0],
-      #              :task => row[1],
-      #              :expected_results => row[2],
-      #              :require_id => row[3],
-      #              :department_id => 1,
-      #              :category_id => 1)
     end
-
+    puts "all done now go make some money"
   end
 
 end

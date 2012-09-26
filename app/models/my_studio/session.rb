@@ -64,7 +64,7 @@ class MyStudio::Session < ActiveRecord::Base
 
   def display_name(current_user_admin)
     display_name = name
-    display_name = "#{studio.name} #{name}" if current_user_admin
+    display_name = "#{studio.try(:name)} #{name}" if current_user_admin
     display_name
   end
 
