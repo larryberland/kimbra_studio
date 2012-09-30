@@ -135,7 +135,7 @@ namespace 'kimbra' do
         puts "INVALID email[#{idx}]"
         puts "studio[#{idx}]:#{row.inspect}"
       end
-      if idx > 2
+      if idx > 9
         break
       end
     end
