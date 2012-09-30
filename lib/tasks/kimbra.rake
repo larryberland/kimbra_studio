@@ -117,7 +117,7 @@ namespace 'kimbra' do
               puts "studio[#{csv_row}]:#{studio.inspect}"
               puts "studio[#{csv_row}]:#{row.inspect}"
             else
-              puts "added [#{csv_row}] id:#{studio.id} #{studio.name}"
+              puts "added [#{csv_row}] email:#{studio.owner.email} pwd:#{studio.owner.first_pass} id:#{studio.id} #{studio.name} "
             end
           else
             puts "fix_me"
