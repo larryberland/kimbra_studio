@@ -142,7 +142,7 @@ class StudiosController < ApplicationController
     password = User.generate_random_text
     owner.update_attribute :password, password
     owner.skip_confirmation!
-    Notifier.delay.studio_signup_confirmation(studio.id, owner.name, owner.email, password)
+    Notifier.delay.studio_signup_confirmation(studio.id, password)
     respond_to do |format|
       format.js do
         render text: "$('#send_new_account_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"

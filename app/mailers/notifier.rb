@@ -11,18 +11,23 @@ class Notifier < ActionMailer::Base
     end
   end
 
-  def studio_signup_confirmation(studio_id, name, email, password)
-    @password = password
-    @name = name
-    @email = email
+  def studio_signup_confirmation(studio_id, password)
     @studio = Studio.find(studio_id)
-    logo = ''
-        open('image.jpg', 'w') do |file|
-          logo << open(File.join(Rails.root, '/app/assets/images/kimbra_logo.png')).read
-        end
-        attachments.inline['logo.png'] = logo
+    @password = password
+    @name = @studio.owner.name
+    @email = @studio.owner.email
+    studio_logo = ''
+    open('studio_logo.jpg', 'w') do |file|
+      studio_logo << open(@studio.minisite.image_url).read
+    end
+    attachments.inline['logo.png'] = studio_logo
+    kimbra_logo = ''
+    open('kimbra_logo.png', 'w') do |file|
+      kimbra_logo << open(File.join(Rails.root, '/app/assets/images/kimbra_logo.png')).read
+    end
+    attachments.inline['kimbra_logo.png'] = kimbra_logo
     mail(to: email,
-         subject: "New KimbraClickPLUS account",
+         subject: "New KimbraClickPLUS program - welcome to #{@studio.name}",
          bcc: 'support@KimbraClickPLUS.com')
   end
 

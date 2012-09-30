@@ -1,0 +1,50 @@
+<h1>Welcome <%= @name %>!</h1>
+
+<p>
+  to Kimbra's ClickPLUS program for professional photography studios. Our mission is to help you:
+  <ul>
+    <li>establish a whole new marketing program with your clients and their most influential friends and family</li>
+    <li>generate reliable commissions with gorgeous products that you already trust and consumers love</li>
+    <li>offer heirloom quality jewelry pieces <i><b>with photos from your studio</b></i> that your clients show off to their friends and family
+    <li>build your studio's image and artistic reputation by word of mouth</li>
+  </ul>
+  all with ridiculously little effort from you.
+</p>
+
+<h2>Go to <%= link_to 'KimbraClickPLUS.com', 'https://www.KimbraClickPLUS.com' %> to get started.</h2>
+
+<p>
+  You'll login with your email address: <b><%= @email %></b> and your password: <b><%= @password %></b> (case sensitive). You can change your password
+  once you login.
+</p>
+
+<p>
+  After you login, you'll probably want to cruise around the site to check it out. There's not much to see until you
+  create a session for a recent client photo shoot and upload about a half dozen portraits. We'll review your
+  portraits and create a gorgeous personalized offer for your client and send it to them within a day. We take care of
+  everything for you. A couple weeks after your clients purchase an offer, we send you a commission check for 15% of the
+  total (excluding shipping and tax).
+</p>
+
+<p>
+  Even more exciting, as your clients forward the email to their friends (and post on Facebook and Twitter), and they go
+  to your branded minisite and make purchases, you continue to receive the marketing benefits and a full commission on
+  every sale.
+</p>
+
+<p>Call or email us any time with any questions. We also have a chatbox on every page for you to contact us.</p>
+
+<p>
+  Call us direct 11am - 8pm Eastern<br/>
+  (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
+  email us at <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com' %><br/>
+
+</p>
+
+<p>
+  powered by<br/>
+  <%= link_to image_tag(attachments['logo.png'].url,alt: "Kimbra's logo",style: "display:inline",border: "0",align: "top"), 'http://KimbraStudios.com' -%>
+</p>
+
+
+<p>(Sent to <%= @studio.name %> by Candi James at KimbraClickPLUS.)</p>
