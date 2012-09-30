@@ -28,7 +28,8 @@ class Studio < ActiveRecord::Base
                   :address_1, :address_2, :city, :state_id, :zip_code,
                   :info, :info_attributes,
                   :minisite, :minisite_attributes,
-                  :owner, :owner_attributes
+                  :owner, :owner_attributes,
+                  :country, :state
 
   accepts_nested_attributes_for :info, :minisite, :owner
 

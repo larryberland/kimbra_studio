@@ -24,6 +24,21 @@ states_list.each_pair do |key, state|
   State.create(state['attributes']) unless s
 end
 
+['brazil_states', 'china_states', 'france_states',
+ 'germany_states','japan_states', 'russia_states',
+ 'spain_states', 'united_kingdom_states'].each do|seed_state|
+  file_to_load = seed_path.join('international_states', "#{seed_state}.yml").to_s
+  states_list  = YAML::load(File.open(file_to_load))
+
+  states_list.each_pair do |key, state|
+    s = State.find_by_abbreviation_and_country_id(state['attributes']['abbreviation'],
+                                                  state['attributes']['country_id'])
+    State.create(state['attributes']) unless s
+  end
+
+end
+
+
 require Rails.root.join('db', 'merchandise_seeds.rb').to_s
 MerchandiseSeeds.seeds(seed_path)
 
@@ -33,10 +48,10 @@ roles.each do |role|
 end
 admin = User.find_by_email ('admin@kimbraclickplus.com')
 admin.destroy if admin
-admin = User.create(email: 'admin@kimbraclickplus.com',
-                    password: 'kimbrarul3s',
+admin = User.create(email:      'admin@kimbraclickplus.com',
+                    password:   'kimbrarul3s',
                     first_name: 'Super',
-                    last_name: 'Admin')
+                    last_name:  'Admin')
 if admin.errors.present?
   puts "create admin errors=>#{admin.errors.full_messages.join('\n')}"
 end
@@ -55,15 +70,15 @@ ZipCodeTax.delete_all
 tax_file = Rails.root.join('TAXRATES_ZIP5_CO201204.csv')
 CSV.foreach(tax_file, headers: true) do |row|
   ZipCodeTax.create(
-      state: row['state'].to_s.strip,
-      zip_code: row['zip_code'].to_s.strip,
+      state:           row['state'].to_s.strip,
+      zip_code:        row['zip_code'].to_s.strip,
       tax_region_name: row['tax_region_name'].to_s.strip,
       tax_region_code: row['tax_region_code'].to_s.strip,
-      combined_rate: row['combined_rate'],
-      state_rate: row['state_rate'],
-      county_rate: row['county_rate'],
-      city_rate: row['city_rate'],
-      special_rate: row['special_rate']
+      combined_rate:   row['combined_rate'],
+      state_rate:      row['state_rate'],
+      county_rate:     row['county_rate'],
+      city_rate:       row['city_rate'],
+      special_rate:    row['special_rate']
   )
 end
 if ZipCodeTax.count > 600
@@ -82,7 +97,7 @@ end
  ['Mexico Shipping', 3295, 'Delivery to Mexico.'],
  ['Outside USA, Mexico and Canada', 4800, 'Delivery to most countries outside North America. ' +
      'Some countries are excluded. We\'ll contact you if there\'s a problem.']].each_with_index do |item, index|
-  ShippingOption.create :name => item.first, :cost_cents => item.second, :description =>item.last, :sort_order => index
+  ShippingOption.create :name => item.first, :cost_cents => item.second, :description => item.last, :sort_order => index
 end
 if ShippingOption.count > 6
   puts "created #{ShippingOption.count} shipping options."

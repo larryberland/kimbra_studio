@@ -1,15 +1,16 @@
 class StudiosController < ApplicationController
 
   before_filter :form_info
-  before_filter :load_my_studio
+  # this is already happenging in application controller
+  #before_filter :load_my_studio
   before_filter :authenticate_admin!
 
   # GET /studios
   # GET /studios.json
   def index
-    @studios = Studio.order('updated_at desc, name asc')
+    @studios      = Studio.order('updated_at desc, name asc')
     @record_count = @studios.count
-    @studios = @studios.page(params[:page])
+    @studios      = @studios.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -38,17 +39,17 @@ class StudiosController < ApplicationController
   # GET /studios/new
   # GET /studios/new.json
   def new
+    puts "params:#{params.inspect}"
     if current_user.admin?
-      @studio = Studio.new(
-          info: MyStudio::Info.new,
-          minisite: MyStudio::Minisite.new)
+      @studio = Studio.new(info:     MyStudio::Info.new,
+                           minisite: MyStudio::Minisite.new)
       @studio.build_owner(password: 'changeme22')
     else
-      @studio = Studio.new(
-          info: MyStudio::Info.new(:email => current_user.email),
-          minisite: MyStudio::Minisite.new)
-      @studio.owner = current_user
+      @studio = Studio.new(info:     MyStudio::Info.new(email: current_user.email),
+                           minisite: MyStudio::Minisite.new,
+                           owner:    current_user)
     end
+    @my_studio = @studio
     respond_to do |format|
       format.html
       format.json { render json: @studio }
@@ -69,8 +70,8 @@ class StudiosController < ApplicationController
   # POST /studios.json
   def create
     owner_info = params[:studio].delete(:owner_attributes)
-    @studio = Studio.new(params[:studio])
-    notice = 'Studio was successfully created.'
+    @studio    = Studio.new(params[:studio])
+    notice     = 'Studio was successfully created.'
     if current_user.admin?
       notice = 'Studio was successfully created with no owner.'
       if owner_info[:email].present?
@@ -78,10 +79,10 @@ class StudiosController < ApplicationController
         owner = User.new(owner_info.merge(password: User.generate_random_text))
         owner.skip_confirmation!
         @studio.owner = owner
-        notice = 'Studio created with owner but no email sent.'
+        notice        = 'Studio created with owner but no email sent.'
       end
     else
-      @studio.owner = User.find(owner_info[:id])
+      @studio.owner        = User.find(owner_info[:id])
       @studio.current_user = current_user
     end
     respond_to do |format|
@@ -97,8 +98,8 @@ class StudiosController < ApplicationController
 
   def create_owner
     owner_info = params[:studio].delete(:owner_attributes)
-    @studio = Studio.find(params[:id])
-    owner = User.new(owner_info.merge(password: 'abc123'))
+    @studio    = Studio.find(params[:id])
+    owner      = User.new(owner_info.merge(password: 'abc123'))
     owner.skip_confirmation!
     respond_to do |format|
       if owner.save && @studio.owner = owner
@@ -132,8 +133,8 @@ class StudiosController < ApplicationController
 
   # Ajax action that sends email and returns text.
   def send_new_account_email
-    studio = Studio.find(params[:id])
-    owner = studio.owner
+    studio   = Studio.find(params[:id])
+    owner    = studio.owner
     password = User.generate_random_text
     owner.update_attribute :password, password
     owner.skip_confirmation!
@@ -146,7 +147,7 @@ class StudiosController < ApplicationController
   end
 
   # DELETE /studios/1
-  # DELETE /studios/1.json
+          # DELETE /studios/1.json
   def destroy
     @studio = Studio.find(params[:id])
     @studio.destroy
@@ -157,7 +158,7 @@ class StudiosController < ApplicationController
   end
 
   def show_branding
-    @my_studio = Studio.find(params[:id])
+    @my_studio          = Studio.find(params[:id])
     @my_studio_minisite = @my_studio.minisite
     render 'my_studio/minisites/show'
   end

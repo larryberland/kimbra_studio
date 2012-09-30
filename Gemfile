@@ -42,6 +42,7 @@ gem 'numbers_and_words'
 gem 'coffeebeans'
 
 gem 'kaminari'  # paginator
+gem 'gmaps4rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

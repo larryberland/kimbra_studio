@@ -32,22 +32,23 @@ class BaseUploader < CarrierWave::Uploader::Base
   #   could be fog or local file?
   def to_image(version=nil)
     img = if file.kind_of?(CarrierWave::SanitizedFile)
-              # puts "using storage file"
-              Magick::Image.read(current_path)
+            # puts "using storage file"
+            Magick::Image.read(current_path)
           else
             # fog file?
-              #puts "#{model.class.name} for #{mounted_as} version=>#{version}"
-              p = model.send("#{mounted_as}_url", version)
-              raise "#{model.class.name} for #{mounted_as} using amazon file#{p}" if p.blank?
-              Magick::Image.read(p)
-            end
+            p = model.send("#{mounted_as}_url", version)
+            #puts "#{model.class.name}[#{model.id}] for #{mounted_as} version=>#{version} #{p}"
+            #puts "#{model.class.name}[#{model.id}] for #{mounted_as} version=>#{version} #{p}"
+            raise "#{model.class.name} for #{mounted_as} using amazon file#{p}" if p.blank?
+            Magick::Image.read(p)
+          end
     img.first
   end
 
   # Add a white list of extensions which are allowed to be uploaded.
   # For images you might use something like this:
   def extension_white_list
-     %w(jpg jpeg gif png)
+    %w(jpg jpeg gif png)
   end
 
 end

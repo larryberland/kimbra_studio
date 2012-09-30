@@ -413,7 +413,7 @@ t1:
     
 u1:
   attributes:
-    name: Tennesse
+    name: Tennessee
     abbreviation: TN
     country_id: 214
     shipping_zone_id: 1

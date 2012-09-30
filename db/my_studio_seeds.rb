@@ -8,11 +8,14 @@ class MyStudioSeeds
     studios      = YAML::load(File.open(file_to_load))[:studios]
 
     studios.each do |my_studio_attrs|
+
       puts "processing #{my_studio_attrs['name']}"
+
       if Studio.find_by_name(my_studio_attrs['name'])
         Studio.find_by_name(my_studio_attrs['name']).destroy
         puts "destroyed #{my_studio_attrs['name']}"
       end
+
       unless Studio.find_by_name(my_studio_attrs['name'])
         path = image_path.join(my_studio_attrs['name'].underscore.gsub(' ', '_'))
         path.mkpath unless path.directory?
@@ -71,7 +74,10 @@ class MyStudioSeeds
                 portrait = MyStudio::Portrait.create
                 portrait.image.store!(File.open(p.to_s))
                 r = portrait.save
-                puts "portrait saved: #{portrait.id} #{portrait.image_url} #{r}"
+                puts "portrait[#{portrait.id}] save result:#{r} #{portrait.image_url} #{r}"
+                unless (r)
+                  puts "portrait[#{portrait.id}] errors:#{portrait.errors.full_messages}"
+                end
                 #get_face.perform(portrait) # process for faces
                 portrait
               end

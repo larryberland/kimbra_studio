@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120908124242) do
+ActiveRecord::Schema.define(:version => 20120928193123) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -634,6 +634,12 @@ ActiveRecord::Schema.define(:version => 20120908124242) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.float    "latitude"
+    t.float    "longitude"
+    t.boolean  "gmaps"
+    t.string   "formatted_address"
+    t.date     "joined_on"
+    t.integer  "csv_row"
   end
 
   add_index "users", ["access_token"], :name => "index_users_on_access_token", :unique => true
