@@ -6,5 +6,6 @@ class AddGmaps4RailsToUsers < ActiveRecord::Migration
     add_column :users, :formatted_address, :string
     add_column :users, :joined_on, :date
     add_column :users, :csv_row, :integer
+    add_column :users, :first_pass, :string
   end
 end

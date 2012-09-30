@@ -20,7 +20,11 @@ class StudiosController < ApplicationController
 
   # GET /studios/search
   def search
-    set           = Studio.search(params[:search])
+    set = if params[:search_logoize]
+      Studio.search_logoize(params[:search_logoize])
+    else
+      Studio.search(params[:search])
+    end
     @record_count = set.count
     @studios      = set.page(params[:page])
     render :action => "index"

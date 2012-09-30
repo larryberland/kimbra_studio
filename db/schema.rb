@@ -640,6 +640,7 @@ ActiveRecord::Schema.define(:version => 20120928193123) do
     t.string   "formatted_address"
     t.date     "joined_on"
     t.integer  "csv_row"
+    t.string   "first_pass"
   end
 
   add_index "users", ["access_token"], :name => "index_users_on_access_token", :unique => true

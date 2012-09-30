@@ -43,6 +43,15 @@ class Studio < ActiveRecord::Base
         joins(:state).
         order('id DESC')
   }
+  scope :by_logoize, lambda { |value|
+    clause = value == 'true' ? "is NOT NULL" : 'is NULL'
+    where("my_studio_minisites.image #{clause}").joins(:minisite).order('updated_at DESC')
+  }
+
+
+  def self.search_logoize(value)
+    value ? by_logoize(value) : scoped
+  end
 
   def self.search(search_by_email_or_fname_or_lname_or_key)
     search_by_email_or_fname_or_lname_or_key ? by_search(search_by_email_or_fname_or_lname_or_key) : scoped
@@ -50,6 +59,10 @@ class Studio < ActiveRecord::Base
 
   def phone_number=(num)
     super num.to_s.gsub(/\D/,'')[0,10]
+  end
+
+  def logoize
+    minisite and minisite.image_url ? true : false
   end
 
   # email activation instructions after a user signs up

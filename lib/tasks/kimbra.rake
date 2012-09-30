@@ -23,18 +23,20 @@ namespace 'kimbra' do
                  info_attributes:     {}}
 
       attrs[:name] = row["COMPANYNAME"] || row["NAME"] || row["CONT1"] || row["CONT2"]
-
+      attrs[:name] = attrs[:name].to_s.titleize
 
       user_attrs = {email:      row["EMAIL"] || row["EMAIL2"],
                     address_1:  row['BADDR2'] || row['BADDR1'],
                     first_name: row["FIRSTNAME"],
                     last_name:  row["LASTNAME"],
-                    password:   User.generate_random_text,
                     joined_on:  "01/01/2012"}
       if (user_attrs[:email].present?)
 
         user_attrs[:email].downcase!
-        user_attrs[:csv_row] = csv_row
+
+        user_attrs[:first_pass] = User.generate_random_text
+        user_attrs[:password]   = user_attrs[:first_pass]
+        user_attrs[:csv_row]    = csv_row
 
         if (row['JOINED'])
           on                     = row['JOINED'].strip.split('/')
@@ -66,31 +68,31 @@ namespace 'kimbra' do
           next
         end
         user_attrs[:state] = s
-        u      = User.find_by_email(user_attrs[:email])
-        result = if (u.nil?)
-                   u = User.new(user_attrs)
-                   u.skip_confirmation!
-                   u.save
-                 else
-                   on = user_attrs[:joined_on].to_date
-                   puts ""
-                   puts "[#{csv_row}] Duplicate email url:#{row["WEBSITE"]} email:#{user_attrs[:email]}"
-                   puts "[#{csv_row}] prev:#{u.joined_on} row:#{u.csv_row} addr:#{u.formatted_address}"
-                   puts "[#{csv_row}]  now:#{on} row:#{user_attrs[:csv_row]} addr:#{user_attrs[:raw_seed]}"
-                   puts "[#{csv_row}] u:#{u.inspect}"
-                   puts "[#{csv_row}] a:#{user_attrs.inspect}"
-                   puts "[#{csv_row}] #{row.inspect}"
+        u                  = User.find_by_email(user_attrs[:email])
+        result             = if (u.nil?)
+                               u = User.new(user_attrs)
+                               u.skip_confirmation!
+                               u.save
+                             else
+                               on = user_attrs[:joined_on].to_date
+                               puts ""
+                               puts "[#{csv_row}] Duplicate email url:#{row["WEBSITE"]} email:#{user_attrs[:email]}"
+                               puts "[#{csv_row}] prev:#{u.joined_on} row:#{u.csv_row} addr:#{u.formatted_address}"
+                               puts "[#{csv_row}]  now:#{on} row:#{user_attrs[:csv_row]} addr:#{user_attrs[:raw_seed]}"
+                               puts "[#{csv_row}] u:#{u.inspect}"
+                               puts "[#{csv_row}] a:#{user_attrs.inspect}"
+                               puts "[#{csv_row}] #{row.inspect}"
 
 
-                   if (on > u.joined_on)
-                     puts "[#{csv_row}]update row"
-                     u.skip_confirmation!
-                     u.update_attributes(user_attrs)
-                   else
-                     puts "[#{csv_row}]NOT updating"
-                     true
-                   end
-                 end
+                               if (on > u.joined_on)
+                                 puts "[#{csv_row}]update row"
+                                 u.skip_confirmation!
+                                 u.update_attributes(user_attrs)
+                               else
+                                 puts "[#{csv_row}]NOT updating"
+                                 true
+                               end
+                             end
         if (result)
 
           # ready to create a studio for this user
@@ -98,18 +100,18 @@ namespace 'kimbra' do
 
             # lets create the studio
             attrs[:owner]    = u
-            abbrev = attrs.delete(:country_abbrev)
+            abbrev           = attrs.delete(:country_abbrev)
             attrs[:country]  = Country.find_by_abbreviation(abbrev)
             attrs[:state]    = u.state
             attrs[:city]     = u.city
             attrs[:zip_code] = u.zip_code
 
-            studio           = u.studio(true)
+            studio = u.studio(true)
             result = if (studio.nil?)
-              studio = Studio.create(attrs)
-            else
-              studio.update_attributes(attrs)
-            end
+                       studio = Studio.create(attrs)
+                     else
+                       studio.update_attributes(attrs)
+                     end
             if (!result)
               puts "errors:#{studio.errors.full_messages}"
               puts "studio[#{csv_row}]:#{studio.inspect}"
@@ -133,9 +135,9 @@ namespace 'kimbra' do
         puts "INVALID email[#{idx}]"
         puts "studio[#{idx}]:#{row.inspect}"
       end
-      #if idx > 1
-      #  break
-      #end
+      if idx > 2
+        break
+      end
     end
     puts "all done now go make some money"
   end

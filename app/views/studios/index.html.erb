@@ -1,16 +1,14 @@
-<h1>
-  <%=t(:studios_index_title)%>
-</h1>
+<h1><%=t(:studios_index_title)%></h1>
 
 <div class="dd-form">
   <fieldset class='search'>
     <%= form_tag search_studios_path, :method => :get do %>
         <p>
+          <span class="hint">By Name, Phone Number, City, or State</span>
           <%= text_field_tag(:search, params[:search]) %>
+          <span class="hint">OR logo? (true|false)</span>
+          <%= text_field_tag(:search_logoize, params[:search_logoize]) %>
           <%= submit_tag "Search", name: nil %>
-          <span class="hint">
-            By Name, Phone Number, City, or State
-          </span>
         </p>
         <p>
           <span class="hint">
@@ -38,6 +36,7 @@
     <th></th>
     <th>City</th>
     <th>State</th>
+    <th>Logo?</th>
     <th colspan="5">Actions</th>
   </tr>
   </thead>
@@ -51,6 +50,7 @@
         <td><%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %></td>
         <td><%= studio.try(:city) %></td>
         <td><%= studio.try(:state).try(:abbreviation) %></td>
+        <td><%= studio.try(:logoize) %></td>
         <td><%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %></td>
         <td><%= link_to t(:show), studio %></td>
         <td><%= link_to 'Branding', show_branding_studio_path(studio) %></td>

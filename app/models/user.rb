@@ -45,7 +45,7 @@ class User < ActiveRecord::Base
 
   attr_accessor :raw_seed, :use_gmap
                                  # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me,
+  attr_accessible :email, :password, :password_confirmation, :first_pass, :remember_me,
                   :first_name, :last_name, :friendly_name, :phone_number,
                   :address_1, :address_2,
                   :city, :state, :zip_code, :state_id, :id,
