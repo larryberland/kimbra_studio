@@ -34,71 +34,55 @@
 
     <h1 class='logo' style='text-align:left;'> <%= link_to display_h1, root_path %> </h1>
 
-    <div id='main_nav'>
-      <% if is_admin? %>
-          <div class='menu_item'>
-            <%= link_to_button t(:admin_menu_overview), admin_overview_url, selected == 'admin/overviews' %>
-          </div>
-          <div class='menu_item'>
-            <%= link_to_button t(:admin_menu_emails), admin_customer_emails_path, selected == 'admin/customer/emails' %>
-          </div>
-          <div class='menu_item'>
-            <%= link_to_button t(:admin_menu_studios), studios_path, selected == 'studios' %>
-          </div>
-          <div class='menu_item'>
-            <%= link_to_button t(:admin_menu_users), users_path, selected == 'users' %>
-          </div>
-          <div class='menu_item'>
-            <%= link_to_button t(:admin_menu_merchandise), admin_merchandise_pieces_path, selected == 'admin/merchandise/pieces' %>
-          </div>
-          <div class='menu_item'>
-            <%= link_to_button t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
-          </div>
-          <div class='menu_item_right'>
-            <%= link_to_button t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
-          </div>
-          <div class='menu_item'>
-            <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
-          </div>
-      <% else %>
-          <% if current_user and current_user.studio? %>
+    <% if current_user %>
+        <div id='main_nav'>
+          <% if is_admin? %>
               <div class='menu_item'>
-                <%= link_to_button t(:my_studio_overview_link), my_studio_dashboard_path, selected == 'my_studio/dashboards' %>
+                <%= link_to_button t(:admin_menu_overview), admin_overview_url, selected == 'admin/overviews' %>
               </div>
               <div class='menu_item'>
-                <%= link_to_button t(:my_studio_overview_label_session), my_studio_sessions_path, selected == 'my_studio/sessions' %>
+                <%= link_to_button t(:admin_menu_emails), admin_customer_emails_path, selected == 'admin/customer/emails' %>
               </div>
               <div class='menu_item'>
-                <%= link_to_button t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos' %>
+                <%= link_to_button t(:admin_menu_studios), studios_path, selected == 'studios' %>
               </div>
               <div class='menu_item'>
-                <% unless @my_studio.new_record? %>
-                    <%= link_to_button t(:my_studio_minisite_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
-                <% end %>
+                <%= link_to_button t(:admin_menu_users), users_path, selected == 'users' %>
+              </div>
+              <div class='menu_item'>
+                <%= link_to_button t(:admin_menu_merchandise), admin_merchandise_pieces_path, selected == 'admin/merchandise/pieces' %>
+              </div>
+              <div class='menu_item'>
+                <%= link_to_button t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
+              </div>
+              <div class='menu_item_right'>
+                <%= link_to_button t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
               </div>
               <div class='menu_item'>
                 <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
               </div>
-              <!-- remove for now until we have studios with staff
-              <div class='menu_item'>
-                <%# link_to_button t(:my_studio_overview_label_staff, :action => 'View '), my_studio_staffers_path, false %>
-              </div>
-              <div class='menu_item'>
-                <%# link_to_button t(:my_studio_overview_label_info, :action => 'View '), user_path(current_user), false %>
-              </div>
-              <% unless current_user.studio.nil? %>
+          <% else %>
+              <% if current_user and current_user.studio? %>
                   <div class='menu_item'>
-                    <%# link_to_button t(:my_studio_overview_label_studio, :action => 'View '), studio_path(current_user.studio, false) %>
+                    <%= link_to_button t(:my_studio_overview_link), my_studio_dashboard_path, selected == 'my_studio/dashboards' %>
+                  </div>
+                  <div class='menu_item'>
+                    <%= link_to_button t(:my_studio_overview_label_session), my_studio_sessions_path, selected == 'my_studio/sessions' %>
+                  </div>
+                  <div class='menu_item'>
+                    <%= link_to_button t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos' %>
+                  </div>
+                  <div class='menu_item'>
+                    <% unless @my_studio.new_record? %>
+                        <%= link_to_button t(:my_studio_minisite_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
+                    <% end %>
+                  </div>
+                  <div class='menu_item'>
+                    <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
                   </div>
               <% end %>
-              -->
-          <% else %>
-              <div class='menu_item'>
-                <%= t(:company_brand) %>
-              </div>
           <% end %>
-      <% end %>
-
-    </div>
+        </div>
+    <% end %>
   </div>
 </div>
