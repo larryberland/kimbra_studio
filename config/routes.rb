@@ -140,8 +140,5 @@ KimbraStudio::Application.routes.draw do
   match 'admin' => 'admin/overviews#index'
   match 'delivery' => 'shopping/carts#find_by_tracking'
   match 'tracking/:id', :to => 'tracking#image', :as => "tracking_image"
-  #match 'login' => 'user_sessions#new'
-  #match 'logout' => 'user_sessions#destroy'
-  #match 'signup' => 'my_studio/registrations#new'
 
 end

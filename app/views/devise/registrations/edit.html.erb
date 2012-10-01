@@ -2,27 +2,55 @@
     <h3>devise/registrations/edit.html (only shows in development)</h3>
 <% end %>
 
-<h1><%= "#{translate(:edit)} #{resource_name.to_s.humanize}" %></h1>
+<h1>Edit your user account</h1>
 <div class="platypus-form-container">
 
   <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put}) do |f| %>
       <%= devise_error_messages! %>
+      <table class='plain'>
+        <thead>
+        <tr>
+          <th>Change email</th>
+          <th>Change password</th>
+        </tr>
+        </thead>
+        <tr>
+          <td  style='vertical-align:top;'>
+            <div>
+              <i>Your email is both your username for signin and the address we send emails.</i><br/>
+              <%= f.label :email %>
+              <br/>
+              <%= f.email_field :email %>
+            </div>
+          </td>
+          <td style='vertical-align:top;'>
+            <div>
+              <i>Leave this section blank unless you want to change your password.</i><br/>
+              <%= f.label :password %><br/>
+              <%= f.password_field :password %>
+            </div>
 
-      <div><%= f.label :email %>
-        <br/>
-        <%= f.email_field :email %></div>
+            <div>
+              <%= f.label :password_confirmation %>
+              <br/>
+              <%= f.password_field :password_confirmation %>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td align='center' colspan=2>
+            <div>
+              <%= f.label :current_password %> <i> - we need your current password to confirm any changes</i><br/>
+              <%= f.password_field :current_password %>
+            </div>
 
-      <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br/>
-        <%= f.password_field :password %></div>
+            <div>
+              <%= f.submit translate(:registrations_edit_submit) %>
+            </div>
+          </td>
+        </tr>
+      </table>
 
-      <div><%= f.label :password_confirmation %>
-        <br/>
-        <%= f.password_field :password_confirmation %></div>
-
-      <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br/>
-        <%= f.password_field :current_password %></div>
-
-      <div><%= f.submit translate(:registrations_edit_submit) %></div>
   <% end %>
 
   <!--
