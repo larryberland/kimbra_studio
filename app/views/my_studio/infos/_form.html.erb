@@ -9,7 +9,7 @@
     <div class="field">
       <%= g.label :website %> - paste from browser address bar. eg, http://my_photographer.com
       <br/>
-      <%= g.text_field :website, size: 60 %> <%= link_to('Go', info.website, target: '_blank') if current_user.admin? %>
+      <%= g.text_field :website, size: 60 %> <%= link_to('Go', info.website, target: '_blank') if current_user.admin? && info.website %>
     </div>
     <div class="field">
       <%= g.label :email, "Studio's Email" %> - displayed on your Contact page
