@@ -1,13 +1,13 @@
-<h1><%=t(:studios_index_title)%></h1>
+<h1><%= t(:studios_index_title) %></h1>
 
 <div class="dd-form">
   <fieldset class='search'>
     <%= form_tag studios_path, :method => :get do %>
         <p>
-          By Name, Phone Number, City, or State
-          <%= text_field_tag(:search, params[:search]) %>
-          OR logo
+          Logo?
           <%= select_tag :search_logoize, options_for_select(%w(any present missing), @logo_search_value) %>
+          AND By Name, Phone Number, City, or State
+          <%= text_field_tag(:search, params[:search]) %>
           <%= submit_tag "Search", name: nil %>
           <span class="hint">
               Record Set Count:<%= @record_count %>
@@ -42,7 +42,7 @@
         <td><%= studio.name %></td>
         <td><%= number_to_phone studio.phone_number, area_code: true %></td>
         <td><%= email_or_link(studio) %></td>
-        <td><%= link_to studio.try(:info).try(:website), studio.try(:info).try(:website), target: '_blank'%></td>
+        <td><%= link_to studio.try(:info).try(:website), studio.try(:info).try(:website), target: '_blank' %></td>
         <td><%= studio.try(:city) %></td>
         <td><%= studio.try(:state).try(:abbreviation) %></td>
         <td><%= studio.try(:logoize) %></td>

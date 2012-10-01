@@ -65,7 +65,7 @@ class Studio < ActiveRecord::Base
   end
 
   def self.search(search_by_email_or_fname_or_lname_or_key)
-    search_by_email_or_fname_or_lname_or_key ? by_search(search_by_email_or_fname_or_lname_or_key) : scoped
+    search_by_email_or_fname_or_lname_or_key ? by_search(search_by_email_or_fname_or_lname_or_key) : where('id>0').order('updated_at DESC')
   end
 
   def phone_number=(num)

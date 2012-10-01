@@ -45,7 +45,9 @@ class StudiosController < ApplicationController
     if current_user.admin?
       @studio = Studio.new(info:     MyStudio::Info.new,
                            minisite: MyStudio::Minisite.new)
-      @studio.build_owner(password: 'changeme22')
+      attrs = {first_pass: User.generate_random_text}
+      attrs[:password] = attrs[:first_pass]
+      @studio.build_owner(attrs)
     else
       @studio = Studio.new(info:     MyStudio::Info.new(email: current_user.email),
                            minisite: MyStudio::Minisite.new,
@@ -78,7 +80,7 @@ class StudiosController < ApplicationController
       notice = 'Studio was successfully created with no owner.'
       if owner_info[:email].present?
         # create the user, make them owner, don't send email (yet)
-        owner = User.new(owner_info.merge(password: User.generate_random_text))
+        owner = User.new(owner_info.merge(password: owner_info[:first_pass]))
         owner.skip_confirmation!
         @studio.owner = owner
         notice        = 'Studio created with owner but no email sent.'
@@ -101,7 +103,8 @@ class StudiosController < ApplicationController
   def create_owner
     owner_info = params[:studio].delete(:owner_attributes)
     @studio    = Studio.find(params[:id])
-    owner      = User.new(owner_info.merge(password: 'abc123'))
+    owner_info[:first_pass] = User.generate_random_text
+    owner      = User.new(owner_info.merge(password: owner_info[:first_pass]))
     owner.skip_confirmation!
     respond_to do |format|
       if owner.save && @studio.owner = owner
