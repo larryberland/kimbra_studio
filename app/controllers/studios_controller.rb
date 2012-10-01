@@ -28,20 +28,6 @@ class StudiosController < ApplicationController
     end
   end
 
-  # GET /studios/search
-  def search
-    set = if params[:search_logoize].present?
-            session[:search_logoize] = params[:search_logoize]
-            Studio.search_logoize(params[:search_logoize])
-          else
-            session[:search_logoize] = nil
-            Studio.search(params[:search])
-          end
-    @record_count = set.count
-    @studios = set.page(params[:page])
-    render :action => "index"
-  end
-
   # GET /studios/1
   # GET /studios/1.json
   def show
