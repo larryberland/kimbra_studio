@@ -2,21 +2,18 @@
 
 <div class="dd-form">
   <fieldset class='search'>
-    <%= form_tag search_studios_path, :method => :get do %>
+    <%= form_tag studios_path, :method => :get do %>
         <p>
-          <span class="hint">By Name, Phone Number, City, or State</span>
+          By Name, Phone Number, City, or State
           <%= text_field_tag(:search, params[:search]) %>
-          <span class="hint">OR logo? (true|false)</span>
-          <%= text_field_tag(:search_logoize, params[:search_logoize]) %>
+          OR logo
+          <%= select_tag :search_logoize, options_for_select(%w(any present missing), @logo_search_value) %>
           <%= submit_tag "Search", name: nil %>
-        </p>
-        <p>
           <span class="hint">
-              Record Set Count:<%= number_to_human @record_count %>
+              Record Set Count:<%= @record_count %>
           </span>
         </p>
     <% end %>
-
   </fieldset>
 </div>
 

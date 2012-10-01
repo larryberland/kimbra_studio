@@ -1,17 +1,27 @@
 class StudiosController < ApplicationController
 
   before_filter :form_info
-  # this is already happenging in application controller
-  #before_filter :load_my_studio
   before_filter :authenticate_admin!
 
   # GET /studios
   # GET /studios.json
   def index
-    @studios      = Studio.order('updated_at desc, name asc')
-    @record_count = @studios.count
-    @studios      = @studios.page(params[:page])
-
+    set = if params[:search_logoize].blank?
+            if session[:search_logoize].blank?
+              Studio.search(params[:search])
+            else
+              Studio.search_logoize(session[:search_logoize])
+            end
+          elsif params[:search_logoize] == 'any'
+            session[:search_logoize] = 'any'
+            Studio.search(params[:search])
+          else
+            session[:search_logoize] = params[:search_logoize]
+            Studio.search_logoize(params[:search_logoize])
+          end
+    @logo_search_value = params[:search_logoize] || session[:search_logoize]
+    @record_count = set.count
+    @studios = set.page(params[:page])
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @studios }
@@ -20,13 +30,15 @@ class StudiosController < ApplicationController
 
   # GET /studios/search
   def search
-    set = if params[:search_logoize]
-      Studio.search_logoize(params[:search_logoize])
-    else
-      Studio.search(params[:search])
-    end
+    set = if params[:search_logoize].present?
+            session[:search_logoize] = params[:search_logoize]
+            Studio.search_logoize(params[:search_logoize])
+          else
+            session[:search_logoize] = nil
+            Studio.search(params[:search])
+          end
     @record_count = set.count
-    @studios      = set.page(params[:page])
+    @studios = set.page(params[:page])
     render :action => "index"
   end
 

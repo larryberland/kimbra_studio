@@ -39,17 +39,28 @@ class Studio < ActiveRecord::Base
 
   scope :by_search, lambda { |text|
     v = text.gsub('%', '\%').gsub('_', '\_')
-    where("studios.name like '%#{v}%' OR phone_number like '%#{v}%' OR city like '%#{v}%' OR states.name like ?", v).
+    where("studios.name like '%#{v}%' OR phone_number like '%#{v}%' OR city like '%#{v}%' OR states.name = ?", v).
         joins(:state).
         order('id DESC')
   }
+
   scope :by_logoize, lambda { |value|
-    clause = value == 'true' ? "is NOT NULL" : 'is NULL'
+    return nil if value.nil?
+    return nil if value.downcase == 'any'
+    clause = case value
+               when 'present'
+                 "is NOT NULL"
+               when 'missing'
+                 'is NULL'
+               else
+                 raise 'unknown value for logo search'
+             end
     where("my_studio_minisites.image #{clause}").joins(:minisite).order('updated_at DESC')
   }
 
 
   def self.search_logoize(value)
+    puts "in self.search_logoize(#{value})"
     value ? by_logoize(value) : scoped
   end
 
