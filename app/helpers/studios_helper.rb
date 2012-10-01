@@ -2,7 +2,7 @@ module StudiosHelper
 
   def email_or_link(studio)
     if studio.owner
-      if SentEmail.sent_new_studio_account?(studio.owner.email)
+      if SentEmail.sent_studio_eap_email?(studio.owner.email)
         studio.owner.email
       else
         content_tag :span, {id: "send_new_account_email_#{studio.id}"} do

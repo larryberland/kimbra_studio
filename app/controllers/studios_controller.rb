@@ -139,11 +139,7 @@ class StudiosController < ApplicationController
   # Ajax action that sends email and returns text.
   def send_new_account_email
     studio   = Studio.find(params[:id])
-    owner    = studio.owner
-    password = User.generate_random_text
-    owner.update_attribute :password, password
-    owner.skip_confirmation!
-    Notifier.delay.studio_signup_confirmation(studio.id, password)
+    Notifier.delay.studio_eap_email(studio.id)
     respond_to do |format|
       format.js do
         render text: "$('#send_new_account_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"

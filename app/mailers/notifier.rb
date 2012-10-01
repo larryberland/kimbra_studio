@@ -11,7 +11,7 @@ class Notifier < ActionMailer::Base
     end
   end
 
-  def studio_signup_confirmation(studio_id, password)
+  def studio_eap_email(studio_id)
     @studio = Studio.find(studio_id)
     @password = @studio.owner.first_pass
     @name = @studio.owner.name
@@ -27,7 +27,7 @@ class Notifier < ActionMailer::Base
     end
     attachments.inline['kimbra_logo.png'] = kimbra_logo
     mail(to: @email,
-         subject: "New KimbraClickPLUS program - welcome to #{@studio.name}",
+         subject: "New KimbraClickPLUS program - welcome to #{@studio.name} (EAP)",
          bcc: 'support@KimbraClickPLUS.com')
   end
 
