@@ -13,7 +13,7 @@ class Notifier < ActionMailer::Base
 
   def studio_signup_confirmation(studio_id, password)
     @studio = Studio.find(studio_id)
-    @password = password
+    @password = @studio.owner.first_pass
     @name = @studio.owner.name
     @email = @studio.owner.email
     studio_logo = ''
