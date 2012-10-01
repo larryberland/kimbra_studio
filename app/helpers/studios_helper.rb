@@ -6,7 +6,7 @@ module StudiosHelper
         studio.owner.email
       else
         content_tag :span, {id: "send_new_account_email_#{studio.id}"} do
-          link_to 'Send new account email!', send_new_account_email_studio_path(studio), method: :post, remote: true
+          link_to 'send Early Adopter email', send_new_account_email_studio_path(studio), method: :post, remote: true
         end
       end
     else
