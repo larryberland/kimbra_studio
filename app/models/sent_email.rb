@@ -11,7 +11,7 @@ class SentEmail < ActiveRecord::Base
   end
 
   def self.sent_new_studio_account?(email)
-    SentEmail.where(email: email).collect(&:subject).select{|s| s.match /New KimbraClickPLUS Account/i }.present?
+    SentEmail.where(email: email).collect(&:subject).select{|s| s.match /New KimbraClickPLUS program/i }.present?
   end
 
 end
