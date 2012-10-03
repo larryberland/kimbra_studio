@@ -172,7 +172,7 @@ module ApplicationHelper
     host = host.start_with?('www.') ? host[4..-1] : host
     result = host.split('.')
     result.delete(result.last)
-    link_to result.join('.'), url, target: '_blank'
+    link_to result.join('.'), url, target: '_blank', title: url
   end
 
 end
