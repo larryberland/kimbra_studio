@@ -8,12 +8,12 @@ namespace 'kimbra' do
   desc "Seed Studios from Kimbra Spreadsheet using gmap"
   task :seed_studio_owners => :environment do
     require 'csv'
-    zipped_file = "kimbra_ss.zip"
+    zipped_file = "app/kimbra_ss.zip"
     pass = ENV['FILE_PASSWORD']
     # Generate unencrypted seed file. Filename is kimbra_studios.csv
     `unzip -P #{pass} #{zipped_file}`
 
-    file = "kimbra_studios.csv"
+    file = "app/kimbra_studios.csv"
 
     CSV.open(file.to_s, "r", headers: true).each_with_index do |row, idx|
 
