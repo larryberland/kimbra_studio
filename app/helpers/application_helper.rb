@@ -170,9 +170,8 @@ module ApplicationHelper
     return 'none' unless url.present?
     host = URI.parse(url).host.downcase
     host = host.start_with?('www.') ? host[4..-1] : host
-    result = host.split('.')
-    result.delete(result.last)
-    link_to result.join('.'), url, target: '_blank', title: url
+    result = host.split('.').first
+    link_to result, url, target: '_blank', title: url
   end
 
 end
