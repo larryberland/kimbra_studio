@@ -539,45 +539,48 @@
                             <h3 style="color: <%= @studio.minisite.font_color %>;">EARLY ADOPTER PROGRAM</h3>
 
                             <p style="color: <%= @studio.minisite.font_color %>;">
-                              Kimbra introduces her ClickPLUS program for professional photography studios. Our mission is to help you:
+                              <%= link_to 'Kimbra', 'http://KimbraStudios.com', style: "color: #{@studio.minisite.font_color};" %>
+                              introduces her ClickPLUS program for professional photography studios. You are a candidate for the
+                              program because you are a registered partner in Kimbra's Professional Photographer Program (PPP).
+                             </p>
+
+                            <p style="color: <%= @studio.minisite.font_color %>;">
+                              Kimbra's ClickPLUS program helps you:
                             <ul style="color: <%= @studio.minisite.font_color %>;">
-                              <li style="color: <%= @studio.minisite.font_color %>;">establish a whole new marketing program with your clients and their most influential friends and family</li>
-                              <li style="color: <%= @studio.minisite.font_color %>;">generate reliable commissions with gorgeous products that you already trust and consumers love</li>
-                              <li style="color: <%= @studio.minisite.font_color %>;">offer heirloom quality jewelry pieces <i><b>with photos from your studio</b></i> that your clients show off to their friends and family
-                              <li style="color: <%= @studio.minisite.font_color %>;">build your studio's image and artistic reputation by word of mouth</li>
+                              <li style="color: <%= @studio.minisite.font_color %>;">E<small>STABLISH</small> a whole new <small>MARKETING PROGRAM</small> with your clients and their most influential friends and family</li>
+                              <li style="color: <%= @studio.minisite.font_color %>;">G<small>ENERATE</small> reliable <small>COMMISSIONS</small> with gorgeous products that you already trust and consumers love</li>
+                              <li style="color: <%= @studio.minisite.font_color %>;">O<small>FFER</small> your photos in <small>HEIRLOOM JEWELRY</small> pieces that your clients show off to their friends and family
+                              <li style="color: <%= @studio.minisite.font_color %>;">B<small>UILD</small> your studio's <small>IMAGE</small> and artistic <small>REPUTATION</small> by word of mouth</li>
                             </ul>
-                            all with little effort from you. It costs NOTHING for you to join or participate.
-                            </p>
-
-                            <h3 style="color: <%= @studio.minisite.font_color %>;">
-                              We have already set you up in the new program. This email shows the branding we have created for your client offer emails and minisite.
-                              Go to <%= link_to 'KimbraClickPLUS.com', root_url, style: "color: #{@studio.minisite.font_color};" %> to get started.
-                            </h3>
-
-                            <p style="color: <%= @studio.minisite.font_color %>;"><b>
-                              You'll sign-in with your email address: <b><%= @email %></b> and your password: <b><%= @password %></b> (case sensitive). You can change your password
-                              once you login.</b>
+                            <span style="color: <%= @studio.minisite.font_color %>;">all with little effort from you. You can see from this email we have incorporated your branding into all aspects of your clients' experience with the offers.
+                            It costs you NOTHING to join or participate.</span>
                             </p>
 
                             <p style="color: <%= @studio.minisite.font_color %>;">
-                              After you login, create a photo session for a recent client photo shoot and upload about a half dozen portraits. We'll review your
-                              portraits and create a gorgeous personalized offer for your client and send it to them within a day. We take care of
+                              Create a <small>PHOTO SESSION</small> by uploading 6 portraits and entering your client's name and email. That's all you have to do!
+                              We'll review your portraits and create a gorgeous personalized offer for your client and send it to them within a day. We take care of
                               everything for you. A couple weeks after your clients purchase an offer, we send you a commission check for 10% of the
                               total (excluding shipping and tax).
                             </p>
 
+                            <h3 style="color: <%= @studio.minisite.font_color %>;">
+                              To Get Started Go To <%= link_to 'KimbraClickPLUS.com', root_url, style: "color: #{@studio.minisite.font_color};" %>
+                            </h3>
+
                             <p style="color: <%= @studio.minisite.font_color %>;">
-                              Even more exciting, as your clients forward the offer email to their friends (and post on Facebook and Twitter), and they go
-                              to your KimbraClickPLUS branded minisite and make purchases, you continue to receive full commission
-                              and the marketing benefits from every sale.
+                              <b>Sign-in with your email address: <b><%= @email %></b> and password: <b><%= @password %></b> (not the same as your current login on Kimbra's site).</b>
                             </p>
 
-                            <p style="color: <%= @studio.minisite.font_color %>;">Call or email us any time with any questions. We also have a chatbox on every page for you to contact us.</p>
+                            <p style="color: <%= @studio.minisite.font_color %>;">
+                              Watch the excitement grow as your clients forward the offer email with your beautiful portraits to their friends and post on Facebook and Twitter,
+                              your clients' friends will want to engage you for their own photographic events.
+                            </p>
 
                             <p style="color: <%= @studio.minisite.font_color %>;">
-                              Call us direct 11am - 8pm Eastern<br/>
-                              (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
-                              email us at <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com' %><br/>
+                              We're here to answer your questions.<br/>
+                              Call: (303) 586-1371<br/>
+                              Skype: KimbraClickPLUS<br/>
+                              Email: <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com' %>
                             </p>
 
                             <p style="color: <%= @studio.minisite.font_color %>;">
