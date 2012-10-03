@@ -42,7 +42,7 @@
         <td><%= studio.name %></td>
         <td><%= number_to_phone studio.phone_number, area_code: true %></td>
         <td><%= owner_link(studio) %></td>
-        <td><%= link_to studio.try(:info).try(:website), studio.try(:info).try(:website), target: '_blank' %></td>
+        <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
         <td><%= studio.try(:city) %></td>
         <td><%= studio.try(:state).try(:abbreviation) %></td>
         <td><%= studio.try(:logoize) %></td>

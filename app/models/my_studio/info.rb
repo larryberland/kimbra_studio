@@ -33,7 +33,7 @@ class MyStudio::Info < ActiveRecord::Base
   def website=(site)
     if site =~ /^http:\/\/|^https:\/\//i
       self[:website] = site
-    else
+    elsif site.present?
       self[:website] = "http://#{site}"
     end
   end
