@@ -12,7 +12,7 @@ class KimbraMailer < ActionMailer::Base
     @studio = Studio.find(studio_id)
     @admin_customer_email = @cart.email
     @show_status_only = true
-    mail(bcc:     ['candi@jimjames.org'],
+    mail(bcc:     ['candi@jimjames.org','jim@jimjames.org'],
          subject: "KimbraClickPLUS #{@studio.name}, #{@admin_customer_email.my_studio_session.client.name}. Order: #{@cart.tracking}")
   end
 
