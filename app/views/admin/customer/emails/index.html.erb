@@ -12,6 +12,8 @@
 <table>
   <thead>
   <tr>
+    <th>Studio</th>
+    <th>Client</th>
     <th>Generated</th>
     <th>Sent at</th>
     <th>Active</th>
@@ -24,6 +26,8 @@
   <tbody>
   <% @admin_customer_emails.all.each do |admin_customer_email| %>
       <tr>
+        <td><%= admin_customer_email.my_studio_session.studio.name %></td>
+        <td><%= admin_customer_email.my_studio_session.client.name %></td>
         <td><%= time_short(admin_customer_email.generated_at) %></td>
         <td><%= sent_or_queue(admin_customer_email) %></td>
         <td><%= admin_customer_email.active %></td>

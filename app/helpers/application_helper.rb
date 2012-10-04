@@ -100,7 +100,7 @@ module ApplicationHelper
   end
 
   def url_for_offer_or_not(offer)
-    if current_user && current_user.studio?
+    if defined?(current_user) && current_user.studio?
       '#'
     else
       minisite_offer_url(offer)
@@ -108,7 +108,7 @@ module ApplicationHelper
   end
 
   def link_to_your_collection_or_not(admin_customer_email)
-    if current_user && current_user.studio?
+    if defined?(current_user) && current_user.studio?
       link_to t(:minisite_your_collection), show_collection_my_studio_minisite_path(admin_customer_email.tracking)
     else
       link_to_unless_current t(:minisite_your_collection), minisite_email_offers_path(admin_customer_email.tracking)
