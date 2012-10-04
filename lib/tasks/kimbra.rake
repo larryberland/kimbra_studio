@@ -8,9 +8,7 @@ namespace 'kimbra' do
   desc "Seed Studios from Kimbra Spreadsheet using gmap"
   task :seed_studio_owners => :environment do
     require 'csv'
-    file = Rails.root.join('config', 'kimbra_studios.csv')
-
-    CSV.open(file.to_s, "r", headers: true).each_with_index do |row, idx|
+    CSV.open('kimbra_studios.csv', "r", headers: true).each_with_index do |row, idx|
 
       csv_row = idx + 2
       attrs   = {address_1:           row["BADDR2"],
