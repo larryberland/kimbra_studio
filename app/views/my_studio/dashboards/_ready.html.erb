@@ -7,25 +7,25 @@
       <table>
         <thead>
         <tr>
+          <th>Actions</th>
+          <th>photo session</th>
           <% if current_user.admin? %>
               <th>studio</th>
           <% end %>
-          <th>photo session</th>
           <th>client</th>
           <th>how many<br/>offers</th>
-          <th>Actions</th>
         </tr>
         </thead>
         <tbody>
         <% emails.each do |email| %>
             <tr>
+              <td><span id="send_email_<%= email.id %>"><%= actions_for_email(email) %></span></td>
+              <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session) %></td>
               <% if current_user.admin? %>
                   <td><%= email.my_studio_session.studio.name %></td>
               <% end %>
-              <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session) %></td>
               <td><%= email.my_studio_session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
               <td><%= email.try(:offers).try(:count).to_words %></td>
-              <td><span id="send_email_<%= email.id %>"><%= actions_for_email(email) %></span></td>
             </tr>
         <% end %>
         </tbody>
