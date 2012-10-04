@@ -39,7 +39,7 @@ class Studio < ActiveRecord::Base
 
   scope :by_search, lambda { |text|
     v = text.gsub('%', '\%').gsub('_', '\_')
-    where("studios.name like '%#{v}%' OR phone_number like '%#{v}%' OR city like '%#{v}%' OR states.name = ?", v).
+    where("studios.name ilike '%#{v}%' OR phone_number like '%#{v}%' OR city ilike '%#{v}%' OR states.abbreviation ilike '#{v}'", v).
         joins(:state).
         order('id DESC')
   }
