@@ -315,6 +315,10 @@ table {
     color: white;
     padding-left: 10px;
   }
+
+  thead tr.no-round th{
+    border-radius: 0;
+  }
 }
 
 div#main_nav {

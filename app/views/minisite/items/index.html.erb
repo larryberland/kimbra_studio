@@ -1,12 +1,16 @@
 <h1><%= t(:minisite_admin_customer_items_index_title) %></h1>
 
 <table>
+  <thead>
   <tr>
     <th></th>
     <th></th>
     <th></th>
     <th></th>
   </tr>
+
+  </thead>
+  <tbody>
 
   <tr>
     <td colspan="<%= @items.size %>">
@@ -46,4 +50,5 @@
         <% end %>
       </tr>
   <% end %>
+  </tbody>
 </table>

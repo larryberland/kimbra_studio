@@ -1,56 +1,59 @@
-<div class="show">
-  <p>
-    <b>Parts:</b>
-    <%= link_to 'Parts', admin_merchandise_piece_parts_path(@admin_merchandise_piece) %>
-  </p>
+<div class="platypus-show-container">
+  <div class="show">
+    <p>
+      <b>Parts:</b>
+      <%= link_to 'Parts', admin_merchandise_piece_parts_path(@admin_merchandise_piece) %>
+    </p>
 
-  <% if is_admin? %>
-  <p>
-    <b>Size:</b>
-    <% to_size(@admin_merchandise_piece) %>
-  </p>
-  <% end %>
-  <p>
-    <b>Name:</b>
-    <%= @admin_merchandise_piece.name %>
-  </p>
+    <% if is_admin? %>
+        <p>
+          <b>Size:</b>
+          <% to_size(@admin_merchandise_piece) %>
+        </p>
+    <% end %>
+    <p>
+      <b>Name:</b>
+      <%= @admin_merchandise_piece.name %>
+    </p>
 
-  <p style='width:400px;'>
-    <b>Short description:</b>
-    <%= @admin_merchandise_piece.short_description %>
-  </p>
+    <p style='width:400px;'>
+      <b>Short description:</b>
+      <%= @admin_merchandise_piece.short_description %>
+    </p>
 
-  <p style='width:400px;'>
-    <b>Long description:</b>
-    <%= @admin_merchandise_piece.description_markup %>
-  </p>
+    <p style='width:400px;'>
+      <b>Long description:</b>
+      <%= @admin_merchandise_piece.description_markup %>
+    </p>
 
-  <p>
-    <b>Sku:</b>
-    <%= @admin_merchandise_piece.sku %>
-  </p>
+    <p>
+      <b>Sku:</b>
+      <%= @admin_merchandise_piece.sku %>
+    </p>
 
-  <p>
-    <b>Price:</b>
-    <%= number_to_currency(@admin_merchandise_piece.price) %>
-  </p>
+    <p>
+      <b>Price:</b>
+      <%= number_to_currency(@admin_merchandise_piece.price) %>
+    </p>
 
-  <p>
-    <b>Active:</b>
-    <%= @admin_merchandise_piece.active %>
-  </p>
+    <p>
+      <b>Active:</b>
+      <%= @admin_merchandise_piece.active %>
+    </p>
 
-  <p>
-    <b>Featured:</b>
-    <%= @admin_merchandise_piece.featured %>
-  </p>
+    <p>
+      <b>Featured:</b>
+      <%= @admin_merchandise_piece.featured %>
+    </p>
 
-  <p>
-    <b>Deleted at:</b>
-    <%= @admin_merchandise_piece.deleted_at %>
-  </p>
+    <p>
+      <b>Deleted at:</b>
+      <%= @admin_merchandise_piece.deleted_at %>
+    </p>
 
-  <%= link_to t(:edit), edit_admin_merchandise_piece_path(@admin_merchandise_piece) %> |
-  <%= link_to t(:back), admin_merchandise_pieces_path %>
+    <%= link_to t(:edit), edit_admin_merchandise_piece_path(@admin_merchandise_piece) %> |
+    <%= link_to t(:back), admin_merchandise_pieces_path %>
+  </div>
+  <%= render 'admin/merchandise/pieces/side_menu', :piece => @admin_merchandise_piece %>
+  <div class="clear-both"></div>
 </div>
-<%= render 'admin/merchandise/pieces/side_menu', :piece => @admin_merchandise_piece %>

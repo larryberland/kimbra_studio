@@ -1,38 +1,42 @@
-<div class='show'>
+<div class="platypus-show-container">
 
-  <p>
-    <b>Piece:</b>
-    <%= @part.piece.name %>
-  </p>
+  <div class='show'>
 
-  <p>
-    <b>Custom Kimbra Part Picture Viewport for Background Image</b>
-    x:<%= @part.viewport[:x] %>
-    y:<%= @part.viewport[:y] %>
-    width:<%= @part.viewport[:w] %>
-    height:<%= @part.viewport[:h] %>
-  </p>
+    <p>
+      <b>Piece:</b>
+      <%= @part.piece.name %>
+    </p>
 
-  <p>
-    <b>Custom Kimbra Part Background Image Size:</b>
-    <b>Width:</b>
-    <%= @part.width %>
-    <b>Height:</b>
-    <%= @part.height %>
-  </p>
+    <p>
+      <b>Custom Kimbra Part Picture Viewport for Background Image</b>
+      x:<%= @part.viewport[:x] %>
+      y:<%= @part.viewport[:y] %>
+      width:<%= @part.viewport[:w] %>
+      height:<%= @part.viewport[:h] %>
+    </p>
 
-  <p>
-    <b>Order:</b>
-    <%= @part.order %>
-  </p>
+    <p>
+      <b>Custom Kimbra Part Background Image Size:</b>
+      <b>Width:</b>
+      <%= @part.width %>
+      <b>Height:</b>
+      <%= @part.height %>
+    </p>
 
-  <p>
-    <b>Active:</b>
-    <%= @part.active %>
-  </p>
+    <p>
+      <b>Order:</b>
+      <%= @part.order %>
+    </p>
+
+    <p>
+      <b>Active:</b>
+      <%= @part.active %>
+    </p>
 
 
-  <%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, @part) %> |
-  <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece) %>
+    <%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, @part) %> |
+    <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece) %>
+  </div>
+  <%= render 'admin/merchandise/parts/side_menu', :part => @part %>
+  <div class="clear-both"></div>
 </div>
-<%= render 'admin/merchandise/parts/side_menu', :part => @part %>

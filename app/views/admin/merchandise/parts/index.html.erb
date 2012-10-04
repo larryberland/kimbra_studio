@@ -9,43 +9,43 @@
   <tr>
     <th>&nbsp;</th>
     <th>&nbsp;</th>
+    <th>Kimbra</th>
+    <th>Custom</th>
     <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <th colspan="2">Viewport</th>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <th colspan="2">Background Size</th>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <th colspan="2">Offer Image</th>
-    <th>&nbsp;</th>
+    <th colspan="4">Viewport</th>
+    <th colspan="3">Background Size</th>
+    <th colspan="4">Offer Image</th>
     <th colspan="3">&nbsp;</th>
   </tr>
-  <tr>
-    <th>Piece</th>
-    <th>Kimbra part</th>
-    <th>Custom part</th>
-    <th>Portrait</th>
-    <th>x</th>
-    <th>y</th>
-    <th>width</th>
-    <th>height</th>
-    <th>Order</th>
-    <th>Part Width</th>
-    <th>Part Height</th>
-    <th>x</th>
-    <th>y</th>
-    <th>width</th>
-    <th>height</th>
-    <th>Active</th>
-    <th colspan="3">Actions</th>
+  <tr class='no-round'>
+    <th >Actions</th>
+    <th >Piece</th>
+    <th >Part</th>
+    <th >Part</th>
+    <th >Portrait</th>
+    <th >x</th>
+    <th >y</th>
+    <th >width</th>
+    <th >height</th>
+    <th >Order</th>
+    <th >Part Width</th>
+    <th >Part Height</th>
+    <th >x</th>
+    <th >y</th>
+    <th >width</th>
+    <th >height</th>
+    <th >Active</th>
   </tr>
 
   </thead>
   <tbody>
   <% @parts.each do |admin_merchandise_part| %>
       <tr>
+        <td>
+          <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></br>
+          <%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></br>
+          <%= link_to t(:destroy), admin_merchandise_piece_part_path(@piece, admin_merchandise_part), confirm: t(:link_destroy_confirm), method: :delete %>
+        </td>
         <td><%= admin_merchandise_part.try(:piece).try(:name) %></td>
         <td><%= image_tag admin_merchandise_part.image_part_url(:list).to_s %></td>
         <td><%= image_tag admin_merchandise_part.image_url(:list).to_s %></td>
@@ -62,9 +62,6 @@
         <td><%= admin_merchandise_part.piece_layout.layout.w %></td>
         <td><%= admin_merchandise_part.piece_layout.layout.h %></td>
         <td><%= admin_merchandise_part.active %></td>
-        <td><%= link_to t(:show), admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></td>
-        <td><%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></td>
-        <td><%= link_to t(:destroy), admin_merchandise_piece_part_path(@piece, admin_merchandise_part), confirm: t(:link_destroy_confirm), method: :delete %></td>
       </tr>
   <% end %>
 

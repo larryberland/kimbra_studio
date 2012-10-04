@@ -1,6 +1,13 @@
 <div class="side-menu">
   <table>
-    <tr><td>Kimbra Piece:</td></tr>
-    <tr><td><%= cw_div_image(piece) %></td></tr>
+    <thead>
+    <th colspan="2"> <%= piece.try(:to_image_span) %></th>
+    </thead>
+    <tbody>
+    <tr>
+      <td>Kimbra Piece:</td>
+      <td><%= cw_div_image_only(piece) %></td>
+    </tr>
+    </tbody>
   </table>
 </div>
