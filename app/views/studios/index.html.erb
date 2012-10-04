@@ -6,7 +6,7 @@
         <p>
           Logo?
           <%= select_tag :search_logoize, options_for_select(%w(any present missing), @logo_search_value) %>
-          AND By Name, Phone Number, City, or State
+          AND By Name, Phone Number, City, or State abbrev
           <%= text_field_tag(:search, params[:search]) %>
           <%= submit_tag "Search", name: nil %>
           <span class="hint">
