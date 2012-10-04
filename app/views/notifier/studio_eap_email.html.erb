@@ -648,7 +648,7 @@
           </p>
 
           <p class="footer-content-left" align="left" style="color: #e2e2e2">
-            <unsubscribe><%= link_to 'Unsubscribe instantly', 'http://google.com', style: "color: #{@studio.minisite.font_color}" %></unsubscribe>
+            <unsubscribe><%= link_to 'Unsubscribe instantly', unsubscribe_studio_url(@studio, @studio.owner.email), style: "color: #{@studio.minisite.font_color}" %></unsubscribe>
           </p>
         </td>
         <td class="hide w0" width="60"></td>

@@ -2,6 +2,7 @@ class StudiosController < ApplicationController
 
   before_filter :form_info
   before_filter :authenticate_admin!
+  skip_before_filter :authenticate_user!,  only: [:unsubscribe]
 
   # GET /studios
   # GET /studios.json
@@ -162,6 +163,16 @@ class StudiosController < ApplicationController
     @my_studio          = Studio.find(params[:id])
     @my_studio_minisite = @my_studio.minisite
     render 'my_studio/minisites/show'
+  end
+
+  def unsubscribe
+    email = params[:email]
+    if User.exists?(email: email)
+      Unsubscribe.create(email: email) unless Unsubscribe.exists?(email: email)
+      render 'minisite/emails/unsubscribe', layout: false
+    else
+      render(text: 'No email found with that email address.')
+    end
   end
 
   private #==========================================================================

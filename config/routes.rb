@@ -120,12 +120,13 @@ KimbraStudio::Application.routes.draw do
   end
 
   resources :states, :only => [:index]
-  resources :studios do
+  resources :studios, constraints: { email: /.*/ } do
     member do
-      get :new_owner
       put :create_owner
+      get :new_owner
       post :send_new_account_email
       get :show_branding
+      get :unsubscribe, path: 'unsubscribe/:email'
     end
   end
   resources :terms, :only => [:index]

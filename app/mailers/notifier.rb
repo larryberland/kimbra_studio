@@ -16,6 +16,7 @@ class Notifier < ActionMailer::Base
     @password = @studio.owner.first_pass
     @name = @studio.owner.name
     @email = @studio.owner.email
+    raise "this email already unsubscribed: #{@email}" if Unsubscribe.exists?(email: @email)
     studio_logo = ''
     open('studio_logo.jpg', 'w') do |file|
       studio_logo << open(@studio.minisite.image_url).read

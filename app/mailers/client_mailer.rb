@@ -6,6 +6,7 @@ class ClientMailer < ActionMailer::Base
 
   def send_offers(email_id)
     @email = Admin::Customer::Email.find(email_id)
+    raise "this email already unsubscribed: #{@email}" if Unsubscribe.exists?(email: @email)
     @client = @email.my_studio_session.client
     @studio = @email.my_studio_session.studio
     logo = ''
@@ -45,6 +46,7 @@ class ClientMailer < ActionMailer::Base
     @session = MyStudio::Session.find(session_id)
     @client = @session.client
     @studio = @session.studio
+    raise "this email already unsubscribed: #{@client.email}" if Unsubscribe.exists?(email: @client.email)
     logo = ''
     open('image.jpg', 'w') do |file|
       logo << open(@studio.minisite.image_url).read
