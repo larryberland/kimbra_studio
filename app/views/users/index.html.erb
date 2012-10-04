@@ -15,6 +15,7 @@
 <table>
   <thead>
   <tr>
+    <th>Actions</th>
     <th>setup</th>
     <th>Name</th>
     <th>Studio</th>
@@ -22,12 +23,20 @@
     <th>Phone</th>
     <th>City</th>
     <th>State</th>
-    <th colspan="4">Actions</th>
   </tr>
   </thead>
   <tbody>
   <% @users.all.each do |user| %>
       <tr>
+        <td>
+          <%= link_to 'Impersonate', "/switch_user?scope_identifier=user_#{user.id}" %>
+          <br>
+          <%= link_to t(:show), user %>
+          <br>
+          <%= link_to t(:edit), edit_user_path(user) %>
+          <br>
+          <%= link_to t(:destroy), user, confirm: 'Are you sure?', method: :delete %>
+        </td>
         <td><%= user.try(:first_pass) %></td>
         <td><%= full_name(user) %></td>
         <td><%= user.try(:studio).try(:name) %></td>
@@ -35,10 +44,6 @@
         <td><%= number_to_phone user.phone_number, area_code: true %></td>
         <td><%= user.try(:city) %></td>
         <td><%= user.try(:state).try(:abbrev_and_name) %></td>
-        <td><%= link_to 'Impersonate', "/switch_user?scope_identifier=user_#{user.id}" %></td>
-        <td><%= link_to t(:show), user %></td>
-        <td><%= link_to t(:edit), edit_user_path(user) %></td>
-        <td><%= link_to t(:destroy), user, confirm: 'Are you sure?', method: :delete %></td>
       </tr>
   <% end %>
   </tbody>

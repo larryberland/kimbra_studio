@@ -38,7 +38,7 @@ module ApplicationHelper
   def image_tag_thumb(model_with_carrier_wave_image)
     url = model_with_carrier_wave_image.image_url(:thumb).to_s rescue nil
     url = 'spacer.gif' if url.blank?
-      image_tag url, alt: 'studio logo'
+    image_tag url, alt: 'studio logo'
   end
 
   def image_tag_list(model_with_carrier_wave_image)
@@ -91,7 +91,7 @@ module ApplicationHelper
   end
 
   def link_for_shopping_cart_nav
-    url = (current_user && current_user.studio?) ? '#' : shopping_cart_path(@cart.tracking)
+    url               = (current_user && current_user.studio?) ? '#' : shopping_cart_path(@cart.tracking)
     cart_numericality = content_tag :span, :id => :cart_numericality do
       pluralize(@cart.try(:quantity), 'piece')
     end
@@ -152,11 +152,11 @@ module ApplicationHelper
   end
 
   def link_to_destroy(url)
-    is_admin? ? link_to( t(:destroy), url, confirm: t(:link_destroy_confirm), method: :delete) : ''
+    is_admin? ? link_to(t(:destroy), url, confirm: t(:link_destroy_confirm), method: :delete) : ''
   end
 
   def css_button(selected)
-    css = ''  # usually likeabutton
+    css = '' # usually likeabutton
     css += ' selected' if selected
     css
   end
@@ -167,11 +167,12 @@ module ApplicationHelper
   end
 
   def link_from_site_short_name(url)
-    return 'none' unless url.present?
-    host = URI.parse(url).host.downcase
-    host = host.start_with?('www.') ? host[4..-1] : host
+    host   = URI.parse(url).host.downcase
+    host   = host.start_with?('www.') ? host[4..-1] : host
     result = host.split('.').first
     link_to result, url, target: '_blank', title: url
+  rescue
+    'none'
   end
 
 end
