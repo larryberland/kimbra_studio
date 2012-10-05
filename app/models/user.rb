@@ -164,7 +164,7 @@ class User < ActiveRecord::Base
     if latitude.blank? or longitude.blank?
       self.gmaps = false # reset our geocode
     end
-    Rails.logger.info("LDB::RESET our geocode") unless gmaps
+    # Rails.logger.info("LDB::RESET our geocode") unless gmaps
     # disable for now until i figure out the limit issue
     self.gmaps = true
     true
