@@ -91,11 +91,11 @@ module ApplicationHelper
   end
 
   def link_for_shopping_cart_nav
-    url               = (current_user && current_user.studio?) ? '#' : shopping_cart_path(@cart.tracking)
+    url               = (defined?(current_user) && current_user.studio?) ? '#' : shopping_cart_path(@cart.tracking)
     cart_numericality = content_tag :span, :id => :cart_numericality do
       pluralize(@cart.try(:quantity), 'piece')
     end
-    cart_numericality = '0 pieces' if (current_user && current_user.studio?)
+    cart_numericality = '0 pieces' if (defined?(current_user) && current_user.studio?)
     link_to_unless_current (t(:minisite_menu_shopping_cart_link) + " (#{ cart_numericality })").html_safe, url
   end
 
