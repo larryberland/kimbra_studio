@@ -5,13 +5,19 @@ namespace 'kimbra' do
     Admin::Customer::Email.send_offer_emails
   end
 
-  desc "Seed Studios from Kimbra Spreadsheet using gmap"
-  task :seed_studio_owners => :environment do
+  desc "Seed Studios from Kimbra Spreadsheet. Use: [n] to add next n rows. Defaults to 10."
+  task :seed_studio_owners, [:rows_to_add] => :environment do |t,args|
     require 'csv'
+    last_row_added = Studio.maximum(:csv_row).to_i
+    args.with_defaults rows_to_add: 10
     CSV.open('kimbra_studios.csv', "r", headers: true).each_with_index do |row, idx|
-
       csv_row = idx + 2
-      attrs   = {address_1:           row["BADDR2"],
+      # Skip over spreadsheet rows we already loaded.
+      next unless csv_row > last_row_added
+      # Only add the requested number of rows.
+      break if csv_row >= last_row_added + args.rows_to_add.to_i + 1
+      attrs   = {csv_row:             csv_row,
+                 address_1:           row["BADDR2"],
                  address_2:           row["BADDR3"],
                  phone_number:        row["PHONE1"],
                  country_abbrev:      row["BADDR5"].to_s.strip.upcase,
@@ -133,9 +139,7 @@ namespace 'kimbra' do
         puts "INVALID email[#{idx}]"
         puts "studio[#{idx}]:#{row.inspect}"
       end
-      if idx > 9
-        break
-      end
+
     end
     puts "all done now go make some money"
   end

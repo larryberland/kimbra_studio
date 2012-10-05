@@ -29,7 +29,7 @@ class Studio < ActiveRecord::Base
                   :info, :info_attributes,
                   :minisite, :minisite_attributes,
                   :owner, :owner_attributes,
-                  :country, :state
+                  :country, :state, :csv_row
 
   accepts_nested_attributes_for :info, :minisite, :owner
 
