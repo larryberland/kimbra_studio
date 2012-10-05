@@ -63,6 +63,12 @@ class User < ActiveRecord::Base
 
   after_create :update_studio
 
+  scope :search, lambda {|value|
+    like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_','\_')}%" : "%"
+    where( 'first_name ilike ? OR last_name ilike ? OR email ilike ?  OR studios.name ilike ?',
+           like_exp, like_exp, like_exp, like_exp).joins(:studio).order('updated_at desc, last_name asc')
+  }
+
   def phone_number=(num)
     super num.to_s.gsub(/\D/, '')[0, 10]
   end

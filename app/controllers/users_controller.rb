@@ -6,9 +6,12 @@ class UsersController < ApplicationController
   # GET /users
   # GET /users.json
   def index
-    @users        = User.order('updated_at desc, last_name asc')
-    @record_count = @users.count
-    @users        = @users.page(params[:page])
+    search                 = params[:search] || session[:search_users]
+    session[:search_users] = search
+
+    set           = User.search(search)
+    @record_count = set.count
+    @users        = set.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

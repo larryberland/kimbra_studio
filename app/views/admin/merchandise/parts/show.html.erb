@@ -33,10 +33,12 @@
       <%= @part.active %>
     </p>
 
-
     <%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, @part) %> |
     <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece) %>
+
   </div>
+
   <%= render 'admin/merchandise/parts/side_menu', :part => @part %>
+
   <div class="clear-both"></div>
 </div>

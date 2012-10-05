@@ -1,10 +1,19 @@
-<h1>
-  <%= t(:users_index_title) %>
-  <span class="hint">
-      record set count: <%= number_to_human @record_count %>
-  </span>
+<h1><%= t(:users_index_title) %></h1>
 
-</h1>
+<div class="dd-form">
+  <fieldset class='search'>
+    <%= form_tag users_path, :method => :get do %>
+        <p>
+          By Name or Email or Studio Name
+          <%= text_field_tag(:search, session[:search_users]) %>
+          <%= submit_tag "Search", name: nil %>
+          <span class="hint">
+              Record Set Count:<%= @record_count %>
+          </span>
+        </p>
+    <% end %>
+  </fieldset>
+</div>
 
 <%= link_to 'New User', new_user_path %>
 

@@ -18,6 +18,11 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   scope :for_strategy, lambda { |categories| where('active=? and category IN(?)', true, categories) }
   scope :for_bracelets, lambda { by_category('Photo Bracelets') }
 
+  scope :search, lambda {|value|
+    like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_','\_')}%" : "%"
+    where( 'category ilike ? OR name ilike ?', like_exp, like_exp).order('active desc, category desc, name asc')
+  }
+
   # determines both the number of offers we send out and from which category
   #  when the Holiday's start we can just add to this array
   def self.strategy_categories

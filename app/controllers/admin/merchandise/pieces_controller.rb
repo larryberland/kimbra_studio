@@ -2,9 +2,13 @@ class Admin::Merchandise::PiecesController < ApplicationController
   # GET /admin/merchandise/pieces
   # GET /admin/merchandise/pieces.json
   def index
-    @admin_merchandise_pieces = Admin::Merchandise::Piece.order('active desc, category desc, name asc')
-    @record_count             = @admin_merchandise_pieces.count
-    @admin_merchandise_pieces = @admin_merchandise_pieces.page(params[:page])
+
+    search                  = params[:search] || session[:search_pieces]
+    session[:search_pieces] = search
+
+    set                       = Admin::Merchandise::Piece.search(search)
+    @record_count             = set.count
+    @admin_merchandise_pieces = set.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb

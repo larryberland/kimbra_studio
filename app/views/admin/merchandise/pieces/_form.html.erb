@@ -1,46 +1,53 @@
-<%= render 'shared/error_messages', record: @admin_merchandise_piece %>
-<%= form_for(@admin_merchandise_piece, :html => {:multipart => true}) do |f| %>
+<div class="show">
 
-    <div class="text-field">
-      <%= f.label :name %>
-      <%= f.text_field :name %>
-    </div>
+  <%= render 'shared/error_messages', record: @admin_merchandise_piece %>
+  <%= form_for(@admin_merchandise_piece, :html => {:multipart => true}) do |f| %>
 
-    <div class="text-field">
-      <%= f.label :image %>
-      <%= f.file_field :image %>
-      <%= f.label :remote_image_url, 'or image URL' %>
-      <%= f.text_field :remote_image_url %>
-    </div>
+      <div class="text-field">
+        <%= f.label :name %>
+        <%= f.text_field :name %>
+      </div>
 
-    <div class="text-field">
-      <%= f.label :short_description %>
-      <%= f.text_field :short_description %>
-    </div>
-    <div class="text-field">
-      <%= f.label :description_markup, 'Description' %>
-      <%= f.text_area :description_markup %>
-    </div>
-    <div class="text-field">
-      <%= f.label :sku %>
-      <%= f.text_field :sku %>
-    </div>
-    <div class="text-field">
-      <%= f.label :price %>
-      <%= f.text_field :price %>
-    </div>
-    <div class="text-field">
-      <%= f.label :active %>
-      <%= f.check_box :active %>
-      <%= f.label :featured %>
-      <%= f.check_box :featured %>
-    </div>
-    <div class="text-field">
-      <%= f.label :deleted_at %>
-      <%= f.text_field :deleted_at %>
-    </div>
-    <div class="actions">
-      <%= f.submit :id => 'my_submit' %>
-      <span id="spinner" style="display:none"></span>
-    </div>
-<% end %>
+      <div class="text-field">
+        <%= f.label :image %>
+        <%= f.file_field :image %>
+        <br>
+        <%= f.label :remote_image_url, 'or image URL' %>
+        <%= f.text_field :remote_image_url %>
+      </div>
+
+      <div class="text-field">
+        <%= f.label :short_description %><br>
+        <%= f.text_area :short_description, cols: 65, rows:4 %>
+      </div>
+      <div class="text-field">
+        <%= f.label :description_markup, 'Description' %><br>
+        <%= f.text_area :description_markup, cols: 65, rows: 4 %>
+      </div>
+      <div class="text-field">
+        <%= f.label :sku %>
+        <%= f.text_field :sku %>
+      </div>
+      <div class="text-field">
+        <%= f.label :price %>
+        <%= f.text_field :price %>
+      </div>
+      <div class="text-field">
+        <%= f.label :active %>
+        <%= f.check_box :active %>
+        <%= f.label :featured %>
+        <%= f.check_box :featured %>
+      </div>
+      <div class="text-field">
+        <%= f.label :deleted_at %>
+        <%= f.text_field :deleted_at %>
+      </div>
+      <div class="actions">
+        <%= f.submit :id => 'my_submit' %>
+        <span id="spinner" style="display:none"></span>
+      </div>
+  <% end %>
+</div>
+<%= render 'admin/merchandise/pieces/side_menu', :piece => @admin_merchandise_piece %>
+
+

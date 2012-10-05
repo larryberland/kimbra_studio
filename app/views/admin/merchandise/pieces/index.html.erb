@@ -1,9 +1,20 @@
-<h1>
-  <%= t(:admin_merchandise_pieces_index_title) %>
-  <span class="hint">
-      record set count: <%= number_to_human @record_count %>
-  </span>
-</h1>
+<h1><%= t(:admin_merchandise_pieces_index_title) %></h1>
+
+<div class="dd-form">
+  <fieldset class='search'>
+    <%= form_tag admin_merchandise_pieces_path, :method => :get do %>
+        <p>
+          By Name or Category
+          <%= text_field_tag(:search, session[:search_pieces]) %>
+          <%= submit_tag "Search", name: nil %>
+          <span class="hint">
+              Record Set Count:<%= @record_count %>
+          </span>
+        </p>
+    <% end %>
+  </fieldset>
+</div>
+
 <%= button_to t(:admin_merchandise_pieces_new_link), new_admin_merchandise_piece_path, method: :get %>
 <div class="paginate">
   <%= paginate @admin_merchandise_pieces %>
