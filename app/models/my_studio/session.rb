@@ -26,14 +26,26 @@ class MyStudio::Session < ActiveRecord::Base
     joins(:portraits).where('my_studio_portraits.created_at >= ?', 24.hours.ago()).order('created_at desc')
   }
 
+  scope :search, lambda { |my_studio, value|
+    rel      = if (my_studio.present?)
+                 where('my_studio_sessions.studio_id = ?', my_studio)
+               else
+                 where('my_studio_sessions.studio_id > 0')
+               end
+    like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_', '\_')}%" : "%"
+
+    rel.where('my_studio_sessions.name ilike ? OR my_studio_clients.name ilike ? OR my_studio_clients.email ilike ?',
+              like_exp, like_exp, like_exp).joins(:client).order('session_at desc')
+  }
+
   def to_strategy_portrait
     raise "did you forget to upload portraits?" if portraits.empty?
     used_list = previous_offers.collect { |offer| offer.item_portrait_list }.flatten.compact.uniq
-    used_ids = used_list.collect(&:id)
-    list = portraits.collect do |portrait|
+    used_ids  = used_list.collect(&:id)
+    list      = portraits.collect do |portrait|
       if (portrait.active? and (portrait.faces.size > 0))
-        {portrait: portrait,
-         used: false,
+        {portrait:      portrait,
+         used:          false,
          used_previous: used_ids.include?(portrait.id)}
       else
         nil
@@ -53,7 +65,7 @@ class MyStudio::Session < ActiveRecord::Base
     portraits.count > 2
   end
 
-  # allow the forms to send in a text name
+          # allow the forms to send in a text name
   def category_name=(category_name)
     self.category = Category.find_or_initialize_by_name(category_name)
   end

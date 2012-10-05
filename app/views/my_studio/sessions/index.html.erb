@@ -5,6 +5,21 @@
   </span>
 </h1>
 
+<div class="dd-form">
+  <fieldset class='search'>
+    <%= form_tag my_studio_sessions_path, :method => :get do %>
+        <p>
+          By Photo Session or Client or Email
+          <%= text_field_tag(:search, session[:search_my_studio_sessions]) %>
+          <%= submit_tag "Search", name: nil %>
+          <span class="hint">
+              Record Set Count:<%= @record_count %>
+          </span>
+        </p>
+    <% end %>
+  </fieldset>
+</div>
+
 <%= button_to(t(:my_studio_sessions_new_link), new_my_studio_session_path, method: :get) unless current_user.admin? %>
 <div class="paginate">
   <%= paginate @sessions %>

@@ -8,6 +8,7 @@
       <% end %>
       <th>Photo Session</th>
       <th>Client</th>
+      <th>Email</th>
       <th>Offer Emails</th>
       <th>Portraits</th>
       <th>Session Date</th>
@@ -22,6 +23,7 @@
           <% end %>
           <td><%= link_to session.display_name(current_user.admin?), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
           <td><%= session.try(:client).try(:name) %></td>
+          <td><%= session.try(:client).try(:email) %></td>
           <td><%= (session.emails.count > 0) ? link_to(session.emails.count.to_words, session_list_admin_customer_email_path(session), title: 'View All Offer Emails') : 'none yet' %></td>
           <td><%= upload_link(session) %></td>
           <td><%= session.session_at.to_s(:short) %></td>

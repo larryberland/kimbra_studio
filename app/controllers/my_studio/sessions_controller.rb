@@ -5,10 +5,13 @@ class MyStudio::SessionsController < MyStudio::BaseController
   # GET /my_studio/sessions
   # GET /my_studio/sessions.json
   def index
-    @sessions = MyStudio::Session.where('studio_id=?', @my_studio).order('session_at desc')
-    @sessions = MyStudio::Session.order('session_at desc') if current_user.admin?
-    @record_count = @sessions.count
-    @sessions = @sessions.page(params[:page])
+    search = params[:search] || session[:search_my_studio_sessions]
+    session[:search_my_studio_sessions] = search
+    my_studio = current_user.admin? ? nil : @my_studio
+
+    set = MyStudio::Session.search(my_studio, search)
+    @record_count = set.count
+    @sessions = set.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
