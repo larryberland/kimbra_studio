@@ -25,12 +25,12 @@
           name: acme smith
           email: testclient@kimbraclickplus.com
           phone_number: 813 111 1234
-      - name: Pets
+      - name: Graduation
         client:
           name: bravo smith
           email: testclient@kimbraclickplus.com
           phone_number: 813 222 1234
-      - name: Graduation
+      - name: Pets
         client:
           name: charlie smith
           email: testclient@kimbraclickplus.com

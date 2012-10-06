@@ -40,22 +40,31 @@ module Minisite
         @admin_customer_email = @cart.email
         @admin_customer_offer = nil
       end
-      # Pull cart from current session; usually normal shopping activity.
-      if @cart.nil? && session[:cart_id]
-        @cart                 = Shopping::Cart.find(session[:cart_id]) rescue nil
-        @admin_customer_email = @cart.email if @cart
+
+      if (is_client?)
+        # Pull cart from current session; usually normal shopping activity.
+        if @cart.nil? && session[:cart_id]
+          @cart = Shopping::Cart.find(session[:cart_id]) rescue nil
+          @admin_customer_email = @cart.email if @cart
+        end
+        # Otherwise create new cart; we are starting a new shopping session.
+        # Offer and email are already set.
+        if @cart.nil?
+          @cart             = Shopping::Cart.create(:email => @admin_customer_email)
+          session[:cart_id] = @cart.id
+        end
+        session[:admin_customer_email_id] = @admin_customer_email.id
+        @client                           = @admin_customer_email.my_studio_session.client
+        session[:client_id]               ||= @client.id
+        @studio                           = @admin_customer_email.my_studio_session.studio
+        session[:studio_id]               ||= @studio.id
+      elsif (is_studio?)
+        # studio and admin should have @cart and @client nil
+        @studio = current_user.studio
+      else
+        # studio and admin should have @cart and @client nil
+        @studio = @admin_customer_email.my_studio_session.studio
       end
-      # Otherwise create new cart; we are starting a new shopping session.
-      # Offer and email are already set.
-      if @cart.nil?
-        @cart             = Shopping::Cart.create(:email => @admin_customer_email)
-        session[:cart_id] = @cart.id
-      end
-      session[:admin_customer_email_id] = @admin_customer_email.id
-      @client                           = @admin_customer_email.my_studio_session.client
-      session[:client_id]               ||= @client.id
-      @studio                           = @admin_customer_email.my_studio_session.studio
-      session[:studio_id]               ||= @studio.id
     end
 
   end

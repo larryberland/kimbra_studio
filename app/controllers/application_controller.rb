@@ -34,6 +34,18 @@ class ApplicationController < ActionController::Base
     #u || root_url
   end
 
+  def is_admin?
+    defined?(current_user) and current_user and current_user.admin?
+  end
+
+  def is_studio?
+    defined?(current_user) and current_user and current_user.studio?
+  end
+
+  def is_client?
+    (is_admin? or is_studio?) ? false : true
+  end
+
   def require_user
     redirect_to login_url and return if logged_out?
   end
