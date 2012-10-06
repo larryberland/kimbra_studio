@@ -48,7 +48,7 @@
         </td>
         <td><%= admin_merchandise_part.try(:piece).try(:name) %></td>
         <td><%= image_tag admin_merchandise_part.image_part_url(:list).to_s %></td>
-        <td><%= image_tag admin_merchandise_part.image_url(:list).to_s %></td>
+        <td><%= image_tag admin_merchandise_part.image_url(:list).to_s if (admin_merchandise_part.image)%></td>
         <td><%= image_tag admin_merchandise_part.portrait.image_url(:list).to_s if admin_merchandise_part.portrait %></td>
         <td><%= admin_merchandise_part.viewport_offset[:x] %></td>
         <td><%= admin_merchandise_part.viewport_offset[:y] %></td>

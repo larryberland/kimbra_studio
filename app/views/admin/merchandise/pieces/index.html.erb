@@ -52,7 +52,7 @@
         </td>
         <td><%= admin_merchandise_piece.category %></td>
         <td><%= admin_merchandise_piece.name %></td>
-        <td><%= image_tag_list(admin_merchandise_piece) %></td>
+        <td><%= image_tag_list(admin_merchandise_piece) if (admin_merchandise_piece.image.present?)%></td>
         <td><%= admin_merchandise_piece.short_description %></td>
         <td><%= admin_merchandise_piece.sku %></td>
         <td><%= number_to_currency(admin_merchandise_piece.price) %></td>
