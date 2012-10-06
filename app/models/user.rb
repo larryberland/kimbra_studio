@@ -73,6 +73,39 @@ class User < ActiveRecord::Base
     super num.to_s.gsub(/\D/, '')[0, 10]
   end
 
+  # Use this method to represent the state abbreviation
+  #  it is possible the state is nil. in that case the abbreviation will be stored in
+  #  the state_name column in the DB
+  #
+  # @param [none]
+  # @return [String] state abbreviation
+  def state_abbr_name
+    state ? state.abbreviation : nil
+  end
+
+    # Use this method to represent the "city, state.abbreviation"
+  #
+  # @param [none]
+  # @return [String] "city, state.abbreviation"
+  def city_state_name
+    [city.to_s.titleize, state_abbr_name].compact.join(', ')
+  end
+
+  # Use this method to represent the "city, state.abbreviation zip_code"
+  #
+  # @param [none]
+          # @return [String] "city, state.abbreviation zip_code"
+  def city_state_zip
+    [city_state_name, zip_code].join(' ')
+  end
+
+  def address_array
+    info = [address_1]
+    info << address_2
+    info << city_state_zip
+    info.compact
+  end
+
   def admin?
     @admin ||= roles.select { |r| r.is_admin? }.present?
   end
