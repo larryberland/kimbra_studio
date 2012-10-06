@@ -2,9 +2,10 @@
   <table id='dashboard_sessions'>
     <thead>
     <tr>
-      <% if current_user.admin? %>
+      <% if is_admin? %>
           <th><span class='explainer' title='Need at least 2 portraits to generate an email.'>Actions</span></th>
           <th>New Portrait?</th>
+          <th>Studio</th>
       <% end %>
       <th>Photo Session</th>
       <th>Client</th>
@@ -17,11 +18,13 @@
     <tbody>
     <% sessions.each do |session| %>
         <tr>
-          <% if current_user.admin? %>
+          <% if is_admin? %>
               <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
               <td><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
+              <td><%= link_to session.try(:studio).try(:name), studio_path(session.studio), title: t(:studios_show_link) %></td>
+
           <% end %>
-          <td><%= link_to session.display_name(current_user.admin?), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
+          <td><%= link_to session.try(:name), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
           <td><%= session.try(:client).try(:name) %></td>
           <td><%= session.try(:client).try(:email) %></td>
           <td><%= (session.emails.count > 0) ? link_to(session.emails.count.to_words, session_list_admin_customer_email_path(session), title: 'View All Offer Emails') : 'none yet' %></td>

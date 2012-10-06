@@ -88,6 +88,7 @@ en:
   studios_new_title: 'Your Studio'
   studios_new_link: 'New Kimbra ClickPLUS Studio'
   studios_index_title: 'Listing Kimbra ClickPLUS Studios'
+  studios_show_link: 'View Studio'
 
   # users
   users_new_title: ''

@@ -74,12 +74,6 @@ class MyStudio::Session < ActiveRecord::Base
     category.name if category
   end
 
-  def display_name(current_user_admin)
-    display_name = name
-    display_name = "#{studio.try(:name)} #{name}" if current_user_admin
-    display_name
-  end
-
   def in_generate_queue?
     # Look for a generate job waiting.
     jobs = DelayedJob.where(" handler like '%:generate%' ")
