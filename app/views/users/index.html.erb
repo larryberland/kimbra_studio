@@ -46,7 +46,7 @@
           <br>
           <%= link_to t(:destroy), user, confirm: 'Are you sure?', method: :delete %>
         </td>
-        <td><%= "#{time_short(user.last_sign_in_at)} (#{user.try(:first_pass)}" %></td>
+        <td><%= "#{time_short_index(user.last_sign_in_at)} (#{user.try(:first_pass)})" %></td>
         <td><%= full_name(user) %></td>
         <td><%= user.try(:studio).try(:name) %></td>
         <td><%= user.email %></td>
