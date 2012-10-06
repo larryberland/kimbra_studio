@@ -9,7 +9,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   storage KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
-  def xdefault_url
+  def default_url
     version = version_name.downcase if version_name
     du = "/images/fallback/" + [version, "empty_deal_image.png"].compact.join('_')
     # puts "default_url=>#{du}"
