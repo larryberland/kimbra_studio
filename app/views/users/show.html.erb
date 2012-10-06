@@ -6,6 +6,11 @@
   </p>
 
   <p>
+    <b>last sign in: </b>
+    <%= time_short(@user.last_sign_in_at) %>
+  </p>
+
+  <p>
     <b>Email:</b>
     <%= @user.email %>
   </p>
