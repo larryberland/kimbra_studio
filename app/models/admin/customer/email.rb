@@ -85,7 +85,7 @@ class Admin::Customer::Email < ActiveRecord::Base
 
     # pick portraits that are only set active
 
-    idx = -1
+    idx                      = -1
     portrait_pick_list       = studio_session.portraits.select { |p| p.active? }
     order_by_number_of_parts = piece_strategy_list.sort_by { |piece| piece.photo_parts.size.to_i }.reverse
     offers                   = order_by_number_of_parts.collect do |piece|

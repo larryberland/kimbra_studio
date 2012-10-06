@@ -65,11 +65,4 @@ class MyStudio::Portrait < ActiveRecord::Base
     end
   end
 
-  def get_faces
-    #if image_changed?
-    #  gf = GetFace.new
-    #  gf.perform(self)
-    #end
-  end
-
 end

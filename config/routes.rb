@@ -89,9 +89,7 @@ KimbraStudio::Application.routes.draw do
     end
     resource :overview, :only => [:show]
     resources :sessions do
-      resources :portraits do
-        resources :faces
-      end
+      resources :portraits
     end
     resources :staffers
   end

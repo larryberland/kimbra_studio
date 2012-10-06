@@ -1,1 +1,0 @@
-require Rails.root.join('lib','get_face.rb').to_s

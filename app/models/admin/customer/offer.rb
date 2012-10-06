@@ -58,18 +58,11 @@ class Admin::Customer::Offer < ActiveRecord::Base
   # Strategy
   #
   #   Piece has a single part
-  #     create item with portrait as function of face
+  #     create item with portrait
   #
   #   Piece has multiple parts
   #     Portrait
-  #       has no faces:
-  #         create item with portrait resize
-  #       has one face:
-  #         create item for this face centered
-  #       has multiple faces:
-  #         create item for each face centered
-  #
-
+  #      create item with portrait resize
   def assemble(merchandise_piece)
     raise "did you forget to assign a piece for this offer?" if merchandise_piece.nil?
     raise "did you forget to assign a portrait_parts_list for this offer?" if portrait_parts_list.nil?
@@ -85,7 +78,6 @@ class Admin::Customer::Offer < ActiveRecord::Base
         #  the first one in our non_photo_part list.
         if portrait_parts_list.present?
           if portrait_parts_list.kind_of?(Array)
-
             portrait_parts_list.first[:photo_part] = part if portrait_parts_list.first[:photo_part].nil?
           elsif portrait_parts_list.kind_of?(Hash)
             portrait_parts_list[:photo_part] = part if portrait_parts_list[:photo_part].nil?
