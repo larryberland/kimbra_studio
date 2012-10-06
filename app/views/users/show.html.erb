@@ -26,8 +26,8 @@
   </p>
 
   <p>Address:</p>
-  <% if addresses.present? %>
-      <%= render 'shared/addresses/show', :resource => @user %>
+  <% if @user.addresses.present? %>
+      <%= render 'shared/addresses/show', resource: @user %>
   <% else %>
       no addresses
   <% end %>
