@@ -1,4 +1,3 @@
-require Rails.root.join('lib', 'get_face.rb').to_s
 
 class MyStudioSeeds
 
@@ -78,7 +77,6 @@ class MyStudioSeeds
                 unless (r)
                   puts "portrait[#{portrait.id}] errors:#{portrait.errors.full_messages}"
                 end
-                #get_face.perform(portrait) # process for faces
                 portrait
               end
             end

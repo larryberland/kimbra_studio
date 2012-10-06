@@ -27,14 +27,6 @@ development: &non_production_settings
     :name: admin@kimbraclickplus.com
     :secret_key: '4osP7DgGMXX3Z4CWgkvT5q3EPBldxfss'
     :publishable_key: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs'
-  :click_face:
-    api_key:
-    api_secret:
-    website:
-      username: 'clickplus1'
-      info:     'facerul3s'
-    :value:
-    :secret_key:
 
 test:
   <<: *non_production_settings

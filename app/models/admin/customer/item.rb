@@ -13,8 +13,8 @@ class Admin::Customer::Item < ActiveRecord::Base
   accepts_nested_attributes_for :part, :offer, :item_sides
 
   # assemble an item and its sides
-  #  options = [front_side => {:photo_part, :portrait, :face},
-  #             back_side => {:photo_part, :portrait, :face}]
+  #  options = [front_side => {:photo_part, :portrait},
+  #             back_side => {:photo_part, :portrait}]
   #
   def self.assemble_side(offer, options)
     sides = [options] if options.kind_of?(Hash)

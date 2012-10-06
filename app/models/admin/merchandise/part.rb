@@ -5,15 +5,13 @@ class Admin::Merchandise::Part < ActiveRecord::Base
                   :photo, :order,
                   :piece, :portrait,
                   :piece_layout, :piece_layout_attributes,
-                  :part_layout, :part_layout_attributes,
-                  :face, :face_attributes
+                  :part_layout, :part_layout_attributes
 
   mount_uploader :image, ImageUploader                  # custom assembled part
   mount_uploader :image_part, ImageUploader             # background Image used to generate the custom assembled part
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece'
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
-  belongs_to :face, :class_name => 'MyStudio::Portrait::Face'
 
   has_one :item, :class_name => 'Admin::Customer::Item' # TODO: do we destroy Offer::Item on this?
   has_one :item_side, :class_name => 'Admin::Customer::ItemSide' # TODO: do we destroy Offer::Item on this?
@@ -62,12 +60,13 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     item_part.save
     if portrait_options
       item_part.portrait = portrait_options[:portrait]
-      item_part.face     = portrait_options[:face]
-      f_stock, f_custom  = if portrait_options[:face]
-                             item_part.center_on_face(portrait_options[:face])
-                           else
-                             item_part.group_shot
-                           end
+      # LDB: Keeping around just in case
+      #f_stock, f_custom  = if portrait_options[:face]
+      #                       item_part.center_on_face(portrait_options[:face])
+      #                     else
+      #                       item_part.group_shot
+      #                     end
+      f_stock, f_custom  = item_part.group_shot
 
     end
     item_part.copy_image(merchandise_part)

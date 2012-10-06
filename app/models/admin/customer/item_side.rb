@@ -7,13 +7,11 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # my own copy of merchandise part
 
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
-  belongs_to :face, :class_name => 'MyStudio::Portrait::Face'
 
   attr_accessible :image_stock, :remote_image_stock_url, :image_stock_cache,
                   :image_custom, :remote_image_custom_url, :image_custom_cache,
                   :changed_layout_at,
                   :portrait, :portrait_attributes, :portrait_id,
-                  :face, :face_attributes,
                   :item, :item_attributes,
                   :part, :part_attributes,
                   :crop_x, :crop_y, :crop_h, :crop_w
@@ -33,8 +31,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     my_part      = Admin::Merchandise::Part.create_clone(options[:photo_part])
     my_item_side = Admin::Customer::ItemSide.create(:item     => item,
                                                     :part     => my_part,
-                                                    :portrait => options[:portrait],
-                                                    :face     => options[:face])
+                                                    :portrait => options[:portrait])
     if Rails.env.test?
       puts "#{self} my_part=>#{my_item_side.part.inspect}"
       puts "#{self} my_part=>#{my_item_side.part.part_layout.layout.inspect}"
@@ -55,7 +52,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     @assembly = true
     # LDB? At this point not sure if i want an image or a remote_file reference
     #      when i start the create side. sure seems like it should be an image
-    file_url  = if face or portrait
+    file_url  = if portrait
                   # set the image_stock file to the portrait's remote url
                   #self.image_stock = portrait.face_file
                   portrait.image_url(:face)
@@ -88,10 +85,19 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                         img
                       elsif assembly?
                         #puts "  Assembly"
-                        img = if face
-                                #puts "  using Face"
-                                draw_face(src_image, size[:w], size[:h])
-                              elsif portrait
+                        # LDB: Keeping this around until we know we don't need
+                        #      this draw_face thing
+                        #img = if face
+                        #        #puts "  using Face"
+                        #        draw_face(src_image, size[:w], size[:h])
+                        #      elsif portrait
+                        #        #puts "  using Full Portrait"
+                        #        src_image.resize_to_fit(size[:w], size[:h])
+                        #      else
+                        #        #puts "  using No photo"
+                        #        image_transparent(size[:w], size[:h])
+                        #      end
+                        img = if portrait
                                 #puts "  using Full Portrait"
                                 src_image.resize_to_fit(size[:w], size[:h])
                               else
@@ -200,7 +206,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     return size[:w], size[:h]
   end
 
-  def draw_face(portrait_image, viewport_w, viewport_h)
+  # LDB:: Keeping this until we figure we don't need these
+  #       magical calculations
+  def x_draw_face(portrait_image, viewport_w, viewport_h)
     info = face.calculate_center_in_area(viewport_w, viewport_h)
 
     crop    = info[:crop]

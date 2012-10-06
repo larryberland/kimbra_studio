@@ -37,8 +37,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   # portrait_parts_list
   #   array => {:photo_parts => merchandise_part to use,
-  #             :portrait => portrait to use for this part,
-  #             :face => face within this portrait to use
+  #             :portrait => portrait to use for this part}
   def self.generate(email, piece, portrait_parts_list)
     tracking = UUID.random_tracking_number
     offer    = Admin::Customer::Offer.create(
