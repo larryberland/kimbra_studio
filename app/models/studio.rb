@@ -22,8 +22,6 @@ class Studio < ActiveRecord::Base
   has_one :info, class_name: 'MyStudio::Info', dependent: :destroy, inverse_of: :studio
   has_one :minisite, class_name: 'MyStudio::Minisite', dependent: :destroy, inverse_of: :studio
 
-  attr_accessor :current_user
-
   attr_accessible :sessions, :name, :phone_number,
                   :address_1, :address_2, :city, :state_id, :zip_code,
                   :info, :info_attributes,
@@ -34,8 +32,6 @@ class Studio < ActiveRecord::Base
   accepts_nested_attributes_for :info, :minisite, :owner
 
   validates :name, :address_1, :state_id, :zip_code, presence: true
-
-  before_save :set_user_info
 
   scope :by_search, lambda { |text|
     v = text.gsub('%', '\%').gsub('_', '\_')
@@ -94,19 +90,5 @@ class Studio < ActiveRecord::Base
   end
 
   private #===================================================================
-
-  def set_user_info
-    if current_user.try(:'studio?')
-      if owner
-        self.owner = current_user if (owner.id != current_user.id)
-      else
-        self.owner = current_user
-      end
-    elsif current_user.try(:'studio_staff?')
-      self.staffers << current_user if staffers.select { |u| u.id == current_user.id }
-    elsif current_user.try(:'client?')
-      self.clients << current_user if clients.select { |u| u.id == current_user.id }
-    end
-  end
 
 end

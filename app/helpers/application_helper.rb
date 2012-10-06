@@ -1,7 +1,15 @@
 module ApplicationHelper
 
   def is_admin?
-    current_user and current_user.admin?
+    defined?(current_user) and current_user and current_user.admin?
+  end
+
+  def is_studio?
+    defined?(current_user) and current_user and current_user.studio?
+  end
+
+  def is_client?
+    (is_admin? or is_studio?) ? false : true
   end
 
   def studio_name
@@ -96,29 +104,27 @@ module ApplicationHelper
   end
 
   def link_for_shopping_cart_nav
-    url               = (defined?(current_user) && current_user.studio?) ? '#' : shopping_cart_path(@cart.tracking)
-    cart_numericality = content_tag :span, :id => :cart_numericality do
-      pluralize(@cart.try(:quantity), 'piece')
+    url = '#'
+    cart_numericality = '0 pieces'
+    if (is_client?)
+      url               = shopping_cart_path(@cart.tracking)
+      cart_numericality = content_tag :span, :id => :cart_numericality do
+        pluralize(@cart.try(:quantity), 'piece')
+      end
     end
-    cart_numericality = '0 pieces' if (defined?(current_user) && current_user.studio?)
     link_to_unless_current (t(:minisite_menu_shopping_cart_link) + " (#{ cart_numericality })").html_safe, url
   end
 
   def url_for_offer_or_not(offer)
-    if defined?(current_user) && current_user.studio?
-      '#'
-    else
-      minisite_offer_url(offer)
-    end
+    is_client? ? minisite_offer_url(offer) : '#'
   end
 
   def link_to_your_collection_or_not(admin_customer_email)
-    if defined?(current_user) && current_user.studio?
-      link_to t(:minisite_your_collection), show_collection_my_studio_minisite_path(admin_customer_email.tracking)
-    else
+    if is_client?
       link_to_unless_current t(:minisite_your_collection), minisite_email_offers_path(admin_customer_email.tracking)
+    else
+      link_to t(:minisite_your_collection), show_collection_my_studio_minisite_path(admin_customer_email.tracking)
     end
-
   end
 
   # Show a link to the current offer - no need for this if we are at the Collection page or if there's no current offer.
@@ -126,7 +132,7 @@ module ApplicationHelper
   def link_back_to_current_offer
     if @admin_customer_offer
       at_collection_page = controller_name == 'offers' && action_name == 'index'
-      at_shopping_page   = %w(carts addresses shippings items purchases strip_cards).include?(controller_name)
+      at_shopping_page   = %w(carts addresses shippings items purchases stripe_cards).include?(controller_name)
       at_offer_page      = controller_name == 'offers' && action_name == 'show'
       link_text          = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
       unless at_collection_page or at_shopping_page

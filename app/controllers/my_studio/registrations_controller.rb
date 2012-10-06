@@ -14,7 +14,6 @@ class MyStudio::RegistrationsController < MyStudio::BaseController
     @studio.info = @info if @info
     @studio.minisite = @minisite if @minisite
     @studio.owner = User.new(:email => @info.email)
-    @studio.current_user = @studio.owner
 
     # Saving without session maintenance to skip
     # auto-login which can't happen here because
