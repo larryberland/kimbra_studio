@@ -25,9 +25,9 @@ class Story < ActiveRecord::Base
   scope :without_name, where("name is NULL")
   scope :without_name_grouped_by_day, without_name.group("DATE(created_at)")
 
-  def self.setup(request, controller_name, action_name, client, studio)
+  def self.setup(request, controller_name, action_name, client, studio, is_client)
     user_agent = UserAgent.parse(request.user_agent)
-    if user_agent.crawler? || action_name == "health_check"
+    if user_agent.crawler? || action_name == "health_check"  || !is_client
       # Make objects that will essentially ignore all updates and never get saved.
       story = Story.new(:crawler => true)
       storyline = Storyline.new(:crawler => true)

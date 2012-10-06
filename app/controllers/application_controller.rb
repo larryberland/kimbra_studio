@@ -55,7 +55,7 @@ class ApplicationController < ActionController::Base
   end
 
   def setup_story
-    @story, @storyline = Story.setup(request, controller_name, action_name, @client, @studio)
+    @story, @storyline = Story.setup(request, controller_name, action_name, @client, @studio, is_client?)
   end
 
   private #=========================================================================
