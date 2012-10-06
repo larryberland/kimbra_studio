@@ -8,7 +8,7 @@ namespace 'kimbra' do
   desc "Seed Studios from Kimbra Spreadsheet. Use: [n] to add next n rows. Defaults to 10."
   task :seed_studio_owners, [:rows_to_add] => :environment do |t,args|
     require 'csv'
-    last_row_added = Studio.maximum(:csv_row).to_i
+    last_row_added = User.maximum(:csv_row).to_i
     args.with_defaults rows_to_add: 10
     CSV.open('kimbra_studios.csv', "r", headers: true).each_with_index do |row, idx|
       csv_row = idx + 2
