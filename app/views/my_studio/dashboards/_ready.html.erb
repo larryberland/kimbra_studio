@@ -8,8 +8,11 @@
         <thead>
         <tr>
           <th>Actions</th>
+          <% if is_admin? %>
+              <th>Offers</th>
+          <% end %>
           <th>photo session</th>
-          <% if current_user.admin? %>
+          <% if is_admin? %>
               <th>studio</th>
           <% end %>
           <th>client</th>
@@ -20,10 +23,17 @@
         <% emails.each do |email| %>
             <tr>
               <td><span id="send_email_<%= email.id %>"><%= actions_for_email(email) %></span></td>
+
+              <% if is_admin? %>
+                  <td><%= link_to 'Edit', minisite_email_offers_path(email.tracking) %></td>
+              <% end %>
+
               <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session) %></td>
-              <% if current_user.admin? %>
+
+              <% if is_admin? %>
                   <td><%= email.my_studio_session.studio.name %></td>
               <% end %>
+
               <td><%= email.my_studio_session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
               <td><%= email.try(:offers).try(:count).to_words %></td>
             </tr>

@@ -116,7 +116,9 @@ module ApplicationHelper
   end
 
   def url_for_offer_or_not(offer)
-    is_client? ? minisite_offer_url(offer) : '#'
+    # currently opening this offer up for amyone to change
+    #  may re-think this later on security or Save issues
+    minisite_offer_url(offer)
   end
 
   def link_to_your_collection_or_not(admin_customer_email)
