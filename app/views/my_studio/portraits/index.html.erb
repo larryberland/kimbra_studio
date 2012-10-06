@@ -7,34 +7,29 @@
 <table>
   <thead>
   <tr>
+    <th colspan="<%= is_admin? ? 3 : 1 %>">Actions</th>
+    <th>Portrait</th>
     <th>Description</th>
     <th>Active?</th>
     <th>Width</th>
     <th>Height</th>
-    <th>Thumb</th>
-    <% if is_admin? %>
-        <th>Faces</th>
-        <th colspan="3">Actions</th>
-    <% else %>
-        <th>Actions</th>
-    <% end %>
   </tr>
   </thead>
   <tbody>
   <% @my_studio_portraits.each do |my_studio_portrait| %>
       <tr>
+        <% if is_admin? %>
+            <td><%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
+            <td><%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
+            <td><%= link_to t(:destroy), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait), confirm: t(:link_destroy_confirm), method: :delete %></td>
+        <% else %>
+            <td><%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
+        <% end %>
+        <td><%= link_to image_tag_list(my_studio_portrait), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
         <td><%= my_studio_portrait.description %></td>
         <td><%= my_studio_portrait.active %></td>
         <td><%= my_studio_portrait.width %></td>
         <td><%= my_studio_portrait.height %></td>
-        <td><%= link_to image_tag_list(my_studio_portrait), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
-        <% if is_admin? %>
-            <td><%= link_to my_studio_portrait.faces.size, my_studio_session_portrait_faces_path(@my_studio_session, my_studio_portrait) %></td>
-            <td><%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
-            <td><%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
-            <td><%= link_to t(:destroy), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait), confirm: t(:link_destroy_confirm), method: :delete %></td>
-        <% end %>
-        <td><%= link_to t(:destroy), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait), confirm: t(:link_destroy_confirm), method: :delete %></td>
       </tr>
   <% end %>
   </tbody>

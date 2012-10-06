@@ -40,6 +40,9 @@ Admin Functionality
     Setup Email Offers
         /admin/customer/email/offers
 
+=== kimbra delayed jobs
+
+
 == Welcome to Rails
 
 Rails is a web-application framework that includes everything needed to create

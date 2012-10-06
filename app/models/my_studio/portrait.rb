@@ -17,9 +17,6 @@ class MyStudio::Portrait < ActiveRecord::Base
   scope :last_day, where(created_at: 24.hours.ago..Time.now)
 
   before_save :set_description
-  after_save :get_faces
-
-  # validates_presence_of :image
 
   def face_image
     if @face_image.nil?
@@ -69,10 +66,10 @@ class MyStudio::Portrait < ActiveRecord::Base
   end
 
   def get_faces
-    if image_changed?
-      gf = GetFace.new
-      gf.perform(self)
-    end
+    #if image_changed?
+    #  gf = GetFace.new
+    #  gf.perform(self)
+    #end
   end
 
 end
