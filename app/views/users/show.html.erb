@@ -29,13 +29,17 @@
     <b>Phone: </b>
     <%= @user.phone_number %>
   </p>
+  <p>
+    <b>Address:</b>
+    <%= "#{@user.try(:address_1)} #{@user.try(:address_2)}" %><br>
+    <%= "#{@user.try(:city)} #{@user.try(:state).try(:abbreviation)}, #{@user.try(:zip_code)}" %>
+    <% if @user.addresses.present? %>
+        <%= render 'shared/addresses/show', resource: @user %>
+    <% else %>
+        no addresses
+    <% end %>
+  </p>
 
-  <p>Address:</p>
-  <% if @user.addresses.present? %>
-      <%= render 'shared/addresses/show', resource: @user %>
-  <% else %>
-      no addresses
-  <% end %>
 
   <%= link_to translate(:edit), edit_user_path(@user) %> |
   <% url = current_user.admin? ? users_path : my_studio_overview_path %>
