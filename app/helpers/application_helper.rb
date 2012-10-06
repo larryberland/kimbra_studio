@@ -19,6 +19,11 @@ module ApplicationHelper
     time.nil? ? '' : l(time.in_time_zone("Eastern Time (US & Canada)"), format: :show)
   end
 
+  def time_short_index(time)
+    # TODO: add time_zone entry to user table so we can display users time_zone
+    time.nil? ? '' : l(time.in_time_zone("Eastern Time (US & Canada)"), format: :index)
+  end
+
   # return Time.now if no time
   def time_short_now(time)
     # TODO: add time_zone entry to user table so we can display users time_zone

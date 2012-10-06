@@ -262,6 +262,7 @@ en:
       short: "%d %b %H:%M"
       long: "%B %d, %Y %H:%M"
       show: "%B %d, %Y %I:%M %p"
+      index: "%b %d, %Y %I:%M %p"
       date: "%m/%d/%Y"
     am: "am"
     pm: "pm"
