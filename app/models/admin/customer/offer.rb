@@ -1,21 +1,8 @@
 class Admin::Customer::Offer < ActiveRecord::Base
 
-  attr_accessible :image, :remote_image_url,
-                  :image_front, :remote_image_front_url,
-                  :image_back, :remote_image_back_url,
-                  :name, :email, :piece, :description,
-                  :custom_layout, :portrait_parts_list,
-                  :tracking
-
-  attr_accessor :portrait_parts_list                            # parts list having portraits assigned to which part
-
   mount_uploader :image, ImageUploader                          # the final custom kimbra piece
   mount_uploader :image_front, ImageUploader                    # the front side of the final custom kimbra piece
   mount_uploader :image_back, ImageUploader                     # the back side of the final custom kimbra piece
-
-  before_create :piece_create_default_and_tracking
-  before_save :piece_default
-  after_update :check_width
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece' # kimbra piece
   belongs_to :email, :class_name => 'Admin::Customer::Email'
@@ -23,6 +10,20 @@ class Admin::Customer::Offer < ActiveRecord::Base
   has_many :items, :class_name => 'Admin::Customer::Item'       # Items that make up the custom piece
 
   has_one :shopping_item, :class_name => 'Shopping::Item'
+
+  attr_accessible :image, :remote_image_url,
+                  :image_front, :remote_image_front_url,
+                  :image_back, :remote_image_back_url,
+                  :name, :email, :piece, :description,
+                  :custom_layout, :item_options_list,
+                  :tracking
+
+  attr_accessor :item_options_list                              # parts list having portraits assigned to which part
+
+  # active_model callbacks
+  before_create :piece_create_default_and_tracking
+  before_save :piece_default
+  after_update :check_width
 
   # So that tracking number will be the id in params.
   def to_param
@@ -32,19 +33,27 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def self.test_offer(options)
     options[:email] ||= Admin::Customer::Email.first
     options[:piece] ||= Admin::Merchandise::Piece.first
-    options[:portrait_parts_list]
+    options[:item_options_list]
   end
 
-  # portrait_parts_list
-  #   array => {:photo_parts => merchandise_part to use,
-  #             :portrait => portrait to use for this part}
-  def self.generate(email, piece, portrait_parts_list)
-    tracking = UUID.random_tracking_number
-    offer    = Admin::Customer::Offer.create(
-        :tracking            => tracking,
-        :email               => email,
-        :piece               => piece,
-        :portrait_parts_list => portrait_parts_list)
+  # Create a item_options_list array that is used by the assemble
+  #   so it knows which portrait can be assigned to all the pieces
+  #   photo_parts
+  #
+  # The Email is sending in which part should get this photo described
+  #   in the item_options_list Array of hashes
+  #   item_options_list
+  #     array => {:photo_part => merchandise_part to use,
+  #               :portrait => portrait to use for this part}
+  def self.generate(email, piece, item_options_list)
+    item_list = item_options_list
+    item_list ||= [] # if Email has no item_options suggestions make sure we have at least the array
+    item_list = [item_list] if item_options_list.kind_of?(Hash)
+    offer = Admin::Customer::Offer.create(
+        tracking:          UUID.random_tracking_number,
+        email:             email,
+        piece:             piece, # parent merchandise.piece
+        item_options_list: item_list)
     offer.assemble(piece)
     offer
   end
@@ -64,31 +73,22 @@ class Admin::Customer::Offer < ActiveRecord::Base
   #      create item with portrait resize
   def assemble(merchandise_piece)
     raise "did you forget to assign a piece for this offer?" if merchandise_piece.nil?
-    raise "did you forget to assign a portrait_parts_list for this offer?" if portrait_parts_list.nil?
+    raise "did you forget to assign a item_options_list for this offer?" if item_options_list.nil?
+    raise "did you forget to convert your item_options_list into an array?" unless item_options_list.kind_of?(Array)
 
-    # add an item for every non_photo part
-    merchandise_piece.non_photo_parts.each_with_index do |part, index|
-      if part.nil?
-        raise "how can part be nil"
-      end
-      if index == 0
-        # for parts that are charms there is only one side which does
-        #  not have a photo part so we need to set the photo part to
-        #  the first one in our non_photo_part list.
-        if portrait_parts_list.present?
-          if portrait_parts_list.kind_of?(Array)
-            portrait_parts_list.first[:photo_part] = part if portrait_parts_list.first[:photo_part].nil?
-          elsif portrait_parts_list.kind_of?(Hash)
-            portrait_parts_list[:photo_part] = part if portrait_parts_list[:photo_part].nil?
-          end
-        end
-      end
-      portrait_parts_list << [{:photo_part => part}] # bad choice on name
-                                                     # this is really a non_photo_part
+    # create all of our non_photo items and store them in our
+    # item_options_list. LDB: sure seems like this variable should be called part_items_list
+
+    # for every non_photo part defined in the merchandise.piece
+    #   create an offer item representing that non_photo part
+    #   and add it out item_options_list for this offer.
+    merchandise_piece.non_photo_parts.each do |part|
+      item_options_list << {photo_part: part, portrait: nil}
     end
 
-    # add an item for every photo_part we have
-    portrait_parts_list.each do |item_options|
+    # Turn our requested item_options_list into the Offer
+    #   items array
+    item_options_list.flatten.each do |item_options|
       self.items << Admin::Customer::Item.assemble_side(self, item_options)
     end
 
@@ -99,9 +99,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   # list of portrait's used by all items in this offer
   def item_portrait_list
-    items.each.collect{|item|item.portrait_list}.compact if items.present?
+    items.each.collect { |item| item.portrait_list }.compact if items.present?
   end
-          # span text for Offer
+
+  # span text for Offer
   def to_image_span
     text = name.to_s
     text = piece.to_image_span if piece.present?
@@ -109,9 +110,9 @@ class Admin::Customer::Offer < ActiveRecord::Base
     text
   end
 
-  # return all portraits that make up this offer
+          # return all portraits that make up this offer
   def portrait_list
-    items.collect {|item| item.portrait_list}.flatten.compact
+    items.collect { |item| item.portrait_list }.flatten.compact
   end
 
   def back
@@ -193,8 +194,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
       h << item.part.piece_layout.h
       w << item.part.piece_layout.w
     end
-    height = h.max
-    width  = w.sum
+    height       = h.max
+    width        = w.sum
     # create the custom piece image that is the maximum size based on
     #   all the individual parts
     custom_piece = image_new(width, height)
