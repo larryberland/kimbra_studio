@@ -5,3 +5,8 @@
         <%= render 'minisite/wide_image', offer: offer, studio: @studio %>
     <% end %>
 <% end %>
+
+<% if is_admin? %>
+    <% btn_message =  @admin_customer_email.sent_at? ? "This email already sent on #{time_short_index @admin_customer_email.sent_at}. Click to send again." : 'If all offers are fixed, click me to send the offer email!' %>
+    <%= button_to btn_message, send_offers_admin_customer_email_url(@admin_customer_email), method: :post %>
+<% end %>

@@ -31,17 +31,19 @@
 
   <p class="price"><%= number_to_currency(@admin_customer_offer.price) %></p>
 
-<% unless @show_status_only %>
-  <%= form_for(@shopping_item, :remote => true) do |f| %>
-      <p>
-        <%= f.hidden_field :offer_id %>
-        <%= f.hidden_field :cart_id %>
-        <%= submit_tag 'Add to Cart', :id => 'my_submit', :class => 'likeabutton' %>
-        <span id="spinner" style="display:none"></span>
-      </p>
+  <% unless @show_status_only %>
+      <% if is_client? %>
+          <%= form_for(@shopping_item, :remote => true) do |f| %>
+              <p>
+                <%= f.hidden_field :offer_id %>
+                <%= f.hidden_field :cart_id %>
+                <%= submit_tag 'Add to Cart', :id => 'my_submit', :class => 'likeabutton' %>
+                <span id="spinner" style="display:none"></span>
+              </p>
+          <% end %>
+      <% end %>
+      <%= button_to 'Adjust picture', edit_url, method: :get %>
   <% end %>
-  <%= button_to 'Adjust picture', edit_url, method: :get %>
-<% end %>
 
   <span id='shopping_item'></span>
 
