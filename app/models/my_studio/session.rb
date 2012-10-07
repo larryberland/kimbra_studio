@@ -16,6 +16,7 @@ class MyStudio::Session < ActiveRecord::Base
   validates_associated :client, :studio
   validates_presence_of :category
 
+  # active_model callbacks
   before_save :set_name
 
   scope :within_seven_days, lambda {
@@ -45,8 +46,13 @@ class MyStudio::Session < ActiveRecord::Base
     @previous_offers
   end
 
+  # portraits for this session that are marked as active?
+  def portrait_list
+    portraits.select {|p| p.active?}
+  end
+
   def email_ready?
-    portraits.count > 2
+    portrait_list.count > 2
   end
 
           # allow the forms to send in a text name

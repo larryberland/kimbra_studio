@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121006194406) do
+ActiveRecord::Schema.define(:version => 20121007142725) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -65,7 +65,6 @@ ActiveRecord::Schema.define(:version => 20121006194406) do
     t.integer  "item_id"
     t.integer  "part_id"
     t.integer  "portrait_id"
-    t.integer  "face_id"
     t.datetime "changed_layout_at"
     t.string   "image_stock"
     t.string   "image_custom"

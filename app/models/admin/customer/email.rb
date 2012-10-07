@@ -3,19 +3,20 @@ class Admin::Customer::Email < ActiveRecord::Base
   attr_accessible :description, :message, :generated_at, :sent_at, :active, :tracking,
                   :my_studio_session
 
-  before_save :set_message
-
   belongs_to :my_studio_session, class_name: 'MyStudio::Session', foreign_key: 'my_studio_session_id'
   has_many :offers, class_name: 'Admin::Customer::Offer', dependent: :destroy, order: 'id DESC'
   has_many :carts, class_name: 'Shopping::Cart'
 
-  scope :by_session, lambda { |studio_session_id| where('my_studio_session_id = ?', studio_session_id) }
-
-  scope :unsent, where('sent_at is NULL and active = ?', true)
+  # active_model callbacks
+  before_save :set_message
 
   after_initialize do |email|
     email.tracking = UUID.random_tracking_number if email.tracking.nil?
   end
+
+  scope :by_session, lambda { |studio_session_id| where('my_studio_session_id = ?', studio_session_id) }
+
+  scope :unsent, where('sent_at is NULL and active = ?', true)
 
   # So that tracking number will be the id in params.
   def to_param
@@ -39,7 +40,7 @@ class Admin::Customer::Email < ActiveRecord::Base
     piece_strategy_list = [piece]
 
     # setup portrait pick_list strategy
-    portrait_pick_list  = studio_session.portraits.select { |p| p.active? }
+    portrait_pick_list  = studio_session.portrait_list
 
     order_by_number_of_parts = piece_strategy_list.sort_by { |piece| piece.photo_parts.size.to_i }.reverse
 
@@ -66,14 +67,18 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   # Entry point to Generate the Offers for an Email to our customer
   def self.generate(studio_session_id)
-    studio_session = MyStudio::Session.find(studio_session_id)
-    email          = Admin::Customer::Email.new(my_studio_session: studio_session)
+    studio_session     = MyStudio::Session.find(studio_session_id)
+    email              = Admin::Customer::Email.new(my_studio_session: studio_session)
+
+    # pick portraits that are only set active
+    portrait_pick_list = studio_session.portrait_list
+    raise "photo session needs at least 3 active portraits count:#{portrait_pick_list.count}" unless studio_session.email_ready?
 
     # setup merchandise piece pick_list strategy
 
     # for testing each category piece just set the categories array index below
     # Categories
-    categories     = %w(Necklaces Bracelets Charms Rings ).collect { |e| "Photo #{e}" }
+    categories = %w(Necklaces Bracelets Charms Rings ).collect { |e| "Photo #{e}" }
     categories << 'Holiday'
     # Photo Bracelets
     # Photo Necklaces
@@ -83,10 +88,7 @@ class Admin::Customer::Email < ActiveRecord::Base
     # pick some pieces to send
     piece_strategy_list      = PieceStrategy.new(email).pick_pieces
 
-    # pick portraits that are only set active
-
     idx                      = -1
-    portrait_pick_list       = studio_session.portraits.select { |p| p.active? }
     order_by_number_of_parts = piece_strategy_list.sort_by { |piece| piece.photo_parts.size.to_i }.reverse
     offers                   = order_by_number_of_parts.collect do |piece|
 
