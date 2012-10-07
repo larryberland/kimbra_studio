@@ -1,4 +1,4 @@
-<h1 xmlns="http://www.w3.org/1999/html"><%= t(:my_studio_portraits_index_title, name: @my_studio_session.name) %></h1>
+<h1 xmlns="http://www.w3.org/1999/html"><%= t(:my_studio_portraits_index_title, name: @my_studio_session.client.name, category:  @my_studio_session.category.name) %></h1>
 
 <%= button_to t(:my_studio_portraits_new_link), new_my_studio_session_portrait_path(@my_studio_session), remote: true, method: :get %>
 <br/>
@@ -37,3 +37,4 @@
   </tbody>
 </table>
 
+<h3><%= feedback_for @my_studio_portraits %></h3>

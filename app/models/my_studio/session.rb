@@ -17,7 +17,7 @@ class MyStudio::Session < ActiveRecord::Base
   validates_presence_of :category
 
   # active_model callbacks
-  before_save :set_name
+  before_save :set_name_and_session_at
 
   scope :within_seven_days, lambda {
     where('session_at >= ? or created_at >= ?', 14.days.ago(Date.today), 14.days.ago(Date.today)).
@@ -72,8 +72,8 @@ class MyStudio::Session < ActiveRecord::Base
 
   private #===============================================================
 
-  def set_name
-    self.name = "#{category.name} for #{client.name}" if name.blank?
+  def set_name_and_session_at
+    self.name = "#{category.try(:name)}" if name.blank?
     self.session_at = Time.now if session_at.nil?
   end
 
