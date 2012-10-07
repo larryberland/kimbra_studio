@@ -56,7 +56,7 @@ class MyStudio::SessionsController < MyStudio::BaseController
 
     respond_to do |format|
       if @my_studio_session.save
-        format.html { redirect_to my_studio_sessions_url, notice: 'Session was successfully created.' }
+        format.html { redirect_to new_my_studio_session_portrait_path(@my_studio_session) }
         format.json { render json: @my_studio_session, status: :created, location: @my_studio_session }
       else
         format.html { render action: "new" }

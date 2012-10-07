@@ -1,4 +1,4 @@
-<%= render 'shared/error_messages', record: @my_studio_session, h2_msg: 'stopped this Session' %>
+<%= render 'shared/error_messages', record: @my_studio_session, h2_msg: 'stopped this Photo Session' %>
 
 <%= form_for(@my_studio_session, validate: true) do |f| %>
 
@@ -36,4 +36,9 @@
       <span id="spinner" style="display:none"></span>
     </div>
 
+<% end %>
+
+<%= coffee_script_tag do %>
+$ ->
+    $(':text:visible:enabled:first').focus()
 <% end %>
