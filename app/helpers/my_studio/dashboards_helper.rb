@@ -18,7 +18,7 @@ module MyStudio::DashboardsHelper
   def actions_for_session(session)
     if session.email_ready? # need 2 or more portraits
       if session.emails.present? # already have an email
-        'email already generated'
+        'done'
       else
         if session.in_generate_queue? # look in the queue for pending email generation
           'in queue'
@@ -27,7 +27,7 @@ module MyStudio::DashboardsHelper
         end
       end
     else
-      'not enough portraits yet'
+      'waiting for studio'
     end
   end
 

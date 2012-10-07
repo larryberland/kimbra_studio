@@ -16,6 +16,7 @@
   </tr>
   </thead>
   <tbody>
+  <%= empty_table_rows if @my_studio_portraits.blank? %>
   <% @my_studio_portraits.each do |my_studio_portrait| %>
       <tr>
         <td>
@@ -38,3 +39,5 @@
 </table>
 
 <h3><%= feedback_for @my_studio_portraits %></h3>
+
+<%= actions_for_portraits(@my_studio_session) %>

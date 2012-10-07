@@ -52,7 +52,8 @@ class MyStudio::Session < ActiveRecord::Base
   end
 
   def email_ready?
-    portrait_list.count > 2
+    # portrait_list.count > 2
+    finished_uploading_at?
   end
 
           # allow the forms to send in a text name

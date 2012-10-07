@@ -39,6 +39,10 @@ module ApplicationHelper
     l(at.in_time_zone("Eastern Time (US & Canada)"), format: :show)
   end
 
+  def date_short(date)
+    date.strftime('%b %d') if date.is_a?(Date)
+  end
+
   def image_tag_title(image_url)
 
   end
