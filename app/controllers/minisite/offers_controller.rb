@@ -6,7 +6,7 @@ module Minisite
     # GET /minisite/offers.json
     def index
       if @admin_customer_email
-        @admin_customer_email.update_attribute :visited_at, Time.now
+        @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
         @admin_customer_offers = @admin_customer_email.offers
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
@@ -22,7 +22,7 @@ module Minisite
     # GET /minisite/offers/1t7t7rye
     # GET /minisite/offers/1t7t7rye.json
     def show
-      @admin_customer_offer.update_attribute :visited_at, Time.now
+      @admin_customer_offer.update_attribute(:visited_at, Time.now) if is_client?
       @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
       @storyline.describe "Viewing #{@admin_customer_offer.name} offer."
       respond_to do |format|
