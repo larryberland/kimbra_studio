@@ -1,7 +1,7 @@
 class Admin::Customer::ItemSide < ActiveRecord::Base
 
-  mount_uploader :image_stock, StockUploader                  # original portrait cropped for image part
-  mount_uploader :image_custom, PartCustomUploader            # final image with portrait and part
+  mount_uploader :image_stock, StockUploader        # original portrait cropped for image part
+  mount_uploader :image_custom, PartCustomUploader  # final image with portrait and part
 
   belongs_to :item, :class_name => 'Admin::Customer::Item'
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # my own copy of merchandise part
@@ -11,7 +11,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   attr_accessible :image_stock, :remote_image_stock_url, :image_stock_cache,
                   :image_custom, :remote_image_custom_url, :image_custom_cache,
                   :changed_layout_at,
-                  :portrait, :portrait_attributes, :portrait_id,
+                  :portrait_id, :portrait, :portrait_attributes,
                   :item, :item_attributes,
                   :part, :part_attributes,
                   :crop_x, :crop_y, :crop_h, :crop_w
@@ -22,22 +22,29 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   after_update :crop_stock_image, if: :cropping?
 
-  # assemble a part side for this item and portrait
-  # options => {:photo_part,
+  # DB Structure
+  #  Piece And Portrait
+  #   Part
+  #     Item
+  #     Item_side
+
+  # assemble a part's item_side
+  #   options => {:photo_part,
   #             :portrait,
   #             :face}
+  #   photo_part => merchandise.part to use for this item_side
+  #   portrait   => sessions.portrait to use for this item_side
   def self.assemble(item, options)
     raise "needs to be a hash options=>#{options.inspect}" unless options.kind_of?(Hash)
+    # clone the merchandise part for the customer's offering
+    #  so this model has its own copy for its parent
     my_part      = Admin::Merchandise::Part.create_clone(options[:photo_part])
+
+
+    # create record with parents, part, item, and portrait
     my_item_side = Admin::Customer::ItemSide.create(:item     => item,
                                                     :part     => my_part,
                                                     :portrait => options[:portrait])
-    if Rails.env.test?
-      puts "#{self} my_part=>#{my_item_side.part.inspect}"
-      puts "#{self} my_part=>#{my_item_side.part.part_layout.layout.inspect}"
-      puts "#{self} my_part=>#{my_item_side.part.piece_layout.layout.inspect}"
-    end
-
     my_item_side.create_side
     my_item_side
   end
@@ -49,22 +56,30 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   # create the image_stock from [portrait | face | part]
   # create the image_custom from stock and merchandise_part
   def create_side
+    raise "no fog images without an id" if new_record?
     @assembly = true
-    # LDB? At this point not sure if i want an image or a remote_file reference
-    #      when i start the create side. sure seems like it should be an image
+
     file_url  = if portrait
-                  # set the image_stock file to the portrait's remote url
-                  #self.image_stock = portrait.face_file
+                  # grab a copy of the sessions portrait using the face sized image
                   portrait.image_url(:face)
                 else
+                  # no portrait must just be a charm so use the merchandise.parts image
                   part.image_part_url
                 end
 
+    raise "no item_side image? customer_item_side id:#{id} file:#{file_url}" if file_url.blank?
+
+    # LDB:? sure seems like i have these reversed?
+    #       i would think stock means no portrait and custom
+    #       should be the portrait image (sure i am wrong)
     self.remote_image_stock_url  = file_url
+
+    # end up being the custom piece with portrait and background
     self.remote_image_custom_url = part.image_part_url
 
     # this writes our remote image_custom and image_stock to the S3 server
     save
+
   end
 
   # carrier_wave callback to process the stock_image
@@ -123,7 +138,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   # carrier_wave process callback from PartCustomUploader
   def image_custom_process(part_image)
-    viewport = part.viewport
+
+    viewport = part.viewport  # viewport defined by the Part
     if (viewport[:w] != stock_image.columns) and (viewport[:h] != stock_image.rows)
       puts "#{self} stock_image onto part #{part_image.columns}x#{part_image.rows} viewport #{viewport[:x]} #{viewport[:y]} #{stock_image.columns}x#{stock_image.rows}"
       puts "#{self} viewport=>#{viewport.inspect}"

@@ -1,12 +1,5 @@
 class Admin::Merchandise::Part < ActiveRecord::Base
 
-  attr_accessible :image, :remote_image_url, :image_width, :image_height,
-                  :image_part, :image_part_url, :image_part_width, :image_part_height,
-                  :photo, :order,
-                  :piece, :portrait,
-                  :piece_layout, :piece_layout_attributes,
-                  :part_layout, :part_layout_attributes
-
   mount_uploader :image, ImageUploader                  # custom assembled part
   mount_uploader :image_part, ImageUploader             # background Image used to generate the custom assembled part
 
@@ -18,6 +11,13 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   has_one :part_layout # the viewport coordinates for the image_part background
   has_one :piece_layout
+
+  attr_accessible :image, :remote_image_url, :image_width, :image_height,
+                  :image_part, :image_part_url, :image_part_width, :image_part_height,
+                  :photo, :order,
+                  :piece, :portrait,
+                  :part_layout, :part_layout_attributes,
+                  :piece_layout, :piece_layout_attributes
   accepts_nested_attributes_for :part_layout, :piece_layout
 
   attr_accessor :width, :height # generic form of image_part_width
@@ -45,34 +45,20 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     my_part
   end
 
-  #def generate
-  #  f_stock, f_custom = if face.present?
-  #                        center_on_face(face)
-  #                      else
-  #                        group_shot
-  #                      end
-  #end
-
-  # create a clone of merchandise_part we can use for customisation
-  def self.create_clone(merchandise_part, portrait_options=nil)
+  # clone a merchandises part for the customer's custom part
+  def self.create_clone(merchandise_part)
+    # clone a new copy for our customer's custom paort
     item_part       = merchandise_part.clone
-    item_part.piece = merchandise_part.piece
-    item_part.save
-    if portrait_options
-      item_part.portrait = portrait_options[:portrait]
-      # LDB: Keeping around just in case
-      #f_stock, f_custom  = if portrait_options[:face]
-      #                       item_part.center_on_face(portrait_options[:face])
-      #                     else
-      #                       item_part.group_shot
-      #                     end
-      f_stock, f_custom  = item_part.group_shot
 
-    end
+    # use the same merchandise part's, piece (no clone)
+    item_part.piece = merchandise_part.piece
+
+    item_part.save  # save before fog so we have valid Id for image s3 paths
+
+    # copy the original merchandise part images into the fog
     item_part.copy_image(merchandise_part)
     item_part
   end
-
 
   def width
     self.image_part_width # width of the original kimbra background image part graphic
