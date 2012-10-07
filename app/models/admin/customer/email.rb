@@ -137,7 +137,7 @@ class Admin::Customer::Email < ActiveRecord::Base
   private #================================================
 
   def set_message
-    self.message = I18n.translate(:email_message, :name => my_studio_session.client.name.titleize) unless message
+    self.message = I18n.translate(:email_message, studio: my_studio_session.studio.name, name: my_studio_session.client.name.titleize) unless message
   end
 
 end
