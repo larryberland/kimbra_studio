@@ -83,7 +83,11 @@
           <% unless is_client? %>
               |
               <li>
-                <%= link_to 'Return to sessions list', my_studio_sessions_path %>
+                <% if is_admin? %>
+                    <%= link_to 'Return to Overview', admin_overview_path %>
+                <% elsif is_studio? %>
+                    <%= link_to 'Return to sessions list', my_studio_sessions_path %>
+                <% end %>
               </li>
           <% end %>
         </ul>

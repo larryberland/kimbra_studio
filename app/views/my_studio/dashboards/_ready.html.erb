@@ -7,9 +7,9 @@
       <table>
         <thead>
         <tr>
-          <th>Actions</th>
           <% if is_admin? %>
-              <th>Offers</th>
+              <th>Actions</th>
+              <th>been waiting</th>
           <% end %>
           <th>photo session</th>
           <% if is_admin? %>
@@ -22,10 +22,9 @@
         <tbody>
         <% emails.each do |email| %>
             <tr>
-              <td><span id="send_email_<%= email.id %>"><%= actions_for_email(email) %></span></td>
-
               <% if is_admin? %>
-                  <td><%= link_to 'Edit', minisite_email_offers_path(email.tracking) %></td>
+                  <td><%= link_to 'Edit offers', minisite_email_offers_path(email.tracking) %></td>
+                  <td><%= time_ago_in_words email.created_at %></td>
               <% end %>
 
               <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session) %></td>
@@ -40,10 +39,6 @@
         <% end %>
         </tbody>
       </table>
-      <br/>
-      <span id='send_all_emails'>
-        <%= link_to "Send all #{pluralize(emails.size, 'ready email')}", send_all_offers_admin_customer_emails_url, method: :post, remote: true %>
-      </span>
   <% else %>
       <p>None</p>
   <% end %>

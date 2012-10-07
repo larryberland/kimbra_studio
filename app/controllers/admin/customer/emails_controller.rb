@@ -98,12 +98,10 @@ class Admin::Customer::EmailsController < ApplicationController
   end
 
   def send_offers
-    Admin::Customer::Email.find(params[:id]).send_offers
-    respond_to do |format|
-      format.js do
-        render text: "$('#send_email_#{params[:id]}').html('queueing...').effect('highlight', 2000)"
-      end
-    end
+    email = Admin::Customer::Email.find_by_tracking(params[:id])
+    email.send_offers
+    flash[:notice] = "Sending offer email to #{email.my_studio_session.client.name} from #{email.my_studio_session.studio.name}."
+    redirect_to admin_overview_path
   end
 
   def send_all_offers
