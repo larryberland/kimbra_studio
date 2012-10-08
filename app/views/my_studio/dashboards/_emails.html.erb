@@ -23,6 +23,7 @@
         </tr>
         </thead>
         <tbody>
+        <%= empty_email_table_rows if sessions.blank? %>
         <% sessions.each do |session| %>
             <% session.emails.each do |email| %>
                 <tr>

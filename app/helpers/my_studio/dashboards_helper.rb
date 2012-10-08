@@ -40,4 +40,8 @@ module MyStudio::DashboardsHelper
     end
   end
 
+  def empty_email_table_rows
+    '<tr><td>No emails this week yet.</td></tr>'.html_safe
+  end
+
 end
