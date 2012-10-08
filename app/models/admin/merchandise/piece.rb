@@ -25,19 +25,28 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
 
   # determines both the number of offers we send out and from which category
   #  when the Holiday's start we can just add to this array
+  # ["Photo Bracelets", "Photo Necklaces", "Holiday", "Photo Charms"] as of 10/7/2012
   def self.strategy_categories
-    ['Photo Necklaces', 'Photo Charms']
+    if Rails.env.development?
+      Admin::Merchandise::Piece.select('distinct(category)').collect(&:category)
+    else
+      ['Photo Necklaces', 'Photo Charms']
+    end
   end
 
+  # get all kimbra merchandise pieces for this category
+  # that have photo_parts AND also are marked active?
   def self.to_strategy_category(category)
     by_category(category).all.select{|r| r.photo_parts.present?}
   end
 
-  # return a hash of all pieces to use when deciding
-  #   on a strategy for sending offers to prospective clients
+  # return a hash of all piece categories to use when deciding
+  #   on a strategy when sending offers to prospective clients
   def self.to_strategy
-    # currently using everything except Holiday category
-    #   and the admin has set Active in the database
+    # we only want kimbra pieces that have the categories defined by
+    #   strategy_categories Array
+    #   10/7/2012 => using Photo Necklaces and Photo Charms according to thie
+    # TODO:  I don't think this is the case as i see charms and bracelets right now?
     strategy_categories.collect{|category| to_strategy_category(category)}.flatten.group_by{|r| r.category}
   end
 

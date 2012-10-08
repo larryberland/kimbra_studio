@@ -82,22 +82,34 @@ class Admin::Customer::Email < ActiveRecord::Base
     categories << 'Holiday'
     # Photo Bracelets
     # Photo Necklaces
-    #piece_strategy_list = PieceStrategy.new.pick_category(categories[4]) # testing
-    # end of test
+    if Rails.env.development?
+      # This will generate an Email with an offer from every piece in a specific category
+      #  just enter in the Category you want to be generated
+      #  (ie categories[2]  will do all charms)
+      piece_strategy_list = PieceStrategy.new(email).pick_category(categories[0])
+    else
 
-    # pick some pieces to send
-    piece_strategy_list      = PieceStrategy.new(email).pick_pieces
+      # pick some pieces to send
+      piece_strategy_list = PieceStrategy.new(email).pick_pieces
+    end
+    Rails.logger.info("piece_strategy_list:#{piece_strategy_list.inspect}")
 
-    idx                      = -1
+    # arrange the order we are going to create the offers based on the number of parts for each piece
+    #  (ie bracelets are done first then single charms)
     order_by_number_of_parts = piece_strategy_list.sort_by { |piece| piece.photo_parts.size.to_i }.reverse
+
+    # lets go create and assemble all the pieces
+    idx                      = -1
     offers                   = order_by_number_of_parts.collect do |piece|
 
-      # assign a portrait for the part
       strategy_picture_list = piece.photo_parts.each.collect do |part|
         idx += 1
         idx = 0 if idx >= portrait_pick_list.size
+        # suggest a portrait to be used for each of the pieces  parts that require a photo
         {portrait: portrait_pick_list[idx], photo_part: part, face: nil} # temp for now will remove
       end
+
+      # create the offer for this kimbra piece with the suggested (part and picture) for each Offer
       offer                 = Admin::Customer::Offer.generate(email, piece, strategy_picture_list)
       offer
     end

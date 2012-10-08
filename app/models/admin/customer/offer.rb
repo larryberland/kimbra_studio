@@ -88,6 +88,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
     # Turn our requested item_options_list into the Offer
     #   items array
+    Rails.logger.info("offer\nitem_options_list:#{item_options_list.flatten.inspect}")
     item_options_list.flatten.each do |item_options|
       self.items << Admin::Customer::Item.assemble_side(self, item_options)
     end
