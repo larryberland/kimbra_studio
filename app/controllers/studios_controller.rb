@@ -2,7 +2,7 @@ class StudiosController < ApplicationController
 
   before_filter :form_info
   before_filter :authenticate_admin!
-  skip_before_filter :authenticate_user!, only: [:unsubscribe]
+  skip_before_filter :authenticate_user!, only: [:unsubscribe, :eap]
 
   # GET /studios
   # GET /studios.json
@@ -126,7 +126,13 @@ class StudiosController < ApplicationController
     @studio.update_attributes(params[:studio])
     respond_to do |format|
       if @studio.save
-        format.html { redirect_to my_studio_minisite_path(@studio), notice: "Studio was successfully updated." }
+        format.html do
+          if request.xhr?
+            render text: @studio.sales_status
+          else
+            redirect_to my_studio_minisite_path(@studio), notice: "Studio was successfully updated."
+          end
+        end
         format.json { head :ok }
       else
         format.html { render action: "edit" }
@@ -171,6 +177,12 @@ class StudiosController < ApplicationController
     else
       render(text: 'No email found with that email address.')
     end
+  end
+
+  def eap
+    studio = Studio.find(params[:id])
+    studio.update_attribute(:eap_click, Time.now) if studio
+    redirect_to root_path
   end
 
   private #==========================================================================

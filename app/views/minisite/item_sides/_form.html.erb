@@ -28,6 +28,11 @@
       </table>
     </div>
 
+    <p>
+      Please ignore any thin white lines appearing on the sides of your portraits in the jewelry pieces.
+      <br/>These will not be present when we prepare your pieces.
+    </p>
+
     <div class="actions">
       <%= f.submit :id => 'my_submit', :value => 'Save' %>
       <%= link_to 'Cancel', minisite_offer_url(@offer), :style => 'margin-left: 15px;' %>
@@ -38,7 +43,6 @@
 
     </div>
 
-    <!-- Studio Portraits and current charm portrait -->
     <div class="portraits">
       <div><br/><br/><i>Click to select a different portrait</i></div>
       <% @admin_customer_offer.portraits.each do |portrait| %>

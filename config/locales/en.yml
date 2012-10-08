@@ -19,7 +19,7 @@ en:
   # customer_mailer/send_offer.html.erb
   client_send_offers_subject: "%{name} custom jewelry offer"
 
-  email_message: "Kimbra ClickPLUS has created this special offer just for %{name}."
+  email_message: "%{studio} suggests heirloom jewelry for %{name}."
 
   # credit card profile
   new_credit_card_title: 'Credit Card Profile name'

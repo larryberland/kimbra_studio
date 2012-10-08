@@ -89,6 +89,7 @@ KimbraStudio::Application.routes.draw do
     end
     resource :overview, :only => [:show]
     resources :sessions do
+      get :is_finished_uploading_portraits
       resources :portraits
     end
     resources :staffers
@@ -121,6 +122,7 @@ KimbraStudio::Application.routes.draw do
   resources :studios, constraints: { email: /.*/ } do
     member do
       put :create_owner
+      get :eap
       get :new_owner
       post :send_new_account_email
       get :show_branding
@@ -135,6 +137,6 @@ KimbraStudio::Application.routes.draw do
 
   match 'admin' => 'admin/overviews#index'
   match 'delivery' => 'shopping/carts#find_by_tracking'
-  match 'tracking/:id', :to => 'tracking#image', :as => "tracking_image"
+  match 'tracking/:id', to: 'tracking#image', as: 'tracking_image'
 
 end

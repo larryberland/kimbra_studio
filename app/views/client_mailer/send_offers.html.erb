@@ -268,12 +268,11 @@
     }
 
     .article-title {
-        font-size: 18px;
-        line-height: 24px;
+        font-size: 14px;
+        line-height: 18px;
         color: <%= @studio.minisite.font_color -%>;
-        font-weight: bold;
         margin-top: 0px;
-        margin-bottom: 18px;
+        margin-bottom: 15px;
         font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
     }
 
@@ -509,7 +508,7 @@
                                     :align => "top" -%>
                     </div>
                     <p class="article-title" align="center" style="color: <%= @studio.minisite.font_color -%>;">
-                      <%= @studio.name %> suggests heirloom jewelry.
+                      <%= @email.message %>
                     </p>
                   </td>
                 </tr>
@@ -556,11 +555,14 @@
         <td class="w30" width="30"></td>
         <td class="w580" valign="top" width="360">
           <p id="permission-reminder" class="footer-content-left" align="left" style="color: #e2e2e2">
-            <span>We sent you this email this because you are a customer of <%= @studio.name -%>.</span>
+            We sent you this email this because you are a customer of <%= @studio.name -%>.
+            If you like to schedule a photo session with <%= @studio.name -%>,
+            <% msg = 'My name is ... I am interested in a new photo session. Would you please contact me to discuss arrangements.' %>
+            <u><%= mail_to @studio.info.email, 'please send us a note!', subject: 'Interested in new photo session!', body: msg  %></u>
           </p>
 
           <p class="footer-content-left" align="left" style="color: #e2e2e2">
-            <unsubscribe><%= link_to 'Unsubscribe instantly', unsubscribe_minisite_email_url(@email.tracking), style: "color: #{@studio.minisite.font_color}" %></unsubscribe>
+            <unsubscribe><%= link_to 'Unsubscribe instantly', unsubscribe_minisite_email_url(@email.tracking), style: "color: #e2e2e2" %></unsubscribe>
             <%= image_tag tracking_image_url(@email), :alt => '', :title => '' %>
           </p>
         </td>

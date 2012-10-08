@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007142725) do
+ActiveRecord::Schema.define(:version => 20121008074152) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -290,12 +290,13 @@ ActiveRecord::Schema.define(:version => 20121007142725) do
   create_table "my_studio_sessions", :force => true do |t|
     t.string   "name"
     t.date     "session_at"
-    t.boolean  "active",      :default => true
+    t.boolean  "active",                :default => true
     t.integer  "studio_id"
     t.integer  "client_id"
     t.integer  "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.datetime "finished_uploading_at"
   end
 
   add_index "my_studio_sessions", ["category_id"], :name => "index_my_studio_sessions_on_category_id"
@@ -579,6 +580,9 @@ ActiveRecord::Schema.define(:version => 20121007142725) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "sales_status", :default => "none"
+    t.text     "sales_notes"
+    t.datetime "eap_click"
   end
 
   create_table "unsubscribes", :force => true do |t|

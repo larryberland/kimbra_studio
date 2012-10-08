@@ -56,7 +56,7 @@ class MyStudio::SessionsController < MyStudio::BaseController
 
     respond_to do |format|
       if @my_studio_session.save
-        format.html { redirect_to new_my_studio_session_portrait_path(@my_studio_session) }
+        format.html { redirect_to my_studio_session_portraits_path(@my_studio_session) }
         format.json { render json: @my_studio_session, status: :created, location: @my_studio_session }
       else
         format.html { render action: "new" }
@@ -92,6 +92,13 @@ class MyStudio::SessionsController < MyStudio::BaseController
       format.html { redirect_to my_studio_sessions_url }
       format.json { head :ok }
     end
+  end
+
+  def is_finished_uploading_portraits
+    sess = MyStudio::Session.find(params[:session_id]) rescue nil
+    sess.update_attribute(:finished_uploading_at, Time.now) if sess
+    flash[:notice] = 'Thanks! We\'ll start photoshopping those portraits into Kimbra\'s jewelry pieces soon.'
+    redirect_to my_studio_dashboard_path
   end
 
   private #==================================================================================

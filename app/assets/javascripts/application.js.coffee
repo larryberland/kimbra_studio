@@ -11,12 +11,14 @@
 #= require imagesloaded
 #= require rails.validations
 #= require jquery.orbit-1.2.3.min
+#= require jeditable
+#= require aloha-config
 
 $ ->
   $('.flash_notice').each (index, element) ->
-      $(element).effect('highlight', 4000).delay(2000).slideUp('slow')
+      $(element).effect('highlight', 6000).delay(2000).slideUp('slow')
   $('.flash_error').each (index, element) ->
-      $(element).effect('highlight', 4000).delay(2000).slideUp('slow')
+      $(element).effect('highlight', 6000).delay(2000).slideUp('slow')
 
   $('.datepicker').each (index, element) ->
     $(element).datepicker({ dateFormat: "yy-mm-dd" })
