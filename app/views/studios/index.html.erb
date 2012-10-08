@@ -63,7 +63,7 @@
         <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
         <td><%= studio.try(:city) %></td>
         <td><%= studio.try(:state).try(:abbreviation) %></td>
-        <td><%= editable_field studio, :sales_status, {tooltip: 'edit me'} %></td>
+        <td><%= editable_field studio, :sales_status, {tooltip: studio.sales_notes} %></td>
       </tr>
   <% end %>
   </tbody>

@@ -46,7 +46,6 @@ gem 'gmaps4rails'
 
 gem 'newrelic_rpm'
 gem 'jeditable-rails'
-gem 'aloha-rails'
 
 # Gems used only for assets and not required
 # in production environments by default.

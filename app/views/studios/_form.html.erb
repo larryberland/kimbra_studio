@@ -8,7 +8,7 @@
     </div>
     <div class="field">
       <%= f.label :phone_number %>
-      <%= f.text_field :phone_number, {size: 15, maxlength:15, value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true)} %>
+      <%= f.text_field :phone_number, {size: 15, maxlength: 15, value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true)} %>
       for clients to contact
     </div>
 
@@ -37,29 +37,21 @@
     <% ms = @studio.minisite.nil? ? MyStudio::Minisite.new : @studio.minisite %>
     <%= render "my_studio/minisites/form", :f => f, :minisite => ms %>
 
-    <div class="field">
-      <%= f.label 'Sales status' %>
-      <%= f.text_field :sales_status %>
-    </div>
-    <div class="field">
-      <%= f.label 'Sales notes' %>
-      <%= f.text_area :sales_notes %>
-    </div>
+    <% if is_admin? %>
+        <div class="field">
+          <%= f.label 'Sales status' %>
+          <%= f.text_field :sales_status %>
+        </div>
+        <div class="field">
+          <%= f.label 'Sales notes' %>
+          <%= f.text_area :sales_notes %>
+        </div>
 
-    <div class="actions">
-      <%= f.submit :id => 'my_submit' %>
-      <span id="spinner" style="display:none"></span>
-    </div>
+        <div class="actions">
+          <%= f.submit :id => 'my_submit' %>
+          <span id="spinner" style="display:none"></span>
+        </div>
 
-<% end %>
+    <% end %>
 
-<% if is_admin? %>
-<script type="text/javascript">
-//    Aloha.ready( function() {
-//
-//        // Make #content editable once Aloha is loaded and ready.
-//        Aloha.jQuery('#studio_sales_notes').aloha();
-//
-//    });
-</script>
 <% end %>

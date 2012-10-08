@@ -12,7 +12,6 @@
 #= require rails.validations
 #= require jquery.orbit-1.2.3.min
 #= require jeditable
-#= require aloha-config
 
 $ ->
   $('.flash_notice').each (index, element) ->

@@ -12,4 +12,18 @@ module MyStudio::SessionsHelper
     end
   end
 
+  def complete?(session)
+    if is_admin?
+      if session.finished_uploading_at?
+        content_tag :span, title: "#{time_short session.finished_uploading_at}" do
+          '&#x2713;'.html_safe
+        end
+      else
+        '&#x2718;'.html_safe
+      end
+    else
+      session.finished_uploading_at? ? '&#x2713;'.html_safe : button_to(t(:my_studio_portraits_new_link), my_studio_session_portraits_path(session), method: :get)
+    end
+  end
+
 end
