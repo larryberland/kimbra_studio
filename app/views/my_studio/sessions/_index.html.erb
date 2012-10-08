@@ -25,11 +25,11 @@
               <td><%= link_to session.try(:studio).try(:name), studio_path(session.studio), title: t(:studios_show_link) %></td>
           <% end %>
           <td><%= link_to session.try(:name), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
-          <td><%= session.try(:client).try(:name) %></td>
-          <td><%= session.try(:client).try(:email) %></td>
+          <td><%= session.client.name %></td>
+          <td><%= session.client.email.to_s.sub('@','&thinsp;@').html_safe %></td>
           <td><%= date_short session.session_at %></td>
           <td><%= upload_link(session) %></td>
-          <td><%= session.finished_uploading_at? ? '&#x2713;'.html_safe : button_to(t(:my_studio_portraits_new_link), new_my_studio_session_portrait_path(session), remote: true, method: :get) %></td>
+          <td><%= session.finished_uploading_at? ? '&#x2713;'.html_safe : button_to(t(:my_studio_portraits_new_link), my_studio_session_portraits_path(session), method: :get) %></td>
           <td><%= session.emails.last ? link_to('View', show_collection_my_studio_minisite_path(session.emails.last.tracking)) : 'not sent yet' %></td>
         </tr>
     <% end %>
