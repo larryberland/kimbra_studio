@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121007191055) do
+ActiveRecord::Schema.define(:version => 20121008074152) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -580,6 +580,9 @@ ActiveRecord::Schema.define(:version => 20121007191055) do
     t.string   "phone_number"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "sales_status", :default => "none"
+    t.text     "sales_notes"
+    t.datetime "eap_click"
   end
 
   create_table "unsubscribes", :force => true do |t|

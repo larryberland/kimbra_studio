@@ -27,7 +27,7 @@ class Studio < ActiveRecord::Base
                   :info, :info_attributes,
                   :minisite, :minisite_attributes,
                   :owner, :owner_attributes,
-                  :country, :state, :csv_row
+                  :country, :state, :csv_row, :sales_status, :sales_notes
 
   accepts_nested_attributes_for :info, :minisite, :owner
 

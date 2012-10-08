@@ -37,9 +37,29 @@
     <% ms = @studio.minisite.nil? ? MyStudio::Minisite.new : @studio.minisite %>
     <%= render "my_studio/minisites/form", :f => f, :minisite => ms %>
 
+    <div class="field">
+      <%= f.label 'Sales status' %>
+      <%= f.text_field :sales_status %>
+    </div>
+    <div class="field">
+      <%= f.label 'Sales notes' %>
+      <%= f.text_area :sales_notes %>
+    </div>
+
     <div class="actions">
       <%= f.submit :id => 'my_submit' %>
       <span id="spinner" style="display:none"></span>
     </div>
 
+<% end %>
+
+<% if is_admin? %>
+<script type="text/javascript">
+//    Aloha.ready( function() {
+//
+//        // Make #content editable once Aloha is loaded and ready.
+//        Aloha.jQuery('#studio_sales_notes').aloha();
+//
+//    });
+</script>
 <% end %>
