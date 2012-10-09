@@ -27,6 +27,7 @@
             <td class="w580" width="580">
               <div class="article-content" align="center">
                 <p style="color: <%= studio.minisite.font_color %>;">
+                  <b><%= offer.name %></b><br/>
                   <%= offer.piece.short_description %>
                   <span class="price"><%= number_to_currency(offer.price) %></span> •
                   <%= link_to "Details...", url_for_offer_or_not(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
