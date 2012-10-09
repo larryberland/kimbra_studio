@@ -46,14 +46,14 @@ class Admin::Customer::Offer < ActiveRecord::Base
   #     array => {:photo_part => merchandise_part to use,
   #               :portrait => portrait to use for this part}
   def self.generate(email, piece, item_options_list)
-    item_list = item_options_list
-    item_list ||= [] # if Email has no item_options suggestions make sure we have at least the array
-    item_list = [item_list] if item_options_list.kind_of?(Hash)
+    list = item_options_list
+    list = [item_options_list] if item_options_list.kind_of?(Hash)
+    list ||= [] # if Email has no item_options suggestions make sure we have at least the array
     offer = Admin::Customer::Offer.create(
         tracking:          UUID.random_tracking_number,
         email:             email,
         piece:             piece, # parent merchandise.piece
-        item_options_list: item_list)
+        item_options_list: list)
     offer.assemble(piece)
     offer
   end
@@ -95,6 +95,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
     # create a composite of all the items
     create_custom_image
+
     self
   end
 

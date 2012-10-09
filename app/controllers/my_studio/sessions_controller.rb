@@ -98,7 +98,8 @@ class MyStudio::SessionsController < MyStudio::BaseController
     sess = MyStudio::Session.find(params[:session_id]) rescue nil
     sess.update_attribute(:finished_uploading_at, Time.now) if sess
     flash[:notice] = 'Thanks! We\'ll start photoshopping those portraits into Kimbra\'s jewelry pieces soon.'
-    redirect_to my_studio_dashboard_path
+
+    redirect_to my_studio_dashboard_path(my_studio_id: sess.studio.id)
   end
 
   private #==================================================================================

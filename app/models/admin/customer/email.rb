@@ -84,7 +84,8 @@ class Admin::Customer::Email < ActiveRecord::Base
     # Photo Necklaces
     if Rails.env.development?
       # This will generate an Email with an offer from every piece in a specific category
-      #  just enter in the Category you want to be generated
+      #  just enter in
+      # the Category you want to be generated
       #  (ie categories[2]  will do all charms)
       piece_strategy_list = PieceStrategy.new(email).pick_category(categories[0])
     else
