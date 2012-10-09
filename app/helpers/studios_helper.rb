@@ -16,11 +16,19 @@ module StudiosHelper
     end
   end
 
-  def owner_link(studio)
-    if studio.owner
-      content_tag :span, mail_to(studio.owner.email, studio.owner.name), title: studio.owner.email
+  def studio_email_link(studio)
+    if studio.info
+      content_tag :span, mail_to(studio.info.email, studio.name), title: studio.info.email
     else
       link_to 'create', new_owner_studio_path(studio)
+    end
+  end
+
+  def user_email_link(user)
+    if user
+      content_tag :span, mail_to(user.email, user.name), title: user.email
+    else
+      'no email'
     end
   end
 

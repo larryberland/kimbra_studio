@@ -26,8 +26,8 @@
   <tr>
     <th>Actions</th>
     <th>setup</th>
-    <th>Name</th>
-    <th>Studio</th>
+    <th title="send a user email">Name</th>
+    <th title="send a studio email">Studio</th>
     <th>Phone</th>
     <th>Location</th>
   </tr>
@@ -45,8 +45,8 @@
           <%= link_to t(:destroy), user, confirm: 'Are you sure?', method: :delete %>
         </td>
         <td><%= "#{time_short_index(user.last_sign_in_at)} (#{user.try(:first_pass)})" %></td>
-        <td><%= full_name(user) %></td>
-        <td><%=  owner_link(user.try(:studio)) %></td>
+        <td><%=  user_email_link(user) %></td>
+        <td><%=  studio_email_link(user.try(:studio)) %></td>
         <td><%= number_to_phone user.phone_number_display, area_code: true %></td>
         <td><%= user.try(:city_state_name) %></td>
       </tr>

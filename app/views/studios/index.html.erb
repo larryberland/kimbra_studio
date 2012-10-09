@@ -29,10 +29,10 @@
     <th>Actions</th>
     <th>Logo?</th>
     <th title='date studio clicked through EAP email'>EAP</th>
-    <th>Name</th>
-    <th>Phone number</th>
-    <th>Owner</th>
+    <th title='send studio an email'>Name</th>
+    <th title='send owner an email'>Owner</th>
     <th>Website</th>
+    <th>Phone number</th>
     <th>Location</th>
     <th>Sales<br/>status</th>
   </tr>
@@ -56,10 +56,10 @@
         </td>
         <td><%= studio.try(:logoize) %></td>
         <td title='<%= time_short_index studio.eap_click %>' ><%= date_short studio.eap_click  %></td>
-        <td><%= studio.name %></td>
-        <td><%= number_to_phone studio.phone_number, area_code: true %></td>
-        <td><%= owner_link(studio) %></td>
+        <td><%= studio_email_link(studio) %></td>
+        <td><%= user_email_link(studio.owner) %></td>
         <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
+        <td><%= number_to_phone studio.phone_number, area_code: true %></td>
         <td><%= studio.try(:city_state_name) %></td>
         <td><%= editable_field studio, :sales_status, {tooltip: studio.sales_notes} %></td>
       </tr>
