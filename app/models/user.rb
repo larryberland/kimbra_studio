@@ -69,6 +69,12 @@ class User < ActiveRecord::Base
            like_exp, like_exp, like_exp, like_exp).joins(:studio).order('last_sign_in_at desc, updated_at desc, last_name asc')
   }
 
+  def phone_number_display
+    pn = phone_number
+    pn ||= studio.try(:phone_number)
+    pn
+  end
+
   def phone_number=(num)
     super num.to_s.gsub(/\D/, '')[0, 10]
   end
