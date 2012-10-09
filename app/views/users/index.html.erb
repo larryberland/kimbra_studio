@@ -48,7 +48,7 @@
         <td><%= "#{time_short_index(user.last_sign_in_at)} (#{user.try(:first_pass)})" %></td>
         <td><%= full_name(user) %></td>
         <td><%= user.try(:studio).try(:name) %></td>
-        <td><%= user.email %></td>
+        <td><%= mail_to user.email, user.email.split('@').first if user.email.present? %></td>
         <td><%= number_to_phone user.phone_number_display, area_code: true %></td>
         <td><%= user.try(:city_state_name) %></td>
       </tr>

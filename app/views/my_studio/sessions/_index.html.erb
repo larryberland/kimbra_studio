@@ -23,9 +23,9 @@
         <tr>
           <% if is_admin? %>
               <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
-              <td><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
+              <td title="portraits have been uploaded in last 2 days"><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
           <% end %>
-          <td><%= complete?(session) %></td>
+          <td title=""><%= complete?(session) %></td>
           <td><%= upload_link(session) %></td>
           <td><%= session.emails.last ? link_to('View', show_collection_my_studio_minisite_path(session.emails.last.tracking)) : 'not sent yet' %></td>
           <% if is_admin? %>
@@ -33,7 +33,7 @@
           <% end %>
           <td><%= link_to session.try(:name), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
           <td><%= session.client.name %></td>
-          <td><%= session.client.email.to_s.sub('@', '&thinsp;@').html_safe %></td>
+          <td><%= mail_to session.client.email, session.client.email.split('@').first%></td>
           <td><%= date_short session.session_at %></td>
         </tr>
     <% end %>
