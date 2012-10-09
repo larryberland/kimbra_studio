@@ -30,8 +30,7 @@
     <th>Studio</th>
     <th>Email</th>
     <th>Phone</th>
-    <th>City</th>
-    <th>State</th>
+    <th>Location</th>
   </tr>
   </thead>
   <tbody>
@@ -51,8 +50,7 @@
         <td><%= user.try(:studio).try(:name) %></td>
         <td><%= user.email %></td>
         <td><%= number_to_phone user.phone_number, area_code: true %></td>
-        <td><%= user.try(:city) %></td>
-        <td><%= user.try(:state).try(:abbrev_and_name) %></td>
+        <td><%= user.try(:city_state_name) %></td>
       </tr>
   <% end %>
   </tbody>
