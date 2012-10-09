@@ -5,15 +5,17 @@
       <% if is_admin? %>
           <th><span class='explainer' title='Need at least 2 portraits to generate an email.'>Actions</span></th>
           <th>New Portrait?</th>
+      <% end %>
+      <th>Complete?</th>
+      <th>Portraits</th>
+      <th>Offer Email</th>
+      <% if is_admin? %>
           <th>Studio</th>
       <% end %>
       <th>Photo Session</th>
       <th>Client</th>
       <th>Email</th>
       <th>Session Date</th>
-      <th>Portraits</th>
-      <th>Complete?</th>
-      <th>Offer Emails</th>
     </tr>
     </thead>
     <tbody>
@@ -22,15 +24,17 @@
           <% if is_admin? %>
               <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
               <td><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
+          <% end %>
+          <td><%= complete?(session) %></td>
+          <td><%= upload_link(session) %></td>
+          <td><%= session.emails.last ? link_to('View', show_collection_my_studio_minisite_path(session.emails.last.tracking)) : 'not sent yet' %></td>
+          <% if is_admin? %>
               <td><%= link_to session.try(:studio).try(:name), studio_path(session.studio), title: t(:studios_show_link) %></td>
           <% end %>
           <td><%= link_to session.try(:name), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
           <td><%= session.client.name %></td>
-          <td><%= session.client.email.to_s.sub('@','&thinsp;@').html_safe %></td>
+          <td><%= session.client.email.to_s.sub('@', '&thinsp;@').html_safe %></td>
           <td><%= date_short session.session_at %></td>
-          <td><%= upload_link(session) %></td>
-          <td><%= complete?(session) %></td>
-          <td><%= session.emails.last ? link_to('View', show_collection_my_studio_minisite_path(session.emails.last.tracking)) : 'not sent yet' %></td>
         </tr>
     <% end %>
     </tbody>
