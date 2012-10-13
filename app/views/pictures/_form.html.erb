@@ -1,0 +1,243 @@
+<% content_for :head do %>
+    <!-- Force latest IE rendering engine or ChromeFrame if installed -->
+    <!--[if IE]>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
+    <meta charset="utf-8">
+
+    <meta name="description" content="File Upload widget with multiple file selection, drag&amp;drop support, progress bar and preview images for jQuery. Supports cross-domain, chunked and resumable file uploads. Works with any server-side platform (Google App Engine, PHP, Python, Ruby on Rails, Java, etc.) that supports standard HTML form file uploads.">
+    <meta name="viewport" content="width=device-width">
+    <!-- Bootstrap CSS Toolkit styles -->
+    <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap.min.css">
+
+    <!-- Generic page styles
+    <link rel="stylesheet" href="css/style.css">
+    -->
+
+    <!-- Bootstrap styles for responsive website layout, supporting different screen sizes -->
+    <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-responsive.min.css">
+    <!-- Bootstrap CSS fixes for IE6 -->
+    <!--[if lt IE 7]>
+    <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css"><![endif]-->
+    <!-- Bootstrap Image Gallery styles -->
+    <link rel="stylesheet" href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars
+    <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
+    -->
+    <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+    <!--[if lt IE 9]>
+    <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+
+<% end %>
+<div class="platypus-form-container">
+
+  <%= form_for Picture.new, :html => {multipart: true, id: 'fileupload'} do |f| %>
+
+      <div class="row fileupload-buttonbar">
+
+        <div class="span7">
+
+          <span class="btn btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span><%= t('photos.add_files') %>...</span>
+            <%= f.file_field :file, :multiple => true %>
+          </span>
+          <button type="submit" class="btn btn-primary start">
+            <i class="icon-upload icon-white"></i>
+            <%= t('photos.start_upload') %>
+          </button>
+          <button type="reset" class="btn btn-warning cancel">
+            <i class="icon-ban-circle icon-white"></i>
+            <%= t('photos.cancel_upload') %>
+          </button>
+          <button type="button" class="btn btn-danger delete">
+            <i class="icon-trash icon-white"></i>
+            <%= t('photos.delete_selected') %>
+          </button>
+          <input type="checkbox" class="toggle">
+        </div>
+        <div class="clear-both"></div>
+        <!-- The global progress information -->
+        <div class="span5 fileupload-progress fade">
+          <!-- The global progress bar -->
+          <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div class="bar" style="width:0%;"></div>
+          </div>
+          <!-- The extended global progress information -->
+          <div class="progress-extended">&nbsp;</div>
+        </div>
+
+      </div>
+
+      <!-- The loading indicator is shown during file processing -->
+      <div class="fileupload-loading"></div>
+      <br>
+      <!-- The table listing the files available for upload/download -->
+      <table role="presentation" class="table table-striped">
+        <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+      </table>
+  <% end %>
+
+  <!-- modal-gallery is the modal dialog used for the image gallery -->
+  <div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd" tabindex="-1">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+
+      <h3 class="modal-title"></h3>
+    </div>
+    <div class="modal-body">
+      <div class="modal-image"></div>
+    </div>
+    <div class="modal-footer">
+      <a class="btn modal-download" target="_blank">
+        <i class="icon-download"></i>
+        <span>Download</span>
+      </a>
+      <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
+        <i class="icon-play icon-white"></i>
+        <span>Slideshow</span>
+      </a>
+      <a class="btn btn-info modal-prev">
+        <i class="icon-arrow-left icon-white"></i>
+        <span>Previous</span>
+      </a>
+      <a class="btn btn-primary modal-next">
+        <span>Next</span>
+        <i class="icon-arrow-right icon-white"></i>
+      </a>
+    </div>
+  </div>
+  <!-- platypus form container -->
+</div>
+
+<script>
+    var fileUploadErrors = {
+        maxFileSize:'File is too big',
+        minFileSize:'File is too small',
+        acceptFileTypes:'Filetype not allowed',
+        maxNumberOfFiles:'Max number of files exceeded',
+        uploadedBytes:'Uploaded bytes exceed file size',
+        emptyResult:'Empty file upload result'
+    };
+</script>
+
+<!-- IMPORTANT fade class makes fileupload depend on css transition effect REMOVE or RENAME it -->
+<!--<script id="template-upload" type="text/html"> -->
+<script id="template-upload" type="text/x-tmpl">
+  {% for (var i=0, files=o.files, l=files.length, file=files[0]; i<l; file=files[++i]) { %}
+  <tr class="template-upload nofade">
+    <td class="preview"><span class="nofade"></span></td>
+    <td class="name">{%=file.name%}</td>
+    <td class="size">{%=o.formatFileSize(file.size)%}</td>
+    {% if (file.error) { %}
+    <td class="error" colspan="2"><span class="label important">Error</span> {%=fileUploadErrors[file.error] ||
+      file.error%}
+    </td>
+    {% } else if (o.files.valid && !i) { %}
+    <td class="progress">
+      <div class="progressbar">
+        <div style="width:0%;"></div>
+      </div>
+    </td>
+    <td class="start">{% if (!o.options.autoUpload) { %}
+      <button class="btn primary"><%= t('photos.template.start') %></button>
+      {% } %}
+    </td>
+    {% } else { %}
+    <td colspan="2"></td>
+    {% } %}
+    <td class="cancel">{% if (!i) { %}
+      <button class="btn info"><%= t('photos.template.cancel') %></button>
+      {% } %}
+    </td>
+  </tr>
+  {% } %}
+</script>
+<script id="template-download" type="text/html">
+  {% for (var i=0, files=o.files, l=files.length, file=files[0]; i
+  <l
+  ; file=files[++i]) { %}
+  <tr class="template-download nofade">
+    {% if (file.error) { %}
+    <td></td>
+    <td class="name">{%=file.name%}</td>
+    <td class="size">{%=o.formatFileSize(file.size)%}</td>
+    <td class="error" colspan="2"><span class="label important">Error</span> {%=fileUploadErrors[file.error] ||
+      file.error%}
+    </td>
+    {% } else { %}
+    <td class="preview">{% if (file.thumbnail_url) { %}
+      <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery"><img src="{%=file.thumbnail_url%}"></a>
+      {% } %}
+    </td>
+    <td class="name">
+      <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}">{%=file.name%}</a>
+    </td>
+    <td class="size">{%=o.formatFileSize(file.size)%}</td>
+    <td colspan="2"></td>
+    {% } %}
+    <td class="delete">
+      <button class="btn danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"><%= t('photos.template.delete') %></button>
+      <input type="checkbox" name="delete" value="1">
+    </td>
+  </tr>
+  {% } %}
+</script>
+
+
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<%= javascript_include_tag 'jquery.ui.widget.js' %>
+<!-- The Templates and Load Image plugins are included for the FileUpload user interface -->
+<script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
+<script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<%= javascript_include_tag 'jquery.iframe-transport.js' %>
+<%= javascript_include_tag 'jquery.fileupload.js' %>
+<%= javascript_include_tag 'jquery.fileupload-ui.js' %>
+<!-- add include_tag js files to config.assets.precompile in ...environments/production.rb if you have it in vendor/ assets -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
+<%= javascript_include_tag "jquery.ui.widget.js" %>
+<!-- The Templates plugin is included to render the upload/download listings -->
+<script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
+<!-- The Load Image plugin is included for the preview images and image resizing functionality -->
+<script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
+<!-- The Canvas to Blob plugin is included for image resizing functionality -->
+<script src="http://blueimp.github.com/JavaScript-Canvas-to-Blob/canvas-to-blob.min.js"></script>
+<!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
+<script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
+<script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"></script>
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<%= javascript_include_tag "jquery.iframe-transport.js" %>
+<!-- The basic File Upload plugin -->
+<%= javascript_include_tag "jquery.fileupload.js" %>
+<!-- The File Upload file processing plugin -->
+<%= javascript_include_tag "jquery.fileupload-fp.js" %>
+<!-- The File Upload user interface plugin -->
+<%= javascript_include_tag "jquery.fileupload-ui.js" %>
+<!-- The main application script -->
+<%= javascript_include_tag src="main.js" %>
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+<!--[if gte IE 8]><%= javascript_include_tag "cors/jquery.xdr-transport.js" %><![endif]-->
+
+<script type="text/javascript" charset="utf-8">
+    $(function () {
+        // Initialize the jQuery File Upload widget:
+        $('#fileupload').fileupload();
+        //
+        // Load existing files:
+        $.getJSON($('#fileupload').prop('action'), function (files) {
+            var fu = $('#fileupload').data('fileupload'),
+                    template;
+            fu._adjustMaxNumberOfFiles(-files.length);
+            template = fu._renderDownload(files)
+                    .appendTo($('#fileupload .files'));
+            // Force reflow:
+            fu._reflow = fu._transition && template.length &&
+                    template[0].offsetWidth;
+            template.addClass('in');
+            $('#loading').remove();
+        });
+
+    });
+</script>

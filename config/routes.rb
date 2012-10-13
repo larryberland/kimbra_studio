@@ -129,6 +129,8 @@ KimbraStudio::Application.routes.draw do
       get :unsubscribe, path: 'unsubscribe/:email'
     end
   end
+
+  resources :pictures, :only => [:index, :create, :destroy]
   resources :terms, :only => [:index]
   devise_for :users, path_names: {sign_up: 'register'}
   resources :users do

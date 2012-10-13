@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121008074152) do
+ActiveRecord::Schema.define(:version => 20121013122909) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -394,6 +394,18 @@ ActiveRecord::Schema.define(:version => 20121008074152) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "pictures", :force => true do |t|
+    t.string   "avatar"
+    t.integer  "width",                :default => 0
+    t.integer  "height",               :default => 0
+    t.boolean  "active",               :default => true
+    t.integer  "my_studio_session_id"
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
+  end
+
+  add_index "pictures", ["my_studio_session_id"], :name => "index_pictures_on_my_studio_session_id"
 
   create_table "piece_layouts", :force => true do |t|
     t.integer  "part_id"
