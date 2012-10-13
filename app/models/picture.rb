@@ -13,6 +13,7 @@ class Picture < ActiveRecord::Base
   #one convenient method to pass jq_upload the necessary information
   def to_jq_upload
     {
+      "my_studio_session_id" => my_studio_session_id,
       "name" => read_attribute(:avatar),
       "size" => avatar.size,
       "url" => avatar.url,

@@ -16,6 +16,9 @@ div.platypus-form-container {
   span {
     color: $base-form-label-color;
   }
+  form#fileupload span{
+    color: white;
+  }
   div.field_with_errors {
     @include rounded-corners(5px);
     label {

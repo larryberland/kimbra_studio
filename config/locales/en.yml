@@ -221,6 +221,15 @@ en:
   shopping_purchases_submit_new: 'Submit Payment'
   shopping_purchases_submit_edit: 'Submit Payment'
 
+  photos:
+    add_files: "Add Files..."
+    start_upload: "Start Upload"
+    cancel_upload: "Cancel"
+    delete_selected: "Delete Selected"
+    template:
+      start: "T Start"
+      cancel: "T Cancel"
+
   # override InheritedResources flash messages
   # shopping/purchases
   flash:

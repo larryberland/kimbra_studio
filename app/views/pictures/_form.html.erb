@@ -32,13 +32,14 @@
 
   <%= form_for Picture.new, :html => {multipart: true, id: 'fileupload'} do |f| %>
 
+      <%= f.hidden_field :my_studio_session_id %>
       <div class="row fileupload-buttonbar">
 
         <div class="span7">
 
           <span class="btn btn-success fileinput-button">
             <i class="icon-plus icon-white"></i>
-            <span><%= t('photos.add_files') %>...</span>
+            <span><%= t('photos.add_files') %></span>
             <%= f.file_field :file, :multiple => true %>
           </span>
           <button type="submit" class="btn btn-primary start">
@@ -54,23 +55,20 @@
             <%= t('photos.delete_selected') %>
           </button>
           <input type="checkbox" class="toggle">
-        </div>
-        <div class="clear-both"></div>
-        <!-- The global progress information -->
-        <div class="span5 fileupload-progress fade">
-          <!-- The global progress bar -->
-          <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-            <div class="bar" style="width:0%;"></div>
+          <!-- The global progress information -->
+          <div class="span5 fileupload-progress fade">
+            <!-- The global progress bar -->
+            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+              <div class="bar" style="width:0%;"></div>
+            </div>
+            <!-- The extended global progress information -->
+            <div class="progress-extended">&nbsp;</div>
           </div>
-          <!-- The extended global progress information -->
-          <div class="progress-extended">&nbsp;</div>
+          <!-- The loading indicator is shown during file processing -->
+          <div class="fileupload-loading"></div>
         </div>
-
       </div>
 
-      <!-- The loading indicator is shown during file processing -->
-      <div class="fileupload-loading"></div>
-      <br>
       <!-- The table listing the files available for upload/download -->
       <table role="presentation" class="table table-striped">
         <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
@@ -124,39 +122,44 @@
 <!--<script id="template-upload" type="text/html"> -->
 <script id="template-upload" type="text/x-tmpl">
   {% for (var i=0, files=o.files, l=files.length, file=files[0]; i<l; file=files[++i]) { %}
-  <tr class="template-upload nofade">
-    <td class="preview"><span class="nofade"></span></td>
+  <tr class="template-upload fade">
+    <td class="preview"><span class="fade"></span></td>
     <td class="name">{%=file.name%}</td>
     <td class="size">{%=o.formatFileSize(file.size)%}</td>
     {% if (file.error) { %}
-    <td class="error" colspan="2"><span class="label important">Error</span> {%=fileUploadErrors[file.error] ||
-      file.error%}
+    <td class="error" colspan="2">
+      <span class="label important">Error</span> {%=fileUploadErrors[file.error] || file.error%}
     </td>
     {% } else if (o.files.valid && !i) { %}
-    <td class="progress">
-      <div class="progressbar">
-        <div style="width:0%;"></div>
+    <td>
+      <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="bar" style="width:0%;"></div>
       </div>
     </td>
     <td class="start">{% if (!o.options.autoUpload) { %}
-      <button class="btn primary"><%= t('photos.template.start') %></button>
+      <button class="btn btn-primary">
+        <i class="icon-upload icon-white"></i>
+        <%= t('photos.template.start') %>
+      </button>
       {% } %}
     </td>
     {% } else { %}
     <td colspan="2"></td>
     {% } %}
     <td class="cancel">{% if (!i) { %}
-      <button class="btn info"><%= t('photos.template.cancel') %></button>
+      <button class="btn btn-warning">
+        <i class="icon-ban-circle icon-white"></i>
+        <%= t('photos.template.cancel') %>
+      </button>
       {% } %}
     </td>
   </tr>
   {% } %}
 </script>
-<script id="template-download" type="text/html">
-  {% for (var i=0, files=o.files, l=files.length, file=files[0]; i
-  <l
-  ; file=files[++i]) { %}
-  <tr class="template-download nofade">
+
+<script id="template-download" type="text/x-tmpl">
+  {% for (var i=0, files=o.files, l=files.length, file=files[0]; i<l; file=files[++i]) { %}
+  <tr class="template-download fade">
     {% if (file.error) { %}
     <td></td>
     <td class="name">{%=file.name%}</td>
@@ -176,7 +179,10 @@
     <td colspan="2"></td>
     {% } %}
     <td class="delete">
-      <button class="btn danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}"><%= t('photos.template.delete') %></button>
+      <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+        <i class="icon-trash icon-white"></i>
+        <%= t('photos.template.delete') %>
+      </button>
       <input type="checkbox" name="delete" value="1">
     </td>
   </tr>
@@ -184,20 +190,9 @@
 </script>
 
 
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<%= javascript_include_tag 'jquery.ui.widget.js' %>
-<!-- The Templates and Load Image plugins are included for the FileUpload user interface -->
-<script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
-<script src="http://blueimp.github.com/JavaScript-Load-Image/load-image.min.js"></script>
-<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<%= javascript_include_tag 'jquery.iframe-transport.js' %>
-<%= javascript_include_tag 'jquery.fileupload.js' %>
-<%= javascript_include_tag 'jquery.fileupload-ui.js' %>
-<!-- add include_tag js files to config.assets.precompile in ...environments/production.rb if you have it in vendor/ assets -->
-
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<%= javascript_include_tag "jquery.ui.widget.js" %>
+<%= javascript_include_tag 'jquery.ui.widget.js' %>
 <!-- The Templates plugin is included to render the upload/download listings -->
 <script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
@@ -208,36 +203,14 @@
 <script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
 <script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"></script>
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<%= javascript_include_tag "jquery.iframe-transport.js" %>
-<!-- The basic File Upload plugin -->
-<%= javascript_include_tag "jquery.fileupload.js" %>
-<!-- The File Upload file processing plugin -->
-<%= javascript_include_tag "jquery.fileupload-fp.js" %>
-<!-- The File Upload user interface plugin -->
-<%= javascript_include_tag "jquery.fileupload-ui.js" %>
+<%= javascript_include_tag 'jquery.iframe-transport.js' %>
+<%= javascript_include_tag 'jquery.fileupload.js' %>
+<%= javascript_include_tag 'jquery.fileupload-fp.js' %>
+<%= javascript_include_tag 'jquery.fileupload-ui.js' %>
+<!-- add include_tag js files to config.assets.precompile in ...environments/production.rb if you have it in vendor/ assets -->
+
 <!-- The main application script -->
 <%= javascript_include_tag src="main.js" %>
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
 <!--[if gte IE 8]><%= javascript_include_tag "cors/jquery.xdr-transport.js" %><![endif]-->
 
-<script type="text/javascript" charset="utf-8">
-    $(function () {
-        // Initialize the jQuery File Upload widget:
-        $('#fileupload').fileupload();
-        //
-        // Load existing files:
-        $.getJSON($('#fileupload').prop('action'), function (files) {
-            var fu = $('#fileupload').data('fileupload'),
-                    template;
-            fu._adjustMaxNumberOfFiles(-files.length);
-            template = fu._renderDownload(files)
-                    .appendTo($('#fileupload .files'));
-            // Force reflow:
-            fu._reflow = fu._transition && template.length &&
-                    template[0].offsetWidth;
-            template.addClass('in');
-            $('#loading').remove();
-        });
-
-    });
-</script>

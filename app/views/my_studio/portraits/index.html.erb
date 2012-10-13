@@ -1,46 +1,50 @@
-<h1 xmlns="http://www.w3.org/1999/html"><%= t(:my_studio_portraits_index_title, name: @my_studio_session.client.name, category:  @my_studio_session.category.name) %></h1>
+<h1 xmlns="http://www.w3.org/1999/html"><%= t(:my_studio_portraits_index_title, name: @my_studio_session.client.name, category: @my_studio_session.category.name) %></h1>
 
-<%= button_to t(:my_studio_portraits_new_link), new_my_studio_session_portrait_path(@my_studio_session), remote: true, method: :get %>
-<br/>
-<!-- Upload more pictures -->
-<%= render "pictures/form" %>
+<% if (current_user.email == 'teststudio@kimbraclickplus.com') %>
+    <!-- Upload more pictures -->
+    <%= render "pictures/form" %>
+<% else %>
+    <%= button_to t(:my_studio_portraits_new_link), new_my_studio_session_portrait_path(@my_studio_session), remote: true, method: :get %>
+    <br/>
 
-<div id='new_portrait'>&nbsp;</div>
+    <div id='new_portrait'>&nbsp;</div>
 
-<table>
-  <thead>
-  <tr>
-    <th>Actions</th>
-    <th>Portrait</th>
-    <th>Description</th>
-    <th>Active?</th>
-    <th>Width</th>
-    <th>Height</th>
-  </tr>
-  </thead>
-  <tbody>
-  <%= empty_table_rows if @my_studio_portraits.blank? %>
-  <% @my_studio_portraits.each do |my_studio_portrait| %>
+    <table>
+      <thead>
       <tr>
-        <td>
-          <% if is_admin? %>
-              <%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></br>
-              <%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></br>
-              <%= link_to t(:destroy), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait), confirm: t(:link_destroy_confirm), method: :delete %>
-          <% else %>
-              <%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %>
-          <% end %>
-        </td>
-        <td><%= link_to image_tag_list(my_studio_portrait), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
-        <td><%= my_studio_portrait.description %></td>
-        <td><%= my_studio_portrait.active %></td>
-        <td><%= my_studio_portrait.width %></td>
-        <td><%= my_studio_portrait.height %></td>
+        <th>Actions</th>
+        <th>Portrait</th>
+        <th>Description</th>
+        <th>Active?</th>
+        <th>Width</th>
+        <th>Height</th>
       </tr>
-  <% end %>
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+      <%= empty_table_rows if @my_studio_portraits.blank? %>
+      <% @my_studio_portraits.each do |my_studio_portrait| %>
+          <tr>
+            <td>
+              <% if is_admin? %>
+                  <%= link_to t(:show), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></br>
+                  <%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></br>
+                  <%= link_to t(:destroy), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait), confirm: t(:link_destroy_confirm), method: :delete %>
+              <% else %>
+                  <%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %>
+              <% end %>
+            </td>
+            <td><%= link_to image_tag_list(my_studio_portrait), my_studio_session_portrait_path(@my_studio_session, my_studio_portrait) %></td>
+            <td><%= my_studio_portrait.description %></td>
+            <td><%= my_studio_portrait.active %></td>
+            <td><%= my_studio_portrait.width %></td>
+            <td><%= my_studio_portrait.height %></td>
+          </tr>
+      <% end %>
+      </tbody>
+    </table>
 
-<h3><%= feedback_for @my_studio_portraits %></h3>
+    <h3><%= feedback_for @my_studio_portraits %></h3>
+
+<% end %>
 
 <%= actions_for_portraits(@my_studio_session) %>
