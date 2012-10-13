@@ -68,7 +68,7 @@ class Studio < ActiveRecord::Base
   end
 
   def logoize
-    minisite and minisite.image_url ? true : false
+    minisite && minisite.image_url.to_s !~ /empty_deal_image/ ? true : false
   end
 
   # email activation instructions after a user signs up
