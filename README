@@ -1,5 +1,9 @@
 == Welcome to Kimbra Studios Click Plus+
 
+git push heroku master
+
+heroku run rake db:migrate
+
 brew install imagemagick
 brew install postgres
 
