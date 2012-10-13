@@ -15,4 +15,6 @@ class MyStudio::Minisite < ActiveRecord::Base
   validates :font_color, :presence => true,
               :format => {:with => CustomValidators::Colors.css_color_validator}
 
+  FONTS = %w(Georgia Times Palatino Arial Cursive Helvetica Verdana Courier Monaco)
+
 end
