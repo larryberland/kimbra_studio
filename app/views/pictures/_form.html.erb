@@ -20,9 +20,11 @@
     <link rel="stylesheet" href="http://blueimp.github.com/cdn/css/bootstrap-ie6.min.css"><![endif]-->
     <!-- Bootstrap Image Gallery styles -->
     <link rel="stylesheet" href="http://blueimp.github.com/Bootstrap-Image-Gallery/css/bootstrap-image-gallery.min.css">
+
     <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars
     <link rel="stylesheet" href="css/jquery.fileupload-ui.css">
     -->
+    <%= stylesheet_link_tag 'fileuploads' %>
     <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
     <!--[if lt IE 9]>
     <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
@@ -191,8 +193,6 @@
 
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<!-- The jQuery UI widget factory, can be omitted if jQuery UI is already included -->
-<%= javascript_include_tag 'jquery.ui.widget.js' %>
 <!-- The Templates plugin is included to render the upload/download listings -->
 <script src="http://blueimp.github.com/JavaScript-Templates/tmpl.min.js"></script>
 <!-- The Load Image plugin is included for the preview images and image resizing functionality -->
@@ -202,15 +202,11 @@
 <!-- Bootstrap JS and Bootstrap Image Gallery are not required, but included for the demo -->
 <script src="http://blueimp.github.com/cdn/js/bootstrap.min.js"></script>
 <script src="http://blueimp.github.com/Bootstrap-Image-Gallery/js/bootstrap-image-gallery.min.js"></script>
+
 <!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
-<%= javascript_include_tag 'jquery.iframe-transport.js' %>
-<%= javascript_include_tag 'jquery.fileupload.js' %>
-<%= javascript_include_tag 'jquery.fileupload-fp.js' %>
-<%= javascript_include_tag 'jquery.fileupload-ui.js' %>
+<%= javascript_include_tag 'fileuploads.js' %>
 <!-- add include_tag js files to config.assets.precompile in ...environments/production.rb if you have it in vendor/ assets -->
 
-<!-- The main application script -->
-<%= javascript_include_tag src="main.js" %>
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
-<!--[if gte IE 8]><%= javascript_include_tag "cors/jquery.xdr-transport.js" %><![endif]-->
+<!--[if gte IE 8]><%= javascript_include_tag "xdr.js" %><![endif]-->
 
