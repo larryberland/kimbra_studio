@@ -227,8 +227,8 @@ en:
     cancel_upload: "Cancel"
     delete_selected: "Delete Selected"
     template:
-      start: "T Start"
-      cancel: "T Cancel"
+      start: "Start"
+      cancel: "Cancel"
 
   # override InheritedResources flash messages
   # shopping/purchases
