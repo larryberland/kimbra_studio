@@ -1,4 +1,9 @@
 #= require vendor/jquery.ui.widget.js
+#= require fileuploads/templates/tmpl.min.js
+#= require fileuploads/load-image/load-image.min.js
+#= require fileuploads/canvas-to-blob/canvas-to-blob.min.js
+#= require ./bootstrap/bootstrap.min.js
+#= require ./bootstrap/image-gallery/bootstrap-image-gallery.min.js
 #= require fileuploads/jquery.iframe-transport.js
 #= require fileuploads/jquery.fileupload.js
 #= require fileuploads/jquery.fileupload-fp.js
