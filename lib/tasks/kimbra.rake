@@ -16,8 +16,7 @@ namespace 'kimbra' do
       next unless csv_row > last_row_added
       # Only add the requested number of rows.
       break if csv_row >= last_row_added + args.rows_to_add.to_i + 1
-      attrs   = {csv_row:             csv_row,
-                 address_1:           row["BADDR2"],
+      attrs   = {address_1:           row["BADDR2"],
                  address_2:           row["BADDR3"],
                  phone_number:        row["PHONE1"],
                  country_abbrev:      row["BADDR5"].to_s.strip.upcase,
