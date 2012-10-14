@@ -109,7 +109,7 @@ module ApplicationHelper
   end
 
   def link_for_shopping_cart_nav
-    url = '#'
+    url               = '#'
     cart_numericality = '0 pieces'
     if (is_client?)
       url               = shopping_cart_path(@cart.tracking)
@@ -179,7 +179,16 @@ module ApplicationHelper
     css
   end
 
+  def link_to_nav_pill(label, url, selected, title="")
+    css_class = selected ? {class: 'active'} : {}
+    html      = content_tag(:li, css_class) do
+      link_to(label, url, title: title)
+    end
+    html.html_safe
+  end
+
   def link_to_button(label, url, selected, title="")
+
     css = css_button(selected)
     link_to label, url, class: css, title: title
   end

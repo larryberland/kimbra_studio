@@ -35,54 +35,31 @@
     <h1 class='logo' style='text-align:left;'> <%= link_to display_h1, root_path %> </h1>
 
     <% if current_user %>
-        <div id='main_nav'>
+        <div id="main_nav">
+        <ul class='nav nav-pills'>
           <% if is_admin? %>
-              <div class='menu_item'>
-                <%= link_to_button t(:admin_menu_overview), admin_overview_url, selected == 'admin/overviews' %>
-              </div>
-              <div class='menu_item'>
-                <%= link_to_button t(:admin_menu_emails), admin_customer_emails_path, selected == 'admin/customer/emails' %>
-              </div>
-              <div class='menu_item'>
-                <%= link_to_button t(:admin_menu_studios), studios_path, selected == 'studios' %>
-              </div>
-              <div class='menu_item'>
-                <%= link_to_button t(:admin_menu_users), users_path, selected == 'users' %>
-              </div>
-              <div class='menu_item'>
-                <%= link_to_button t(:admin_menu_merchandise), admin_merchandise_pieces_path, selected == 'admin/merchandise/pieces' %>
-              </div>
-              <div class='menu_item'>
-                <%= link_to_button t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
-              </div>
-              <div class='menu_item_right'>
-                <%= link_to_button t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
-              </div>
-              <div class='menu_item'>
-                <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
-              </div>
+              <%= link_to_nav_pill t(:admin_menu_overview), admin_overview_url, selected == 'admin/overviews' %>
+              <%= link_to_nav_pill t(:admin_menu_emails), admin_customer_emails_path, selected == 'admin/customer/emails' %>
+              <%= link_to_nav_pill t(:admin_menu_studios), studios_path, selected == 'studios' %>
+              <%= link_to_nav_pill t(:admin_menu_users), users_path, selected == 'users' %>
+              <%= link_to_nav_pill t(:admin_menu_merchandise), admin_merchandise_pieces_path, selected == 'admin/merchandise/pieces' %>
+              <%= link_to_nav_pill t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
+              <%= link_to_nav_pill t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
+              <%= link_to_nav_pill t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
           <% else %>
               <% if current_user and current_user.studio? %>
-                  <div class='menu_item'>
-                    <%= link_to_button t(:my_studio_overview_link), my_studio_dashboard_path, selected == 'my_studio/dashboards' %>
-                  </div>
-                  <div class='menu_item'>
-                    <%= link_to_button t(:my_studio_overview_label_session), my_studio_sessions_path, selected == 'my_studio/sessions' %>
-                  </div>
-                  <div class='menu_item'>
-                    <%= link_to_button t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos' %>
-                  </div>
-                  <div class='menu_item'>
-                    <% unless @my_studio.new_record? %>
-                        <%= link_to_button t(:my_studio_minisite_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
-                    <% end %>
-                  </div>
-                  <div class='menu_item'>
-                    <%= link_to_button t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
-                  </div>
+                  <%= link_to_nav_pill t(:my_studio_overview_link), my_studio_dashboard_path, selected == 'my_studio/dashboards' %>
+                  <%= link_to_nav_pill t(:my_studio_overview_label_session), my_studio_sessions_path, (selected == 'my_studio/sessions' or selected=='my_studio/portraits') %>
+                  <%= link_to_nav_pill t(:my_studio_info_label_samples), samples_my_studio_infos_path, (selected == 'my_studio/infos' and params[:action] == 'samples') %>
+                  <% unless @my_studio.new_record? %>
+                      <%= link_to_nav_pill t(:my_studio_minisite_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
+                  <% end %>
+                  <%= link_to_nav_pill t(:my_studio_info_label_faq), faq_my_studio_infos_path, (selected == 'my_studio/infos' and params[:action] == 'faq') %>
               <% end %>
           <% end %>
+        </ul>
         </div>
+
     <% end %>
   </div>
 </div>
