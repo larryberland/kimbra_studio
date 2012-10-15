@@ -1,5 +1,5 @@
-<div class="panel_contents">
-  <table id='dashboard_sessions'>
+<div class="panel-container">
+  <table class="table">
     <thead>
     <tr>
       <% if is_admin? %>
@@ -22,10 +22,10 @@
     <% sessions.each do |session| %>
         <tr>
           <% if is_admin? %>
-              <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
+              <td ><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
               <td title="portraits have been uploaded in last 2 days"><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
           <% end %>
-          <td title=""><%= complete?(session) %></td>
+          <td class="first" title=""><%= complete?(session) %></td>
           <td><%= upload_link(session) %></td>
           <td><%= session.emails.last ? link_to('View', show_collection_my_studio_minisite_path(session.emails.last.tracking)) : 'not sent yet' %></td>
           <% if is_admin? %>

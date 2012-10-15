@@ -2,13 +2,19 @@
     <%= stylesheet_link_tag 'orbit-1.2.3' %>
 <% end %>
 
-<div id="index_container">
+<div class="row">
 
-  <h1>you make beautiful pictures -- we make beautiful jewelry.</h1>
+  <div class="span12">
 
-  <h1>let's get together and make delighted clients.</h1>
+    <h3>you make beautiful pictures -- we make beautiful jewelry.</h3>
 
-  <div class="left-side">
+    <h3>let's get together and make delighted clients.</h3>
+
+  </div>
+</div>
+
+<div class="row">
+  <div class="span7">
     <div id='slides'>
       <%= image_tag 'new1.png' %>
       <%= image_tag 'new2.png' %>
@@ -16,29 +22,26 @@
     </div>
 
   </div>
-  <div class="right-side">
 
-    <div id="index_text">
-      <h3>
-        KimbraClickPLUS helps photography studios offer their clients gorgeous photo jewelry in a super easy way.
-      </h3>
+  <div class="span5">
+    <p class="lead">
+      KimbraClickPLUS helps photography studios offer their clients gorgeous photo jewelry in a super easy way.
+    </p>
 
-      <h3>
-        You upload choice portraits from a client's photo session,
-        and we create a direct email offer for them with your branding.
-      </h3>
+    <p class="lead">
+      You upload choice portraits from a client's photo session,
+      and we create a direct email offer for them with your branding.
+    </p>
 
-      <h3>
-        It's gorgeous and compelling. Clients want to forward these emails to all their friends
-        (and post to FB and Twitter) - and share their excitement about the work your studio has done.
-      </h3>
+    <p class="lead">
+      It's gorgeous and compelling. Clients want to forward these emails to all their friends
+      (and post to FB and Twitter) - and share their excitement about the work your studio has done.
+    </p>
 
-      <h3>
-        <%= link_to 'Get Started Now.', new_user_session_path %>
-      </h3>
-    </div>
+    <p class="lead">
+      <%= link_to 'Get Started Now.', new_user_session_path %>
+    </p>
   </div>
-  <div class="clear-both"/>
 
 </div>
 

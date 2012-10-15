@@ -1,70 +1,72 @@
 <h1><%= t(:admin_merchandise_parts_index_title, :piece_name => @piece.name) %></h1>
-
 <%= link_to t(:admin_merchandise_parts_new_link), new_admin_merchandise_piece_part_path(@piece) %>
 <br/>
 <%= link_to t(:back), admin_merchandise_piece_path(@piece) %>
-
-<table>
-  <thead>
-  <tr>
-    <th>&nbsp;</th>
-    <th>&nbsp;</th>
-    <th>Kimbra</th>
-    <th>Custom</th>
-    <th>&nbsp;</th>
-    <th colspan="4">Viewport</th>
-    <th colspan="3">Background Size</th>
-    <th colspan="4">Offer Image</th>
-    <th colspan="3">&nbsp;</th>
-  </tr>
-  <tr class='no-round'>
-    <th >Actions</th>
-    <th >Piece</th>
-    <th >Part</th>
-    <th >Part</th>
-    <th >Portrait</th>
-    <th >x</th>
-    <th >y</th>
-    <th >width</th>
-    <th >height</th>
-    <th >Order</th>
-    <th >Part Width</th>
-    <th >Part Height</th>
-    <th >x</th>
-    <th >y</th>
-    <th >width</th>
-    <th >height</th>
-    <th >Active</th>
-  </tr>
-
-  </thead>
-  <tbody>
-  <% @parts.each do |admin_merchandise_part| %>
+<div class="row">
+  <div class="span12 tab-content">
+    <table class="table">
+      <thead>
       <tr>
-        <td>
-          <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></br>
-          <%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></br>
-          <%= link_to t(:destroy), admin_merchandise_piece_part_path(@piece, admin_merchandise_part), confirm: t(:link_destroy_confirm), method: :delete %>
-        </td>
-        <td><%= admin_merchandise_part.try(:piece).try(:name) %></td>
-        <td><%= image_tag admin_merchandise_part.image_part_url(:list).to_s %></td>
-        <td><%= image_tag_list admin_merchandise_part%></td>
-        <td><%= image_tag admin_merchandise_part.portrait.image_url(:list).to_s if admin_merchandise_part.portrait %></td>
-        <td><%= admin_merchandise_part.viewport_offset[:x] %></td>
-        <td><%= admin_merchandise_part.viewport_offset[:y] %></td>
-        <td><%= admin_merchandise_part.viewport_size[:w] %></td>
-        <td><%= admin_merchandise_part.viewport_size[:h] %></td>
-        <td><%= admin_merchandise_part.order %></td>
-        <td><%= admin_merchandise_part.width %></td>
-        <td><%= admin_merchandise_part.height %></td>
-        <td><%= admin_merchandise_part.piece_layout.layout.x %></td>
-        <td><%= admin_merchandise_part.piece_layout.layout.x %></td>
-        <td><%= admin_merchandise_part.piece_layout.layout.w %></td>
-        <td><%= admin_merchandise_part.piece_layout.layout.h %></td>
-        <td><%= admin_merchandise_part.active %></td>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+        <th>Kimbra</th>
+        <th>Custom</th>
+        <th>&nbsp;</th>
+        <th colspan="4">Viewport</th>
+        <th colspan="3">Background Size</th>
+        <th colspan="4">Offer Image</th>
+        <th colspan="3">&nbsp;</th>
       </tr>
-  <% end %>
+      <tr class='no-round'>
+        <th>Actions</th>
+        <th>Piece</th>
+        <th>Part</th>
+        <th>Part</th>
+        <th>Portrait</th>
+        <th>x</th>
+        <th>y</th>
+        <th>width</th>
+        <th>height</th>
+        <th>Order</th>
+        <th>Part Width</th>
+        <th>Part Height</th>
+        <th>x</th>
+        <th>y</th>
+        <th>width</th>
+        <th>height</th>
+        <th>Active</th>
+      </tr>
 
-  </tbody>
-</table>
+      </thead>
+      <tbody>
+      <% @parts.each do |admin_merchandise_part| %>
+          <tr>
+            <td>
+              <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></br>
+              <%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></br>
+              <%= link_to t(:destroy), admin_merchandise_piece_part_path(@piece, admin_merchandise_part), confirm: t(:link_destroy_confirm), method: :delete %>
+            </td>
+            <td><%= admin_merchandise_part.try(:piece).try(:name) %></td>
+            <td><%= image_tag admin_merchandise_part.image_part_url(:list).to_s %></td>
+            <td><%= image_tag_list admin_merchandise_part %></td>
+            <td><%= image_tag admin_merchandise_part.portrait.image_url(:list).to_s if admin_merchandise_part.portrait %></td>
+            <td><%= admin_merchandise_part.viewport_offset[:x] %></td>
+            <td><%= admin_merchandise_part.viewport_offset[:y] %></td>
+            <td><%= admin_merchandise_part.viewport_size[:w] %></td>
+            <td><%= admin_merchandise_part.viewport_size[:h] %></td>
+            <td><%= admin_merchandise_part.order %></td>
+            <td><%= admin_merchandise_part.width %></td>
+            <td><%= admin_merchandise_part.height %></td>
+            <td><%= admin_merchandise_part.piece_layout.layout.x %></td>
+            <td><%= admin_merchandise_part.piece_layout.layout.x %></td>
+            <td><%= admin_merchandise_part.piece_layout.layout.w %></td>
+            <td><%= admin_merchandise_part.piece_layout.layout.h %></td>
+            <td><%= admin_merchandise_part.active %></td>
+          </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+  </div>
+</div>
 

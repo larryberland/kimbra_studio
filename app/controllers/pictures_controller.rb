@@ -1,7 +1,10 @@
 class PicturesController < ApplicationController
 
+  before_filter :load_my_studio_session
+
   def index
-    @pictures = Picture.all
+    @pictures = Picture.where('my_studio_session_id=?', @my_studio_session).order('created_at desc')
+    #@pictures = Picture.all.order('created_at desc')
     render :json => @pictures.collect { |p| p.to_jq_upload }.to_json
   end
 
@@ -35,4 +38,11 @@ class PicturesController < ApplicationController
     @picture.destroy
     render :json => true
   end
+
+  private #=====================================================================================
+
+  def load_my_studio_session
+    @my_studio_session = MyStudio::Session.find(params[:session_id]) if params[:session_id]
+  end
+
 end

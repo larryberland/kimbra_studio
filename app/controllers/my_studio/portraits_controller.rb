@@ -8,7 +8,7 @@ class MyStudio::PortraitsController < MyStudio::BaseController
     @my_studio_portraits = MyStudio::Portrait.where('my_studio_session_id=?', @my_studio_session).order('created_at desc')
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @my_studio_portraits }
+      format.json {@my_studio_portraits.collect { |p| p.to_jq_upload }.to_json}
     end
   end
 

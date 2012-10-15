@@ -18,6 +18,19 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   before_save :set_description
 
+  #one convenient method to pass jq_upload the necessary information
+  def to_jq_upload
+    {
+      "my_studio_session_id" => my_studio_session_id,
+      "name" => read_attribute(:image),
+      "size" => image.size,
+      "url" => image.url,
+      "thumbnail_url" => image.thumb.url,
+      "delete_url" => my_studio_session_portrait_path(my_studio_session, id),
+      "delete_type" => "DELETE"
+    }
+  end
+
   def face_image
     if @face_image.nil?
       raise "who is calling me face_image"

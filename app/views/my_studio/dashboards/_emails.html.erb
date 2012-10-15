@@ -1,12 +1,12 @@
 <div id='title_bar'>
   <h3><%= t(:my_studio_dashboards_emails_title) %></h3>
 </div>
-<div class='panel_contents'>
+<div class='panel-container'>
 
   <% if sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
       <h1 class='motivation'>&#x2718; No emails this past week - no portraits uploaded?</h1>
   <% else %>
-      <table id='dashboard_emails'>
+      <table class="table">
         <thead>
         <tr>
           <% if current_user.admin? %>

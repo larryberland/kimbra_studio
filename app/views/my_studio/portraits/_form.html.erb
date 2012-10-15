@@ -1,33 +1,179 @@
-<% url = @my_studio_portrait.id.nil? ? my_studio_session_portraits_path(@my_studio_session) : my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %>
-<%= form_for(@my_studio_portrait, :url => url, :html => {:multipart => true}) do |f| %>
+<% content_for :head do %>
+    <!-- Force latest IE rendering engine or ChromeFrame if installed -->
+    <!--[if IE]><!--meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
 
-    <%= render 'shared/error_messages', record: @my_studio_portrait, h2_msg: 'prohibited new portrait:' %>
+    <!-- Bootstrap CSS fixes for IE6 -->
+    <!--[if lt IE 7]><%=stylesheet_link_tag "bootstrap-ie6.min.css" %><![endif]-->
 
-    <!-- remove for now - not necessary
-    <div class="field">
-      <%= f.label :description %>
-      <br/>
-      <%= f.text_field :description %>
-    </div>
-    -->
+    <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
+    <%= stylesheet_link_tag "fileuploads" %>
 
-    <div class="field">
-      <%= f.label :image, 'Portrait:' %>
-      <%= f.file_field :image %>
-      <%= f.label :remote_image_url, 'or Portrait URL' %>
-      <%= f.text_field :remote_image_url %>
-    </div>
-
-    <% unless %w(new create).include? action_name %>
-        <div class="field">
-          <%= f.label :active %>
-          <%= f.check_box :active %>
-        </div>
-    <% end %>
-
-    <div class="actions">
-      <%= f.submit t(:create), :id => 'my_submit' %>
-      <span id="spinner" style="display:none"></span>
-    </div>
+    <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
+    <!--[if lt IE 9]><!--script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 <% end %>
+
+<%= form_for( MyStudio::Portrait.new, url: my_studio_session_portraits_path(@my_studio_session), html: {multipart: true, id: 'fileupload'}) do |f| %>
+
+    <%= f.hidden_field :my_studio_session_id %>
+
+    <div class="row fileupload-buttonbar">
+
+      <div class="span7">
+
+        <span class="btn btn-success fileinput-button">
+          <i class="icon-plus icon-white"></i>
+          <span><%= t('photos.add_files') %></span>
+          <%= f.file_field :file, :multiple => true %>
+        </span>
+        <button type="submit" class="btn btn-primary start">
+          <i class="icon-upload icon-white"></i>
+          <%= t('photos.start_upload') %>
+        </button>
+        <button type="reset" class="btn btn-warning cancel">
+          <i class="icon-ban-circle icon-white"></i>
+          <%= t('photos.cancel_upload') %>
+        </button>
+        <button type="button" class="btn btn-danger delete">
+          <i class="icon-trash icon-white"></i>
+          <%= t('photos.delete_selected') %>
+        </button>
+        <input type="checkbox" class="toggle">
+        <!-- The global progress information -->
+        <div class="span5 fileupload-progress fade">
+          <!-- The global progress bar -->
+          <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div class="bar" style="width:0%;"></div>
+          </div>
+          <!-- The extended global progress information -->
+          <div class="progress-extended">&nbsp;</div>
+        </div>
+        <!-- The loading indicator is shown during file processing -->
+        <div class="fileupload-loading"></div>
+      </div>
+    </div>
+
+    <!-- The table listing the files available for upload/download -->
+    <table role="presentation" class="table table-striped">
+      <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+    </table>
+
+<% end %>
+
+<!-- modal-gallery is the modal dialog used for the image gallery -->
+<div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd" tabindex="-1">
+  <div class="modal-header">
+    <a class="close" data-dismiss="modal">&times;</a>
+    <h3 class="modal-title"></h3>
+  </div>
+  <div class="modal-body">
+    <div class="modal-image"></div>
+  </div>
+  <div class="modal-footer">
+    <a class="btn modal-download" target="_blank">
+      <i class="icon-download"></i>
+      <span>Download</span>
+    </a>
+    <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
+      <i class="icon-play icon-white"></i>
+      <span>Slideshow</span>
+    </a>
+    <a class="btn btn-info modal-prev">
+      <i class="icon-arrow-left icon-white"></i>
+      <span>Previous</span>
+    </a>
+    <a class="btn btn-primary modal-next">
+      <span>Next</span>
+      <i class="icon-arrow-right icon-white"></i>
+    </a>
+  </div>
+</div>
+<script>
+    var fileUploadErrors = {
+        maxFileSize:'File is too big',
+        minFileSize:'File is too small',
+        acceptFileTypes:'Filetype not allowed',
+        maxNumberOfFiles:'Max number of files exceeded',
+        uploadedBytes:'Uploaded bytes exceed file size',
+        emptyResult:'Empty file upload result'
+    };
+</script>
+
+<!-- IMPORTANT fade class makes fileupload depend on css transition effect REMOVE or RENAME it -->
+<!--<script id="template-upload" type="text/html"> -->
+<script id="template-upload" type="text/x-tmpl">
+  {% for (var i=0, files=o.files, l=files.length, file=files[0]; i<l; file=files[++i]) { %}
+  <tr class="template-upload fade">
+    <td class="preview"><span class="fade"></span></td>
+    <td class="name">{%=file.name%}</td>
+    <td class="size">{%=o.formatFileSize(file.size)%}</td>
+    {% if (file.error) { %}
+    <td class="error" colspan="2">
+      <span class="label important">Error</span> {%=fileUploadErrors[file.error] || file.error%}
+    </td>
+    {% } else if (o.files.valid && !i) { %}
+    <td>
+      <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+        <div class="bar" style="width:0%;"></div>
+      </div>
+    </td>
+    <td class="start">{% if (!o.options.autoUpload) { %}
+      <button class="btn btn-primary">
+        <i class="icon-upload icon-white"></i>
+        <%= t('photos.template.start') %>
+      </button>
+      {% } %}
+    </td>
+    {% } else { %}
+    <td colspan="2"></td>
+    {% } %}
+    <td class="cancel">{% if (!i) { %}
+      <button class="btn btn-warning">
+        <i class="icon-ban-circle icon-white"></i>
+        <%= t('photos.template.cancel') %>
+      </button>
+      {% } %}
+    </td>
+  </tr>
+  {% } %}
+</script>
+
+<script id="template-download" type="text/x-tmpl">
+  {% for (var i=0, files=o.files, l=files.length, file=files[0]; i<l; file=files[++i]) { %}
+  <tr class="template-download fade">
+    {% if (file.error) { %}
+    <td></td>
+    <td class="name">{%=file.name%}</td>
+    <td class="size">{%=o.formatFileSize(file.size)%}</td>
+    <td class="error" colspan="2"><span class="label important">Error</span> {%=fileUploadErrors[file.error] ||
+      file.error%}
+    </td>
+    {% } else { %}
+    <td class="preview">{% if (file.thumbnail_url) { %}
+      <a href="{%=file.url%}" title="{%=file.name%}" rel="gallery"><img src="{%=file.thumbnail_url%}"></a>
+      {% } %}
+    </td>
+    <td class="name">
+      <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}">{%=file.name%}</a>
+    </td>
+    <td class="size">{%=o.formatFileSize(file.size)%}</td>
+    <td colspan="2"></td>
+    {% } %}
+    <td class="delete">
+      <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
+        <i class="icon-trash icon-white"></i>
+        <%= t('photos.template.delete') %>
+      </button>
+      <input type="checkbox" name="delete" value="1">
+    </td>
+  </tr>
+  {% } %}
+</script>
+
+
+<!-- The Iframe Transport is required for browsers without support for XHR file uploads -->
+<%= javascript_include_tag 'fileuploads.js' %>
+
+<!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
+<!--[if gte IE 8]><%= javascript_include_tag "xdr.js" %><![endif]-->
+
