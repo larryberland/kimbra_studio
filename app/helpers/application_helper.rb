@@ -40,7 +40,7 @@ module ApplicationHelper
   end
 
   def date_short(date)
-    date = date.to_date if date.is_a?(Time)
+    date = date.in_time_zone("Eastern Time (US & Canada)").to_date if date.is_a?(Time)
     date.strftime('%b %d') if date.is_a?(Date)
   end
 
