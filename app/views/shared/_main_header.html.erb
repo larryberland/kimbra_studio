@@ -10,8 +10,8 @@
           <span>(<%= link_to translate(:not_you), destroy_user_session_path, method: :delete %>)</span>
           <%= coffee_script_tag do %>
               $ ->
-              olark('api.chat.updateVisitorNickname',
-              snippet:'<%= current_user.name %>, <%= current_user.studio.try(:name) %>')
+                olark('api.chat.updateVisitorNickname',
+                  snippet:'<%= current_user.name %>, <%= current_user.studio.try(:name) %>')
           <% end %>
       <% else %>
           <strong><%= link_to translate(:sign_in), new_user_session_path %></strong>
