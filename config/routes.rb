@@ -1,5 +1,7 @@
 KimbraStudio::Application.routes.draw do
 
+  ActiveAdmin.routes(self)
+
   root :to => "welcome#index"
 
   resource :about do

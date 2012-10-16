@@ -46,6 +46,7 @@ gem 'gmaps4rails'
 
 gem 'newrelic_rpm'
 gem 'jeditable-rails'
+gem 'activeadmin'
 
 # Gems used only for assets and not required
 # in production environments by default.
