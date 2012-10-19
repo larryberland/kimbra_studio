@@ -13,6 +13,7 @@
 #= require jquery.orbit-1.2.3.min
 #= require ./bootstrap/bootstrap
 #= require jeditable
+#= require active_admin
 
 $ ->
   $('.flash_notice').each (index, element) ->

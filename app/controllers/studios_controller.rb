@@ -158,7 +158,14 @@ class StudiosController < ApplicationController
     @studio = Studio.find(params[:id])
     @studio.destroy
     respond_to do |format|
-      format.html { redirect_to studios_url }
+      format.html do
+        if params[:aa]
+          redirect_to admin_studios_path
+        else
+          flash[:notice] = 'Successfully deleted a studio!'
+          redirect_to studios_url
+        end
+      end
       format.json { head :ok }
     end
   end

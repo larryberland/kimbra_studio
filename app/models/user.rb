@@ -66,7 +66,7 @@ class User < ActiveRecord::Base
   scope :search, lambda {|value|
     like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_','\_')}%" : "%"
     where( 'first_name ilike ? OR last_name ilike ? OR email ilike ?  OR studios.name ilike ?',
-           like_exp, like_exp, like_exp, like_exp).joins(:studio).order('last_sign_in_at desc, updated_at desc, last_name asc')
+           like_exp, like_exp, like_exp, like_exp).joins(:studio).order('last_sign_in_at desc NULLS LAST, updated_at desc, last_name asc')
   }
 
   def phone_number_display
