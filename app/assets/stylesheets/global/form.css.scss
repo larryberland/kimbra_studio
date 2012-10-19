@@ -101,3 +101,30 @@ div.platypus-form {
   }
 }
 
+div.platypus-bootstrap-form-container {
+  width: 700px;
+  padding: 10px 15px;
+  background-color: $base-background-container;
+  @include rounded-corners(10px);
+  border: 2px outset black;
+  margin: auto;
+
+  div.field_with_errors {
+    @include rounded-corners(5px);
+  }
+
+  div.float-right {
+    float: right;
+    text-align: left;
+    ul {
+      margin: 0;
+      line-height: 1.0em;
+      padding: 0;
+      ol {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+}
+

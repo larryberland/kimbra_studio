@@ -9,12 +9,12 @@
   -moz-border-radius: 10px 10px 0 0;
 }
 
-div.field_with_errors {
-  @include rounded-corners(5px);
-  label {
-    color: white;
-  }
-  &.message {
-    padding: 3px 5px;
-  }
-}
+//div.field_with_errors {
+//  @include rounded-corners(5px);
+//  label {
+//    color: white;
+//  }
+//  &.message {
+//    padding: 3px 5px;
+//  }
+//}

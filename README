@@ -4,6 +4,18 @@ git push heroku master
 
 heroku run rake db:migrate
 
+== for deploys that have a migration, do:
+
+	heroku maintenance:on
+	git push heroku master
+	heroku run rake db:migrate
+	heroku restart
+	heroku maintenance:off
+
+We don't have a maintenance page (yet). Heroku just returns a 503 without a preset page. It's on my list.
+== end heroku migration
+
+--
 brew install imagemagick
 brew install postgres
 
