@@ -87,7 +87,7 @@ namespace 'kimbra' do
                                puts "[#{csv_row}] #{row.inspect}"
 
 
-                               if (on > u.joined_on)
+                               if u.joined_on.present? && on > u.joined_on
                                  puts "[#{csv_row}]update row"
                                  u.skip_confirmation!
                                  u.update_attributes(user_attrs)
