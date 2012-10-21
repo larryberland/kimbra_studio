@@ -1,22 +1,22 @@
 (function () {
     $(document).ready(function () {
         return $("div.control-group").focusout(function () {
-            if (!$("div.control-group").hasClass("error")) {
-                return $(this).addClass("success");
+            if (!$("div.control-group").hasClass("info")) {
+                return $(this).addClass("xsuccess");
             }
         });
     });
 }).call(this);
 
-clientSideValidations.formBuilders['SimpleForm::FormBuilder'] = {
+clientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = {
     add:function (element, settings, message) {
         var errorElement, wrapper;
 
         settings.wrapper_tag = ".control-group";
         settings.error_tag = "span";
-        settings.error_class = "help-inline";
-        settings.wrapper_error_class = "error";
-        settings.wrapper_success = "success";
+        settings.error_class = "help-inline playtypus";
+        settings.wrapper_error_class = "info";
+        settings.wrapper_success = "xsuccess";
 
         if (element.data('valid') !== false) {
             wrapper = element.closest(settings.wrapper_tag);
@@ -38,9 +38,9 @@ clientSideValidations.formBuilders['SimpleForm::FormBuilder'] = {
 
         settings.wrapper_tag = ".control-group";
         settings.error_tag = "span";
-        settings.error_class = "help-inline";
-        settings.wrapper_error_class = "error";
-        settings.wrapper_success = "success";
+        settings.error_class = "help-inline playtypus";
+        settings.wrapper_error_class = "info";
+        settings.wrapper_success = "xsuccess";
 
         wrapper = element.closest("" + settings.wrapper_tag + "." + settings.wrapper_error_class);
         wrapper.removeClass(settings.wrapper_error_class);

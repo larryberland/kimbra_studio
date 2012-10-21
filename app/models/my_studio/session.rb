@@ -14,7 +14,8 @@ class MyStudio::Session < ActiveRecord::Base
                   :created_at, :updated_at
 
   # need some validations presence here
-  validates_associated :client, :studio
+  validates_associated :client
+  validates_associated :studio
   validates_presence_of :category
 
   # active_model callbacks
@@ -39,6 +40,17 @@ class MyStudio::Session < ActiveRecord::Base
     rel.where('my_studio_sessions.name ilike ? OR my_studio_clients.name ilike ? OR my_studio_clients.email ilike ?',
               like_exp, like_exp, like_exp).joins(:client).order('session_at desc')
   }
+
+  def to_error_messages
+    msgs = errors.messages.collect{|k, msg| k == :client ? nil : "#{k.to_s.titleize} #{msg.join(', ')}"}
+    if (client and client.errors.present?)
+      msgs << client.errors.full_messages
+    end
+    if (studio and studio.errors.present?)
+      msgs << studio.errors.full_messages
+    end
+    msgs.flatten.compact
+  end
 
   def previous_offers
     if @previous_offers.nil?

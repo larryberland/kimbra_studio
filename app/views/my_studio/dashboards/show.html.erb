@@ -1,13 +1,20 @@
 <div class='container'>
+
   <div class='motivation'>
-    <table class='plain'>
+
+    <table class='table'>
       <tbody>
       <tr>
         <td>
           <%= new_sessions_days_ago_text %>
         </td>
-        <td align='left' class="odd">
-          <%= button_to 'Create new photo session and upload portraits now!', new_my_studio_session_path, method: :get, style: 'font-size:10pt' %>
+        <td align='left'>
+          <%= form_tag new_my_studio_session_path, :method => :get do %>
+              <button type="submit" class="btn btn-success">
+                <i class="icon-plus icon-white"></i>
+                Create new photo session and upload portraits now!...
+              </button>
+          <% end %>
         </td>
       </tr>
       </tbody>
@@ -32,7 +39,6 @@
     </div>
 <% end %>
 
-<div class='span-6 last ar-widget'>
-  powered by
+<div class='span2'>
   <%= image_tag 'kimbra_logo.png' %>
 </div>

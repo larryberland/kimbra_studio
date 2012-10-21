@@ -1,11 +1,11 @@
 <% if record and record.errors.present? %>
-    <div id="error_explanation">
-      <% if not h2_msg.nil? %>
-          <% h2_msg = "prohibited this #{record.class.model_name.human} from being saved:" %>
-      <% end %>
-      <h1><%= pluralize(record.errors.count, "error") %> <%= h2_msg.to_s %> </h1>
+    <div class="alert error rounded">
+      <i class="icon-hand-right"> </i>
+      <button type="button" class="close" data-dismiss="alert">close x</button>
       <ul>
-        <% record.errors.full_messages.each do |msg| %>
+        <% messages = record.to_error_messages if record.respond_to?(:to_error_messages) %>
+        <% messages ||= record.errors.full_messages %>
+        <% messages.each do |msg| %>
             <li><%= msg %></li>
         <% end %>
       </ul>

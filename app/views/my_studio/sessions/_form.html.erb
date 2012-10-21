@@ -1,24 +1,17 @@
-<%= render 'shared/error_messages', record: @my_studio_session, h2_msg: 'stopped this Photo Session' %>
+<%= render 'shared/error_messages', record: @my_studio_session %>
 
 <%= form_for(@my_studio_session, validate: true, html: {class: 'form-horizontal'}) do |f| %>
 
     <%= render "my_studio/clients/form", f: f, client: @my_studio_session.client %>
 
-    <% unless %w(new create).include? action_name %>
+    <% if is_admin? %>
         <div class="control-group">
-          <%= f.label :name, class: "control-label" %>
           <div class="controls">
-            <%= f.text_field :name, placeholder: 'Son Tom\'s graduation' %>
+            <label class="checkbox">
+              <%= f.check_box :active %>Active?
+            </label>
+            <span class="help-inline">Uncheck this to remove all pictures for this Session from active email marketing.</span>
           </div>
-          <span class="help-block">Short descriptive text when you have multiple sessions with one client (optional).</span>
-        </div>
-
-        <div class="control-group">
-          <%= f.label :active, class: "control-label" %>
-          <div class="controls">
-            <%= f.check_box :active %>
-          </div>
-          <span class="help-block">Uncheck this to remove all pictures for this Session from active email marketing.</span>
         </div>
     <% end %>
 
@@ -33,8 +26,8 @@
       <%= f.label :category_id, class: "control-label" %>
       <div class="controls">
         <%= f.select :category_id, @categories, include_blank: true %>
+        <span class="help-inline">This helps us find candidate pictures for special event marketing, such as Mothers Day, Christmas, etc.</span>
       </div>
-      <span class="help-block">This helps us find candidate pictures for special event marketing, such as Mothers Day, Christmas, etc.</span>
     </div>
 
     <div class="actions controls">
@@ -47,61 +40,4 @@
 <%= coffee_script_tag do %>
     $ ->
     $(':text:visible:enabled:first').focus()
-<% end %>
-
-<%= javascript_tag do %>
-    (function () {
-        $(document).ready(function () {
-            return $("div.control-group").focusout(function () {
-                if (!$("div.control-group").hasClass("error")) {
-                    return $(this).addClass(" ");
-                }
-            });
-        });
-    }).call(this);
-
-    clientSideValidations.formBuilders['SimpleForm::FormBuilder'] = {
-    add: function(element, settings, message) {
-    alert("add");
-    var errorElement, wrapper;
-
-    settings.wrapper_tag = ".control-group";
-    settings.error_tag = "span";
-    settings.error_class = "help-inline";
-    settings.wrapper_error_class = "error";
-    settings.wrapper_success = "xsuccess";
-
-    if (element.data('valid') !== false) {
-      wrapper = element.closest(settings.wrapper_tag);
-      wrapper.removeClass(settings.wrapper_success);
-      wrapper.addClass(settings.wrapper_error_class);
-      alert("add error");
-      errorElement = $("<" + settings.error_tag + "/>", {
-      "class": settings.error_class,
-      text: message
-      });
-      return wrapper.find(".controls").append(errorElement);
-    } else {
-      wrapper = element.closest(settings.wrapper_tag);
-      wrapper.addClass(settings.wrapper_error_class);
-      return element.parent().find("" + settings.error_tag + "." + settings.error_class).text(message);
-    }
-    },
-    remove: function(element, settings) {
-    var errorElement, wrapper;
-    alert("remove");
-    settings.wrapper_tag = ".control-group";
-    settings.error_tag = "span";
-    settings.error_class = "help-inline";
-    settings.wrapper_error_class = "error";
-    settings.wrapper_success = "xsuccess";
-
-    wrapper = element.closest("" + settings.wrapper_tag + "." + settings.wrapper_error_class);
-    wrapper.removeClass(settings.wrapper_error_class);
-    alert("remove Error");
-    wrapper.addClass(settings.wrapper_success);
-    errorElement = wrapper.find("" + settings.error_tag + "." + settings.error_class);
-    return errorElement.remove();
-    }
-    };
 <% end %>

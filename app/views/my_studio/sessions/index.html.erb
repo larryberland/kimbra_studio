@@ -1,26 +1,27 @@
-<h1>
+<h2>
   <%= t(:my_studio_sessions_index_title, name: '') %>
-  <span class="hint">
-      record set count: <%= number_to_human @record_count %>
+</h2>
+
+<form class="form-search">
+  <span class="medium">
+    By Photo Session or Client or Email
   </span>
-</h1>
+  <%= text_field_tag(:search, session[:search_my_studio_sessions], class: "input-medium search-query") %>
+  <%= submit_tag "Search", name: nil, class: "btn" %>
+  <span class="small">
+      Record Set Count:<%= @record_count %>
+  </span>
+</form>
 
-<div class="dd-form">
-  <fieldset class='search'>
-    <%= form_tag my_studio_sessions_path, :method => :get do %>
-        <p>
-          By Photo Session or Client or Email
-          <%= text_field_tag(:search, session[:search_my_studio_sessions]) %>
-          <%= submit_tag "Search", name: nil %>
-          <span class="hint">
-              Record Set Count:<%= @record_count %>
-          </span>
-        </p>
+<% unless is_admin? %>
+    <%= form_tag new_my_studio_session_path, :method => :get do %>
+        <button type="submit" class="btn btn-success">
+          <i class="icon-plus icon-white"></i>
+          <%= t(:my_studio_sessions_new_link) %>...
+        </button>
     <% end %>
-  </fieldset>
-</div>
+<% end %>
 
-<%= button_to(t(:my_studio_sessions_new_link), new_my_studio_session_path, method: :get) unless current_user.admin? %>
 <div class="paginate">
   <%= paginate @sessions %>
 </div>

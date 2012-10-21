@@ -3,11 +3,11 @@
   <%= f.fields_for :client, client do |g| %>
 
       <div class="control-group">
-        <%= g.label :name, 'Client first and last name', class: "control-label" %>
+        <%= g.label :name, class: "control-label" %>
         <div class="controls">
           <%= g.text_field :name %>
+          <span class="help-inline">Enter the name as you'd like it to appear in emails. Eg, Mary Smith</span>
         </div>
-        <span class="help-block">Enter the name as you'd like it to appear in emails. Eg, Mary Smith</span>
       </div>
 
       <div class="control-group">
@@ -17,13 +17,14 @@
         </div>
       </div>
 
-      <% unless %w(new create).include? action_name %>
+      <% if is_admin? %>
           <div class="control-group">
-            <%= g.label :active, 'Client active?' %>
             <div class="controls">
-              <%= g.check_box :active %>
+              <label class= "checkbox">
+              <%= g.check_box :active %> Client active?
+                <span class="help-inline"> Uncheck this to remove all sessions for this client from active email marketing.</span>
+              </label>
             </div>
-            <span class="help-block"> Uncheck this to remove all sessions for this client from active email marketing.</span>
           </div>
       <% end %>
 

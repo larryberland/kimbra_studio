@@ -447,3 +447,9 @@ table.table thead tr.no-round th {
 .nav {
   margin-bottom: 0 !important;
 }
+
+// bootstrap info and error message containers
+div.error,
+div.info{
+  @include rounded-corners(5px);
+}
