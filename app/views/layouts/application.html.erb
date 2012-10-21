@@ -41,6 +41,6 @@
   </ul>
 </div>
 
-<%= render('shared/olark') if user_signed_in? %>
+<%= render('shared/olark') if user_signed_in? && Rails.env.production? %>
 </body>
 </html>
