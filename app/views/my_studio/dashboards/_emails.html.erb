@@ -1,10 +1,10 @@
-<div id='title_bar'>
-  <h3><%= t(:my_studio_dashboards_emails_title) %></h3>
-</div>
+<div class="page-header">
+<h3><%= t(:my_studio_dashboards_emails_title) %></h3>
+
 <div class='panel-container'>
 
   <% if sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
-      <h1 class='motivation'>&#x2718; No emails this past week - no portraits uploaded?</h1>
+      <h4>&#x2718; No emails this past week - no portraits uploaded?</h4>
   <% else %>
       <table class="table">
         <thead>
@@ -37,7 +37,7 @@
                   <td><%= email.opened_at ? "#{time_ago_in_words email.opened_at} ago" : 'not yet' %></td>
                   <td><%= email.visited_at ? "#{time_ago_in_words email.visited_at} ago" : 'not yet' %></td>
                   <td><%= email.offers.select { |o| o.purchased_at.present? }.count.to_words %></td>
-                  <td><%= date = email.carts.collect{|c| c.shipping.updated_at if c.shipping.try(:tracking)}.max ? "#{time_ago_in_words(date)} days ago" : 'not yet' %></td>
+                  <td><%= date = email.carts.collect { |c| c.shipping.updated_at if c.shipping.try(:tracking) }.max ? "#{time_ago_in_words(date)} days ago" : 'not yet' %></td>
                 </tr>
             <% end %>
         <% end %>
@@ -45,4 +45,5 @@
       </table>
   <% end %>
 
+</div>
 </div>

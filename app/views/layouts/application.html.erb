@@ -22,11 +22,11 @@
 </head>
 <body>
 
-<div id='body_wrapper'>
+<div id='xbody_wrapper'>
 
-  <%= render 'shared/main_header', selected: params['controller']%>
+  <%= render 'shared/main_header_bs', selected: params['controller']%>
 
-  <div id='content_wrapper' class='container marketing'>
+  <div id='xcontent_wrapper' class='hero-unit container'>
     <%= yield %>
   </div>
 </div>

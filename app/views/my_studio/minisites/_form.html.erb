@@ -1,42 +1,45 @@
-<div>
-  <h3>Minisite Info</h3>
-  <%= f.fields_for :minisite, minisite do |g| %>
+<legend>Minisite Info</legend>
+<%= f.fields_for :minisite, minisite do |g| %>
 
-      <div class="image-thumb">
-        <%= image_tag_thumb(minisite) %>
-      </div>
+    <div class="image-thumb">
+      <%= image_tag_thumb(minisite) %>
+    </div>
 
-      <div class="field">
-        <%= g.label :image, 'Studio logo' %>
+    <div class="control-group">
+      <%= g.label :image, 'Studio logo', class: "control-label" %>
+      <div class="controls">
         <%= g.file_field :image %>
-        <%= g.label :remote_image_url, 'or Logo URL' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= g.label :remote_image_url, 'or Logo URL', class: "control-label" %>
+      <div class="controls">
         <%= g.text_field :remote_image_url %>
       </div>
+    </div>
 
-      <div><%= g.hidden_field :image_cache %></div>
+    <div><%= g.hidden_field :image_cache %></div>
 
-      <div class="field">
-        <%= g.label 'Page background color' %>
+    <div class="control-group">
+      <%= g.label 'Page background color', class: "control-label" %>
+      <div class="controls">
         <%= g.text_field :bgcolor, class: 'short' %>
       </div>
+    </div>
 
-      <div class="field">
-        <%= g.label :font_color %>
+    <div class="control-group">
+      <%= g.label :font_color, class: "control-label" %>
+      <div class="controls">
         <%= g.text_field :font_color, class: 'short' %>
       </div>
+    </div>
 
-      <div class="field">
-        <%= g.label :font_family %>
+    <div class="control-group">
+      <%= g.label :font_family, class: "control-label" %>
+      <div class="controls">
         <%= select_tag 'studio[minisite_attributes][font_family]', options_for_font_selector, id: 'studio_minisite_attributes_font_family' %>
       </div>
+    </div>
 
-      <!--
-      <div class="field">
-        <%# g.label :theme %>
-        <br/>
-        <%# g.text_field :theme %>
-      </div>
-      -->
-
-  <% end %>
-</div>
+<% end %>

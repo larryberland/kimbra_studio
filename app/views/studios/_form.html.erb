@@ -1,30 +1,40 @@
-<%= render 'shared/error_messages', record: @studio, h2_msg: 'prohibited new studio:' %>
+<%= render 'shared/error_messages', record: @studio %>
 
-<%= form_for(@studio, validate: true) do |f| %>
+<%= form_for(@studio, validate: true, html: {class: 'form-horizontal'}) do |f| %>
 
-    <div class="field">
-      <%= f.label 'Studio name' %>
-      <%= f.text_field :name %>
+    <div class="control-group">
+      <%= f.label 'Studio name', class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :name %>
+      </div>
     </div>
-    <div class="field">
-      <%= f.label :phone_number %>
-      <%= f.text_field :phone_number, {size: 15, maxlength: 15, value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true)} %>
-      for clients to contact
+
+    <div class="control-group">
+      <%= f.label :phone_number, class: "control-label" %>
+      <div class="controls">
+        <%= f.text_field :phone_number, {size: 15, maxlength: 15, value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true)} %>
+        <span class="help-inline">for clients to contact</span>
+      </div>
     </div>
 
     <%= f.fields_for :owner, @studio.owner do |g| %>
         <%= g.hidden_field :id %>
         <%= g.hidden_field :first_pass %>
-        <div class="field">
-          <%= g.label 'Owner\'s first and last name' %> - clients see this on the studio's Contact page
-          <br/>
-          <%= g.text_field :first_name, class: :short %> <%= g.text_field :last_name %>
+        <div class="control-group">
+          <%= g.label 'Owner\'s first and last name', class: "control-label" %>
+          <div class="controls">
+            <%= g.text_field :first_name, class: :short %>
+            <%= g.text_field :last_name %>
+            <span class="help-inline">clients see this on the studio's Contact page</span>
+          </div>
         </div>
         <% if current_user.admin? %>
-            <div class="field">
-              <%= g.label 'Owner\'s email' %> - can be different from the studio email
-              <br/>
-              <%= g.text_field :email %>
+            <div class="control-group">
+              <%= g.label "Owner's email", class: "control-label" %>
+              <div class="controls">
+                <%= g.text_field :email %>
+                <span class="help-inline"> - can be different from the studio email</span>
+              </div>
             </div>
         <% end %>
     <% end %>
@@ -38,16 +48,20 @@
     <%= render "my_studio/minisites/form", :f => f, :minisite => ms %>
 
     <% if is_admin? %>
-        <div class="field">
-          <%= f.label 'Sales status' %>
-          <%= f.text_field :sales_status %>
+        <div class="control-group">
+          <%= f.label 'Sales status', class: "control-label" %>
+          <div class="controls">
+            <%= f.text_field :sales_status %>
+          </div>
         </div>
-        <div class="field">
-          <%= f.label 'Sales notes' %>
-          <%= f.text_area :sales_notes %>
+        <div class="control-group">
+          <%= f.label 'Sales notes', class: "control-label" %>
+          <div class="controls">
+            <%= f.text_area :sales_notes %>
+          </div>
         </div>
 
-        <div class="actions">
+        <div class="actions controls">
           <%= f.submit :id => 'my_submit' %>
           <span id="spinner" style="display:none"></span>
         </div>

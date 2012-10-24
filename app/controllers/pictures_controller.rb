@@ -12,10 +12,6 @@ class PicturesController < ApplicationController
     p_attr = params[:picture]
     p_attr[:avatar] = params[:picture][:file].first if params[:picture][:file].class == Array
 
-    puts "params:#{params.inspect}"
-
-    puts "p_attr:#{p_attr.inspect}"
-
     @picture = Picture.new(p_attr)
     if @picture.save
       respond_to do |format|

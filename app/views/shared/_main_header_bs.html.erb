@@ -1,0 +1,74 @@
+<% selected = '' if selected.nil? %>
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+
+  <div class="navbar-inner">
+
+    <div class="container">
+
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <%= link_to nav_bar_title, root_path, class: "brand" %>
+
+      <ul class='nav pull-right'>
+        <!-- devise signup, logout, edit account -->
+        <% if user_signed_in? %>
+            <li><%= link_to "Edit account", edit_user_registration_path %></li>
+            <li><%= link_to "Log out", destroy_user_session_path, method: :delete %>
+            </li>
+        <% else %>
+            <li><%= link_to translate(:sign_in), new_user_session_path %></li>
+            <!-- <li>> link_to translate(:sign_up), new_user_registration_path %></li>-->
+            <li><%= link_to translate(:sign_up), signup_about_path %></li>
+        <% end %>
+
+      </ul>
+
+      <!-- Everything you want hidden at 940px or less, place within here -->
+      <div class="nav-collapse collapse">
+
+        <ul class='nav'>
+
+          <% if is_admin? %>
+              <%= link_to_nav_pill t(:admin_menu_overview), admin_overview_url, selected == 'admin/overviews' %>
+              <%= link_to_nav_pill t(:admin_menu_emails), admin_customer_emails_path, selected == 'admin/customer/emails' %>
+              <%= link_to_nav_pill t(:admin_menu_studios), studios_path, selected == 'studios' %>
+              <%= link_to_nav_pill t(:admin_menu_users), users_path, selected == 'users' %>
+              <%= link_to_nav_pill t(:admin_menu_merchandise), admin_merchandise_pieces_path, selected == 'admin/merchandise/pieces' %>
+              <%= link_to_nav_pill t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
+              <%= link_to_nav_pill t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
+              <%= link_to_nav_pill t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
+          <% elsif is_studio? %>
+              <%= link_to_nav_pill t(:my_studio_overview_link), my_studio_dashboard_path, selected == 'my_studio/dashboards' %>
+              <%= link_to_nav_pill t(:my_studio_overview_label_session), my_studio_sessions_path, (selected == 'my_studio/sessions' or selected=='my_studio/portraits'), 'View My Photo Sessions' %>
+              <%= link_to_nav_pill t(:my_studio_info_label_samples), samples_my_studio_infos_path, (selected == 'my_studio/infos' and params[:action] == 'samples') %>
+              <% unless @my_studio.new_record? %>
+                  <%= link_to_nav_pill t(:my_studio_minisite_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
+              <% end %>
+              <%= link_to_nav_pill t(:my_studio_info_label_faq), faq_my_studio_infos_path, (selected == 'my_studio/infos' and params[:action] == 'faq') %>
+          <% end %>
+
+        </ul>
+
+        <!-- nav-collapse -->
+      </div>
+
+
+      <!-- container navbar-inner -->
+    </div>
+
+    <!-- navbar-inner -->
+  </div>
+  <!-- navbar-fixed-top -->
+</div>
+
+<div id="flash_wrapper" class="bp">
+  <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
+  <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
+</div>
+

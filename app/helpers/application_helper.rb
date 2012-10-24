@@ -20,6 +20,18 @@ module ApplicationHelper
     I18n.t(:company)
   end
 
+  def nav_bar_title
+    title = if user_signed_in?
+              if is_admin?
+                t(:admin_overview_title)
+              else
+                @my_studio.try(:name)
+              end
+
+            end
+    title ||= t(:company_brand)
+    title
+  end
 
   # return blank if no time
   def time_short(time)

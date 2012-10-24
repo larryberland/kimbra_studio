@@ -1,52 +1,63 @@
-<h3> Studio Info</h3>
+<legend> Studio Info</legend>
 <%= f.fields_for :info, info do |g| %>
 
-    <% if current_user.admin? %>
-        <div class="field">
+    <% if is_admin? %>
+        <div class="control-group">
           <%= g.check_box :active %> <%= g.label :active %>
         </div>
     <% end %>
-    <div class="field">
-      <%= g.label :website %> - paste from browser address bar. eg, http://my_photographer.com
-      <br/>
-      <%= g.text_field :website, size: 60 %> <%= link_to('Go', info.website, target: '_blank') if current_user.admin? && info.website %>
+    <div class="control-group">
+      <%= g.label :website, class: "control-label" %>
+      <div class="controls">
+        <%= g.text_field :website, size: 60 %> <%= link_to('Go', info.website, target: '_blank') if current_user.admin? && info.website %>
+        <span class="help-inline">paste from browser address bar. eg, http://my_photographer.com</span>
+
+      </div>
     </div>
-    <div class="field">
-      <%= g.label :email, "Studio's Email" %> - displayed on your Contact page
-      <br/>
-      <%= g.email_field :email %>
+    <div class="control-group">
+      <%= g.label :email, "Studio's Email", class: "control-label" %>
+      <div class="controls">
+        <%= g.email_field :email %>
+        <span class="help-inline">displayed on your Contact page</span>
+      </div>
     </div>
-    <!--
-    <div class="field">
-      <%# g.label :email_notification %>
-      <br/>
-      <%# g.email_field :email_notification %> intended as a secondary email address for alerts to go to
+    <div class="control-group">
+      <%= g.label :tax_ein, 'Tax ID/EIN', class: "control-label" %>
+      <div class="controls">
+
+        <%= g.text_field :tax_ein %>
+        <span class="help-inline">we need this before we can cut you a commission check</span>
+      </div>
     </div>
-    -->
-    <div class="field">
-      <%= g.label :tax_ein, 'Tax ID/EIN', class: 'short' %> - we need this before we can cut you a commission check
-      <br/>
-      <%= g.text_field :tax_ein %>
+
+    <div class="control-group">
+      <%= g.label :commission_rate, 'Commission rate (%)', class: "control-label" %>
+      <div class="controls">
+        <%= g.text_field :commission_rate, disabled: !current_user.admin?, class: 'short' %>
+        <span class="help-inline">base rate is 5%</span>
+      </div>
     </div>
-    <div class="field">
-      <%= g.label :commission_rate, 'Commission rate (%)' %>
-      <br/>
-      <%= g.text_field :commission_rate, disabled: !current_user.admin?, class: 'short' %> base rate is 5%
+
+    <div class="control-group">
+      <label class="checkbox inline">
+        <%= g.check_box :pictage_member %> Pictage member?
+      </label>
+      <label class="checkbox inline">
+        <%= g.check_box :smug_mug_member %> SmugMug member?
+      </label>
     </div>
-    <div class="field">
-      <%= g.check_box :pictage_member %> <%= g.label 'Pictage member?' %>
+    <div class="control-group">
+      <label class="checkbox inline">
+        <%= g.check_box :mac_user %> use Macs?
+      </label>
+      <label class="checkbox inline">
+        <%= g.check_box :windows_user %> use PCs running Microsoft Windows?
+      </label>
     </div>
-    <div class="field">
-      <%= g.check_box :smug_mug_member %> <%= g.label 'SmugMug member?' %>
-    </div>
-    <div class="field">
-      <%= g.check_box :mac_user %> <%= g.label 'use Macs?' %>
-    </div>
-    <div class="field">
-      <%= g.check_box :windows_user %> <%= g.label 'use PCs running Microsoft Windows?' %>
-    </div>
-    <div class="field">
-      <%= g.check_box :ping_email %> <%= g.label :ping_email, 'receive emails about commissions, new features, etc' %>
+    <div class="control-group">
+      <label class="checkbox">
+        <%= g.check_box :ping_email %>  receive emails about commissions, new features, etc'
+      </label>
     </div>
 
 <% end %>

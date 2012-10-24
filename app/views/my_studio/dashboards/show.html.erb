@@ -1,44 +1,35 @@
 <div class='container'>
 
-  <div class='motivation'>
+  <div class='page-header'>
 
-    <table class='table'>
-      <tbody>
-      <tr>
-        <td>
-          <%= new_sessions_days_ago_text %>
-        </td>
-        <td align='left'>
-          <%= form_tag new_my_studio_session_path, :method => :get do %>
-              <button type="submit" class="btn btn-success">
-                <i class="icon-plus icon-white"></i>
-                Create new photo session and upload portraits now!...
-              </button>
-          <% end %>
-        </td>
-      </tr>
-      </tbody>
-    </table>
+    <h4>
+      <%= new_sessions_days_ago_text %>
+      <%= form_tag new_my_studio_session_path, method: :get do %>
+          <button type="submit" class="btn btn-success">
+            <i class="icon-plus icon-white"></i>
+            Create new photo session and upload portraits now!...
+          </button>
+      <% end %>
+    </h4>
+
+
+    <% if @sessions.present? %>
+        <h4>
+          Total revenue so far: <%= number_to_currency @sum_purchases %> Your commmission (at <%= @commission_rate %>
+          %):
+          <%= number_to_currency @total_commissions %>
+        </h4>
+
+        <div class='container'>
+          <%= render 'my_studio/dashboards/sessions', sessions: @sessions %>
+        </div>
+
+        <div class='container'>
+          <%= render 'my_studio/dashboards/emails', sessions: @sessions %>
+        </div>
+    <% end %>
   </div>
-
-  <% if @sessions.present? %>
-      <div class='motivation'>
-        Total revenue so far: <%= number_to_currency @sum_purchases %> Your commmission (at <%= @commission_rate %>%):
-        <%= number_to_currency @total_commissions %>
-      </div>
-  <% end %>
-</div>
-
-<% if @sessions.present? %>
-    <div class='container'>
-      <%= render 'my_studio/dashboards/sessions', sessions: @sessions %>
-    </div>
-
-    <div class='container'>
-      <%= render 'my_studio/dashboards/emails', sessions: @sessions %>
-    </div>
-<% end %>
-
-<div class='span2'>
-  <%= image_tag 'kimbra_logo.png' %>
+  <div class='span2'>
+    <%= image_tag 'kimbra_logo.png' %>
+  </div>
 </div>

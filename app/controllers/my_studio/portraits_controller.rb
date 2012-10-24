@@ -6,9 +6,10 @@ class MyStudio::PortraitsController < MyStudio::BaseController
   # GET /my_studio/portraits.json
   def index
     @my_studio_portraits = MyStudio::Portrait.where('my_studio_session_id=?', @my_studio_session).order('created_at desc')
+    @record_count        = @my_studio_portraits.size
     respond_to do |format|
       format.html # index.html.erb
-      format.json {@my_studio_portraits.collect { |p| p.to_jq_upload }.to_json}
+      format.json { @my_studio_portraits.collect { |p| p.to_jq_upload }.to_json }
     end
   end
 
@@ -39,25 +40,29 @@ class MyStudio::PortraitsController < MyStudio::BaseController
   # POST /my_studio/portraits
   # POST /my_studio/portraits.json
   def create
-    @my_studio_portrait = MyStudio::Portrait.new(params[:my_studio_portrait])
+    p_attrs = params[:my_studio_portrait]
+    p_attrs[:image] = params[:my_studio_portrait][:file].first if params[:my_studio_portrait][:file].class == Array
+
+    @my_studio_portrait                   = MyStudio::Portrait.new(p_attrs)
     @my_studio_portrait.my_studio_session = @my_studio_session
-    respond_to do |format|
-      if @my_studio_portrait.save
-        format.html { redirect_to my_studio_session_portraits_url(@my_studio_session), notice: 'Portrait was successfully created.' }
-        format.json { render json: my_studio_session_portrait_url(@my_studio_session, @my_studio_portrait), status: :created, location: @my_studio_portrait }
-        format.js { redirect_to my_studio_session_portraits_url(@my_studio_session), notice: 'Portrait was successfully created.' }
-      else
-        format.html { render action: 'new' }
-        format.json { render json: @my_studio_portrait.errors, status: :unprocessable_entity }
-        format.js { render action: 'new' }
+    if @my_studio_portrait.save
+      respond_to do |format|
+        format.html {
+          render :json         => [@my_studio_portrait.to_jq_upload].to_json,
+                 :content_type => 'text/html',
+                 :layout       => false
+        }
+        format.json { render json: [@my_studio_portrait.to_jq_upload].to_json }
       end
+    else
+      render :json => [{:error => "custom_failure"}], :status => 304
     end
   end
 
   # PUT /my_studio/portraits/1
   # PUT /my_studio/portraits/1.json
   def update
-    @my_studio_portrait = MyStudio::Portrait.find(params[:id])
+    @my_studio_portrait                   = MyStudio::Portrait.find(params[:id])
     @my_studio_portrait.my_studio_session = @my_studio_session
 
     respond_to do |format|
@@ -72,7 +77,7 @@ class MyStudio::PortraitsController < MyStudio::BaseController
   end
 
   # DELETE /my_studio/portraits/1
-  # DELETE /my_studio/portraits/1.json
+          # DELETE /my_studio/portraits/1.json
   def destroy
     @my_studio_portrait = MyStudio::Portrait.find(params[:id])
     @my_studio_portrait.destroy
