@@ -43,6 +43,9 @@
 
 # Ignore temp jpg files
 face*.jpg
+/logo.jpg
+/studio_logo.jpg
+/kimbra_logo.jpg
 
 # Ignore all logfiles and tempfiles.
 /log/*.log
