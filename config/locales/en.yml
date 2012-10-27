@@ -137,6 +137,7 @@ en:
   #my_studio/infos/samples, faq
   my_studio_info_label_samples: 'How It Works'
   my_studio_info_label_faq: 'FAQ'
+  my_studio_info_label_blog: 'Blog'
 
   #my_studio_minisites
   my_studio_minisite_label: 'Branding'

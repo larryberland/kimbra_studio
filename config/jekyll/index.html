@@ -1,0 +1,17 @@
+---
+layout: default
+---
+
+<section class="group1">
+    <h3>{{ site.posts.first.title }}</h3>
+    {{ site.posts.first.content }}
+
+    <div id="disqus_thread"></div>
+
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+
+</section>
+
+<script type="text/javascript">
+    var disqus_identifier = "{{ site.posts.first.title }}";
+</script>

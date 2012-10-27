@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>BLOG_NAME</title>
+ <link href="YOUR_URL/atom.xml" rel="self"/>
+ <link href="YOUR_URL"/>
+ <updated>2012-10-27T08:34:00-04:00</updated>
+ <id>BLOG_URL</id>
+ <author>
+   <name>BLOG_NAME</name>
+ </author>
+
+ 
+ <entry>
+   <title>I can't select the jewelry pieces!</title>
+   <link href="YOUR_URL/i-cannot-select-the-jewelry-pieces.html"/>
+   <updated>2012-10-26T00:00:00-04:00</updated>
+   <id>BLOG_URL/i-cannot-select-the-jewelry-pieces</id>
+   <content type="html">&lt;p&gt;The Kimbra ClickPLUS process is pretty simple: you upload a few pictures, we take care of everything else. But sometimes
+studios complain that they cannot select the jewelry pieces themselves.&lt;/p&gt;
+
+&lt;p&gt;We designed it that way because studio after studio told us that they want to focus on photography and running their
+studio, instead of spending way too much time fussing with photo jewelry offers.&lt;/p&gt;
+
+&lt;p&gt;To make it as fast for studios as possible, we delay selecting the jewelry pieces that we'll use for your offer until we
+start working on the photoshopping of the offers themselves. We don't want you to take time to select the perfect jewelry
+piece appropriate for the portrait you just uploaded - we'll do that for you. And it's faster if you just leave it to us.&lt;/p&gt;
+
+&lt;p&gt;Of course, you can use Kimbra's PPP program (Professional Photography Program) if tyou want to perform all ofthe steps
+yourself: up;oad theportraits, select the jewelry piece, composite it into the piece, collect the payment from the client,
+process the payment, handle customer support, shipping, etc. But who has the time?&lt;/p&gt;
+
+&lt;p&gt;Let us do all the hard work in the process of creating gorgeous photo jewelry pieces for your clients and building
+marketing programs that spread the word of your studio's quality to your client's families and friends.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Reviewing offers before we send them to your clients</title>
+   <link href="YOUR_URL/reviewing-offers-before-we-send-them-to-your-clients.html"/>
+   <updated>2012-10-19T00:00:00-04:00</updated>
+   <id>BLOG_URL/reviewing-offers-before-we-send-them-to-your-clients</id>
+   <content type="html">&lt;p&gt;Several studios who haven't been part of the early adopter program would love to use Kimbra's ClickPLUS program but feel
+hesitant to trust us with their clients for the first time.&lt;/p&gt;
+
+&lt;p&gt;You can easily review the offer pieces we created for your client and the offer email and the mini-website they click through
+for more details and purchase. But you don't see those until after we have created and sent the offers.&lt;/p&gt;
+
+&lt;p&gt;We are thinking of adding a checkbox that will allow you to review the offers before we send them. We'll only send the
+offers to your client after you have reviewed them. We'll probably send you an email as soon as the offers are ready for
+review.&lt;/p&gt;
+
+&lt;p&gt;After you are used to the quality of work we do, you can select &lt;em&gt;skip individual reviews&lt;/em&gt; to have us send the offer
+emails as soon as they are ready. That removes a step for you and speeds everything up.&lt;/p&gt;
+
+&lt;p&gt;What do you think of that proposal? Let us know in the comments or contact us directly via chat or email.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>The story with pets</title>
+   <link href="YOUR_URL/the-story-with-pets.html"/>
+   <updated>2012-10-12T00:00:00-04:00</updated>
+   <id>BLOG_URL/the-story-with-pets</id>
+   <content type="html">&lt;p&gt;You probably know that Kimbra has several pieces in her jewelry collections specifically themed for pets. You may not have
+noticed, but we do not yet offer these pieces in the Kimbra ClickPLUS platform.&lt;/p&gt;
+
+&lt;p&gt;It's not that we don't love pets, and it's not that we discourage pet portraits for your clients. Far from it.&lt;/p&gt;
+
+&lt;p&gt;The real reason is that we automate many parts of the process of photoshopping your portraits into the jewelry pieces to create
+the offers for your clients. We have removed Kimbra's pet-themed pieces so that we don't accidentally create an offer
+of the bride's mother on a pooch bracelet -- that would be bad.&lt;/p&gt;
+
+&lt;p&gt;Studios that specialize in pet portraits love to use us because pet portraits look great in regular jewelry pieces.&lt;/p&gt;
+
+&lt;p&gt;When we have a foolproof process for ensuring that the mother of the bride does not end up in the wrong place, we'll
+introduce Kimbra's line of pet-themed jewelry.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Number One reason wedding studios use us</title>
+   <link href="YOUR_URL/top-reason-for-use.html"/>
+   <updated>2012-10-05T00:00:00-04:00</updated>
+   <id>BLOG_URL/top-reason-for-use</id>
+   <content type="html">&lt;p&gt;Wedding studios are under a lot of pressure to complete their photography package quickly. The bride, the mother of the bride,
+the families of the bride and the groom, everyone wants to see those pictures. The reality is that it takes significant time
+to winnow the thousand or more pictures to a presentation package. The clients are impatient and don't appreciate the
+amount of work that's required, nor the studio's reluctance to release portraits before they are all complete and crafted to
+the studio's quality standards.&lt;/p&gt;
+
+&lt;p&gt;Some studios have realized that they can provide significant satisfaction to their clients' impatience by sending them a
+photo jewelry offer. The offers are gorgeous and captivate the clients and their families. Because the portraits are
+greatly reduced in size (typically to an inch across), the studio does not need to spend &lt;em&gt;any&lt;/em&gt; time on post-processing
+or enhancements. Nor does the studio need to worry about artistic considerations involved in the cropping and positioning
+of the jewelry piece - we do all of that for them.&lt;/p&gt;
+
+&lt;p&gt;Even better than reducing their client's impatience, the studio's branding is forwarded to all the friends and families
+of the delighted and excited client. That word-of-mouth marketing is gold to studios who want to increase their business.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ 
+</feed>
