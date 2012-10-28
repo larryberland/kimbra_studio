@@ -2,6 +2,4 @@
 
 <%= render 'form' %>
 
-<div class='show'>
-  <%= link_to t(:back), admin_customer_email_offer_items_path(@offer.email, @offer) %>
-</div>
+<%= link_to t(:back), admin_customer_email_offer_items_path(@offer.email, @offer), class: "btn btn-primary" %>

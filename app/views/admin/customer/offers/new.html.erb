@@ -3,7 +3,5 @@
 <div class="platypus-form-container">
   <%= render 'form' %>
 
-  <div class='show'>
-    <%= link_to t(:back), admin_customer_email_offers_path(@email) %>
-  </div>
+  <%= link_to t(:back), admin_customer_email_offers_path(@email), class: "btn btn-primary" %>
 </div>

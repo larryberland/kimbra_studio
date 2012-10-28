@@ -17,6 +17,6 @@
 <%= render 'admin/customer/item_sides/show', :item_side => @item.back, :label => '2' if @item.back.present? %>
 
 <% unless @show_status_only %>
-    <%= link_to t(:edit), edit_admin_customer_email_offer_item_path(@offer.email, @offer, @item) %> |
-    <%= link_to t(:back), admin_customer_email_offer_items_path(@offer.email, @offer) %>
+    <%= link_to t(:edit), edit_admin_customer_email_offer_item_path(@offer.email, @offer, @item), class: "btn btn-success" %> |
+    <%= link_to t(:back), admin_customer_email_offer_items_path(@offer.email, @offer), class: "btn btn-primary" %>
 <% end %>

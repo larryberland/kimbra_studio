@@ -8,8 +8,8 @@
   <%= render 'admin/merchandise/parts/position', :part => @part %>
 
   <div class="show">
-    <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, @part) %> |
-    <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece) %>
+    <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, @part), class: "btn btn-primary" %> |
+    <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece), class: "btn btn-primary" %>
   </div>
 
 </div>

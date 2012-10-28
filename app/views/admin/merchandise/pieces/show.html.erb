@@ -51,8 +51,8 @@
       <%= @admin_merchandise_piece.deleted_at %>
     </p>
 
-    <%= link_to t(:edit), edit_admin_merchandise_piece_path(@admin_merchandise_piece) %> |
-    <%= link_to t(:back), admin_merchandise_pieces_path %>
+    <%= link_to t(:edit), edit_admin_merchandise_piece_path(@admin_merchandise_piece), class: "btn btn-success" %> |
+    <%= link_to t(:back), admin_merchandise_pieces_path, class: "btn btn-primary" %>
   </div>
 
   <%= render 'admin/merchandise/pieces/side_menu', :piece => @admin_merchandise_piece %>

@@ -49,8 +49,8 @@
   <%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
 
   <div class="clear-both"></div>
-  <%= link_to t(:edit), edit_admin_customer_email_path(@admin_customer_email) %> |
-  <%= link_to t(:back), admin_customer_emails_path %>
+  <%= link_to t(:edit), edit_admin_customer_email_path(@admin_customer_email), class: "btn btn-success" %> |
+  <%= link_to t(:back), admin_customer_emails_path, class: "btn btn-primary" %>
 
 </div>
 

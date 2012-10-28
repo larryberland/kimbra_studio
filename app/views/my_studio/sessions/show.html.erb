@@ -22,6 +22,6 @@
   <% @my_studio_client = @my_studio_session.client %>
   <%= render 'my_studio/clients/show', :client => @my_studio_session.client %>
 
-  <%= link_to t(:edit), edit_my_studio_session_path(@my_studio_session) %> |
-  <%= link_to t(:back), my_studio_sessions_path %>
+  <%= link_to t(:edit), edit_my_studio_session_path(@my_studio_session), class: "btn btn-success" %> |
+  <%= link_to t(:back), my_studio_sessions_path, class: "btn btn-primary" %>
 </div>

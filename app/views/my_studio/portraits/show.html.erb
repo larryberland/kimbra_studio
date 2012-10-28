@@ -14,8 +14,8 @@
     <%= @my_studio_portrait.active %>
   </p>
 
-  <%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait) %> |
-  <%= link_to t(:back), my_studio_session_portraits_path(@my_studio_session) %>
+  <%= link_to t(:edit), edit_my_studio_session_portrait_path(@my_studio_session, @my_studio_portrait), class: "btn btn-success" %> |
+  <%= link_to t(:back), my_studio_session_portraits_path(@my_studio_session), class: "btn btn-primary" %>
 
 </div>
 <%= render 'my_studio/portraits/side_menu', :portrait => @my_studio_portrait %>
