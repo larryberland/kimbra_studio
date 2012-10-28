@@ -1,6 +1,8 @@
-<h1><%= t(:admin_customer_emails_new_title) %></h1>
+<div class="row span12">
 
-<div class="platypus-form-container large">
+<h2><%= t(:admin_customer_emails_new_title) %></h2>
+
   <%= render 'form' %>
+
+  <%= link_to t(:back), admin_customer_emails_path, class: "btn btn-primary" %>
 </div>
-<%= link_to t(:back), admin_customer_emails_path %>
