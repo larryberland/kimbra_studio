@@ -1,10 +1,10 @@
 module MyStudio::PortraitsHelper
 
-  def feedback_for(count)
-    return '' if count == 0
+  def feedback_for(portraits)
+    return '' if portraits.count == 0
     msg = "You have uploaded #{count == 1 ? 'only 1 portrait' : "#{count} portraits"} so far. "
     msg << "<br/>We will generate an offer email with as few as 2 portraits but we prefer if you load at least 6 or as many as 20. "
-    msg << "<br/>#{6 - count} to go." unless count >= 6
+    msg << "<br/>#{6 - portraits.count} to go." unless portraits.count >= 6
     msg.html_safe
   end
 
