@@ -9,7 +9,7 @@ class MyStudio::PortraitsController < MyStudio::BaseController
     @record_count        = @my_studio_portraits.size
     respond_to do |format|
       format.html # index.html.erb
-      format.json { @my_studio_portraits.collect { |p| p.to_jq_upload }.to_json }
+      format.json { render json: @my_studio_portraits.collect { |p| p.to_jq_upload }.to_json }
     end
   end
 

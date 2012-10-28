@@ -8,7 +8,7 @@
   <%= stylesheet_link_tag 'application' %>
   <%= stylesheet_link_tag 'bootstrap' %>
   <%= javascript_include_tag 'application' %>
-  <%= render 'shared/firefly' %>
+  <%= render 'shared/firefly' if Rails.env.production? %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
   <!--[if !IE 7]>

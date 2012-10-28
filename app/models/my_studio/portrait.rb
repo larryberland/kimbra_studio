@@ -28,7 +28,7 @@ class MyStudio::Portrait < ActiveRecord::Base
       "size" => image.size,
       "url" => image.url,
       "thumbnail_url" => image.thumb.url,
-      "delete_url" => my_studio_session_portraits_path(my_studio_session, id),
+      "delete_url" => my_studio_session_portrait_path(my_studio_session, id),
       "delete_type" => "DELETE"
     }
   end
