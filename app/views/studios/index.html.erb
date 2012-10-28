@@ -7,7 +7,7 @@
 
   <form class='form-search'>
 
-    <div class="controls controls-row">
+    <div class="span8 controls controls-row">
       Logo?
       <%= select_tag :search_logoize, options_for_select(%w(any present missing), @logo_search_value) %>
       <div class="input-append">
@@ -18,7 +18,7 @@
     </div>
   </form>
 
-  <%= form_tag new_studio_path, method: :get, class: "pull-left" do %>
+  <%= form_tag new_studio_path, method: :get, class: "pull-right" do %>
       <button type="submit" class="btn btn-success">
         <i class="icon-plus icon-white"></i>
         <%= t(:studios_new_link) %>...

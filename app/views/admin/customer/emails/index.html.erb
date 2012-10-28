@@ -1,15 +1,13 @@
-<h1>
+<h2>
   <%= t(:admin_customer_emails_index_title) %>
-  <span class="hint">
-      record set count: <%= number_to_human @record_count %>
-  </span>
-</h1>
+  <small>result set count: <%= number_to_human @record_count %></small>
+</h2>
 
 <div class="paginate">
   <%= paginate @admin_customer_emails %>
 </div>
 
-<table>
+<table class="table table-striped table-bordered">
   <thead>
   <tr>
     <th colspan="<%= is_admin? ? 4 : 1 %>">Actions</th>
