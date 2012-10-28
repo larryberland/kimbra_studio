@@ -277,3 +277,6 @@ en:
       date: "%m/%d/%Y"
     am: "am"
     pm: "pm"
+  numbers:
+    ones: [none, one, two, three, four, five, six, seven, eight, nine]
+    tens: [none, ten, twenty, thirty, forty, fifty, sixty, seventy, eighty, ninety]

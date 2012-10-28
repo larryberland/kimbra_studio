@@ -1,4 +1,4 @@
-<div class="platypus-show-container">
+<div class="row span12">
   <p>
     <b>Studio Name:</b>
     <%= @studio.name %> (studio_id: <%= @studio.id %>)
@@ -24,7 +24,7 @@
 
   <%= render 'shared/addresses/show', :resource => @studio %>
 
-  <%= link_to translate(:edit), edit_studio_path(@studio) %> |
+  <%= link_to translate(:edit), edit_studio_path(@studio), class:"btn btn-success" %> |
   <% url = current_user.admin? ? studios_path : my_studio_overview_path %>
-  <%= link_to translate(:back), url %>
+  <%= link_to translate(:back), url, class: "btn btn-primary" %>
 </div>
