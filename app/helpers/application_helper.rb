@@ -200,10 +200,15 @@ module ApplicationHelper
   end
 
   def link_to_button(label, url, selected, title="")
-
     css = css_button(selected)
     link_to label, url, class: css, title: title
   end
+
+  # allows word wrapping on email strings
+  def email_display(email)
+    email.to_s.downcase.gsub('@', "&#8203;@").gsub('.', "&#8203;.").html_safe
+  end
+
 
   def link_from_site_short_name(url)
     host   = URI.parse(url).host.downcase

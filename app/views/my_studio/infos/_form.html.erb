@@ -1,19 +1,14 @@
 <legend> Studio Info</legend>
 <%= f.fields_for :info, info do |g| %>
 
-    <% if is_admin? %>
-        <div class="control-group">
-          <%= g.check_box :active %> <%= g.label :active %>
-        </div>
-    <% end %>
     <div class="control-group">
       <%= g.label :website, class: "control-label" %>
       <div class="controls">
         <%= g.text_field :website, size: 60 %> <%= link_to('Go', info.website, target: '_blank') if current_user.admin? && info.website %>
         <span class="help-inline">paste from browser address bar. eg, http://my_photographer.com</span>
-
       </div>
     </div>
+
     <div class="control-group">
       <%= g.label :email, "Studio's Email", class: "control-label" %>
       <div class="controls">
@@ -21,10 +16,10 @@
         <span class="help-inline">displayed on your Contact page</span>
       </div>
     </div>
+
     <div class="control-group">
       <%= g.label :tax_ein, 'Tax ID/EIN', class: "control-label" %>
       <div class="controls">
-
         <%= g.text_field :tax_ein %>
         <span class="help-inline">we need this before we can cut you a commission check</span>
       </div>
@@ -39,14 +34,18 @@
     </div>
 
     <div class="control-group">
+      <% if is_admin? %>
+          <label class="checkbox inline">
+            <%= g.check_box :active %> Active?
+          </label>
+      <% end %>
+
       <label class="checkbox inline">
         <%= g.check_box :pictage_member %> Pictage member?
       </label>
       <label class="checkbox inline">
         <%= g.check_box :smug_mug_member %> SmugMug member?
       </label>
-    </div>
-    <div class="control-group">
       <label class="checkbox inline">
         <%= g.check_box :mac_user %> use Macs?
       </label>

@@ -1,72 +1,80 @@
-<h1><%= t(:studios_index_title) %></h1>
+<div class="row span12">
 
-<div class="dd-form">
-  <fieldset class='search'>
-    <%= form_tag studios_path, :method => :get do %>
-        <p>
-          Logo?
-          <%= select_tag :search_logoize, options_for_select(%w(any present missing), @logo_search_value) %>
-          AND By Name, Phone Number, City, or State abbrev
-          <%= text_field_tag(:search, params[:search]) %>
-          <%= submit_tag "Search", name: nil %>
-          <span class="hint">
-              Record Set Count:<%= @record_count %>
-          </span>
-        </p>
-    <% end %>
-  </fieldset>
-</div>
+  <h2>
+    <%= t(:studios_index_title) %>
+    <small>current studio count:<%= @record_count %></small>
+  </h2>
 
-<%= link_to t(:studios_new_link), new_studio_path %>
+  <form class='form-search'>
 
-<div class="paginate">
-  <%= paginate @studios %>
-</div>
+    <div class="controls controls-row">
+      Logo?
+      <%= select_tag :search_logoize, options_for_select(%w(any present missing), @logo_search_value) %>
+      <div class="input-append">
+        AND
+        <%= text_field_tag(:search, session[:search], class: "span4 search-query", placeholder: 'By Name, Phone Number, City, or State abbrev') %>
+        <%= submit_tag "Search", name: nil, class: "btn" %>
+      </div>
+    </div>
+  </form>
 
-<table>
-  <thead>
-  <tr>
-    <th>Actions</th>
-    <th>Logo?</th>
-    <th title='date studio clicked through EAP email'>EAP</th>
-    <th title='send studio an email'>Name</th>
-    <th title='send owner an email'>Owner</th>
-    <th>Website</th>
-    <th>Phone number</th>
-    <th>Location</th>
-    <th>Sales<br/>status</th>
-  </tr>
-  </thead>
-  <tbody>
-  <% @studios.all.each do |studio| %>
-      <tr>
-        <td>
-          <% if link = eap_link(studio) %>
-              <%= link %>
-              <br>
-          <% end %>
-          <%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %>
-          <br>
-          <%= link_to 'Branding', show_branding_studio_path(studio) %>
-          <br>
-          <%= link_to t(:edit), edit_studio_path(studio) %>
-          <br>
-          <%= link_to t(:destroy), studio, confirm: t(:link_destroy_confirm), method: :delete %>
-          <br>
-        </td>
-        <td><%= studio.try(:logoize) %></td>
-        <td title='<%= time_short_index studio.eap_click %>' ><%= date_short studio.eap_click  %></td>
-        <td><%= studio_email_link(studio) %></td>
-        <td><%= user_email_link(studio.owner) %></td>
-        <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
-        <td><%= number_to_phone studio.phone_number, area_code: true %></td>
-        <td><%= studio.try(:city_state_name) %></td>
-        <td><%= editable_field studio, :sales_status, {tooltip: studio.sales_notes} %></td>
-      </tr>
+  <%= form_tag new_studio_path, method: :get, class: "pull-left" do %>
+      <button type="submit" class="btn btn-success">
+        <i class="icon-plus icon-white"></i>
+        <%= t(:studios_new_link) %>...
+      </button>
   <% end %>
-  </tbody>
-</table>
 
-<div class="paginate">
-  <%= paginate @studios %>
+  <div class="paginate">
+    <%= paginate @studios %>
+  </div>
+
+  <table class="table table-bordered">
+    <thead>
+    <tr>
+      <th>Actions</th>
+      <th>Logo?</th>
+      <th title='date studio clicked through EAP email'>EAP</th>
+      <th title='send studio an email'>Name</th>
+      <th title='send owner an email'>Owner</th>
+      <th>Website</th>
+      <th>Phone number</th>
+      <th>Location</th>
+      <th>Sales<br/>status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @studios.all.each do |studio| %>
+        <tr>
+          <td>
+            <% if link = eap_link(studio) %>
+                <%= link %>
+                <br>
+            <% end %>
+            <%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %>
+            <br>
+            <%= link_to 'Branding', show_branding_studio_path(studio) %>
+            <br>
+            <%= link_to t(:edit), edit_studio_path(studio) %>
+            <br>
+            <%= link_to t(:destroy), studio, confirm: t(:link_destroy_confirm), method: :delete %>
+            <br>
+          </td>
+          <td><%= studio.try(:logoize) %></td>
+          <td title='<%= time_short_index studio.eap_click %>'><%= date_short studio.eap_click %></td>
+          <td><%= studio_email_link(studio) %></td>
+          <td><%= user_email_link(studio.owner) %></td>
+          <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
+          <td><%= number_to_phone studio.phone_number, area_code: true %></td>
+          <td><%= studio.try(:city_state_name) %></td>
+          <td><%= editable_field studio, :sales_status, {tooltip: studio.sales_notes} %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <div class="paginate">
+    <%= paginate @studios %>
+  </div>
+
 </div>
