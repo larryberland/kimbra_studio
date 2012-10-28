@@ -1,7 +1,7 @@
 <h3><%= t(:users_show_title) %></h3>
 
 <p>
-  <span>Last sign in: </span>
+  <span>Last sign in:</span>
   <%= time_short(@user.last_sign_in_at) %>
 </p>
 
@@ -16,17 +16,17 @@
 </p>
 
 <p>
-  <span>Name: </span>
+  <span>Name:</span>
   <%= full_name(@user) %>
 </p>
 
 <p>
-  <span>Friendly Name: </span>
+  <span>Friendly Name:</span>
   <%= @user.friendly_name %>
 </p>
 
 <p>
-  <span>Phone: </span>
+  <span>Phone:</span>
   <%= number_to_phone @user.phone_number, area_code: true %>
 </p>
 

@@ -209,7 +209,6 @@ module ApplicationHelper
     email.to_s.downcase.gsub('@', "&#8203;@").gsub('.', "&#8203;.").html_safe
   end
 
-
   def link_from_site_short_name(url)
     host   = URI.parse(url).host.downcase
     host   = host.start_with?('www.') ? host[4..-1] : host
@@ -217,6 +216,10 @@ module ApplicationHelper
     link_to result, url, target: '_blank', title: url
   rescue
     'none'
+  end
+
+  def current_status(active_flag)
+    active_flag ? "active" : "inactive"
   end
 
 end

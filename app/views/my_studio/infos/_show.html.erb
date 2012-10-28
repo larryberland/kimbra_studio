@@ -1,7 +1,7 @@
-<h3> Studio Info</h3>
+<h3><%= t(:my_studio_infos_show_title) %></h3>
 <p>
-  <span>Active:</span>
-  <%= info.try(:active) %>
+  <span>Current Status:</span>
+  <%= current_status(info.active) %>
 </p>
 
 <p>

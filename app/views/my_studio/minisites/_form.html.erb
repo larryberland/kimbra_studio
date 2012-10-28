@@ -1,5 +1,26 @@
-<legend>Minisite Page Layout Info</legend>
+<legend><%= t(:my_studio_minisites_form_legend) %></legend>
 <%= f.fields_for :minisite, minisite do |g| %>
+
+    <div class="control-group">
+      <%= g.label :font_family, class: "control-label" %>
+      <div class="controls">
+        <%= select_tag 'studio[minisite_attributes][font_family]', options_for_font_selector, id: 'studio_minisite_attributes_font_family' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= g.label :font_color, class: "control-label" %>
+      <div class="controls">
+        <%= g.text_field :font_color, class: 'short' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= g.label 'Background color', class: "control-label" %>
+      <div class="controls">
+        <%= g.text_field :bgcolor, class: 'short' %>
+      </div>
+    </div>
 
     <div class="image-thumb">
       <%= image_tag_thumb(minisite) %>
@@ -21,25 +42,5 @@
 
     <div><%= g.hidden_field :image_cache %></div>
 
-    <div class="control-group">
-      <%= g.label 'Background color', class: "control-label" %>
-      <div class="controls">
-        <%= g.text_field :bgcolor, class: 'short' %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= g.label :font_color, class: "control-label" %>
-      <div class="controls">
-        <%= g.text_field :font_color, class: 'short' %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= g.label :font_family, class: "control-label" %>
-      <div class="controls">
-        <%= select_tag 'studio[minisite_attributes][font_family]', options_for_font_selector, id: 'studio_minisite_attributes_font_family' %>
-      </div>
-    </div>
 
 <% end %>

@@ -1,26 +1,39 @@
 <h3><%= t(:my_studio_minisites_show_title) %></h3>
-<p>
-  <span>Background Color:</span>
-  <%= minisite.bgcolor %>
-</p>
-<p>
-  <span>Font family:</span>
-  <%= minisite.font_family %>
-</p>
 
-<p>
-  <span>Font color:</span>
-  <%= minisite.font_color %>
-</p>
+<div class="row-fluid">
 
+  <div class="span3">
+    <p>
+      <span>Font:</span>
+      <%= minisite.font_family %>
+    </p>
+
+    <p>
+      <span>Font color:</span>
+      <%= minisite.font_color %>
+    </p>
+
+    <p>
+      <span>Background Color:</span>
+      <%= minisite.bgcolor %>
+    </p>
+
+    <!-- no theme yet
 <p>
   <span>Theme:</span>
   <%= minisite.theme %>
 </p>
+-->
+  </div>
 
-<div class='image-thumb'>
-  <p>
-    <span>Logo:</span>
-    <%= image_tag_thumb(minisite) %>
-  </p>
+  <div class="span3">
+    <div class='image-thumb span3'>
+      <p>
+        <span>Logo:</span>
+        <%= image_tag_thumb(minisite) %>
+      </p>
+    </div>
+
+  </div>
+
 </div>

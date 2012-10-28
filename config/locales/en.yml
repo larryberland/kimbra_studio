@@ -85,15 +85,16 @@ en:
   admin_menu_stories: 'Stories'
 
   # studios
-  studios_new_title: 'Your Studio'
-  studios_new_link: 'New Kimbra ClickPLUS Studio'
-  studios_index_title: 'Listing Kimbra ClickPLUS Studios'
-  studios_show_link: 'View Studio'
+  studios_new_title: "Your Studio"
+  studios_new_link: "New Kimbra ClickPLUS Studio"
+  studios_new_link: "New Kimbra ClickPLUS Studio"
+  studios_edit_title: "Editing Kimbra ClickPLUS Studio"
+  studios_show_link: "View Studio"
   studios_show_title: "ClickPLUS Studio Info"
 
   # users
   users_index_title: "Listing ClickPLUS Users"
-  users_new_title: ''
+  users_new_title: "Create ClickPLUS User"
   users_new_link: "New ClickPLUS User"
   users_edit_title: "Editing ClickPLUS User"
   users_show_title: "ClickPLUS User"
@@ -121,8 +122,20 @@ en:
   # my_studio_faces
   my_studio_faces_index_title: 'Faces Data'
 
-  # my_studio/sessions
-  my_studio_sessions_show_title: "Session Info"
+  #my_studio/infos/samples, faq
+  my_studio_infos_label_samples: 'How It Works'
+  my_studio_infos_label_faq: 'FAQ'
+  my_studio_infos_label_blog: 'Blog'
+  my_studio_infos_new_title: "New ClickPLUS Studio Info"
+  my_studio_infos_edit_title: "Editing ClickPLUS Studio Info"
+  my_studio_infos_index_title: "Listing ClickPLUS Studio Info"
+  my_studio_infos_show_title: "Studio Info"
+  my_studio_infos_form_legend: "Studio Info"
+
+  #my_studio_minisites
+  my_studio_minisites_label: "Branding"
+  my_studio_minisites_show_title: "Branding Page Info"
+  my_studio_minisites_form_legend: "Branding Page Layout Info"
 
   # my_studio/overviews/new
   my_studio_overview_title: 'Studio Dashboard'
@@ -140,15 +153,6 @@ en:
   my_studio_overview_label_minisite: "Studio Minisite Info"
   my_studio_overview_link_minisite: "View Studio Minisite Info"
 
-  #my_studio/infos/samples, faq
-  my_studio_info_label_samples: 'How It Works'
-  my_studio_info_label_faq: 'FAQ'
-  my_studio_info_label_blog: 'Blog'
-
-  #my_studio_minisites
-  my_studio_minisites_label: "Branding"
-  my_studio_minisites_show_title: "Branding Minisite Page Info"
-
   # my_studio/portraits
   my_studio_portraits_new_title: "Upload Session Portrait for %{name}"
   my_studio_portraits_new_link: 'Upload New Session Portrait'
@@ -162,6 +166,7 @@ en:
   my_studio_sessions_edit_title: 'Editing %{name} ClickPLUS Photo Session'
   my_studio_sessions_edit_link: 'Edit ClickPLUS Photo Session'
   my_studio_sessions_index_title: 'ClickPLUS Photo Sessions'
+  my_studio_sessions_show_title: "Session Info"
 
   # my_studio/staffers
   my_studio_staffers_new_title: 'New Studio Staff'

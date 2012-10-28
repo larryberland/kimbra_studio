@@ -1,33 +1,40 @@
-<div class="hero-unit">
+<h3><%= t(:studios_show_title) %></h3>
 
-  <h3><%= t(:studios_show_title) %></h3>
+<div class="row-fluid">
+  <div class="span5">
+    <p>
+      <span>Studio Name:</span>
+      <%= @studio.name %> (studio_id: <%= @studio.id %>)
+    </p>
 
-  <p>
-    <span>Studio Name:</span>
-    <%= @studio.name %> (studio_id: <%= @studio.id %>)
-  </p>
+    <p>
+      <span>Phone number:</span>
+      <%= number_to_phone @studio.phone_number, area_code: true %>
+    </p>
 
-  <p>
-    <span>Phone number:</span>
-    <%= number_to_phone @studio.phone_number, area_code: true %>
-  </p>
+    <p>
+      <span>Owner:</span>
+      <% if @studio.owner %>
+          <%= @studio.owner.first_name %> <%= @studio.owner.last_name %> (user_id:<%= @studio.owner.id %>)
+      <% else %>
+          No owner created yet.
+      <% end %>
+    </p>
+  </div>
 
-  <p>
-    <span>Owner:</span>
-    <% if @studio.owner %>
-        <%= @studio.owner.first_name %> <%= @studio.owner.last_name %> (user_id:<%= @studio.owner.id %>)
-    <% else %>
-        No owner created yet.
-    <% end %>
-  </p>
+  <div class="span3">
+    <p>
+      <span>Address</span>
+      <%= render 'shared/addresses/show', :resource => @studio %>
+    </p>
+  </div>
 
-  <%= render 'my_studio/infos/show', :info => @studio.info %>
-
-  <%= render "my_studio/minisites/show", :minisite => @studio.minisite %>
-
-  <%= render 'shared/addresses/show', :resource => @studio %>
-
-  <%= link_to translate(:edit), edit_studio_path(@studio), class: "btn btn-success" %> |
-  <% url = current_user.admin? ? studios_path : my_studio_overview_path %>
-  <%= link_to translate(:back), url, class: "btn btn-primary" %>
 </div>
+
+<%= render 'my_studio/infos/show', :info => @studio.info %>
+
+<%= render "my_studio/minisites/show", :minisite => @studio.minisite %>
+
+<%= link_to translate(:edit), edit_studio_path(@studio), class: "btn btn-success" %> |
+<% url = current_user.admin? ? studios_path : my_studio_overview_path %>
+<%= link_to translate(:back), url, class: "btn btn-primary" %>

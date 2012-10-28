@@ -1,28 +1,26 @@
-<div class="hero-unit">
-  <h3><%=t(:my_studio_sessions_show_title)%></h3>
-  <p>
-    <span>Current Status:</span>
-    <%= @my_studio_session.active ? 'active' : 'inactive' %>
-  </p>
+<h3><%= t(:my_studio_sessions_show_title) %></h3>
+<p>
+  <span>Current Status:</span>
+  <%= current_status(@my_studio_session.active)%>
+</p>
 
-  <p>
-    <span>Name:</span>
-    <%= @my_studio_session.name %>
-  </p>
+<p>
+  <span>Name:</span>
+  <%= @my_studio_session.name %>
+</p>
 
-  <p>
-    <span>Session at:</span>
-    <%= @my_studio_session.session_at %>
-  </p>
+<p>
+  <span>Session at:</span>
+  <%= @my_studio_session.session_at %>
+</p>
 
-  <p>
-    <span>Category:</span>
-    <%= @my_studio_session.category_name %>
-  </p>
+<p>
+  <span>Category:</span>
+  <%= @my_studio_session.category_name %>
+</p>
 
-  <% @my_studio_client = @my_studio_session.client %>
-  <%= render 'my_studio/clients/show', :client => @my_studio_session.client %>
+<% @my_studio_client = @my_studio_session.client %>
+<%= render 'my_studio/clients/show', :client => @my_studio_session.client %>
 
-  <%= link_to t(:edit), edit_my_studio_session_path(@my_studio_session), class: "btn btn-success" %> |
-  <%= link_to t(:back), my_studio_sessions_path, class: "btn btn-primary" %>
-</div>
+<%= link_to t(:edit), edit_my_studio_session_path(@my_studio_session), class: "btn btn-success" %> |
+<%= link_to t(:back), my_studio_sessions_path, class: "btn btn-primary" %>
