@@ -1,41 +1,45 @@
-<h2>Branding for your offer emails and minisite</h2>
+<div class="container-fluid">
 
-<div style="border:black 1px solid;width:700px;text-align:center;background-color:<%= @my_studio_minisite.bgcolor %>">
-  <div style="margin:0px auto;width:700px"><%= image_tag @my_studio_minisite.image %></div>
-  <h3 style="padding-top:10px;font-family:<%= @my_studio_minisite.font_family %>, Arial, sans-serif;color:<%= @my_studio_minisite.font_color %>">
-    My studio name is <%= @my_studio_minisite.studio.name %> (sample heading).
-  </h3>
-  <p style="padding-bottom:20px;font-family:<%= @my_studio_minisite.font_family %>, Arial, sans-serif;color:<%= @my_studio_minisite.font_color %>">
-    Sample page text in the studio font and color.
-  </p>
+  <h2>Branding for your offer emails and minisite</h2>
+
+  <div class="row-fluid">
+
+    <div class="span3">
+      <p>
+        <b>Font:</b>
+        <%= @my_studio_minisite.font_family %>
+      </p>
+
+      <p>
+        <b>Font color:</b>
+        <%= @my_studio_minisite.font_color %>
+      </p>
+
+      <p>
+        <b>Background color:</b>
+        <%= @my_studio_minisite.bgcolor %>
+      </p>
+
+    </div>
+
+    <div class="span8">
+      <div style="border:black 1px solid;width:700px;text-align:center;background-color:<%= @my_studio_minisite.bgcolor %>">
+        <div style="margin:0px auto;width:700px"><%= image_tag @my_studio_minisite.image %></div>
+        <h3 style="padding-top:10px;font-family:<%= @my_studio_minisite.font_family %>, Arial, sans-serif;color:<%= @my_studio_minisite.font_color %>">
+          My studio name is <%= @my_studio_minisite.studio.name %> (sample heading).
+        </h3>
+
+        <p style="padding-bottom:20px;font-family:<%= @my_studio_minisite.font_family %>, Arial, sans-serif;color:<%= @my_studio_minisite.font_color %>">
+          Sample page text in the studio font and color.
+        </p>
+      </div>
+
+    </div>
+
+
+  </div>
+  <br>
+  <%= link_to t(:edit), edit_studio_path(@my_studio), class: "btn btn-success" %>
+
 </div>
 
-<!--
-<p>
-  <b>Studio name:</b>
-  <%# @my_studio_minisite.studio.name %>
-</p>
-
-<p>
-  <b>Studio logo:</b>
-  <br/>
-  <%# image_tag @my_studio_minisite.image %>
-</p>
--->
-
-<p>
-  <b>Page font:</b>
-  <%= @my_studio_minisite.font_family %>
-</p>
-
-<p>
-  <b>Font color:</b>
-  <%= @my_studio_minisite.font_color %>
-</p>
-
-<p>
-  <b>Page background color:</b>
-  <%= @my_studio_minisite.bgcolor %>
-</p>
-
-<%= link_to t(:edit), edit_studio_path(@my_studio), class: "btn btn-success" %>
