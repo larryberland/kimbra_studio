@@ -1,38 +1,38 @@
 <h3> Studio Info</h3>
 <p>
-  <b>Active:</b>
+  <span>Active:</span>
   <%= info.try(:active) %>
 </p>
 
 <p>
-  <b>Website:</b>
+  <span>Website:</span>
   <%= info.try(:website) %>
 </p>
 
 <p>
-  <b>Studio Email:</b>
+  <span>Studio Email:</span>
   <%= info.try(:email) %>
 </p>
 
 <p>
-  <b>Studio Email notification:</b>
+  <span>Studio Email notification:</span>
   <%= info.try(:email_notification) %>
 </p>
 
 <p>
-  <b>Tax ID/EIN:</b>
+  <span>Tax ID/EIN:</span>
   <%= info.try(:tax_ein) %>
 </p>
 
-<div class='container'>
-  <b>Pictage member:</b>
+<p>
+  <span>Pictage member:</span>
   <%= info.try(:pictage_member) %>
-  <b>SmugMug member:</b>
+  <span>SmugMug member:</span>
   <%= info.try(:smug_mug_member) %>
-  <b>Mac user:</b>
+  <span>Mac user:</span>
   <%= info.try(:mac_user) %>
-  <b>Windows user:</b>
+  <span>Windows user:</span>
   <%= info.try(:windows_user) %>
-  <b>Ping email:</b>
+  <span>Ping email:</span>
   <%= info.try(:ping_email) %>
-</div>
+</p>

@@ -33,7 +33,7 @@
         <% end %>
     <% end %>
 
-    <h1 class='logo' style='text-align:left;'> <%= link_to display_h1, root_path %> </h2>
+    <h1 class='logo' style='text-align:left;'> <%= link_to display_h1, root_path %> </h1>
 
     <% if current_user %>
         <div id="main_nav">
@@ -54,7 +54,7 @@
                     <%= link_to_nav_pill t(:my_studio_overview_label_session), my_studio_sessions_path, (selected == 'my_studio/sessions' or selected=='my_studio/portraits'), 'View My Photo Sessions' %>
                     <%= link_to_nav_pill t(:my_studio_info_label_samples), samples_my_studio_infos_path, (selected == 'my_studio/infos' and params[:action] == 'samples') %>
                     <% unless @my_studio.new_record? %>
-                        <%= link_to_nav_pill t(:my_studio_minisite_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
+                        <%= link_to_nav_pill t(:my_studio_minisites_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
                     <% end %>
                     <%= link_to_nav_pill t(:my_studio_info_label_faq), faq_my_studio_infos_path, (selected == 'my_studio/infos' and params[:action] == 'faq') %>
                 <% end %>

@@ -1,5 +1,10 @@
 @import "colors";
 
+div.hero-unit{
+  span{
+    color: $base-form-label-color;
+  }
+}
 div.platypus-show-container {
   width: 95%;
   text-align: left;

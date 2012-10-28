@@ -1,16 +1,19 @@
-<div class="row span12">
+<div class="hero-unit">
+
+  <h3><%= t(:studios_show_title) %></h3>
+
   <p>
-    <b>Studio Name:</b>
+    <span>Studio Name:</span>
     <%= @studio.name %> (studio_id: <%= @studio.id %>)
   </p>
 
   <p>
-    <b>Phone number:</b>
+    <span>Phone number:</span>
     <%= number_to_phone @studio.phone_number, area_code: true %>
   </p>
 
   <p>
-    <b>Owner:</b>
+    <span>Owner:</span>
     <% if @studio.owner %>
         <%= @studio.owner.first_name %> <%= @studio.owner.last_name %> (user_id:<%= @studio.owner.id %>)
     <% else %>
@@ -24,7 +27,7 @@
 
   <%= render 'shared/addresses/show', :resource => @studio %>
 
-  <%= link_to translate(:edit), edit_studio_path(@studio), class:"btn btn-success" %> |
+  <%= link_to translate(:edit), edit_studio_path(@studio), class: "btn btn-success" %> |
   <% url = current_user.admin? ? studios_path : my_studio_overview_path %>
   <%= link_to translate(:back), url, class: "btn btn-primary" %>
 </div>

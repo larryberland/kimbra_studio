@@ -1,22 +1,24 @@
+<div class="hero-unit">
+
 <p id="notice"><%= notice %></p>
 
 <p>
-  <b>Name:</b>
+  <span>Name:</span>
   <%= @my_studio_client.name %>
 </p>
 
 <p>
-  <b>Email:</b>
+  <span>Email:</span>
   <%= @my_studio_client.email %>
 </p>
 
 <p>
-  <b>Phone number:</b>
+  <span>Phone number:</span>
   <%= @my_studio_client.phone_number %>
 </p>
 
 <p>
-  <b>Active:</b>
+  <span>Active:</span>
   <%= @my_studio_client.active %>
 </p>
 
@@ -28,3 +30,6 @@
 
 <%= link_to t(:edit), edit_my_studio_client_path(@my_studio_client), class: "btn btn-success" %> |
 <%= link_to t(:back), my_studio_clients_path, class: "btn btn-primary" %>
+
+</div>
+

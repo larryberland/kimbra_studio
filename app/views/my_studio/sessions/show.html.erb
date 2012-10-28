@@ -1,7 +1,8 @@
-<div class="platypus-show-container">
+<div class="hero-unit">
+  <h3><%=t(:my_studio_sessions_show_title)%></h3>
   <p>
-    <span>Session Active:</span>
-    <%= @my_studio_session.active %>
+    <span>Current Status:</span>
+    <%= @my_studio_session.active ? 'active' : 'inactive' %>
   </p>
 
   <p>
