@@ -38,7 +38,8 @@
           <i class="icon-trash icon-white"></i>
           <%= t('photos.delete_selected') %>
         </button>
-        <input type="checkbox" class="toggle">
+        <%= label_tag 'select_all', 'Select all: ', style: 'display: inline-block' %>
+        <input type="checkbox" class="toggle" id="select_all">
         <!-- The global progress information -->
         <div class="span5 fileupload-progress fade">
           <!-- The global progress bar -->

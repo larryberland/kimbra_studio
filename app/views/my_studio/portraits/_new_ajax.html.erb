@@ -6,7 +6,7 @@
     <div class="field">
       <%= f.label :image, 'Portrait:' %>
       <%= f.file_field :image %>
-      <%= f.label :remote_image_url, 'or Portrait URL' %>
+      <%= f.label :remote_image_url, 'or Portrait URL', style: 'display:inline-block;' %>
       <%= f.text_field :remote_image_url %>
       <%= f.submit t(:create), id: 'my_submit' %>
       <span id="spinner" style="display:none"></span>
