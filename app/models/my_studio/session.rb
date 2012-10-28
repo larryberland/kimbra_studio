@@ -41,8 +41,12 @@ class MyStudio::Session < ActiveRecord::Base
               like_exp, like_exp, like_exp).joins(:client).order('session_at desc')
   }
 
+  def title
+    "#{category.name} #{client.name}"
+  end
+
   def to_error_messages
-    msgs = errors.messages.collect{|k, msg| k == :client ? nil : "#{k.to_s.titleize} #{msg.join(', ')}"}
+    msgs = errors.messages.collect { |k, msg| k == :client ? nil : "#{k.to_s.titleize} #{msg.join(', ')}" }
     if (client and client.errors.present?)
       msgs << client.errors.full_messages
     end
@@ -61,7 +65,7 @@ class MyStudio::Session < ActiveRecord::Base
 
   # portraits for this session that are marked as active?
   def portrait_list
-    portraits.select {|p| p.active?}
+    portraits.select { |p| p.active? }
   end
 
   def email_ready?

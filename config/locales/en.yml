@@ -134,8 +134,9 @@ en:
 
   #my_studio_minisites
   my_studio_minisites_label: "Branding"
-  my_studio_minisites_show_title: "Branding Page Info"
-  my_studio_minisites_form_legend: "Branding Page Layout Info"
+  my_studio_minisites_show_title: "Branding Minisite Info"
+  my_studio_minisites_form_legend: "Branding Minisite Page Info"
+  my_studio_minisites_show_title: "Branding for your Minisite and Offer Emails"
 
   # my_studio/overviews/new
   my_studio_overview_title: 'Studio Dashboard'
@@ -161,11 +162,12 @@ en:
   my_studio_portraits_session: "For %{name}"
 
   # my_studio/sessions
-  my_studio_sessions_new_title: 'Step 1. Create a ClickPLUS Photo Session'
-  my_studio_sessions_new_link: 'New ClickPLUS Photo Session'
-  my_studio_sessions_edit_title: 'Editing %{name} ClickPLUS Photo Session'
-  my_studio_sessions_edit_link: 'Edit ClickPLUS Photo Session'
-  my_studio_sessions_index_title: 'ClickPLUS Photo Sessions'
+  my_studio_sessions_new_title: "Step 1. Create a ClickPLUS Photo Session"
+  my_studio_sessions_new_link: "New ClickPLUS Photo Session"
+  my_studio_sessions_create_link: "Create new photo session and upload portraits now!"
+  my_studio_sessions_edit_title: "Editing %{name} ClickPLUS Photo Session"
+  my_studio_sessions_edit_link: "Edit ClickPLUS Photo Session"
+  my_studio_sessions_index_title: "ClickPLUS Photo Sessions"
   my_studio_sessions_show_title: "Session Info"
 
   # my_studio/staffers
