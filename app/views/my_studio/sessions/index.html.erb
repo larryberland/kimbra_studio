@@ -1,6 +1,12 @@
 <h2>
   <%= t(:my_studio_sessions_index_title, name: '') %>
-  <small>current session count:<%= @record_count %></small>
+  <small>
+    <% if session[:search_my_studio_sessions].blank? %>
+        count:<%= @record_count %>
+    <% else %>
+        search result count:<%= @record_count %>
+    <% end %>
+  </small>
 </h2>
 
 <div class="row">

@@ -1,4 +1,4 @@
-<legend>Minisite Info</legend>
+<legend>Minisite Page Layout Info</legend>
 <%= f.fields_for :minisite, minisite do |g| %>
 
     <div class="image-thumb">
@@ -22,7 +22,7 @@
     <div><%= g.hidden_field :image_cache %></div>
 
     <div class="control-group">
-      <%= g.label 'Page background color', class: "control-label" %>
+      <%= g.label 'Background color', class: "control-label" %>
       <div class="controls">
         <%= g.text_field :bgcolor, class: 'short' %>
       </div>
