@@ -34,12 +34,12 @@
           <i class="icon-ban-circle icon-white"></i>
           <%= t('photos.cancel_upload') %>
         </button>
-        <button type="button" class="btn btn-danger delete">
-          <i class="icon-trash icon-white"></i>
-          <%= t('photos.delete_selected') %>
-        </button>
-        <%= label_tag 'select_all', 'Select all: ', style: 'display: inline-block' %>
-        <input type="checkbox" class="toggle" id="select_all">
+        <!--<button type="button" class="btn btn-danger delete">-->
+          <!--<i class="icon-trash icon-white"></i>-->
+          <!--<%= t('photos.delete_selected') %>-->
+        <!--</button>-->
+        <%# label_tag 'select_all', 'Select all: ', style: 'display: inline-block' %>
+        <!--<input type="checkbox" class="toggle" id="select_all">-->
         <!-- The global progress information -->
         <div class="span5 fileupload-progress fade">
           <!-- The global progress bar -->
@@ -56,6 +56,15 @@
 
     <!-- The table listing the files available for upload/download -->
     <table role="presentation" class="table table-striped">
+      <thead>
+      <tr>
+        <th>Preview</th>
+        <th>Name</th>
+        <th>Size</th>
+        <th colspan='2'></th>
+        <th>Action</th>
+      </tr>
+      </thead>
       <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
     </table>
 
@@ -158,14 +167,13 @@
       <a href="{%=file.url%}" title="{%=file.name%}" rel="{%=file.thumbnail_url&&'gallery'%}">{%=file.name%}</a>
     </td>
     <td class="size">{%=o.formatFileSize(file.size)%}</td>
-    <td colspan="2"></td>
+    <td colspan='2'></td>
     {% } %}
     <td class="delete">
       <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
         <i class="icon-trash icon-white"></i>
         <%= t('photos.template.delete') %>
       </button>
-      <input type="checkbox" name="delete" value="1">
     </td>
   </tr>
   {% } %}
