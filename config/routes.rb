@@ -142,5 +142,6 @@ KimbraStudio::Application.routes.draw do
   match 'admin' => 'admin/overviews#index'
   match 'delivery' => 'shopping/carts#find_by_tracking'
   match 'tracking/:id', to: 'tracking#image', as: 'tracking_image'
+  match 'blog' => 'blog'
 
 end

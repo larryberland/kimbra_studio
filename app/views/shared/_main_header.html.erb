@@ -47,6 +47,7 @@
                 <%= link_to_nav_pill t(:my_studio_info_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
                 <%= link_to_nav_pill t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
                 <%= link_to_nav_pill t(:my_studio_info_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
+                <%= link_to_nav_pill t(:my_studio_info_label_blog), blog_path, selected == 'blog' %>
             <% else %>
                 <% if current_user and current_user.studio? %>
                     <%= link_to_nav_pill t(:my_studio_overview_link), my_studio_dashboard_path, selected == 'my_studio/dashboards' %>
