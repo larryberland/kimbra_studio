@@ -1,71 +1,74 @@
-<%= render 'shared/error_messages', record: @studio %>
+<div class="platypus-form">
+  <%= render 'shared/error_messages', record: @studio %>
 
-<%= form_for(@studio, validate: true, html: {class: 'form-horizontal'}) do |f| %>
+  <%= form_for(@studio, validate: true, html: {class: 'form-horizontal'}) do |f| %>
 
-    <div class="control-group">
-      <%= f.label 'Studio name', class: "control-label" %>
-      <div class="controls">
-        <%= f.text_field :name %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= f.label :phone_number, class: "control-label" %>
-      <div class="controls">
-        <%= f.text_field :phone_number, {size: 15, maxlength: 15, value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true)} %>
-        <span class="help-inline">for clients to contact</span>
-      </div>
-    </div>
-
-    <%= f.fields_for :owner, @studio.owner do |g| %>
-        <%= g.hidden_field :id %>
-        <%= g.hidden_field :first_pass %>
-        <div class="control-group">
-          <%= g.label 'Owner\'s first and last name', class: "control-label" %>
-          <div class="controls">
-            <%= g.text_field :first_name, class: :short %>
-            <%= g.text_field :last_name %>
-            <span class="help-inline">clients see this on the studio's Contact page</span>
-          </div>
+      <div class="control-group">
+        <%= f.label 'Studio name', class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :name %>
         </div>
-        <% if current_user.admin? %>
-            <div class="control-group">
-              <%= g.label "Owner's email", class: "control-label" %>
-              <div class="controls">
-                <%= g.text_field :email %>
-                <span class="help-inline"> - can be different from the studio email</span>
-              </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :phone_number, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :phone_number, {size: 15, maxlength: 15, value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true)} %>
+          <span class="help-inline">for clients to contact</span>
+        </div>
+      </div>
+
+      <%= f.fields_for :owner, @studio.owner do |g| %>
+          <%= g.hidden_field :id %>
+          <%= g.hidden_field :first_pass %>
+          <div class="control-group">
+            <%= g.label 'Owner\'s first and last name', class: "control-label" %>
+            <div class="controls">
+              <%= g.text_field :first_name, class: :short %>
+              <%= g.text_field :last_name %>
+              <span class="help-inline">clients see this on the studio's Contact page</span>
             </div>
-        <% end %>
-    <% end %>
-
-    <%= render "shared/addresses/form", :f => f %>
-
-    <% info = @studio.info.nil? ? MyStudio::Info.new : @studio.info %>
-    <%= render "my_studio/infos/form", :f => f, :info => info %>
-
-    <% ms = @studio.minisite.nil? ? MyStudio::Minisite.new : @studio.minisite %>
-    <%= render "my_studio/minisites/form", :f => f, :minisite => ms %>
-
-    <% if is_admin? %>
-        <div class="control-group">
-          <%= f.label 'Sales status', class: "control-label" %>
-          <div class="controls">
-            <%= f.text_field :sales_status %>
           </div>
-        </div>
-        <div class="control-group">
-          <%= f.label 'Sales notes', class: "control-label" %>
-          <div class="controls x-large">
-            <%= f.text_area :sales_notes, rows:5, class: "input-xxlarge" %>
+          <% if current_user.admin? %>
+              <div class="control-group">
+                <%= g.label "Owner's email", class: "control-label" %>
+                <div class="controls">
+                  <%= g.text_field :email %>
+                  <span class="help-inline"> - can be different from the studio email</span>
+                </div>
+              </div>
+          <% end %>
+      <% end %>
+
+      <%= render "shared/addresses/form", :f => f %>
+
+      <% info = @studio.info.nil? ? MyStudio::Info.new : @studio.info %>
+      <%= render "my_studio/infos/form", :f => f, :info => info %>
+
+      <% ms = @studio.minisite.nil? ? MyStudio::Minisite.new : @studio.minisite %>
+      <%= render "my_studio/minisites/form", :f => f, :minisite => ms %>
+
+      <% if is_admin? %>
+          <div class="control-group">
+            <%= f.label 'Sales status', class: "control-label" %>
+            <div class="controls">
+              <%= f.text_field :sales_status %>
+            </div>
           </div>
-        </div>
+          <div class="control-group">
+            <%= f.label 'Sales notes', class: "control-label" %>
+            <div class="controls x-large">
+              <%= f.text_area :sales_notes, rows: 5, class: "input-xxlarge" %>
+            </div>
+          </div>
 
-        <div class="actions controls">
-          <%= f.submit :id => 'my_submit' %>
-          <span id="spinner" style="display:none"></span>
-        </div>
+          <div class="actions controls">
+            <%= f.submit :id => 'my_submit' %>
+            <span id="spinner" style="display:none"></span>
+          </div>
 
-    <% end %>
+      <% end %>
 
-<% end %>
+  <% end %>
+
+</div>

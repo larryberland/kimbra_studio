@@ -1,5 +1,13 @@
 @import "colors";
 
+div.platypus-form{
+  padding: 10px 15px;
+  margin-bottom: 15px;
+  //background-color: $base-background-container;
+  @include rounded-corners(10px);
+  border: 2px outset black;
+}
+
 div.platypus-form-container {
   width: 700px;
   text-align: left;
@@ -43,7 +51,7 @@ div.platypus-form-container.small {
   width:40%;
 }
 
-div.platypus-form {
+div.xplatypus-form {
   margin: auto;
 
   label {
