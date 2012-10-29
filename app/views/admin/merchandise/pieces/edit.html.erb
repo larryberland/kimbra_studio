@@ -1,10 +1,12 @@
-<h2><%= t(:admin_merchandise_pieces_edit_title) %></h2>
-<div class="platypus-form-container large">
+<div class="row span10">
+
+  <h2><%= t(:admin_merchandise_pieces_edit_title, name: @admin_merchandise_piece.name) %></h2>
 
   <%= render 'form' %>
 
-  <div class="clear-both"></div>
+</div>
 
-  <%= link_to t(:show), @admin_merchandise_piece, class: "btn btn-primary" %> |
-  <%= link_to t(:back), admin_merchandise_pieces_path, class: "btn btn-primary" %>
+<div class="row span9">
+<%= link_to t(:show), @admin_merchandise_piece, class: "btn btn-primary" %> |
+<%= link_to t(:back), admin_merchandise_pieces_path, class: "btn btn-primary" %>
 </div>

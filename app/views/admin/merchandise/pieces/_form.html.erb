@@ -1,53 +1,77 @@
-<div class="show">
+<div class="platypus-form span6">
 
-  <%= render 'shared/error_messages', record: @admin_merchandise_piece %>
-  <%= form_for(@admin_merchandise_piece, :html => {:multipart => true}) do |f| %>
+    <%= render 'shared/error_messages', record: @admin_merchandise_piece %>
 
-      <div class="text-field">
-        <%= f.label :name %>
-        <%= f.text_field :name %>
-      </div>
+    <%= form_for(@admin_merchandise_piece, html: {multipart: true, class: "form-horizontal"}) do |f| %>
 
-      <div class="text-field">
-        <%= f.label :image %>
-        <%= f.file_field :image %>
-        <br>
-        <%= f.label :remote_image_url, 'or image URL' %>
-        <%= f.text_field :remote_image_url %>
-      </div>
+        <div class="control-group">
+          <label class="checkbox inline">
+            <%= f.check_box :active %> Active?
+          </label>
+          <label class="checkbox inline">
+            <%= f.check_box :featured %> Featured?
+          </label>
+        </div>
 
-      <div class="text-field">
-        <%= f.label :short_description %><br>
-        <%= f.text_area :short_description, cols: 65, rows:4 %>
-      </div>
-      <div class="text-field">
-        <%= f.label :description_markup, 'Description' %><br>
-        <%= f.text_area :description_markup, cols: 65, rows: 4 %>
-      </div>
-      <div class="text-field">
-        <%= f.label :sku %>
-        <%= f.text_field :sku %>
-      </div>
-      <div class="text-field">
-        <%= f.label :price %>
-        <%= f.text_field :price %>
-      </div>
-      <div class="text-field">
-        <%= f.label :active %>
-        <%= f.check_box :active %>
-        <%= f.label :featured %>
-        <%= f.check_box :featured %>
-      </div>
-      <div class="text-field">
-        <%= f.label :deleted_at %>
-        <%= f.text_field :deleted_at %>
-      </div>
-      <div class="actions">
-        <%= f.submit :id => 'my_submit' %>
-        <span id="spinner" style="display:none"></span>
-      </div>
-  <% end %>
+        <div class="control-group">
+          <%= f.label :name, class: "control-label" %>
+          <div class="controls">
+            <%= f.text_field :name %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :image, class: "control-label" %>
+          <div class="controls">
+            <%= f.file_field :image %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :remote_image_url, 'or image URL', class: "control-label" %>
+          <div class="controls">
+            <%= f.text_field :remote_image_url %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :short_description, class: "control-label" %>
+          <div class="controls">
+            <%= f.text_area :short_description, rows: 4, class: "input-xlarge" %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :description_markup, 'Description', class: "control-label" %>
+          <div class="controls">
+            <%= f.text_area :description_markup, rows: 5, class: "input-xlarge" %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :price, class: "control-label" %>
+          <div class="controls">
+            <%= f.text_field :price %>
+          </div>
+        </div>
+        <div class="control-group">
+          <%= f.label :deleted_at, class: "control-label" %>
+          <div class="controls">
+            <%= f.text_field :deleted_at %>
+          </div>
+        </div>
+        <div class="form-actions">
+          <%= f.submit :id => 'my_submit' %>
+          <span id="spinner" style="display:none"></span>
+        </div>
+    <% end %>
+
+  <!-- platypus-form -->
 </div>
-<%= render 'admin/merchandise/pieces/side_menu', :piece => @admin_merchandise_piece %>
+
+<div class="span3">
+  <%= render 'admin/merchandise/pieces/side_menu', :piece => @admin_merchandise_piece %>
+</div>
+
 
 

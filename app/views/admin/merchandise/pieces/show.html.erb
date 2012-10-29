@@ -1,62 +1,61 @@
-<div class="platypus-show-container">
-  <div class="show">
+<h3><%= t(:admin_merchandise_pieces_show_title, name: @admin_merchandise_piece.name) %></h3>
+
+<div class="row">
+
+  <div class="span7">
     <p>
-      <b>Parts:</b>
+      <span>Current Status:</span>
+      <%= current_status(@admin_merchandise_piece.active) %>
+      <span>Featured:</span>
+      <%= @admin_merchandise_piece.featured %>
+    </p>
+
+    <p>
+      <span>Parts:</span>
       <%= link_to 'Parts', admin_merchandise_piece_parts_path(@admin_merchandise_piece) %>
     </p>
 
     <% if is_admin? %>
         <p>
-          <b>Size:</b>
+          <span>Size:</span>
           <% to_size(@admin_merchandise_piece) %>
         </p>
     <% end %>
     <p>
-      <b>Name:</b>
+      <span>Name:</span>
       <%= @admin_merchandise_piece.name %>
     </p>
 
-    <p style='width:400px;'>
-      <b>Short description:</b>
+    <p>
+      <span>Short description:</span>
       <%= @admin_merchandise_piece.short_description %>
     </p>
 
-    <p style='width:400px;'>
-      <b>Long description:</b>
+    <p>
+      <span>Long description:</span>
       <%= @admin_merchandise_piece.description_markup %>
     </p>
 
     <p>
-      <b>Sku:</b>
-      <%= @admin_merchandise_piece.sku %>
-    </p>
-
-    <p>
-      <b>Price:</b>
+      <span>Price:</span>
       <%= number_to_currency(@admin_merchandise_piece.price) %>
     </p>
 
     <p>
-      <b>Active:</b>
-      <%= @admin_merchandise_piece.active %>
-    </p>
-
-    <p>
-      <b>Featured:</b>
-      <%= @admin_merchandise_piece.featured %>
-    </p>
-
-    <p>
-      <b>Deleted at:</b>
+      <span>Deleted at:</span>
       <%= @admin_merchandise_piece.deleted_at %>
     </p>
 
     <%= link_to t(:edit), edit_admin_merchandise_piece_path(@admin_merchandise_piece), class: "btn btn-success" %> |
-    <%= link_to t(:back), admin_merchandise_pieces_path, class: "btn btn-primary" %>
+    <%= link_to t(:back), admin_merchandise_pieces_path, class: "btn btn-primary" %>\
   </div>
 
-  <%= render 'admin/merchandise/pieces/side_menu', :piece => @admin_merchandise_piece %>
-
-  <div class="clear-both"></div>
+  <div class="span3">
+    <%= render 'admin/merchandise/pieces/side_menu', :piece => @admin_merchandise_piece %>
+  </div>
 
 </div>
+
+
+
+

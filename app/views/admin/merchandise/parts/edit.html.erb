@@ -1,15 +1,11 @@
-<h2><%= t(:admin_merchandise_parts_edit_title, :piece_name => @piece.name) %></h2>
-<div class="platypus-form-container large" style="overflow:auto;">
+<div class="row span8">
+
+  <h2><%= t(:admin_merchandise_parts_edit_title, :piece_name => @piece.name) %></h2>
 
   <%= render 'form' %>
 
-  <div class="clear-both"></div>
-
   <%= render 'admin/merchandise/parts/position', :part => @part %>
 
-  <div class="show">
-    <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, @part), class: "btn btn-primary" %> |
-    <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece), class: "btn btn-primary" %>
-  </div>
-
+  <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, @part), class: "btn btn-primary" %> |
+  <%= link_to t(:back), admin_merchandise_piece_parts_path(@piece), class: "btn btn-primary" %>
 </div>

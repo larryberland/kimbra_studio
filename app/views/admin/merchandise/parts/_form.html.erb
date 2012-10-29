@@ -1,41 +1,52 @@
 <%= render 'shared/error_messages', record: @part %>
-<div class='show'>
   <% url = @part.id.nil? ? admin_merchandise_piece_parts_path(@piece) : admin_merchandise_piece_part_path(@piece, @part) %>
-  <%= form_for(@part, :url => url, :html => {:multipart => true}) do |f| %>
+  <%= form_for(@part, url: url, html: {multipart: true, class:"form-horizontal"}) do |f| %>
 
-      <div class="field">
-        <%= f.label :piece %>
+      <div class="control-group">
+        <%= f.label :piece, class: "control-label" %>
+        <div class="controls">
         <%= @part.piece.name %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= f.label :order, 'Assemble Process' %>
+      <div class="control-group">
+        <%= f.label :order, 'Assemble Process', class: "control-label" %>
+        <div class="controls">
         <%= f.number_field :order %>
+        </div>
       </div>
 
-      <div class="field">
-        <%= f.label :portrait %>
+      <div class="control-group">
+        <%= f.label :portrait, class: "control-label" %>
+        <div class="controls">
         <%= f.text_field :portrait %>
+        </div>
       </div>
-      <div class="field">
-        <%= f.label :image_part %>
+      <div class="control-group">
+        <%= f.label :image_part, class: "control-label" %>
+        <div class="controls">
         <%= f.text_field :image_part %>
+        </div>
       </div>
-      <div class="field">
-        <%= f.label :image %>
+      <div class="control-group">
+        <%= f.label :image, class: "control-label" %>
+        <div class="controls">
         <%= f.text_field :image %>
+        </div>
       </div>
-      <div class="field">
-        <%= f.label :active %>
-        <%= f.check_box :active %>
+      <div class="control-group">
+        <label class="checkbox inline">
+          <%= f.check_box :active %> Active?
+        </label>
       </div>
       <div class="actions">
         <%= f.submit :id => 'my_submit' %>
         <span id="spinner" style="display:none"></span>
       </div>
+
       <div class="fieldset">
         Custom Kimbra Part Background Image Size:
-        <div class="field" style="color:red;">
+        <div class="control-group" style="color:red;">
           <%= f.label :width %>
           <%= f.number_field :width %>
           <%= f.label :height %>
@@ -48,7 +59,7 @@
           <%= g.fields_for :layout, @part.part_layout.layout do |l| %>
               <div class="fieldset">
                 Custom Kimbra Part Picture Viewport for Background Image:
-                <div class="field" style="color:green;">
+                <div class="control-group" style="color:green;">
                   <%= l.label :x %>
                   <%= l.number_field :x %>
                   <%= l.label :y %>
@@ -70,7 +81,7 @@
           <%= g.fields_for :layout, @part.piece_layout.layout do |l| %>
               <div class="fieldset">
                 Size of custom part image:
-                <div class="field" style="color:green;">
+                <div class="control-group" style="color:green;">
                   <%= l.label :x %>
                   <%= l.number_field :x %>
                   <%= l.label :y %>

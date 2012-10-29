@@ -213,10 +213,11 @@ en:
   admin_merchandise_parts_edit_title: "Editing %{piece_name}'s Part"
 
   # admin/merchandise/pieces
-  admin_merchandise_pieces_new_title: 'New Kimbra Studio Piece'
-  admin_merchandise_pieces_new_link: 'New Piece'
-  admin_merchandise_pieces_index_title: 'Listing Kimbra Studio Pieces'
-  admin_merchandise_pieces_edit_title: 'Editing Kimbra Studio Piece'
+  admin_merchandise_pieces_new_title: "New Kimbra Studio Piece"
+  admin_merchandise_pieces_new_link: "New Piece"
+  admin_merchandise_pieces_index_title: "Listing Kimbra Studio Pieces"
+  admin_merchandise_pieces_edit_title: "Editing %{name}"
+  admin_merchandise_pieces_show_title: "Kimbra Studio %{name}"
 
   # myaccount/overview
   myaccount_overview_link: 'My Account'

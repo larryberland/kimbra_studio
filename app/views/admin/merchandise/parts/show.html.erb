@@ -1,14 +1,14 @@
 <div class="row span12">
 
-  <div class='show'>
+  <div class='span7'>
 
     <p>
-      <b>Piece:</b>
+      <span>Piece:</span>
       <%= @part.piece.name %>
     </p>
 
     <p>
-      <b>Custom Kimbra Part Picture Viewport for Background Image</b>
+      <span>Custom Kimbra Part Picture Viewport for Background Image</span>
       x:<%= @part.viewport[:x] %>
       y:<%= @part.viewport[:y] %>
       width:<%= @part.viewport[:w] %>
@@ -16,21 +16,21 @@
     </p>
 
     <p>
-      <b>Custom Kimbra Part Background Image Size:</b>
-      <b>Width:</b>
+      <span>Custom Kimbra Part Background Image Size:</span>
+      <span>Width:</span>
       <%= @part.width %>
-      <b>Height:</b>
+      <span>Height:</span>
       <%= @part.height %>
     </p>
 
     <p>
-      <b>Order:</b>
+      <span>Order:</span>
       <%= @part.order %>
     </p>
 
     <p>
-      <b>Active:</b>
-      <%= @part.active %>
+      <span>Current Status:</span>
+      <%= current_status(@part.active) %>
     </p>
 
     <%= link_to t(:edit), edit_admin_merchandise_piece_part_path(@piece, @part), class: "btn btn-success" %> |
@@ -38,7 +38,8 @@
 
   </div>
 
-  <%= render 'admin/merchandise/parts/side_menu', :part => @part %>
+  <div class="span3">
+    <%= render 'admin/merchandise/parts/side_menu', :part => @part %>
+  </div>
 
-  <div class="clear-both"></div>
 </div>
