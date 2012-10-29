@@ -12,8 +12,8 @@
         <div class="controls controls-row">
           Logo?
           <%= select_tag :search_logoize, options_for_select(%w(any present missing), @logo_search_value), class: 'input-small' %>
+          AND
           <div class="input-append">
-            AND
             <%= text_field_tag(:search, session[:search], class: "span4 search-query", placeholder: 'By Name, Phone Number, City, or State abbrev') %>
             <%= submit_tag "Search", name: nil, class: "btn" %>
           </div>
