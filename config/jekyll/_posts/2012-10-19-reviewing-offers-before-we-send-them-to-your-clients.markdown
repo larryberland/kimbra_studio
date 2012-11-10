@@ -3,6 +3,9 @@ layout: post
 published: true
 title: Reviewing offers before we send them to your clients
 comments: true
+author: Jim James
+excerpt: Several studios who haven't been part of the early adopter program would love to use Kimbra's ClickPLUS program but feel
+         hesitant to trust us with their clients for the first time.
 ---
 
 Several studios who haven't been part of the early adopter program would love to use Kimbra's ClickPLUS program but feel

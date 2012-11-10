@@ -7,7 +7,7 @@
     <script src='http://html5shiv.googlecode.com/svn/trunk/html5.js'></script>
     <![endif]-->
 
-    <link rel='shortcut icon' href='images/favicon.gif' type='image/x-icon'/>
+    <link rel='shortcut icon' href='images/favicon.ico' type='image/x-icon'/>
     <link rel='stylesheet' type='text/css' href='../stylesheets/blog_styles.css'/>
     <!-- Typekit -->
     <script type='text/javascript' src='//use.typekit.net/ghl4ofz.js'></script>
@@ -30,7 +30,7 @@
 
         <nav>
             <ul>
-                <li><a href='#' class='current'>Blog</a></li>
+                <li><a href='/blog' class='current'>Blog</a></li>
                 <li><a href='/about'>About</a></li>
                 <li><a href='/'>Main site</a></li>
                 <li><a href='/about/contact'>Contact</a></li>
@@ -62,17 +62,6 @@
     <div class='holder_content'>
 
         {{ content }}
-
-        <aside class="group2">
-            {% for post in site.posts limit:3 %}
-            <article class="holder_news">
-                <h4>
-                    <a href="/blog{{ post.url }}"><span>{{ post.date | date_to_string }}</span>
-                    {{ post.title }}</a>
-                </h4>
-            </article>
-            {% endfor %}
-        </aside>
 
     </div>
     <!--end holder-->

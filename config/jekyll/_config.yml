@@ -2,6 +2,7 @@ markdown: rdiscount
 permalink: /:title.html
 destination: ../../public/blog
 auto: true
+paginate: 3
 exclude:
   - Rakefile
   - Gemfile

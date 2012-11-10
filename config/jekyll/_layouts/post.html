@@ -3,9 +3,29 @@ layout: default
 comments: true
 ---
 
+<aside class='group2'>
+
+    <h3>Latest News</h3>
+
+    <article class="holder_news">
+        <h4>An Item</h4>
+
+        <p>And some text that is going to be very interesting right here.</p>
+    </article>
+
+    <article class="holder_news">
+        <h4>An Item</h4>
+
+        <p>And some text that is going to be very interesting right here.</p>
+    </article>
+
+</aside>
+
 <section class="group1">
     <h3>{{ page.title }}</h3>
+    {% author_image %}
     <h4><span>{{ page.date | date_to_string }}</span></h4>
+
     {{ content }}
 
     {% if page.comments %}

@@ -3,6 +3,9 @@ layout: post
 published: true
 title: The story with pets
 comments: true
+author: Jim James
+excerpt: You probably know that Kimbra has several pieces in her jewelry collections specifically themed for pets.
+         You may not have noticed, but we do not yet offer these pieces in the Kimbra ClickPLUS platform.
 ---
 
 You probably know that Kimbra has several pieces in her jewelry collections specifically themed for pets. You may not have

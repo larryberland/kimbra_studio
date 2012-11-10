@@ -2,16 +2,68 @@
 layout: default
 ---
 
-<section class="group1">
-    <h3>{{ site.posts.first.title }}</h3>
-    {{ site.posts.first.content }}
+<aside class='group2'>
 
-    <div id="disqus_thread"></div>
+    <h3>Latest News</h3>
 
-    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    <article class="holder_news">
+        <h4>An Item</h4>
+
+        <p>And some text that is going to be very interesting right here.</p>
+    </article>
+
+    <article class="holder_news">
+        <h4>An Item</h4>
+
+        <p>And some text that is going to be very interesting right here.</p>
+    </article>
+
+</aside>
+
+
+{% if paginator.previous_page %}
+<section class='group1'>
+    <div class='button black'>
+        {% if paginator.previous_page == 1 %}
+        <a href="/blog">Previous page</a>
+        {% else %}
+        <a href="/blog/page{{paginator.previous_page}}">Previous page</a>
+        {% endif %}
+    </div>
+</section>
+{% endif %}
+
+
+{% for post in paginator.posts %}
+
+<section class='group1'>
+    <h3>
+        <a href="/blog{{ post.url }}">{{ post.title }}</a>
+    </h3>
+    <span style='float:right;margin-top:15px;'>Submitted by: {{ post.author }}</span>
+    <h4><span>{{ post.date | date_to_string }}</span></h4>
+
+    {% if post.excerpt %}
+    {{ post.excerpt }}
+    <p>
+        <a href="/blog{{ post.url }}" class='more-link'>
+            <span class='readmore'>Read the rest of this article &raquo;</span>
+        </a>
+    </p>
+    {% else %}
+    {{ post.content }}
+    {% endif %}
 
 </section>
 
-<script type="text/javascript">
-    var disqus_identifier = "{{ site.posts.first.title }}";
-</script>
+{% endfor %}
+
+
+{% if paginator.next_page %}
+<section class='group1'>
+    <div class='button black'>
+        <a href="/blog/page{{paginator.next_page}}">Next page</a>
+    </div>
+</section>
+{% endif %}
+

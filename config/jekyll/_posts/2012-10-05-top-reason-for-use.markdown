@@ -3,6 +3,12 @@ layout: post
 published: true
 title: Number One reason wedding studios use us
 comments: true
+author: Jim James
+excerpt: Wedding studios are under a lot of pressure to complete their photography package quickly. The bride, the mother of the bride,
+         the families of the bride and the groom, everyone wants to see those pictures. The reality is that it takes significant time
+         to winnow the thousand or more pictures to a presentation package. The clients are impatient and don't appreciate the
+         amount of work that's required, nor the studio's reluctance to release portraits before they are all complete and crafted to
+         the studio's quality standards.
 ---
 
 Wedding studios are under a lot of pressure to complete their photography package quickly. The bride, the mother of the bride,
