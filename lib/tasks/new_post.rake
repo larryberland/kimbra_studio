@@ -14,7 +14,7 @@ task :np do
   	puts "[WARN] File exists - skipping create"
   else
     File.open(path, "w") do |file|
-      file.puts YAML.dump({'layout' => 'default', 'published' => true, 'title' => title, 'comments' => true, 'author' => 'Jim James'})
+      file.puts YAML.dump({'layout' => 'default', 'published' => true, 'title' => title, 'comments' => true, 'author' => 'Jim James', 'excerpt' => 'brief excerpt sentences'})
       file.puts "---"
     end
   end
