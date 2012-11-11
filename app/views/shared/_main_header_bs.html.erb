@@ -51,6 +51,7 @@
                   <%= link_to_nav_pill t(:my_studio_minisites_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
               <% end %>
               <%= link_to_nav_pill t(:my_studio_infos_label_faq), faq_my_studio_infos_path, (selected == 'my_studio/infos' and params[:action] == 'faq') %>
+              <li><%= link_to_unless_current t(:my_studio_infos_label_blog), blog_path %></li>
           <% end %>
 
         </ul>
