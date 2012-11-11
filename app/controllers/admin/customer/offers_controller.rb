@@ -6,11 +6,15 @@ class Admin::Customer::OffersController < ApplicationController
   # GET /admin/customer/offers
   # GET /admin/customer/offers.json
   def index
-    if @email
-      @admin_customer_offers = @email.offers
-    else
-      @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
-    end
+    set                    = if @email
+                               @email.offers
+                             else
+                               Admin::Customer::Offer.where(:tracking => params[:email_id]).all
+                             end
+    @record_count          = set.count
+    @admin_customer_offers = set.page(params[:page])
+
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @admin_customer_offers }
@@ -44,7 +48,7 @@ class Admin::Customer::OffersController < ApplicationController
   # POST /admin/customer/offers
   # POST /admin/customer/offers.json
   def create
-    @admin_customer_offer = Admin::Customer::Offer.new(params[:admin_customer_offer])
+    @admin_customer_offer       = Admin::Customer::Offer.new(params[:admin_customer_offer])
     @admin_customer_offer.email = @email
     respond_to do |format|
       if @admin_customer_offer.save
@@ -73,7 +77,7 @@ class Admin::Customer::OffersController < ApplicationController
   end
 
   # DELETE /admin/customer/offers/1t7t7rye
-  # DELETE /admin/customer/offers/1t7t7rye.json
+          # DELETE /admin/customer/offers/1t7t7rye.json
   def destroy
     @admin_customer_offer.destroy
     respond_to do |format|
