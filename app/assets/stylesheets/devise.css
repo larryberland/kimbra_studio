@@ -27,6 +27,7 @@ body-wrapper {
     margin: 50px auto 0;
     width: 654px;
     height: 550px;  /* LDB needs to go away when figure this out */
+    padding: 15px;
 }
 
 .signup .shadow, .tour .shadow {
@@ -55,6 +56,8 @@ body-wrapper {
     float: right;
     margin: 15px 25px;
     width: 290px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 .signup-form fieldset {
     /*margin-bottom: 18px;*/

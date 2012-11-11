@@ -6,7 +6,7 @@ en:
   company: 'Kimbra Studios ClickPLUS'
   company_brand: 'Kimbra ClickPLUS'
 
-  welcome: 'Welcome!'
+  welcome: 'Welcome to ClickPLUS!'
 
   create: 'Add'
   show: 'Show'
@@ -25,10 +25,12 @@ en:
   new_credit_card_title: 'Credit Card Profile name'
 
   # devise views
-  sign_in: 'Sign in'
-  sign_up: 'Register'
-  not_you: 'Not you? or Logout'
-  link_destroy_confirm: 'Are you sure?'
+  sign_up: "Register"
+  not_you: "Not you? or Logout"
+  link_destroy_confirm: "Are you sure?"
+  sign_in: "Sign In"
+  sign_in_remember_me:  "Remember me for 2 weeks"
+  sign_in_lead: "If you are a Kimbra Studio Professional Photography Studio and Signing in from the New Kimbra ClickPLUS Program Email you received. Your Email Address and Password is contained in the invitation."
 
   # confirmations/new
   confirmations_new_title: 'Resend confirmation instructions'
@@ -52,8 +54,8 @@ en:
   registrations_edit_cancel_link: 'Cancel my account'
 
   # sessions/new
-  sessions_new_title: 'Sign in'
-  sessions_new_submit: 'Sign in'
+  sessions_new_title: 'Sign In'
+  sessions_new_submit: 'Sign In'
 
   # shared/links
   forgot_password: 'Forgot your password?'

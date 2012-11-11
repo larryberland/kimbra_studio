@@ -62,7 +62,7 @@
             <% text = (admin_merchandise_piece.parts.size > 0) ? admin_merchandise_piece.parts.size : t(:admin_merchandise_parts_new_link) %>
             <%= link_to text, admin_merchandise_piece_parts_path(admin_merchandise_piece) %>
           </td>
-          <td><%= admin_merchandise_piece.category %></td>
+          <td><%= admin_merchandise_piece.category_view %></td>
           <td><%= admin_merchandise_piece.name %></td>
           <td><%= image_tag_list(admin_merchandise_piece) if (admin_merchandise_piece.image.present?) %></td>
           <td><%= admin_merchandise_piece.short_description %></td>

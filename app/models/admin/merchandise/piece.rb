@@ -62,6 +62,10 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
     image.to_image
   end
 
+  def category_view
+    category.to_s.gsub("Photo ", "")
+  end
+
   # span text for Piece
   def to_image_span
     text = name.to_s
