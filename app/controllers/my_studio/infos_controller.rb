@@ -94,6 +94,7 @@ class MyStudio::InfosController < MyStudio::BaseController
   # Non-functioning mockup of the Your Collection page.
   def mock_collection
     @studio = @my_studio
+    @studio = Studio.first if @studio.nil? # handle admin
     render layout: false
   end
 
