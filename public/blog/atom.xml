@@ -4,7 +4,7 @@
  <title>BLOG_NAME</title>
  <link href="YOUR_URL/atom.xml" rel="self"/>
  <link href="YOUR_URL"/>
- <updated>2012-11-11T08:46:55-05:00</updated>
+ <updated>2012-11-11T09:36:59-05:00</updated>
  <id>BLOG_URL</id>
  <author>
    <name>BLOG_NAME</name>
@@ -12,11 +12,17 @@
 
  
  <entry>
-   <title>family-portraits-for-thanksgiving</title>
+   <title>Family portraits for Thanksgiving</title>
    <link href="YOUR_URL/family-portraits-for-thanksgiving.html"/>
    <updated>2012-11-10T00:00:00-05:00</updated>
    <id>BLOG_URL/family-portraits-for-thanksgiving</id>
-   <content type="html">
+   <content type="html">&lt;p&gt;Thanksgiving is a great time to reach out to your clients and remind them of the power of families to connect through portraits.&lt;/p&gt;
+
+&lt;p&gt;While we are gearing up to provide regular promotional campaigns for your clients using the sessions you have uploaded
+in the past, you can still do your own marketing. Simply upload a previous famility portrait session and let us do the work to compose&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;    the offer emails to send to your clients.
+&lt;/code&gt;&lt;/pre&gt;
 </content>
  </entry>
  

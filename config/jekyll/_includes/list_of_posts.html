@@ -1,0 +1,9 @@
+<h3>Recent articles</h3>
+
+{% for post in site.posts %}
+<p>
+    <a href="/blog{{ post.url }}" class='readmore'>
+        {{ post.title }}
+    </a>
+</p>
+{% endfor %}
