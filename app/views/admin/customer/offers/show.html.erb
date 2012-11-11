@@ -1,9 +1,12 @@
-<div class="platypus-show-container">
+<h3><%= t(:admin_customer_offers_show_title, name: time_short_index(@admin_customer_offer.email.sent_at)) %></h3>
 
-  <div class="show">
+<div class="row">
+
+  <div class="span7">
+
     <% if is_admin? %>
         <p>
-          <b>Items:</b>
+          <span>Items:</span>
           <%= link_to 'Items', admin_customer_email_offer_items_path(@admin_customer_offer.email.id, @admin_customer_offer.id) %>
         </p>
     <% end %>
@@ -12,55 +15,57 @@
     <!--
     <% if @admin_customer_offer.back.present? %>
         <p>
-          <b>Custom Piece Side 1</b>
+          <span>Custom Piece Side 1</span>
           <%= image_tag @admin_customer_offer.image_front_url.to_s %>
         </p>
 
         <p>
-          <b>Custom Piece Side 2</b>
+          <span>Custom Piece Side 2</span>
           <%= image_tag @admin_customer_offer.image_back_url.to_s %>
         </p>
     <% else %>
         <p>
-          <b>Custom Piece</b>
+          <span>Custom Piece</span>
           <%= image_tag @admin_customer_offer.image_url.to_s, :title => "@admin_customer_offer.name", :alt => "@admin_customer_offer.name", :width => @admin_customer_offer.width, :height => @admin_customer_offer.height %>
         </p>
     <% end %>
     -->
 
     <p>
-      <b>Email:</b>
+      <span>Active:</span>
+      <%= @admin_customer_offer.active %>
+    </p>
+
+    <p>
+      <span>Email:</span>
       <%= @admin_customer_offer.try(:email).try(:my_studio_session).try(:client).try(:email) %>
     </p>
 
     <p>
-      <b>Name:</b>
+      <span>Name:</span>
       <%= @admin_customer_offer.name %>
     </p>
 
     <p style="width:400px;">
-      <b>Description:</b>
+      <span>Description:</span>
       <%= @admin_customer_offer.description %>
     </p>
 
     <p>
-      <b>Activation code:</b>
+      <span>Activation code:</span>
       <%= @admin_customer_offer.activation_code %>
     </p>
 
-    <p>
-      <b>Active:</b>
-      <%= @admin_customer_offer.active %>
-    </p>
+    <%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, @admin_customer_offer), class: "btn btn-success" %>
+    |
+    <%= link_to t(:back), admin_customer_email_offers_path(@email), class: "btn btn-primary" %>
+    <!-- left side -->
+  </div>
+
+  <div class="span3">
+    <%= render 'admin/customer/offers/side_menu', :offer => @admin_customer_offer %>
+    <!-- right side -->
 
   </div>
 
-  <%= render 'admin/customer/offers/side_menu', :offer => @admin_customer_offer %>
-
-  <div class="clear-both">
-
-  </div>
-
-  <%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, @admin_customer_offer), class: "btn btn-success" %> |
-  <%= link_to t(:back), admin_customer_email_offers_path(@email), class: "btn btn-primary" %>
 </div>
