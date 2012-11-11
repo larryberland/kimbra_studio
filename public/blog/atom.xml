@@ -4,12 +4,21 @@
  <title>BLOG_NAME</title>
  <link href="YOUR_URL/atom.xml" rel="self"/>
  <link href="YOUR_URL"/>
- <updated>2012-11-10T20:32:54-05:00</updated>
+ <updated>2012-11-11T08:46:55-05:00</updated>
  <id>BLOG_URL</id>
  <author>
    <name>BLOG_NAME</name>
  </author>
 
+ 
+ <entry>
+   <title>family-portraits-for-thanksgiving</title>
+   <link href="YOUR_URL/family-portraits-for-thanksgiving.html"/>
+   <updated>2012-11-10T00:00:00-05:00</updated>
+   <id>BLOG_URL/family-portraits-for-thanksgiving</id>
+   <content type="html">
+</content>
+ </entry>
  
  <entry>
    <title>I can't select the jewelry pieces!</title>
