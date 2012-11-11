@@ -1,5 +1,9 @@
 class MyStudio::Session < ActiveRecord::Base
 
+  MIN_PORTRAITS  = 2
+  BEST_PORTRAITS = 6
+  MAX_PORTRAITS  = 20
+
   belongs_to :studio
   belongs_to :category
   belongs_to :client, :class_name => 'MyStudio::Client'
@@ -21,8 +25,9 @@ class MyStudio::Session < ActiveRecord::Base
   # active_model callbacks
   before_save :set_name_and_session_at
 
-  scope :within_seven_days, lambda {
-    where('session_at >= ? or created_at >= ?', 14.days.ago(Date.today), 14.days.ago(Date.today)).
+  scope :recent, lambda {
+    on_date = 14.days.ago(Date.today)
+    where('session_at >= ? or created_at >= ? or finished_uploading_at >= ?', on_date, on_date, on_date).
         order('session_at desc')
   }
   scope :portraits_last_day, lambda {
@@ -38,8 +43,12 @@ class MyStudio::Session < ActiveRecord::Base
     like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_', '\_')}%" : "%"
 
     rel.where('my_studio_sessions.name ilike ? OR my_studio_clients.name ilike ? OR my_studio_clients.email ilike ?',
-              like_exp, like_exp, like_exp).joins(:client).order('session_at desc')
+              like_exp, like_exp, like_exp).joins(:client).order('updated_at desc')
   }
+
+  def complete?
+    portraits and portraits.count >= MIN_PORTRAITS
+  end
 
   def title
     "#{category.name} #{client.name}"

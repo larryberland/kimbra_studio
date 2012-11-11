@@ -22,18 +22,26 @@
     <% sessions.each do |session| %>
         <tr>
           <% if is_admin? %>
-              <td ><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
+              <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
               <td title="portraits have been uploaded in last 2 days"><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
           <% end %>
-          <td class="first" title=""><%= complete?(session) %></td>
+          <td class="first span2"><%= complete?(session) %></td>
           <td><%= upload_link(session) %></td>
-          <td><%= session.emails.last ? link_to('View', show_collection_my_studio_minisite_path(session.emails.last.tracking)) : 'not sent yet' %></td>
+          <td>
+            <% if session.emails.last %>
+                <%= link_to(t(:view), show_collection_my_studio_minisite_path(session.emails.last.tracking)) %>
+            <% elsif session.finished_uploading_at %>
+                <%= t(:my_studio_sessions_offer_email_link, length: time_ago_in_words(session.finished_uploading_at)) %>
+            <% else %>
+                &nbsp;
+            <% end %>
+          </td>
           <% if is_admin? %>
               <td><%= link_to session.try(:studio).try(:name), studio_path(session.studio), title: t(:studios_show_link) %></td>
           <% end %>
           <td><%= link_to session.try(:name), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
           <td><%= session.client.name %></td>
-          <td><%= mail_to session.client.email, session.client.email.split('@').first, {title: "click to send an email."}%></td>
+          <td><%= mail_to session.client.email, session.client.email.split('@').first, {title: "click to send an email."} %></td>
           <td><%= date_short session.session_at %></td>
         </tr>
     <% end %>

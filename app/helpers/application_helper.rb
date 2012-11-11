@@ -199,6 +199,15 @@ module ApplicationHelper
     html.html_safe
   end
 
+  def link_to_nav_drop_down(label, url, selected, title="")
+    css_class = {class: "dropdown-menu"}
+    css_class[:class] += " active" if selected
+    html      = content_tag(:ul, css_class) do
+      link_to(label, url, title: title)
+    end
+    html.html_safe
+  end
+
   def link_to_button(label, url, selected, title="")
     css = css_button(selected)
     link_to label, url, class: css, title: title

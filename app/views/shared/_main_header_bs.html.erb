@@ -39,10 +39,20 @@
               <%= link_to_nav_pill t(:admin_menu_emails), admin_customer_emails_path, selected == 'admin/customer/emails' %>
               <%= link_to_nav_pill t(:admin_menu_studios), studios_path, selected == 'studios' %>
               <%= link_to_nav_pill t(:admin_menu_users), users_path, selected == 'users' %>
-              <%= link_to_nav_pill t(:admin_menu_merchandise), admin_merchandise_pieces_path, selected == 'admin/merchandise/pieces' %>
-              <%= link_to_nav_pill t(:my_studio_infos_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
-              <%= link_to_nav_pill t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
-              <%= link_to_nav_pill t(:my_studio_infos_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  Misc
+                  <b class="caret"></b>
+                  <ul class="dropdown-menu">
+                    <%= link_to_nav_pill t(:admin_menu_merchandise), admin_merchandise_pieces_path, selected == 'admin/merchandise/pieces' %>
+                    <%= link_to_nav_pill t(:my_studio_infos_label_samples), samples_my_studio_infos_path, selected == 'my_studio/infos/samples' %>
+                    <%= link_to_nav_pill t(:admin_menu_stories), admin_stories_path, selected == 'admin/stories' %>
+                    <%= link_to_nav_pill t(:my_studio_infos_label_faq), faq_my_studio_infos_path, selected == 'my_studio/infos/faqs' %>
+
+                  </ul>
+                </a>
+              </li>
+
           <% elsif is_studio? %>
               <%= link_to_nav_pill t(:my_studio_overview_link), my_studio_dashboard_path, selected == 'my_studio/dashboards' %>
               <%= link_to_nav_pill t(:my_studio_overview_label_session), my_studio_sessions_path, (selected == 'my_studio/sessions' or selected=='my_studio/portraits'), 'View My Photo Sessions' %>
@@ -51,8 +61,8 @@
                   <%= link_to_nav_pill t(:my_studio_minisites_label), my_studio_minisite_path(@my_studio), selected == 'my_studio/minisites' %>
               <% end %>
               <%= link_to_nav_pill t(:my_studio_infos_label_faq), faq_my_studio_infos_path, (selected == 'my_studio/infos' and params[:action] == 'faq') %>
-              <li><%= link_to_unless_current t(:my_studio_infos_label_blog), blog_path %></li>
           <% end %>
+          <li><%= link_to_unless_current t(:my_studio_infos_label_blog), blog_path %></li>
 
         </ul>
 

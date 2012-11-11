@@ -1,14 +1,22 @@
 module MyStudio::SessionsHelper
 
   def upload_link(session)
-    return link_to(session.portraits.count.to_words, my_studio_session_portraits_path(session), title: 'View Session Portraits') if is_admin?
-    case  session.portraits.count
-      when 0
-        button_to "Upload Portraits Now!", my_studio_session_portraits_path(session), method: :get
-      when 1..4
-        button_to "Upload more portraits", my_studio_session_portraits_path(session), method: :get
-      else
-        link_to session.portraits.count.to_words, my_studio_session_portraits_path(session), title: 'View Session Portraits'
+    url   = my_studio_session_portraits_path(session)
+    name = session.portraits.count.to_words
+    return link_to(name, url, title: 'View Session Portraits') if is_admin?
+    html_options = {method: :get, class: "btn btn-success"}
+    if (session.finished_uploading_at)
+      # studio has marked this as finished so no more uploading
+      link_to name, url, title: 'View Session Portraits'
+    else
+      case session.portraits.count
+        when 0
+          button_to t(:my_studio_sessions_upload_now_link), url, html_options
+        when 1..MyStudio::Session::MIN_PORTRAITS
+          button_to t(:my_studio_sessions_upload_more_link), url, html_options
+        else
+          link_to name, url, title: 'View Session Portraits'
+      end
     end
   end
 
@@ -22,7 +30,20 @@ module MyStudio::SessionsHelper
         '&#x2718;'.html_safe
       end
     else
-      session.finished_uploading_at? ? '&#x2713;'.html_safe : button_to(t(:my_studio_portraits_new_link), my_studio_session_portraits_path(session), method: :get)
+      #session.finished_uploading_at? ?  : button_to(t(:my_studio_portraits_new_link), my_studio_session_portraits_path(session), {method: :get, class: "btn btn-primary"})
+      if (session.finished_uploading_at?)
+        '&#x2713;'.html_safe
+      else
+        if (session.complete?)
+          button_to(t(:my_studio_sessions_complete_link),
+                    my_studio_session_is_finished_uploading_portraits_path(session),
+                    {method: :get, class: "btn btn-primary", title: t(:my_studio_sessions_complete_title)})
+        else
+          "Recommend #{MyStudio::Session::BEST_PORTRAITS} portraits to complete."
+        end
+
+      end
+
     end
   end
 

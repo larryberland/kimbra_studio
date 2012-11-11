@@ -57,6 +57,7 @@ Admin Functionality
         /admin/customer/email/offers
 
 === kimbra delayed jobs
+rake jobs:work
 
 
 == Welcome to Rails

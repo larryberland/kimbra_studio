@@ -1,4 +1,7 @@
-<h2><%= t(:admin_customer_offers_index_title) %></h2>
+<h2>
+  <%= t(:admin_customer_offers_index_title) %>
+  <small>Result Set Count:<%= @record_count %></small>
+</h2>
 
 <div class="paginate">
   <%= paginate @admin_customer_offers %>
@@ -8,6 +11,7 @@
   <thead>
   <tr>
     <th>Actions</th>
+    <th>Studio</th>
     <th>Name</th>
     <th>Kimbra Piece</th>
     <th>Custom Piece</th>
@@ -27,6 +31,7 @@
           <%= link_to t(:destroy), admin_customer_email_offer_path(@email, admin_customer_offer), confirm: t(:link_destroy_confirm), method: :delete %>
         </td>
 
+        <td><%= admin_customer_offer.try(:email).try(:my_studio_session).try(:studio).try(:name) %></td>
         <td><%= admin_customer_offer.name %></td>
         <td><%= image_tag_list(admin_customer_offer.piece) %></td>
         <td><%= image_tag_list(admin_customer_offer) %></td>
