@@ -3,22 +3,17 @@ layout: default
 comments: true
 ---
 
-<aside class='group2'>
-
-    {% include did_you_know.html %}
-
-</aside>
-
 <section class="group1">
     <h3>{{ page.title }}</h3>
     {% author_image %}
-    <h4><span>{{ page.date | date_to_string }}</span></h4>
+    <h4>
+        <span>{{ page.date | date_to_string }}</span>
+    </h4>
 
     {{ content }}
 
     {% if page.comments %}
     <div id="disqus_thread"></div>
-
     <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
     {% endif %}
 </section>
