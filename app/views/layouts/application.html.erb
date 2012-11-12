@@ -24,9 +24,19 @@
 
 <div id='body_wrapper'>
 
-  <%= render 'shared/main_header_bs', selected: params['controller']%>
+  <%= render 'shared/main_header_bs', selected: params['controller'] %>
 
   <div class='hero-unit span12'>
+
+    <% if notice || alert %>
+        <div class="alert error rounded row">
+          <i class="icon-hand-right"> </i>
+          <button type="button" class="close" data-dismiss="alert">close x</button>
+          <%= raw "<p> #{notice}</p>" if notice %>
+          <%= raw "<p><strong>#{t(:snap)}</strong>#{alert}</p>" if alert %>
+        </div>
+    <% end %>
+
     <%= yield %>
   </div>
 </div>

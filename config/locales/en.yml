@@ -2,6 +2,19 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  helpers:
+    label:
+      fieldset:
+        admin: "Admin Only"
+      admin_customer_offer:
+        activation_code: "Activation Code"
+        active: "Email Offer Active?"
+        custom_layout: "Layout Strategy"
+        description: "Description"
+        image: "Kimbra Piece Image"
+        name: "Name"
+        remote_image_url: "or URL"
+
   hello: "Hello world"
   company: "Kimbra Studios ClickPLUS"
   company_brand: "Kimbra ClickPLUS"
@@ -16,6 +29,7 @@ en:
   update: "Update"
   destroy: "Delete"
   offers: "Offers"
+  snap: "Oh Snap! "
 
   # customer_mailer/send_offer.html.erb
   client_send_offers_subject: "%{name} custom jewelry offer"

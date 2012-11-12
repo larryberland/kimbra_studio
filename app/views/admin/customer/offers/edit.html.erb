@@ -1,11 +1,12 @@
-<h2><%= t(:admin_customer_offers_edit_title) %></h2>
+<div class="row span10">
 
-<div class="platypus-form-container large">
+  <h2><%= t(:admin_customer_offers_edit_title) %></h2>
 
   <%= render 'form' %>
+
 </div>
 
-<div class="show">
+<div class="row span9">
   <%= link_to t(:show), admin_customer_email_offer_path(@email, @admin_customer_offer), class: "btn btn-primary" %> |
   <%= link_to t(:back), admin_customer_email_offers_path(@email), class: "btn btn-primary" %>
 </div>

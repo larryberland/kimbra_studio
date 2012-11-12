@@ -12,7 +12,7 @@ module MyStudio::SessionsHelper
       case session.portraits.count
         when 0
           button_to t(:my_studio_sessions_upload_now_link), url, html_options
-        when 1..MyStudio::Session::MIN_PORTRAITS
+        when 1..MyStudio::Session::BEST_PORTRAITS
           button_to t(:my_studio_sessions_upload_more_link), url, html_options
         else
           link_to name, url, title: 'View Session Portraits'

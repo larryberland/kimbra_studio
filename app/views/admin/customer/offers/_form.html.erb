@@ -1,50 +1,70 @@
-<div class="show">
+<div class="platypus-form span6">
+
   <%= render 'shared/error_messages', record: @admin_customer_offer %>
 
   <% url = @admin_customer_offer.id.nil? ? admin_customer_email_offers_path(@email) : admin_customer_email_offer_path(@email, @admin_customer_offer) %>
-  <%= form_for(@admin_customer_offer, :url => url, :html => {:multipart => true}) do |f| %>
+  <%= form_for(@admin_customer_offer, :url => url, :html => {multipart: true, class: "form-horizontal"}) do |f| %>
 
-      <div class="field">
-        <%= f.label :name %>
-        <%= f.text_field :name %>
+      <div class="control-group">
+        <label class="checkbox inline">
+          <%= f.check_box :active %><%= t("helpers.label.admin_customer_offer.active") %>
+        </label>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :name, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :name %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :description, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_area :description, rows: 4, class: "input-xlarge" %>
+        </div>
       </div>
 
       <% if is_admin? %>
-          <div class="field">
-            <%= f.label :custom_layout %>
-            <%= f.text_field :custom_layout %>
+          <fieldset title="<%= t("helpers.label.fieldset.admin")%>" >
+          <b><%= t("helpers.label.fieldset.admin")%></b>
+          <div class="control-group">
+            <%= f.label :custom_layout, class: "control-label" %>
+            <div class="controls">
+              <%= f.text_field :custom_layout %>
+            </div>
           </div>
 
-          <div class="field">
-            <%= f.label :image, 'Final Piece image' %>
-            <%= f.file_field :image %>
-            <%= f.label :remote_image_url, 'or image URL' %>
-            <%= f.text_field :remote_image_url %>
+          <div class="control-group">
+            <%= f.label :image, class: "control-label" %>
+            <div class="controls">
+              <%= f.file_field :image %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label :remote_image_url, class: "control-label" %>
+            <div class="controls">
+              <%= f.text_field :remote_image_url %>
+            </div>
           </div>
 
-          <div class="field">
-            <%= f.label :activation_code %>
-            <%= f.text_field :activation_code %>
+          <div class="control-group">
+            <%= f.label :activation_code, class: "control-label" %>
+            <div class="controls">
+              <%= f.text_field :activation_code %>
+            </div>
           </div>
-
+          </fieldset>
       <% end %>
 
-      <div class="field">
-        <%= f.label :description %>
-        <%= f.text_area :description, :rows => 4 %>
-      </div>
-
-      <div class="field">
-        <%= f.label :active %>
-        <%= f.check_box :active %>
-      </div>
-
-      <div class="actions">
-        <%= f.submit :id => 'my_submit' %>
+      <div class="form-actions">
+        <%= f.submit id: 'my_submit', class: "btn btn-primary" %>
         <span id="spinner" style="display:none"></span>
       </div>
   <% end %>
+  <!-- platypus-form -->
 </div>
 
-<%= render 'admin/customer/offers/side_menu', :offer => @admin_customer_offer %>
-<div class="clear-both"/>
+<div class="span3">
+  <%= render 'admin/customer/offers/side_menu', :offer => @admin_customer_offer %>
+</div>
