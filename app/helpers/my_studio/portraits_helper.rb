@@ -23,7 +23,7 @@ module MyStudio::PortraitsHelper
     if my_studio_session.finished_uploading_at?
       'You marked this photo session as complete and it has been scheduled for photoshopping.'
     elsif my_studio_session.complete?
-      button_to('Process my email! I have uploaded a good selection of portraits.',
+      button_to('Process my offer email! I have uploaded a good selection of portraits.',
                 my_studio_session_is_finished_uploading_portraits_path,
                 {method: :get, class: "btn btn-success"})
     end

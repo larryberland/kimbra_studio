@@ -31,7 +31,7 @@ en:
   link_destroy_confirm: "Are you sure?"
   sign_in: "Sign In"
   sign_in_remember_me:  "Remember me for 2 weeks"
-  sign_in_lead: "If you are a Kimbra Studio Professional Photography Studio and Signing in from the New Kimbra ClickPLUS Program Email you received. Your Email Address and Password is contained in the invitation."
+  sign_in_lead: "If you are a Kimbra Professional Photography Studio signing in from the new Kimbra ClickPLUS Program email you received, your studio email address and password are contained in the invitation."
 
   # confirmations/new
   confirmations_new_title: "Resend confirmation instructions"

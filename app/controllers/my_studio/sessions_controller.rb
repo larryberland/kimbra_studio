@@ -95,10 +95,11 @@ class MyStudio::SessionsController < MyStudio::BaseController
   end
 
   def is_finished_uploading_portraits
-    sess = MyStudio::Session.find(params[:session_id]) rescue nil
-    sess.update_attribute(:finished_uploading_at, Time.now) if sess
+    if sess = MyStudio::Session.find(params[:session_id]) rescue nil
+    sess.update_attribute(:finished_uploading_at, Time.now)
     flash[:notice] = 'Thanks! We\'ll start photoshopping those portraits into Kimbra\'s jewelry pieces soon.'
-
+    Notifier.delay.session_ready(params[:session_id])
+    end
     redirect_to my_studio_dashboard_path(my_studio_id: sess.studio.id)
   end
 

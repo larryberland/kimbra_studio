@@ -32,4 +32,12 @@ class Notifier < ActionMailer::Base
          bcc: 'support@KimbraClickPLUS.com')
   end
 
+  def session_ready(session_id)
+      sess = MyStudio::Session.find(session_id)
+      mail(to: 'admin@kimbraclickplus.com',
+           subject: "Session ready: #{sess.studio.name}") do |format|
+        format.html { render :text => "<h1>#{sess.studio.name}</h1> <a href='#{admin_overview_url}'>Session portraits are ready for email generation and offer processing.</a>" }
+      end
+    end
+
 end

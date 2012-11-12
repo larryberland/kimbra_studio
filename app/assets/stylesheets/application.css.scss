@@ -25,3 +25,8 @@ div.error,
 div.info{
   @include rounded-corners(5px);
 }
+
+#flash_wrapper {
+  position: fixed;
+  top: 50px;
+}
