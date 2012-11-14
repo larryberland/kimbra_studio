@@ -40,7 +40,7 @@ class Notifier < ActionMailer::Base
     end
   end
 
-  def studio_second_email(studio_id)
+  def studio_tkg_email(studio_id)
     @studio = Studio.find(studio_id)
     @password = @studio.owner.first_pass
     @name = @studio.owner.name
