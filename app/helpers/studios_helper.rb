@@ -8,11 +8,25 @@ module StudiosHelper
         'opted out'
       elsif studio.logoize
         content_tag :span, {id: "send_new_account_email_#{studio.id}"} do
-          link_to 'send Early Adopter email', send_new_account_email_studio_path(studio), method: :post, remote: true
+          link_to 'send EAP email', send_new_account_email_studio_path(studio), method: :post, remote: true
         end
       end
     end
   end
+
+  def tkg_link(studio)
+      if studio.owner
+        if SentEmail.sent_studio_tkg_email?(studio.owner.email)
+          'sent TKG'
+        elsif  Unsubscribe.exists?(email: studio.owner.email)
+          'opted out'
+        elsif studio.logoize
+          content_tag :span, {id: "send_tkg_email_#{studio.id}"} do
+            link_to 'send TKG email', send_tkg_email_studio_path(studio), method: :post, remote: true
+          end
+        end
+      end
+    end
 
   def studio_email_link(studio)
     if studio.info

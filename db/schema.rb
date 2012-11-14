@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121013212002) do
+ActiveRecord::Schema.define(:version => 20121114005149) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -26,7 +26,6 @@ ActiveRecord::Schema.define(:version => 20121013212002) do
 
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
-  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -610,6 +609,7 @@ ActiveRecord::Schema.define(:version => 20121013212002) do
     t.string   "sales_status", :default => "none"
     t.text     "sales_notes"
     t.datetime "eap_click"
+    t.datetime "tkg_click"
   end
 
   create_table "unsubscribes", :force => true do |t|

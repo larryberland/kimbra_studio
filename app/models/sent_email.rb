@@ -14,4 +14,8 @@ class SentEmail < ActiveRecord::Base
     SentEmail.where(email: email).collect(&:subject).select{|s| s.match /EAP/ }.present?
   end
 
+  def self.sent_studio_tkg_email?(email)
+      SentEmail.where(email: email).collect(&:subject).select{|s| s.match /TKG/ }.present?
+    end
+
 end

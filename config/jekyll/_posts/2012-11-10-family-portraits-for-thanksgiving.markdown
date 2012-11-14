@@ -11,7 +11,7 @@ Thanksgiving is a great time to reach out to your clients and remind them of the
 portraits.
 
 While we are gearing up to provide regular promotional campaigns for your clients using the sessions you have uploaded
-in the past, you can still do your own guerilla marketing. Simply upload a previous famility portrait session and let us
+in the past, you can still do your own guerilla marketing. Simply upload a previous family portrait session and let us
 do the work to compose the offer emails to send to your clients.
 
 You'll notice that our offer emails do not carry seasonal or event-driven marketing messages to your clients.

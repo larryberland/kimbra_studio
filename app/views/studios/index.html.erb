@@ -42,6 +42,7 @@
       <th>Actions</th>
       <th>Logo?</th>
       <th title='date studio clicked through EAP email'>EAP</th>
+      <th title='date studio clicked through TKG email'>TKG</th>
       <th title='send studio an email'>Name</th>
       <th title='send owner an email'>Owner</th>
       <th>Website</th>
@@ -54,8 +55,12 @@
     <% @studios.all.each do |studio| %>
         <tr>
           <td>
-            <% if link = eap_link(studio) %>
-                <%= link %>
+            <% if elink = eap_link(studio) %>
+                <%= elink %>
+                <br>
+            <% end %>
+            <% if tlink = tkg_link(studio) %>
+                <%= tlink %>
                 <br>
             <% end %>
             <%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %>
@@ -69,6 +74,7 @@
           </td>
           <td><%= studio.try(:logoize) %></td>
           <td title='<%= time_short_index studio.eap_click %>'><%= date_short studio.eap_click %></td>
+          <td title='<%= time_short_index studio.tkg_click %>'><%= date_short studio.tkg_click %></td>
           <td><%= studio_email_link(studio) %></td>
           <td><%= user_email_link(studio.owner) %></td>
           <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
