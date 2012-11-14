@@ -21,6 +21,12 @@
             <li><%= link_to "Edit account", edit_user_registration_path %></li>
             <li><%= link_to "Log out", destroy_user_session_path, method: :delete %>
             </li>
+            <%= coffee_script_tag do %>
+                # BEWARE FORMATTING! ALL 3 OF THE LINE SBELOW MUST BE SUCCESSIVELY INDENTED!
+                $ ->
+                  olark('api.chat.updateVisitorNickname',
+                    snippet:'<%= current_user.name %>, <%= current_user.studio.try(:name) %>')
+            <% end %>
         <% else %>
             <li><%= link_to translate(:sign_in), new_user_session_path %></li>
             <!-- <li>> link_to translate(:sign_up), new_user_registration_path %></li>-->
