@@ -26,7 +26,7 @@
                 $ ->
                   olark('api.chat.updateVisitorNickname',
                     snippet:'<%= current_user.name %>, <%= current_user.studio.try(:name) %>')
-            <% end %>
+            <% end if Rails.env.production? %>
         <% else %>
             <li><%= link_to translate(:sign_in), new_user_session_path %></li>
             <!-- <li>> link_to translate(:sign_up), new_user_registration_path %></li>-->
