@@ -1,10 +1,12 @@
-<div class="row span12">
+<div class="row span10">
 
   <h2><%= t(:admin_customer_emails_edit_title) %></h2>
 
   <%= render 'form' %>
 
+</div>
+
+<div class="row span9">
   <%= link_to t(:show), @admin_customer_email, class: "btn btn-primary" %> |
   <%= link_to t(:back), admin_customer_emails_path, class: "btn btn-primary" %>
-
 </div>

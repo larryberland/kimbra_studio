@@ -14,11 +14,14 @@ class Admin::Customer::Offer < ActiveRecord::Base
   attr_accessible :image, :remote_image_url,
                   :image_front, :remote_image_front_url,
                   :image_back, :remote_image_back_url,
-                  :name, :email, :piece, :description,
-                  :custom_layout, :item_options_list,
-                  :tracking
+                  :name, :email, :description,
+                  :piece, :custom_layout, :item_options_list,
+                  :piece, :piece_id,
+                  :tracking, :active, :activation_code,
+                  :portrait_id
 
-  attr_accessor :item_options_list                              # parts list having portraits assigned to which part
+  # parts list having portraits assigned to which part
+  attr_accessor :item_options_list, :portrait_id, :image_front_cache
 
   # active_model callbacks
   before_create :piece_create_default_and_tracking
@@ -95,6 +98,73 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
     # create a composite of all the items
     create_custom_image
+
+    self
+  end
+
+  # Using the existing offer information, going to reassemble
+  #  this offer with the new kimbra merchandise piece
+  def reassemble
+
+    # override the current offer layout info from the Kimbra piece
+    custom_layout = piece.custom_layout
+
+    # grab any existing portrait info from items
+    current_portraits = []
+    current_portraits << MyStudio::Portrait.find_by_id(portrait_id) if portrait_id
+    puts "portrait_id:#{portrait_id}"
+
+    items.each do |item|
+      item.item_sides.each do |side|
+        current_portraits << side.portrait
+      end
+    end
+
+    # remove any old items we had
+    items.destroy_all if items.present?
+
+    # setup our item options
+    item_options_list = []
+
+    # for every non_photo part defined in the merchandise.piece
+    #   create an offer item representing that non_photo part
+    #   and add it out item_options_list for this offer.
+    piece.non_photo_parts.each do |part|
+      item_options_list << {photo_part: part, portrait: nil}
+    end
+
+    piece.photo_parts.each_with_index do |part, index|
+      options = {photo_part: part}
+      if (index < current_portraits.size)
+        puts "portrait cp[#{index}]=#{current_portraits[index].id}"
+        options[:portrait] = current_portraits[index]
+      else
+        options[:portrait] = email.my_studio_session.portraits.first
+        puts "portrait email[#{index}]=#{options[:portrait].id}"
+      end
+      item_options_list << options
+    end
+
+    item_options_list.flatten.each do |item_options|
+      self.items << Admin::Customer::Item.assemble_side(self, item_options)
+    end
+
+    # LDB:? NOTE
+    # this is a before_create right now and i am going
+    #  to leave it there until we know we want to do this on
+    #  updates as well
+    piece_create_default_and_tracking
+
+    # create a composite of all the items
+    image.cache_stored_file! if image.present?
+    image_front.cache_stored_file! if image_front.present?
+    image_back.cache_stored_file! if image_back.present?
+
+    create_custom_image
+
+    if (errors.messages)
+      Rails.logger.info "CHALLENGE:: offer save errors:#{errors.full_messages}"
+    end
 
     self
   end
@@ -205,10 +275,15 @@ class Admin::Customer::Offer < ActiveRecord::Base
       custom_piece = item.draw_piece_with_custom(custom_piece, front_side)
     end
     t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
-    # puts "    custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
+    puts "    custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
     custom_piece.write(t_front_or_back.path)
     i = front_side ? image_front : image_back
+
+    puts "order before:#{i.inspect}"
+    puts "order    url:#{i.url(:thumb)}"
     i.store_file!(t_front_or_back.path)
+    puts "order after:#{i.inspect}"
+    puts "order   url:#{i.url(:thumb)}"
     # puts "    Store custom piece finished"
     # puts ""
     t_front_or_back
@@ -227,6 +302,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" unless t_front_or_back.path.present?
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" if t_front_or_back.path.blank?
     i.store_file!(t_front_or_back.path)
+    puts "composite:#{i.inspect}"
     t_front_or_back
   end
 

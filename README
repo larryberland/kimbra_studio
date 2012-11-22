@@ -29,6 +29,9 @@ start Server
 
 log in with confirmation displayed after rake db:seed
 
+== jquery dropdown plugin ddslick
+http://designwithpc.com/Plugins/ddSlick
+
 select Sign Up with email and password to create yourself as a Studio user
 ==
 Register or Sign up

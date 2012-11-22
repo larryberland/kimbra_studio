@@ -1,16 +1,21 @@
-<h2><%= t(:admin_customer_items_edit_title) %></h2>
+<div class="row span12">
 
-<div class="admin-customer-items">
-  <div class='platypus-form-container large'>
+  <h2><%= t(:admin_customer_items_edit_title) %></h2>
 
+  <div class='platypus-form span5'>
     <%= render 'form' %>
+  </div>
 
+  <div class='row span6'>
     <%= render 'admin/customer/items/side_menu', :item => @item %>
-
-    <div class="clear-both"/>
-
-    <%= link_to t(:show), admin_customer_email_offer_item_path(@offer.email, @offer, @item), class: "btn btn-primary" %> |
-    <%= link_to t(:back), admin_customer_email_offer_items_path(@offer.email, @offer), class: "btn btn-primary" %>
   </div>
 
 </div>
+
+<div class='row span9'>
+
+  <%= link_to t(:show), admin_customer_email_offer_item_path(@offer.email, @offer, @item), class: "btn btn-primary" %>
+  |
+  <%= link_to t(:back), admin_customer_email_offer_items_path(@offer.email, @offer), class: "btn btn-primary" %>
+</div>
+

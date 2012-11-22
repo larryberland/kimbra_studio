@@ -8,15 +8,15 @@
 
             <%= h.fields_for :layout, part.piece_layout.layout do |i| %>
 
-                <div class="field">
+                <div class="control-group form-inline">
                   <%= i.label :x %>
-                  <%= i.number_field :x %>
+                  <%= i.number_field :x, class:"input-mini"  %>
                   <%= i.label :y %>
-                  <%= i.number_field :y %>
+                  <%= i.number_field :y, class:"input-mini"  %>
                   <%= i.label :w, 'Width' %>
-                  <%= i.number_field :w %>
+                  <%= i.number_field :w, class:"input-mini"  %>
                   <%= i.label :h, 'Height' %>
-                  <%= i.number_field :h %>
+                  <%= i.number_field :h, class:"input-mini"  %>
                 </div>
             <% end %>
         <% end %>

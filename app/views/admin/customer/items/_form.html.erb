@@ -1,24 +1,18 @@
-<%= render 'shared/error_messages', record: @item %>
-<div class='show'>
+  <%= render 'shared/error_messages', record: @item %>
 
   <% url = @item.id.nil? ? admin_customer_email_offer_items_path(@offer.email, @offer, @item) : admin_customer_email_offer_item_path(@offer.email, @offer, @item) %>
   <%= form_for(@item, :url => url, :html => {:multipart => true}) do |f| %>
 
       <fieldset title="Portrait position">
-        <b>Portrait Position</b>
+        <legend>Portrait Position</legend>
         <%= render "part_layout/form", :f => f, :part => @item.part %>
       </fieldset>
+
       <fieldset title="Custom Piece position">
-        <b>Piece Position</b>
+        <legend>Piece Position</legend>
         <%= render "piece_layout/form", :f => f, :part => @item.part %>
       </fieldset>
 
-      <div class="field">
-        <%= link_to 'Offer', admin_customer_email_offer_path(@item.offer.email, @item.offer) %>
-      </div>
-      <div class="field">
-        <%= link_to 'Part', admin_merchandise_piece_part_path(@item.part.piece, @item.part) %>
-      </div>
       <% @item.item_sides.each do |side| %>
           <%= f.fields_for :item_sides, side do |g| %>
 
@@ -26,9 +20,16 @@
 
           <% end %>
       <% end %>
-      <div class="actions">
+
+      <div class="form-actions">
+
+        <div class="control-group">
+          <%= link_to 'Offer', admin_customer_email_offer_path(@item.offer.email, @item.offer), class: "btn" %>
+          <%= link_to 'Part', admin_merchandise_piece_part_path(@item.part.piece, @item.part), class: "btn" %>
+        </div>
+
         <%= f.submit :id => 'my_submit' %>
         <span id="spinner" style="display:none"></span>
       </div>
   <% end %>
-</div>
+

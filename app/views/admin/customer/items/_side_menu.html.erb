@@ -1,17 +1,23 @@
-<div class='side-menu'>
-  <table>
-    <thead>
-    <th><%= @item.try(:to_image_span) %></th>
-    </thead>
-    <tbody>
-    <tr><td>Custom Item:</td></tr>
-    <tr><td><%= cw_div_image_only(@item.front, :image => :image_custom, :version => :original) %></td></tr>
-    <tr><td>Resized Portrait:</td></tr>
-    <tr><td><%= cw_div_image_only(@item.front, :image => :image_stock, :version => :original) %></td></tr>
-    <tr><td>Kimbra Part:</td></tr>
-    <tr><td><%= cw_div_image_only(@item.part, :image => :image_part) %></td></tr>
-    <tr><td>Kimbra Piece:</td></tr>
-    <tr><td><%= cw_div_image_only(@item.offer.piece) %></td></tr>
-    </tbody>
-  </table>
+<div class="row-fluid">
+  <h3><%= @item.try(:to_image_span) %></h3>
+
+  <div class="span5">
+    Custom Item:
+    <%= cw_div_image_only(@item.front, :image => :image_custom, :version => :original) %>
+  </div>
+
+  <div class="span3">
+    Resized Portrait:<%= cw_div_image_only(@item.front, :image => :image_stock, :version => :original) %>
+  </div>
+
+</div>
+
+<div class="row-fluid">
+  <div class="span3">
+    Kimbra Part:<%= cw_div_image_only(@item.part, :image => :image_part) %>
+  </div>
+  <div class="span3">
+    Kimbra Piece:<%= cw_div_image_only(@item.offer.piece) %>
+  </div>
+
 </div>

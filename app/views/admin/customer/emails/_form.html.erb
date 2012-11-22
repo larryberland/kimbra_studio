@@ -1,48 +1,63 @@
-<div class="show">
+<div class="platypus-form span6">
 
   <h3><%= t(:my_studio_portraits_session, :name => @admin_customer_email.try(:my_studio_session).try(:name)) %></h3>
 
   <%= render 'shared/error_messages', record: @admin_customer_email %>
 
-  <%= form_for(@admin_customer_email) do |f| %>
+  <%= form_for(@admin_customer_email, html: {class: 'form-horizontal'}) do |f| %>
 
-      <div class="text-field">
-        <%= f.label :message %>
-        <%= f.text_area :message %>
-      </div>
-      <div class="field">
-        <%= f.label :generated_at %>
-        <%= f.text_field :generated_at, :readonly => 'readonly' %>
-      </div>
-
-      <div class="field ui-widget">
-        <%= f.label :sent_at %>
-        <%= f.text_field :sent_at %>
-      </div>
-      <div class="field">
-        <%= f.label :active %>
+      <div class="control-group">
+        <%= f.label :active, 'Active?', class: "checkbox inline" %>
         <%= f.check_box :active %>
       </div>
 
-      <% if @admin_customer_email.id %>
-          <% (0..2).each do |index| %>
-              <div class='field'>
-                <% unless @admin_customer_email.offers[index] %>
-                    <%= link_to "New Offer #{index+1}", new_admin_customer_email_offer_path(@admin_customer_email) %>
-                <% end %>
-              </div>
-          <% end %>
-      <% end %>
-      <div class="actions">
+      <div class="control-group">
+        <%= f.label :message, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_area :message, class: "input-xlarge", rows: 4 %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :generated_at, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :generated_at, :readonly => 'readonly' %>
+        </div>
+      </div>
+
+      <div class="control-group ui-widget">
+        <%= f.label :sent_at, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :sent_at %>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <% unless @admin_customer_email.new_record? %>
+            <div class="control-group">
+              <% (0..2).each do |index| %>
+                  <% if @admin_customer_email.offers[index] %>
+
+
+                      <%= link_to "Edit Offer ##{index+1}", edit_admin_customer_email_offer_path(@admin_customer_email,@admin_customer_email.offers[index]), class: "btn btn-primary" %>
+                  <% else %>
+                      <%= link_to "Create New Offer ##{index+1}", new_admin_customer_email_offer_path(@admin_customer_email), class: "btn btn-success" %>
+                  <% end %>
+              <% end %>
+
+            </div>
+        <% end %>
+
         <%= f.submit :id => 'my_submit' %>
         <span id="spinner" style="display:none"></span>
       </div>
+
   <% end %>
 </div>
 
 <% if @admin_customer_email.id %>
-    <%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
+    <div class="span3">
+      <%= render 'admin/customer/emails/side_menu', :offers => @admin_customer_email.offers %>
+    </div>
 <% end %>
-<div class="clear-both">
-  &nbsp;
-</div>
+

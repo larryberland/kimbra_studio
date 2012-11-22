@@ -1,4 +1,7 @@
 <div class='side-menu'>
+
+
+
   <table>
     <thead>
     <th colspan="2">Kimbra Pieces</th>
@@ -7,7 +10,10 @@
     <% offers.each_with_index do |offer, index| %>
         <tr>
           <td><%= index+1 %></td>
-          <td><%= cw_div_image(offer, :image => 'image_front') %></td>
+          <td>
+            <%= hidden_field_tag( "image_front_cache_#{offer.id}_#{index}", offer.image_front_cache) %>
+            <%= cw_div_image(offer, :image => 'image_front') %>
+          </td>
         </tr>
     <% end unless offers.nil? %>
     </tbody>

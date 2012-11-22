@@ -10,7 +10,10 @@
     </tr>
     <tr>
       <td>Custom Piece:</td>
-      <td><%= cw_div_image_only(offer, :image => 'image_front') %></td>
+      <td>
+        <%= hidden_field_tag( "image_front_cache_#{offer.id}", offer.image_front_cache) %>
+        <%= cw_div_image_only(offer, :image => 'image_front') %>
+      </td>
     </tr>
     <% if offer.back.present? %>
         <tr>
