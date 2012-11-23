@@ -1,5 +1,4 @@
-<% pieces = Admin::Merchandise::Piece.non_photo_charms.all %>
-<% pieces.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |piece| %>
+<% @pieces.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |piece| %>
 
     <%  @shopping_item = Shopping::Item.new(piece_id: piece.id, :cart => @cart) %>
 

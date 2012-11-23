@@ -41,6 +41,28 @@ module Minisite
       end
     end
 
+    # GET /minisite/index_chains
+    # GET /minisite/index_chains.json
+    def index_chains
+      if @admin_customer_email
+        @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
+        @admin_customer_offers = @admin_customer_email.offers
+      else
+        @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
+      end
+
+      # only show charms that have not already been added to their offers page
+      existing_offers = @admin_customer_offers.collect{|r|r.piece.id}
+      @pieces = Admin::Merchandise::Piece.for_chains.all.select{|p| !existing_offers.include?(p.id)}
+
+      @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
+      @storyline.describe 'Viewing chains page.'
+      respond_to do |format|
+        format.html # index_charms.html.erb
+        format.json { render json: @admin_customer_offers }
+      end
+    end
+
     # GET /minisite/offers/1t7t7rye
     # GET /minisite/offers/1t7t7rye.json
     def show

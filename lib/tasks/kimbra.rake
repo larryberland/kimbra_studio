@@ -1,6 +1,49 @@
 namespace 'kimbra' do
 
-  desc "Send unsent offer emails"
+  desc "Seed the chains into Kimbra pieces"
+  task :seed_chains => :environment do
+    seed_path    = Rails.root.join('db', 'seed')
+    file_to_load = seed_path.join('chains.yml').to_s
+    image_path   = Rails.root.join('public', 'kimbra')
+    info         = YAML::load(File.open(file_to_load))
+    pieces_list  = info[:pieces]
+    default      = info[:default]
+    image_stub   = Rails.root.join('app', 'assets', 'images', 'kimbra_logo.png')
+    puts "storing #{pieces_list.size} Pieces"
+    pieces_list.each do |piece|
+      parts = piece.delete(:parts)
+
+      path = image_path.join(piece['category'].underscore.gsub(' ', '_'))
+      path.mkpath unless path.directory?
+
+      puts "piece=>#{piece['name']}"
+      p = Admin::Merchandise::Piece.find_or_create_by_category_and_name(piece['category'], piece['name'])
+
+      piece_image_fname = piece.delete('image')
+      if piece_image_fname
+        fname = path.join(piece_image_fname)
+        if File.exist?(fname.to_s)
+          p.image.store!(File.open(fname.to_s))
+        else
+          puts "missing Piece image fname=>#{piece_image_fname} in #{piece['category']}/#{piece['name']} image=>#{fname}"
+        end
+      end
+
+      p.parts.destroy_all if p.parts
+
+      # seed the parts for this Jewelry Piece
+      parts.each do |part_info|
+        attrs            = part_info.clone
+        part_image_fname = path.join(piece_image_fname)
+        p.parts << Admin::Merchandise::Part.seed(attrs, default, part_image_fname)
+      end if parts.present?
+
+      p.update_attributes(piece)
+    end
+
+  end
+
+  desc "Seed the photo column in Pieces table"
   task :seed_piece_photo => :environment do
     Admin::Merchandise::Piece.all.each do |p|
       have_photos = false

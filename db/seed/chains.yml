@@ -1,0 +1,76 @@
+:default:
+  :parts:
+    - :image_part: part_charm.png
+  :part_layout: {layout: {x: 19, y: 34, w: 90, h: 137}}
+  :piece_layout: {layout: {x: 0, y: 0, w: 70, h: 85}}
+
+:pieces:
+  - category: Chains
+    name: Black Ribbon and 3 Cord Chain
+    price: 12.00
+    image: black_ribbon_3_cord.png
+    short_description: 'Measuring: 18 inches.'
+    custom_layout: order
+    sku:
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 325, y: 33, w: 94, h: 87}}
+
+  - category: Chains
+    name: Link Chain
+    price: 42.00
+    image: link_chain_24.png
+    short_description: 'Measuring: 24 inches.'
+    custom_layout: order
+    sku:
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
+  - category: Chains
+    name: Link Chain
+    price: 32.00
+    image: link_chain_24.png
+    short_description: 'Measuring: 18 inches.'
+    custom_layout: order
+    sku:
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
+  - category: Chains
+    name: Small Bead Chain
+    price: 24.00
+    image: bead_chain_24.png
+    short_description: 'Measuring: 18 inches.'
+    custom_layout: order
+    sku:
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+
+  - category: Chains
+    name: Large Oval Link Necklace
+    price: 160.00
+    image: large_oval_link.png
+    short_description: 'Measuring: 16 inches.'
+    custom_layout: order
+    sku:
+    :parts:
+      - :image_part: part0.png
+        order: 0
+        photo: false
+        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
