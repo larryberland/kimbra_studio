@@ -13,8 +13,12 @@ class Shopping::BaseController < InheritedResources::Base
     if params[:shopping_item] && params[:shopping_item][:offer_id]
       @admin_customer_offer = Admin::Customer::Offer.find(params[:shopping_item][:offer_id])
       session[:admin_customer_offer_id] = @admin_customer_offer.id
+      @shopping_item_id = params[:shopping_item][:offer_id]
+    elsif params[:shopping_item] && params[:shopping_item][:piece_id]
+      @shopping_item_id = params[:shopping_item][:piece_id]
     else
       @admin_customer_offer = Admin::Customer::Offer.find(session[:admin_customer_offer_id]) if session[:admin_customer_offer_id]
+      @shopping_item_id = @admin_customer_offer.id
     end
 #    @studio = @admin_customer_email.my_studio_session.studio
     @studio = Studio.find(session[:studio_id])

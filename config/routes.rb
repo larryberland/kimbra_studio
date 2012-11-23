@@ -50,7 +50,13 @@ KimbraStudio::Application.routes.draw do
         get :returns
         get :unsubscribe
       end
-      resources :offers
+      resources :offers do
+        collection do
+          get :index_chains
+          get :index_charms
+        end
+
+      end
     end
     resources :item_sides do
           member do

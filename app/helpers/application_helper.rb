@@ -153,7 +153,7 @@ module ApplicationHelper
   def link_to_your_charms_or_not(admin_customer_email)
     text = t(:minisite_menu_charms_link)
     if is_client?
-      link_to_unless_current(text, minisite_email_offers_path(admin_customer_email.tracking))
+      link_to_unless_current(text, index_charms_minisite_email_offers_path(admin_customer_email.tracking))
     else
       link_to text, show_charms_my_studio_minisite_path(admin_customer_email.tracking)
     end
@@ -162,7 +162,7 @@ module ApplicationHelper
   def link_to_your_chains_or_not(admin_customer_email)
     text = t(:minisite_menu_chains_link)
     if is_client?
-      link_to_unless_current(text, minisite_email_offers_path(admin_customer_email.tracking))
+      link_to_unless_current(text, index_chains_minisite_email_offers_path(admin_customer_email.tracking))
     else
       link_to text, show_chains_my_studio_minisite_path(admin_customer_email.tracking)
     end

@@ -4,7 +4,10 @@ class Shopping::Item < ActiveRecord::Base
   belongs_to :offer, :class_name => 'Admin::Customer::Offer'
 
   attr_accessible :offer, :offer_attributes, :offer_id,
-                  :cart, :cart_attributes, :cart_id
+                  :cart, :cart_attributes, :cart_id,
+                  :piece_id  # kimbra non photo piece we are going to turn into an offer
+
+  attr_accessor :piece_id
 
   accepts_nested_attributes_for :offer, :cart
 

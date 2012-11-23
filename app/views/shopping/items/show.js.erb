@@ -1,1 +1,1 @@
-$("shopping_item").update("<%= escape_javascript(render(@item))%>");
+$("#<%= "shopping_item_#{@shopping_item_id}" %>").update("<%= escape_javascript(render(@item))%>");

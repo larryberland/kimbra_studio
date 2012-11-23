@@ -12,10 +12,19 @@ module Shopping
     end
 
     def create
-      params[:cart_id] = params[:shopping_item][:cart_id]
+      if params[:shopping_item] && params[:shopping_item][:piece_id]
+        # create an offer out of this kimbra_piece
+        @admin_customer_offer             = Admin::Customer::Offer.generate_from_piece(@admin_customer_email,
+                                                                                       params[:shopping_item][:piece_id])
+        params[:shopping_item][:offer_id] = @admin_customer_offer.id
+        session[:admin_customer_offer_id] = @admin_customer_offer.id
+        @shopping_item_id = params[:shopping_item][:piece_id]
+      end
       params[:offer_id] = params[:shopping_item][:offer_id]
+      params[:cart_id]  = params[:shopping_item][:cart_id]
       @storyline.describe "Adding #{@admin_customer_offer.name} to cart."
       item_already_in_cart = @cart.items.where(:offer_id => params[:offer_id]).first
+
       if item_already_in_cart
         item_already_in_cart.update_attribute :quantity, item_already_in_cart.quantity.to_i + 1
         @item = item_already_in_cart
@@ -25,7 +34,7 @@ module Shopping
     end
 
     def update
-      @item = Shopping::Item.find(params[:id])
+      @item    = Shopping::Item.find(params[:id])
       quantity = params[:quantity].to_i
       @storyline.describe "Changing quantity of #{@item.offer.name} to #{quantity} in cart."
       if quantity == 0

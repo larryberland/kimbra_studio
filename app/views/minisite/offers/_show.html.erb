@@ -30,6 +30,10 @@
 
   <p class="price"><%= number_to_currency(@admin_customer_offer.price) %></p>
 
+  <p class="shopping-item">
+      <span id='<%="shopping_item_#{@admin_customer_offer.id}"%>'></span>
+  </p>
+
   <% unless @show_status_only %>
       <% if is_client? %>
           <%= form_for(@shopping_item, :remote => true) do |f| %>
@@ -41,10 +45,8 @@
               </p>
           <% end %>
       <% end %>
-      <%= button_to 'Adjust picture', edit_url, method: :get %>
+      <%= button_to 'Adjust picture', edit_url, method: :get  if @admin_customer_offer.piece.photo?%>
   <% end %>
-
-  <span id='shopping_item'></span>
 
   <%= content_tag :p do %>
       <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>

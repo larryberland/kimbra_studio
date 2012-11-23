@@ -61,6 +61,17 @@ class Admin::Customer::Offer < ActiveRecord::Base
     offer
   end
 
+  def self.generate_from_piece(email, piece_id)
+    piece = Admin::Merchandise::Piece.find(piece_id)
+    offer = Admin::Customer::Offer.create(
+        tracking:          UUID.random_tracking_number,
+        email:             email,
+        piece:             piece, # parent merchandise.piece
+        item_options_list: [])
+    offer.assemble(piece)
+    offer
+  end
+
   # Using a Kimbra Piece made up of Kimbra Parts we create
   #  a Custom Offer with custom items which are mapped one to one
   #  with the Kimbra parts.
