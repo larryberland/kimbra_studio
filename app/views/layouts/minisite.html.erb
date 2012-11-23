@@ -24,6 +24,15 @@
 
   <%= render 'shared/minisite_header', studio: @studio, admin_customer_email: @admin_customer_email %>
 
+  <% if notice || alert %>
+      <div class="centered_container alert error rounded row span5">
+        <i class="icon-hand-right"> </i>
+        <button type="button" class="close" data-dismiss="alert" style="float:right;">close x</button>
+        <%= raw "<p> #{notice}</p>" if notice %>
+        <%= raw "<p><strong>#{t(:snap)}</strong>#{alert}</p>" if alert %>
+      </div>
+  <% end %>
+
   <div id='content_wrapper' class='container'>
     <%= yield %>
   </div>

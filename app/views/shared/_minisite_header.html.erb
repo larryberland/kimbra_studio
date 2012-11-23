@@ -58,10 +58,10 @@
 
 <img id="logo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
 
-<div class="bp">
-  <%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>
-  <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
-</div>
+<!--<div class="bp">-->
+  <!--<%= raw "<p class='flash_notice'> #{notice}</p>" if notice %>-->
+  <!--<%= raw "<p class='flash_error'>#{alert}</p>" if alert %>-->
+<!--</div>-->
 
 <%# do not show the navigation bar if Kimbra is entering the delivery tracking number  %>
 <% unless controller_name == 'carts' && action_name == 'edit_delivery_tracking' %>
@@ -72,6 +72,16 @@
             <%= link_to_your_collection_or_not(admin_customer_email) %>
           </li>
           |
+          <!--
+          <li>
+            <%= link_to t(:minisite_menu_chains_link), admin_overview_path %>
+          </li>
+          |
+          <li>
+            <%= link_to t(:minisite_menu_charms_link), admin_overview_path %>
+          </li>
+          |
+          -->
           <li>
             <%= link_to_unless_current t(:minisite_menu_about_link, :studio_name => studio.name),
                                        about_minisite_email_path(admin_customer_email.tracking) %>

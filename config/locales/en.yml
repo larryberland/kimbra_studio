@@ -93,6 +93,8 @@ en:
   minisite_menu_custom_work_link: "Custom Work"
   minisite_menu_shopping_cart_link: "Shopping Cart"
   minisite_menu_about_link: "About %{studio_name}"
+  minisite_menu_chains_link: "Chains"
+  minisite_menu_charms_link: "Charms"
 
   admin_menu_overview: "Overview"
   admin_menu_emails:   "Offer Emails"

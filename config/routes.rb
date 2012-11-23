@@ -87,6 +87,8 @@ KimbraStudio::Application.routes.draw do
     resources :minisites do
       member do
         get :show_collection
+        get :show_chains
+        get :show_charms
       end
     end
     resource :overview, :only => [:show]

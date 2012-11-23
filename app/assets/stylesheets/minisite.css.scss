@@ -4,7 +4,7 @@
  * the top of the compiled file, but it's generally better to create a new file per style scope.
  *= require_self
  *= require_tree ../stylesheets/jcrop
-  *= require_tree ../stylesheets/minisite
+ *= require_tree ../stylesheets/minisite
  *= require _widget
  *= require _common
  *= require devise
@@ -334,4 +334,11 @@ td.total {
 
 .field_with_errors label.message {
   margin-left: 5px;
+}
+//bootstrap style without bringing input bootstrap
+.span5 {
+    width: 380px;
+}
+.close{
+  float: right;
 }

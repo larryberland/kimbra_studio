@@ -25,7 +25,7 @@ class Shopping::Cart < ActiveRecord::Base
 
   def taxable_sub_total
     items.each do |item|
-      raise 'missing price in offer=>#{item.offer.inspect) piece=>#{item.offer.piece.id}' if item.offer.piece.price.nil?
+      raise "missing price in offer=>#{item.offer.inspect} piece=>#{item.offer.piece.id}" if item.offer.piece.price.nil?
     end
     items.inject(0) { |result, item| result + item.extension }
   end

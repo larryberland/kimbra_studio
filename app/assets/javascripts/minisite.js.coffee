@@ -10,6 +10,7 @@
 #= require imagesloaded
 #= require shopping/purchases
 #= require minisite/ups_tracking
+#= require ./bootstrap/bootstrap
 #= require rails.validations
 
 $ ->
