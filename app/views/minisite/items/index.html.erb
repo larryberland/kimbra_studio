@@ -20,7 +20,7 @@
   <tr>
     <% @items.each do |item| %>
         <td>
-          <%= image_tag item.front.image_custom_url(:list).to_s + '?' + SecureRandom.hex(8) %>
+          <%= item.front.image_custom.to_image_cache_buster(:list) %>
           <br>
           <%= link_to t(:edit), edit_minisite_item_side_path(item.front) %>
         </td>
@@ -42,7 +42,7 @@
         <% @items.each do |item| %>
             <% if item.back.present? %>
                 <td>
-                  <%= image_tag item.back.image_custom_url(:list).to_s + '?' + SecureRandom.hex(8) %>
+                  <%= item.back.image_custom.to_image_cache_buster(:list) %>
                   <br>
                   <%= link_to t(:edit), edit_minisite_item_side_path(item.back) %>
                 </td>

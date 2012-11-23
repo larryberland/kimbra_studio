@@ -9,11 +9,12 @@
           <tbody>
           <tr>
             <td class="w280" align="right" width="280">
-              <%= link_to image_tag(offer.image.url_cache_buster,
-                                    :title => offer.name,
-                                    :alt => offer.name,
-                                    :width => offer.width,
-                                    :height => offer.height,
+              <%# TODO refactor this cache buster to be more rails-like. %>
+              <%= link_to image_tag(piece.image.url_cache_buster,
+                                    :title => piece.name,
+                                    :alt => piece.name,
+                                    :width => piece.width,
+                                    :height => piece.height,
                                     :class => "w280 img-rounded",
                                     :editable => "true",
                                     :label => "Image",
@@ -40,9 +41,9 @@
             <td class="w280" width="280">
               <div class="article-content" align="left">
                 <p style="color: <%= studio.minisite.font_color %>;">
-                  <b><%= offer.name %></b><br/>
-                  <%= offer.piece.short_description %><br/>
-                  <span class="price"><%= number_to_currency(offer.price) %></span><br/>
+                  <b><%= piece.name %></b><br/>
+                  <%= piece.short_description %><br/>
+                  <span class="price"><%= number_to_currency(piece.price) %></span><br/>
                   <%= link_to "Details...", url_for_offer_or_not(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
                 </p>
               </div>

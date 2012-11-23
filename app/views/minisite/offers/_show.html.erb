@@ -15,16 +15,16 @@
   <% if @admin_customer_offer.back.present? %>
       <p>
         <b>Front</b>
-        <%= link_to @admin_customer_offer.image_front.to_url_cache_buster, edit_url %>
+        <%= link_to @admin_customer_offer.image_front.to_image_cache_buster, edit_url%>
       </p>
 
       <p>
         <b>Back</b>
-        <%= link_to @admin_customer_offer.image_back.to_url_cache_buster, edit_url %>
+        <%= link_to @admin_customer_offer.image_back.to_image_cache_buster, edit_url%>
       </p>
   <% else %>
       <p>
-        <%= link_to @admin_customer_offer.image.to_url_cache_buster, edit_url %>
+        <%= link_to @admin_customer_offer.image.to_image_cache_buster, edit_url%>
       </p>
   <% end %>
 

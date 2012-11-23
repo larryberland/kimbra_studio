@@ -89,4 +89,19 @@ class MyStudio::MinisitesController < MyStudio::BaseController
     render layout: 'layouts/minisite'
   end
 
+  def show_chains
+    @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
+    @admin_customer_offers = @admin_customer_email.offers
+    @studio = @admin_customer_email.my_studio_session.studio
+    render layout: 'layouts/minisite'
+  end
+
+  def show_charms
+    @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
+    @admin_customer_offers = @admin_customer_email.offers
+    @studio = @admin_customer_email.my_studio_session.studio
+    render layout: 'layouts/minisite'
+  end
+
+
 end

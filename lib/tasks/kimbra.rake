@@ -1,12 +1,28 @@
 namespace 'kimbra' do
 
   desc "Send unsent offer emails"
+  task :seed_piece_photo => :environment do
+    Admin::Merchandise::Piece.all.each do |p|
+      have_photos = false
+      p.parts.each do |part|
+        if part.photo?
+          have_photos = true
+          break
+        end
+      end
+      puts "#{p.name} photos:#{have_photos}"
+      p.photo = have_photos
+      p.save
+    end
+  end
+
+  desc "Send unsent offer emails"
   task :send_offers => :environment do
     Admin::Customer::Email.send_offer_emails
   end
 
   desc "Seed Studios from Kimbra Spreadsheet. Use: [n] to add next n rows. Defaults to 10."
-  task :seed_studio_owners, [:rows_to_add] => :environment do |t,args|
+  task :seed_studio_owners, [:rows_to_add] => :environment do |t, args|
     require 'csv'
     last_row_added = User.maximum(:csv_row).to_i
     args.with_defaults rows_to_add: 10
@@ -16,14 +32,14 @@ namespace 'kimbra' do
       next unless csv_row > last_row_added
       # Only add the requested number of rows.
       break if csv_row >= last_row_added + args.rows_to_add.to_i + 1
-      attrs   = {address_1:           row["BADDR2"],
-                 address_2:           row["BADDR3"],
-                 phone_number:        row["PHONE1"],
-                 country_abbrev:      row["BADDR5"].to_s.strip.upcase,
-                 minisite_attributes: {bgcolor:     '#2a1907',
-                                       font_color:  '#d3b492',
-                                       font_family: 'Arial'},
-                 info_attributes:     {}}
+      attrs = {address_1:           row["BADDR2"],
+               address_2:           row["BADDR3"],
+               phone_number:        row["PHONE1"],
+               country_abbrev:      row["BADDR5"].to_s.strip.upcase,
+               minisite_attributes: {bgcolor:     '#2a1907',
+                                     font_color:  '#d3b492',
+                                     font_family: 'Arial'},
+               info_attributes:     {}}
 
       attrs[:name] = row["COMPANYNAME"] || row["NAME"] || row["CONT1"] || row["CONT2"]
       attrs[:name] = attrs[:name].to_s.titleize

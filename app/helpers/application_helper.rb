@@ -135,7 +135,11 @@ module ApplicationHelper
   def url_for_offer_or_not(offer)
     # currently opening this offer up for amyone to change
     #  may re-think this later on security or Save issues
-    minisite_offer_url(offer)
+    if (offer.kind_of?(Admin::Merchandise::Piece))
+      minisite_offer_url(offer)
+    else
+      minisite_offer_url(offer)
+    end
   end
 
   def link_to_your_collection_or_not(admin_customer_email)
@@ -166,87 +170,87 @@ module ApplicationHelper
 
 # Show a link to the current offer - no need for this if we are at the Collection page or if there's no current offer.
 # NOT USED ANYMORE.
-def link_back_to_current_offer
-  if @admin_customer_offer
-    at_collection_page = controller_name == 'offers' && action_name == 'index'
-    at_shopping_page   = %w(carts addresses shippings items purchases stripe_cards).include?(controller_name)
-    at_offer_page      = controller_name == 'offers' && action_name == 'show'
-    link_text          = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
-    unless at_collection_page or at_shopping_page
-      link = content_tag :li do
-        link_to_unless_current link_text, minisite_offer_url(@admin_customer_offer)
+  def link_back_to_current_offer
+    if @admin_customer_offer
+      at_collection_page = controller_name == 'offers' && action_name == 'index'
+      at_shopping_page   = %w(carts addresses shippings items purchases stripe_cards).include?(controller_name)
+      at_offer_page      = controller_name == 'offers' && action_name == 'show'
+      link_text          = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
+      unless at_collection_page or at_shopping_page
+        link = content_tag :li do
+          link_to_unless_current link_text, minisite_offer_url(@admin_customer_offer)
+        end
+        (" | " + link).html_safe
       end
-      (" | " + link).html_safe
     end
   end
-end
 
 # Dynamically constrain image size to 500px wide.
 # offer must respond to #width and #height
 # dimension must be :width or :height
-def constrain_to_500_px_wide(offer, dimension)
-  if offer.width.to_i <= 500
-    return "#{offer.width}px" if dimension == :width
-    return "#{offer.height}px" if dimension == :height
-  else
-    case dimension
-      when :width
-        "500px"
-      when :height
-        height = (500.0 / offer.width.to_i * offer.height.to_i).to_i
-        "#{height}px"
+  def constrain_to_500_px_wide(offer, dimension)
+    if offer.width.to_i <= 500
+      return "#{offer.width}px" if dimension == :width
+      return "#{offer.height}px" if dimension == :height
+    else
+      case dimension
+        when :width
+          "500px"
+        when :height
+          height = (500.0 / offer.width.to_i * offer.height.to_i).to_i
+          "#{height}px"
+      end
     end
   end
-end
 
-def link_to_destroy(url)
-  is_admin? ? link_to(t(:destroy), url, confirm: t(:link_destroy_confirm), method: :delete) : ''
-end
-
-def css_button(selected)
-  css = '' # usually likeabutton
-  css += ' selected' if selected
-  css
-end
-
-def link_to_nav_pill(label, url, selected, title="")
-  css_class = selected ? {class: 'active'} : {}
-  html      = content_tag(:li, css_class) do
-    link_to(label, url, title: title)
+  def link_to_destroy(url)
+    is_admin? ? link_to(t(:destroy), url, confirm: t(:link_destroy_confirm), method: :delete) : ''
   end
-  html.html_safe
-end
 
-def link_to_nav_drop_down(label, url, selected, title="")
-  css_class = {class: "dropdown-menu"}
-  css_class[:class] += " active" if selected
-  html = content_tag(:ul, css_class) do
-    link_to(label, url, title: title)
+  def css_button(selected)
+    css = '' # usually likeabutton
+    css += ' selected' if selected
+    css
   end
-  html.html_safe
-end
 
-def link_to_button(label, url, selected, title="")
-  css = css_button(selected)
-  link_to label, url, class: css, title: title
-end
+  def link_to_nav_pill(label, url, selected, title="")
+    css_class = selected ? {class: 'active'} : {}
+    html      = content_tag(:li, css_class) do
+      link_to(label, url, title: title)
+    end
+    html.html_safe
+  end
+
+  def link_to_nav_drop_down(label, url, selected, title="")
+    css_class = {class: "dropdown-menu"}
+    css_class[:class] += " active" if selected
+    html = content_tag(:ul, css_class) do
+      link_to(label, url, title: title)
+    end
+    html.html_safe
+  end
+
+  def link_to_button(label, url, selected, title="")
+    css = css_button(selected)
+    link_to label, url, class: css, title: title
+  end
 
 # allows word wrapping on email strings
-def email_display(email)
-  email.to_s.downcase.gsub('@', "&#8203;@").gsub('.', "&#8203;.").html_safe
-end
+  def email_display(email)
+    email.to_s.downcase.gsub('@', "&#8203;@").gsub('.', "&#8203;.").html_safe
+  end
 
-def link_from_site_short_name(url)
-  host   = URI.parse(url).host.downcase
-  host   = host.start_with?('www.') ? host[4..-1] : host
-  result = host.split('.').first
-  link_to result, url, target: '_blank', title: url
-rescue
-  'none'
-end
+  def link_from_site_short_name(url)
+    host   = URI.parse(url).host.downcase
+    host   = host.start_with?('www.') ? host[4..-1] : host
+    result = host.split('.').first
+    link_to result, url, target: '_blank', title: url
+  rescue
+    'none'
+  end
 
-def current_status(active_flag)
-  active_flag ? "active" : "inactive"
-end
+  def current_status(active_flag)
+    active_flag ? "active" : "inactive"
+  end
 
 end

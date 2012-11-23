@@ -16,13 +16,13 @@
           </td>
           <td class='shopping-item-index'>
             <%= link_to image_tag(item.offer.image_url.to_s,
-                                  :title => item.offer.name,
-                                  :alt => item.offer.name,
-                                  :width => 150,
-                               #   :height => '30%',
-                               #   :class => "w280",
-                               #   :editable => "true",
-                               #   :label => "Image",
+                                  :title  => item.offer.name,
+                                  :alt    => item.offer.name,
+                                  :width  => 150,
+                                  #   :height => '30%',
+                                  :class  => "img-rounded",
+                                  #   :editable => "true",
+                                  #   :label => "Image",
                                   :border => 0),
                         minisite_offer_url(item.offer),
                         {:style => "text-decoration: none;"} %>
@@ -44,7 +44,9 @@
           </td>
         </tr>
     <% end if cart.items && cart.items.present? %>
-    <tr><td colspan=5>&nbsp;</td></tr>
+    <tr>
+      <td colspan=5>&nbsp;</td>
+    </tr>
     <tr>
       <td class='shopping-item-index left'>Shipping</td>
       <td class='shopping-item-index'><%= cart.shipping ? cart.shipping.shipping_option : 'no shipping selected yet' %> </td>

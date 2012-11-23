@@ -1,7 +1,7 @@
 class Admin::Merchandise::Piece < ActiveRecord::Base
   attr_accessible :image, :remote_image_url,
                   :category, :name, :short_description, :description_markup,
-                  :sku, :price, :custom_layout,
+                  :sku, :price, :photo, :custom_layout,
                   :active, :featured, :deleted_at
 
   mount_uploader :image, ImageUploader
@@ -17,6 +17,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   scope :by_category, lambda { |category| where('active=? and category IN(?)', true, category) }
   scope :for_strategy, lambda { |categories| where('active=? and category IN(?)', true, categories) }
   scope :for_bracelets, lambda { by_category('Photo Bracelets') }
+  scope :non_photo_charms, lambda { where('photo=?', false)}
 
   scope :search, lambda {|value|
     like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_','\_')}%" : "%"

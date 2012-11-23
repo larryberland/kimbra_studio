@@ -51,8 +51,16 @@ class BaseUploader < CarrierWave::Uploader::Base
     %w(jpg jpeg gif png)
   end
 
-  def to_url_cache_buster
-    url = model.send("#{mounted_as}_url").to_s + '?' + SecureRandom.hex(8)
-    "<img src=\"#{url}\"/>".html_safe
+  def to_image_cache_buster(version=nil)
+    "<img class=\"img-rounded\" src=\"#{url_cache_buster(version)}\"/>".html_safe
+  end
+
+  def url_cache_buster(version=nil)
+    image_src = if (version)
+            model.send("#{mounted_as}_url", version).to_s
+          else
+            model.send("#{mounted_as}_url").to_s
+          end
+    image_src + '?' + SecureRandom.hex(8)
   end
 end
