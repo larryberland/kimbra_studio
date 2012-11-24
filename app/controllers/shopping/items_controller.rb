@@ -41,6 +41,7 @@ module Shopping
       if quantity == 0
         # destroy any offers that came from charms/chains
         @item.destroy
+        session[:admin_customer_offer_id] = nil if session[:admin_customer_offer_id]
       else
         @item.update_attribute :quantity, quantity
       end
