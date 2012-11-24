@@ -99,7 +99,7 @@ class Admin::Customer::OffersController < ApplicationController
   def destroy
     @admin_customer_offer.destroy
     respond_to do |format|
-      format.html { redirect_to admin_customer_offers_url }
+      format.html { redirect_to admin_customer_email_offers_url(@email) }
       format.json { head :ok }
     end
   end

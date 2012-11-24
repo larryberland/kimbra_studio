@@ -24,7 +24,7 @@
     <% @admin_customer_emails.all.each do |admin_customer_email| %>
         <tr>
           <% if is_admin? %>
-              <td><%= link_to t(:offers), admin_customer_email_offers_path(admin_customer_email.tracking), title: 'View All Offers for this Email' %></td>
+              <td><%= link_to "#{admin_customer_email.offers.size.to_i.to_words} #{t(:offers)}", admin_customer_email_offers_path(admin_customer_email.tracking), title: 'View All Offers for this Email' %></td>
           <% end %>
           <td><%= link_to t(:show), show_collection_my_studio_minisite_path(admin_customer_email.tracking) %></td>
           <% if is_admin? %>
