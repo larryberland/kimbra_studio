@@ -17,8 +17,8 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   scope :by_category, lambda { |category| where('active=? and category IN(?)', true, category) }
   scope :for_strategy, lambda { |categories| where('active=? and category IN(?)', true, categories) }
   scope :for_bracelets, lambda { by_category('Photo Bracelets') }
-  scope :non_photo_charms, lambda { where('photo=?', false)}
-  scope :for_chains, lambda { by_category('Chains')}
+  scope :non_photo_charms, lambda { where('photo=? AND category NOT IN(?)', false, 'Chains').order('name ASC')}
+  scope :for_chains, lambda { by_category('Chains').order('name ASC')}
 
   scope :search, lambda {|value|
     like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_','\_')}%" : "%"

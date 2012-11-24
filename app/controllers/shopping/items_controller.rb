@@ -13,12 +13,13 @@ module Shopping
 
     def create
       if params[:shopping_item] && params[:shopping_item][:piece_id]
-        # create an offer out of this kimbra_piece
+        # create an offer from this kimbra_piece and add to the shopping cart
         @admin_customer_offer             = Admin::Customer::Offer.generate_from_piece(@admin_customer_email,
                                                                                        params[:shopping_item][:piece_id])
         params[:shopping_item][:offer_id] = @admin_customer_offer.id
         session[:admin_customer_offer_id] = @admin_customer_offer.id
         @shopping_item_id = params[:shopping_item][:piece_id]
+        params[:shopping_item][:from_piece] = true    # after_destroy flag to remove offer
       end
       params[:offer_id] = params[:shopping_item][:offer_id]
       params[:cart_id]  = params[:shopping_item][:cart_id]
@@ -38,6 +39,7 @@ module Shopping
       quantity = params[:quantity].to_i
       @storyline.describe "Changing quantity of #{@item.offer.name} to #{quantity} in cart."
       if quantity == 0
+        # destroy any offers that came from charms/chains
         @item.destroy
       else
         @item.update_attribute :quantity, quantity

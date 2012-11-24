@@ -9,6 +9,10 @@ namespace 'kimbra' do
     pieces_list  = info[:pieces]
     default      = info[:default]
     image_stub   = Rails.root.join('app', 'assets', 'images', 'kimbra_logo.png')
+
+    # remove any current chains
+    Admin::Merchandise::Piece.for_chains.destroy_all
+
     puts "storing #{pieces_list.size} Pieces"
     pieces_list.each do |piece|
       parts = piece.delete(:parts)

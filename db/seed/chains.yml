@@ -1,76 +1,90 @@
 :default:
   :parts:
     - :image_part: part_charm.png
-  :part_layout: {layout: {x: 19, y: 34, w: 90, h: 137}}
-  :piece_layout: {layout: {x: 0, y: 0, w: 70, h: 85}}
+  :part_layout: {layout: {x: 0, y: 0, w: 440, h: 137}}
+  :piece_layout: {layout: {x: 0, y: 0, w: 440, h: 137}}
 
 :pieces:
   - category: Chains
-    name: Black Ribbon and 3 Cord Chain
+    name: Black Ribbon and 3 Cord
     price: 12.00
     image: black_ribbon_3_cord.png
+    photo: false
     short_description: 'Measuring: 18 inches.'
-    custom_layout: order
+    custom_layout: composite
     sku:
     :parts:
-      - :image_part: part0.png
-        order: 0
+      - order: 0
         photo: false
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
-        :piece_layout: {layout: {x: 325, y: 33, w: 94, h: 87}}
+        :part_layout: {layout: {x: 0, y: 0, w: 447, h: 176}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 447, h: 176}}
 
   - category: Chains
-    name: Link Chain
+    name: Link Chain 24
     price: 42.00
     image: link_chain_24.png
+    photo: false
     short_description: 'Measuring: 24 inches.'
-    custom_layout: order
+    custom_layout: composite
     sku:
     :parts:
-      - :image_part: part0.png
-        order: 0
+      - order: 0
         photo: false
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
-        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+        :part_layout: {layout: {x: 0, y: 0, w: 448, h: 74}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 448, h: 74}}
 
   - category: Chains
-    name: Link Chain
+    name: Link Chain 18
     price: 32.00
     image: link_chain_24.png
+    photo: false
     short_description: 'Measuring: 18 inches.'
-    custom_layout: order
+    custom_layout: composite
     sku:
     :parts:
-      - :image_part: part0.png
-        order: 0
+      - order: 0
         photo: false
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
-        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+        :part_layout: {layout: {x: 0, y: 0, w: 448, h: 74}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 448, h: 74}}
 
   - category: Chains
-    name: Small Bead Chain
+    name: Bead Chain
     price: 24.00
     image: bead_chain_24.png
-    short_description: 'Measuring: 18 inches.'
-    custom_layout: order
+    photo: false
+    short_description: 'Small Bead Chain Measuring: 18 inches.'
+    custom_layout: composite
     sku:
     :parts:
-      - :image_part: part0.png
-        order: 0
+      - order: 0
         photo: false
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
-        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+        :part_layout: {layout: {x: 0, y: 0, w: 445, h: 68}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 445, h: 68}}
 
   - category: Chains
-    name: Large Oval Link Necklace
+    name: Large Oval Link Necklace 16
     price: 160.00
     image: large_oval_link.png
+    photo: false
     short_description: 'Measuring: 16 inches.'
-    custom_layout: order
+    custom_layout: composite
     sku:
     :parts:
-      - :image_part: part0.png
-        order: 0
+      - order: 0
         photo: false
-        :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
-        :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
+        :part_layout: {layout: {x: 0, y: 0, w: 444, h: 137}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 444, h: 137}}
+
+  - category: Chains
+    name: Large Oval Link Necklace 18
+    price: 175.00
+    image: large_oval_link.png
+    photo: false
+    short_description: 'Measuring: 18 inches.'
+    custom_layout: composite
+    sku:
+    :parts:
+      - order: 0
+        photo: false
+        :part_layout: {layout: {x: 0, y: 0, w: 444, h: 137}}
+        :piece_layout: {layout: {x: 0, y: 0, w: 444, h: 137}}

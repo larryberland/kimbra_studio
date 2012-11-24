@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121123140301) do
+ActiveRecord::Schema.define(:version => 20121124101115) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -495,6 +495,7 @@ ActiveRecord::Schema.define(:version => 20121123140301) do
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "from_piece", :default => false
   end
 
   add_index "shopping_items", ["cart_id"], :name => "index_shopping_items_on_cart_id"
