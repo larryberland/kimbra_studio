@@ -13,9 +13,6 @@
       <td>
         <%= offer.image_front.to_image_cache_buster(:thumb) %>
       </td>
-      <td>
-        <%= offer.image_front.to_image_cache_buster %>
-      </td>
     </tr>
     <% if offer.back.present? %>
         <tr>
