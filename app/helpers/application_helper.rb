@@ -109,7 +109,6 @@ module ApplicationHelper
   end
 
   #<div class='image-thumb'>
-  #  <span><%= model.to_image_span %></span><br/>
   #  <%= image_tag_version(model) %>
   #</div>
   def cw_div_image_only(model_with_carrier_wave_image, options={})

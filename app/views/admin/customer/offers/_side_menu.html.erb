@@ -11,14 +11,16 @@
     <tr>
       <td>Custom Piece:</td>
       <td>
-        <%= hidden_field_tag( "image_front_cache_#{offer.id}", offer.image_front_cache) %>
-        <%= cw_div_image_only(offer, :image => 'image_front') %>
+        <%= offer.image_front.to_image_cache_buster(:thumb) %>
+      </td>
+      <td>
+        <%= offer.image_front.to_image_cache_buster %>
       </td>
     </tr>
     <% if offer.back.present? %>
         <tr>
           <td>Custom Piece Side 2:</td>
-          <td><%= cw_div_image_only(offer, :image => 'image_back') %></td>
+          <td><%= offer.image_back.to_image_cache_buster(:thumb) %></td>
         </tr>
     <% end %>
     </tbody>

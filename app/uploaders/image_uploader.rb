@@ -13,6 +13,7 @@ class ImageUploader < BaseUploader
 
   # Create different versions of your uploaded files:
   version :thumb do
+    puts "thumb version"
     process :resize_to_limit => [100, 100]
   end
 

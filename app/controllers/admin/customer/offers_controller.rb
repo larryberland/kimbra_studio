@@ -52,9 +52,7 @@ class Admin::Customer::OffersController < ApplicationController
     @admin_customer_offer.email = @email
 
     result = @admin_customer_offer.save
-    if (result)
-      @admin_customer_offer.reassemble
-    end
+    @admin_customer_offer.on_create if (result)
 
     respond_to do |format|
       if result
@@ -71,16 +69,14 @@ class Admin::Customer::OffersController < ApplicationController
   # PUT /admin/customer/offers/1t7t7rye.json
   def update
     @admin_customer_offer.email = @email
-
-    generate_offer = true if @admin_customer_offer.piece_id != params[:admin_customer_offer][:piece_id]
-    generate_offer = true if params[:admin_customer_offer][:portrait_id]
-
-    result = @admin_customer_offer.update_attributes(params[:admin_customer_offer])
-
-    if result and generate_offer
+    previous_piece_id = @admin_customer_offer.piece_id
+    if result = @admin_customer_offer.update_attributes(params[:admin_customer_offer])
       # send this to the worker to generate a new offer
       #   using the new kimbra piece
-      @admin_customer_offer.reassemble
+      @admin_customer_offer.on_update(previous_piece_id)
+
+      # recreate our offer image versions in fog
+      #Admin::Customer::Offer.fog_buster(@admin_customer_offer.id)
     end
 
     respond_to do |format|

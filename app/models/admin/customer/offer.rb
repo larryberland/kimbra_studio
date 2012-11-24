@@ -51,7 +51,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def self.generate(email, piece, item_options_list)
     list = item_options_list
     list = [item_options_list] if item_options_list.kind_of?(Hash)
-    list ||= [] # if Email has no item_options suggestions make sure we have at least the array
+    list  ||= [] # if Email has no item_options suggestions make sure we have at least the array
     offer = Admin::Customer::Offer.create(
         tracking:          UUID.random_tracking_number,
         email:             email,
@@ -61,6 +61,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
     offer
   end
 
+  # generate an offer directly from a kimbra piece
+  # NOTE: So far these are all non-photo charms or chains
   def self.generate_from_piece(email, piece_id)
     piece = Admin::Merchandise::Piece.find(piece_id)
     offer = Admin::Customer::Offer.create(
@@ -113,71 +115,103 @@ class Admin::Customer::Offer < ActiveRecord::Base
     self
   end
 
+  # reassemble this piece using the current piece_id and portrait_id
+  #   sent in from the form
+  def on_create
+    on_update(-1)
+  end
+
   # Using the existing offer information, going to reassemble
   #  this offer with the new kimbra merchandise piece
-  def reassemble
+  def on_update(previous_piece_id)
 
-    # override the current offer layout info from the Kimbra piece
-    custom_layout = piece.custom_layout
+    new_piece    = previous_piece_id != piece_id
+    new_portrait = portrait_id.to_i > 0
 
-    # grab any existing portrait info from items
-    current_portraits = []
-    current_portraits << MyStudio::Portrait.find_by_id(portrait_id) if portrait_id
-    puts "portrait_id:#{portrait_id}"
+    if (new_piece or new_portrait)
 
-    items.each do |item|
-      item.item_sides.each do |side|
-        current_portraits << side.portrait
+      # grab any existing portrait info from items
+      current_portraits = []
+
+      if (new_portrait)
+
+        current_portraits << MyStudio::Portrait.find_by_id(portrait_id)
+
       end
-    end
 
-    # remove any old items we had
-    items.destroy_all if items.present?
-
-    # setup our item options
-    item_options_list = []
-
-    # for every non_photo part defined in the merchandise.piece
-    #   create an offer item representing that non_photo part
-    #   and add it out item_options_list for this offer.
-    piece.non_photo_parts.each do |part|
-      item_options_list << {photo_part: part, portrait: nil}
-    end
-
-    piece.photo_parts.each_with_index do |part, index|
-      options = {photo_part: part}
-      if (index < current_portraits.size)
-        puts "portrait cp[#{index}]=#{current_portraits[index].id}"
-        options[:portrait] = current_portraits[index]
-      else
-        options[:portrait] = email.my_studio_session.portraits.first
-        puts "portrait email[#{index}]=#{options[:portrait].id}"
+      # pull out the portraits this offer is currently using
+      items.each do |item|
+        item.item_sides.each do |side|
+          current_portraits << side.portrait
+        end
       end
-      item_options_list << options
-    end
 
-    item_options_list.flatten.each do |item_options|
-      self.items << Admin::Customer::Item.assemble_side(self, item_options)
-    end
+      # remove any old items we had
+      items.destroy_all if items.present?
 
-    # LDB:? NOTE
-    # this is a before_create right now and i am going
-    #  to leave it there until we know we want to do this on
-    #  updates as well
-    piece_create_default_and_tracking
+      # setup our item options
+      item_options_list = []
 
-    # create a composite of all the items
-    image.cache_stored_file! if image.present?
-    image_front.cache_stored_file! if image_front.present?
-    image_back.cache_stored_file! if image_back.present?
+      # for every non_photo part defined in the merchandise.piece
+      #   create an offer item representing that non_photo part
+      #   and add it out item_options_list for this offer.
+      piece.non_photo_parts.each do |part|
+        item_options_list << {photo_part: part, portrait: nil}
+      end
 
-    create_custom_image
+      piece.photo_parts.each_with_index do |part, index|
+        options = {photo_part: part}
+        if (index < current_portraits.size)
+          options[:portrait] = current_portraits[index]
+        else
+          options[:portrait] = email.my_studio_session.portraits.first
+        end
+        item_options_list << options
+      end
 
-    if (errors.messages)
-      Rails.logger.info "CHALLENGE:: offer save errors:#{errors.full_messages}"
+      item_options_list.flatten.each do |item_options|
+        self.items << Admin::Customer::Item.assemble_side(self, item_options)
+      end
+
+      # LDB:? NOTE
+      # this is a before_create right now and i am going
+      #  to leave it there until we know we want to do this on
+      #  updates as well
+      piece_create_default_and_tracking
+
+      # create a composite of all the items
+      create_custom_image
+
+      if (errors.messages)
+        Rails.logger.warn "CHALLENGE:: offer save errors:#{errors.full_messages}"
+      end
     end
 
     self
+  end
+
+  # this allows carrier_wave to recreate_versions whenever we
+  #  manipulate the image items in fog and need to recreate
+  #  out different versions
+  def self.fog_buster(offer_id)
+    offer = find(offer_id)
+
+    offer.image_front.cache_stored_file!
+    offer.image_front.retrieve_from_cache!(offer.image_front.cache_name)
+    offer.image_front.recreate_versions!
+
+    if (offer.image_back.present?)
+      offer.image_back.cache_stored_file!
+      offer.image_back.retrieve_from_cache!(offer.image_back.cache_name)
+      offer.image_back.recreate_versions!
+    end
+
+    offer.image.cache_stored_file!
+    offer.image.retrieve_from_cache!(offer.image.cache_name)
+    offer.image.recreate_versions!
+
+    offer.save!
+    offer
   end
 
   # list of portrait's used by all items in this offer
@@ -323,10 +357,19 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def create_custom_image
+    # draw the front side
     t_front = send("draw_by_#{custom_layout}", front=true)
+
+    # store the front side as our displayable image to the client
     image.store_file!(t_front.path)
-    send("draw_by_#{custom_layout}", front=false) if baby_got_back
+
+    # draw the back side
+    if baby_got_back
+      send("draw_by_#{custom_layout}", front=false) if baby_got_back
+    end
     dump('custom', image.to_image) if Rails.env.test?
+
+    # save our offer record
     save
   end
 
