@@ -7,19 +7,19 @@ class PartLayout < ActiveRecord::Base
   accepts_nested_attributes_for :layout
 
   def x
-    layout.x
+    layout.x.to_i
   end
 
   def y
-    layout.y
+    layout.y.to_i
   end
 
   def w
-    layout.w
+    layout.w.to_i
   end
 
   def h
-    layout.h
+    layout.h.to_i
   end
 
   def size

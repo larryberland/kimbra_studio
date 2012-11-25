@@ -8,8 +8,8 @@
     <td><%= cw_div_image_only(@part.piece) %></td>
   </tr>
   <tr>
-    <td>Custom Part:</td>
-    <td><%= cw_div_image_only(@part) %></td>
+    <td>Kimbra Part:</td>
+    <td><%= cw_div_image_only(@part, :image => :image_part) %></td>
   </tr>
   <% if @part.portrait %>
       <tr>
@@ -18,8 +18,8 @@
       </tr>
   <% end %>
   <tr>
-    <td>Kimbra Part:</td>
-    <td><%= cw_div_image_only(@part, :image => :image_part) %></td>
+    <td>Custom Part:</td>
+    <td><%= cw_div_image_only(@part) %></td>
   </tr>
   </tbody>
 </table>

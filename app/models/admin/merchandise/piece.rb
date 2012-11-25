@@ -1,4 +1,5 @@
 class Admin::Merchandise::Piece < ActiveRecord::Base
+
   attr_accessible :image, :image_cache, :remote_image_url,
                   :category, :name, :short_description, :description_markup,
                   :sku, :price, :photo, :custom_layout,
@@ -50,6 +51,13 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
     #   10/7/2012 => using Photo Necklaces and Photo Charms according to thie
     # TODO:  I don't think this is the case as i see charms and bracelets right now?
     strategy_categories.collect{|category| to_strategy_category(category)}.flatten.group_by{|r| r.category}
+  end
+
+  def self.fog_buster(piece_id)
+    p = find(piece_id)
+    p.image.fog_buster
+    p.save
+    p
   end
 
   def photo_parts

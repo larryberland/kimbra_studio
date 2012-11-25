@@ -11,6 +11,16 @@
           <label class="checkbox inline">
             <%= f.check_box :featured %> Featured?
           </label>
+          <label class="checkbox inline">
+            <%= f.check_box :photo %> has Photo?
+          </label>
+        </div>
+
+        <div class="control-group">
+          <%= f.label :category, class: "control-label" %>
+          <div class="controls">
+            <%= f.text_field :category %>
+          </div>
         </div>
 
         <div class="control-group">
@@ -55,12 +65,21 @@
             <%= f.text_field :price %>
           </div>
         </div>
+
         <div class="control-group">
           <%= f.label :deleted_at, class: "control-label" %>
           <div class="controls">
             <%= f.text_field :deleted_at %>
           </div>
         </div>
+
+      <div class="control-group">
+        <%= f.label :custom_layout, class: "control-label" %>
+        <div class="controls">
+          <%= f.select :custom_layout, [['composite','composite'], ['order','order']] %>
+        </div>
+      </div>
+
         <div class="form-actions">
           <%= f.submit :id => 'my_submit' %>
           <span id="spinner" style="display:none"></span>

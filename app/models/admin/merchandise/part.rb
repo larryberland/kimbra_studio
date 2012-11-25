@@ -1,26 +1,28 @@
 class Admin::Merchandise::Part < ActiveRecord::Base
 
-  mount_uploader :image, ImageUploader                  # custom assembled part
-  mount_uploader :image_part, ImageUploader             # background Image used to generate the custom assembled part
+  mount_uploader :image, ImageUploader                           # custom assembled part
+  mount_uploader :image_part, ImageUploader                      # background Image used to generate the custom assembled part
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece'
   belongs_to :portrait, :class_name => 'MyStudio::Portrait'
 
-  has_one :item, :class_name => 'Admin::Customer::Item' # TODO: do we destroy Offer::Item on this?
+  has_one :item, :class_name => 'Admin::Customer::Item'          # TODO: do we destroy Offer::Item on this?
   has_one :item_side, :class_name => 'Admin::Customer::ItemSide' # TODO: do we destroy Offer::Item on this?
 
-  has_one :part_layout # the viewport coordinates for the image_part background
+  has_one :part_layout                                           # the viewport coordinates for the image_part background
   has_one :piece_layout
 
-  attr_accessible :image, :remote_image_url, :image_width, :image_height,
-                  :image_part, :image_part_url, :image_part_width, :image_part_height,
+  attr_accessible :image, :image_cache, :remote_image_url, :image_width, :image_height,
+                  :image_part, :image_part_cache, :image_part_url, :image_part_width, :image_part_height,
                   :photo, :order,
                   :piece, :portrait,
                   :part_layout, :part_layout_attributes,
                   :piece_layout, :piece_layout_attributes
   accepts_nested_attributes_for :part_layout, :piece_layout
 
-  attr_accessor :width, :height # generic form of image_part_width
+  attr_accessor :width, :height                                  # generic form of image_part_width
+
+  after_create :create_layout_info
 
   def self.seed_nested_attributes(info, attr, default)
     key                               = info.key?(attr) ? attr : info.key?(attr.to_s) ? attr.to_s : attr
@@ -50,10 +52,10 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     # clone a new copy for our customer's custom paort
     item_part       = merchandise_part.clone
 
-    # use the same merchandise part's, piece (no clone)
+                   # use the same merchandise part's, piece (no clone)
     item_part.piece = merchandise_part.piece
 
-    item_part.save  # save before fog so we have valid Id for image s3 paths
+    item_part.save # save before fog so we have valid Id for image s3 paths
 
     # copy the original merchandise part images into the fog
     item_part.copy_image(merchandise_part)
@@ -73,12 +75,16 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     viewport_offset.merge(viewport_size)
   end
 
+  # the viewport top left corner where we place the portrait into the
+  #  image_part graphic
   def viewport_offset
-    @viewport_offset ||= {x: part_layout.x, y: part_layout.y}
+    @viewport_offset ||= {x: part_layout.x.to_i, y: part_layout.y.to_i}
   end
 
+  # the viewport size where we place the portrait into the
+  #  image_part graphic
   def viewport_size
-    @viewport_size ||= {w: part_layout.w, h: part_layout.h}
+    @viewport_size ||= {w: part_layout.w.to_i, h: part_layout.h.to_i}
   end
 
   def copy_image(from_part)
@@ -132,6 +138,14 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   def dump_filename
     "part_#{id}_piece_#{piece.id}_portrait_#{portrait.id}.jpg"
+  end
+
+  # assure that we have part and piece layout info for this
+  #   part of the Kimbra piece
+  def create_layout_info
+    self.piece_layout ||= PieceLayout.create(layout: ImageLayout.create)
+    self.part_layout  ||= PartLayout.create(layout: ImageLayout.create)
+    save
   end
 
 end

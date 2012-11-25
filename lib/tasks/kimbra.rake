@@ -37,6 +37,8 @@ namespace 'kimbra' do
 
       p.save
 
+      Admin::Merchandise::Piece.fog_buster(p.id)
+
       # convert any current Offer.custom_layouts into composite
       Admin::Customer::Offer.find_all_by_piece_id(p.id).each do |offer|
         offer.update_attributes(custom_layout: 'composite')

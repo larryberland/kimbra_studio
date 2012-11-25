@@ -17,22 +17,19 @@
         </div>
       </div>
 
-      <div class="control-group">
-        <%= f.label :portrait, class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :portrait %>
-        </div>
-      </div>
+      <%= f.hidden_field :image_part_cache %>
       <div class="control-group">
         <%= f.label :image_part, class: "control-label" %>
         <div class="controls">
-          <%= f.text_field :image_part %>
+          <%= f.file_field :image_part %>
         </div>
       </div>
+
+      <%= f.hidden_field :image_cache %>
       <div class="control-group">
         <%= f.label :image, class: "control-label" %>
         <div class="controls">
-          <%= f.text_field :image %>
+          <%= f.file_field :image %>
         </div>
       </div>
 
@@ -46,11 +43,13 @@
         </div>
       </div>
 
-      <%= f.fields_for :part_layout, @part.part_layout do |g| %>
+      <% @part.piece_layout ||= PieceLayout.new %>
+      <%= f.fields_for :piece_layout, @part.piece_layout do |g| %>
 
-          <%= g.fields_for :layout, @part.part_layout.layout do |l| %>
+          <%= g.fields_for :layout, @part.piece_layout.layout do |l| %>
               <div class="fieldset">
-                Custom Kimbra Part Picture Viewport for Background Image:
+                Your Collection Info (piece_layout)<br>
+                Portrait Viewport onto the Kimbra Piece (offer.image_front):
                 <div class="control-group form-inline" style="color:green;">
                   <%= l.label :x %>
                   <%= l.number_field :x, class: 'input-mini' %>
@@ -68,11 +67,13 @@
 
       <% end %>
 
-      <%= f.fields_for :piece_layout, @part.piece_layout do |g| %>
+      <% @part.part_layout ||= PartLayout.new %>
+      <%= f.fields_for :part_layout, @part.part_layout do |g| %>
 
-          <%= g.fields_for :layout, @part.piece_layout.layout do |l| %>
+          <%= g.fields_for :layout, @part.part_layout.layout do |l| %>
               <div class="fieldset">
-                Size of custom part image:
+                Adjust Picture Info(part_layout)<br>
+                Portrait Viewport onto the Kimbra Part (part.imagepart):
                 <div class="control-group form-inline" style="color:green;">
                   <%= l.label :x %>
                   <%= l.number_field :x, class: 'input-mini' %>

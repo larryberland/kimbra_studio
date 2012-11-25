@@ -32,7 +32,10 @@ class ImageLayout < ActiveRecord::Base
 
   def draw_custom_part2(part_image, src_image, operator=Magick::DstOverCompositeOp)
     Rails.logger.info("draw_custom_part onto #{part_image.columns}x#{part_image.rows} with viewport #{x} #{y} src_image:#{src_image.columns}x#{src_image.rows}")
+    puts("draw_custom_part onto #{part_image.columns}x#{part_image.rows} with viewport #{x} #{y} src_image:#{src_image.columns}x#{src_image.rows}")
     image = rotate(resize(src_image))
+    puts("draw_custom_part new image:#{image.columns}x#{image.rows}")
+
     part_image.composite(image, x, y, operator)
   end
 

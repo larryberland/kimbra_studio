@@ -63,4 +63,12 @@ class BaseUploader < CarrierWave::Uploader::Base
           end
     image_src + '?' + SecureRandom.hex(8)
   end
+
+  def fog_buster
+    m = model.send("#{mounted_as}")
+    m.cache_stored_file!
+    m.retrieve_from_cache!(m.cache_name)
+    m.recreate_versions!
+  end
+
 end

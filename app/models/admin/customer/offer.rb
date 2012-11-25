@@ -196,19 +196,9 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def self.fog_buster(offer_id)
     offer = find(offer_id)
 
-    offer.image_front.cache_stored_file!
-    offer.image_front.retrieve_from_cache!(offer.image_front.cache_name)
-    offer.image_front.recreate_versions!
-
-    if (offer.image_back.present?)
-      offer.image_back.cache_stored_file!
-      offer.image_back.retrieve_from_cache!(offer.image_back.cache_name)
-      offer.image_back.recreate_versions!
-    end
-
-    offer.image.cache_stored_file!
-    offer.image.retrieve_from_cache!(offer.image.cache_name)
-    offer.image.recreate_versions!
+    offer.image_front.fog_buster if (offer.image_front.present?)
+    offer.image_back.fog_buster if offer.image_back.present?
+    offer.image.fog_buster if offer.image.present?
 
     offer.save!
     offer
@@ -227,7 +217,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     text
   end
 
-          # return all portraits that make up this offer
+  # return all portraits that make up this offer
   def portrait_list
     items.collect { |item| item.portrait_list }.flatten.compact
   end
@@ -275,7 +265,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     piece.photo_parts.present?
   end
 
-  # Adjusted one of the item.item_sides for this offer
+          # Adjusted one of the item.item_sides for this offer
   def update_front_side(item)
     # need to rebuild each item in order to build the custom piece
     create_images
@@ -338,25 +328,25 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   # Take every items side (either front or back)
-  #  and place them onto the piece.get_image
-  #  as defined by item_side.part.piece_layout information
+  #  and place them onto the piece.get_image graphic
+  #  placing each items side defined by
+  #  item_side.part.piece_layout information
   def draw_by_composite(front=true)
-    #custom_piece = piece.get_image
+
+    # Kimbra piece background with transparent cut outs for our items
     custom_piece = piece.get_image
-    #custom_piece = image_transparent(final.columns, final.rows)
+
+    # LDB:? TODO: Not sure if this will work for more than 1 item
     items.each_with_index do |item, index|
-      puts "item[#{index}]"
       custom_piece = item.draw_kimbra_piece(custom_piece, front)
     end
-
-    t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
-
-    custom_piece.write(t_front_or_back.path)
-
     i = front ? image_front : image_back
+
+    t_front_or_back = i.store_image!(custom_piece)
+
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" unless t_front_or_back.path.present?
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" if t_front_or_back.path.blank?
-    i.store_file!(t_front_or_back.path)
+
     dump('custom_item edit', i.to_image)
     t_front_or_back
   end

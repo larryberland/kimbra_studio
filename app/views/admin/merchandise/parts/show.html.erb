@@ -8,7 +8,15 @@
     </p>
 
     <p>
-      <span>Custom Kimbra Part Picture Viewport for Background Image</span>
+      <span>Kimbra Piece<br> Viewport for portrait (offer.image_front)<br></span>
+      x:<%= @part.piece_layout.layout.x %>
+      y:<%= @part.piece_layout.layout.y %>
+      width:<%= @part.piece_layout.layout.w %>
+      height:<%= @part.piece_layout.layout.h %>
+    </p>
+
+    <p>
+      <span>Kimbra Part<br> Viewport for portrait (part.image_part)<br></span>
       x:<%= @part.viewport[:x] %>
       y:<%= @part.viewport[:y] %>
       width:<%= @part.viewport[:w] %>
@@ -16,7 +24,7 @@
     </p>
 
     <p>
-      <span>Custom Kimbra Part Background Image Size:</span>
+      <span>Kimbra Part Background Image Size:<br></span>
       <span>Width:</span>
       <%= @part.width %>
       <span>Height:</span>
