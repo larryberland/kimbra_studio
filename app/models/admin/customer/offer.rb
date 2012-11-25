@@ -375,13 +375,13 @@ class Admin::Customer::Offer < ActiveRecord::Base
     t_front = send("draw_by_#{custom_layout}", front=true)
 
     # the overall image is just a snapshot of the front side right now
+    # This image should go away there is no reason to use it since
+    #  it is a duplicate of the Front Side
+    #  at some point i guess it should be an image made up of the front and back
     image.store_file!(t_front.path)
 
     # draw the back side
     send("draw_by_#{custom_layout}", front=false) if baby_got_back
-
-    # draw all the parts onto our kimbra piece
-    #draw_kimbra_custom
 
     # save our offer record
     save
