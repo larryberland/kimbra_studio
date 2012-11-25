@@ -77,19 +77,21 @@ namespace 'kimbra' do
     data = [
         {category: 'Photo Rings', name: 'Emma Ring', price: 98.00,
          short_description: 'Oval measuring: 1"h x 3/4"w. Available in sizes 6-9. Solid Sterling Silver. Completely waterproof.',
-         image: 'emma_ring.jpeg',
-         custom_layout: 'order', parts: {image_part: 'part0.png', order: 0,
-                                         part_layout: {layout: {x: 30, y: 25, w: 213, h: 297}},
-                                         piece_layout: {image: 'emma_ring.png', layout: {x: 31, y: 11, w: 102, h: 159}}
-        }},
+         image: 'emma_ring.jpeg', custom_layout: 'order',
+         parts: {image_part: 'part0.png',
+                 order: 0,
+                 part_layout: {layout: {x: 30, y: 25, w: 213, h: 297}},
+                 piece_layout: {image: 'emma_ring.png', layout: {x: 31, y: 11, w: 102, h: 159}}
+         }},
 
         {category: 'Photo Rings', name: 'Cadence Ring', price: 98.00,
          short_description: 'Photo measuring: 9/16"w x 3/4"h. Available in sizes 6-8. Solid Sterling Silver. Completely waterproof.',
-         image: 'cadence_ring.jpeg',
-         custom_layout: 'order', parts: {image_part: 'part0.png', order: 0,
-                                         part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}},
-                                         piece_layout: {image: 'cadence_ring.png', layout: {x: 77, y: 29, w: 90, h: 129}}
-        }}
+         image: 'cadence_ring.jpeg', custom_layout: 'order',
+         parts: {image_part: 'part0.png',
+                 order: 0,
+                 part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}},
+                 piece_layout: {image: 'cadence_ring.png', layout: {x: 77, y: 29, w: 90, h: 129}}
+         }}
     ]
     data.each do |piece|
       parts = piece.delete(:parts)
@@ -121,33 +123,29 @@ namespace 'kimbra' do
         end
       end
       p.parts.destroy_all if p.parts.present?
-      sub_dir = piece[:name].gsub(' ', '_').gsub('(','').gsub(')','').underscore
-      path = path.join(sub_dir)
-      path.mkpath unless path.directory?
-
-      parts.each do |part_info|
-        attrs = part_info.clone
-        part_image_fname = path.join(attrs.delete(:image_part))
-        p.parts << Admin::Merchandise::Part.seed(attrs, default, part_image_fname)
-        layout = p.parts.first.piece_layout.layout
-        unless layout.update_attributes(part_info[:part_layout])
-          raise "unable to set layout for #{part_info.inspect}"
-        end
-        unless p.update_attributes(custom_layout: 'order')
-          raise "error on update #{p.errors.full_messages}"
-        end
-        fname = path.join(part_info[:piece_layout][:image])
-        if File.exist?(fname)
-          p.image.store!(File.open(fname))
-        else
-          puts "missing Piece image fname=>#{fname} in #{options[:category]}"
-        end
-        p.save
-        Admin::Merchandise::Piece.fog_buster(p.id)
+      sub_dir = piece[:name].gsub(' ', '_').gsub('(', '').gsub(')', '').underscore
+      subpath = path.join(sub_dir)
+      subpath.mkpath unless subpath.directory?
+      part_image_fname = subpath.join(parts[:image_part])
+      p.parts << Admin::Merchandise::Part.seed(piece, default, part_image_fname)
+      layout = p.parts.first.piece_layout.layout
+      unless layout.update_attributes(piece[:part_layout])
+        raise "unable to set layout for #{piece.inspect}"
       end
-      p.update_attributes(piece)
+      unless p.update_attributes(custom_layout: 'order')
+        raise "error on update #{p.errors.full_messages}"
+      end
+      fname = path.join(parts[:piece_layout][:image])
+      if File.exist?(fname)
+        p.image.store!(File.open(fname))
+      else
+        puts "missing Piece image fname=>#{fname} in #{piece[:category]}"
+      end
+      puts p.save
+      puts Admin::Merchandise::Piece.fog_buster(p.id).errors.full_messages
+      puts p.update_attributes(piece)
     end
-
+    puts 'Finished.'
   end
 
   desc "Seed the chains into Kimbra pieces"
