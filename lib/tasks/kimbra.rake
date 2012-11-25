@@ -1,6 +1,47 @@
 namespace 'kimbra' do
 
   desc "Seed the chains into Kimbra pieces"
+  task :seed_kkp => :environment do
+    data = [
+        {name: 'Bailey Necklace', image: 'bailey_necklace.png', layout: {x: 63, y: 62, w: 61, h: 113}},
+        {name: 'Denise Pendant', image: 'denise_pendant.png', layout: {x: 84, y: 92, w: 39, h: 60}},
+        {name: 'Embrace Necklace', image: 'embrace_necklace.png', layout: {x: 224, y: 416, w: 91, h: 140}},
+        {name: 'Linda Pendant', image: 'linda_pendant.png', layout: {x: 56, y: 70, w: 72, h: 109}},
+        {name: 'Madelyn Necklace', image: 'madelyn_necklace.png', layout: {x: 220, y: 381, w: 151, h: 143}},
+        {name: 'My Love Necklace', image: 'my_love_necklace.png', layout: {x: 89, y: 83, w: 41, h: 63}},
+        {name: 'Roseanne Pendant', image: 'roseanne_pendant.png', layout: {x: 41, y: 96, w: 123, h: 83}},
+        {category: 'Photo Charms', name: 'Annika Charm', image: 'annika_charm.png', layout: {x: 22, y: 34, w: 151, h: 151}},
+    ]
+
+    data.each do |options|
+      options[:category] ||= 'Photo Necklaces'
+      p = Admin::Merchandise::Piece.find_by_category_and_name(options[:category], options[:name])
+      raise "didn't fiind piece #{options.inspect}" if p.nil?
+
+      layout = p.parts.first.piece_layout.layout
+      unless layout.update_attributes(options[:layout])
+        raise "unable to set layout for #{options.inspect}"
+      end
+
+      unless p.update_attributes(custom_layout: 'composite')
+        raise "error on update #{p.errors.full_messages}"
+      end
+
+      fname = Rails.root.join("public", 'kimbra',options[:category], options[:image]).to_s.gsub(' ', '_').downcase
+
+      if File.exist?(fname)
+        p.image.store!(File.open(fname))
+      else
+        puts "missing Piece image fname=>#{fname} in #{options[:category]}"
+      end
+
+      p.save
+      puts "updated #{options[:name]}"
+    end
+
+  end
+
+  desc "Seed the chains into Kimbra pieces"
   task :seed_chains => :environment do
     seed_path    = Rails.root.join('db', 'seed')
     file_to_load = seed_path.join('chains.yml').to_s
