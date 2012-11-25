@@ -55,10 +55,9 @@ class Shopping::Item < ActiveRecord::Base
   # from a kimbra piece item.  When set true it means
   # to destroy the Offer when this item is destroyed
   def from_piece_destroy_offer
-    puts "Shopping::Item from_piece?#{from_piece?} offer=>#{offer.inspect}"
+    # puts "Shopping::Item from_piece?#{from_piece?} offer=>#{offer.inspect}"
     if (from_piece?)
       if offer.present?
-        puts "destroying offer yea"
         offer.destroy
       end
     end

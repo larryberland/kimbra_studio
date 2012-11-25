@@ -96,14 +96,16 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     part_layout.draw_custom_part(part_image, stock_image)
   end
 
-  # draw the custom portrait image onto the Kimbra piece image
+  # draw the custom portrait image using the piece_layout viewport
   def draw_piece(piece_image, portrait_item_image)
-    puts "LDB: part::draw_piece() portrait_item_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
+    # puts "LDB: part::draw_piece() portrait_item_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
     piece_layout.draw_piece(piece_image, portrait_item_image)
   end
 
+  # draw custom portrait image using the piece_layout viewport
+  #   with Composite
   def draw_kimbra_piece(piece_image, portrait_item_image)
-    puts "LDB: part::draw_piece() portrait_item_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
+    # puts "LDB: part::draw_piece() portrait_item_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
     piece_layout.draw_kimbra_piece(piece_image, portrait_item_image)
   end
 

@@ -55,7 +55,6 @@ class Studio < ActiveRecord::Base
   }
 
   def self.search_logoize(value)
-    puts "in self.search_logoize(#{value})"
     value ? by_logoize(value) : scoped
   end
 

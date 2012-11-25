@@ -40,13 +40,11 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     #  so this model has its own copy for its parent
     my_part      = Admin::Merchandise::Part.create_clone(options[:photo_part])
 
-
     # create record with parents, part, item, and portrait
     my_item_side = Admin::Customer::ItemSide.create(:item     => item,
                                                     :part     => my_part,
                                                     :portrait => options[:portrait])
     my_item_side.create_side
-    puts "LDB: item_side\npart:#{my_item_side.part.inspect}"
     my_item_side
   end
 

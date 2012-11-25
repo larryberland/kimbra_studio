@@ -312,18 +312,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
     items.each_with_index do |item, index|
       custom_piece = item.draw_piece_with_custom(custom_piece, front_side)
     end
-    t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
-    puts "    custom_piece #{custom_piece.columns}x#{custom_piece.rows}"
-    custom_piece.write(t_front_or_back.path)
     i = front_side ? image_front : image_back
-
-    puts "order before:#{i.inspect}"
-    puts "order    url:#{i.url(:thumb)}"
-    i.store_file!(t_front_or_back.path)
-    puts "order after:#{i.inspect}"
-    puts "order   url:#{i.url(:thumb)}"
-    # puts "    Store custom piece finished"
-    # puts ""
+    t_front_or_back = i.store_image!(custom_piece)
     t_front_or_back
   end
 
@@ -341,13 +331,11 @@ class Admin::Customer::Offer < ActiveRecord::Base
       custom_piece = item.draw_kimbra_piece(custom_piece, front)
     end
     i = front ? image_front : image_back
-
     t_front_or_back = i.store_image!(custom_piece)
 
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" unless t_front_or_back.path.present?
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" if t_front_or_back.path.blank?
 
-    dump('custom_item edit', i.to_image)
     t_front_or_back
   end
 

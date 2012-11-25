@@ -29,14 +29,14 @@ class ImageUploader < BaseUploader
 
   # Override the filename of the uploaded files:
   # Avoid using model.id or version_name here, see uploader/store.rb for details.
-  #def filename
-  #  if original_filename
-  #    if model && model.read_attribute(:image).present?
-  #      model.read_attribute(:image)
-  #    else
-  #      super
-  #    end
-  #  end
-  #end
+  def filename
+    if original_filename
+      if model && model.read_attribute(:image).present?
+        model.read_attribute(:image)
+      else
+        super
+      end
+    end
+  end
 
 end
