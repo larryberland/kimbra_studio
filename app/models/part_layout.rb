@@ -27,6 +27,11 @@ class PartLayout < ActiveRecord::Base
   end
 
   # draw the scr_image onto the part_image background
+  def draw_piece(part_image, src_image)
+    layout.draw_piece(part_image, src_image)
+  end
+
+  # draw the scr_image onto the part_image background
   def draw_custom_part(part_image, src_image)
     layout.draw_custom_part(part_image, src_image)
   end

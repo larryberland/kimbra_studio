@@ -46,6 +46,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                                                     :part     => my_part,
                                                     :portrait => options[:portrait])
     my_item_side.create_side
+    puts "LDB: item_side\npart:#{my_item_side.part.inspect}"
     my_item_side
   end
 
@@ -173,6 +174,12 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   # draw the image using current part information
   def draw_piece(piece_image)
     img = part.draw_piece(piece_image, stock_image)
+    dump('draw_piece', img)
+    img
+  end
+
+  def draw_kimbra_piece(piece_image)
+    img = part.draw_kimbra_piece(piece_image, stock_image)
     dump('draw_piece', img)
     img
   end

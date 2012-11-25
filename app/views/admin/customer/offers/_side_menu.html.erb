@@ -9,7 +9,11 @@
       <td><%= cw_div_image_only(offer.piece) %></td>
     </tr>
     <tr>
-      <td>Custom Piece:</td>
+      <td>Custom Kimbra Piece:</td>
+      <td><%= offer.image.to_image_cache_buster(:thumb) %></td>
+    </tr>
+    <tr>
+      <td>Custom Front Piece:</td>
       <td>
         <%= offer.image_front.to_image_cache_buster(:thumb) %>
       </td>

@@ -1,6 +1,6 @@
 namespace 'kimbra' do
 
-  desc "Seed the chains into Kimbra pieces"
+  desc "Seed the new Kimbra Komposite Images for Offers"
   task :seed_kkp => :environment do
     data = [
         {name: 'Bailey Necklace', image: 'bailey_necklace.png', layout: {x: 63, y: 62, w: 61, h: 113}},
@@ -16,7 +16,7 @@ namespace 'kimbra' do
     data.each do |options|
       options[:category] ||= 'Photo Necklaces'
       p = Admin::Merchandise::Piece.find_by_category_and_name(options[:category], options[:name])
-      raise "didn't fiind piece #{options.inspect}" if p.nil?
+      raise "didn't find piece #{options.inspect}" if p.nil?
 
       layout = p.parts.first.piece_layout.layout
       unless layout.update_attributes(options[:layout])
@@ -36,6 +36,12 @@ namespace 'kimbra' do
       end
 
       p.save
+
+      # convert any current Offer.custom_layouts into composite
+      Admin::Customer::Offer.find_all_by_piece_id(p.id).each do |offer|
+        offer.update_attributes(custom_layout: 'composite')
+      end
+
       puts "updated #{options[:name]}"
     end
 

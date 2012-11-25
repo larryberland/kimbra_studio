@@ -59,9 +59,21 @@ class Admin::Customer::Item < ActiveRecord::Base
     end
   end
 
+  # This is currently being used but it should be
+  #  draw_part => using the part_layout instead of the piece_layout
   def draw_piece(piece_image, front_side)
     if side = get_side(front_side)
       side.draw_piece(piece_image)
+    else
+      piece_image
+    end
+  end
+
+  # taking our current front side and draw it onto
+  #  our Kimbra Custom background for the entire Kimbra Piece
+  def draw_kimbra_piece(piece_image, front_side)
+    if side = get_side(front_side)
+      side.draw_kimbra_piece(piece_image)
     else
       piece_image
     end

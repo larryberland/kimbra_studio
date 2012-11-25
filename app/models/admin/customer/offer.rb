@@ -17,7 +17,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
                   :name, :email, :description,
                   :piece, :custom_layout, :item_options_list,
                   :piece, :piece_id,
-                  :tracking, :active, :activation_code,
+                  :tracking, :active, :activation_code, :frozen,
                   :portrait_id
 
   # parts list having portraits assigned to which part
@@ -110,7 +110,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
 
     # create a composite of all the items
-    create_custom_image
+    create_images
 
     self
   end
@@ -180,7 +180,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
       piece_create_default_and_tracking
 
       # create a composite of all the items
-      create_custom_image
+      create_images
 
       if (errors.messages)
         Rails.logger.warn "CHALLENGE:: offer save errors:#{errors.full_messages}"
@@ -238,7 +238,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   def on_layout_change
     # need to redraw the offer image
-    create_custom_image
+    create_images
   end
 
   def price
@@ -275,9 +275,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
     piece.photo_parts.present?
   end
 
+  # Adjusted one of the item.item_sides for this offer
   def update_front_side(item)
     # need to rebuild each item in order to build the custom piece
-    create_custom_image
+    create_images
   end
 
   def update_back_side
@@ -307,6 +308,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
     # puts "  draw_by_order front=>#{front_side}"
     w = []
     h = []
+    # calculate the max width and height of all our
+    # items that are making up the complete side
     items.each do |item|
       h << item.part.piece_layout.h
       w << item.part.piece_layout.w
@@ -334,20 +337,27 @@ class Admin::Customer::Offer < ActiveRecord::Base
     t_front_or_back
   end
 
+  # Take every items side (either front or back)
+  #  and place them onto the piece.get_image
+  #  as defined by item_side.part.piece_layout information
   def draw_by_composite(front=true)
+    #custom_piece = piece.get_image
     custom_piece = piece.get_image
+    #custom_piece = image_transparent(final.columns, final.rows)
     items.each_with_index do |item, index|
-      custom_piece = item.draw_piece(custom_piece, front)
-# Jim commented this out to see if it works without.
-#      custom_piece.write("public/kmagick/custom_offer_#{id}_index_#{index}.jpg")
+      puts "item[#{index}]"
+      custom_piece = item.draw_kimbra_piece(custom_piece, front)
     end
+
     t_front_or_back = Tempfile.new(["offer_#{id}", '.jpg'])
+
     custom_piece.write(t_front_or_back.path)
+
     i = front ? image_front : image_back
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" unless t_front_or_back.path.present?
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" if t_front_or_back.path.blank?
     i.store_file!(t_front_or_back.path)
-    puts "composite:#{i.inspect}"
+    dump('custom_item edit', i.to_image)
     t_front_or_back
   end
 
@@ -356,18 +366,22 @@ class Admin::Customer::Offer < ActiveRecord::Base
     list.size > 0 ? true : false
   end
 
-  def create_custom_image
+  # creates three images for this offer record
+  #  a front side compilation of each item
+  #  a back side compilation of each item
+  #  a final image with each items portrait placed into the final Kimbra piece
+  def create_images
     # draw the front side
     t_front = send("draw_by_#{custom_layout}", front=true)
 
-    # store the front side as our displayable image to the client
+    # the overall image is just a snapshot of the front side right now
     image.store_file!(t_front.path)
 
     # draw the back side
-    if baby_got_back
-      send("draw_by_#{custom_layout}", front=false) if baby_got_back
-    end
-    dump('custom', image.to_image) if Rails.env.test?
+    send("draw_by_#{custom_layout}", front=false) if baby_got_back
+
+    # draw all the parts onto our kimbra piece
+    #draw_kimbra_custom
 
     # save our offer record
     save

@@ -23,7 +23,13 @@ class PieceLayout < ActiveRecord::Base
   end
 
   def draw_piece(dest_image, src_image)
+    puts "LDB:draw_piece() #{self}=>#{layout.inspect}"
     layout.draw_piece(dest_image, src_image)
+  end
+
+  def draw_kimbra_piece(dest_image, src_image)
+    puts "LDB:draw_kimbra_piece() #{self}=>#{layout.inspect}"
+    layout.draw_custom_part2(dest_image, src_image)
   end
 
 end

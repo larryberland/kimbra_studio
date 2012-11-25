@@ -1,5 +1,5 @@
 class Admin::Merchandise::Piece < ActiveRecord::Base
-  attr_accessible :image, :remote_image_url,
+  attr_accessible :image, :image_cache, :remote_image_url,
                   :category, :name, :short_description, :description_markup,
                   :sku, :price, :photo, :custom_layout,
                   :active, :featured, :deleted_at

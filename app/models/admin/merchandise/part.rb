@@ -92,8 +92,13 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   # draw the custom portrait image onto the Kimbra piece image
   def draw_piece(piece_image, portrait_item_image)
-    # puts "custom_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
+    puts "LDB: part::draw_piece() portrait_item_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
     piece_layout.draw_piece(piece_image, portrait_item_image)
+  end
+
+  def draw_kimbra_piece(piece_image, portrait_item_image)
+    puts "LDB: part::draw_piece() portrait_item_image=>#{portrait_item_image.columns}x#{portrait_item_image.rows}"
+    piece_layout.draw_kimbra_piece(piece_image, portrait_item_image)
   end
 
   # create a custom assembled part that does not need a photo
