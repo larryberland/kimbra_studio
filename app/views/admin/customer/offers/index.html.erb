@@ -3,6 +3,31 @@
   <small>Result Set Count:<%= @record_count %></small>
 </h2>
 
+<div class="row">
+
+  <div class="span5">
+
+    <form class="form-search">
+      <div class="input-append">
+        <%= text_field_tag(:search, session[:search_admin_customer_offers_session], class: "span4 search-query", placeholder: 'Not working yet') %>
+        <%= submit_tag "Search", name: nil, class: "btn" %>
+      </div>
+    </form>
+  </div>
+
+  <% if is_admin? %>
+      <div class="span3">
+        <%= form_tag new_admin_customer_email_offer_path(@email), method: :get, class: "pull-right" do %>
+            <button type="submit" class="btn btn-success">
+              <i class="icon-plus icon-white"></i>
+              <%= t(:admin_customer_offers_new_link) %>...
+            </button>
+        <% end %>
+      </div>
+  <% end %>
+
+</div>
+
 <div class="paginate">
   <%= paginate @admin_customer_offers %>
 </div>

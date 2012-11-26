@@ -20,14 +20,14 @@
       <div class="control-group">
         <%= f.label :name, class: "control-label" %>
         <div class="controls">
-          <%= f.text_field :name %>
+          <%= f.text_field :name, class: "input-xlarge", placeholder: 'customize or auto-filled on Create' %>
         </div>
       </div>
 
       <div class="control-group">
         <%= f.label :description, class: "control-label" %>
         <div class="controls">
-          <%= f.text_area :description, rows: 4, class: "input-xlarge" %>
+          <%= f.text_area :description, rows: 4, class: "input-xlarge", placeholder: 'customize or auto-filled on Create' %>
         </div>
       </div>
 
@@ -60,12 +60,14 @@
               <!--</div>-->
             <!--</div>-->
 
+            <% unless @admin_customer_offer.new_record? %>
             <div class="control-group">
               <%= f.label :activation_code, class: "control-label" %>
               <div class="controls">
                 <%= f.text_field :activation_code %>
               </div>
             </div>
+           <% end %>
 
           </fieldset>
       <% end %>
