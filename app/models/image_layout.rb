@@ -11,36 +11,18 @@ class ImageLayout < ActiveRecord::Base
   end
 
   def rotate(image)
-    if degrees
-      puts "rotating #{degrees}"
+    if degrees and ((degrees < 1.0) or (degrees > 1.0))
       # set background transparent
       image.background_color = "transparent"
-      new_image = image.rotate(degrees)
-
-      dh = new_image.columns - image.columns
-      dw = new_image.rows - image.rows
-
-      dh = Math::sin(degrees) * new_image.columns
-      puts "img #{image.columns}x#{image.rows}"
-      puts "rot #{new_image.columns}x#{new_image.rows}"
-      puts " dh #{dw}x#{dh}"
+      new_image              = image.rotate(degrees)
 
       rad = degrees * Math::PI / 180.0
-      dh2 = Math.sin(rad) * image.columns
-      puts "dh2:#{dh2}"
+      dh  = Math.sin(rad) * image.columns
       if (degrees < 0)
-      @new_y += dh2
+        @new_y += dh
       else
-      @new_x -= dh2
+        @new_x -= dh
       end
-
-
-      #if (degrees < 0)
-      #  @new_y -= dh
-      #  @new_x -= dw
-      #else
-      #  @new_y += dh
-      #end
     end
     new_image ||= image
     new_image
@@ -62,10 +44,10 @@ class ImageLayout < ActiveRecord::Base
   end
 
   def draw_custom_part2(part_image, src_image, operator=Magick::DstOverCompositeOp)
-    # Rails.logger.info("draw_custom_part onto #{part_image.columns}x#{part_image.rows} with viewport #{x} #{y} src_image:#{src_image.columns}x#{src_image.rows}")
+    #puts " portrait src_image #{src_image.columns}x#{src_image.rows}"
     @new_x = x
     @new_y = y
-    image = rotate(resize(src_image))
+    image  = rotate(resize(src_image))
     part_image.composite(image, @new_x, @new_y, operator)
   end
 

@@ -50,7 +50,7 @@ namespace 'kimbra' do
       unless p.update_attributes(custom_layout: 'composite')
         raise "error on update #{p.errors.full_messages}"
       end
-      fname = Rails.root.join("public", 'kimbra',options[:category], options[:image]).to_s.gsub(' ', '_').downcase
+      fname = Rails.root.join("public", 'kimbra', options[:category], options[:image]).to_s.gsub(' ', '_').downcase
       if File.exist?(fname)
         p.image.store!(File.open(fname))
       else
@@ -64,40 +64,88 @@ namespace 'kimbra' do
       end
       puts "updated #{options[:name]}"
     end
+
+    data = [
+        {category: 'Photo Bracelets', name: 'Leota Bracelet',
+         image: 'leota_bracelet.png',
+         price: 180.00,
+         layouts:  [
+                       {x: 160, y: 420, w: 110, h: 110, degrees: 75.66},
+                       {x: 250, y: 600, w: 110, h: 110, degrees: 29.74},
+                       {x: 434, y: 650, w: 110, h: 110, degrees: -21.25},
+                       {x: 558, y: 548, w: 120, h: 120, degrees: -67.29}]
+        }
+    ]
+    data.each do |options|
+      p = Admin::Merchandise::Piece.find_by_category_and_name(options[:category], options[:name])
+      raise "didn't find piece #{options.inspect}" if p.nil?
+
+      options[:layouts].each_with_index do |piece_layout, index|
+        layout = p.parts[index].piece_layout.layout
+        unless layout.update_attributes(piece_layout)
+          raise "unable to set layout for parts[#{index}], layout=>#{piece_layout.inspect}"
+        end
+      end
+
+      if (options[:price])
+        p.price = options[:price]
+      end
+
+      unless p.update_attributes(custom_layout: 'composite')
+        raise "error on update #{p.errors.full_messages}"
+      end
+
+      fname = Rails.root.join("public", 'kimbra', options[:category], options[:image]).to_s.gsub(' ', '_').downcase
+      if File.exist?(fname)
+        p.image.store!(File.open(fname))
+      else
+      p4
+      puts "missing Piece image fname=>#{fname} in #{options[:category]}"
+      end
+
+      p.save
+      Admin::Merchandise::Piece.fog_buster(p.id)
+
+      # convert any current Offer.custom_layouts into composite
+      Admin::Customer::Offer.find_all_by_piece_id(p.id).each do |offer|
+        offer.update_attributes(custom_layout: 'composite')
+      end
+      puts "updated #{options[:name]}"
+    end
     puts 'Finished.'
   end
 
   desc 'Add rings back in to the mix.'
   task :seed_rings => :environment do
     image_path = Rails.root.join('public', 'kimbra')
-    default = {parts: {image_part: 'part_charm.png'},
-               part_layout: {layout: {x: 19, y: 34, w: 90, h: 137}},
-               piece_layout: {layout: {x: 0, y: 0, w: 70, h: 85}}
+    default    = {parts:        {image_part: 'part_charm.png'},
+                  part_layout:  {layout: {x: 19, y: 34, w: 90, h: 137}},
+                  piece_layout: {layout: {x: 0, y: 0, w: 70, h: 85}}
     }
-    data = [
-        {category: 'Photo Rings', name: 'Emma Ring', price: 98.00,
+    data       = [
+        {category:          'Photo Rings', name: 'Emma Ring', price: 98.00,
          short_description: 'Oval measuring: 1"h x 3/4"w. Available in sizes 6-9. Solid Sterling Silver. Completely waterproof.',
-         image: 'emma_ring.jpeg', custom_layout: 'order',
-         parts: {image_part: 'part0.png',
-                 order: 0,
-                 part_layout: {layout: {x: 30, y: 25, w: 213, h: 297}},
-                 piece_layout: {image: 'emma_ring.png', layout: {x: 31, y: 11, w: 102, h: 159}}
+         image:             'emma_ring.jpeg', custom_layout: 'order',
+         parts:             {image_part:   'part0.png',
+                             order:        0,
+                             part_layout:  {layout: {x: 30, y: 25, w: 213, h: 297}},
+                             piece_layout: {image: 'emma_ring.png', layout: {x: 31, y: 11, w: 102, h: 159}}
          }},
 
-        {category: 'Photo Rings', name: 'Cadence Ring', price: 98.00,
+        {category:          'Photo Rings', name: 'Cadence Ring', price: 98.00,
          short_description: 'Photo measuring: 9/16"w x 3/4"h. Available in sizes 6-8. Solid Sterling Silver. Completely waterproof.',
-         image: 'cadence_ring.jpeg', custom_layout: 'order',
-         parts: {image_part: 'part0.png',
-                 order: 0,
-                 part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}},
-                 piece_layout: {image: 'cadence_ring.png', layout: {x: 77, y: 29, w: 90, h: 129}}
+         image:             'cadence_ring.jpeg', custom_layout: 'order',
+         parts:             {image_part:   'part0.png',
+                             order:        0,
+                             part_layout:  {layout: {x: 102, y: 78, w: 301, h: 372}},
+                             piece_layout: {image: 'cadence_ring.png', layout: {x: 77, y: 29, w: 90, h: 129}}
          }}
     ]
     data.each do |piece|
       parts = piece.delete(:parts)
-      path = image_path.join(piece[:category].underscore.gsub(' ', '_'))
+      path  = image_path.join(piece[:category].underscore.gsub(' ', '_'))
       puts "piece=>#{piece[:name]}"
-      p = Admin::Merchandise::Piece.find_or_create_by_category_and_name(piece[:category], piece[:name])
+      p                 = Admin::Merchandise::Piece.find_or_create_by_category_and_name(piece[:category], piece[:name])
       piece_image_fname = piece.delete(:image)
       if piece_image_fname
         fname = path.join(piece_image_fname)
