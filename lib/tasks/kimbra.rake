@@ -3,50 +3,149 @@ namespace 'kimbra' do
   desc "Seed the new Kimbra Komposite Images for Offers"
   task :seed_kkp => :environment do
     data = [
-        {name: 'Bailey Necklace', image: 'bailey_necklace.png', layout: {x: 63, y: 62, w: 61, h: 113}},
-        {name: 'Denise Pendant', image: 'denise_pendant.png', layout: {x: 84, y: 92, w: 39, h: 60}},
-        {name: 'Embrace Necklace', image: 'embrace_necklace.png', layout: {x: 224, y: 416, w: 91, h: 140}},
-        {name: 'Linda Pendant', image: 'linda_pendant.png', layout: {x: 56, y: 70, w: 72, h: 109}},
-        {name: 'Madelyn Necklace', image: 'madelyn_necklace.png', layout: {x: 220, y: 381, w: 151, h: 143}},
-        {name: 'My Love Necklace', image: 'my_love_necklace.png', layout: {x: 89, y: 83, w: 41, h: 63}},
-        {name: 'Roseanne Pendant', image: 'roseanne_pendant.png', layout: {x: 41, y: 96, w: 123, h: 83}},
+        {category: 'Photo Necklaces', name: 'Awareness Necklace', image: 'awareness_necklace.png', layout: {x: 92, y: 106, w: 62, h: 59}},
+        {category: 'Photo Necklaces', name: 'Sophie Necklace', image: 'sophie_necklace.png', layout: {x: 77, y: 83, w: 42, h: 47}},
+        {category: 'Photo Necklaces', name: 'Bailey Necklace', image: 'bailey_necklace.png', layout: {x: 63, y: 62, w: 61, h: 113}},
+        {category: 'Photo Necklaces', name: 'Denise Pendant', image: 'denise_pendant.png', layout: {x: 84, y: 92, w: 39, h: 60}},
+        {category: 'Photo Necklaces', name: 'Embrace Necklace', image: 'embrace_necklace.png', layout: {x: 133, y: 275, w: 91, h: 140}},
+        {category: 'Photo Necklaces', name: 'Linda Pendant', image: 'linda_pendant.png', layout: {x: 56, y: 70, w: 72, h: 109}},
+        {category: 'Photo Necklaces', name: 'Madelyn Necklace', image: 'madelyn_necklace.png', layout: {x: 220, y: 381, w: 151, h: 143}},
+        {category: 'Photo Necklaces', name: 'My Love Necklace', image: 'my_love_necklace.png', layout: {x: 89, y: 83, w: 41, h: 63}},
+        {category: 'Photo Necklaces', name: 'Roseanne Pendant', image: 'roseanne_pendant.png', layout: {x: 41, y: 96, w: 123, h: 83}},
         {category: 'Photo Charms', name: 'Annika Charm', image: 'annika_charm.png', layout: {x: 22, y: 34, w: 151, h: 151}},
+        {category: 'Photo Charms', name: 'Evalina Charm', image: 'evalina_charm.png', layout: {x: 65, y: 77, w: 69, h: 69}},
+        {category: 'Photo Charms', name: 'Harper Charm', image: 'harper_charm.png', layout: {x: 22, y: 49, w: 154, h: 106}},
+        {category: 'Photo Charms', name: 'Harper Charm (two sided)', image: 'harper_charm_two_sided.png', layout: {x: 19, y: 48, w: 161, h: 111}},
+        {category: 'Photo Charms', name: 'Karrie Charm', image: 'karrie_charm.png', layout: {x: 53, y: 67, w: 100, h: 76}},
+        {category: 'Photo Charms', name: 'Kayda Charm', image: 'kayda_charm.png', layout: {x: 35, y: 53, w: 123, h: 120}},
+        {category: 'Photo Charms', name: 'Margaret Charm', image: 'margaret_charm.png', layout: {x: 31, y: 33, w: 137, h: 152}},
+        {category: 'Photo Charms', name: 'Nicole Charm', image: 'nicole_charm.png', layout: {x: 61, y: 62, w: 75, h: 94}},
+        {category: 'Photo Charms', name: 'Rachel Charm', image: 'rachel_charm.png', layout: {x: 53, y: 64, w: 94, h: 94}},
+        {category: 'Photo Charms', name: 'Rachel Charm (two sided)', image: 'rachel_charm_two_sided.png', layout: {x: 53, y: 67, w: 89, h: 89}},
+        {category: 'Photo Charms', name: 'Sadie Charm', image: 'sadie_charm.png', layout: {x: 67, y: 26, w: 72, h: 158}},
+        {category: 'Photo Charms', name: 'Sela Charm', image: 'sela_charm.png', layout: {x: 50, y: 35, w: 101, h: 147}},
+        {category: 'Photo Charms', name: 'Sela Charm (two sided)', image: 'sela_charm_two_sided.png', layout: {x: 49, y: 36, w: 106, h: 153}},
+        {category: 'Photo Charms', name: 'Shelise Charm', image: 'shelise_charm.png', layout: {x: 50, y: 62, w: 97, h: 97}},
+        {category: 'Photo Charms', name: 'Taneka Charm', image: 'taneka_charm.png', layout: {x: 64, y: 48, w: 74, h: 112}},
+        {category: 'Photo Charms', name: 'Tucker Charm', image: 'tucker_charm.png', layout: {x: 62, y: 55, w: 72, h: 78}},
+        {category: 'Photo Charms', name: 'Wendy Bead Charm', image: 'wendy_bead_charm.png', layout: {x: 81, y: 110, w: 36, h: 49}},
+        {category: 'Photo Charms', name: 'Baby Foot Bead Charm', image: 'baby_foot_bead_charm.png', layout: {x: 78, y: 107, w: 39, h: 51}},
+        {category: 'Photo Charms', name: 'Paw Print Bead Charm', image: 'paw_print_bead_charm.png', layout: {x: 78, y: 108, w: 39, h: 47}},
+        {category: 'Holiday', name: 'Aspen Ornament', image: 'aspen_ornament.png', layout: {x: 81, y: 95, w: 43, h: 43}},
+        {category: 'Holiday', name: 'Awareness Ornament', image: 'awareness_ornament.png', layout: {x: 60, y: 42, w: 75, h: 99}},
+        {category: 'Holiday', name: 'Evergreen Ornament', image: 'evergreen_ornament.png', layout: {x: 77, y: 101, w: 47, h: 47}},
+        {category: 'Holiday', name: 'Fairchild Ornament', image: 'fairchild_ornament.png', layout: {x: 63, y: 91, w: 77, h: 77}},
+        {category: 'Holiday', name: 'Joy Love Peace Ornament', image: 'joy_love_peace_ornament.png', layout: {x: 59, y: 90, w: 83, h: 83}},
+        {category: 'Holiday', name: 'Keepsake Year Frame', image: 'keepsake_year_frame.png', layout: {x: 67, y: 60, w: 66, h: 86}},
+        {category: 'Holiday', name: 'Keepsake Year Frame (horizontal)', image: 'keepsake_year_frame_horizontal.png', layout: {x: 61, y: 73, w: 86, h: 66}},
+        {category: 'Holiday', name: 'Memorial Ornament', image: 'memorial_ornament.png', layout: {x: 60, y: 72, w: 81, h: 113}}
     ]
-
     data.each do |options|
-      options[:category] ||= 'Photo Necklaces'
       p = Admin::Merchandise::Piece.find_by_category_and_name(options[:category], options[:name])
       raise "didn't find piece #{options.inspect}" if p.nil?
-
       layout = p.parts.first.piece_layout.layout
       unless layout.update_attributes(options[:layout])
         raise "unable to set layout for #{options.inspect}"
       end
-
       unless p.update_attributes(custom_layout: 'composite')
         raise "error on update #{p.errors.full_messages}"
       end
-
       fname = Rails.root.join("public", 'kimbra',options[:category], options[:image]).to_s.gsub(' ', '_').downcase
-
       if File.exist?(fname)
         p.image.store!(File.open(fname))
       else
         puts "missing Piece image fname=>#{fname} in #{options[:category]}"
       end
-
       p.save
-
       Admin::Merchandise::Piece.fog_buster(p.id)
-
       # convert any current Offer.custom_layouts into composite
       Admin::Customer::Offer.find_all_by_piece_id(p.id).each do |offer|
         offer.update_attributes(custom_layout: 'composite')
       end
-
       puts "updated #{options[:name]}"
     end
+    puts 'Finished.'
+  end
 
+  desc 'Add rings back in to the mix.'
+  task :seed_rings => :environment do
+    image_path = Rails.root.join('public', 'kimbra')
+    default = {parts: {image_part: 'part_charm.png'},
+               part_layout: {layout: {x: 19, y: 34, w: 90, h: 137}},
+               piece_layout: {layout: {x: 0, y: 0, w: 70, h: 85}}
+    }
+    data = [
+        {category: 'Photo Rings', name: 'Emma Ring', price: 98.00,
+         short_description: 'Oval measuring: 1"h x 3/4"w. Available in sizes 6-9. Solid Sterling Silver. Completely waterproof.',
+         image: 'emma_ring.jpeg', custom_layout: 'order',
+         parts: {image_part: 'part0.png',
+                 order: 0,
+                 part_layout: {layout: {x: 30, y: 25, w: 213, h: 297}},
+                 piece_layout: {image: 'emma_ring.png', layout: {x: 31, y: 11, w: 102, h: 159}}
+         }},
+
+        {category: 'Photo Rings', name: 'Cadence Ring', price: 98.00,
+         short_description: 'Photo measuring: 9/16"w x 3/4"h. Available in sizes 6-8. Solid Sterling Silver. Completely waterproof.',
+         image: 'cadence_ring.jpeg', custom_layout: 'order',
+         parts: {image_part: 'part0.png',
+                 order: 0,
+                 part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}},
+                 piece_layout: {image: 'cadence_ring.png', layout: {x: 77, y: 29, w: 90, h: 129}}
+         }}
+    ]
+    data.each do |piece|
+      parts = piece.delete(:parts)
+      path = image_path.join(piece[:category].underscore.gsub(' ', '_'))
+      puts "piece=>#{piece[:name]}"
+      p = Admin::Merchandise::Piece.find_or_create_by_category_and_name(piece[:category], piece[:name])
+      piece_image_fname = piece.delete(:image)
+      if piece_image_fname
+        fname = path.join(piece_image_fname)
+        if File.exist?(fname.to_s)
+          p.image.store!(File.open(fname.to_s))
+        else
+          puts "missing Piece image fname=>#{piece_image_fname} in #{piece['category']}/#{piece['name']} image=>#{fname}"
+        end
+      else
+        fname = to_filename(piece[:name])
+        ['jpeg', 'png'].each do |ext|
+          fname_path = path.join("#{fname}.#{ext}").to_s
+          if File.exists?(fname_path)
+            p.image.store!(File.open(fname_path))
+            break
+          else
+            puts "missing Piece image fname=>#{fname} for image=>#{fname_path}"
+          end
+        end
+        if p.image_url.blank?
+          puts "missing Piece #{fname}.[png|jpeg]  in #{piece['category']}/#{piece['name']}"
+          p.image.store!(File.open(image_stub.to_s)) # stub them for now
+        end
+      end
+      p.parts.destroy_all if p.parts.present?
+      sub_dir = piece[:name].gsub(' ', '_').gsub('(', '').gsub(')', '').underscore
+      subpath = path.join(sub_dir)
+      subpath.mkpath unless subpath.directory?
+      part_image_fname = subpath.join(parts[:image_part])
+      p.parts << Admin::Merchandise::Part.seed(piece, default, part_image_fname)
+      layout = p.parts.first.piece_layout.layout
+      unless layout.update_attributes(piece[:part_layout])
+        raise "unable to set layout for #{piece.inspect}"
+      end
+      unless p.update_attributes(custom_layout: 'order')
+        raise "error on update #{p.errors.full_messages}"
+      end
+      fname = path.join(parts[:piece_layout][:image])
+      if File.exist?(fname)
+        p.image.store!(File.open(fname))
+      else
+        puts "missing Piece image fname=>#{fname} in #{piece[:category]}"
+      end
+      puts p.save
+      puts Admin::Merchandise::Piece.fog_buster(p.id).errors.full_messages
+      puts p.update_attributes(piece)
+    end
+    puts 'Finished.'
   end
 
   desc "Seed the chains into Kimbra pieces"

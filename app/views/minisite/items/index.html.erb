@@ -8,10 +8,8 @@
     <th></th>
     <th></th>
   </tr>
-
   </thead>
   <tbody>
-
   <tr>
     <td colspan="<%= @items.size %>">
       <h4>Custom Piece Front</h4>
@@ -20,7 +18,7 @@
   <tr>
     <% @items.each do |item| %>
         <td>
-          <%= item.front.image_custom.to_image_cache_buster(:list) %>
+          <%= link_to item.front.image_custom.to_image_cache_buster(:list), edit_minisite_item_side_path(item.front) %>
           <br>
           <%= link_to t(:edit), edit_minisite_item_side_path(item.front) %>
         </td>

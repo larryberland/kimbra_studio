@@ -9,17 +9,15 @@
           <tbody>
           <tr>
             <td class="w580" align="center" width="580">
-              <%= link_to image_tag(piece.image.url_cache_buster,
-                                    :title    => piece.name,
-                                    :alt      => piece.name,
-                                    :width    => constrain_to_500_px_wide(piece, :width),
-                                    :height   => constrain_to_500_px_wide(piece, :height),
-                                    :class    => "w280 img-rounded",
-                                    :editable => "true",
-                                    :label    => "Image",
-                                    :border   => 0),
-                          url_for_offer_or_not(offer),
-                          {:style => "text-decoration: none;"} %>
+              <%= image_tag(piece.image.url_cache_buster,
+                            :title => piece.name,
+                            :alt => piece.name,
+                            :width => constrain_to_500_px_wide(piece, :width),
+                            :height => constrain_to_500_px_wide(piece, :height),
+                            :class => "w280 img-rounded",
+                            :editable => "true",
+                            :label => "Image",
+                            :border => 0) %>
             </td>
           </tr>
           <tr>
@@ -28,7 +26,7 @@
                 <p style="color: <%= studio.minisite.font_color %>;">
                   <b><%= piece.name %></b><br/>
                   <%= piece.short_description %>
-                  <span class="price"><%= number_to_currency(piece.price) %></span> •
+                  <span class="price"><%= number_to_currency(piece.price) %></span>
 
                   <% unless @show_status_only %>
                       <% if is_client? %>

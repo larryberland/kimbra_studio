@@ -14,7 +14,6 @@
       <% end %>
       <th>Photo Session</th>
       <th>Client</th>
-      <th>Email</th>
       <th>Session Date</th>
     </tr>
     </thead>
@@ -40,8 +39,7 @@
               <td><%= link_to session.try(:studio).try(:name), studio_path(session.studio), title: t(:studios_show_link) %></td>
           <% end %>
           <td><%= link_to session.try(:name), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
-          <td><%= session.client.name %></td>
-          <td><%= mail_to session.client.email, session.client.email.split('@').first, {title: "click to send an email."} %></td>
+          <td><%= mail_to session.client.email, session.client.name, {title: session.client.email} %></td>
           <td><%= date_short session.session_at %></td>
         </tr>
     <% end %>

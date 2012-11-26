@@ -252,4 +252,8 @@ module ApplicationHelper
     active_flag ? "active" : "inactive"
   end
 
+  def table_friendly_email(email)
+    email.to_s.gsub(/([@.])/,'\1@&thinsp;').html_safe
+  end
+
 end
