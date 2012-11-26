@@ -21,23 +21,23 @@
   </tr>
   </thead>
   <tbody>
-  <% @admin_customer_offers.each do |admin_customer_offer| %>
+  <% @admin_customer_offers.each do |offer| %>
       <tr>
         <td>
-          <%= link_to t(:show), admin_customer_email_offer_path(@email, admin_customer_offer) %>
+          <%= link_to t(:show), admin_customer_email_offer_path(@email, offer) %>
           <br>
-          <%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, admin_customer_offer) %>
+          <%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, offer) %>
           <br>
-          <%= link_to t(:destroy), admin_customer_email_offer_path(@email, admin_customer_offer), confirm: t(:link_destroy_confirm), method: :delete %>
+          <%= link_to t(:destroy), admin_customer_email_offer_path(@email, offer), confirm: t(:link_destroy_confirm), method: :delete %>
         </td>
 
-        <td><%= admin_customer_offer.try(:email).try(:my_studio_session).try(:studio).try(:name) %></td>
-        <td><%= admin_customer_offer.name %></td>
-        <td><%= image_tag_list(admin_customer_offer.piece) %></td>
-        <td><%= image_tag_list(admin_customer_offer) %></td>
-        <td><%= admin_customer_offer.description %></td>
-        <td><%= admin_customer_offer.activation_code %></td>
-        <td><%= admin_customer_offer.active %></td>
+        <td><%= offer.try(:email).try(:my_studio_session).try(:studio).try(:name) %></td>
+        <td><%= offer.name %></td>
+        <td><%= image_tag_list(offer.piece) %></td>
+        <td><%= image_tag_list(offer) %></td>
+        <td><%= offer.description %></td>
+        <td><%= offer.activation_code %></td>
+        <td><%= offer.active %></td>
 
       </tr>
   <% end %>

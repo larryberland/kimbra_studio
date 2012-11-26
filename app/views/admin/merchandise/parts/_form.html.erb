@@ -59,6 +59,8 @@
                   <%= l.number_field :w, class: 'input-mini' %>
                   <%= l.label :h %>
                   <%= l.number_field :h, class: 'input-mini' %>
+                  <%= l.label :degrees %>
+                  <%= l.text_field :degrees, class: 'input-mini', value: number_with_precision(@part.piece_layout.layout.degrees, :precision => 2) %>
                 </div>
 
               </div>

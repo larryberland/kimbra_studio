@@ -275,6 +275,12 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   end
 
+  # return the front side of the first item
+  #  that will be displayed in the AdjustPicture View
+  def adjust_picture_model
+    items.first.front.part
+  end
+
   private #===========================================================================
 
   def piece_create_default_and_tracking
