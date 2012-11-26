@@ -70,10 +70,10 @@ namespace 'kimbra' do
          image: 'leota_bracelet.png',
          price: 180.00,
          layouts:  [
-                       {x: 160, y: 420, w: 110, h: 110, degrees: 75.66},
-                       {x: 250, y: 600, w: 110, h: 110, degrees: 29.74},
-                       {x: 434, y: 650, w: 110, h: 110, degrees: -21.25},
-                       {x: 558, y: 548, w: 120, h: 120, degrees: -67.29}]
+                       {x: 159, y: 426, w: 98, h: 98, degrees: 75.66},
+                       {x: 250, y: 600, w: 98, h: 98, degrees: 29.74},
+                       {x: 432, y: 652, w: 98, h: 98, degrees: -21.25},
+                       {x: 599, y: 553, w: 98, h: 98, degrees: -67.1}]
         }
     ]
     data.each do |options|
