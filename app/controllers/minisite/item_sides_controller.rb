@@ -8,10 +8,10 @@ class Minisite::ItemSidesController < InheritedResources::Base
   layout 'minisite'
 
   def update
-    portrait_attrs = params[:admin_customer_item_side].delete(:portrait_attributes)
-    @portrait = MyStudio::Portrait.find(portrait_attrs[:id])
+    portrait_attrs                               = params[:admin_customer_item_side].delete(:portrait_attributes)
+    @portrait                                    = MyStudio::Portrait.find(portrait_attrs[:id])
     params[:admin_customer_item_side][:portrait] = @portrait
-    success = @item_side.update_attributes(params[:admin_customer_item_side])
+    success                                      = @item_side.update_attributes(params[:admin_customer_item_side])
     if success
       @storyline.describe 'Saved item side.'
       @offer.update_front_side(@item_side.item)
@@ -19,7 +19,14 @@ class Minisite::ItemSidesController < InheritedResources::Base
     end
     respond_to do |format|
       if success
-        format.html { redirect_to minisite_offer_url(@item_side.item.offer), notice: 'Item was successfully updated.' }
+        offer = @item_side.item.offer
+        url   = if (offer.items.size > 1)
+                  minisite_offer_items_path(offer) # keep editing the other item_sides
+                else
+                  minisite_offer_url(offer) # go to offer edit
+                end
+
+        format.html { redirect_to url, notice: t(:minisite_item_sides_update_notice_success) }
         format.json { head :ok }
       else
         format.html { render action: 'edit' }
@@ -28,7 +35,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     end
   end
 
-  # get /minisite/offers/tracking/portrait
+          # get /minisite/offers/tracking/portrait
   def portrait
     @storyline.describe 'Selecting a new portrait.'
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil

@@ -1,4 +1,4 @@
-<h2><%= t(:minisite_admin_customer_items_index_title) %></h2>
+<h2><%= t'.title' %></h2>
 
 <table>
   <thead>
@@ -12,7 +12,7 @@
   <tbody>
   <tr>
     <td colspan="<%= @items.size %>">
-      <h4>Custom Piece Front</h4>
+      <h4><%= t('.title_front') %></h4>
     </td>
   </tr>
   <tr>
@@ -33,7 +33,7 @@
   <% if has_back %>
       <tr>
         <td colspan="<%= @items.size %>">
-          <h4>Custom Piece Back</h4>
+          <h4><%= t('.title_back') %></h4>
         </td>
       </tr>
       <tr>

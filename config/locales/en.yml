@@ -30,6 +30,7 @@ en:
   destroy: "Delete"
   offers: "Offers"
   snap: "Oh Snap! "
+  cancel: "Cancel"
 
   # customer_mailer/send_offer.html.erb
   client_send_offers_subject: "%{name} custom jewelry offer"
@@ -86,7 +87,12 @@ en:
   # stripe
   stripe_description_prefix: "Kimbra Studio via ClickPLUS"
 
-  minisite_admin_customer_items_index_title: "Edit Your Custom Items"
+  admin_menu_overview: "Overview"
+  admin_menu_emails:   "Offer Emails"
+  admin_menu_merchandise: "Merchandise"
+  admin_menu_studios: "Studios"
+  admin_menu_users:   "Users"
+  admin_menu_stories: "Stories"
 
   # minisite menu buttons
   minisite_menu_collection_link: "The Collection"
@@ -96,12 +102,6 @@ en:
   minisite_menu_chains_link: "Chains"
   minisite_menu_charms_link: "Charms"
 
-  admin_menu_overview: "Overview"
-  admin_menu_emails:   "Offer Emails"
-  admin_menu_merchandise: "Merchandise"
-  admin_menu_studios: "Studios"
-  admin_menu_users:   "Users"
-  admin_menu_stories: "Stories"
 
   # admin/customer/emails
   admin_customer_emails_new_title: "New Offer Email"
@@ -168,6 +168,10 @@ en:
 
   # minisite/items/show
   minisite_items_show_link: "Make adjustments to this piece"
+
+  # minisite/item_sides
+  minisite_item_sides_update_notice_success: "Item was successfully updated."
+
 
   # minisite/emails/show
   minisite_your_collection: "Your Collection"
@@ -263,6 +267,20 @@ en:
   # shopping/purchase
   shopping_purchases_submit_new: "Submit Payment"
   shopping_purchases_submit_edit: "Submit Payment"
+
+  # views
+  minisite:
+    items:
+      index:
+        title: "Edit Your Custom Items"
+        title_front: "Custom Piece Front"
+        title_back:  "Custom Piece Back"
+
+    item_sides:
+      form:
+        title: "Move or resize selection by dragging"
+        p1_html: "Please ignore any thin white lines appearing on the sides of your portraits in the jewelry pieces.<br/>These will not be present when we prepare your pieces."
+        portraits_click: "Click to select a different portrait"
 
   photos:
     add_files: "Add Portraits..."

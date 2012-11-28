@@ -3,7 +3,7 @@
     <%= render 'shared/error_messages', record: @item_side %>
 
     <div class='preview'>
-      <h3>Move or resize selection by dragging</h3>
+      <h3><%= t'.title' %></h3>
       <table cellpadding='20px'>
         <tr>
           <td align='right'>
@@ -29,13 +29,13 @@
     </div>
 
     <p>
-      Please ignore any thin white lines appearing on the sides of your portraits in the jewelry pieces.
-      <br/>These will not be present when we prepare your pieces.
+      <%= t'.p1_html' %>
     </p>
 
     <div class="actions">
       <%= f.submit :id => 'my_submit', :value => 'Save' %>
-      <%= link_to 'Cancel', minisite_offer_url(@offer), :style => 'margin-left: 15px;' %>
+      <% cancel_url = @offer.items.count > 1 ? minisite_offer_items_path(@offer) : minisite_offer_url(@offer) %>
+      <%= link_to t(:cancel), cancel_url, :style => 'margin-left: 15px;' %>
       <span id="spinner" style="display:none"></span>
     </div>
 
@@ -44,7 +44,7 @@
     </div>
 
     <div class="portraits">
-      <div><br/><br/><i>Click to select a different portrait</i></div>
+      <div><br/><br/><i><%= t'.portraits_click' %></i></div>
       <% @admin_customer_offer.portraits.each do |portrait| %>
           <div>
             <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
