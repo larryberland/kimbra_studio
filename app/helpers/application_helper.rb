@@ -134,8 +134,21 @@ module ApplicationHelper
   def url_for_offer_or_not(offer)
     # currently opening this offer up for amyone to change
     #  may re-think this later on security or Save issues
-    if (offer.kind_of?(Admin::Merchandise::Piece))
-      minisite_offer_url(offer)
+    minisite_offer_url(offer)
+  end
+
+  # on image do some workflow for the admin user
+  def url_for_offer_or_not_image(offer)
+    # currently opening this offer up for amyone to change
+    #  may re-think this later on security or Save issues
+    if (is_admin?)
+      # go directly to Adjust Picture
+      offer.has_picture?
+      if offer.items.size > 1
+        minisite_offer_items_path(offer)
+      else
+        edit_minisite_item_side_path(offer.items.first.front)
+      end
     else
       minisite_offer_url(offer)
     end
@@ -253,7 +266,7 @@ module ApplicationHelper
   end
 
   def table_friendly_email(email)
-    email.to_s.gsub(/([@.])/,'\1@&thinsp;').html_safe
+    email.to_s.gsub(/([@.])/, '\1@&thinsp;').html_safe
   end
 
 end

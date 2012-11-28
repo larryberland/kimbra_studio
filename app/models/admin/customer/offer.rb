@@ -281,6 +281,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
     items.first.front.part
   end
 
+  def has_back?
+    baby_got_back
+  end
+
   private #===========================================================================
 
   def piece_create_default_and_tracking

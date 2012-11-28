@@ -270,6 +270,11 @@ en:
 
   # views
   minisite:
+    offers:
+      show:
+        front: "Front"
+        back:   "Back"
+
     items:
       index:
         title: "Edit Your Custom Items"

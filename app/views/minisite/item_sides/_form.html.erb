@@ -34,8 +34,7 @@
 
     <div class="actions">
       <%= f.submit :id => 'my_submit', :value => 'Save' %>
-      <% cancel_url = @offer.items.count > 1 ? minisite_offer_items_path(@offer) : minisite_offer_url(@offer) %>
-      <%= link_to t(:cancel), cancel_url, :style => 'margin-left: 15px;' %>
+      <%= link_to t(:cancel), url_for_cancel_workflow(@offer), :style => 'margin-left: 15px;' %>
       <span id="spinner" style="display:none"></span>
     </div>
 

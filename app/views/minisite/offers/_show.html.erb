@@ -14,12 +14,12 @@
 
   <% if @admin_customer_offer.back.present? %>
       <p>
-        <b>Front</b>
+        <b><%= t('.front') %></b>
         <%= link_to @admin_customer_offer.image_front.to_image_cache_buster, edit_url%>
       </p>
 
       <p>
-        <b>Back</b>
+        <b><%= t('.back') %></b>
         <%= link_to @admin_customer_offer.image_back.to_image_cache_buster, edit_url%>
       </p>
   <% else %>

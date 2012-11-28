@@ -19,14 +19,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     end
     respond_to do |format|
       if success
-        offer = @item_side.item.offer
-        url   = if (offer.items.size > 1)
-                  minisite_offer_items_path(offer) # keep editing the other item_sides
-                else
-                  minisite_offer_url(offer) # go to offer edit
-                end
-
-        format.html { redirect_to url, notice: t(:minisite_item_sides_update_notice_success) }
+        format.html { redirect_to url_for_workflow(@item_side.item.offer), notice: t(:minisite_item_sides_update_notice_success) }
         format.json { head :ok }
       else
         format.html { render action: 'edit' }
@@ -76,5 +69,24 @@ class Minisite::ItemSidesController < InheritedResources::Base
     @admin_customer_email             = @email
     @admin_customer_offer             = @offer
   end
+
+  # handle some workflow for admin when adjusting pictures
+  #  in the offers.
+  # when offer only has a single front item
+  #   go directly to adjust picture and return to collection
+  #   otherwise go to multi item edit window and back
+  def url_for_workflow(offer)
+    if (offer.items.size > 1)
+      minisite_offer_items_url(offer) # keep editing the other item_sides
+    else
+      if (is_admin? and (!offer.has_back?))
+          # go directly to collection
+          show_collection_my_studio_minisite_path(offer.email.tracking)
+      else
+        minisite_offer_url(offer) # go to offer edit
+      end
+    end
+  end
+
 
 end
