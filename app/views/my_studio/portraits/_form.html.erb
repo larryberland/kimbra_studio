@@ -186,3 +186,15 @@
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
 <!--[if gte IE 8]><%= javascript_include_tag "xdr.js" %><![endif]-->
 
+<%= coffee_script_tag do %>
+# After portraits are added or deleted, update the studio message at the top of the page.
+$ ->
+    $('#fileupload').live 'fileuploaddone', ->
+        request = $.get '/my_studio/sessions/<%= @my_studio_session.id %>/portraits/upload_status_messages.js'
+        request.success (data) -> data
+        request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "<br/>Error: #{errorThrown} Status: #{textStatus}"
+    $('#fileupload').live 'fileuploaddestroy', ->
+        request = $.get '/my_studio/sessions/<%= @my_studio_session.id %>/portraits/upload_status_messages.js'
+        request.success (data) -> data
+        request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "<br/>Error: #{errorThrown} Status: #{textStatus}"
+<% end %>

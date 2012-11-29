@@ -13,7 +13,6 @@ class MyStudio::Portrait < ActiveRecord::Base
   attr_accessible :image, :remote_image_url, :description, :active, :faces,
                   :my_studio_session, :my_studio_session_id
 
-
   scope :last, order('created_at desc').limit(1)
   scope :last_2_hours, where(created_at: 2.hours.ago..Time.now)
   scope :last_day, where(created_at: 24.hours.ago..Time.now)

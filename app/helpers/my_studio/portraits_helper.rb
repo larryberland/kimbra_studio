@@ -10,7 +10,7 @@ module MyStudio::PortraitsHelper
     else
       msg = "You have uploaded #{count == 1 ? 'only 1 portrait' : "#{count} portraits"} so far. "
       msg << "<br/>#{text}"
-      msg << "<br/>#{MyStudio::Session::BEST_PORTRAITS - count} to go." unless count >= MyStudio::Session::BEST_PORTRAITS
+      msg << "<br/> <i class='icon-hand-right'> </i> #{MyStudio::Session::BEST_PORTRAITS - count} to go." unless count >= MyStudio::Session::BEST_PORTRAITS
     end
     msg.html_safe
   end
@@ -26,6 +26,21 @@ module MyStudio::PortraitsHelper
       button_to('Process my offer email! I have uploaded a good selection of portraits.',
                 my_studio_session_is_finished_uploading_portraits_path,
                 {method: :get, class: "btn btn-success"})
+    end
+  end
+
+  def alert_type_for(count)
+    case
+      when count < MyStudio::Session::MIN_PORTRAITS
+        'alert-error'
+      when count < MyStudio::Session::BEST_PORTRAITS
+        'alert-info'
+      when count >= MyStudio::Session::BEST_PORTRAITS && count <= MyStudio::Session::MAX_PORTRAITS
+          'alert-success'
+      when count > MyStudio::Session::MAX_PORTRAITS
+        'alert-error'
+      else
+        'alert-error'
     end
   end
 
