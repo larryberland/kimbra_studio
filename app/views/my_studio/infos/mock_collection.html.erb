@@ -81,19 +81,19 @@
       <div class="centered_container">
         <ul id='main-header-tabs'>
           <li>
-            <%= t(:minisite_your_collection) %>
+            <%= t('.your_collection') %>
           </li>
           |
           <li>
-            <%= link_to t(:minisite_menu_about_link, :studio_name => @studio.name), '#' %>
+            <%= link_to t('.about', studio_name: @studio.name), '#' %>
           </li>
           |
           <li>
-            <%= link_to 'Shopping Cart (0 items)', '#' %>
+            <%= link_to t('.shopping_cart'), '#' %>
           </li>
           |
           <li>
-            <%= link_to 'Back to Samples', samples_my_studio_infos_path %>
+            <%= link_to t('.back_samples'), samples_my_studio_infos_path %>
           </li>
         </ul>
       </div>

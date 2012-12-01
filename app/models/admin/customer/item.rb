@@ -15,21 +15,23 @@ class Admin::Customer::Item < ActiveRecord::Base
   # assemble an item and its sides
   #  always at least one side item_sides[0]
   #
-  #  options = [front_side => {:photo_part, :portrait},
-  #             back_side => {:photo_part, :portrait}]
+  #  options = [front_side => {:photo_part, :portrait, :adjusted_picture_url},
+  #             back_side => {:photo_part, :portrait, :adjusted_picture_url}]
   #
   # NOTE: item is really nothing more than a holder of the front & back sides
   def self.assemble_side(offer, options)
+    raise "did you forget to assign the item_sides options?" if options.nil?
+
     # if this only a hash turn it into an array of 1 for the front_side
     sides = [options] if options.kind_of?(Hash)
 
     # otherwise the caller has set up an array for front and back
     sides ||= options
 
-    # Create the item and its Front item_side
+    # Create the item, and its part information
     item = assemble(offer, sides.first[:photo_part])
 
-    # Create any other sides, I hope there is only 1 more for back_side
+    # Create the sides
     item.item_sides = sides.collect do |item_side_options|
       Admin::Customer::ItemSide.assemble(item, item_side_options)
     end
@@ -91,7 +93,9 @@ class Admin::Customer::Item < ActiveRecord::Base
     front_side ? front : back
   end
 
-  # create an Item with a part for building an offer
+  # create an Item
+  #   cloning a merchandise:part for this item
+  #   and assigning its offer
   def self.assemble(offer, merchandise_part)
     raise "missing kimbra part in offer=>#{offer.inspect}" unless merchandise_part.present?
 

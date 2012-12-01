@@ -147,6 +147,12 @@ class Admin::Customer::Email < ActiveRecord::Base
     jobs.detect { |job| YAML.load(job.handler).args.include? self.id }.present?
   end
 
+  def offers_lists
+    shopping_cart_list = offers.select { |r| r.frozen_offer? }
+    clickplus_list = offers.select { |r| !r.frozen_offer? }
+    return shopping_cart_list, clickplus_list
+  end
+
   private #================================================
 
   def set_message

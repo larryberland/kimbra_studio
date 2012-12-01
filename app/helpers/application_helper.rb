@@ -128,7 +128,7 @@ module ApplicationHelper
         pluralize(@cart.try(:quantity), 'piece')
       end
     end
-    link_to_unless_current (t(:minisite_menu_shopping_cart_link) + " (#{ cart_numericality })").html_safe, url
+    link_to_unless_current (t('.menu_shopping_cart') + " (#{ cart_numericality })").html_safe, url
   end
 
   def url_for_offer_or_not(offer)
@@ -155,15 +155,17 @@ module ApplicationHelper
   end
 
   def link_to_your_collection_or_not(admin_customer_email)
+    # LDB: NOTE:  if this helper is called from any other erb
+    #   than shared/minisite_header not sure if the translations will work
     if is_client?
-      link_to_unless_current t(:minisite_your_collection), minisite_email_offers_path(admin_customer_email.tracking)
+      link_to_unless_current t('.menu_collection'), minisite_email_offers_path(admin_customer_email.tracking)
     else
-      link_to t(:minisite_your_collection), show_collection_my_studio_minisite_path(admin_customer_email.tracking)
+      link_to t('.menu_collection'), show_collection_my_studio_minisite_path(admin_customer_email.tracking)
     end
   end
 
   def link_to_your_charms_or_not(admin_customer_email)
-    text = t(:minisite_menu_charms_link)
+    text = t('.menu_charms')
     if is_client?
       link_to_unless_current(text, index_charms_minisite_email_offers_path(admin_customer_email.tracking))
     else
@@ -172,7 +174,7 @@ module ApplicationHelper
   end
 
   def link_to_your_chains_or_not(admin_customer_email)
-    text = t(:minisite_menu_chains_link)
+    text = t('.menu_chains')
     if is_client?
       link_to_unless_current(text, index_chains_minisite_email_offers_path(admin_customer_email.tracking))
     else

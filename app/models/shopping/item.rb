@@ -14,7 +14,7 @@ class Shopping::Item < ActiveRecord::Base
 
   before_create :ensure_qty_1
 
-  after_destroy :from_piece_destroy_offer
+  after_destroy :destroy_offer_or_not
 
   def price
     p = if offer
@@ -51,15 +51,17 @@ class Shopping::Item < ActiveRecord::Base
     self.quantity = 1 unless quantity
   end
 
+  # every offer that is a member of the shopping::item was
+  # created and frozen for this user so if quantity goes down to zero
+  #   we should move the offer into the Collection maybe
+  #
   # from_piece? true => This items offer record was generated
   # from a kimbra piece item.  When set true it means
   # to destroy the Offer when this item is destroyed
-  def from_piece_destroy_offer
+  def destroy_offer_or_not
     # puts "Shopping::Item from_piece?#{from_piece?} offer=>#{offer.inspect}"
-    if (from_piece?)
-      if offer.present?
-        offer.destroy
-      end
+    if offer.present?
+      offer.destroy
     end
   end
 end

@@ -1,7 +1,7 @@
 class Admin::Customer::ItemSide < ActiveRecord::Base
 
-  mount_uploader :image_stock, StockUploader        # original portrait cropped for image part
-  mount_uploader :image_custom, PartCustomUploader  # final image with portrait and part
+  mount_uploader :image_stock, StockUploader                  # original portrait cropped for image part
+  mount_uploader :image_custom, PartCustomUploader            # final image with portrait and part
 
   belongs_to :item, :class_name => 'Admin::Customer::Item'
   belongs_to :part, :class_name => 'Admin::Merchandise::Part' # my own copy of merchandise part
@@ -14,11 +14,13 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                   :portrait_id, :portrait, :portrait_attributes,
                   :item, :item_attributes,
                   :part, :part_attributes,
-                  :crop_x, :crop_y, :crop_h, :crop_w
+                  :adjusted_picture_url,    # stock_image url from another item_side record
+                  :crop_x, :crop_y, :crop_h, :crop_w,
+                  :x, :y, :w, :h
 
   accepts_nested_attributes_for :item, :part, :portrait
 
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :assembly
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :assembly, :adjusted_picture_url
 
   after_update :crop_stock_image, if: :cropping?
 
@@ -31,19 +33,25 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   # assemble a part's item_side
   #   options => {:photo_part,
   #             :portrait,
-  #             :face}
+  #             :face,
+  #             :adjusted_picture_url}
   #   photo_part => merchandise.part to use for this item_side
   #   portrait   => sessions.portrait to use for this item_side
+  #   adjusted_picture_url => from another item_side that has adjusted the picture and we should
+  #                           use this image as the image_stock
   def self.assemble(item, options)
+
     raise "needs to be a hash options=>#{options.inspect}" unless options.kind_of?(Hash)
+
     # clone the merchandise part for the customer's offering
     #  so this model has its own copy for its parent
     my_part      = Admin::Merchandise::Part.create_clone(options[:photo_part])
 
     # create record with parents, part, item, and portrait
-    my_item_side = Admin::Customer::ItemSide.create(:item     => item,
-                                                    :part     => my_part,
-                                                    :portrait => options[:portrait])
+    my_item_side = Admin::Customer::ItemSide.create(item:                 item,
+                                                    part:                 my_part,
+                                                    portrait:             options[:portrait],
+                                                    adjusted_picture_url: options[:adjusted_picture_url])
     my_item_side.create_side
     my_item_side
   end
@@ -58,19 +66,22 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     raise "no fog images without an id" if new_record?
     @assembly = true
 
-    file_url  = if portrait
-                  # grab a copy of the sessions portrait using the face sized image
-                  portrait.image_url(:face)
-                else
-                  # no portrait must just be a charm so use the merchandise.parts image
-                  part.image_part_url
-                end
+    puts "apu=>#{adjusted_picture_url}"
+    puts "portrait=>#{portrait.inspect}"
+
+    file_url = if adjusted_picture_url
+                 adjusted_picture_url # the adjusted picture url
+               elsif portrait
+                 # grab a copy of the sessions portrait using the face sized image
+                 portrait.image_url(:face)
+               else
+                 # no portrait must just be a charm so use the merchandise.parts image
+                 part.image_part_url
+               end
 
     raise "no item_side image? customer_item_side id:#{id} file:#{file_url}" if file_url.blank?
 
-    # LDB:? sure seems like i have these reversed?
-    #       i would think stock means no portrait and custom
-    #       should be the portrait image (sure i am wrong)
+    # LDB:? i think this url stores the file into image_stock
     self.remote_image_stock_url  = file_url
 
     # end up being the custom piece with portrait and background
@@ -79,6 +90,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     # this writes our remote image_custom and image_stock to the S3 server
     save
 
+    # finished using the incoming adjusted picture url
+    self.adjusted_picture_url = nil
+
   end
 
   # carrier_wave callback to process the stock_image
@@ -86,11 +100,11 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   def image_stock_process(src_image)
     # puts ""
     # puts "ItemSide create image_stock"
-    size            = part.viewport_size
-    # puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
+    size = part.viewport_size
+    puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
 
     new_stock_image = if cropping?
-                        # puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
+                        puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
                         img = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
                         clear_cropping
                         #puts "img size:#{img.columns}x#{img.rows}"
@@ -98,35 +112,26 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                         img.resize!(size[:w], size[:h])
                         img
                       elsif assembly?
-                        #puts "  Assembly"
-                        # LDB: Keeping this around until we know we don't need
-                        #      this draw_face thing
-                        #img = if face
-                        #        #puts "  using Face"
-                        #        draw_face(src_image, size[:w], size[:h])
-                        #      elsif portrait
-                        #        #puts "  using Full Portrait"
-                        #        src_image.resize_to_fit(size[:w], size[:h])
-                        #      else
-                        #        #puts "  using No photo"
-                        #        image_transparent(size[:w], size[:h])
-                        #      end
-                        img = if portrait
-                                #puts "  using Full Portrait"
+                        puts "  Assembly"
+                        img = if adjusted_picture_url
+                                #puts "  using adjusted picture url"
+                                src_image
+                              elsif portrait
+                                puts "  using Full Portrait"
                                 src_image.resize_to_fit(size[:w], size[:h])
                               else
-                                #puts "  using No photo"
+                                puts "  using No photo"
                                 image_transparent(size[:w], size[:h])
                               end
-                        #puts " item_side stock_image=>#{img.columns}x#{img.rows}"
+                        puts " item_side stock_image=>#{img.columns}x#{img.rows}"
                         img
                       else
-                        puts "  NO OP"
+                        puts "no-op"
                         src_image # no op
-                        # need to create a transparent image here somehow
-                        #image_transparent(size[:w], size[:h])
+                                  # need to create a transparent image here somehow
+                                  #image_transparent(size[:w], size[:h])
                       end
-    #puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
+    puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
     new_stock_image
   end
 
@@ -138,7 +143,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   # carrier_wave process callback from PartCustomUploader
   def image_custom_process(part_image)
 
-    viewport = part.viewport  # viewport defined by the Part
+    viewport = part.viewport # viewport defined by the Part
     if (viewport[:w] != stock_image.columns) and (viewport[:h] != stock_image.rows)
       puts "#{self} stock_image onto part #{part_image.columns}x#{part_image.rows} viewport #{viewport[:x]} #{viewport[:y]} #{stock_image.columns}x#{stock_image.rows}"
       puts "#{self} viewport=>#{viewport.inspect}"
@@ -184,13 +189,13 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   def image_title(attr)
 #    u   = send("#{attr}_url")
-    u = attr
+    u   = attr
     img = Magick::Image.read(u).first
     #img = attr.to_image
     "size #{img.columns} x #{img.rows}"
   end
 
-  # clear the cropping data so new recreate_versions will not crop
+          # clear the cropping data so new recreate_versions will not crop
   def clear_cropping
     self.crop_x = nil
     self.crop_y = nil

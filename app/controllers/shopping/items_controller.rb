@@ -12,19 +12,42 @@ module Shopping
     end
 
     def create
+
+      item_already_in_cart = @cart.find_item(@admin_customer_offer.id) if @admin_customer_ofer
+
       if params[:shopping_item] && params[:shopping_item][:piece_id]
+        # Someone has picked one of the Kimbra Pieces that is not associated
+        #   with our email offer (ex. chains or charms)
         # create an offer from this kimbra_piece and add to the shopping cart
-        @admin_customer_offer             = Admin::Customer::Offer.generate_from_piece(@admin_customer_email,
-                                                                                       params[:shopping_item][:piece_id])
-        params[:shopping_item][:offer_id] = @admin_customer_offer.id
-        session[:admin_customer_offer_id] = @admin_customer_offer.id
-        @shopping_item_id = params[:shopping_item][:piece_id]
-        params[:shopping_item][:from_piece] = true    # after_destroy flag to remove offer
+        @admin_customer_offer               = Admin::Customer::Offer.generate_from_piece(@admin_customer_email,
+                                                                                         params[:shopping_item][:piece_id])
+        params[:shopping_item][:offer_id]   = @admin_customer_offer.id
+        session[:admin_customer_offer_id]   = @admin_customer_offer.id
+        @shopping_item_id                   = params[:shopping_item][:piece_id]
+
+        # after_destroy flag to remove offer when removing from the shopping cart
+        params[:shopping_item][:from_piece] = true
+      else
+        # sending an offer that has been adjusted and going to the shopping cart
+        #   make a copy that is frozen and no one can edit in case they decide
+        #   to purchase this offer
+        unless item_already_in_cart
+          # shopping_item_id needs to be the original offer
+          @shopping_item_id                 = @admin_customer_offer.id
+
+          # create our new frozen_offer? record that no one can adjust picture
+          @admin_customer_offer             = @admin_customer_offer.generate_for_cart
+
+          # reset our info to the new frozen offer
+          session[:admin_customer_offer_id] = @admin_customer_offer.id
+          params[:shopping_item][:offer_id] = @admin_customer_offer.id
+        end
       end
+
       params[:offer_id] = params[:shopping_item][:offer_id]
       params[:cart_id]  = params[:shopping_item][:cart_id]
+
       @storyline.describe "Adding #{@admin_customer_offer.name} to cart."
-      item_already_in_cart = @cart.items.where(:offer_id => params[:offer_id]).first
 
       if item_already_in_cart
         item_already_in_cart.update_attribute :quantity, item_already_in_cart.quantity.to_i + 1
@@ -32,6 +55,7 @@ module Shopping
       else
         create!
       end
+
     end
 
     def update

@@ -45,7 +45,7 @@
               </p>
           <% end %>
       <% end %>
-      <%= button_to 'Adjust picture', edit_url, method: :get  if @admin_customer_offer.piece.photo?%>
+      <%= button_to 'Adjust picture', edit_url, method: :get  if @admin_customer_offer.adjust_picture?%>
   <% end %>
 
   <%= content_tag :p do %>

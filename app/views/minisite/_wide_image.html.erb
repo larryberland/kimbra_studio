@@ -9,12 +9,13 @@
           <tbody>
           <tr>
             <td class="w580" align="center" width="580">
+              <% klass = offer.frozen_offer? ? "frozen" : "" %>
               <%= link_to image_tag(offer.image.url_cache_buster,
                                     :title => offer.name,
                                     :alt => offer.name,
                                     :width => constrain_to_500_px_wide(offer, :width),
                                     :height => constrain_to_500_px_wide(offer, :height),
-                                    :class => "w280 img-rounded",
+                                    :class => "w280 img-rounded #{klass}",
                                     :editable => "true",
                                     :label => "Image",
                                     :border => 0),
@@ -26,6 +27,9 @@
             <td class="w580" width="580">
               <div class="article-content" align="center">
                 <p style="color: <%= studio.minisite.font_color %>;">
+                  <% if offer.frozen_offer? %>
+                      <b><%= t('in_shopping_cart') %></b><br>
+                  <% end %>
                   <b><%= offer.name %></b><br/>
                   <%= offer.piece.short_description %>
                   <span class="price"><%= number_to_currency(offer.price) %></span> •

@@ -10,39 +10,43 @@
     <tbody>
     <% total = 0 %>
     <% cart.items.each do |item| %>
-        <tr>
-          <td class='shopping-item-index left'>
-            <%= item.try(:offer).try(:name) %>
-          </td>
-          <td class='shopping-item-index'>
-            <%= link_to image_tag(item.offer.image_url.to_s,
-                                  :title  => item.offer.name,
-                                  :alt    => item.offer.name,
-                                  :width  => 150,
-                                  #   :height => '30%',
-                                  :class  => "img-rounded",
-                                  #   :editable => "true",
-                                  #   :label => "Image",
-                                  :border => 0),
-                        minisite_offer_url(item.offer),
-                        {:style => "text-decoration: none;"} %>
-          </td>
-          <td class='shopping-item-index right'>
-            <%= number_to_currency item.price.to_f %>
-          </td>
-          <td class="shopping-item-index <%= show_status_only ? 'right' : 'left' %>">
-            <% if show_status_only %>
-                <%= item.quantity %>
-            <% else %>
-                <%= text_field_tag :quantity, item.quantity, size: 3 %>
-                <%= link_to 'update', shopping_item_path(item),
-                            class: :update_quantity %>
-            <% end %>
-          </td>
-          <td class='shopping-item-index right'>
-            <%= number_to_currency item.extension %>
-          </td>
-        </tr>
+        <% if item.offer %>
+            <tr>
+              <td class='shopping-item-index left'>
+                <%= item.try(:offer).try(:name) %>
+              </td>
+              <td class='shopping-item-index'>
+                <%= link_to image_tag(item.offer.image_url.to_s,
+                                      :title  => item.offer.name,
+                                      :alt    => item.offer.name,
+                                      :width  => 150,
+                                      #   :height => '30%',
+                                      :class  => "img-rounded",
+                                      #   :editable => "true",
+                                      #   :label => "Image",
+                                      :border => 0),
+                            minisite_offer_url(item.offer),
+                            {:style => "text-decoration: none;"} %>
+              </td>
+              <td class='shopping-item-index right'>
+                <%= number_to_currency item.price.to_f %>
+              </td>
+              <td class="shopping-item-index <%= show_status_only ? 'right' : 'left' %>">
+                <% if show_status_only %>
+                    <%= item.quantity %>
+                <% else %>
+                    <%= text_field_tag :quantity, item.quantity, size: 3 %>
+                    <%= link_to 'update', shopping_item_path(item),
+                                class: :update_quantity %>
+                <% end %>
+              </td>
+              <td class='shopping-item-index right'>
+                <%= number_to_currency item.extension %>
+              </td>
+            </tr>
+        <% else %>
+            <% Rails.logger.info("ORPHAN OFFER::Shopping Cart item=>#{item.inspect}") %>
+        <% end %>
     <% end if cart.items && cart.items.present? %>
     <tr>
       <td colspan=5>&nbsp;</td>

@@ -94,15 +94,6 @@ en:
   admin_menu_users:   "Users"
   admin_menu_stories: "Stories"
 
-  # minisite menu buttons
-  minisite_menu_collection_link: "The Collection"
-  minisite_menu_custom_work_link: "Custom Work"
-  minisite_menu_shopping_cart_link: "Shopping Cart"
-  minisite_menu_about_link: "About %{studio_name}"
-  minisite_menu_chains_link: "Chains"
-  minisite_menu_charms_link: "Charms"
-
-
   # admin/customer/emails
   admin_customer_emails_new_title: "New Offer Email"
   admin_customer_emails_new_link: "New Offer Email"
@@ -274,7 +265,9 @@ en:
       show:
         front: "Front"
         back:   "Back"
-
+      index:
+        shopping_cart_list: "Your Shopping Cart Custom Pieces"
+        clickplus_list: "Create More Custom Pieces"
     items:
       index:
         title: "Edit Your Custom Items"
@@ -286,6 +279,18 @@ en:
         title: "Move or resize selection by dragging"
         p1_html: "Please ignore any thin white lines appearing on the sides of your portraits in the jewelry pieces.<br/>These will not be present when we prepare your pieces."
         portraits_click: "Click to select a different portrait"
+    narrow_image:
+      in_shopping_cart: "In your shopping cart"
+    wide_image:
+      in_shopping_cart: "In your shopping cart"
+
+  my_studio:
+    infos:
+      mock_collection:
+        your_collection: "Your Collection"
+        shopping_cart:  "Shopping Cart (0 items)"
+        about: "About %{studio_name}"
+        back_samples: "Back to Samples"
 
   photos:
     add_files: "Add Portraits..."
@@ -295,6 +300,16 @@ en:
     template:
       start: "Start"
       cancel: "Cancel"
+
+  shared:
+    minisite_header:
+      menu_sessions: "Return to sessions list"
+      menu_about:    "About %{studio_name}"
+      menu_collection: "Your Collection"
+      menu_custom_work: "Custom Work"
+      menu_shopping_cart: "Shopping Cart"
+      menu_chains: "Chains"
+      menu_charms: "Charms"
 
   # override InheritedResources flash messages
   # shopping/purchases

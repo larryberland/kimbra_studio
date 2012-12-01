@@ -1,12 +1,34 @@
-<% @admin_customer_email.offers.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
-    <% if offer.width.to_i < 250 %>
-        <%= render 'minisite/narrow_image', offer: offer, studio: @studio %>
-    <% else %>
-        <%= render 'minisite/wide_image', offer: offer, studio: @studio %>
-    <% end %>
+<div class="container span10">
+<% cart_offers = @admin_customer_email.offers.select { |r| r.frozen_offer? } %>
+<% if cart_offers.size > 0 %>
+    <div class="cart-offers span5">
+       <h3>My Gallery</h3>
+      <% cart_offers.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
+          <% if offer.width.to_i < 250 %>
+              <%= render 'minisite/narrow_image', offer: offer, studio: @studio %>
+          <% else %>
+              <%= render 'minisite/wide_image', offer: offer, studio: @studio %>
+          <% end %>
+      <% end %>
+
+    </div>
 <% end %>
+
+<% email_offers = @admin_customer_email.offers.select { |r| !r.frozen_offer? } %>
+<div class="email-offers span5">
+  <h3>ClickPLUS Offers</h3>
+  <% email_offers.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
+      <% if offer.width.to_i < 250 %>
+          <%= render 'minisite/narrow_image', offer: offer, studio: @studio %>
+      <% else %>
+          <%= render 'minisite/wide_image', offer: offer, studio: @studio %>
+      <% end %>
+  <% end %>
+</div>
 
 <% if is_admin? %>
     <% btn_message =  @admin_customer_email.sent_at? ? "This email already sent on #{time_short_index @admin_customer_email.sent_at}. Click to send again." : 'If all offers are fixed, click me to send the offer email !' %>
     <%= button_to btn_message, send_offers_admin_customer_email_url(@admin_customer_email), method: :post %>
 <% end %>
+
+</div>

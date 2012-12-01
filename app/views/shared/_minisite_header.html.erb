@@ -67,34 +67,29 @@
             <%= link_to_your_collection_or_not(admin_customer_email) %>
           </li>
           |
-          <% if Rails.env.development? %>
-              <li>
-                <%= link_to_your_charms_or_not(admin_customer_email) %>
-              </li>
-              |
-              <li>
-                <%= link_to_your_chains_or_not(admin_customer_email) %>
-              </li>
-              |
-          <% end %>
           <li>
-            <%= link_to_unless_current t(:minisite_menu_about_link, :studio_name => studio.name),
+            <%= link_to_your_charms_or_not(admin_customer_email) %>
+          </li>
+          |
+          <li>
+            <%= link_to_your_chains_or_not(admin_customer_email) %>
+          </li>
+          |
+          <li>
+            <%= link_to_unless_current t('.menu_about', studio_name: studio.name),
                                        about_minisite_email_path(admin_customer_email.tracking) %>
           </li>
           |
           <li>
-            <%= link_for_shopping_cart_nav %>
+            <% if is_admin? %>
+                <%= link_to t('.menu_sessions'), admin_overview_path %>
+            <% elsif is_studio? %>
+                <%= link_to t('.menu_sessions'), my_studio_sessions_path %>
+            <% else %>
+                <%= link_for_shopping_cart_nav %>
+            <% end %>
           </li>
-          <% unless is_client? %>
-              |
-              <li>
-                <% if is_admin? %>
-                    <%= link_to 'Return to Overview', admin_overview_path %>
-                <% elsif is_studio? %>
-                    <%= link_to 'Return to sessions list', my_studio_sessions_path %>
-                <% end %>
-              </li>
-          <% end %>
+
         </ul>
       </div>
     </div>

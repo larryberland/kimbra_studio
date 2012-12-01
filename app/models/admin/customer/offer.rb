@@ -14,10 +14,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
   attr_accessible :image, :remote_image_url,
                   :image_front, :remote_image_front_url,
                   :image_back, :remote_image_back_url,
-                  :name, :email, :description,
+                  :name, :email, :description, :frozen_offer,
                   :piece, :custom_layout, :item_options_list,
                   :piece, :piece_id,
-                  :tracking, :active, :activation_code, :frozen,
+                  :tracking, :active, :activation_code,
                   :portrait_id
 
   # parts list having portraits assigned to which part
@@ -70,8 +70,45 @@ class Admin::Customer::Offer < ActiveRecord::Base
         email:             email,
         piece:             piece, # parent merchandise.piece
         item_options_list: [])
+    offer.frozen_offer = true
     offer.assemble(piece)
     offer
+  end
+
+  # Create an offer for the cart that will not allow
+  #   anyone to edit it
+  def generate_for_cart
+    cart_offer = Admin::Customer::Offer.create(
+        tracking: UUID.random_tracking_number,
+        email:    email,
+        piece:    piece) # parent merchandise.piece
+    cart_offer.assemble_cart(self)
+    cart_offer
+  end
+
+  # assemble an offer that is identical to the from_offer
+  #   that will be frozen and non-editable by anyone
+  def assemble_cart(from_offer)
+    # create our images from the items
+    from_offer.items.each do |item|
+
+      options = item.item_sides.collect do |item_side|
+        {adjusted_picture_url: item_side.image_stock.url,
+         portrait:             item_side.portrait,
+         photo_part:           item.part}
+      end
+
+      # Assemble the item and its sides
+      items << Admin::Customer::Item.assemble_side(self, options)
+      puts "FINISHED item"
+
+    end
+
+    self.frozen_offer = true
+
+    create_images
+
+    save
   end
 
   # Using a Kimbra Piece made up of Kimbra Parts we create
@@ -261,11 +298,15 @@ class Admin::Customer::Offer < ActiveRecord::Base
     portraits
   end
 
+  def adjust_picture?
+    piece.photo? and (not frozen_offer?)
+  end
+
   def has_picture?
     piece.photo_parts.present?
   end
 
-          # Adjusted one of the item.item_sides for this offer
+  # Adjusted one of the item.item_sides for this offer
   def update_front_side(item)
     # need to rebuild each item in order to build the custom piece
     create_images
@@ -276,7 +317,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   # return the front side of the first item
-  #  that will be displayed in the AdjustPicture View
+          #  that will be displayed in the AdjustPicture View
   def adjust_picture_model
     items.first.front.part
   end
@@ -322,7 +363,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     items.each_with_index do |item, index|
       custom_piece = item.draw_piece_with_custom(custom_piece, front_side)
     end
-    i = front_side ? image_front : image_back
+    i               = front_side ? image_front : image_back
     t_front_or_back = i.store_image!(custom_piece)
     t_front_or_back
   end
@@ -340,7 +381,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     items.each_with_index do |item, index|
       custom_piece = item.draw_kimbra_piece(custom_piece, front)
     end
-    i = front ? image_front : image_back
+    i               = front ? image_front : image_back
     t_front_or_back = i.store_image!(custom_piece)
 
     raise "#{self}  front=>#{front} bad path=>#{t_front_or_back.path}" unless t_front_or_back.path.present?
