@@ -171,13 +171,6 @@ en:
   my_studio_clients_show_title: "Client Info"
   my_studio_clients_form_title: "Send an Email to Client"
 
-  # my_studio/dashboard
-  my_studio_dashboards_sessions_title: "Photo Session Activity this past week"
-  my_studio_dashboards_index_title: "Studio Dashboard"
-  my_studio_dashboards_ready_title: "Emails ready to be sent"
-  my_studio_dashboards_emails_title: "Emails this past week"
-  my_studio_dashboards_recent_portraits_title: "Photo Portraits Activity this past day"
-
   # my_studio_faces
   my_studio_faces_index_title: "Faces Data"
 
@@ -224,7 +217,6 @@ en:
   # my_studio/sessions
   my_studio_sessions_new_title: "Step 1. Create a ClickPLUS Photo Session"
   my_studio_sessions_new_link: "New ClickPLUS Photo Session"
-  my_studio_sessions_create_link: "Create new photo session and upload portraits now!"
   my_studio_sessions_edit_title: "Editing %{name} ClickPLUS Photo Session"
   my_studio_sessions_edit_link: "Edit ClickPLUS Photo Session"
   my_studio_sessions_index_title: "ClickPLUS Photo Sessions"
@@ -234,7 +226,7 @@ en:
   my_studio_sessions_complete_link: "Portraits are ready!"
   my_studio_sessions_complete_title: "Click to Process my email! I have uploaded a good selection of portraits."
   my_studio_sessions_offer_email_link: "ClickPLUS work queue %{length}"
-
+  my_studio_sessions_finished_uploading_notice_html: "Thanks! We'll start photoshopping those portraits into Kimbra's jewelry pieces soon.<br>Your Photo Session has been placed in the ClickPLUS Work Queue.<br>Check back shortly to View your Client's Offer Email."
   # my_studio/staffers
   my_studio_staffers_new_title: "New Studio Staff"
   my_studio_staffers_new_link: "New Studio Staff"
@@ -284,7 +276,19 @@ en:
     wide_image:
       in_shopping_cart: "In your shopping cart"
 
+  my_studio_dashboards_index_title: "Studio Dashboard"
+  my_studio_dashboards_ready_title: "Emails ready to be sent"
+  my_studio_dashboards_emails_title: "Emails this past week"
+  my_studio_dashboards_recent_portraits_title: "Photo Portraits Activity this past day"
+
   my_studio:
+    # my_studio/dashboard
+    dashboards:
+      sessions:
+        title: "Photo Session Activity this past week"
+      show:
+        create_photo_session: "Create new photo session and upload portraits now!"
+
     infos:
       mock_collection:
         your_collection: "Your Collection"

@@ -3,7 +3,9 @@
 
 <div class='panel-container'>
 
-  <% if sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
+  <% if sessions.empty? %>
+      <h4>&#x2713; This will display your Offer Emails sent to your clients.</h4>
+  <% elsif sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
       <h4>&#x2718; No emails this past week - no portraits uploaded?</h4>
   <% else %>
       <table class="table">

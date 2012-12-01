@@ -12,7 +12,8 @@ module MyStudio::DashboardsHelper
             "&#x2718; No portraits uploaded in the last #{pluralize days_ago, 'day'}!".html_safe
         end
       else
-        '&#x2718; You haven\'t uploaded any portraits yet!'.html_safe
+        # LDB:? First time into our application just have the Create a Photo Session Link
+        '&#x2713; Welcome to Kimbra ClickPLUS Studio Dashboard.<br> Click the button below to create your first Photo Session'.html_safe
       end
     end
   end

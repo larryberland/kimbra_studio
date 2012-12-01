@@ -171,7 +171,8 @@ class User < ActiveRecord::Base
     # TODO: set roles based on some new logic
     # TODO Gotta get rid of this when we think through how studio users get created.
     if roles.empty?
-      role_name  = if email == 'larryberland@gmail.com' || last_name.to_s.downcase == 'admin'
+      #role_name  = if email == 'larryberland@gmail.com' || last_name.to_s.downcase == 'admin'
+      role_name  = if last_name.to_s.downcase == 'admin'
                      Role::SUPER_ADMIN
                    else
                      Role::STUDIO

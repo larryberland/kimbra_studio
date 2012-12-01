@@ -5,13 +5,13 @@ class MyStudio::SessionsController < MyStudio::BaseController
   # GET /my_studio/sessions
   # GET /my_studio/sessions.json
   def index
-    search = params[:search] || session[:search_my_studio_sessions]
+    search                              = params[:search] || session[:search_my_studio_sessions]
     session[:search_my_studio_sessions] = search
-    my_studio = current_user.admin? ? nil : @my_studio
+    my_studio                           = current_user.admin? ? nil : @my_studio
 
-    set = MyStudio::Session.search(my_studio, search)
+    set           = MyStudio::Session.search(my_studio, search)
     @record_count = set.count
-    @sessions = set.page(params[:page])
+    @sessions     = set.page(params[:page])
 
     respond_to do |format|
       format.html # index.html.erb
@@ -83,7 +83,7 @@ class MyStudio::SessionsController < MyStudio::BaseController
   end
 
   # DELETE /my_studio/sessions/1
-  # DELETE /my_studio/sessions/1.json
+          # DELETE /my_studio/sessions/1.json
   def destroy
     @my_studio_session = MyStudio::Session.find(params[:id])
     @my_studio_session.destroy
@@ -96,9 +96,9 @@ class MyStudio::SessionsController < MyStudio::BaseController
 
   def is_finished_uploading_portraits
     if sess = MyStudio::Session.find(params[:session_id]) rescue nil
-    sess.update_attribute(:finished_uploading_at, Time.now)
-    flash[:notice] = 'Thanks! We\'ll start photoshopping those portraits into Kimbra\'s jewelry pieces soon.'
-    Notifier.delay.session_ready(params[:session_id])
+      sess.update_attribute(:finished_uploading_at, Time.now)
+      flash[:notice] = t(:my_studio_sessions_finished_uploading_notice_html)
+      Notifier.delay.session_ready(params[:session_id])
     end
     redirect_to my_studio_dashboard_path(my_studio_id: sess.studio.id)
   end

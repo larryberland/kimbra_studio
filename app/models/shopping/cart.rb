@@ -32,6 +32,7 @@ class Shopping::Cart < ActiveRecord::Base
     items.each do |item|
       if item.offer.nil?
         Rails.logger.warn("Missing offer in item=>#{item.inspect}")
+        item.destroy if Rails.env.development?
         raise "missing offer in item=>#{item.inspect}"
       elsif item.offer.piece.nil?
         Rails.logger.warn("Missing piece in offer=>#{item.offer.inspect}")

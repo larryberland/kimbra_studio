@@ -43,7 +43,7 @@ class MyStudio::Session < ActiveRecord::Base
     like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_', '\_')}%" : "%"
 
     rel.where('my_studio_sessions.name ilike ? OR my_studio_clients.name ilike ? OR my_studio_clients.email ilike ?',
-              like_exp, like_exp, like_exp).joins(:client).order('updated_at desc')
+              like_exp, like_exp, like_exp).joins(:client).order('my_studio_clients.updated_at desc, my_studio_sessions.updated_at desc')
   }
 
   def complete?

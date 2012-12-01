@@ -29,6 +29,7 @@
           <td>
             <% if session.emails.last %>
                 <%= link_to(t(:view), show_collection_my_studio_minisite_path(session.emails.last.tracking)) %>
+                <i class="icon-envelope"> </i>
             <% elsif session.finished_uploading_at %>
                 <%= t(:my_studio_sessions_offer_email_link, length: time_ago_in_words(session.finished_uploading_at)) %>
             <% else %>
