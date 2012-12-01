@@ -5,7 +5,7 @@ class MyStudio::PortraitsController < MyStudio::BaseController
   # GET /my_studio/portraits
   # GET /my_studio/portraits.json
   def index
-    @my_studio_portraits = MyStudio::Portrait.where('my_studio_session_id=?', @my_studio_session).order('created_at desc')
+    @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @my_studio_session).order('created_at desc')
     @record_count        = @my_studio_portraits.size
     respond_to do |format|
       format.html # index.html.erb
@@ -55,7 +55,7 @@ class MyStudio::PortraitsController < MyStudio::BaseController
         format.json { render json: [@my_studio_portrait.to_jq_upload].to_json }
       end
     else
-      render :json => [{:error => "custom_failure"}], :status => 304
+      render json: [{:error => "custom_failure"}], status: 304
     end
   end
 
@@ -81,11 +81,18 @@ class MyStudio::PortraitsController < MyStudio::BaseController
   def destroy
     @my_studio_portrait = MyStudio::Portrait.find(params[:id])
     @my_studio_portrait.destroy
+    @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @my_studio_session).order('created_at desc')
+    @record_count = @my_studio_portraits.size
 
     respond_to do |format|
       format.html { redirect_to my_studio_session_portraits_url }
       format.json { head :ok }
     end
+  end
+
+  def upload_status_messages
+    @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @my_studio_session).order('created_at desc')
+    @record_count = @my_studio_portraits.size
   end
 
   private #=====================================================================================

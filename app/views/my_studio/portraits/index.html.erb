@@ -1,9 +1,11 @@
-<div class="row span12">
+<div class='row span12'>
 
   <h2><%= t(:my_studio_portraits_index_title, name: @my_studio_session.client.name, category: @my_studio_session.category.name) %></h2>
 
-  <p class="lead"><%= feedback_for @record_count %></p>
-  <%= actions_for_portraits(@my_studio_session) %>
-  <%= render "form" %>
+  <div id='portrait_messages_for_studio' class='lead'>
+    <%= render 'upload_status_messages' %>
+  </div>
+
+  <%= render 'form' %>
 
 </div>

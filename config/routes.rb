@@ -100,7 +100,11 @@ KimbraStudio::Application.routes.draw do
     resource :overview, :only => [:show]
     resources :sessions do
       get :is_finished_uploading_portraits
-      resources :portraits
+      resources :portraits do
+        collection do
+          get :upload_status_messages
+        end
+      end
     end
     resources :staffers
   end
