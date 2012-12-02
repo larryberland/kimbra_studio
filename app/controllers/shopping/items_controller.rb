@@ -67,11 +67,9 @@ module Shopping
         @item.destroy
         session[:admin_customer_offer_id] = nil if session[:admin_customer_offer_id]
       else
-        attrs ={quantity: quantity}
-        if params[:ring_size]
-          attrs[:option]          = 'ring size'
-          attrs[:option_selected] = params[:ring_size]
-        end
+        attrs = {quantity:        params[:quantity],
+                 option:          params[:option],
+                 option_selected: params[:option_selected]}
         @item.update_attributes attrs
       end
       respond_to do |format|

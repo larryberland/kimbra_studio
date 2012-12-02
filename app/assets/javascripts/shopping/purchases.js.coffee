@@ -81,11 +81,13 @@ $ ->
 
 window.updateQuantityLinks = ->
   $('a.update_quantity').click (event) ->
+    td = $('this').prevUntil('td')
     event.preventDefault()
     $.post(
       $(this).attr('href')
       quantity: $(this).prev().val()
-      ring_size: $('#ring_size').val()
+      option: $(this).prevUntil(td,'select').attr('name')
+      option_selected: $(this).prevUntil(td,'select').val()
       (data) ->
         eval data
         updateQuantityLinks()
