@@ -125,20 +125,20 @@ namespace 'kimbra' do
     data       = [
         {category:          'Photo Rings', name: 'Emma Ring', price: 98.00,
          short_description: 'Oval measuring: 1"h x 3/4"w. Available in sizes 6-9. Solid Sterling Silver. Completely waterproof.',
-         image:             'emma_ring.jpeg', custom_layout: 'order',
+         image:             'emma_ring.jpeg', custom_layout: 'composite',
          parts:             {image_part:   'part0.png',
                              order:        0,
                              part_layout:  {layout: {x: 30, y: 25, w: 213, h: 297}},
-                             piece_layout: {image: 'emma_ring.png', layout: {x: 31, y: 11, w: 102, h: 159}}
+                             piece_layout: {image: 'emma_ring.png', layout: {x: 31, y: 11, w: 115, h: 160}}
          }},
 
         {category:          'Photo Rings', name: 'Cadence Ring', price: 98.00,
          short_description: 'Photo measuring: 9/16"w x 3/4"h. Available in sizes 6-8. Solid Sterling Silver. Completely waterproof.',
-         image:             'cadence_ring.jpeg', custom_layout: 'order',
+         image:             'cadence_ring.jpeg', custom_layout: 'composite',
          parts:             {image_part:   'part0.png',
                              order:        0,
                              part_layout:  {layout: {x: 102, y: 78, w: 301, h: 372}},
-                             piece_layout: {image: 'cadence_ring.png', layout: {x: 77, y: 29, w: 90, h: 129}}
+                             piece_layout: {image: 'cadence_ring.png', layout: {x: 77, y: 29, w: 105, h: 129}}
          }}
     ]
     data.each do |piece|
@@ -176,19 +176,28 @@ namespace 'kimbra' do
       subpath.mkpath unless subpath.directory?
       part_image_fname = subpath.join(parts[:image_part])
       p.parts << Admin::Merchandise::Part.seed(piece, default, part_image_fname)
+
       layout = p.parts.first.piece_layout.layout
-      unless layout.update_attributes(piece[:part_layout])
-        raise "unable to set layout for #{piece.inspect}"
+      unless layout.update_attributes(parts[:piece_layout][:layout])
+        raise "unable to set piece_layout for #{piece.inspect}"
       end
-      unless p.update_attributes(custom_layout: 'order')
+
+      layout = p.parts.first.part_layout.layout
+      unless layout.update_attributes(parts[:part_layout][:layout])
+        raise "unable to set part_layout for #{piece.inspect}"
+      end
+
+      unless p.update_attributes(custom_layout: 'composite')
         raise "error on update #{p.errors.full_messages}"
       end
+
       fname = path.join(parts[:piece_layout][:image])
       if File.exist?(fname)
         p.image.store!(File.open(fname))
       else
         puts "missing Piece image fname=>#{fname} in #{piece[:category]}"
       end
+
       puts p.save
       puts Admin::Merchandise::Piece.fog_buster(p.id).errors.full_messages
       puts p.update_attributes(piece)

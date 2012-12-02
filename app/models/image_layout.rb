@@ -4,7 +4,7 @@ class ImageLayout < ActiveRecord::Base
   belongs_to :layout, :polymorphic => true
 
   def resize(image)
-    # puts "imageLayout resize:#{image.columns}x#{image.rows} to:#{w}x#{h}"
+    #puts "imageLayout resize:#{image.columns}x#{image.rows} to:#{w}x#{h}"
     new_image = image.resize_to_fit(w, h) if w and h
     new_image ||= image
     new_image
@@ -44,10 +44,11 @@ class ImageLayout < ActiveRecord::Base
   end
 
   def draw_custom_part2(part_image, src_image, operator=Magick::DstOverCompositeOp)
-    #puts " portrait src_image #{src_image.columns}x#{src_image.rows}"
+    # puts " draw_custom() portrait src_image #{src_image.columns}x#{src_image.rows}"
     @new_x = x
     @new_y = y
     image  = rotate(resize(src_image))
+    # puts " draw_custom() resized image #{image.columns}x#{image.rows}"
     part_image.composite(image, @new_x, @new_y, operator)
   end
 
