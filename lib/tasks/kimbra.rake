@@ -43,13 +43,16 @@ namespace 'kimbra' do
     data.each do |options|
       p = Admin::Merchandise::Piece.find_by_category_and_name(options[:category], options[:name])
       raise "didn't find piece #{options.inspect}" if p.nil?
+
       layout = p.parts.first.piece_layout.layout
       unless layout.update_attributes(options[:layout])
         raise "unable to set layout for #{options.inspect}"
       end
-      unless p.update_attributes(custom_layout: 'composite')
+
+      unless p.update_attributes(custom_layout: 'composite', photo: true)
         raise "error on update #{p.errors.full_messages}"
       end
+
       fname = Rails.root.join("public", 'kimbra', options[:category], options[:image]).to_s.gsub(' ', '_').downcase
       if File.exist?(fname)
         p.image.store!(File.open(fname))
@@ -91,7 +94,7 @@ namespace 'kimbra' do
         p.price = options[:price]
       end
 
-      unless p.update_attributes(custom_layout: 'composite')
+      unless p.update_attributes(custom_layout: 'composite', photo: true)
         raise "error on update #{p.errors.full_messages}"
       end
 
@@ -125,7 +128,7 @@ namespace 'kimbra' do
     data       = [
         {category:          'Photo Rings', name: 'Emma Ring', price: 98.00,
          short_description: 'Oval measuring: 1"h x 3/4"w. Available in sizes 6-9. Solid Sterling Silver. Completely waterproof.',
-         image:             'emma_ring.jpeg', custom_layout: 'composite',
+         image:             'emma_ring.jpeg',
          parts:             {image_part:   'part0.png',
                              order:        0,
                              part_layout:  {layout: {x: 30, y: 25, w: 213, h: 297}},
@@ -134,7 +137,7 @@ namespace 'kimbra' do
 
         {category:          'Photo Rings', name: 'Cadence Ring', price: 98.00,
          short_description: 'Photo measuring: 9/16"w x 3/4"h. Available in sizes 6-8. Solid Sterling Silver. Completely waterproof.',
-         image:             'cadence_ring.jpeg', custom_layout: 'composite',
+         image:             'cadence_ring.jpeg',
          parts:             {image_part:   'part0.png',
                              order:        0,
                              part_layout:  {layout: {x: 102, y: 78, w: 301, h: 372}},
@@ -170,11 +173,12 @@ namespace 'kimbra' do
           p.image.store!(File.open(image_stub.to_s)) # stub them for now
         end
       end
+
       p.parts.destroy_all if p.parts.present?
       sub_dir = piece[:name].gsub(' ', '_').gsub('(', '').gsub(')', '').underscore
-      subpath = path.join(sub_dir)
-      subpath.mkpath unless subpath.directory?
-      part_image_fname = subpath.join(parts[:image_part])
+      sub_path = path.join(sub_dir)
+      sub_path.mkpath unless sub_path.directory?
+      part_image_fname = sub_path.join(parts[:image_part])
       p.parts << Admin::Merchandise::Part.seed(piece, default, part_image_fname)
 
       layout = p.parts.first.piece_layout.layout
@@ -187,7 +191,7 @@ namespace 'kimbra' do
         raise "unable to set part_layout for #{piece.inspect}"
       end
 
-      unless p.update_attributes(custom_layout: 'composite')
+      unless p.update_attributes(custom_layout: 'composite', photo: true)
         raise "error on update #{p.errors.full_messages}"
       end
 
