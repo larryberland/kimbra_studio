@@ -7,6 +7,7 @@
 
 <div class="platypus-form span7">
 
+
   <%= render 'shared/error_messages', record: @admin_customer_offer %>
 
   <% url = @admin_customer_offer.id.nil? ? admin_customer_email_offers_path(@email) : admin_customer_email_offer_path(@email, @admin_customer_offer) %>
@@ -31,6 +32,7 @@
         </div>
       </div>
 
+      <%= f.hidden_field :frozen_offer %>
       <% if is_admin? %>
           <fieldset title="<%= t("helpers.label.fieldset.admin") %>">
             <legend><%= t("helpers.label.fieldset.admin") %></legend>

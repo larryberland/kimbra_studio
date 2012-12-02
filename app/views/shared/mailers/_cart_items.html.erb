@@ -12,6 +12,10 @@
       <tr>
         <td class='left'>
           <%= item.try(:offer).try(:name) %>
+          <% if item.option %>
+              <br>
+              <%= "#{item.option} #{item.option_selected}" %>
+          <% end %>
         </td>
         <td class='shopping-item-index right' align='right'>
           <%= number_to_currency item.price.to_f %>

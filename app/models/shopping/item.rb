@@ -5,7 +5,7 @@ class Shopping::Item < ActiveRecord::Base
 
   attr_accessible :offer, :offer_attributes, :offer_id,
                   :cart, :cart_attributes, :cart_id,
-                  :from_piece,
+                  :from_piece, :option, :option_selected,
                   :piece_id # kimbra non photo piece we are going to turn into an offer
 
   attr_accessor :piece_id

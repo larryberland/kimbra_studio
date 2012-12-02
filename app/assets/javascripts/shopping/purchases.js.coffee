@@ -85,6 +85,7 @@ window.updateQuantityLinks = ->
     $.post(
       $(this).attr('href')
       quantity: $(this).prev().val()
+      ring_size: $('#ring_size').val()
       (data) ->
         eval data
         updateQuantityLinks()

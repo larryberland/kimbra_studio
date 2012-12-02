@@ -50,10 +50,14 @@
       <tr>
         <td>
           <%= link_to t(:show), admin_customer_email_offer_path(@email, offer) %>
-          <br>
-          <%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, offer) %>
-          <br>
-          <%= link_to t(:destroy), admin_customer_email_offer_path(@email, offer), confirm: t(:link_destroy_confirm), method: :delete %>
+          <% unless offer.frozen_offer? %>
+              <br>
+              <%= link_to t(:edit), edit_admin_customer_email_offer_path(@email, offer) %>
+              <br>
+              <%= link_to t(:destroy), admin_customer_email_offer_path(@email, offer), confirm: t(:link_destroy_confirm), method: :delete %>
+          <% else %>
+              <i class="icon-shopping-cart"></i>
+          <% end %>
         </td>
 
         <td><%= offer.try(:email).try(:my_studio_session).try(:studio).try(:name) %></td>
