@@ -14,13 +14,6 @@
             <tr>
               <td class='shopping-item-index left'>
                 <%= item.try(:offer).try(:name) %>
-                <% if item.offer.piece.category == "Photo Rings" %>
-                    <div class="span2">
-                      <%= hidden_field_tag :option, 'ring_size' %>
-                      <%= label_tag(:ring_size) %>
-                      <%= select_tag(:ring_size, options_for_select(%w(6 7 8 9 10 11 12 13), item.option_selected)) %>
-                    </div>
-                <% end %>
               </td>
               <td class='shopping-item-index'>
                 <%= link_to image_tag(item.offer.image_url.to_s,
@@ -42,6 +35,13 @@
                 <% if show_status_only %>
                     <%= item.quantity %>
                 <% else %>
+                    <% if item.offer.piece.category == "Photo Rings" %>
+                        <div class="span2">
+                          <%= select_tag(:ring_size, options_for_select(%w(6 7 8 9 10 11 12 13), item.option_selected)) %>
+                          <%= label_tag(:ring_size) %>
+                        </div>
+                        <br>
+                    <% end %>
                     <%= text_field_tag :quantity, item.quantity, size: 3 %>
                     <%= link_to 'update', shopping_item_path(item),
                                 class: :update_quantity %>
