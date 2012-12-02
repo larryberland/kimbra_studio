@@ -288,6 +288,8 @@ en:
         title: "Photo Session Activity this past week"
       show:
         create_photo_session: "Create new photo session and upload portraits now!"
+        revenue: "Total revenue so far: %{purchases} Your commission (at %{rate}%): %{total}"
+
 
     infos:
       mock_collection:

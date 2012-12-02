@@ -8,9 +8,9 @@ class MyStudio::DashboardsController < MyStudio::BaseController
     # redirect in sessions controller is passing in the my_studio_id for admin
     @my_studio ||= Studio.find(params[:my_studio_id]) if params[:my_studio_id]
     @sessions          = @my_studio.sessions.recent
-    @sum_purchases     = @my_studio.carts.collect { |c| c.purchase.try(:total_cents).to_i / 100.0 }.sum
+    @sum_purchases     = @my_studio.sum_purchases
     @commission_rate   = @my_studio.info.commission_rate.to_i
-    @total_commissions = @my_studio.carts.collect { |c| c.taxable_sub_total }.sum * @commission_rate / 100.0
+    @total_commissions = @my_studio.total_commission
     #@my_studio_dashboards = MyStudio::Dashboard.all
     respond_to do |format|
       format.html # show.html.erb

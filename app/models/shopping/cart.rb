@@ -42,7 +42,9 @@ class Shopping::Cart < ActiveRecord::Base
         raise "missing price in offer=>#{item.offer.inspect} piece=>#{item.offer.piece.id}"
       end
     end
-    items.inject(0) { |result, item| result + item.extension }
+    sub_total = items.inject(0) {|result, item| result + item.extension} if purchase.present?
+    sub_total ||= 0.0
+    sub_total
   end
 
   def total

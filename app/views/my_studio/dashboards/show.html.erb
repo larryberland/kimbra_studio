@@ -14,9 +14,7 @@
 
 
     <h4>
-      Total revenue so far: <%= number_to_currency @sum_purchases %> Your commission (at <%= @commission_rate %>
-      %):
-      <%= number_to_currency @total_commissions %>
+      <%= t('.revenue', purchases: number_to_currency(@sum_purchases), rate: @commission_rate, total: number_to_currency(@total_commissions)) %>
     </h4>
 
     <div class='container'>

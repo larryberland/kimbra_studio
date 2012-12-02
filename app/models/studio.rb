@@ -8,16 +8,16 @@ class Studio < ActiveRecord::Base
   has_many :carts, class_name: 'Shopping::Cart', through: :emails
 
   has_one :owner, dependent: :destroy,
-          class_name: 'User',
-          inverse_of: :studio
+          class_name:        'User',
+          inverse_of:        :studio
 
   has_many :clients, dependent: :destroy,
-           conditions: Proc.new { User.where('roles.name = ?', Role::CLIENT).includes(:roles) },
-           class_name: 'User'
+           conditions:          Proc.new { User.where('roles.name = ?', Role::CLIENT).includes(:roles) },
+           class_name:          'User'
 
   has_many :staffers, dependent: :destroy,
-           conditions: Proc.new { User.where('roles.name = ?', Role::STUDIO_STAFF).includes(:roles) },
-           class_name: 'User'
+           conditions:           Proc.new { User.where('roles.name = ?', Role::STUDIO_STAFF).includes(:roles) },
+           class_name:           'User'
 
   has_one :info, class_name: 'MyStudio::Info', dependent: :destroy, inverse_of: :studio
   has_one :minisite, class_name: 'MyStudio::Minisite', dependent: :destroy, inverse_of: :studio
@@ -62,8 +62,25 @@ class Studio < ActiveRecord::Base
     search_by_email_or_fname_or_lname_or_key ? by_search(search_by_email_or_fname_or_lname_or_key) : where('id>0').order('updated_at DESC')
   end
 
+  def sum_purchases
+    sum = carts.collect { |c| c.purchase.try(:total_cents).to_i / 100.0 }.sum if carts.present?
+    sum ||= 0.0
+    sum
+  end
+
+  def total_commission
+    if (carts.present?)
+      carts.each { |c| puts "[#{c.id}] items:#{c.items.size} purchase:#{c.purchase.try(:total_cents)} taxSubTotal:#{c.taxable_sub_total}" }
+
+      sum   = carts.collect { |c| c.taxable_sub_total }.sum
+      total = (sum * info.commission_rate.to_i) / 100.0
+    end
+    total ||= 0.0
+    total
+  end
+
   def phone_number=(num)
-    super num.to_s.gsub(/\D/,'')[0,10]
+    super num.to_s.gsub(/\D/, '')[0, 10]
   end
 
   def logoize
@@ -97,7 +114,7 @@ class Studio < ActiveRecord::Base
     state ? state.abbreviation : nil
   end
 
-    # Use this method to represent the "city, state.abbreviation"
+  # Use this method to represent the "city, state.abbreviation"
   #
   # @param [none]
   # @return [String] "city, state.abbreviation"
@@ -108,7 +125,7 @@ class Studio < ActiveRecord::Base
   # Use this method to represent the "city, state.abbreviation zip_code"
   #
   # @param [none]
-          # @return [String] "city, state.abbreviation zip_code"
+  # @return [String] "city, state.abbreviation zip_code"
   def city_state_zip
     [city_state_name, zip_code].join(' ')
   end
