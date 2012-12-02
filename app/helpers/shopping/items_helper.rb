@@ -9,11 +9,21 @@ module Shopping::ItemsHelper
                     option = :ring_size
                     options_for_select(%w(6 7 8 9 10 11 12 13), item.option_selected)
                   when 'Holiday'
-                    if (name == 'Evergreen Ornament' || name == 'Memorial Ornament' || name == 'Aspen Ornament')
-                      nil
-                    else
-                      option = :year
-                      options_for_select(%w(2007 2008 2009 2010 2011 2012), item.option_selected)
+                    case name
+                      when 'Keepsake Year Frame (horizontal)'
+                        option = :year
+                        options_for_select(%w(2012 2011 2010 2009 2008 2007), item.option_selected)
+                      when 'Keepsake Year Frame'
+                        option = :year
+                        options_for_select(%w(2012 2011 2010 2009 2008 2007 2006), item.option_selected)
+                      when 'Joy Love Peace Ornament'
+                        option = :year
+                        options_for_select(%w(2012 2011), item.option_selected)
+                      when 'Fairchild Ornament'
+                        option = :year
+                        options_for_select(%w(2012 2011), item.option_selected)
+                      else
+                        nil
                     end
                   else
                     nil
