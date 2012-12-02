@@ -9,7 +9,7 @@
           <td align='right'>
             <div id='portrait_item'>
               <!-- Constrain stock image to be 300px wide. Height varies according to part. This is done in the css. -->
-              <%= image_tag @item_side.portrait.image_url(:face), id: 'cropbox' %>
+              <%= image_tag @item_side.session_portrait.image_url(:face), id: 'cropbox' %>
             </div>
           </td>
           <td align="top">

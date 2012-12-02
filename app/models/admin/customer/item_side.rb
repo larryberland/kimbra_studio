@@ -209,6 +209,16 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     res
   end
 
+  def session_portrait
+    if portrait.nil?
+      # find us another portrait to substitute here
+      if another_portrait = item.offer.email.my_studio_session.portraits.first
+        update_attributes(portrait: another_portrait)
+      end
+    end
+    portrait
+  end
+
   private #================================================================================================
 
   def crop_stock_image
