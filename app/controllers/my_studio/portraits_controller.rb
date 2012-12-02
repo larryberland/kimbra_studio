@@ -82,7 +82,7 @@ class MyStudio::PortraitsController < MyStudio::BaseController
     @my_studio_portrait = MyStudio::Portrait.find(params[:id])
     @my_studio_portrait.destroy
     @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @my_studio_session).order('created_at desc')
-    @record_count = @my_studio_portraits.size
+    @record_count        = @my_studio_portraits.size
 
     respond_to do |format|
       format.html { redirect_to my_studio_session_portraits_url }
@@ -92,13 +92,21 @@ class MyStudio::PortraitsController < MyStudio::BaseController
 
   def upload_status_messages
     @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @my_studio_session).order('created_at desc')
-    @record_count = @my_studio_portraits.size
+    @record_count        = @my_studio_portraits.size
   end
 
   private #=====================================================================================
 
   def load_my_studio_session
     @my_studio_session = MyStudio::Session.find(params[:session_id]) if params[:session_id]
+    unless (is_admin?)
+      if (is_studio?)
+        if (current_user and @my_studio_session and current_user.studio.id != @my_studio_session.studio.id)
+          flash[:error] = "not your session!"
+          @my_studio_session = nil
+        end
+      end
+    end
   end
 
 end
