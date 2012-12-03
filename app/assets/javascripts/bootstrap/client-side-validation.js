@@ -14,7 +14,7 @@ clientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = {
 
         settings.wrapper_tag = ".control-group";
         settings.error_tag = "span";
-        settings.error_class = "help-inline playtypus";
+        settings.error_class = "help-inline";
         settings.wrapper_error_class = "info";
         settings.wrapper_success = "xsuccess";
 
@@ -38,7 +38,7 @@ clientSideValidations.formBuilders['ActionView::Helpers::FormBuilder'] = {
 
         settings.wrapper_tag = ".control-group";
         settings.error_tag = "span";
-        settings.error_class = "help-inline playtypus";
+        settings.error_class = "help-inline";
         settings.wrapper_error_class = "info";
         settings.wrapper_success = "xsuccess";
 

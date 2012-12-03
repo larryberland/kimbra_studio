@@ -1,7 +1,7 @@
 <div class="row span12">
 
   <h2>
-    <%= t(:users_index_title) %>
+    <%= t('.title') %>
     <small>result set count:<%= @record_count %></small>
   </h2>
 
@@ -20,7 +20,7 @@
       <%= form_tag new_user_path, method: :get do %>
           <button type="submit" class="btn btn-success">
             <i class="icon-plus icon-white"></i>
-            <%= t(:users_new_link) %>...
+            <%= t('.new') %>...
           </button>
       <% end %>
 

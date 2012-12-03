@@ -94,12 +94,6 @@ en:
   admin_menu_users:   "Users"
   admin_menu_stories: "Stories"
 
-  # admin/customer/emails
-  admin_customer_emails_new_title: "New Offer Email"
-  admin_customer_emails_new_link: "New Offer Email"
-  admin_customer_emails_index_title: "Listing all sent and unsent Offer Emails"
-  admin_customer_emails_edit_title: "Editing Offer Email"
-
   # admin/customer/items
   admin_customer_items_new_title: "New Offer Item"
   admin_customer_items_new_link: "New Item"
@@ -147,13 +141,6 @@ en:
   studios_show_link: "View Studio"
   studios_show_title: "ClickPLUS Studio Info"
 
-  # users
-  users_index_title: "Listing ClickPLUS Users"
-  users_new_title: "Create ClickPLUS User"
-  users_new_link: "New ClickPLUS User"
-  users_edit_title: "Editing ClickPLUS User"
-  users_show_title: "ClickPLUS User"
-
   # minisite/showrooms/show
   minisite_showrooms_show_add_to_cart: "Add to Cart"
 
@@ -162,7 +149,6 @@ en:
 
   # minisite/item_sides
   minisite_item_sides_update_notice_success: "Item was successfully updated."
-
 
   # minisite/emails/show
   minisite_your_collection: "Your Collection"
@@ -206,7 +192,6 @@ en:
   my_studio_overview_label_minisite: "Studio Minisite Info"
   my_studio_overview_link_minisite: "View Studio Minisite Info"
 
-
   # my_studio/sessions
   my_studio_sessions_new_title: "Step 1. Create a ClickPLUS Photo Session"
   my_studio_sessions_new_link: "New ClickPLUS Photo Session"
@@ -244,7 +229,24 @@ en:
   shopping_purchases_submit_new: "Submit Payment"
   shopping_purchases_submit_edit: "Submit Payment"
 
+   # my_studio_portraits/index
+  my_studio_portraits_new_link: "Upload New Session Portrait"
+  my_studio_portraits_session: "For %{name}"
+  my_studio_portraits_feedback_common: "We will generate an offer email with as few as %{min} portraits but we prefer you upload at least %{best} or as many as %{max}. "
+
   # views
+
+  # admin/customer/emails
+  admin:
+    customer:
+      emails:
+        new:
+          title: "New Offer Email"
+        index:
+          title: "Listing all sent and unsent Offer Emails"
+        edit:
+          title: "Editing Offer Email"
+
   minisite:
     offers:
       show:
@@ -270,26 +272,18 @@ en:
     wide_image:
       in_shopping_cart: "In your shopping cart"
 
-  my_studio_dashboards_index_title: "Studio Dashboard"
-  my_studio_dashboards_ready_title: "Emails ready to be sent"
-  my_studio_dashboards_emails_title: "Emails this past week"
-  my_studio_dashboards_recent_portraits_title: "Photo Portraits Activity this past day"
-
-  # my_studio/portraits
-  my_studio_portraits_new_link: "Upload New Session Portrait"
-  my_studio_portraits_edit_title: "Editing Session portraits"
-  my_studio_portraits_session: "For %{name}"
-  my_studio_portraits_feedback_common: "We will generate an offer email with as few as %{min} portraits but we prefer you upload at least %{best} or as many as %{max}. "
-
   my_studio:
     # my_studio/dashboard
     dashboards:
+      emails:
+        title: "Emails this past week"
+      ready:
+        title: "Emails ready to be sent"
       sessions:
         title: "Photo Session Activity this past week"
       show:
         create_photo_session: "Create new photo session and upload portraits now!"
         revenue: "Total revenue so far: %{purchases} Your commission (at %{rate}%): %{total}"
-
 
     infos:
       mock_collection:
@@ -297,8 +291,10 @@ en:
         shopping_cart:  "Shopping Cart (0 items)"
         about: "About %{studio_name}"
         back_samples: "Back to Samples"
-    # my_studio_portraits/index
+
     portraits:
+      edit:
+        title: "Editing Session portraits"
       index:
         title: "Step 2. Add Session Portraits for %{name} (%{category})"
       new:
@@ -322,6 +318,18 @@ en:
       menu_shopping_cart: "Shopping Cart"
       menu_chains: "Chains"
       menu_charms: "Charms"
+
+  # users
+  users:
+    index:
+      title: "Listing ClickPLUS Users"
+      new: "New ClickPLUS User"
+    new:
+      title: "Create ClickPLUS User"
+    edit:
+      title: "Editing ClickPLUS User"
+    show:
+      title: "ClickPLUS User"
 
   # override InheritedResources flash messages
   # shopping/purchases
