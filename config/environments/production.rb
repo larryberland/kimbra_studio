@@ -47,7 +47,7 @@ KimbraStudio::Application.configure do
   config.assets.precompile += %w( bootstrap-ie6.min.css bootstrap.css )
   config.assets.precompile += %w( active_admin.css active_admin.js active_admin/print.css )
   config.assets.precompile += %w( platypus_dd.js )
-  config.assets.precompile += %w( fileupload.css fileupload.js xdr.js )
+  config.assets.precompile += %w( fileuploads.css fileuploads.js xdr.js )
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false

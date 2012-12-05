@@ -15,7 +15,6 @@
 #= require active_admin
 #= require ./bootstrap/bootstrap
 #= require ./bootstrap/client-side-validation
-#= require fileuploads
 
 $ ->
   $('.flash_notice').each (index, element) ->
