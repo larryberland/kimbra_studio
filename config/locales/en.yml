@@ -161,8 +161,6 @@ en:
   my_studio_faces_index_title: "Faces Data"
 
   #my_studio/infos/samples, faq
-  my_studio_infos_label_samples: "How It Works"
-  my_studio_infos_label_faq: "FAQ"
   my_studio_infos_label_blog: "Blog"
   my_studio_infos_new_title: "New ClickPLUS Studio Info"
   my_studio_infos_edit_title: "Editing ClickPLUS Studio Info"
@@ -171,24 +169,24 @@ en:
   my_studio_infos_form_legend: "Studio Info"
 
   #my_studio_minisites
-  my_studio_minisites_label: "Branding"
   my_studio_minisites_show_title: "Branding Minisite Info"
   my_studio_minisites_form_legend: "Branding Minisite Page Info"
   my_studio_minisites_show_title: "Branding for your Minisite and Offer Emails"
 
   # my_studio/overviews/new
-  my_studio_overview_title: "Studio Dashboard"
+  my_studio_overview_label_session: "Photo Sessions"
   my_studio_overview_link: "Studio Dashboard"
+  my_studio_overview_link_session: "View Sessions"
+  my_studio_overview_link_staff: "View Staff"
+  my_studio_overview_link_info: "View Info"
+  my_studio_overview_link_studio: "View Studio Info"
+
+  my_studio_overview_title: "Studio Dashboard"
   my_studio_overview_label_dashboard: "Studio Dashboard"
   my_studio_overview_link_dashboard: "View Dashboard"
-  my_studio_overview_label_session: "Photo Sessions"
-  my_studio_overview_link_session: "View Sessions"
   my_studio_overview_label_staff: "Staff"
-  my_studio_overview_link_staff: "View Staff"
   my_studio_overview_label_info: "Info"
-  my_studio_overview_link_info: "View Info"
   my_studio_overview_label_studio: "Studio Info"
-  my_studio_overview_link_studio: "View Studio Info"
   my_studio_overview_label_minisite: "Studio Minisite Info"
   my_studio_overview_link_minisite: "View Studio Minisite Info"
 
@@ -310,6 +308,14 @@ en:
       cancel: "Cancel"
 
   shared:
+    main_header:
+      menu_photo_sessions: "Photo Sessions"
+      menu_dashboard: "Dashboard"
+      menu_minisite:  "Branding"
+      menu_infos_samples: "How It Works"
+      menu_infos_faqs: "FAQ"
+      menu_blog: "Blog"
+
     minisite_header:
       menu_sessions: "Return to sessions list"
       menu_about:    "About %{studio_name}"
