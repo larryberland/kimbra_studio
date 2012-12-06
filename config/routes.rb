@@ -57,6 +57,7 @@ KimbraStudio::Application.routes.draw do
         end
 
       end
+      resources :portraits
     end
     resources :item_sides do
           member do

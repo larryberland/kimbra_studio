@@ -246,14 +246,6 @@ en:
           title: "Editing Offer Email"
 
   minisite:
-    offers:
-      show:
-        front: "Front"
-        back:   "Back"
-        adjust: "Adjust Photo"
-      index:
-        shopping_cart_list: "Your Shopping Cart Items"
-        clickplus_list_html: "Add to Cart or Adjust Photo"
     items:
       index:
         title: "Edit Your Custom Items"
@@ -269,6 +261,21 @@ en:
       in_shopping_cart: "In your shopping cart"
     wide_image:
       in_shopping_cart: "In your shopping cart"
+
+    offers:
+      show:
+        front: "Front"
+        back:   "Back"
+        adjust: "Adjust Photo"
+      index:
+        shopping_cart_list: "Your Shopping Cart Items"
+        clickplus_list_html: "Add to Cart or Adjust Photo"
+        upload_photo: "Upload Your Own Photo"
+
+    portraits:
+      index:
+        title: "Upload New Photos"
+        add_files: "Add Photos"
 
   my_studio:
     # my_studio/dashboard

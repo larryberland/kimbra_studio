@@ -3,7 +3,7 @@
 <div class="row span10">
 
   <% if shopping_cart_list.size > 0 %>
-      <h3><%=t('.shopping_cart_list')%></h3>
+      <h3><%= t('.shopping_cart_list') %></h3>
       <% shopping_cart_list.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
           <% if offer.width.to_i < 250 %>
               <%= render 'minisite/narrow_image', offer: offer, studio: @studio %>
@@ -24,6 +24,16 @@
       <% end %>
   <% end %>
 </div>
+
+<% if is_client? %>
+    <div class="row span10">
+      <%= button_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: 'Add Your Own Photos') %>
+    </div>
+
+    <div class="row span10">
+      &nbsp;
+    </div>
+<% end %>
 
 <% if is_admin? %>
     <% btn_message = @admin_customer_email.sent_at? ? "This email already sent on #{time_short_index @admin_customer_email.sent_at}. Click to send again." : 'If all offers are fixed, click me to send the offer email!' %>
