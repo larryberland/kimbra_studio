@@ -10,7 +10,9 @@
 
   <%= render 'shared/error_messages', record: @admin_customer_offer %>
 
-  <% url = @admin_customer_offer.id.nil? ? admin_customer_email_offers_path(@email) : admin_customer_email_offer_path(@email, @admin_customer_offer) %>
+  <% url = @admin_customer_offer.id.nil? ?
+          admin_customer_email_offers_path(@email) :
+          admin_customer_email_offer_path(@email, @admin_customer_offer) %>
   <%= form_for(@admin_customer_offer, :url => url, :html => {multipart: true, class: "form-horizontal"}) do |f| %>
 
       <div class="control-group">

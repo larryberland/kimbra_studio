@@ -1,0 +1,105 @@
+<% content_for :head do %>
+    <%= stylesheet_link_tag "bootstrap" %>
+    <%= javascript_include_tag 'platypus_dd' %>
+
+    <style type="text/css">
+        div.form-actions {
+            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+            font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
+            color: <%= @studio.try(:minisite).try(:font_color) %>;
+        }
+        .dd-select {
+            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+            font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
+            color: <%= @studio.try(:minisite).try(:font_color) %>;
+
+        }
+        div#myDropdown li,
+        div#myDropdownPortrait li{
+            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+            font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
+            color: <%= @studio.try(:minisite).try(:font_color) %>;
+
+        }
+        .dd-option-text{
+            color: <%= @studio.try(:minisite).try(:font_color) %>;
+        }
+        .dd-option-selected, .dd-selected{
+            color: <%= @studio.try(:minisite).try(:font_color) %>;
+            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        }
+    </style>
+
+<% end %>
+
+<% select_id = "admin_customer_offer_piece_id" %>
+<% select_portrait_id = "admin_customer_offer_portrait_id" %>
+
+<div class="platypus-form span8">
+
+  <%= render 'shared/error_messages', record: @admin_customer_offer %>
+
+  <% url = @admin_customer_offer.new_record? ?
+          minisite_email_offers_path(@admin_customer_email) :
+          minisite_email_offer_path(@admin_customer_email, @admin_customer_offer) %>
+  <%= form_for(@admin_customer_offer, :url => url, :html => {multipart: true, class: "form-horizontal"}) do |f| %>
+
+      <%= f.hidden_field :frozen_offer %>
+
+      <%= f.hidden_field :piece_id %>
+      <div class="control-group">
+        <%= f.label :piece_id, 'Kimbra Piece', class: 'control-label' %>
+        <div class="controls">
+          <div id="myDropdown"></div>
+        </div>
+      </div>
+
+      <%= f.hidden_field :portrait_id %>
+      <div class="control-group">
+        <%= f.label :portrait_id, 'Portrait', class: 'control-label' %>
+        <div class="controls">
+          <div id="myDropdownPortrait"></div>
+        </div>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit id: 'my_submit', class: "btn btn-primary" %>
+        <span id="spinner" style="display:none" class='spinner'></span>
+      </div>
+  <% end %>
+  <!-- platypus-form -->
+</div>
+
+
+<script type="text/javascript">
+    //Code Starts
+
+    var ddData =<%=kimbra_piece_ddslick_data(@admin_customer_offer)%>;
+    var ddDataPortrait =<%=portrait_ddslick_data(@admin_customer_offer)%>;
+
+    $('#myDropdown').ddslick({
+        data:ddData,
+        width:300,
+        selectText:"Select your preferred Kimbra Piece",
+        defaultSelectedIndex: <%=@ddslick_default_selected_index %>,
+        imagePosition:"right",
+        onSelected:function (selectedData) {
+            //callback function: do something with selectedData;
+            $('#<%=select_id%>').val(selectedData.selectedData.value);
+            return;
+        }
+    });
+    $('#myDropdownPortrait').ddslick({
+        data:ddDataPortrait,
+        width:300,
+        selectText:"Select your preferred Portrait",
+        imagePosition:"right",
+        onSelected:function (selectedData) {
+            //callback function: do something with selectedData;
+            $('#<%=select_portrait_id%>').val(selectedData.selectedData.value);
+            return;
+        }
+    });
+    //Code Ends
+
+</script>

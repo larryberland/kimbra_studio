@@ -27,10 +27,15 @@
 
 <% if is_client? %>
     <div class="row span10">
-      <%= button_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: 'Add Your Own Photos') %>
-    </div>
+      <div class="span3">
+        <%= button_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo_title')) %>
+      </div>
 
-    <div class="row span10">
+      <div class="span6">
+        <%= button_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
+      </div>
+    </div>
+    <div>
       &nbsp;
     </div>
 <% end %>

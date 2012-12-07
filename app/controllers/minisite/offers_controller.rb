@@ -30,8 +30,8 @@ module Minisite
       end
 
       # only show charms that have not already been added to their offers page
-      existing_offers = @admin_customer_offers.collect{|r|r.piece.id}
-      @pieces = Admin::Merchandise::Piece.non_photo_charms.all.select{|p| !existing_offers.include?(p.id)}
+      existing_offers = @admin_customer_offers.collect { |r| r.piece.id }
+      @pieces         = Admin::Merchandise::Piece.non_photo_charms.all.select { |p| !existing_offers.include?(p.id) }
 
       @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
       @storyline.describe 'Viewing charms page.'
@@ -52,8 +52,8 @@ module Minisite
       end
 
       # only show charms that have not already been added to their offers page
-      existing_offers = @admin_customer_offers.collect{|r|r.piece.id}
-      @pieces = Admin::Merchandise::Piece.for_chains.all.select{|p| !existing_offers.include?(p.id)}
+      existing_offers = @admin_customer_offers.collect { |r| r.piece.id }
+      @pieces         = Admin::Merchandise::Piece.for_chains.all.select { |p| !existing_offers.include?(p.id) }
 
       @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
       @storyline.describe 'Viewing chains page.'
@@ -78,7 +78,13 @@ module Minisite
     # GET /minisite/offers/new
     # GET /minisite/offers/new.json
     def new
-      @admin_customer_offer = Admin::Customer::Offer.new(:email => @email)
+      @storyline.describe "New email offer #{@admin_customer_email.my_studio_session.client.email}"
+      if @admin_customer_email
+
+        @admin_customer_offer = Admin::Customer::Offer.new(email: @admin_customer_email)
+
+      end
+      @admin_customer_offer = Admin::Customer::Offer.new(email: @admin_customer_email)
       respond_to do |format|
         format.html # new.html.erb
         format.json { render json: @admin_customer_offer }
@@ -93,12 +99,29 @@ module Minisite
     # POST /minisite/offers
     # POST /minisite/offers.json
     def create
+      # LDB: Changing this pretty sure this was just copied
+      #      from admin_customer_offers
+      # sure seems like i need a generate here with the portrait etc...
       @admin_customer_offer       = Admin::Customer::Offer.new(params[:admin_customer_offer])
-      @admin_customer_offer.email = @email
+      @admin_customer_offer.email = @admin_customer_email
+
+      result = @admin_customer_offer.save
+      @admin_customer_offer.on_create if result
+
       respond_to do |format|
-        if @admin_customer_offer.save
-          format.html { redirect_to admin_customer_email_offer_url(@email, @admin_customer_offer), notice: 'Offer was successfully created.' }
-          format.json { render json: admin_customer_email_offer_url(@email, @admin_customer_offer), status: :created, location: @admin_customer_offer }
+        if result
+          url = if @admin_customer_offer.has_picture?
+                  if @admin_customer_offer.items.size > 1
+                    minisite_offer_items_path(@admin_customer_offer)
+                  else
+                    edit_minisite_item_side_path(@admin_customer_offer.items.first.front)
+                  end
+                else
+                  minisite_email_offer_url(@admin_customer_email, @admin_customer_offer)
+                end
+
+          format.html { redirect_to url, notice: 'Offer was successfully created.' }
+          format.json { render json: minisite_email_offer_url(@admin_customer_email, @admin_customer_offer), status: :created, location: @admin_customer_offer }
         else
           format.html { render action: "new" }
           format.json { render json: @admin_customer_offer.errors, status: :unprocessable_entity }
@@ -122,7 +145,7 @@ module Minisite
     end
 
     # DELETE /minisite/offers/1t7t7rye
-            # DELETE /minisite/offers/1t7t7rye.json
+    # DELETE /minisite/offers/1t7t7rye.json
     def destroy
       @admin_customer_offer.destroy
       respond_to do |format|
