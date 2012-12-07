@@ -23,24 +23,25 @@
           <% end %>
       <% end %>
   <% end %>
+
+  <div class="row span8">
+    <% if is_client? %>
+        <!-- only clients allowed to upload and select new piece -->
+        <div class="row span7">
+          <%= button_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo_title')) %>
+        </div>
+        <br>
+
+        <div class="row span7">
+          <%= button_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
+        </div>
+    <% elsif is_admin? %>
+        <div class="row span7">
+          <% btn_message = @admin_customer_email.sent_at? ? "This email already sent on #{time_short_index @admin_customer_email.sent_at}. Click to send again." : 'If all offers are fixed, click me to send the offer email!' %>
+          <%= button_to btn_message, send_offers_admin_customer_email_url(@admin_customer_email), method: :post %>
+        </div>
+    <% end %>
+    <br>
+  </div>
 </div>
 
-<% if is_client? %>
-    <div class="row span10">
-      <div class="span3">
-        <%= button_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo_title')) %>
-      </div>
-
-      <div class="span6">
-        <%= button_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
-      </div>
-    </div>
-    <div>
-      &nbsp;
-    </div>
-<% end %>
-
-<% if is_admin? %>
-    <% btn_message = @admin_customer_email.sent_at? ? "This email already sent on #{time_short_index @admin_customer_email.sent_at}. Click to send again." : 'If all offers are fixed, click me to send the offer email!' %>
-    <%= button_to btn_message, send_offers_admin_customer_email_url(@admin_customer_email), method: :post %>
-<% end %>

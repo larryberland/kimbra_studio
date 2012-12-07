@@ -152,6 +152,7 @@ en:
 
   # minisite/emails/show
   minisite_your_collection: "Your Collection"
+  minisite_offers_create_success: "Your Custom Heirloom Piece was succesfuly created."
 
   # my_studio/clients
   my_studio_clients_show_title: "Client Info"
@@ -276,6 +277,8 @@ en:
         new_offer_title: "Design your very own custom heirloom piece"
       new:
         title: "Below are some examples of unique designs that we felt were creative and could help you design your very own custom heirloom piece."
+      new_form:
+        submit: "Create My Custom Heirloom Piece"
 
     portraits:
       index:

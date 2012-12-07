@@ -79,11 +79,6 @@ module Minisite
     # GET /minisite/offers/new.json
     def new
       @storyline.describe "New email offer #{@admin_customer_email.my_studio_session.client.email}"
-      if @admin_customer_email
-
-        @admin_customer_offer = Admin::Customer::Offer.new(email: @admin_customer_email)
-
-      end
       @admin_customer_offer = Admin::Customer::Offer.new(email: @admin_customer_email)
       respond_to do |format|
         format.html # new.html.erb
@@ -120,7 +115,7 @@ module Minisite
                   minisite_email_offer_url(@admin_customer_email, @admin_customer_offer)
                 end
 
-          format.html { redirect_to url, notice: 'Offer was successfully created.' }
+          format.html { redirect_to url, notice: t(:minisite_offers_create_success) }
           format.json { render json: minisite_email_offer_url(@admin_customer_email, @admin_customer_offer), status: :created, location: @admin_customer_offer }
         else
           format.html { render action: "new" }
