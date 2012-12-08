@@ -13,4 +13,33 @@ class FacebookUser < ActiveRecord::Base
       user.save!
     end
   end
+
+  # usage
+  # u = FacebookUser.first
+  # u.facebook.get_object("me")
+  # u.facebook.get_connection("me", "television")
+  # u.facebook.get_connection("me", "permissions")
+  def facebook
+    @facebook ||= Koala::Facebook::API.new(oauth_token)
+  end
+
+  def share(offer)
+    if share?
+      facebook.put_wall_post("testing KimbraClickPLUS")
+    end
+  rescue Koala::Facebook::APIError => e
+    logger.info e.to_s
+    nil
+  end
+
+  def permissions
+    @permissions ||= facebook.get_connection("me", "permissions").first
+    puts @permissions.inspect
+    @permissions
+  end
+
+  def share?
+    permissions["publish_stream"] == 1 ? true : false if permissions.keys.include?("publish_stream")
+  end
+
 end

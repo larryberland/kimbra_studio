@@ -50,7 +50,9 @@ gem 'activeadmin'
 
 gem 'bloggy'
 
+# Facebook gems
 gem 'omniauth-facebook'
+gem 'koala'
 
 # Gems used only for assets and not required
 # in production environments by default.

@@ -13,6 +13,12 @@ module Shopping
 
     def create
 
+      if params[:shopping_item][:share_facebook] == "true"
+        if (current_user_facebook)
+          current_user_facebook.share(@admin_customer_offer)
+        end
+      end
+
       item_already_in_cart = @cart.find_item(@admin_customer_offer.id) if @admin_customer_ofer
 
       if params[:shopping_item] && params[:shopping_item][:piece_id]

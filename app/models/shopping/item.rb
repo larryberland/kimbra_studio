@@ -9,7 +9,7 @@ class Shopping::Item < ActiveRecord::Base
                   :quantity,:option, :option_selected,
                   :piece_id # kimbra non photo piece we are going to turn into an offer
 
-  attr_accessor :piece_id
+  attr_accessor :piece_id, :share_facebook
 
   accepts_nested_attributes_for :offer, :cart
 
