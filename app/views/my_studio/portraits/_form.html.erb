@@ -15,11 +15,16 @@
 <div class='row-fluid span12'>
 
   <div class="span8">
+
+    <div id='portrait_messages_for_studio' class="lead">
+      <%= render 'upload_status_messages' %>
+    </div>
+
     <%= form_for(MyStudio::Portrait.new, url: my_studio_session_portraits_path(@my_studio_session), html: {multipart: true, id: 'fileupload'}) do |f| %>
 
         <%= f.hidden_field :my_studio_session_id %>
 
-        <div class="row fileupload-buttonbar">
+        <div class="fileupload-buttonbar">
 
             <span class="btn btn-success fileinput-button">
               <i class="icon-plus icon-white"></i>
@@ -207,16 +212,18 @@
 <!--[if gte IE 8]><%= javascript_include_tag "xdr.js" %><![endif]-->
 
 <%= coffee_script_tag do %>
-    # After portraits are added or deleted, update the studio message at the top of the page.
-    $ ->
+# NOTE: Spacing is critical here if you format this file make sure
+#       the there are tab stops for methods $ -> in each row
+# After portraits are added or deleted, update the studio message at the top of the page.
+$ ->
     $('#fileupload').live 'fileuploaddone', ->
-    request = $.get '/my_studio/sessions/<%= @my_studio_session.id %>/portraits/upload_status_messages.js'
-    request.success (data) -> data
-    request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "
-    <br/>Error: #{errorThrown} Status: #{textStatus}"
+        request = $.get '/my_studio/sessions/<%= @my_studio_session.id %>/portraits/upload_status_messages.js'
+        request.success (data) -> data
+        request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "
+        <br/>Error: #{errorThrown} Status: #{textStatus}"
     $('#fileupload').live 'fileuploaddestroy', ->
-    request = $.get '/my_studio/sessions/<%= @my_studio_session.id %>/portraits/upload_status_messages.js'
-    request.success (data) -> data
-    request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "
-    <br/>Error: #{errorThrown} Status: #{textStatus}"
+        request = $.get '/my_studio/sessions/<%= @my_studio_session.id %>/portraits/upload_status_messages.js'
+        request.success (data) -> data
+        request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "
+        <br/>Error: #{errorThrown} Status: #{textStatus}"
 <% end %>

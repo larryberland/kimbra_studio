@@ -1,11 +1,4 @@
-<div class='row span12'>
+<h2><%= t('.title', name: @my_studio_session.client.name, category: @my_studio_session.category.name) %></h2>
 
-  <h2><%= t('.title', name: @my_studio_session.client.name, category: @my_studio_session.category.name) %></h2>
+<%= render 'form' %>
 
-  <div id='portrait_messages_for_studio' class='lead'>
-    <%= render 'upload_status_messages' %>
-  </div>
-
-  <%= render 'form' %>
-
-</div>
