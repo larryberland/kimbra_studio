@@ -1,21 +1,25 @@
 module MyStudio::SessionsHelper
 
   def upload_link(session)
+    title = t(:my_studio_sessions_upload_view_link_title)
     url   = my_studio_session_portraits_path(session)
-    name = session.portraits.count.to_words
-    return link_to(name, url, title: 'View Session Portraits') if is_admin?
-    html_options = {method: :get, class: "btn btn-success"}
-    if (session.finished_uploading_at)
-      # studio has marked this as finished so no more uploading
-      link_to name, url, title: 'View Session Portraits'
+    name  = session.portraits.count.to_words
+    if is_admin?
+      link_to(name, url, title: title)
     else
-      case session.portraits.count
-        when 0
-          button_to t(:my_studio_sessions_upload_now_link), url, html_options
-        when 1..MyStudio::Session::BEST_PORTRAITS
-          button_to t(:my_studio_sessions_upload_more_link), url, html_options
-        else
-          link_to name, url, title: 'View Session Portraits'
+      if (session.finished_uploading_at)
+        # studio has marked this as finished so no more uploading
+        link_to name, url, title: title
+      else
+        html_options = {method: :get, class: "btn btn-success", title: title}
+        case session.portraits.count
+          when 0
+            button_to t(:my_studio_sessions_upload_now_link), url, html_options
+          when 1..MyStudio::Session::BEST_PORTRAITS
+            button_to t(:my_studio_sessions_upload_more_link), url, html_options
+          else
+            link_to name, url, title: title
+        end
       end
     end
   end

@@ -113,6 +113,7 @@
 </div>
 
 <script>
+    var session_finished = <%=@my_studio_session.finished_uploading_at ? true : false%>;
     var fileUploadErrors = {
         maxFileSize:'File is too big',
         minFileSize:'File is too small',
@@ -187,11 +188,12 @@
     <td class="size">{%=o.formatFileSize(file.size)%}</td>
     <td colspan='2'></td>
     {% } %}
-    <td class="delete">
+    <td class="delete">{% if (!session_finished) { %}
       <button class="btn btn-danger" data-type="{%=file.delete_type%}" data-url="{%=file.delete_url%}">
         <i class="icon-trash icon-white"></i>
         <%= t('photos.template.delete') %>
       </button>
+      {% } %}
     </td>
   </tr>
   {% } %}

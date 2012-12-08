@@ -198,12 +198,18 @@ en:
   my_studio_sessions_edit_link: "Edit ClickPLUS Photo Session"
   my_studio_sessions_index_title: "ClickPLUS Photo Sessions"
   my_studio_sessions_show_title: "Session Info"
-  my_studio_sessions_upload_now_link: "Upload Portraits Now!"
-  my_studio_sessions_upload_more_link: "Upload more portraits"
-  my_studio_sessions_complete_link: "Portraits are ready!"
-  my_studio_sessions_complete_title: "Click to Process my email! I have uploaded a good selection of portraits."
   my_studio_sessions_offer_email_link: "ClickPLUS work queue %{length}"
   my_studio_sessions_finished_uploading_notice_html: "Thanks! We'll start photoshopping those portraits into Kimbra's jewelry pieces soon.<br>Your Photo Session has been placed in the ClickPLUS Work Queue.<br>Check back shortly to View your Client's Offer Email."
+
+  my_studio_sessions_complete_link: "Process my offer email !"
+  my_studio_sessions_complete_link2: "Process my offer email! I have uploaded a good selection of portraits..."
+  my_studio_sessions_complete_title: "Click to Process my offer email! I have uploaded a good selection of portraits."
+
+  my_studio_sessions_upload_now_link: "Upload Portraits Now!"
+  my_studio_sessions_upload_more_link: "Upload more portraits"
+  my_studio_sessions_upload_view_link: "Click to View Photo Session Portraits"
+  my_studio_sessions_upload_view_link_title: "Click to View Photo Session Portraits"
+
   # my_studio/staffers
   my_studio_staffers_new_title: "New Studio Staff"
   my_studio_staffers_new_link: "New Studio Staff"
@@ -312,6 +318,9 @@ en:
         title: "Step 2. Add Session Portraits for %{name} (%{category})"
       new:
         title: "Upload Session Portrait for %{name}"
+    sessions:
+      index:
+        view_email: "Click to View Offer Email"
 
   photos:
     add_files: "Add Portraits..."
