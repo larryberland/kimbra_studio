@@ -27,57 +27,58 @@
               <%= f.file_field :file, :multiple => true %>
             </span>
 
-            <button type="submit" class="btn btn-primary start">
-              <i class="icon-upload icon-white"></i>
-              <%= t('photos.start_upload') %>
-            </button>
+          <button type="submit" class="btn btn-primary start">
+            <i class="icon-upload icon-white"></i>
+            <%= t('photos.start_upload') %>
+          </button>
 
-            <button type="reset" class="btn btn-warning cancel">
-              <i class="icon-ban-circle icon-white"></i>
-              <%= t('photos.cancel_upload') %>
-            </button>
+          <button type="reset" class="btn btn-warning cancel">
+            <i class="icon-ban-circle icon-white"></i>
+            <%= t('photos.cancel_upload') %>
+          </button>
 
-            <!--<button type="button" class="btn btn-danger delete">-->
-            <!--<i class="icon-trash icon-white"></i>-->
-            <!--<%= t('photos.delete_selected') %>-->
-            <!--</button>-->
-            <%# label_tag 'select_all', 'Select all: ', style: 'display: inline-block' %>
-            <!--<input type="checkbox" class="toggle" id="select_all">-->
-            <!-- The global progress information -->
+          <!--<button type="button" class="btn btn-danger delete">-->
+          <!--<i class="icon-trash icon-white"></i>-->
+          <!--<%= t('photos.delete_selected') %>-->
+          <!--</button>-->
+          <%# label_tag 'select_all', 'Select all: ', style: 'display: inline-block' %>
+          <!--<input type="checkbox" class="toggle" id="select_all">-->
+          <!-- The global progress information -->
 
-            <br>
-            <div class="span4 fileupload-progress fade">
-              <!-- The global progress bar -->
-              <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                <div class="bar" style="width:0%;"></div>
-              </div>
-              <!-- The extended global progress information -->
-              <div class="progress-extended">&nbsp;</div>
+          <br>
+
+          <div class="span4 fileupload-progress fade">
+            <!-- The global progress bar -->
+            <div class="progress progress-success progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+              <div class="bar" style="width:0%;"></div>
+            </div>
+            <!-- The extended global progress information -->
+            <div class="progress-extended">&nbsp;</div>
 
             <!-- The loading indicator is shown during file processing -->
             <div class="fileupload-loading"></div>
           </div>
         </div>
 
-          <!-- The table listing the files available for upload/download -->
-          <table role="presentation" class="table table-striped table-bordered">
-            <thead>
-            <tr>
-              <th>Preview</th>
-              <th>Name</th>
-              <th>Size</th>
-              <th colspan='2'></th>
-              <th>Action</th>
-            </tr>
-            </thead>
-            <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
-          </table>
+        <!-- The table listing the files available for upload/download -->
+        <table role="presentation" class="table table-striped table-bordered">
+          <thead>
+          <tr>
+            <th>Preview</th>
+            <th>Name</th>
+            <th>Size</th>
+            <th colspan='2'></th>
+            <th>Action</th>
+          </tr>
+          </thead>
+          <tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+        </table>
 
     <% end %>
   </div>
 
   <div class="span4">
-    <%= render "my_studio/infos/samples" %>
+    <%= render "my_studio/infos/samples_offer_email" %>
   </div>
 </div>
 

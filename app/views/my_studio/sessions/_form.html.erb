@@ -1,43 +1,50 @@
-<div class="platypus-form">
+<div class="row-fluid span12">
 
-  <%= render 'shared/error_messages', record: @my_studio_session %>
+  <div class="platypus-form span7">
 
-  <%= form_for(@my_studio_session, validate: true, html: {class: 'form-horizontal'}) do |f| %>
+    <%= render 'shared/error_messages', record: @my_studio_session %>
 
-      <%= render "my_studio/clients/form", f: f, client: @my_studio_session.client %>
+    <%= form_for(@my_studio_session, validate: true, html: {class: 'form-horizontal'}) do |f| %>
 
-      <% if is_admin? %>
-          <div class="control-group">
-            <div class="controls">
-              <label class="checkbox">
-                <%= f.check_box :active %>Active?
-              </label>
-              <span class="help-inline">Uncheck this to remove all pictures for this Session from active email marketing.</span>
+        <%= render "my_studio/clients/form", f: f, client: @my_studio_session.client %>
+
+        <% if is_admin? %>
+            <div class="control-group">
+              <div class="controls">
+                <label class="checkbox">
+                  <%= f.check_box :active %>Active?
+                </label>
+                <span class="help-inline">Uncheck this to remove all pictures for this Session from active email marketing.</span>
+              </div>
             </div>
+        <% end %>
+
+        <div class="control-group ui-widget">
+          <%= f.label :session_at, 'Session Date', class: "control-label" %>
+          <div class="controls">
+            <%= f.text_field :session_at, class: "datepicker" %>
           </div>
-      <% end %>
-
-      <div class="control-group ui-widget">
-        <%= f.label :session_at, 'Session Date', class: "control-label" %>
-        <div class="controls">
-          <%= f.text_field :session_at, class: "datepicker" %>
         </div>
-      </div>
 
-      <div class="control-group">
-        <%= f.label :category_id, class: "control-label" %>
-        <div class="controls">
-          <%= f.select :category_id, @categories, prompt: '- Select Category -' %>
-          <span class="help-inline">This helps us find candidate pictures for special event marketing, such as Mothers Day, Christmas, etc.</span>
+        <div class="control-group">
+          <%= f.label :category_id, class: "control-label" %>
+          <div class="controls">
+            <%= f.select :category_id, @categories, prompt: '- Select Category -' %>
+            <span class="help-inline">This helps us find candidate pictures for special event marketing, such as Mothers Day, Christmas, etc.</span>
+          </div>
         </div>
-      </div>
 
-      <div class="actions controls">
-        <%= f.submit class: "btn btn-primary" %>
-        <span id="spinner" style="display:none" class='spinner'></span>
-      </div>
+        <div class="actions controls">
+          <%= f.submit class: "btn btn-primary" %>
+          <span id="spinner" style="display:none" class='spinner'></span>
+        </div>
 
-  <% end %>
+    <% end %>
+  </div>
+
+  <div class="span4">
+    <%= render "my_studio/infos/samples_herald" %>
+  </div>
 </div>
 
 <%= coffee_script_tag do %>
