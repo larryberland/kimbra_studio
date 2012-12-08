@@ -12,12 +12,6 @@
         div.form-actions{
             text-align: left;
         }
-        .dd-select {
-            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-            font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
-            color: <%= @studio.try(:minisite).try(:font_color) %>;
-
-        }
 
         div#myDropdown li,
         div#myDropdownPortrait li {
@@ -27,14 +21,36 @@
 
         }
 
+        .dd-select, .dd-selected{
+            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+            font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
+            color: <%= @studio.try(:minisite).try(:font_color) %>;
+        }
+
+        .dd-option {
+            color: <%= @studio.try(:minisite).try(:font_color) %>;
+            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        }
+
         .dd-option-text {
             color: <%= @studio.try(:minisite).try(:font_color) %>;
         }
 
-        .dd-option-selected, .dd-selected {
+        .dd-option-selected{
             color: <%= @studio.try(:minisite).try(:font_color) %>;
-            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
         }
+
+        a.dd-option:hover{
+            background-color: white;
+        }
+        a.dd-option:hover label,
+        a.dd-option:hover small{
+            color: black;
+        }
+        a.dd-selected:hover label{
+            color: white;
+        }
+
     </style>
 
 <% end %>
