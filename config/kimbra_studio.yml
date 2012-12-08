@@ -27,6 +27,8 @@ development: &non_production_settings
     :name: admin@kimbraclickplus.com
     :secret_key: '4osP7DgGMXX3Z4CWgkvT5q3EPBldxfss'
     :publishable_key: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs'
+  :facebook:
+    :name: 'KimbraStudiosClickPlus'
 
 test:
   <<: *non_production_settings

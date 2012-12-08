@@ -56,7 +56,20 @@
 
 <% content_for :page_title, "#{studio.name} Photo Jewelry Offer" %>
 
-<img id="logo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+<div class="row span10">
+
+    <img id="logo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+  <div id="user_facebook_nav" class="span3" style="float:right">
+    <% if current_user_facebook %>
+        <%= image_tag current_user_facebook.image_url %>
+        Signed in as <strong><%= current_user_facebook.name %></strong>!
+        <%= link_to "Sign out Facebook", facebook_signout_path, id: "sign_out" %>
+    <% else %>
+        <%= link_to "Sign into Facebook...", '/auth/facebook', {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
+    <% end %>
+  </div>
+</div>
+
 
 <%# do not show the navigation bar if Kimbra is entering the delivery tracking number  %>
 <% unless controller_name == 'carts' && action_name == 'edit_delivery_tracking' %>

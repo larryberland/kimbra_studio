@@ -1,8 +1,14 @@
 KimbraStudio::Application.routes.draw do
 
+  match 'auth/:provider/callback', to: 'facebook_sessions#create'
+  match 'auth/failure', to: redirect('/')
+  match 'facebook_signout', to: 'facebook_sessions#destroy', as: 'facebook_signout'
+
   ActiveAdmin.routes(self)
 
   root :to => "welcome#index"
+
+  resources :facebook_sessions, only: [:create, :destroy]
 
   resource :about do
     get :show

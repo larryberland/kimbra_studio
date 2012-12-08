@@ -60,6 +60,11 @@ class ApplicationController < ActionController::Base
 
   private #=========================================================================
 
+  def current_user_facebook
+    @current_user_facebook ||= FacebookUser.find(session[:facebook_user_id]) if session[:facebook_user_id]
+  end
+  helper_method :current_user_facebook
+
   def authenticate_admin!
     current_user && current_user.admin?
   end
