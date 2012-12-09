@@ -30,11 +30,6 @@
         <div class="row span7">
           <%= button_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo_title')) %>
         </div>
-        <br>
-
-        <div class="row span7">
-          <%= button_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
-        </div>
     <% elsif is_admin? %>
         <div class="row span7">
           <% btn_message = @admin_customer_email.sent_at? ? "This email already sent on #{time_short_index @admin_customer_email.sent_at}. Click to send again." : 'If all offers are fixed, click me to send the offer email!' %>

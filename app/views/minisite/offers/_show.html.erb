@@ -47,6 +47,7 @@
       <% end %>
       <%= button_to t('.adjust'), edit_url, method: :get if @admin_customer_offer.adjust_picture? %>
 
+
       <% if current_user_facebook %>
           <p class="share_facebook-item">
             <span id='<%= "share_facebook_item_#{@admin_customer_offer.id}" %>'></span>
@@ -77,4 +78,8 @@
       <% end %>
   <% end if @admin_customer_offer.piece.try(:description_markup).present? %>
 
+      <div class="row span10">
+        <%= link_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
+      </div>
+  <br><br>
 </div>

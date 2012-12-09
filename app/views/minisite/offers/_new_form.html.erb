@@ -70,7 +70,7 @@
     <%= f.hidden_field :piece_id %>
 
     <div class="control-group">
-      <%= f.label :piece_id, 'Kimbra Piece', class: 'control-label' %>
+      <%# f.label :piece_id, 'Kimbra Piece', class: 'control-label' %>
       <div class="controls">
         <div id="myDropdown"></div>
       </div>
@@ -78,7 +78,7 @@
 
     <%= f.hidden_field :portrait_id %>
     <div class="control-group">
-      <%= f.label :portrait_id, 'Portrait', class: 'control-label' %>
+      <%# f.label :portrait_id, 'Portrait', class: 'control-label' %>
       <div class="controls">
         <div id="myDropdownPortrait"></div>
       </div>
@@ -103,7 +103,6 @@
         data:ddData,
         width:300,
         selectText:"Select your preferred Kimbra Piece",
-        defaultSelectedIndex: <%=@ddslick_default_selected_index %>,
         imagePosition:"right",
         onSelected:function (selectedData) {
             //callback function: do something with selectedData;
