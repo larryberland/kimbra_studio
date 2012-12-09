@@ -5,10 +5,10 @@
       <% if is_admin? %>
           <th><span class='explainer' title='Need at least 2 portraits to generate an email.'>Actions</span></th>
           <th>New Portrait?</th>
+          <th>Complete?</th>
       <% end %>
-      <th>Complete?</th>
-      <th>Portraits <i class="icon-camera"> </i> </th>
-      <th>Offer Email <i class="icon-envelope"> </i> </th>
+      <th>Portraits <i class="icon-camera"> </i></th>
+      <th>Offer Email <i class="icon-envelope"> </i></th>
       <% if is_admin? %>
           <th>Studio</th>
       <% end %>
@@ -23,8 +23,8 @@
           <% if is_admin? %>
               <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
               <td title="portraits have been uploaded in last 2 days"><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
+              <td class="first span2"><%= complete?(session) %></td>
           <% end %>
-          <td class="first span2"><%= complete?(session) %></td>
           <td><%= upload_link(session) %></td>
           <td>
             <% if session.emails.last %>
