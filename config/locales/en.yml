@@ -316,6 +316,16 @@ en:
         body: "The Herald Email introduces your client to custom heirloom photo jewelry and helps build excitement and
         curiosity about the offer email that will be coming soon. ClickPLUS sends the Herald Email to your client after
         you upload some portraits in the next step."
+      samples_offer_email:
+        title: "Your client's portraits are used to create custom heirloom jewelry pieces for the offer email like the sample below."
+        body_html: "When you click the <i>I'm finished!</i> button, your portraits are sent to the ClickPLUS work queue:
+                    <ul>
+                      <li>portraits are matched to three jewelry pieces that are selected from our featured and seasonal inventory</li>
+                      <li>portriats are cropped, positioned, scaled for maximum effect</li>
+                      <li>the offer email is personalized with your studio's branding</li>
+                      <li>information is sent and updated to your Dashboard</li>
+                      <li>you will be able to view your client's offer email</li>
+                    </ul>"
 
     portraits:
       edit:
