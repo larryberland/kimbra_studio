@@ -51,7 +51,7 @@ class MyStudio::Session < ActiveRecord::Base
   end
 
   def title
-    "#{category.name} #{client.name}"
+    "#{client.name} (#{category.name})"
   end
 
   def to_error_messages
@@ -79,10 +79,10 @@ class MyStudio::Session < ActiveRecord::Base
 
   def email_ready?
     # portrait_list.count > 2
-    finished_uploading_at?
+    finished_uploading_at.present?
   end
 
-          # allow the forms to send in a text name
+  # allow the forms to send in a text name
   def category_name=(category_name)
     self.category = Category.find_or_initialize_by_name(category_name)
   end

@@ -7,13 +7,12 @@
           <th>New Portrait?</th>
           <th>Complete?</th>
       <% end %>
-      <th>Portraits <i class="icon-camera"> </i></th>
+      <th>Step 1. Photo Session</th>
+      <th>Step 2. Portraits <i class="icon-camera"> </i></th>
       <th>Offer Email <i class="icon-envelope"> </i></th>
       <% if is_admin? %>
           <th>Studio</th>
       <% end %>
-      <th>Photo Session</th>
-      <th>Client</th>
       <th>Session Date</th>
     </tr>
     </thead>
@@ -25,6 +24,7 @@
               <td title="portraits have been uploaded in last 2 days"><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
               <td class="first span2"><%= complete?(session) %></td>
           <% end %>
+          <td><%= link_to session.try(:title), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
           <td><%= upload_link(session) %></td>
           <td>
             <% if session.emails.last %>
@@ -32,14 +32,12 @@
             <% elsif session.finished_uploading_at %>
                 <%= t(:my_studio_sessions_offer_email_link, length: time_ago_in_words(session.finished_uploading_at)) %>
             <% else %>
-                &nbsp;
+                Waiting for you to upload more portraits.
             <% end %>
           </td>
           <% if is_admin? %>
               <td><%= link_to session.try(:studio).try(:name), studio_path(session.studio), title: t(:studios_show_link) %></td>
           <% end %>
-          <td><%= link_to session.try(:name), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %></td>
-          <td><%= mail_to session.client.email, session.client.name, {title: session.client.email} %></td>
           <td><%= date_short session.session_at %></td>
         </tr>
     <% end %>

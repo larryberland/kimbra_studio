@@ -199,7 +199,7 @@ en:
   my_studio_sessions_edit_link: "Edit ClickPLUS Photo Session"
   my_studio_sessions_index_title: "ClickPLUS Photo Sessions"
   my_studio_sessions_show_title: "Session Info"
-  my_studio_sessions_offer_email_link: "ClickPLUS work queue %{length}"
+  my_studio_sessions_offer_email_link: "ClickPLUS work queue %{length}. Check back soon to view your offer email."
   my_studio_sessions_finished_uploading_notice_html: "Thanks! We'll start photoshopping those portraits into Kimbra's jewelry pieces soon.<br>Your Photo Session has been placed in the ClickPLUS Work Queue.<br>Check back shortly to View your Client's Offer Email."
 
   my_studio_sessions_complete_link: "Send to ClickPLUS work queue..."
@@ -300,7 +300,7 @@ en:
       ready:
         title: "Emails ready to be sent"
       sessions:
-        title: "Photo Session Activity this past week"
+        title: "Recent ClickPLUS Photo Sessions"
       show:
         create_photo_session: "Create new photo session and upload portraits now!"
         revenue: "Total revenue so far: %{purchases} Your commission (at %{rate}%): %{total}"
@@ -331,7 +331,7 @@ en:
       edit:
         title: "Editing Session portraits"
       index:
-        title: "Step 2. Add Session Portraits for %{name} (%{category})"
+        title: "Step 2. Add Portraits for %{title}"
       new:
         title: "Upload Session Portrait for %{name}"
     sessions:
