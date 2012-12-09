@@ -48,7 +48,7 @@
       <%= button_to t('.adjust'), edit_url, method: :get if @admin_customer_offer.adjust_picture? %>
 
 
-      <% if current_user_facebook %>
+      <% if current_user_facebook && Rails.env.development? %>
           <p class="share_facebook-item">
             <span id='<%= "share_facebook_item_#{@admin_customer_offer.id}" %>'></span>
           </p>

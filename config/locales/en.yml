@@ -280,7 +280,7 @@ en:
       index:
         shopping_cart_list: "Your Shopping Cart Items"
         clickplus_list_html: "Add to Cart or Adjust Photo"
-        upload_photo: "Upload Your Own Photo"
+        upload_photo: "Upload Your Own Photos"
         upload_photo_title: "Add Your Own Photos"
       new:
         title: "Below are some examples of unique designs that we felt were creative and could help you design your very own custom heirloom piece."
@@ -289,7 +289,7 @@ en:
 
     portraits:
       index:
-        title: "Upload New Photos"
+        title: "Upload Your Own Photos"
         add_files: "Add Photos"
 
   my_studio:

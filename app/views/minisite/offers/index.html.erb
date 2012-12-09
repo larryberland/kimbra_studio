@@ -28,7 +28,7 @@
     <% if is_client? %>
         <!-- only clients allowed to upload and select new piece -->
         <div class="row span7">
-          <%= button_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo_title')) %>
+          <%= link_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo_title')) %>
         </div>
     <% elsif is_admin? %>
         <div class="row span7">
