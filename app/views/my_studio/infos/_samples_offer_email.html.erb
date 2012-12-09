@@ -1,12 +1,7 @@
-  <h4>Sample Client Offer Email</h4>
+<h4><%= t('.title') %></h4>
 
-  <p>
-    Portraits are used when creating a custom heirloom jewelry piece for your client.
-  </p>
-
-  <p>
-    <%= link_to image_tag('sample/email_t.png', alt: 'sample personalized offer email',title: t(:img_title_view)), '/assets/sample/email.png', class: 'lb_sample' %>
-    <br/>
-    Personalized offer email is sent after you have uploaded at least 5 portraits and we have custom cropped and
-    positioned each portrait into selected jewelry pieces.
-  </p>
+<p>
+  <%= link_to image_tag('sample/email_t.png', alt: 'sample personalized offer email', title: t(:img_title_view)), '/assets/sample/email.png', class: 'lb_sample' %>
+  <br/>
+  <%= t('.body_html') %>
+</p>
