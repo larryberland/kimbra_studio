@@ -8,7 +8,13 @@ KimbraStudio::Application.routes.draw do
 
   root :to => "welcome#index"
 
-  resources :facebook_sessions, only: [:create, :destroy]
+  resources :facebook_sessions, only: [:create, :destroy] do
+    member do
+      post :share
+    end
+
+
+  end
 
   resource :about do
     get :show

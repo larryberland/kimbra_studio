@@ -7,7 +7,8 @@ class Shopping::Item < ActiveRecord::Base
                   :cart, :cart_attributes, :cart_id,
                   :from_piece,
                   :quantity,:option, :option_selected,
-                  :piece_id # kimbra non photo piece we are going to turn into an offer
+                  :piece_id, # kimbra non photo piece we are going to turn into an offer
+                  :share_facebook
 
   attr_accessor :piece_id, :share_facebook
 

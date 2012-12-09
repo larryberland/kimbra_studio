@@ -3,12 +3,12 @@ class FacebookUser < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     where(auth.slice(:provider, :uid)).first_or_initialize.tap do |user|
-      user.provider = auth.provider
-      user.uid = auth.uid
-      user.name = auth.info.name
-      user.email = auth.info.email
-      user.image_url = auth.info.image
-      user.oauth_token = auth.credentials.token
+      user.provider         = auth.provider
+      user.uid              = auth.uid
+      user.name             = auth.info.name
+      user.email            = auth.info.email
+      user.image_url        = auth.info.image
+      user.oauth_token      = auth.credentials.token
       user.oauth_expires_at = Time.at(auth.credentials.expires_at)
       user.save!
     end
@@ -23,12 +23,40 @@ class FacebookUser < ActiveRecord::Base
     @facebook ||= Koala::Facebook::API.new(oauth_token)
   end
 
-  def share(offer)
+  #@graph.put_wall_post("explodingdog!",
+  # {:name => "i love loving you",
+  # :link => "http://www.explodingdog.com/title/ilovelovingyou.html"},
+  # "tmiley")
+
+  def share(offer, url)
     if share?
-      facebook.put_wall_post("testing KimbraClickPLUS")
+      hash = {
+          message:     "#{offer.email.my_studio_session.studio.name} via Kimbra ClickPLUS",
+          name:        offer.piece.name,
+          caption:     offer.email.my_studio_session.studio.name,
+          description: offer.piece.short_description,
+          link:        url,
+          picture:     offer.image_url}
+      hash[:link] = "www.kimbraclickplus.com" unless Rails.env.production?
+
+      facebook.put_wall_post("#{offer.email.my_studio_session.studio.name} via Kimbra ClickPLUS", hash)
     end
   rescue Koala::Facebook::APIError => e
-    logger.info e.to_s
+    logger.info "FB:CHALLENGE:: #{e}"
+    nil
+  end
+
+  def share_link(offer, url)
+    if share?
+      hash = {
+          from: offer.email.my_studio_session.studio.name,
+          link: url}
+      hash[:link] = "www.kimbraclickplus.com" unless Rails.env.production?
+
+      facebook.put_wall_post("Kimbra ClickPLUS", hash)
+    end
+  rescue Koala::Facebook::APIError => e
+    logger.info "FB:CHALLENGE:: #{e}"
     nil
   end
 

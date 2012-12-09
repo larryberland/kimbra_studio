@@ -15,23 +15,23 @@
   <% if @admin_customer_offer.back.present? %>
       <p>
         <b><%= t('.front') %></b>
-        <%= link_to @admin_customer_offer.image_front.to_image_cache_buster, edit_url%>
+        <%= link_to @admin_customer_offer.image_front.to_image_cache_buster, edit_url %>
       </p>
 
       <p>
         <b><%= t('.back') %></b>
-        <%= link_to @admin_customer_offer.image_back.to_image_cache_buster, edit_url%>
+        <%= link_to @admin_customer_offer.image_back.to_image_cache_buster, edit_url %>
       </p>
   <% else %>
       <p>
-        <%= link_to @admin_customer_offer.image.to_image_cache_buster, edit_url%>
+        <%= link_to @admin_customer_offer.image.to_image_cache_buster, edit_url %>
       </p>
   <% end %>
 
   <p class="price"><%= number_to_currency(@admin_customer_offer.price) %></p>
 
   <p class="shopping-item">
-      <span id='<%="shopping_item_#{@admin_customer_offer.id}"%>'></span>
+    <span id='<%= "shopping_item_#{@admin_customer_offer.id}" %>'></span>
   </p>
 
   <% unless @show_status_only %>
@@ -45,16 +45,20 @@
               </p>
           <% end %>
       <% end %>
-      <%= button_to t('.adjust'), edit_url, method: :get  if @admin_customer_offer.adjust_picture?%>
+      <%= button_to t('.adjust'), edit_url, method: :get if @admin_customer_offer.adjust_picture? %>
+
       <% if current_user_facebook %>
-          <%= form_for(@shopping_item, :remote => true) do |k| %>
-              <p>
-                <%= k.hidden_field :offer_id %>
-                <%= k.hidden_field :share_facebook, value: true%>
-                <%= submit_tag 'Share on Facebook', :id => 'my_submit_share', :class => 'likeabutton' %>
-                <span id="spinner" style="display:none" class='spinner'></span>
-              </p>
-          <% end %>
+          <p class="share_facebook-item">
+            <span id='<%= "share_facebook_item_#{@admin_customer_offer.id}" %>'></span>
+          </p>
+          <%= link_to "Share on Facebook",
+                      share_facebook_session_path(@admin_customer_offer.id),
+                      remote: true,
+                      method: :post,
+                      title:  "Share my Custom Heirloom Jewelry Piece",
+                      class:  "btn likeabutton",
+                      id: "share_facebook" %>
+          <span id='<%= "spinner_share_facebook" %>' style='display:none' class='spinner'></span>
       <% end %>
 
   <% end %>

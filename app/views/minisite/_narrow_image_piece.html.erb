@@ -10,14 +10,14 @@
           <tr>
             <td class="w280" align="right" width="280">
               <%= image_tag(piece.image.url_cache_buster,
-                            :title => piece.name,
-                            :alt => piece.name,
-                            :width => piece.width,
-                            :height => piece.height,
-                            :class => "w280 img-rounded",
+                            :title    => piece.name,
+                            :alt      => piece.name,
+                            :width    => piece.width,
+                            :height   => piece.height,
+                            :class    => "w280 img-rounded",
                             :editable => "true",
-                            :label => "Image",
-                            :border => 0) %>
+                            :label    => "Image",
+                            :border   => 0) %>
             </td>
           </tr>
           <tr>
@@ -44,21 +44,18 @@
 
                   <% unless @show_status_only %>
                       <% if is_client? %>
-                          <%= form_for(@shopping_item, :remote => true) do |f| %>
-                            <p>
-                              <%= f.hidden_field :piece_id %>
-                              <%= f.hidden_field :cart_id %>
-                              <%= submit_tag 'Add to Cart', :id => "my_submit_#{@shopping_item.piece_id}", :class => 'likeabutton multi-submits' %>
-                              <span id='<%= "spinner_#{@shopping_item.piece_id}" %>' style='display:none' class='spinner'></span>
-                            </p>
-                        <% end %>
-                    <% end %>
-                <% end %>
-                <p class="shopping-item">
-                  <span id='<%= "shopping_item_#{@shopping_item.piece_id}" %>'></span>
-                </p>
-                </p>
-              </div>
+                          <%= link_to "Share on Facebook",
+                                      share_shopping_item_path(@shopping_item),
+                                      :remote => true,
+                                      :title  => "Share my Custom Heirloom Jewelry Piece", class: "likeabutton", id: "share_facebook" %>
+                          <span id='<%= "spinner_share_facebook" %>' style='display:none' class='spinner'></span>
+                      <% end %>
+                  <% end %>
+                  <p class="shopping-item">
+                    <span id='<%= "shopping_item_#{@shopping_item.piece_id}" %>'></span>
+                  </p>
+                  </p>
+                  </div>
             </td>
           </tr>
           <tr>

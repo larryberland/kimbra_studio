@@ -7,7 +7,7 @@ module Shopping::ItemsHelper
                 case item.offer.piece.category
                   when 'Photo Rings'
                     option = :ring_size
-                    options_for_select(%w(6 7 8 9 10 11 12 13), item.option_selected)
+                    options_for_select(%w(6 7 8 9), item.option_selected)
                   when 'Holiday'
                     case name
                       when 'Keepsake Year Frame (horizontal)'

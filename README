@@ -1,5 +1,11 @@
 == Welcome to Kimbra Studios ClickPLUS
 
+Facebook
+    tester1: Harry Amdghhbgieic Chaiwitz
+    email: iivockg_chaiwitz_1355058016@tfbnw.net
+    tester2: Bill Amdhceaceifh Smithstein
+    email: lupfnpf_smithstein_1355058015@tfbnw.net
+
 git push heroku master
 
 heroku run rake db:migrate
