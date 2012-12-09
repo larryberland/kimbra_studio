@@ -31,6 +31,7 @@ en:
   offers: "Offers"
   snap: "Oh Snap! "
   cancel: "Cancel"
+  img_title_view: "Click to view"
 
   # customer_mailer/send_offer.html.erb
   client_send_offers_subject: "%{name} custom jewelry offer"
@@ -201,9 +202,9 @@ en:
   my_studio_sessions_offer_email_link: "ClickPLUS work queue %{length}"
   my_studio_sessions_finished_uploading_notice_html: "Thanks! We'll start photoshopping those portraits into Kimbra's jewelry pieces soon.<br>Your Photo Session has been placed in the ClickPLUS Work Queue.<br>Check back shortly to View your Client's Offer Email."
 
-  my_studio_sessions_complete_link: "Process my offer email !"
-  my_studio_sessions_complete_link2: "Process my offer email! I have uploaded a good selection of portraits..."
-  my_studio_sessions_complete_title: "Click to Process my offer email! I have uploaded a good selection of portraits."
+  my_studio_sessions_complete_link: "Send to ClickPLUS work queue..."
+  my_studio_sessions_complete_link2: "I'm finished! These %{portrait_count} portraits are enough. Send to ClickPLUS work queue."
+  my_studio_sessions_complete_title: "Click to send to the ClickPLUS work queue to generate your client's offer email."
 
   my_studio_sessions_upload_now_link: "Upload Portraits Now!"
   my_studio_sessions_upload_more_link: "Upload more portraits"
@@ -237,7 +238,7 @@ en:
    # my_studio_portraits/index
   my_studio_portraits_new_link: "Upload New Session Portrait"
   my_studio_portraits_session: "For %{name}"
-  my_studio_portraits_feedback_common: "We will generate an offer email with as few as %{min} portraits but we prefer you upload at least %{best} or as many as %{max}. "
+  my_studio_portraits_feedback_common: "ClickPLUS will generate an offer email with as few as %{min} portraits but we prefer you upload at least %{best} or as many as %{max}. "
 
   # views
 
@@ -310,6 +311,11 @@ en:
         shopping_cart:  "Shopping Cart (0 items)"
         about: "About %{studio_name}"
         back_samples: "Back to Samples"
+      samples_herald:
+        title: "The information on the left is used to create the Herald Email."
+        body: "The Herald Email introduces your client to custom heirloom photo jewelry and helps build excitement and
+        curiosity about the offer email that will be coming soon. ClickPLUS sends the Herald Email to your client after
+        you upload some portraits in the next step."
 
     portraits:
       edit:
