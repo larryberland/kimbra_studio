@@ -2,7 +2,7 @@
 
   <div class="row">
 
-    <div class="row span10 pull-right">
+    <div class="row span11 pull-right">
 
       <% if @admin_customer_offer.has_picture? %>
           <% if @admin_customer_offer.items.size > 1 %>
@@ -12,7 +12,7 @@
           <% end %>
       <% end %>
 
-      <div class="media span8">
+      <div class="media span10">
 
         <% if @admin_customer_offer.back.present? %>
 
@@ -65,6 +65,7 @@
     </p>
 
     <% unless @show_status_only %>
+
         <% if is_client? %>
             <%= form_for(@shopping_item, :remote => true) do |f| %>
                 <p>
@@ -82,23 +83,23 @@
             <p class="share_facebook-item">
               <span id='<%= "share_facebook_item_#{@admin_customer_offer.id}" %>'></span>
             </p>
-            <%= link_to "Share on Facebook",
-                        share_facebook_session_path(@admin_customer_offer.id),
-                        remote: true,
-                        method: :post,
-                        title:  "Share my Custom Heirloom Jewelry Piece",
-                        class:  "btn likeabutton",
-                        id:     "share_facebook" %>
-            <span id='<%= "spinner_share_facebook" %>' style='display:none' class='spinner'></span>
+
+            <p>
+              <%= link_to "Share on Facebook",
+                          share_facebook_session_path(@admin_customer_offer.id),
+                          remote: true,
+                          method: :post,
+                          title:  "Share my Custom Heirloom Jewelry Piece",
+                          class:  "btn likeabutton",
+                          id:     "share_facebook" %>
+              <span id='<%= "spinner_share_facebook" %>' style='display:none' class='spinner'></span>
+            </p>
         <% end %>
 
     <% end %>
+    <p>
+      <%= link_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
+    </p>
   </div>
 
-
-  <div class="row">
-    <%= link_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
-  </div>
-
-  <br><br>
 </div>
