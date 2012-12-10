@@ -1,6 +1,6 @@
-<div class="row span10 pull-right">
+<div class="row span11 pull-right">
 
-  <div class="media span9">
+  <div class="media span10">
 
     <% klass = offer.frozen_offer? ? "frozen" : "" %>
     <%= link_to image_tag(offer.image.url_cache_buster,
@@ -21,8 +21,12 @@
           <b><%= t('in_shopping_cart') %></b><br>
       <% end %>
       <%= offer.piece.short_description %>
-      <span class="price"><%= number_to_currency(offer.price) %></span> •
+      <br>
       <%= link_to "Details...", url_for_offer_or_not(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
     </div>
   </div>
+  <div class="row">
+    <span class="price"><%= number_to_currency(offer.price) %></span>
+  </div>
+
 </div>

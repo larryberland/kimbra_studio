@@ -87,7 +87,7 @@ class Admin::Customer::Email < ActiveRecord::Base
       #  just enter in
       # the Category you want to be generated
       #  (ie categories[2]  will do all charms)
-      piece_strategy_list = PieceStrategy.new(email).pick_category(categories[3])
+      piece_strategy_list = PieceStrategy.new(email).pick_category(categories[1])
     else
 
       # pick some pieces to send

@@ -59,19 +59,24 @@
         text-decoration: none;
         border-bottom: none;
     }
-    div.row div.media{
+
+    div.row div.media {
         padding: 10px;
         text-align: left;
     }
-    .media-object{
+
+    .media-object {
         padding-right: 10px;
     }
-    h4.media-heading{
+
+    h4.media-heading {
         text-align: left;
     }
-    .centered{
+
+    .centered {
         text-align: center;
     }
+
     span.price {
         display: block;
     }
@@ -80,8 +85,16 @@
 
 <div class="navbar navbar-inverse navbar-fixed-top">
 
-  <div class="row">
-    <img id="logo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+  <div class="row-fluid centered">
+    <div class="span12">
+      <img id="xlogo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+
+      <div class="pull-right" style="padding: 20px;">
+        <% if current_user_facebook %>
+            <%= image_tag current_user_facebook.image_url, class: "rounded" %>
+        <% end %>
+      </div>
+    </div>
   </div>
 
   <div class="navbar-inner">
@@ -95,18 +108,13 @@
       </a>
 
       <ul class="nav pull-right">
-        <% if current_user_facebook %>
-
-            <%= image_tag current_user_facebook.image_url, class: "rounded" %>
-            Signed in as <strong><%= current_user_facebook.name %></strong>!
-            <li>
+        <li>
+          <% if current_user_facebook %>
               <%= link_to "Sign out Facebook", facebook_signout_path, id: "sign_out" %>
-            </li>
-        <% else %>
-            <li>
+          <% else %>
               <%= link_to "Sign into Facebook...", '/auth/facebook', {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
-            </li>
-        <% end %>
+          <% end %>
+        </li>
       </ul>
 
 <%# do not show the navigation bar if Kimbra is entering the delivery tracking number  %>
@@ -117,7 +125,7 @@
 
             <ul class='nav'>
               <li>
-              <a class="brand" href="#"><%= studio.name%></a>
+                <a class="brand" href="#"><%= studio.name %></a>
               </li>
 
 

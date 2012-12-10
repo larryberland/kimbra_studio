@@ -22,9 +22,12 @@
       <% end %>
 
       <%= offer.piece.short_description %>
-      <span class="price"><%= number_to_currency(offer.price) %></span><br/>
+      <br>
       <%= link_to "Details...", url_for_offer_or_not(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
     </div>
+  </div>
+  <div class="row">
+    <span class="price"><%= number_to_currency(offer.price) %></span><br/>
   </div>
 
 </div>
