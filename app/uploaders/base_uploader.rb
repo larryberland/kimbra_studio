@@ -52,7 +52,7 @@ class BaseUploader < CarrierWave::Uploader::Base
   end
 
   def to_image_cache_buster(version=nil)
-    "<img class=\"img-rounded\" src=\"#{url_cache_buster(version)}\"/>".html_safe
+    "<img class=\"img-rounded media-object\" src=\"#{url_cache_buster(version)}\"/>".html_safe
   end
 
   def url_cache_buster(version=nil)

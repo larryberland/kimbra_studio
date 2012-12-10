@@ -4,6 +4,7 @@
   <title><%= content_for :page_title %></title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name='robots' content='noindex, nofollow'>
+  <%= stylesheet_link_tag 'bootstrap' %>
   <%= stylesheet_link_tag 'minisite' %>
   <%= javascript_include_tag 'https://js.stripe.com/v1/', 'minisite', 'http://api.qualifiedaddress.com/scripts/all-lite-min.js' %>
   <%= csrf_meta_tags %>
@@ -20,45 +21,54 @@
 </head>
 <body>
 
-<div id='body_wrapper'>
+<div id='body_wrapperx'>
 
-  <%= render 'shared/minisite_header', studio: @studio, admin_customer_email: @admin_customer_email %>
+  <% content_for :page_title, "#{@studio.name} Photo Jewelry Offer" %>
 
-  <% if notice || alert %>
-      <div class="row span10">
-        <div class="centered_container alert error rounded span5">
-          <i class="icon-hand-right"> </i>
-          <button type="button" class="close" data-dismiss="alert" style="float:right;">close x</button>
-          <%= raw "<p> #{notice}</p>" if notice %>
-          <%= raw "<p><strong>#{t(:snap)}</strong>#{alert}</p>" if alert %>
-        </div>
+
+  <div class="container">
+
+    <%= render 'shared/minisite_header', studio: @studio, admin_customer_email: @admin_customer_email %>
+
+    <div class='hero-unit span12'>
+
+      <div class='row'>
+
+        <% if notice || alert %>
+            <div class="alert error rounded row">
+              <i class="icon-hand-right"> </i>
+              <button type="button" class="close" data-dismiss="alert" style="float:right;">close x</button>
+              <%= raw "<p> #{notice}</p>" if notice %>
+              <%= raw "<p><strong>#{t(:snap)}</strong>#{alert}</p>" if alert %>
+            </div>
+        <% end %>
+
+        <%= yield %>
+
       </div>
-  <% end %>
 
-  <div id='content_wrapper' class='container'>
-    <%= yield %>
+    </div>
   </div>
-
 </div>
 
-<div id='footer'>
-  <ul>
-    <li>
-      <%= link_to_unless_current 'Privacy',
-                                 privacy_minisite_email_path(@admin_customer_email.tracking) %>
-    </li>
-    |
-    <li>
-      <%= link_to_unless_current 'Returns',
-                                 returns_minisite_email_path(@admin_customer_email.tracking) %>
-    </li>
-    |
-    <li>
-      <%= link_to_unless_current 'Contact us',
-                                 contact_minisite_email_path(@admin_customer_email.tracking) %>
-    </li>
-  </ul>
-</div>
+  <div id='footer'>
+    <ul>
+      <li>
+        <%= link_to_unless_current 'Privacy',
+                                   privacy_minisite_email_path(@admin_customer_email.tracking) %>
+      </li>
+      |
+      <li>
+        <%= link_to_unless_current 'Returns',
+                                   returns_minisite_email_path(@admin_customer_email.tracking) %>
+      </li>
+      |
+      <li>
+        <%= link_to_unless_current 'Contact us',
+                                   contact_minisite_email_path(@admin_customer_email.tracking) %>
+      </li>
+    </ul>
+  </div>
 
 </body>
 

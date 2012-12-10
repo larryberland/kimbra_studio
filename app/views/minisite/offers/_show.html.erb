@@ -1,85 +1,104 @@
-<div class="offer_show">
+<div class="row centered">
 
-  <% if @admin_customer_offer.has_picture? %>
-      <% if @admin_customer_offer.items.size > 1 %>
-          <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
-      <% else %>
-          <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
-      <% end %>
-  <% end %>
+  <div class="row">
 
-  <p>
-    <i><%= @admin_customer_offer.name %></i>
-  </p>
+    <div class="row span10 pull-right">
 
-  <% if @admin_customer_offer.back.present? %>
-      <p>
-        <b><%= t('.front') %></b>
-        <%= link_to @admin_customer_offer.image_front.to_image_cache_buster, edit_url %>
-      </p>
-
-      <p>
-        <b><%= t('.back') %></b>
-        <%= link_to @admin_customer_offer.image_back.to_image_cache_buster, edit_url %>
-      </p>
-  <% else %>
-      <p>
-        <%= link_to @admin_customer_offer.image.to_image_cache_buster, edit_url %>
-      </p>
-  <% end %>
-
-  <p class="price"><%= number_to_currency(@admin_customer_offer.price) %></p>
-
-  <p class="shopping-item">
-    <span id='<%= "shopping_item_#{@admin_customer_offer.id}" %>'></span>
-  </p>
-
-  <% unless @show_status_only %>
-      <% if is_client? %>
-          <%= form_for(@shopping_item, :remote => true) do |f| %>
-              <p>
-                <%= f.hidden_field :offer_id %>
-                <%= f.hidden_field :cart_id %>
-                <%= submit_tag 'Add to Cart', :id => 'my_submit', :class => 'likeabutton' %>
-                <span id="spinner" style="display:none" class='spinner'></span>
-              </p>
+      <% if @admin_customer_offer.has_picture? %>
+          <% if @admin_customer_offer.items.size > 1 %>
+              <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
+          <% else %>
+              <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
           <% end %>
       <% end %>
-      <%= button_to t('.adjust'), edit_url, method: :get if @admin_customer_offer.adjust_picture? %>
 
+      <div class="media span8">
 
-      <% if current_user_facebook && Rails.env.development? %>
-          <p class="share_facebook-item">
-            <span id='<%= "share_facebook_item_#{@admin_customer_offer.id}" %>'></span>
-          </p>
-          <%= link_to "Share on Facebook",
-                      share_facebook_session_path(@admin_customer_offer.id),
-                      remote: true,
-                      method: :post,
-                      title:  "Share my Custom Heirloom Jewelry Piece",
-                      class:  "btn likeabutton",
-                      id: "share_facebook" %>
-          <span id='<%= "spinner_share_facebook" %>' style='display:none' class='spinner'></span>
-      <% end %>
+        <% if @admin_customer_offer.back.present? %>
 
-  <% end %>
+            <p>
+              <b><%= t('.front') %></b>
+              <%= link_to @admin_customer_offer.image_front.to_image_cache_buster, edit_url, class: "pull-left" %>
+            </p>
 
-  <%= content_tag :p do %>
-      <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
-          <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
-          <br/>
-      <% end %>
-  <% end if @admin_customer_offer.piece.try(:short_description).present? %>
+            <p>
+              <b><%= t('.back') %></b>
+              <%= link_to @admin_customer_offer.image_back.to_image_cache_buster, edit_url, class: "pull-left" %>
+            </p>
+        <% else %>
+            <p>
+              <%= link_to @admin_customer_offer.image.to_image_cache_buster, edit_url, class: "pull-left" %>
+            </p>
+        <% end %>
 
-  <%= content_tag :p do %>
-      <% @admin_customer_offer.piece.try(:description_markup).to_s.split(". ").each do |sentence| %>
-          <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
-          <br/>
-      <% end %>
-  <% end if @admin_customer_offer.piece.try(:description_markup).present? %>
+        <div class="media-body">
 
-      <div class="row span10">
-        <%= link_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
+          <h4 class="media-heading">
+            <i><%= @admin_customer_offer.name %></i>
+          </h4>
+
+          <%= content_tag :p do %>
+              <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
+                  <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
+                  <br/>
+              <% end %>
+          <% end if @admin_customer_offer.piece.try(:short_description).present? %>
+
+          <%= content_tag :p do %>
+              <% @admin_customer_offer.piece.try(:description_markup).to_s.split(". ").each do |sentence| %>
+                  <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
+                  <br/>
+              <% end %>
+          <% end if @admin_customer_offer.piece.try(:description_markup).present? %>
+
+        </div>
       </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <p class="price"><%= number_to_currency(@admin_customer_offer.price) %></p>
+
+    <p class="shopping-item">
+      <span id='<%= "shopping_item_#{@admin_customer_offer.id}" %>'></span>
+    </p>
+
+    <% unless @show_status_only %>
+        <% if is_client? %>
+            <%= form_for(@shopping_item, :remote => true) do |f| %>
+                <p>
+                  <%= f.hidden_field :offer_id %>
+                  <%= f.hidden_field :cart_id %>
+                  <%= submit_tag 'Add to Cart', :id => 'my_submit', :class => 'likeabutton' %>
+                  <span id="spinner" style="display:none" class='spinner'></span>
+                </p>
+            <% end %>
+        <% end %>
+
+        <%= button_to t('.adjust'), edit_url, method: :get if @admin_customer_offer.adjust_picture? %>
+
+        <% if current_user_facebook && Rails.env.development? %>
+            <p class="share_facebook-item">
+              <span id='<%= "share_facebook_item_#{@admin_customer_offer.id}" %>'></span>
+            </p>
+            <%= link_to "Share on Facebook",
+                        share_facebook_session_path(@admin_customer_offer.id),
+                        remote: true,
+                        method: :post,
+                        title:  "Share my Custom Heirloom Jewelry Piece",
+                        class:  "btn likeabutton",
+                        id:     "share_facebook" %>
+            <span id='<%= "spinner_share_facebook" %>' style='display:none' class='spinner'></span>
+        <% end %>
+
+    <% end %>
+  </div>
+
+
+  <div class="row">
+    <%= link_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
+  </div>
+
   <br><br>
 </div>

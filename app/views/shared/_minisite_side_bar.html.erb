@@ -1,0 +1,13 @@
+<img id="logo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+
+<address>
+  <strong><%= @studio.name %></strong><br>
+  <%= @studio.address_1 %><br>
+  <%= @studio. city_state_zip %><br>
+  <abbr title="Phone">P:</abbr> <%=@studio.phone_number %>
+</address>
+<address>
+  Send Email to<br>
+  <%= mail_to @studio.info.try(:email) %>
+</address>
+

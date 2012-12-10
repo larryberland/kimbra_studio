@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208175422) do
+ActiveRecord::Schema.define(:version => 20121210153834) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -264,6 +264,8 @@ ActiveRecord::Schema.define(:version => 20121208175422) do
     t.string   "theme"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "image_width"
+    t.integer  "image_height"
   end
 
   add_index "my_studio_minisites", ["studio_id"], :name => "index_my_studio_minisites_on_studio_id"
