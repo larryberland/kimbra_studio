@@ -1,0 +1,42 @@
+<div class="row span10 pull-right">
+
+  <div class="media span9">
+    <a class="pull-left">
+
+      <%= image_tag(piece.image.url_cache_buster,
+                    :title    => piece.name,
+                    :alt      => piece.name,
+                    :class    => "img-rounded media-object",
+                    :editable => "true",
+                    :label    => "Image",
+                    :border   => 0) %>
+    </a>
+
+    <div class="media-body">
+
+      <h4 class="media-heading"><%= piece.name %></h4>
+
+      <%= piece.short_description %>
+      <span class="price"><%= number_to_currency(piece.price) %></span>
+
+      <% unless @show_status_only %>
+          <% if is_client? %>
+              <%= form_for(@shopping_item, :remote => true) do |f| %>
+                  <p>
+                    <%= f.hidden_field :piece_id %>
+                    <%= f.hidden_field :cart_id %>
+                    <%= submit_tag 'Add to Cart', :id => "my_submit_#{@shopping_item.piece_id}", :class => 'likeabutton multi-submits' %>
+                    <span id='<%= "spinner_#{@shopping_item.piece_id}" %>' style='display:none' class='spinner'></span>
+                  </p>
+              <% end %>
+          <% end %>
+      <% end %>
+
+      <p class="shopping-item">
+        <span id='<%= "shopping_item_#{@shopping_item.piece_id}" %>'></span>
+      </p>
+
+    </div>
+  </div>
+
+</div>

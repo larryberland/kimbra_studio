@@ -1,12 +1,8 @@
 <% pieces = Admin::Merchandise::Piece.for_chains.all %>
 <% pieces.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |piece| %>
 
-    <%  @shopping_item = Shopping::Item.new(piece_id: piece.id, :cart => @cart) %>
+    <% @shopping_item = Shopping::Item.new(piece_id: piece.id, :cart => @cart) %>
 
-    <% if piece.width.to_i < 250 %>
-        <%= render 'minisite/narrow_image_piece', piece: piece, studio: @studio, offer: @admin_customer_offers.first %>
-    <% else %>
-        <%= render 'minisite/wide_image_piece', piece: piece, studio: @studio, offer: @admin_customer_offers.first %>
-    <% end %>
+    <%= render 'minisite/image_piece', piece: piece, studio: @studio, offer: @admin_customer_offers.first %>
 <% end %>
 
