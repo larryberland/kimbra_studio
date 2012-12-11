@@ -508,3 +508,6 @@ img.frozen {
 #user_facebook_nav {
   vertical-align: top;
 }
+
+// Fix for bootstrap img css conflict.
+.jcrop img {max-width: none}
