@@ -7,7 +7,7 @@
       <table cellpadding='20px'>
         <tr>
           <td align='right'>
-            <div id='portrait_item'>
+            <div id='portrait_item' class='jcrop'>
               <!-- Constrain stock image to be 300px wide. Height varies according to part. This is done in the css. -->
               <%= image_tag @item_side.session_portrait.image_url(:face), id: 'cropbox' %>
             </div>
