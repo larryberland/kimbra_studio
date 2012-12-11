@@ -12,7 +12,14 @@
         font-family: <%= studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
         color: <%= studio.try(:minisite).try(:font_color) %>;
     }
+    .navbar .navbar-inner {
+        background-color: <%= studio.try(:minisite).try(:bgcolor) %>;
+        background-image: none;
+    }
 
+    div.navbar {
+        border-bottom: 1px outset <%=studio.try(:minisite).try(:calc_border_color) %>;
+    }
     .likeabutton {
         background: ButtonFace;
         color: ButtonText;
@@ -31,33 +38,22 @@
 
     a {
         color: <%= studio.try(:minisite).try(:font_color) %>;
-        text-decoration: none;
-        border-bottom: 1px dotted;
     }
 
     a.link {
         color: <%= studio.try(:minisite).try(:font_color) %>;
-        text-decoration: none;
     }
 
     a.visited {
         color: <%= studio.try(:minisite).try(:font_color) %>;
-        text-decoration: none;
     }
 
     a.focus, a.hover {
         color: <%= studio.try(:minisite).try(:font_color) %>;
-        text-decoration: none;
     }
 
     a.active {
         color: <%= studio.try(:minisite).try(:font_color) %>;
-        text-decoration: none;
-    }
-
-    a.no_border {
-        text-decoration: none;
-        border-bottom: none;
     }
 
     div.row div.media {
@@ -80,20 +76,41 @@
     span.price {
         display: block;
     }
+
+    .navbar-header-top-row {
+        text-align: center;
+    }
+    .navbar-header-top-row .pull-left,
+    .navbar-header-top-row .pull-right{
+        padding: 20px;
+    }
+
+
 </style>
 
 
 <div class="navbar navbar-inverse navbar-fixed-top">
 
-  <div class="row-fluid centered">
-    <div class="span12">
-      <img id="xlogo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+  <div class="row navbar-header-top-row">
+    <div class="span2 pull-left">
+      <address>
+        <strong><%= studio.name %></strong><br>
+        <%= studio.address_1 %>
+        <br>
+        <%= studio.city_state_zip %>
+        <br>
+        <abbr title="Phone">P:</abbr> <%= studio.phone_number %>
+      </address>
+    </div>
 
-      <div class="pull-right" style="padding: 20px;">
-        <% if current_user_facebook %>
-            <%= image_tag current_user_facebook.image_url, class: "rounded" %>
-        <% end %>
-      </div>
+    <div class="span10">
+      <img id="xlogo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+    </div>
+
+    <div class="span2 pull-right">
+      <% if current_user_facebook %>
+          <%= image_tag current_user_facebook.image_url, class: "rounded" %>
+      <% end %>
     </div>
   </div>
 
@@ -112,7 +129,7 @@
           <% if current_user_facebook %>
               <%= link_to "Sign out Facebook", facebook_signout_path, id: "sign_out" %>
           <% else %>
-              <%= link_to "Sign into Facebook...", '/auth/facebook', {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
+              <%= link_to image_tag("fb_login.png"), '/auth/facebook', {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %>
           <% end %>
         </li>
       </ul>
@@ -127,8 +144,6 @@
               <li>
                 <a class="brand" href="#"><%= studio.name %></a>
               </li>
-
-
               <li>
                 <%= link_to_your_collection_or_not(admin_customer_email) %>
               </li>
