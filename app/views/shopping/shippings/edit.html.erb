@@ -1,4 +1,4 @@
-<div class='shopping_heading'>
+<div class='row'>
   <h2>1. Delivery Details</h2>
   <table align='center'>
       <tr>
@@ -9,16 +9,15 @@
     </table>
 </div>
 
-<div class='shopping_heading'>
+<div class='row'>
   <h2>2. Shipping Options</h2>
   <%= render 'form' %>
-  <%= link_to 'Back', edit_shopping_address_path(@cart.address.id) %>
 </div>
 
-<div class='shopping_heading'>
+<div class='row'>
   <h2>3. Credit Card</h2>
 </div>
 
-<div class='shopping_heading'>
+<div class='row'>
   <h2>4. Finished!</h2>
 </div>

@@ -18,7 +18,7 @@
     }
 
     div.navbar {
-        border-bottom: 1px outset <%=studio.try(:minisite).try(:calc_border_color) %>;
+        border-bottom: 1px solid <%=studio.try(:minisite).try(:calc_border_color) %>;
     }
     .likeabutton {
         background: ButtonFace;
@@ -70,7 +70,7 @@
     }
 
     .centered {
-        text-align: center;
+        text-align: left;
     }
 
     span.price {
@@ -84,6 +84,13 @@
     .navbar-header-top-row .pull-right{
         padding: 20px;
     }
+    div.platypus-form{
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      @include rounded-corners(10px);
+      border: 2px outset black;
+      text-align: left;
+    }
 
 
 </style>
@@ -92,6 +99,7 @@
 <div class="navbar navbar-inverse navbar-fixed-top">
 
   <div class="row navbar-header-top-row">
+
     <div class="span2 pull-left">
       <address>
         <strong><%= studio.name %></strong><br>

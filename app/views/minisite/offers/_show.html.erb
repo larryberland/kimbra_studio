@@ -2,7 +2,7 @@
 
   <div class="row">
 
-    <div class="row span11 pull-right">
+    <div class="row">
 
       <% if @admin_customer_offer.has_picture? %>
           <% if @admin_customer_offer.items.size > 1 %>
@@ -12,7 +12,7 @@
           <% end %>
       <% end %>
 
-      <div class="media span10">
+      <div class="media">
 
         <% if @admin_customer_offer.back.present? %>
 
@@ -34,7 +34,8 @@
         <div class="media-body">
 
           <h4 class="media-heading">
-            <i><%= @admin_customer_offer.name %></i>
+            <%=  link_to image_tag("facebook/wall_post.png"), '/auth/facebook', title: t(:facebook_share_title) %>
+            <%= @admin_customer_offer.name %>
           </h4>
 
           <%= content_tag :p do %>

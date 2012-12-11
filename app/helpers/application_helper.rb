@@ -147,7 +147,11 @@ module ApplicationHelper
       if offer.items.size > 1
         minisite_offer_items_path(offer)
       else
-        edit_minisite_item_side_path(offer.items.first.front)
+        if offer.items.first
+          edit_minisite_item_side_path(offer.items.first.front)
+        else
+          minisite_offer_items_path(offer)
+        end
       end
     else
       minisite_offer_url(offer)

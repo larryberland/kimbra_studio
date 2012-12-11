@@ -15,8 +15,6 @@ class Shopping::Address < ActiveRecord::Base
   validates_presence_of :first_name
   validates_presence_of :last_name
   validates_presence_of :address1
-  validates_presence_of :phone
-  validates :phone, length: {minimum: 10, too_short: 'needs area code', maximum: 10, too_long: 'no extensions or numbers outside US/Canada'}
   validates_presence_of :city
   validates_presence_of :state
   validates_presence_of :zip_code

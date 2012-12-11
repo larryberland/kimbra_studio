@@ -33,6 +33,8 @@ en:
   cancel: "Cancel"
   img_title_view: "Click to view"
 
+  facebook_share_title: "Send this to friends or post it on your timeline."
+
   # customer_mailer/send_offer.html.erb
   client_send_offers_subject: "%{name} custom jewelry offer"
 

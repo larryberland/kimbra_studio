@@ -1,44 +1,38 @@
-<%= form_for(@shipping) do |f| %>
+<div class="platypus-form span8">
 
-    <%= render 'shared/error_messages',
-               record: @shipping,
-               h2_msg: 'stopped this shipping selection from being saved:' %>
+  <%= form_for(@shipping) do |f| %>
 
-    <div class="field">
-      <table align='center'>
+      <%= render 'shared/error_messages',
+                 record: @shipping,
+                 h2_msg: 'stopped this shipping selection from being saved:' %>
+
+      <div class="control-group">
         <% @shipping_options.each do |so| %>
-            <tr>
-              <td class='left'>
-                <%= f.radio_button :shipping_option, so.last %>
-                <%= label_tag "shopping_shipping_shipping_option_#{so.last.downcase}", so.first %>
-              </td>
-            </tr>
+            <%= label_tag "shopping_shipping_shipping_option_#{so.last.downcase}", '', class: 'radio' %>
+            <div class="controls">
+              <%= f.radio_button :shipping_option, so.last %>
+              <%= " #{so.first}" %>
+            </div>
         <% end %>
-      </table>
-    </div>
+      </div>
 
-    <div class="field">
-      <table align='center'>
-        <tr>
-          <td>
-            <p>
-              Each piece is made by hand in Littleton, Colorado. Please allow us 10 - 15 business days to complete the
-              work on your order. We'll email you as soon as your order ships with tracking details.
-              <br/>You can check the status of your order at any time from a link on your emailed receipt, or contact us
-              directly.
-            </p>
-          </td>
-        </tr>
-      </table>
-    </div>
+      <p>
+        Each piece is made by hand in Littleton, Colorado. Please allow us 10 - 15 business days to complete the
+        work on your order. We'll email you as soon as your order ships with tracking details.
+        <br/>You can check the status of your order at any time from a link on your emailed receipt, or contact
+        us
+        directly.
+      </p>
 
-    <div class="field">
-      <%= f.hidden_field :cart_id, :value => @cart.id %>
-    </div>
+      <div class="control-group">
+        <%= f.hidden_field :cart_id, :value => @cart.id %>
+      </div>
 
-    <div class="actions">
-      <%= f.submit t(:shopping_submit_shipping), :id => 'my_submit' %>
-      <span id="spinner" style="display:none" class='spinner'></span>
-    </div>
+      <div class="form-actions">
+        <%= f.submit t(:shopping_submit_shipping), :id => 'my_submit' %>
+        <span id="spinner" style="display:none" class='spinner'></span>
+        <%= link_to 'Back', edit_shopping_address_path(@cart.address.id) %>
+      </div>
 
-<% end %>
+  <% end %>
+</div>

@@ -4,6 +4,10 @@ class Storyline < ActiveRecord::Base
 
   belongs_to :story
 
+  def description=(s)
+    @description = s.to_s.truncate(254)
+  end
+
   def describe(description)
     self.update_attribute(:description, description) unless crawler
   end
@@ -14,6 +18,7 @@ class Storyline < ActiveRecord::Base
       self.update_attribute(:description, new_description)
     end
   end
+
 
   def seconds_comment
     if seconds

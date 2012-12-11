@@ -1,86 +1,95 @@
-<% url = @purchase.new_record? ? shopping_cart_purchase_path(@cart) : shopping_cart_purchase_path(@cart) %>
+<div class="platypus-form span10">
 
-<%= form_for(@purchase, :url => url) do |f| %>
+  <% url = @purchase.new_record? ? shopping_cart_purchase_path(@cart) : shopping_cart_purchase_path(@cart) %>
+  <% stripe_submit_klass = @purchase.new_record? ? 'new_shopping_purchase' : 'edit_shopping_purchase' %>
 
-    <%= render 'shared/error_messages', record: @purchase, h2_msg: 'stopped this purchase:' %>
+  <%= form_for(@purchase, url: url, html: {class: "#{stripe_submit_klass} form-horizontal"}) do |f| %>
 
-    <%= f.hidden_field :stripe_create_token_response %>
-    <%= f.hidden_field :stripe_create_token_status %>
-    <%= f.fields_for :cart, @cart do |g| %>
-        <%= g.fields_for :address, @cart.address do |h| %>
-            <%= h.hidden_field :name %>
-            <%= h.hidden_field :address1 %>
-            <%= h.hidden_field :address2 %>
-            <%= h.hidden_field :state_stripe %>
-            <%= h.hidden_field :zip_code %>
-            <%= h.hidden_field :country_stripe %>
-        <% end %>
-    <% end %>
+      <%= render 'shared/error_messages', record: @purchase, h2_msg: 'stopped this purchase:' %>
 
-    <table align='center' class='field'>
-      <tr>
-        <td><%= "#{pluralize @cart.quantity, 'item'} in cart" %></td>
-        <td class='right'><%= number_to_currency @cart.taxable_sub_total %></td>
-      </tr>
+      <%= f.hidden_field :stripe_create_token_response %>
+      <%= f.hidden_field :stripe_create_token_status %>
+      <%= f.fields_for :cart, @cart do |g| %>
+          <%= g.fields_for :address, @cart.address do |h| %>
+              <%= h.hidden_field :name %>
+              <%= h.hidden_field :address1 %>
+              <%= h.hidden_field :address2 %>
+              <%= h.hidden_field :state_stripe %>
+              <%= h.hidden_field :zip_code %>
+              <%= h.hidden_field :country_stripe %>
+          <% end %>
+      <% end %>
 
-      <tr>
-        <td>Tax: <%= @purchase.tax_short_description %></td>
-        <td class='right'>
-          <%= number_to_currency @purchase.tax %>
-        </td>
-      </tr>
+      <div class="row">
+        <table align='center' class='field'>
+          <tr>
+            <td><%= "#{pluralize @cart.quantity, 'item'} in cart" %></td>
+            <td class='right'><%= number_to_currency @cart.taxable_sub_total %></td>
+          </tr>
 
-      <tr>
-        <td><%= @cart.shipping.shipping_option %></td>
-        <td class='right'><%= number_to_currency(@cart.shipping.total_cents / 100.0) %></td>
-      </tr>
+          <tr>
+            <td>Tax: <%= @purchase.tax_short_description %></td>
+            <td class='right'>
+              <%= number_to_currency @purchase.tax %>
+            </td>
+          </tr>
 
-      <tr>
-        <td style="border-top: 1px solid;"><%= f.label :total %></td>
-        <td style="border-top: 1px solid;" class='right'><%= number_to_currency @cart.total %></td>
-      </tr>
+          <tr>
+            <td><%= @cart.shipping.shipping_option %></td>
+            <td class='right'><%= number_to_currency(@cart.shipping.total_cents / 100.0) %></td>
+          </tr>
 
-      <tr>
-        <td colspan=2>&nbsp;</td>
-      </tr>
+          <tr>
+            <td style="border-top: 1px solid;"><%= f.label :total %></td>
+            <td style="border-top: 1px solid;" class='right'><%= number_to_currency @cart.total %></td>
+          </tr>
 
-      <tr>
-        <td><%= label_tag :card_number, 'Credit Card Number' %></td>
-        <td><%= text_field_tag :card_number, nil, :name => nil, :size => 18 %>
-          <div id="card_number_error"/>
-        </td>
-      </tr>
+          <tr>
+            <td colspan=2>&nbsp;</td>
+          </tr>
 
-      <tr>
-        <td>
-          <%= label_tag :card_code, 'Security Code on Card (CVV)' %></td>
-        <td><%= text_field_tag :card_code, nil, name: nil, size: 3, autocomplete: 'off' %></td>
-      </tr>
+        </table>
+      </div>
 
-      <tr>
-        <td><%= label_tag :card_month, 'Card Expiration' %></td>
-        <td>
+      <div class="control-group">
+        <%= label_tag :card_number, 'Credit Card Number', class: "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :card_number, nil, name: nil, size: 18, placeholder: 'your card number' %>
+        </div>
+      </div>
+      <div id="card_number_error"></div>
+
+      <div class="control-group">
+        <%= label_tag :card_code, 'Security Code on Card (CVV)', class: "control-label" %>
+        <div class="controls">
+          <%= text_field_tag :card_code, nil, name: nil, size: 3, autocomplete: 'off', placeholder: 'on back of card' %></td>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= label_tag :card_month, 'Card Expiration', class: "control-label" %>
+        <div class="controls">
+
           <%= select_month Date.today, {:add_month_numbers => true}, {:name => nil, :id => 'card_month'} %>
           <%= select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => 'card_year'} %>
-          <%= f.hidden_field :cart_id, :value => @purchase.cart.id %>
-          <%= f.hidden_field :stripe_card_token %>
-          <%= f.hidden_field :total_cents, :value => (@cart.total * 100).to_i %>
-        </td>
-      </tr>
 
-      <tr>
-        <td colspan=2>
-          <div id="stripe_error" class='flash_error'></div>
-        </td>
-      </tr>
+        </div>
 
-      <tr>
-        <td>&nbsp;</td>
-        <td>
-          <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
-          <%= f.submit text, :id => 'my_submit' %>
-          <span id="spinner" style="display:none" class='spinner'></span>
-        </td>
-    </table>
+      </div>
 
-<% end %>
+      <%= f.hidden_field :cart_id, :value => @purchase.cart.id %>
+      <%= f.hidden_field :stripe_card_token %>
+      <%= f.hidden_field :total_cents, :value => (@cart.total * 100).to_i %>
+
+      <div class="field">
+        <div id="stripe_error" class='flash_error'></div>
+      </div>
+
+      <div class="form-actions">
+        <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
+        <%= f.submit text, :id => 'my_submit' %>
+        <span id="spinner" style="display:none" class='spinner'></span>
+      </div>
+
+  <% end %>
+</div>

@@ -1,82 +1,99 @@
-<%= form_for(@address) do |f| %>
+<div class="platypus-form span8">
 
-    <%= render 'shared/error_messages', record: @address, h2_msg: 'stopped this delivery address from being saved:'%>
+  <%= form_for(@address, html: {class: 'form-horizontal'}) do |f| %>
 
-    <table align='center' class='field'>
-      <tr>
-        <td><%= f.label :first_name %></td>
-        <td><%= f.text_field :first_name %></td>
-      </tr>
+      <%= render 'shared/error_messages', record: @address, h2_msg: 'stopped this delivery address from being saved:' %>
 
-      <tr>
-        <td><%= f.label :last_name %></td>
-        <td><%= f.text_field :last_name %></td>
-      </tr>
+      <div class="control-group">
+        <%= f.label :first_name, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :first_name %>
+        </div>
+      </div>
 
-      <tr>
-        <td><%= f.label :email %></td>
-        <td><%= f.text_field :email %></td>
-      </tr>
+      <div class="control-group">
+        <%= f.label :last_name, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :last_name %>
+        </div>
+      </div>
 
-      <tr>
-        <td><%= f.label 'Email again, please!' %></td>
-        <td><%= f.text_field :email_confirmation %></td>
-      </tr>
+      <div class="control-group">
+        <%= f.label :email, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :email %>
+        </div>
+      </div>
 
-      <tr>
-        <td><%= f.label :phone %></td>
-        <td><%= f.phone_field :phone, value: number_to_phone(@address.phone, area_code: true), place_holer:'1234561212' %> for questions about your order</td>
-      </tr>
+      <div class="control-group">
+        <%= f.label 'Email again, please!', class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :email_confirmation %>
+        </div>
+      </div>
 
-
-      <tr>
-        <td><%= f.label :address1 %></td>
-        <td><%= f.text_field :address1 %></td>
-      </tr>
-
-      <tr>
-        <td><%= f.label :address2 %></td>
-        <td><%= f.text_field :address2 %></td>
-      </tr>
-
-      <tr>
-        <td><%= f.label :city %></td>
-        <td><%= f.text_field :city %></td>
-      </tr>
-
-      <tr>
-        <td><%= f.label :state_id %></td>
-        <td><%= f.select :state_id, @states, {}, {include_blank: true, style: 'padding: 9px;'} %></td>
-      </tr>
-
-      <tr>
-        <td><%= f.label :zip_code %></td>
-        <td><%= f.text_field :zip_code, size: 10 %></td>
-      </tr>
-
-      <tr>
-        <td><%= f.label :country %></td>
-        <td><%= f.text_field :country %></td>
-      </tr>
-
-      <tr>
-        <td>&nbsp;</td>
-        <td><span id="QadBusy"></span></td>
-      </tr>
+      <div class="control-group">
+        <%= f.label :phone, class: "control-label" %>
+        <div class="controls">
+          <%= f.phone_field :phone, value: number_to_phone(@address.phone, area_code: true), placeholder: 'for questions about your order' %>
+        </div>
+      </div>
 
 
-    </table>
+      <div class="control-group">
+        <%= f.label :address1, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :address1 %>
+        </div>
+      </div>
 
-    <div class="field">
-      <%= f.hidden_field :cart_id, value: @cart.id %>
-    </div>
+      <div class="control-group">
+        <%= f.label :address2, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :address2 %>
+        </div>
+      </div>
 
-    <div class="actions">
-      <%= f.submit t(:shopping_submit_address), id: 'my_submit' %>
-      <span id="spinner" style="display:none" class='spinner'></span>
-    </div>
+      <div class="control-group">
+        <%= f.label :city, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :city %>
+        </div>
+      </div>
 
-<% end %>
+      <div class="control-group">
+        <%= f.label :state_id, class: "control-label" %>
+        <div class="controls">
+          <%= f.select :state_id, @states, prompt: '- Select State -', include_blank: true %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :zip_code, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :zip_code, size: 10 %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%= f.label :country, class: "control-label" %>
+        <div class="controls">
+          <%= f.text_field :country %>
+        </div>
+      </div>
+
+        <%= f.hidden_field :cart_id, value: @cart.id %>
+      <div align="">
+        <span id="QadBusy"></span>
+      </div>
+
+      <div class="form-actions">
+        <%= f.submit t(:shopping_submit_address), id: 'my_submit' %>
+        <span id="spinner" style="display:none" class='spinner'></span>
+      </div>
+
+  <% end %>
+</div>
 
 <%= javascript_tag do %>
     QadApi(

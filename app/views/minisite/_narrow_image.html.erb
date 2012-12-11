@@ -1,6 +1,6 @@
-<div class="row span10 pull-right">
+<div class="row">
 
-  <div class="media span9">
+  <div class="media">
     <% klass = offer.frozen_offer? ? "frozen" : "" %>
     <%= link_to image_tag(offer.image.url_cache_buster,
                           :title    => offer.name,
@@ -15,7 +15,10 @@
                 class: "pull-left"%>
     <div class="media-body">
 
-      <h4 class="media-heading"><%= offer.name %></h4>
+      <h4 class="media-heading">
+        <%=  link_to image_tag("facebook/wall_post.png"), '/auth/facebook', title: t(:facebook_share_title) %>
+        <%= offer.name %>
+      </h4>
 
       <% if offer.frozen_offer? %>
           <b><%= t('in_shopping_cart') %></b><br>
