@@ -302,4 +302,12 @@ module ApplicationHelper
             id:     "share_facebook_#{offer.id}"
   end
 
+  def button_to_with_icon(button_to_html, icon_class=nil)
+    icon_class ||= 'icon-ok-sign icon-white'
+    # add a span with icon to the div
+    html = button_to_html.gsub('<div><input', "<div><span class='btn btn-success'><i class='#{icon_class}'></i><input")
+    html.gsub!('</div>', '</span></div>')
+    html.html_safe
+  end
+
 end

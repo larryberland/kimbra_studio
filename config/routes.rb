@@ -1,7 +1,7 @@
 KimbraStudio::Application.routes.draw do
 
   match 'auth/:provider/callback', to: 'facebook_sessions#create'
-  match 'auth/failure', to: redirect('/')
+  match 'auth/failure', to: 'facebook_sessions#failure'
   match 'facebook_signout', to: 'facebook_sessions#destroy', as: 'facebook_signout'
 
   ActiveAdmin.routes(self)
@@ -12,6 +12,7 @@ KimbraStudio::Application.routes.draw do
     member do
       post :share
       post :like
+      post :failure
     end
 
 
@@ -73,11 +74,11 @@ KimbraStudio::Application.routes.draw do
       resources :portraits
     end
     resources :item_sides do
-          member do
-            get :portrait, path: 'portrait/:portrait_id(.:format)'
-            get :stock, path: 'stock/:item_side_id(.:format)'
-          end
-        end
+      member do
+        get :portrait, path: 'portrait/:portrait_id(.:format)'
+        get :stock, path: 'stock/:item_side_id(.:format)'
+      end
+    end
     resources :offers do
       member do
         get :portrait, path: 'portrait/:portrait_id(.:format)'
@@ -147,7 +148,7 @@ KimbraStudio::Application.routes.draw do
   end
 
   resources :states, :only => [:index]
-  resources :studios, constraints: { email: /.*/ } do
+  resources :studios, constraints: {email: /.*/} do
     member do
       put :create_owner
       get :eap

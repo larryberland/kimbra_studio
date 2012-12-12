@@ -12,11 +12,12 @@ module MyStudio::SessionsHelper
         link_to name, url, title: title
       else
         html_options = {method: :get, class: "btn btn-success", title: title}
+        icon_class   = 'icon-upload icon-white'
         case session.portraits.count
           when 0
-            button_to t(:my_studio_sessions_upload_now_link), url, html_options
+            button_to_with_icon(button_to(t(:my_studio_sessions_upload_now_link), url, html_options), icon_class)
           when 1..MyStudio::Session::BEST_PORTRAITS
-            button_to t(:my_studio_sessions_upload_more_link), url, html_options
+            button_to_with_icon(button_to(t(:my_studio_sessions_upload_more_link), url, html_options), icon_class)
           else
             link_to name, url, title: title
         end

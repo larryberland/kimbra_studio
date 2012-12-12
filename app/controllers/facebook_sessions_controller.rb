@@ -14,6 +14,16 @@ class FacebookSessionsController < ApplicationController
     end
   end
 
+  def failure
+    # user failed in facebook login
+    email = Admin::Customer::Email.find_by_id(session[:admin_customer_email_id]) rescue nil
+    if email
+      redirect_to minisite_email_offers_url(email.tracking)
+    else
+      redirect_to root_url
+    end
+  end
+
   def destroy
     session[:facebook_user_id] = nil
     email = Admin::Customer::Email.find_by_id(session[:admin_customer_email_id]) rescue nil

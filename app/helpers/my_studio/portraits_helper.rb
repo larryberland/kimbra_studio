@@ -24,14 +24,6 @@ module MyStudio::PortraitsHelper
     "<span><i class='icon-thumbs-up'></i>Some Text#{my_button}</span>".html_safe
   end
 
-  def button_to_with_icon(button_to_html, icon_class=nil)
-    icon_class ||= 'icon-ok-sign icon-white'
-    # add a span with icon to the div
-    html = button_to_html.gsub('<div><input', "<div><span class='btn btn-success'><i class='#{icon_class}'></i><input")
-    html.gsub!('</div>', '</span></div>')
-    html.html_safe
-  end
-
   def actions_for_portraits(my_studio_session)
     if my_studio_session.finished_uploading_at?
       'You marked this photo session as complete and it has been scheduled for photoshopping.'
