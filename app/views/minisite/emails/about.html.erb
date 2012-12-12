@@ -1,6 +1,5 @@
 <h2>About <%= @studio.name %></h2>
-
-<table class="table span8">
+<table class="table">
   <tbody>
   <tr>
     <% span = @admin_customer_email.offers.try(:size) %>
@@ -16,12 +15,14 @@
   </tr>
   </tbody>
 </table>
-<p>These are hand-crafted individual pieces of photo jewelry. Each piece is solid sterling silver or pewter,
-  and is completely waterproof.</p>
+<p>
+  <%= t('.p1') %>
+</p>
 
-<p><%= @studio.name %> has suggested some special pictures from your recent photo shoot to be created
-  into personal pieces of jewelry.</p>
+<p>
+  <%= t('.p2', name: @studio.name) %>
+</p>
 
-<p><%= link_to "Kimbra Studios", "http://kimbrastudios.com" %> is the pioneer in this field and will be doing
-  the hand-crafting at our direction in their studio in Colorado.
-  We love their work and are proud to partner with them to bring you this jewelry.</p>
+<p>
+  <%= link_to "Kimbra Studios", "http://kimbrastudios.com" %> <%= t('.p3') %>
+</p>

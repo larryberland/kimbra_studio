@@ -83,6 +83,9 @@
     .navbar-header-top-row .pull-right{
         padding: 20px;
     }
+    .navbar-header-top-row .pull-left{
+        padding-left: 40px;
+    }
     div.platypus-form{
       padding: 10px 15px;
       margin-bottom: 15px;
@@ -99,26 +102,27 @@
 
   <div class="row navbar-header-top-row">
 
-    <div class="span2 pull-left">
-      <address>
-        <strong><%= studio.name %></strong><br>
-        <%= studio.address_1 %>
-        <br>
-        <%= studio.city_state_zip %>
-        <br>
-        <abbr title="Phone">P:</abbr> <%= studio.phone_number %>
-      </address>
-    </div>
+    <div class="row">
 
-    <div class="span10">
+      <div class="pull-left span2">
+        <address>
+          <strong><%= studio.name %></strong><br>
+          <%= studio.address_1 %>
+          <br>
+          <%= studio.city_state_zip %>
+          <br>
+          <abbr title="Phone">P:</abbr> <%= studio.phone_number %>
+        </address>
+      </div>
+
       <img id="xlogo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+      <div class="pull-right">
+        <% if current_user_facebook %>
+            <%= image_tag current_user_facebook.image_url, class: "rounded" %>
+        <% end %>
+      </div>
     </div>
 
-    <div class="span2 pull-right">
-      <% if current_user_facebook %>
-          <%= image_tag current_user_facebook.image_url, class: "rounded" %>
-      <% end %>
-    </div>
   </div>
 
   <div class="navbar-inner">

@@ -35,6 +35,7 @@ en:
   img_title_view: "Click to view"
 
   facebook_share_title: "Send this to friends or post it on your timeline."
+  facebook_like_title: "Like this on your timeline."
 
   # customer_mailer/send_offer.html.erb
   client_send_offers_subject: "%{name} custom jewelry offer"
@@ -261,6 +262,11 @@ en:
       order_status:
         title: "Order Status"
         order_number: "Your order number is %{number}."
+      about:
+        p1: "These are hand-crafted individual pieces of photo jewelry. Each piece is solid sterling silver or pewter, and is completely waterproof."
+        p2: "%{name} has suggested some special pictures from your recent photo shoot to be created into personal pieces of jewelry."
+        p3: "is the pioneer in this field and will be doing the hand-crafting at our direction in their studio in Colorado. We love their work and are proud to partner with them to bring you this jewelry."
+
     items:
       index:
         title: "Edit Your Custom Items"
