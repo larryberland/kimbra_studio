@@ -33,6 +33,15 @@ class FacebookSessionsController < ApplicationController
     end
   end
 
+  def like
+    # TODO: Figure out the difference between share and like
+    if (current_user_facebook)
+      @shopping_item_id = offer.id
+      @item = offer
+      offer = Admin::Customer::Offer.find_by_id(params[:id])
+      current_user_facebook.like(offer, minisite_offer_url(offer))
+    end
+  end
   private
 
   def facebook_logout

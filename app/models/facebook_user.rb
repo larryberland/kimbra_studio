@@ -70,4 +70,22 @@ class FacebookUser < ActiveRecord::Base
     permissions["publish_stream"] == 1 ? true : false if permissions.keys.include?("publish_stream")
   end
 
+  def like(offer, url)
+    if share?
+      hash = {
+          message:     "#{offer.email.my_studio_session.studio.name} via Kimbra ClickPLUS",
+          name:        offer.piece.name,
+          caption:     offer.email.my_studio_session.studio.name,
+          description: offer.piece.short_description,
+          link:        url,
+          picture:     offer.image_url}
+      hash[:link] = "www.kimbraclickplus.com" unless Rails.env.production?
+
+      facebook.put_wall_post("#{offer.email.my_studio_session.studio.name} via Kimbra ClickPLUS", hash)
+    end
+  rescue Koala::Facebook::APIError => e
+    logger.info "FB:CHALLENGE:: #{e}"
+    nil
+  end
+
 end

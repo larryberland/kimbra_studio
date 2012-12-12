@@ -11,6 +11,7 @@ KimbraStudio::Application.routes.draw do
   resources :facebook_sessions, only: [:create, :destroy] do
     member do
       post :share
+      post :like
     end
 
 
