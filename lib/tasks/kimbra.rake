@@ -3,50 +3,80 @@ namespace 'kimbra' do
   desc "Seed the new Kimbra Komposite Images for Offers"
   task :seed_kkp => :environment do
     data = [
-        {category: 'Photo Necklaces', name: 'Awareness Necklace', image: 'awareness_necklace.png', layout: {x: 92, y: 106, w: 62, h: 59}},
-        {category: 'Photo Necklaces', name: 'Sophie Necklace', image: 'sophie_necklace.png', layout: {x: 77, y: 83, w: 42, h: 47}},
-        {category: 'Photo Necklaces', name: 'Bailey Necklace', image: 'bailey_necklace.png', layout: {x: 63, y: 62, w: 61, h: 113}},
-        {category: 'Photo Necklaces', name: 'Denise Pendant', image: 'denise_pendant.png', layout: {x: 84, y: 92, w: 39, h: 60}},
-        {category: 'Photo Necklaces', name: 'Embrace Necklace', image: 'embrace_necklace.png', layout: {x: 133, y: 275, w: 91, h: 140}},
-        {category: 'Photo Necklaces', name: 'Linda Pendant', image: 'linda_pendant.png', layout: {x: 56, y: 70, w: 72, h: 109}},
-        {category: 'Photo Necklaces', name: 'Madelyn Necklace', image: 'madelyn_necklace.png', layout: {x: 220, y: 381, w: 151, h: 143}},
-        {category: 'Photo Necklaces', name: 'My Love Necklace', image: 'my_love_necklace.png', layout: {x: 89, y: 83, w: 41, h: 63}},
-        {category: 'Photo Necklaces', name: 'Roseanne Pendant', image: 'roseanne_pendant.png', layout: {x: 41, y: 96, w: 123, h: 83}},
-        {category: 'Photo Charms', name: 'Annika Charm', image: 'annika_charm.png', layout: {x: 22, y: 34, w: 151, h: 151}},
-        {category: 'Photo Charms', name: 'Evalina Charm', image: 'evalina_charm.png', layout: {x: 65, y: 77, w: 69, h: 69}},
-        {category: 'Photo Charms', name: 'Harper Charm', image: 'harper_charm.png', layout: {x: 22, y: 49, w: 154, h: 106}},
-        {category: 'Photo Charms', name: 'Harper Charm (two sided)', image: 'harper_charm_two_sided.png', layout: {x: 19, y: 48, w: 161, h: 111}},
-        {category: 'Photo Charms', name: 'Karrie Charm', image: 'karrie_charm.png', layout: {x: 53, y: 67, w: 100, h: 76}},
-        {category: 'Photo Charms', name: 'Kayda Charm', image: 'kayda_charm.png', layout: {x: 35, y: 53, w: 123, h: 120}},
-        {category: 'Photo Charms', name: 'Margaret Charm', image: 'margaret_charm.png', layout: {x: 31, y: 33, w: 137, h: 152}},
-        {category: 'Photo Charms', name: 'Nicole Charm', image: 'nicole_charm.png', layout: {x: 61, y: 62, w: 75, h: 94}},
-        {category: 'Photo Charms', name: 'Rachel Charm', image: 'rachel_charm.png', layout: {x: 53, y: 64, w: 94, h: 94}},
-        {category: 'Photo Charms', name: 'Rachel Charm (two sided)', image: 'rachel_charm_two_sided.png', layout: {x: 53, y: 67, w: 89, h: 89}},
-        {category: 'Photo Charms', name: 'Sadie Charm', image: 'sadie_charm.png', layout: {x: 67, y: 26, w: 72, h: 158}},
-        {category: 'Photo Charms', name: 'Sela Charm', image: 'sela_charm.png', layout: {x: 50, y: 35, w: 101, h: 147}},
-        {category: 'Photo Charms', name: 'Sela Charm (two sided)', image: 'sela_charm_two_sided.png', layout: {x: 49, y: 36, w: 106, h: 153}},
-        {category: 'Photo Charms', name: 'Shelise Charm', image: 'shelise_charm.png', layout: {x: 50, y: 62, w: 97, h: 97}},
-        {category: 'Photo Charms', name: 'Taneka Charm', image: 'taneka_charm.png', layout: {x: 64, y: 48, w: 74, h: 112}},
-        {category: 'Photo Charms', name: 'Tucker Charm', image: 'tucker_charm.png', layout: {x: 62, y: 55, w: 72, h: 78}},
-        {category: 'Photo Charms', name: 'Wendy Bead Charm', image: 'wendy_bead_charm.png', layout: {x: 81, y: 110, w: 36, h: 49}},
-        {category: 'Photo Charms', name: 'Baby Foot Bead Charm', image: 'baby_foot_bead_charm.png', layout: {x: 78, y: 107, w: 39, h: 51}},
-        {category: 'Photo Charms', name: 'Paw Print Bead Charm', image: 'paw_print_bead_charm.png', layout: {x: 78, y: 108, w: 39, h: 47}},
-        {category: 'Holiday', name: 'Aspen Ornament', image: 'aspen_ornament.png', layout: {x: 81, y: 95, w: 43, h: 43}},
-        {category: 'Holiday', name: 'Awareness Ornament', image: 'awareness_ornament.png', layout: {x: 60, y: 42, w: 75, h: 99}},
-        {category: 'Holiday', name: 'Evergreen Ornament', image: 'evergreen_ornament.png', layout: {x: 77, y: 101, w: 47, h: 47}},
-        {category: 'Holiday', name: 'Fairchild Ornament', image: 'fairchild_ornament.png', layout: {x: 63, y: 91, w: 77, h: 77}},
-        {category: 'Holiday', name: 'Joy Love Peace Ornament', image: 'joy_love_peace_ornament.png', layout: {x: 59, y: 90, w: 83, h: 83}},
-        {category: 'Holiday', name: 'Keepsake Year Frame', image: 'keepsake_year_frame.png', layout: {x: 67, y: 60, w: 66, h: 86}},
-        {category: 'Holiday', name: 'Keepsake Year Frame (horizontal)', image: 'keepsake_year_frame_horizontal.png', layout: {x: 61, y: 73, w: 86, h: 66}},
-        {category: 'Holiday', name: 'Memorial Ornament', image: 'memorial_ornament.png', layout: {x: 60, y: 72, w: 81, h: 113}}
+        {category: 'Photo Bracelets', name: 'Alexis Bracelet', image: 'alexis_bracelet.png',
+         layouts:  [
+                       {x: 108, y: 48, w: 70, h: 83},
+                       {x: 227, y: 48, w: 70, h: 81},
+                       {x: 344, y: 48, w: 70, h: 81},
+                       {x: 463, y: 48, w: 69, h: 82},
+                   ]},
+        {category: 'Photo Bracelets', name: 'Eileen Bracelet', image: 'eileen_bracelet.png',
+         layouts:  [
+                       {x: 88, y: 138, w: 98, h: 72, degrees: 136.0},
+                       {x: 112, y: 205, w: 72, h: 72, degrees: 90.0},
+                       {x: 113, y: 318, w: 100, h: 71, degrees: 56.09},
+                       {x: 151, y: 423, w: 72, h: 72, degrees: 0.0},
+                       {x: 274, y: 431, w: 102, h: 66, degrees: -5.9},
+                       {x: 390, y: 399, w: 72, h: 72, degrees: -49.6},
+                       {x: 431, y: 307, w: 96, h: 72, degrees: -78.08},
+                       {x: 438, y: 110, w: 72, h: 72, degrees: 228.34},
+                   ]},
+
+    #{category: 'Photo Necklaces', name: 'Awareness Necklace', image: 'awareness_necklace.png', layout: {x: 92, y: 106, w: 62, h: 59}},
+    #{category: 'Photo Necklaces', name: 'Sophie Necklace', image: 'sophie_necklace.png', layout: {x: 77, y: 83, w: 42, h: 47}},
+    #{category: 'Photo Necklaces', name: 'Bailey Necklace', image: 'bailey_necklace.png', layout: {x: 63, y: 62, w: 61, h: 113}},
+    #{category: 'Photo Necklaces', name: 'Denise Pendant', image: 'denise_pendant.png', layout: {x: 84, y: 92, w: 39, h: 60}},
+    #{category: 'Photo Necklaces', name: 'Embrace Necklace', image: 'embrace_necklace.png', layout: {x: 133, y: 275, w: 91, h: 140}},
+    #{category: 'Photo Necklaces', name: 'Linda Pendant', image: 'linda_pendant.png', layout: {x: 56, y: 70, w: 72, h: 109}},
+    #{category: 'Photo Necklaces', name: 'Madelyn Necklace', image: 'madelyn_necklace.png', layout: {x: 220, y: 381, w: 151, h: 143}},
+    #{category: 'Photo Necklaces', name: 'My Love Necklace', image: 'my_love_necklace.png', layout: {x: 89, y: 83, w: 41, h: 63}},
+    #{category: 'Photo Necklaces', name: 'Roseanne Pendant', image: 'roseanne_pendant.png', layout: {x: 41, y: 96, w: 123, h: 83}},
+    #{category: 'Photo Charms', name: 'Annika Charm', image: 'annika_charm.png', layout: {x: 22, y: 34, w: 151, h: 151}},
+    #{category: 'Photo Charms', name: 'Evalina Charm', image: 'evalina_charm.png', layout: {x: 65, y: 77, w: 69, h: 69}},
+    #{category: 'Photo Charms', name: 'Harper Charm', image: 'harper_charm.png', layout: {x: 22, y: 49, w: 154, h: 106}},
+    #{category: 'Photo Charms', name: 'Harper Charm (two sided)', image: 'harper_charm_two_sided.png', layout: {x: 19, y: 48, w: 161, h: 111}},
+    #{category: 'Photo Charms', name: 'Karrie Charm', image: 'karrie_charm.png', layout: {x: 53, y: 67, w: 100, h: 76}},
+    #{category: 'Photo Charms', name: 'Kayda Charm', image: 'kayda_charm.png', layout: {x: 35, y: 53, w: 123, h: 120}},
+    #{category: 'Photo Charms', name: 'Margaret Charm', image: 'margaret_charm.png', layout: {x: 31, y: 33, w: 137, h: 152}},
+    #{category: 'Photo Charms', name: 'Nicole Charm', image: 'nicole_charm.png', layout: {x: 61, y: 62, w: 75, h: 94}},
+    #{category: 'Photo Charms', name: 'Rachel Charm', image: 'rachel_charm.png', layout: {x: 53, y: 64, w: 94, h: 94}},
+    #{category: 'Photo Charms', name: 'Rachel Charm (two sided)', image: 'rachel_charm_two_sided.png', layout: {x: 53, y: 67, w: 89, h: 89}},
+    #{category: 'Photo Charms', name: 'Sadie Charm', image: 'sadie_charm.png', layout: {x: 67, y: 26, w: 72, h: 158}},
+    #{category: 'Photo Charms', name: 'Sela Charm', image: 'sela_charm.png', layout: {x: 50, y: 35, w: 101, h: 147}},
+    #{category: 'Photo Charms', name: 'Sela Charm (two sided)', image: 'sela_charm_two_sided.png', layout: {x: 49, y: 36, w: 106, h: 153}},
+    #{category: 'Photo Charms', name: 'Shelise Charm', image: 'shelise_charm.png', layout: {x: 50, y: 62, w: 97, h: 97}},
+    #{category: 'Photo Charms', name: 'Taneka Charm', image: 'taneka_charm.png', layout: {x: 64, y: 48, w: 74, h: 112}},
+    #{category: 'Photo Charms', name: 'Tucker Charm', image: 'tucker_charm.png', layout: {x: 62, y: 55, w: 72, h: 78}},
+    #{category: 'Photo Charms', name: 'Wendy Bead Charm', image: 'wendy_bead_charm.png', layout: {x: 81, y: 110, w: 36, h: 49}},
+    #{category: 'Photo Charms', name: 'Baby Foot Bead Charm', image: 'baby_foot_bead_charm.png', layout: {x: 78, y: 107, w: 39, h: 51}},
+    #{category: 'Photo Charms', name: 'Paw Print Bead Charm', image: 'paw_print_bead_charm.png', layout: {x: 78, y: 108, w: 39, h: 47}},
+    #{category: 'Holiday', name: 'Aspen Ornament', image: 'aspen_ornament.png', layout: {x: 81, y: 95, w: 43, h: 43}},
+    #{category: 'Holiday', name: 'Awareness Ornament', image: 'awareness_ornament.png', layout: {x: 60, y: 42, w: 75, h: 99}},
+    #{category: 'Holiday', name: 'Evergreen Ornament', image: 'evergreen_ornament.png', layout: {x: 77, y: 101, w: 47, h: 47}},
+    #{category: 'Holiday', name: 'Fairchild Ornament', image: 'fairchild_ornament.png', layout: {x: 63, y: 91, w: 77, h: 77}},
+    #{category: 'Holiday', name: 'Joy Love Peace Ornament', image: 'joy_love_peace_ornament.png', layout: {x: 59, y: 90, w: 83, h: 83}},
+    #{category: 'Holiday', name: 'Keepsake Year Frame', image: 'keepsake_year_frame.png', layout: {x: 67, y: 60, w: 66, h: 86}},
+    #{category: 'Holiday', name: 'Keepsake Year Frame (horizontal)', image: 'keepsake_year_frame_horizontal.png', layout: {x: 61, y: 73, w: 86, h: 66}},
+    #{category: 'Holiday', name: 'Memorial Ornament', image: 'memorial_ornament.png', layout: {x: 60, y: 72, w: 81, h: 113}}
     ]
     data.each do |options|
       p = Admin::Merchandise::Piece.find_by_category_and_name(options[:category], options[:name])
       raise "didn't find piece #{options.inspect}" if p.nil?
 
-      layout = p.parts.first.piece_layout.layout
-      unless layout.update_attributes(options[:layout])
-        raise "unable to set layout for #{options.inspect}"
+      if (options[:layout])
+        layout = p.parts.first.piece_layout.layout
+        unless layout.update_attributes(options[:layout])
+          raise "unable to set layout for #{options.inspect}"
+        end
+      elsif (options[:layouts])
+        # update all the parts piece_layout information
+        p.parts.each_with_index do |part, index|
+          if layout = options[:layouts][index]
+            unless part.piece_layout.layout.update_attributes(layout)
+              raise "unable to set layout for #{options.inspect}"
+            end
+          end
+        end
       end
 
       unless p.update_attributes(custom_layout: 'composite', photo: true)
@@ -70,8 +100,8 @@ namespace 'kimbra' do
 
     data = [
         {category: 'Photo Bracelets', name: 'Leota Bracelet',
-         image: 'leota_bracelet.png',
-         price: 180.00,
+         image:    'leota_bracelet.png',
+         price:    180.00,
          layouts:  [
                        {x: 159, y: 426, w: 98, h: 98, degrees: 75.66},
                        {x: 250, y: 600, w: 98, h: 98, degrees: 29.74},
@@ -102,8 +132,8 @@ namespace 'kimbra' do
       if File.exist?(fname)
         p.image.store!(File.open(fname))
       else
-      p4
-      puts "missing Piece image fname=>#{fname} in #{options[:category]}"
+        p4
+        puts "missing Piece image fname=>#{fname} in #{options[:category]}"
       end
 
       p.save
@@ -175,7 +205,7 @@ namespace 'kimbra' do
       end
 
       p.parts.destroy_all if p.parts.present?
-      sub_dir = piece[:name].gsub(' ', '_').gsub('(', '').gsub(')', '').underscore
+      sub_dir  = piece[:name].gsub(' ', '_').gsub('(', '').gsub(')', '').underscore
       sub_path = path.join(sub_dir)
       sub_path.mkpath unless sub_path.directory?
       part_image_fname = sub_path.join(parts[:image_part])

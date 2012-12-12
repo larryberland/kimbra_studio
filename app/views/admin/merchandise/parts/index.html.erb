@@ -46,7 +46,7 @@
       <th>y</th>
       <th>width</th>
       <th>height</th>
-      <th>Active</th>
+      <th>degs.</th>
     </tr>
 
     </thead>
@@ -70,10 +70,10 @@
           <td><%= admin_merchandise_part.width %></td>
           <td><%= admin_merchandise_part.height %></td>
           <td><%= admin_merchandise_part.piece_layout.layout.x %></td>
-          <td><%= admin_merchandise_part.piece_layout.layout.x %></td>
+          <td><%= admin_merchandise_part.piece_layout.layout.y %></td>
           <td><%= admin_merchandise_part.piece_layout.layout.w %></td>
           <td><%= admin_merchandise_part.piece_layout.layout.h %></td>
-          <td><%= admin_merchandise_part.active %></td>
+          <td><%= admin_merchandise_part.piece_layout.layout.degrees %></td>
         </tr>
     <% end %>
 

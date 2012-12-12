@@ -4,7 +4,7 @@ class ImageLayout < ActiveRecord::Base
   belongs_to :layout, :polymorphic => true
 
   def resize(image)
-    #puts "imageLayout resize:#{image.columns}x#{image.rows} to:#{w}x#{h}"
+    puts "imageLayout resize:#{image.columns}x#{image.rows} to:#{w}x#{h}"
     new_image = image.resize_to_fit(w, h) if w and h
     new_image ||= image
     new_image
@@ -18,10 +18,20 @@ class ImageLayout < ActiveRecord::Base
 
       rad = degrees * Math::PI / 180.0
       dh  = Math.sin(rad) * image.columns
-      if (degrees < 0)
-        @new_y += dh
+      puts "degrees:#{degrees} dh:#{dh}"
+      if (degrees > 90)
+        # not sure what to do here
+        if (degrees > 180)
+          @new_x += dh
+        else
+          @new_y -= dh
+        end
       else
-        @new_x -= dh
+        if (degrees < 0)
+          @new_y += dh
+        else
+          @new_x -= dh
+        end
       end
     end
     new_image ||= image
@@ -43,12 +53,14 @@ class ImageLayout < ActiveRecord::Base
     part_image.composite(src_image, x, y, operator)
   end
 
+  # use DstOutCompositeOp to see the exact rectangle
+  # use SrcOverCompositeOp to see the photo image on top of background
   def draw_custom_part2(part_image, src_image, operator=Magick::DstOverCompositeOp)
-    # puts " draw_custom() portrait src_image #{src_image.columns}x#{src_image.rows}"
+    puts "\n draw_custom() portrait src_image #{src_image.columns}x#{src_image.rows}"
     @new_x = x
     @new_y = y
     image  = rotate(resize(src_image))
-    # puts " draw_custom() resized image #{image.columns}x#{image.rows}"
+    puts " draw_custom() resized image #{image.columns}x#{image.rows}"
     part_image.composite(image, @new_x, @new_y, operator)
   end
 
