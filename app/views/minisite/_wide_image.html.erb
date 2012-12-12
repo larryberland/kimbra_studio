@@ -17,7 +17,7 @@
     <div class="media-body">
 
       <h4 class="media-heading">
-        <%=  link_to image_tag("facebook/wall_post.png"), '/auth/facebook', title: t(:facebook_share_title) %>
+        <%= link_to_facebook_share(offer) %>
         <%= offer.name %>
       </h4>
       <% if offer.frozen_offer? %>

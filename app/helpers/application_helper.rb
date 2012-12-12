@@ -275,4 +275,15 @@ module ApplicationHelper
     email.to_s.gsub(/([@.])/, '\1@&thinsp;').html_safe
   end
 
+  def link_to_facebook_share(offer)
+    link_to image_tag("facebook/wall_post.png"),
+                share_facebook_session_path(offer.id),
+                remote: true,
+                method: :post,
+                title:  t(:facebook_share_title),
+                class:  "btn likeabutton",
+                id:     "share_facebook_#{offer.id}"
+
+  end
+
 end

@@ -1,34 +1,27 @@
 <h2>About <%= @studio.name %></h2>
 
-<table width="500" cellspacing="0" cellpadding="4" border="0" align="center">
+<table class="table span8">
   <tbody>
   <tr>
     <% span = @admin_customer_email.offers.try(:size) %>
     <% @admin_customer_email.offers.each do |offer| %>
         <td align=center>
-          <div>            
-          <%= link_to image_tag_list(offer), url_for_offer_or_not(offer), :class => :no_border %><br>
-          <%= link_to "View", url_for_offer_or_not(offer) %>
+          <div>
+            <%= link_to image_tag_list(offer), url_for_offer_or_not(offer), :class => :no_border %>
+            <br>
+            <%= link_to "View", url_for_offer_or_not(offer) %>
           </div>
         </td>
     <% end if @admin_customer_email.offers %>
   </tr>
-  <tr>
-    <td align=center colspan=<%= span %> >
-      <div style="text-align:center;width:100%">
-        <div style="width:300px; text-align:left;margin:auto;">
-          <p>These are hand-crafted individual pieces of photo jewelry. Each piece is solid sterling silver or pewter,
-            and is completely waterproof.</p>
-
-          <p><%= @studio.name %> has suggested some special pictures from your recent photo shoot to be created
-            into personal pieces of jewelry.</p>
-
-          <p><%= link_to "Kimbra Studios", "http://kimbrastudios.com" %> is the pioneer in this field and will be doing
-            the hand-crafting at our direction in their studio in Colorado.
-            We love their work and are proud to partner with them to bring you this jewelry.</p>
-        </div>
-      </div>
-    </td>
-  </tr>
   </tbody>
 </table>
+<p>These are hand-crafted individual pieces of photo jewelry. Each piece is solid sterling silver or pewter,
+  and is completely waterproof.</p>
+
+<p><%= @studio.name %> has suggested some special pictures from your recent photo shoot to be created
+  into personal pieces of jewelry.</p>
+
+<p><%= link_to "Kimbra Studios", "http://kimbrastudios.com" %> is the pioneer in this field and will be doing
+  the hand-crafting at our direction in their studio in Colorado.
+  We love their work and are proud to partner with them to bring you this jewelry.</p>
