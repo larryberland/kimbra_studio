@@ -19,7 +19,7 @@
             <% orig_height = @item_side.part.height.to_f %>
             <% dest_width = 300.0 %>
             <% dest_height = (dest_width * orig_height) / orig_width %>
-            <div id='part_item_preview' style='width:300px; height:<%=dest_height%>px;'>
+            <div id='part_item_preview' style='width:300px; height:<%=dest_height%>px;' class='jcrop'>
               <%= image_tag @item_side.part.image_part_url, id: 'part_template' %>
               <%= image_tag @item_side.portrait.image_url(:face), id: 'preview' %>
             </div>
