@@ -20,6 +20,9 @@
     div.navbar {
         border-bottom: 1px solid <%=studio.try(:minisite).try(:calc_border_color) %>;
     }
+    .form-actions{
+        background-color: <%= studio.try(:minisite).try(:bgcolor) %>;
+    }
     .likeabutton {
         background: ButtonFace;
         color: ButtonText;
@@ -62,14 +65,10 @@
     }
 
     .media-object {
-        padding-right: 10px;
+        margin: 10px;
     }
 
     h4.media-heading {
-        text-align: left;
-    }
-
-    .centered {
         text-align: left;
     }
 
