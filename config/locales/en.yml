@@ -21,6 +21,7 @@ en:
 
   welcome: "Welcome to ClickPLUS!"
 
+  alert_close_button: "close x"
   create: "Add"
   show: "Show"
   view: "View"
@@ -256,6 +257,10 @@ en:
           title: "Editing Offer Email"
 
   minisite:
+    emails:
+      order_status:
+        title: "Order Status"
+        order_number: "Your order number is %{number}."
     items:
       index:
         title: "Edit Your Custom Items"

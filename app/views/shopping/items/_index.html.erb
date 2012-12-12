@@ -1,5 +1,5 @@
-<div id='shopping_item_index'>
-  <table class='shopping-item-index' align='center' width='100%'>
+<div id='shopping_item_index' class="row">
+  <table class='shopping-item-index table'>
     <thead>
     <th class='shopping-item-index left'>Piece</th>
     <th class='shopping-item-index'>&nbsp;</th>
@@ -14,16 +14,17 @@
             <tr>
               <td class='shopping-item-index left'>
                 <%= item.try(:offer).try(:name) %>
+                <% if item.try(:option) %>
+                    <br>
+                    <%= "#{item.option} #{item.option_selected}" %>
+                <% end %>
               </td>
               <td class='shopping-item-index'>
                 <%= link_to image_tag(item.offer.image_url.to_s,
                                       :title  => item.offer.name,
                                       :alt    => item.offer.name,
                                       :width  => 150,
-                                      #   :height => '30%',
                                       :class  => "img-rounded",
-                                      #   :editable => "true",
-                                      #   :label => "Image",
                                       :border => 0),
                             minisite_offer_url(item.offer),
                             {:style => "text-decoration: none;"} %>

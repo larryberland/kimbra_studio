@@ -1,19 +1,16 @@
-<h2>Order Status</h2>
+<div class="page-header">
+  <h2><%= t('.title') %></h2>
+</div>
 
-<p>Your order number is <%= @cart_order.tracking %>.</p>
+<p><%= t('.order_number', number: @cart_order.tracking) %></p>
 
 <p><%= status_for_cart(@cart_order) %></p>
 
-<div>
-  <div style='width:50%;margin:0px auto;'>
-  <%= render 'shopping/addresses/show', address: @cart_order.address %>
-  </div>
-</div>
+<%= render 'shopping/addresses/show', address: @cart_order.address %>
 
-<div class='cart-show'>
-  <%= render 'shopping/items/index', cart: @cart_order, show_status_only: @show_status_only %>
-</div>
+<%= render 'shopping/items/index', cart: @cart_order, show_status_only: @show_status_only %>
 
-<div class='cart-show'>
-  <p>Purchased on <%= @cart_order.purchase.purchased_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %b %d %I:%M%p") %> Eastern using credit card xxxx-xxxx-xxxx-<%= @cart_order.purchase.stripe_card.last4 %>.</p>
-</div>
+<p>Purchased
+  on <%= @cart_order.purchase.purchased_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %b %d %I:%M%p") %>
+  Eastern using credit card xxxx-xxxx-xxxx-<%= @cart_order.purchase.stripe_card.last4 %>.
+</p>

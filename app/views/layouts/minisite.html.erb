@@ -32,12 +32,12 @@
 
     <div class='hero-unit span12'>
 
-      <div class='row centered'>
+      <div class='row'>
 
         <% if notice || alert %>
             <div class="alert error rounded row">
               <i class="icon-hand-right"> </i>
-              <button type="button" class="close" data-dismiss="alert" style="float:right;">close x</button>
+              <button type="button" class="close" data-dismiss="alert"><%= t(:alert_close_button) %></button>
               <%= raw "<p> #{notice}</p>" if notice %>
               <%= raw "<p><strong>#{t(:snap)}</strong>#{alert}</p>" if alert %>
             </div>
