@@ -1,10 +1,11 @@
-<%= form_for(@item_side, :url => minisite_item_side_path(@item_side), html: {multipart: true}) do |f| %>
+<%= form_for(@item_side, url: minisite_item_side_path(@item_side), html: {multipart: true}) do |f| %>
 
     <%= render 'shared/error_messages', record: @item_side %>
 
-    <div class='preview span10'>
-      <h3><%= t'.title' %></h3>
-      <table cellpadding='20px'>
+    <div class='preview'>
+        <h3><%= t '.title' %></h3>
+      <table cellpadding='20px' class="table">
+        <tbody>
         <tr>
           <td align='right'>
             <div id='portrait_item' class='jcrop'>
@@ -25,14 +26,15 @@
 
           </td>
         </tr>
+        </tbody>
       </table>
     </div>
 
     <p>
-      <%= t'.p1_html' %>
+      <%= t '.p1_html' %>
     </p>
 
-    <div class="actions">
+    <div class="form-actions">
       <%= f.submit :id => 'my_submit', :value => 'Save' %>
       <%= link_to t(:cancel), url_for_cancel_workflow(@offer), :style => 'margin-left: 15px;' %>
       <span id="spinner" style="display:none" class='spinner'></span>
@@ -43,7 +45,7 @@
     </div>
 
     <div class="portraits">
-      <div><br/><br/><i><%= t'.portraits_click' %></i></div>
+      <div><br/><br/><i><%= t '.portraits_click' %></i></div>
       <% @admin_customer_offer.portraits.each do |portrait| %>
           <div>
             <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
