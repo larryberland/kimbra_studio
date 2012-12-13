@@ -1,5 +1,6 @@
 <h2><%= t '.title' %></h2>
 
+<% items_by_order = @items.sort_by(&:order) %>
 <table class="table">
   <thead>
   <tr>
@@ -16,7 +17,7 @@
     </td>
   </tr>
   <tr>
-    <% @items.each do |item| %>
+    <% items_by_order.each do |item| %>
         <td>
           <%= link_to item.front.image_custom.to_image_cache_buster(:list), edit_minisite_item_side_path(item.front) %>
           <br>

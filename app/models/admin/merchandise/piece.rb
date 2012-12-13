@@ -61,7 +61,8 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   end
 
   def photo_parts
-    parts.select { |part| part.photo? }
+    parts_by_order = parts.sort_by(&:order)
+    parts_by_order.select { |part| part.photo? }
   end
 
   def non_photo_parts

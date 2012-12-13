@@ -10,17 +10,27 @@ namespace 'kimbra' do
                        {x: 344, y: 48, w: 70, h: 81},
                        {x: 463, y: 48, w: 69, h: 82},
                    ]},
-        {category: 'Photo Bracelets', name: 'Eileen Bracelet', image: 'eileen_bracelet.png',
-         layouts:  [
-                       {x: 88, y: 138, w: 98, h: 72, degrees: 136.0},
-                       {x: 112, y: 205, w: 72, h: 72, degrees: 90.0},
-                       {x: 113, y: 318, w: 100, h: 71, degrees: 56.09},
-                       {x: 151, y: 423, w: 72, h: 72, degrees: 0.0},
-                       {x: 274, y: 431, w: 102, h: 66, degrees: -5.9},
-                       {x: 390, y: 399, w: 72, h: 72, degrees: -49.6},
-                       {x: 431, y: 307, w: 96, h: 72, degrees: -78.08},
-                       {x: 438, y: 110, w: 72, h: 72, degrees: 228.34},
-                   ]},
+        {category:     'Photo Bracelets', name: 'Eileen Bracelet', image: 'eileen_bracelet.png',
+         layouts:      [
+                           {x: 88, y: 138, w: 98, h: 72, degrees: 136.0},
+                           {x: 112, y: 205, w: 72, h: 72, degrees: 90.0},
+                           {x: 128, y: 313, w: 98, h: 71, degrees: 56.09},
+                           {x: 153, y: 423, w: 68, h: 68, degrees: 0.0},
+                           {x: 276, y: 431, w: 102, h: 66, degrees: -5.9},
+                           {x: 388, y: 399, w: 68, h: 68, degrees: -49.6},
+                           {x: 431, y: 307, w: 96, h: 72, degrees: -78.08},
+                           {x: 440, y: 109, w: 66, h: 66, degrees: 228.34},
+                       ],
+         part_layouts: [
+                           {x: 41, y: 23, w: 182, h: 132},
+                           {x: 60, y: 32, w: 125, h: 138},
+                           {x: 41, y: 23, w: 182, h: 132},
+                           {x: 60, y: 32, w: 125, h: 138},
+                           {x: 41, y: 23, w: 182, h: 132},
+                           {x: 60, y: 32, w: 125, h: 138},
+                           {x: 41, y: 23, w: 182, h: 132},
+                           {x: 60, y: 32, w: 125, h: 138},
+                       ]},
 
     #{category: 'Photo Necklaces', name: 'Awareness Necklace', image: 'awareness_necklace.png', layout: {x: 92, y: 106, w: 62, h: 59}},
     #{category: 'Photo Necklaces', name: 'Sophie Necklace', image: 'sophie_necklace.png', layout: {x: 77, y: 83, w: 42, h: 47}},
@@ -70,12 +80,27 @@ namespace 'kimbra' do
         end
       elsif (options[:layouts])
         # update all the parts piece_layout information
-        p.parts.each_with_index do |part, index|
-          if layout = options[:layouts][index]
+        p.parts.each do |part|
+          if layout = options[:layouts][part.order]
             unless part.piece_layout.layout.update_attributes(layout)
-              raise "unable to set layout for #{options.inspect}"
+              raise "unable to set piece layout for #{options.inspect}"
             end
           end
+          if options[:part_layouts]
+            if layout = options[:part_layouts][part.order]
+              unless part.part_layout.layout.update_attributes(layout)
+                raise "unable to set part layout for #{options.inspect}"
+              end
+              fname = Rails.root.join("public", 'kimbra', options[:category], options[:name], "part#{part.order}.png").to_s.gsub(' ', '_').downcase
+              if File.exist?(fname)
+                part.image_part.store!(File.open(fname))
+                part.save
+              else
+                puts "NO file:#{fname}"
+              end
+            end
+          end
+
         end
       end
 

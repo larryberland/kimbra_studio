@@ -14,8 +14,7 @@
     <%= link_to t(:back), admin_merchandise_piece_path(@piece), class: "btn btn-primary" %>
   </div>
 
-
-
+  <% parts_by_order = @parts.sort_by(&:order) %>
   <table class="table table-striped table-bordered">
     <thead>
     <tr>
@@ -51,7 +50,7 @@
 
     </thead>
     <tbody>
-    <% @parts.each do |admin_merchandise_part| %>
+    <% parts_by_order.each do |admin_merchandise_part| %>
         <tr>
           <td>
             <%= link_to t(:show), admin_merchandise_piece_part_path(@piece, admin_merchandise_part) %></br>

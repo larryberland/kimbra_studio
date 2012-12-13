@@ -26,10 +26,10 @@ class Admin::Customer::Item < ActiveRecord::Base
     sides = [options] if options.kind_of?(Hash)
 
     # otherwise the caller has set up an array for front and back
-    sides ||= options
+    sides           ||= options
 
     # Create the item, and its part information
-    item = assemble(offer, sides.first[:photo_part])
+    item            = assemble(offer, sides.first[:photo_part])
 
     # Create the sides
     item.item_sides = sides.collect do |item_side_options|
@@ -42,7 +42,7 @@ class Admin::Customer::Item < ActiveRecord::Base
 
   # list of portraits used in this item's front and back sides
   def portrait_list
-    item_sides.collect{|item_side| item_side.try(:portrait)} if item_sides.present?
+    item_sides.collect { |item_side| item_side.try(:portrait) } if item_sides.present?
   end
 
   def front
@@ -100,8 +100,9 @@ class Admin::Customer::Item < ActiveRecord::Base
     raise "missing kimbra part in offer=>#{offer.inspect}" unless merchandise_part.present?
 
     my_part = Admin::Merchandise::Part.create_clone(merchandise_part)
-    item    = Admin::Customer::Item.create(:offer => offer,
-                                           :part  => my_part)
+    item    = Admin::Customer::Item.create(offer: offer,
+                                           part:  my_part,
+                                           order: my_part.order)
     item
   end
 

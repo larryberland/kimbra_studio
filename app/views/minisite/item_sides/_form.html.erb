@@ -24,15 +24,15 @@
               <%= image_tag @item_side.portrait.image_url(:face), id: 'preview' %>
             </div>
 
+            <p>
+              <%= t '.p1_html' %>
+            </p>
+
           </td>
         </tr>
         </tbody>
       </table>
     </div>
-
-    <p>
-      <%= t '.p1_html' %>
-    </p>
 
     <div class="form-actions">
       <%= f.submit :id => 'my_submit', :value => 'Save' %>
