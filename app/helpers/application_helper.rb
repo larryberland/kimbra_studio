@@ -287,7 +287,6 @@ module ApplicationHelper
             remote: true,
             method: :post,
             title:  t(:facebook_like_title),
-            class:  "btn likeabutton",
             id:     "like_facebook_#{offer.id}"
 
   end
@@ -298,8 +297,17 @@ module ApplicationHelper
             remote: true,
             method: :post,
             title:  t(:facebook_share_title),
-            class:  "btn likeabutton",
             id:     "share_facebook_#{offer.id}"
+  end
+
+  def link_to_pinterest(offer)
+    image_url = @admin_customer_offer.image.url_cache_buster
+    page_url = offer.email.my_studio_session.studio.info.website
+    description = url_encode('Gorgeous photo jewelry')
+    link_to image_tag('https://assets.pinterest.com/images/PinExt.png', title: 'Pin It'),
+            "http://pinterest.com/pin/create/button/?url=#{page_url}&media=#{image_url}&description=#{description}",
+            class: 'pin-it-button',
+            'count-layout' => 'none'
   end
 
   def button_to_with_icon(button_to_html, icon_class=nil)

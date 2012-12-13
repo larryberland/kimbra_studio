@@ -8,16 +8,6 @@ KimbraStudio::Application.routes.draw do
 
   root :to => "welcome#index"
 
-  resources :facebook_sessions, only: [:create, :destroy] do
-    member do
-      post :share
-      post :like
-      post :failure
-    end
-
-
-  end
-
   resource :about do
     get :show
     get :signup
@@ -52,6 +42,15 @@ KimbraStudio::Application.routes.draw do
 
   resources :categories # studio session categories
   resources :countries
+
+  resources :facebook_sessions, only: [:create, :destroy] do
+    member do
+      post :share
+      post :like
+      post :failure
+    end
+  end
+
   resources :image_layouts
 
   namespace :minisite do
