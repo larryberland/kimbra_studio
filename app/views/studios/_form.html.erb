@@ -1,8 +1,31 @@
-<div class="platypus-form">
+<% ms = @studio.minisite.nil? ? MyStudio::Minisite.new : @studio.minisite %>
+<% info = @studio.info.nil? ? MyStudio::Info.new : @studio.info %>
+
+<div class="platypus-form span8">
 
   <%= render 'shared/error_messages', record: @studio %>
 
   <%= form_for(@studio, validate: true, html: {class: 'form-horizontal'}) do |f| %>
+
+      <%= render "my_studio/minisites/form", :f => f, :minisite => ms %>
+
+      <%= render "my_studio/infos/form", :f => f, :info => info %>
+
+      <% if is_admin? %>
+          <div class="control-group">
+            <%= f.label 'Sales status', class: "control-label" %>
+            <div class="controls">
+              <%= f.text_field :sales_status %>
+            </div>
+          </div>
+          <div class="control-group">
+            <%= f.label 'Sales notes', class: "control-label" %>
+            <div class="controls x-large">
+              <%= f.text_area :sales_notes, rows: 5, class: "input-xxlarge" %>
+            </div>
+          </div>
+
+      <% end %>
 
       <div class="control-group">
         <%= f.label 'Studio name', class: "control-label" %>
@@ -43,28 +66,6 @@
 
       <%= render "shared/addresses/form", :f => f %>
 
-      <% info = @studio.info.nil? ? MyStudio::Info.new : @studio.info %>
-      <%= render "my_studio/infos/form", :f => f, :info => info %>
-
-      <% ms = @studio.minisite.nil? ? MyStudio::Minisite.new : @studio.minisite %>
-      <%= render "my_studio/minisites/form", :f => f, :minisite => ms %>
-
-      <% if is_admin? %>
-          <div class="control-group">
-            <%= f.label 'Sales status', class: "control-label" %>
-            <div class="controls">
-              <%= f.text_field :sales_status %>
-            </div>
-          </div>
-          <div class="control-group">
-            <%= f.label 'Sales notes', class: "control-label" %>
-            <div class="controls x-large">
-              <%= f.text_area :sales_notes, rows: 5, class: "input-xxlarge" %>
-            </div>
-          </div>
-
-      <% end %>
-
       <div class="actions controls">
         <%= f.submit :id => 'my_submit' %>
         <span id="spinner" style="display:none" class='spinner'></span>
@@ -74,3 +75,4 @@
   <% end %>
 
 </div>
+

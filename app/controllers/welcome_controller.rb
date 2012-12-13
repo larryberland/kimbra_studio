@@ -13,7 +13,7 @@ class WelcomeController < ApplicationController
           if current_user.studio.nil?
             redirect_to new_studio_url
           else
-            redirect_to my_studio_dashboard_url
+            redirect_to my_studio_sessions_url
           end
         elsif current_user.admin?
           redirect_to admin_overview_url

@@ -15,7 +15,10 @@ class MyStudio::Session < ActiveRecord::Base
   attr_accessible :name, :session_at, :active,
                   :studio_id, :client_id, :category_id,
                   :studio, :client, :category,
+                  :client_attributes,
                   :created_at, :updated_at
+
+  accepts_nested_attributes_for :client
 
   # need some validations presence here
   validates_associated :client

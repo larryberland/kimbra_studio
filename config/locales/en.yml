@@ -14,6 +14,12 @@ en:
         image: "Kimbra Piece Image"
         name: "Name"
         remote_image_url: "or URL"
+      # form labels for active record models
+      my_studio_session:
+        session_at: "Session Date"
+      my_studio_session[client_attributes]:
+        name: "Client Email Greeting"
+        email: "Client Email"
 
   hello: "Hello world"
   company: "Kimbra Studios ClickPLUS"
@@ -306,6 +312,12 @@ en:
         add_files: "Add Photos"
 
   my_studio:
+    clients:
+      form:
+        email_placeholder: "client@gmail.com"
+        name_placeholder: ""
+        name_help: "Enter the client's name as you'd like it to appear in emails. Eg, Mary Smith"
+
     # my_studio/dashboard
     dashboards:
       emails:
@@ -348,6 +360,9 @@ en:
       new:
         title: "Upload Session Portrait for %{name}"
     sessions:
+      form:
+        legend_client: "Client Info"
+        legend_session: "Client Session Info"
       index:
         view_email: "Click to View Offer Email"
 

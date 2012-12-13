@@ -10,11 +10,15 @@
 
     <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
     <!--[if lt IE 9]><!--script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
-
+    <style type="text/css">
+    .progress {
+        width: 100px;
+    }
+    </style>
 <% end %>
 <div class='row-fluid span12'>
 
-  <div class="span8">
+  <div class="platypus-form span8">
 
     <div id='portrait_messages_for_studio' class="lead">
       <%= render 'upload_status_messages' %>

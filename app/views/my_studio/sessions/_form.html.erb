@@ -1,12 +1,15 @@
 <div class="row-fluid span12">
 
-  <div class="platypus-form span7">
+  <div class="platypus-form span8">
 
     <%= render 'shared/error_messages', record: @my_studio_session %>
 
     <%= form_for(@my_studio_session, validate: true, html: {class: 'form-horizontal'}) do |f| %>
 
-        <%= render "my_studio/clients/form", f: f, client: @my_studio_session.client %>
+        <fieldset title="Photo Session Client Info">
+          <legend><%= t('.legend_client') %></legend>
+          <%= render "my_studio/clients/form", f: f, client: @my_studio_session.client %>
+        </fieldset>
 
         <% if is_admin? %>
             <div class="control-group">
@@ -19,20 +22,23 @@
             </div>
         <% end %>
 
-        <div class="control-group ui-widget">
-          <%= f.label :session_at, 'Session Date', class: "control-label" %>
-          <div class="controls">
-            <%= f.text_field :session_at, class: "datepicker" %>
+        <fieldset title="Photo Session Info">
+          <legend><%= t('.legend_session') %></legend>
+          <div class="control-group ui-widget">
+            <%= f.label :session_at, class: "control-label" %>
+            <div class="controls">
+              <%= f.text_field :session_at, class: "datepicker" %>
+            </div>
           </div>
-        </div>
 
-        <div class="control-group">
-          <%= f.label :category_id, class: "control-label" %>
-          <div class="controls">
-            <%= f.select :category_id, @categories, prompt: '- Select Category -' %>
-            <span class="help-inline">This helps us find candidate pictures for special event marketing, such as Mothers Day, Christmas, etc.</span>
+          <div class="control-group">
+            <%= f.label :category_id, class: "control-label" %>
+            <div class="controls">
+              <%= f.select :category_id, @categories, prompt: '- Select Category -' %>
+              <span class="help-inline">This helps us find candidate pictures for special event marketing, such as Mothers Day, Christmas, etc.</span>
+            </div>
           </div>
-        </div>
+        </fieldset>
 
         <div class="actions controls">
           <%= f.submit class: "btn btn-primary" %>
@@ -48,6 +54,6 @@
 </div>
 
 <%= coffee_script_tag do %>
-    $ ->
-    $(':text:visible:enabled:first').focus()
+$ ->
+    $('input[type=email]').focus()
 <% end %>
