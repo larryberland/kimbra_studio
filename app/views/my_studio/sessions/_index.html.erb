@@ -17,6 +17,7 @@
     </tr>
     </thead>
     <tbody>
+
     <% sessions.each do |session| %>
         <tr>
           <% if is_admin? %>
@@ -41,6 +42,26 @@
           <td><%= date_short session.session_at %></td>
         </tr>
     <% end %>
+
+    <!-- if no sessions yet, display a placeholder row -->
+
+    <% if sessions.empty? %>
+        <tr>
+          <% if is_admin? %>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td>Placeholder row</td>
+          <% else %>
+              <td><%= render 'new_session_button' %></td>
+          <% end %>
+
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+    <% end %>
+
     </tbody>
   </table>
 </div>
