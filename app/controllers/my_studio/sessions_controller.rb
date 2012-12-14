@@ -49,9 +49,7 @@ class MyStudio::SessionsController < MyStudio::BaseController
   # POST /my_studio/sessions
   # POST /my_studio/sessions.json
   def create
-    @client                   = MyStudio::Client.new(params[:my_studio_session].delete(:client))
     @my_studio_session        = MyStudio::Session.new(params[:my_studio_session])
-    @my_studio_session.client = @client
     @my_studio_session.studio = @my_studio
 
     respond_to do |format|
@@ -69,8 +67,6 @@ class MyStudio::SessionsController < MyStudio::BaseController
   # PUT /my_studio/sessions/1.json
   def update
     @my_studio_session = MyStudio::Session.find(params[:id])
-    @my_studio_session.client.update_attributes(params[:my_studio_session].delete(:client))
-
     respond_to do |format|
       if @my_studio_session.update_attributes(params[:my_studio_session])
         format.html { redirect_to my_studio_sessions_url, notice: 'Session was successfully updated.' }
