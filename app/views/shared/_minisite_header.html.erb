@@ -105,17 +105,20 @@
     <div class="row">
 
       <div class="pull-left span2">
-        <address>
-          <strong><%= studio.name %></strong><br>
-          <%= studio.address_1 %>
-          <br>
-          <%= studio.city_state_zip %>
-          <br>
-          <abbr title="Phone">P:</abbr> <%= studio.phone_number %>
-        </address>
+        <div class='studio-address'>
+          <address>
+            <strong><%= studio.name %></strong><br>
+            <%= studio.address_1 %>
+            <br>
+            <%= studio.city_state_zip %>
+            <br>
+            <abbr title="Phone">P:</abbr> <%= number_to_phone studio.phone_number, area_code: true %>
+          </address>
+        </div>
       </div>
 
       <img id="xlogo" src="<%= studio.minisite.image %>" title="<%= studio.name %>">
+
       <div class="pull-right">
         <% if current_user_facebook %>
             <%= image_tag current_user_facebook.image_url, class: "rounded" %>

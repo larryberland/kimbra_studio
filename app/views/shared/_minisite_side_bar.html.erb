@@ -4,7 +4,7 @@
   <strong><%= @studio.name %></strong><br>
   <%= @studio.address_1 %><br>
   <%= @studio. city_state_zip %><br>
-  <abbr title="Phone">P:</abbr> <%=@studio.phone_number %>
+  <abbr title="Phone">P:</abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
 </address>
 <address>
   Send Email to<br>
