@@ -41,7 +41,7 @@
 
       <ul class="nav pull-right">
         <li>
-          <%= link_to_facebook_or_not %>
+          <%= link_to_navbar(:facebook) %>
         </li>
       </ul>
 
@@ -55,22 +55,11 @@
               <li>
                 <a class="brand" href="#"><%= @studio.name %></a>
               </li>
-              <li>
-                <%= link_to_your_collection_or_not(@admin_customer_email) %>
-              </li>
-              <li>
-                <%= link_to_your_charms_or_not(@admin_customer_email) %>
-              </li>
-              <li>
-                <%= link_to_your_chains_or_not(@admin_customer_email) %>
-              </li>
-              <li>
-                <%= link_to_your_about_or_not(@admin_customer_email) %>
-              </li>
-              <li>
-                <%= link_to_your_cart_or_not %>
-              </li>
-
+                <%= li_navbar(:collection) %>
+                <%= li_navbar(:charms)%>
+                <%= li_navbar(:chains)%>
+                <%= li_navbar(:about)%>
+                <%= li_navbar(:shopping_cart) %>
             </ul>
           </div>
       <% end %>

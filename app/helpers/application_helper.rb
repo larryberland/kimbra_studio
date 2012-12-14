@@ -163,77 +163,46 @@ module ApplicationHelper
     end
   end
 
-  def link_to_your_collection_or_not(admin_customer_email)
-    # LDB: NOTE:  if this helper is called from any other erb
-    #   than shared/minisite_header not sure if the translations will work
-    text = t('.menu_collection')
-    if (admin_customer_email)
-      if is_client?
-        link_to_unless_current text, minisite_email_offers_path(admin_customer_email.tracking)
-      else
-        link_to text, show_collection_my_studio_minisite_path(admin_customer_email.tracking)
-      end
+  def link_to_your_collection_or_not(text, admin_customer_email)
+    if is_client?
+      link_to_unless_current text, minisite_email_offers_path(admin_customer_email.tracking)
     else
-      link_to text, "#"
+      link_to text, show_collection_my_studio_minisite_path(admin_customer_email.tracking)
     end
   end
 
-  def link_to_your_charms_or_not(admin_customer_email)
-    text = t('.menu_charms')
-    if (admin_customer_email)
-      if is_client?
-        link_to_unless_current(text, index_charms_minisite_email_offers_path(admin_customer_email.tracking))
-      else
-        link_to text, show_charms_my_studio_minisite_path(admin_customer_email.tracking)
-      end
+  def link_to_your_charms_or_not(text, admin_customer_email)
+    if is_client?
+      link_to_unless_current(text, index_charms_minisite_email_offers_path(admin_customer_email.tracking))
     else
-      link_to text, "#"
-    end
-
-  end
-
-  def link_to_your_chains_or_not(admin_customer_email)
-    text = t('.menu_chains')
-    if (admin_customer_email)
-      if is_client?
-        link_to_unless_current(text, index_chains_minisite_email_offers_path(admin_customer_email.tracking))
-      else
-        link_to text, show_chains_my_studio_minisite_path(admin_customer_email.tracking)
-      end
-    else
-      link_to text, "#"
+      link_to text, show_charms_my_studio_minisite_path(admin_customer_email.tracking)
     end
   end
 
-  def link_to_your_about_or_not(admin_customer_email)
-    text = t('.menu_about', studio_name: @studio.try(:name))
-    if (admin_customer_email)
-      link_to_unless_current text,
-                             about_minisite_email_path(admin_customer_email.tracking)
+  def link_to_your_chains_or_not(text, admin_customer_email)
+    if is_client?
+      link_to_unless_current(text, index_chains_minisite_email_offers_path(admin_customer_email.tracking))
     else
-      link_to text, "#"
+      link_to text, show_chains_my_studio_minisite_path(admin_customer_email.tracking)
     end
+  end
+
+  def link_to_your_about_or_not(text, admin_customer_email)
+    link_to_unless_current text,
+                           about_minisite_email_path(admin_customer_email.tracking)
   end
 
   def link_to_your_cart_or_not
-    if is_mock?
-      if @link_back
-        link_to t('.menu_infos_samples'), samples_my_studio_infos_path
-      else
-        link_to t('.menu_shopping_cart'), "#"
-      end
+    if is_admin?
+      link_to t('.menu_sessions'), admin_overview_path
+    elsif is_studio?
+      link_to t('.menu_sessions'), my_studio_sessions_path
     else
-      if is_admin?
-        link_to t('.menu_sessions'), admin_overview_path
-      elsif is_studio?
-        link_to t('.menu_sessions'), my_studio_sessions_path
-      else
-        link_for_shopping_cart_nav
-      end
+      link_for_shopping_cart_nav
     end
   end
 
-  def link_to_facebook_or_not
+  def link_to_your_facebook_or_not
     if is_mock?
       link_to image_tag("fb_login.png"), '#'
     else
@@ -289,6 +258,61 @@ module ApplicationHelper
     css = '' # usually likeabutton
     css += ' selected' if selected
     css
+  end
+
+  def li_navbar_class(menu)
+    css_class = {}
+    #puts "menu:#{menu} controller:#{controller.class.name} params:#{params[:controller]}"
+    case
+      when controller.kind_of?(Minisite::OffersController)
+        case controller.action_name
+          when 'index_chains'
+            css_class[:class] = 'active' if (menu == :chains)
+          when 'index_charms'
+            css_class[:class] = 'active' if (menu == :charms)
+          else
+            css_class[:class] = 'active' if (menu == :collection)
+        end
+      when controller.kind_of?(Minisite::EmailsController)
+        css_class[:class] = 'active' if (menu == :about)
+      when controller.kind_of?(Shopping::CartsController)
+        css_class[:class] = 'active' if (menu == :shopping_cart)
+      when controller.kind_of?(Minisite::ItemSidesController)
+        css_class[:class] = 'active' if (menu == :collection)
+    end
+    css_class
+  end
+
+  def li_navbar(menu)
+    content_tag(:li, li_navbar_class(menu)) do
+      link_to_navbar(menu)
+    end
+  end
+
+  def link_to_navbar(menu)
+    text = t(".menu_#{menu}")
+    if (is_mock? or @admin_customer_email.nil?)
+      if (@link_back)
+        link_to t('.menu_infos_samples'), samples_my_studio_infos_path
+      else
+        link_to text, "#"
+      end
+    else
+      case menu
+        when :collection
+          link_to_your_collection_or_not(text, @admin_customer_email)
+        when :charms
+          link_to_your_charms_or_not(text, @admin_customer_email)
+        when :chains
+          link_to_your_chains_or_not(text, @admin_customer_email)
+        when :about
+          link_to_your_about_or_not(t(".menu_#{menu}", studio_name: @studio.try(:name)), @admin_customer_email)
+        when :shopping_cart
+          link_to_your_cart_or_not
+        when :facebook
+          link_to_your_facebook_or_not
+      end
+    end
   end
 
   def link_to_nav_pill(label, url, selected, title="")
