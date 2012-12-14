@@ -1,5 +1,10 @@
 module ApplicationHelper
 
+  def is_mock?
+    @is_mock_navbar = params[:controller] == 'my_studio/infos' ? true : false if @is_mock_navbar.nil?
+    @is_mock_navbar
+  end
+
   def is_admin?
     defined?(current_user) and current_user and current_user.admin?
   end
@@ -161,33 +166,88 @@ module ApplicationHelper
   def link_to_your_collection_or_not(admin_customer_email)
     # LDB: NOTE:  if this helper is called from any other erb
     #   than shared/minisite_header not sure if the translations will work
-    if is_client?
-      link_to_unless_current t('.menu_collection'), minisite_email_offers_path(admin_customer_email.tracking)
+    text = t('.menu_collection')
+    if (admin_customer_email)
+      if is_client?
+        link_to_unless_current text, minisite_email_offers_path(admin_customer_email.tracking)
+      else
+        link_to text, show_collection_my_studio_minisite_path(admin_customer_email.tracking)
+      end
     else
-      link_to t('.menu_collection'), show_collection_my_studio_minisite_path(admin_customer_email.tracking)
+      link_to text, "#"
     end
   end
 
   def link_to_your_charms_or_not(admin_customer_email)
     text = t('.menu_charms')
-    if is_client?
-      link_to_unless_current(text, index_charms_minisite_email_offers_path(admin_customer_email.tracking))
+    if (admin_customer_email)
+      if is_client?
+        link_to_unless_current(text, index_charms_minisite_email_offers_path(admin_customer_email.tracking))
+      else
+        link_to text, show_charms_my_studio_minisite_path(admin_customer_email.tracking)
+      end
     else
-      link_to text, show_charms_my_studio_minisite_path(admin_customer_email.tracking)
+      link_to text, "#"
     end
+
   end
 
   def link_to_your_chains_or_not(admin_customer_email)
     text = t('.menu_chains')
-    if is_client?
-      link_to_unless_current(text, index_chains_minisite_email_offers_path(admin_customer_email.tracking))
+    if (admin_customer_email)
+      if is_client?
+        link_to_unless_current(text, index_chains_minisite_email_offers_path(admin_customer_email.tracking))
+      else
+        link_to text, show_chains_my_studio_minisite_path(admin_customer_email.tracking)
+      end
     else
-      link_to text, show_chains_my_studio_minisite_path(admin_customer_email.tracking)
+      link_to text, "#"
     end
   end
 
-# Show a link to the current offer - no need for this if we are at the Collection page or if there's no current offer.
-# NOT USED ANYMORE.
+  def link_to_your_about_or_not(admin_customer_email)
+    text = t('.menu_about', studio_name: @studio.try(:name))
+    if (admin_customer_email)
+      link_to_unless_current text,
+                             about_minisite_email_path(admin_customer_email.tracking)
+    else
+      link_to text, "#"
+    end
+  end
+
+  def link_to_your_cart_or_not
+    if is_mock?
+      if @link_back
+        link_to t('.menu_infos_samples'), samples_my_studio_infos_path
+      else
+        link_to t('.menu_shopping_cart'), "#"
+      end
+    else
+      if is_admin?
+        link_to t('.menu_sessions'), admin_overview_path
+      elsif is_studio?
+        link_to t('.menu_sessions'), my_studio_sessions_path
+      else
+        link_for_shopping_cart_nav
+      end
+    end
+  end
+
+  def link_to_facebook_or_not
+    if is_mock?
+      link_to image_tag("fb_login.png"), '#'
+    else
+      if current_user_facebook
+        link_to "Sign out Facebook", facebook_signout_path, id: "sign_out"
+      else
+        link_to image_tag("fb_login.png"), '/auth/facebook', {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"}
+      end
+    end
+
+  end
+
+  # Show a link to the current offer - no need for this if we are at the Collection page or if there's no current offer.
+  # NOT USED ANYMORE.
   def link_back_to_current_offer
     if @admin_customer_offer
       at_collection_page = controller_name == 'offers' && action_name == 'index'
@@ -301,19 +361,19 @@ module ApplicationHelper
   end
 
   def link_to_pinterest(offer)
-    image_url = @admin_customer_offer.image.url_cache_buster
-    page_url = offer.email.my_studio_session.studio.info.website
+    image_url   = @admin_customer_offer.image.url_cache_buster
+    page_url    = offer.email.my_studio_session.studio.info.website
     description = url_encode('Gorgeous photo jewelry')
     link_to image_tag('https://assets.pinterest.com/images/PinExt.png', title: 'Pin It'),
             "http://pinterest.com/pin/create/button/?url=#{page_url}&media=#{image_url}&description=#{description}",
-            class: 'pin-it-button',
+            class:         'pin-it-button',
             'count-layout' => 'none'
   end
 
   def button_to_with_icon(button_to_html, icon_class=nil)
     icon_class ||= 'icon-ok-sign icon-white'
     # add a span with icon to the div
-    html = button_to_html.gsub('<div><input', "<div><span class='btn btn-success'><i class='#{icon_class}'></i><input")
+    html       = button_to_html.gsub('<div><input', "<div><span class='btn btn-success'><i class='#{icon_class}'></i><input")
     html.gsub!('</div>', '</span></div>')
     html.html_safe
   end

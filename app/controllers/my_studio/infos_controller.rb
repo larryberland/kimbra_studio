@@ -98,4 +98,11 @@ class MyStudio::InfosController < MyStudio::BaseController
     render layout: false
   end
 
+  def mock_collection_return
+    @link_back = true
+    @studio = @my_studio
+    @studio = Studio.first if @studio.nil? # handle admin
+    render action: 'mock_collection', layout: false
+  end
+
 end

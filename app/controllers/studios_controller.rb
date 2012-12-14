@@ -130,7 +130,7 @@ class StudiosController < ApplicationController
           if request.xhr?
             render text: @studio.sales_status
           else
-            redirect_to my_studio_minisite_path(@studio), notice: "Studio was successfully updated."
+            redirect_to edit_studio_path(@studio), notice: "Studio was successfully updated."
           end
         end
         format.json { head :ok }

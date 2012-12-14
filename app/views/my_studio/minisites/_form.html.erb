@@ -1,10 +1,26 @@
-<legend><%= t(:my_studio_minisites_form_legend) %></legend>
+<legend><%= t('.legend') %></legend>
 <%= f.fields_for :minisite, minisite do |g| %>
+
+    <div class="control-group">
+      <%= g.label :image, class: "control-label" %>
+      <div class="controls">
+        <%= g.file_field :image, class:'input-medium btn-small' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <%= g.label :remote_image_url, 'or Logo URL', class: "control-label" %>
+      <div class="controls">
+        <%= g.text_field :remote_image_url %>
+      </div>
+    </div>
 
     <div class="control-group">
       <%= g.label :font_family, class: "control-label" %>
       <div class="controls">
-        <%= select_tag 'studio[minisite_attributes][font_family]', options_for_font_selector, id: 'studio_minisite_attributes_font_family' %>
+        <%= select_tag 'studio[minisite_attributes][font_family]',
+                       options_for_select(MyStudio::Minisite::FONTS.collect{|n|[n,n]}, minisite.try(:font_family)),
+                       {id: 'studio_minisite_attributes_font_family'} %>
       </div>
     </div>
 
@@ -22,25 +38,6 @@
       </div>
     </div>
 
-    <div class="image-thumb">
-      <%= image_tag_thumb(minisite) %>
-    </div>
-
-    <div class="control-group">
-      <%= g.label :image, 'Studio logo', class: "control-label" %>
-      <div class="controls">
-        <%= g.file_field :image %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <%= g.label :remote_image_url, 'or Logo URL', class: "control-label" %>
-      <div class="controls">
-        <%= g.text_field :remote_image_url %>
-      </div>
-    </div>
-
     <div><%= g.hidden_field :image_cache %></div>
-
 
 <% end %>

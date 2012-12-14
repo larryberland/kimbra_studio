@@ -1,5 +1,11 @@
-<legend><%= t(:my_studio_infos_form_legend) %></legend>
+<legend><%= t('.legend') %></legend>
 <%= f.fields_for :info, info do |g| %>
+
+    <div class="control-group">
+      <label class="checkbox">
+        <%= g.check_box :ping_email %> <%= t('.ping_email_help') %>
+      </label>
+    </div>
 
     <div class="control-group">
       <%= g.label :website, class: "control-label" %>
@@ -51,11 +57,6 @@
       </label>
       <label class="checkbox inline">
         <%= g.check_box :windows_user %> use PCs running Microsoft Windows?
-      </label>
-    </div>
-    <div class="control-group">
-      <label class="checkbox">
-        <%= g.check_box :ping_email %>  receive emails about commissions, new features, etc'
       </label>
     </div>
 

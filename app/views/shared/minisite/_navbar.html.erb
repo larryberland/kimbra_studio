@@ -1,0 +1,81 @@
+
+<div class="navbar navbar-inverse navbar-fixed-top">
+
+  <div class="row navbar-header-top-row">
+
+    <div class="row">
+
+      <div class="pull-left span2">
+        <div class='studio-address'>
+          <address>
+            <strong><%= @studio.name %></strong><br>
+            <%= @studio.address_1 %>
+            <br>
+            <%= @studio.city_state_zip %>
+            <br>
+            <abbr title="Phone">P:</abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
+          </address>
+        </div>
+      </div>
+
+      <img src="<%= @studio.minisite.image_url %>" title="<%= @studio.name %>">
+
+      <div class="pull-right">
+        <% if current_user_facebook %>
+            <%= image_tag current_user_facebook.image_url, class: "rounded" %>
+        <% end %>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="navbar-inner">
+
+    <div class="container">
+      <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+      <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+
+      <ul class="nav pull-right">
+        <li>
+          <%= link_to_facebook_or_not %>
+        </li>
+      </ul>
+
+<%# do not show the navigation bar if Kimbra is entering the delivery tracking number  %>
+      <% unless controller_name == 'carts' && action_name == 'edit_delivery_tracking' %>
+          <!-- Everything you want hidden at 940px or less, place within here -->
+
+          <div class="nav-collapse collapse">
+
+            <ul class='nav'>
+              <li>
+                <a class="brand" href="#"><%= @studio.name %></a>
+              </li>
+              <li>
+                <%= link_to_your_collection_or_not(@admin_customer_email) %>
+              </li>
+              <li>
+                <%= link_to_your_charms_or_not(@admin_customer_email) %>
+              </li>
+              <li>
+                <%= link_to_your_chains_or_not(@admin_customer_email) %>
+              </li>
+              <li>
+                <%= link_to_your_about_or_not(@admin_customer_email) %>
+              </li>
+              <li>
+                <%= link_to_your_cart_or_not %>
+              </li>
+
+            </ul>
+          </div>
+      <% end %>
+    </div>
+
+  </div>
+</div>
+

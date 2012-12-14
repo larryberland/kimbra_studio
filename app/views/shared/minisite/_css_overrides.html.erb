@@ -1,0 +1,99 @@
+<style type="text/css">
+    body {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+        padding: 60px;
+        padding-top: <%=@studio.try(:minisite).try(:body_padding)%>px;
+    }
+
+    .hero-unit, .navbar {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+    .navbar .navbar-inner {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        background-image: none;
+    }
+
+    div.navbar {
+        border-bottom: 1px solid <%=@studio.try(:minisite).try(:calc_border_color) %>;
+    }
+    .form-actions{
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+    }
+    .likeabutton {
+        background: ButtonFace;
+        color: ButtonText;
+        border-color: ButtonHighlight ButtonShadow ButtonShadow ButtonHighlight;
+    }
+
+    .likeabutton.selected,
+    .likeabutton:hover {
+        border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+        background: #FFDA75;
+    }
+
+    .likeabutton:active {
+        border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
+    }
+
+    a {
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    a.link {
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    a.visited {
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    a.focus, a.hover {
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    a.active {
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    div.row div.media {
+        padding: 10px;
+        text-align: left;
+    }
+
+    .media-object {
+        margin: 10px;
+    }
+
+    h4.media-heading {
+        text-align: left;
+    }
+
+    span.price {
+        display: block;
+    }
+
+    .navbar-header-top-row {
+        text-align: center;
+    }
+    .navbar-header-top-row .pull-left,
+    .navbar-header-top-row .pull-right{
+        padding: 20px;
+    }
+    .navbar-header-top-row .pull-left{
+        padding-left: 40px;
+    }
+    div.platypus-form{
+      padding: 10px 15px;
+      margin-bottom: 15px;
+      @include rounded-corners(10px);
+      border: 2px outset black;
+      text-align: left;
+    }
+
+
+</style>
+
