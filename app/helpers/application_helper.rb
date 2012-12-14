@@ -133,7 +133,7 @@ module ApplicationHelper
         pluralize(@cart.try(:quantity), 'piece')
       end
     end
-    link_to_unless_current (t('.menu_shopping_cart') + " (#{ cart_numericality })").html_safe, url
+    link_to_with_current_local (t('.menu_shopping_cart') + " (#{ cart_numericality })").html_safe, url
   end
 
   def url_for_offer_or_not(offer)
@@ -163,9 +163,17 @@ module ApplicationHelper
     end
   end
 
+  def link_to_with_current_local(name, options = {}, html_options = {}, &block)
+    if current_page?(options)
+      link_to name, '#', html_options, &block
+    else
+      link_to name, options, html_options, &block
+    end
+  end
+
   def link_to_your_collection_or_not(text, admin_customer_email)
     if is_client?
-      link_to_unless_current text, minisite_email_offers_path(admin_customer_email.tracking)
+      link_to_with_current_local text, minisite_email_offers_path(admin_customer_email.tracking)
     else
       link_to text, show_collection_my_studio_minisite_path(admin_customer_email.tracking)
     end
@@ -173,7 +181,7 @@ module ApplicationHelper
 
   def link_to_your_charms_or_not(text, admin_customer_email)
     if is_client?
-      link_to_unless_current(text, index_charms_minisite_email_offers_path(admin_customer_email.tracking))
+      link_to_with_current_local(text, index_charms_minisite_email_offers_path(admin_customer_email.tracking))
     else
       link_to text, show_charms_my_studio_minisite_path(admin_customer_email.tracking)
     end
@@ -181,15 +189,14 @@ module ApplicationHelper
 
   def link_to_your_chains_or_not(text, admin_customer_email)
     if is_client?
-      link_to_unless_current(text, index_chains_minisite_email_offers_path(admin_customer_email.tracking))
+      link_to_with_current_local(text, index_chains_minisite_email_offers_path(admin_customer_email.tracking))
     else
       link_to text, show_chains_my_studio_minisite_path(admin_customer_email.tracking)
     end
   end
 
   def link_to_your_about_or_not(text, admin_customer_email)
-    link_to_unless_current text,
-                           about_minisite_email_path(admin_customer_email.tracking)
+    link_to_with_current_local text, about_minisite_email_path(admin_customer_email.tracking)
   end
 
   def link_to_your_cart_or_not
