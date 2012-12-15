@@ -12,6 +12,7 @@
         font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
+
     .navbar .navbar-inner {
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
         background-image: none;
@@ -20,9 +21,11 @@
     div.navbar {
         border-bottom: 1px solid <%=@studio.try(:minisite).try(:calc_border_color) %>;
     }
-    .form-actions{
+
+    .form-actions {
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
     }
+
     .likeabutton {
         background: ButtonFace;
         color: ButtonText;
@@ -41,7 +44,7 @@
 
     a {
         color: <%= @studio.try(:minisite).try(:font_color) %>;
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %> !important;
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
     }
 
     a.link {
@@ -80,19 +83,40 @@
     .navbar-header-top-row {
         text-align: center;
     }
+
     .navbar-header-top-row .pull-left,
-    .navbar-header-top-row .pull-right{
+    .navbar-header-top-row .pull-right {
         padding: 20px;
     }
-    .navbar-header-top-row .pull-left{
+
+    .navbar-header-top-row .pull-left {
         padding-left: 40px;
     }
-    div.platypus-form{
-      padding: 10px 15px;
-      margin-bottom: 15px;
-      @include rounded-corners(10px);
-      border: 2px outset black;
-      text-align: left;
+
+    <% if @studio.minisite.calc_background_brightness >130 %>
+    .navbar-inverse .nav > li > a {
+        background-color: rgba(<%= @studio.try(:minisite).try(:r) %>, <%= @studio.try(:minisite).try(:g) %>, <%= @studio.try(:minisite).try(:b)%>, .05);
+        color: rgba(<%= @studio.try(:minisite).try(:r) %>, <%= @studio.try(:minisite).try(:g) %>, <%= @studio.try(:minisite).try(:b)%>, .9);
+    }
+    .navbar-inverse .nav > li > .active > a,
+    .navbar-inverse .nav > li > .active > a:hover,
+    .navbar-inverse .nav > li > .active > a:focus{
+        background-color: <%= @studio.try(:minisite).try(:font_color) %>;
+        color: <%= @studio.try(:minisite).try(:bgcolor) %> !important;
+    }
+    .navbar-inverse .nav > li > a:focus,
+    .navbar-inverse .nav > li > a:hover{
+        background-color: rgba(<%= @studio.try(:minisite).try(:r) %>, <%= @studio.try(:minisite).try(:g) %>, <%= @studio.try(:minisite).try(:b)%>, .3);
+        color: rgba(<%= @studio.try(:minisite).try(:r) %>, <%= @studio.try(:minisite).try(:g) %>, <%= @studio.try(:minisite).try(:b)%>, 1);
+    }
+    <% end %>
+
+    div.platypus-form {
+        padding: 10px 15px;
+        margin-bottom: 15px;
+    @include rounded-corners ( 10 px );
+        border: 2px outset black;
+        text-align: left;
     }
 
 

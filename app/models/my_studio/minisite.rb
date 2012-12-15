@@ -25,9 +25,39 @@ class MyStudio::Minisite < ActiveRecord::Base
     image_height.to_i + 40
   end
 
+  def font_rgb
+    if (@font_rgb.nil?)
+      if font_color.starts_with?('#')
+        hex = bgcolor[1..-1]
+        if (hex.size > 3)
+          @font_rgb = hex.scan(/../).map { |color| color.to_i(16) }
+        else
+          @font_rgb = hex.scan(/../).map { |color| color.to_i(16) }
+        end
+      elsif font_color == 'black'
+        @font_rgb =[0,0,0]
+      elsif font_color == 'white'
+        @font_rgb =[255,255,255]
+      end
+    end
+    @font_rgb
+  end
+
+  def r
+    font_rgb[0]
+  end
+
+  def g
+    font_rgb[1]
+  end
+
+  def b
+    font_rgb[2]
+  end
+
   # http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
-  def calc_border_color
-    if (@border_color.nil?)
+  def calc_background_brightness
+    if (@background_brightness.nil?)
       if bgcolor.starts_with?('#')
         hex = bgcolor[1..-1]
         if (hex.size > 3)
@@ -35,17 +65,31 @@ class MyStudio::Minisite < ActiveRecord::Base
         else
           rgb = hex.scan(/../).map { |color| color.to_i(16) }
         end
-        brightness = Math.sqrt(0.299 * (rgb[0]*rgb[0]) + 0.587 * (rgb[1]*rgb[1]) + 0.114 * (rgb[2]*rgb[2]))
-        if (brightness < 130)
-          # background is dark use white
-          @border_color = "#ffffff"
-        else
-          # use black
-          @border_color = "#000000"
-        end
+        @background_brightness = Math.sqrt(0.299 * (rgb[0]*rgb[0]) + 0.587 * (rgb[1]*rgb[1]) + 0.114 * (rgb[2]*rgb[2]))
       end
-      @border_color
     end
+    @background_brightness
+  end
+
+  def calc_navbar_inverse
+    if (calc_background_brightness < 130)
+
+    else
+
+    end
+  end
+
+  def calc_border_color
+    if (@border_color.nil?)
+      if (calc_background_brightness < 130)
+        # background is dark use white
+        @border_color = "#ffffff"
+      else
+        # use black
+        @border_color = "#000000"
+      end
+    end
+    @border_color
   end
 
   private
