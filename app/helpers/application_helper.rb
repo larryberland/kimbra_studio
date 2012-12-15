@@ -196,7 +196,7 @@ module ApplicationHelper
   end
 
   def link_to_your_about_or_not(text, admin_customer_email)
-    link_to_with_current_local text, about_minisite_email_path(admin_customer_email.tracking)
+    link_to_with_current_local text, about_minisite_email_path(admin_customer_email.tracking), title: @studio.try(:name)
   end
 
   def link_to_your_cart_or_not
@@ -278,7 +278,7 @@ module ApplicationHelper
     if (is_mock? or @admin_customer_email.nil?)
       case menu
         when :about
-          link_to t(".menu_#{menu}"), "#"
+          link_to t(".menu_#{menu}"), "#", title: @studio.name
         when :shopping_cart
           if (@link_back)
             link_to t('.menu_infos_samples'), "#"
