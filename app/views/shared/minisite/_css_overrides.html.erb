@@ -95,20 +95,23 @@
 
     <% if @studio.minisite.calc_background_brightness >130 %>
     .navbar-inverse .nav > li > a {
-        background-color: rgba(<%= @studio.try(:minisite).try(:r) %>, <%= @studio.try(:minisite).try(:g) %>, <%= @studio.try(:minisite).try(:b)%>, .05);
-        color: rgba(<%= @studio.try(:minisite).try(:r) %>, <%= @studio.try(:minisite).try(:g) %>, <%= @studio.try(:minisite).try(:b)%>, .9);
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
+
     .navbar-inverse .nav > li > .active > a,
     .navbar-inverse .nav > li > .active > a:hover,
-    .navbar-inverse .nav > li > .active > a:focus{
+    .navbar-inverse .nav > li > .active > a:focus {
         background-color: <%= @studio.try(:minisite).try(:font_color) %>;
-        color: <%= @studio.try(:minisite).try(:bgcolor) %> !important;
+        color: <%= @studio.try(:minisite).try(:bgcolor) %>;
     }
+
     .navbar-inverse .nav > li > a:focus,
-    .navbar-inverse .nav > li > a:hover{
-        background-color: rgba(<%= @studio.try(:minisite).try(:r) %>, <%= @studio.try(:minisite).try(:g) %>, <%= @studio.try(:minisite).try(:b)%>, .3);
-        color: rgba(<%= @studio.try(:minisite).try(:r) %>, <%= @studio.try(:minisite).try(:g) %>, <%= @studio.try(:minisite).try(:b)%>, 1);
+    .navbar-inverse .nav > li > a:hover {
+        background-color: <%= @studio.try(:minisite).try(:font_color) %>;
+        color: <%= @studio.try(:minisite).try(:bgcolor) %>;
     }
+
     <% end %>
 
     div.platypus-form {
