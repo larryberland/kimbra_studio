@@ -10,7 +10,6 @@ class MyStudio::Minisite < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  validates :name, length: {maximum: 20}
   validates :bgcolor, :presence => true,
             :format             => {:with => CustomValidators::Colors.css_color_validator}
 
