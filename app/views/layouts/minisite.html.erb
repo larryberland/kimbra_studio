@@ -46,17 +46,17 @@
 <div id='footer'>
   <ul>
     <li>
-      <%= link_to_unless_current 'Privacy',
+      <%= link_to_with_current_local 'Privacy',
                                  privacy_minisite_email_path(@admin_customer_email.tracking) %>
     </li>
     |
     <li>
-      <%= link_to_unless_current 'Returns',
+      <%= link_to_with_current_local 'Returns',
                                  returns_minisite_email_path(@admin_customer_email.tracking) %>
     </li>
     |
     <li>
-      <%= link_to_unless_current 'Contact us',
+      <%= link_to_with_current_local 'Contact us',
                                  contact_minisite_email_path(@admin_customer_email.tracking) %>
     </li>
   </ul>

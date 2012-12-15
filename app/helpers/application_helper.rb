@@ -232,7 +232,7 @@ module ApplicationHelper
       link_text          = at_offer_page ? @admin_customer_offer.name : "Return to #{@admin_customer_offer.name}"
       unless at_collection_page or at_shopping_page
         link = content_tag :li do
-          link_to_unless_current link_text, minisite_offer_url(@admin_customer_offer)
+          link_to_with_current_local link_text, minisite_offer_url(@admin_customer_offer)
         end
         (" | " + link).html_safe
       end

@@ -41,6 +41,7 @@
 
     a {
         color: <%= @studio.try(:minisite).try(:font_color) %>;
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %> !important;
     }
 
     a.link {
