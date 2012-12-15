@@ -5,15 +5,15 @@
       <%= g.label :image, class: "control-label" %>
       <div class="controls">
         <%= g.file_field :image, class:'input-medium btn-small' %>
-        <span class="help-inline">Click Browse to upload your logo image file from your computer.</span>
+        <span class="help-inline"><%= t(".image_help") %></span>
       </div>
     </div>
 
     <div class="control-group">
-      <%= g.label :remote_image_url, 'or Logo URL', class: "control-label" %>
+      <%= g.label :remote_image_url, class: "control-label" %>
       <div class="controls">
         <%= g.text_field :remote_image_url %>
-        <span class="help-inline">Or paste in the direct web address of your existing logo image file.</span>
+        <span class="help-inline"><%= t(".remote_image_help") %></span>
       </div>
     </div>
 
@@ -30,15 +30,15 @@
       <%= g.label :font_color, class: "control-label" %>
       <div class="controls">
         <%= g.text_field :font_color, class: 'short' %>
-        <span class="help-inline">Use web-safe color name or hex code. Eg, olive or #d3b492.</span>
+        <span class="help-inline"><%= t(".font_color_help") %></span>
       </div>
     </div>
 
     <div class="control-group">
-      <%= g.label 'Background color', class: "control-label" %>
+      <%= g.label :bgcolor, class: "control-label" %>
       <div class="controls">
         <%= g.text_field :bgcolor, class: 'short' %>
-        <span class="help-inline">Use web-safe color name or hex code. Eg, olive or #d3b492.</span>
+        <span class="help-inline"><%= t(".bgcolor_help") %></span>
       </div>
     </div>
 

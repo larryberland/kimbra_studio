@@ -22,6 +22,9 @@ en:
         email: "Client Email"
       studio[minisite_attributes]:
         image: "Upload new Studio Logo"
+        bgcolor: "Background color"
+        remote_image_url: "or Logo URL"
+
 
   hello: "Hello world"
   company: "Kimbra Studios ClickPLUS"
@@ -357,6 +360,10 @@ en:
     minisites:
       form:
         legend: "Your Minisite Branding Info"
+        image_help: "Click Browse to upload your logo image file from your computer."
+        bgcolor_help: "Use web-safe color name or hex code. Eg, olive or #d3b492."
+        font_color_help: "Use web-safe color name or hex code. Eg, olive or #d3b492."
+        remote_image_help: "Or paste in the direct web address of your existing logo image file."
 
     portraits:
       edit:
