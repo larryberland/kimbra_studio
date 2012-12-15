@@ -392,8 +392,9 @@ en:
 
     minisite:
       navbar:
+        menu_brand: "My Studio"
         menu_sessions: "Return to sessions list"
-        menu_about:    "About %{studio_name}"
+        menu_about:    "About My Studio"
         menu_collection: "Your Collection"
         menu_custom_work: "Custom Work"
         menu_shopping_cart: "Shopping Cart"

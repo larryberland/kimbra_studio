@@ -278,7 +278,7 @@ module ApplicationHelper
     if (is_mock? or @admin_customer_email.nil?)
       case menu
         when :about
-          link_to t(".menu_#{menu}", studio_name: @studio.try(:brand)), "#"
+          link_to t(".menu_#{menu}"), "#"
         when :shopping_cart
           if (@link_back)
             link_to t('.menu_infos_samples'), "#"
@@ -299,7 +299,7 @@ module ApplicationHelper
         when :chains
           link_to_your_chains_or_not(text, @admin_customer_email)
         when :about
-          link_to_your_about_or_not(t(".menu_#{menu}", studio_name: @studio.try(:brand)), @admin_customer_email)
+          link_to_your_about_or_not(text, @admin_customer_email)
         when :shopping_cart
           link_to_your_cart_or_not
         when :facebook

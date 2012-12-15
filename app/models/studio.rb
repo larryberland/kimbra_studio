@@ -87,10 +87,6 @@ class Studio < ActiveRecord::Base
     minisite && minisite.image_url.to_s !~ /empty_deal_image/ ? true : false
   end
 
-  # navbar brand name for display
-  def brand
-    minisite.name ? minisite.name : name.to_s.truncate(23)
-  end
   # email activation instructions after a user signs up
   #
   # @param  [ none ]
