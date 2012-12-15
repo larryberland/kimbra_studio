@@ -26,7 +26,7 @@
     <%= offer.piece.short_description %>
     <br>
     <%= link_to "Details...", url_for_offer_or_not(offer), style: "color: #{@studio.minisite.font_color};", class: 'text_anchor_emphasis' %>
-    <br/>
+    <br/><br/>
     <span class="price"><%= number_to_currency(offer.price) %></span>
   </div>
 
