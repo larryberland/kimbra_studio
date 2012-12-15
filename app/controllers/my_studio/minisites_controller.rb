@@ -90,6 +90,7 @@ class MyStudio::MinisitesController < MyStudio::BaseController
   end
 
   def show_chains
+    @navbar_active = :chains
     @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
     @admin_customer_offers = @admin_customer_email.offers
     @studio = @admin_customer_email.my_studio_session.studio
@@ -97,6 +98,7 @@ class MyStudio::MinisitesController < MyStudio::BaseController
   end
 
   def show_charms
+    @navbar_active = :charms
     @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
     @admin_customer_offers = @admin_customer_email.offers
     @studio = @admin_customer_email.my_studio_session.studio
