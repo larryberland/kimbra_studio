@@ -378,7 +378,7 @@ module ApplicationHelper
   end
 
   def link_to_pinterest(offer)
-    image_url   = @admin_customer_offer.image.url_cache_buster
+    image_url   = offer.image.url_cache_buster
     page_url    = offer.email.my_studio_session.studio.info.website
     description = url_encode('Gorgeous photo jewelry')
     link_to image_tag('https://assets.pinterest.com/images/PinExt.png', title: 'Pin It'),
