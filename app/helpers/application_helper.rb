@@ -210,16 +210,13 @@ module ApplicationHelper
   end
 
   def link_to_your_facebook_or_not
-    if is_mock?
-      link_to image_tag("fb_login.png"), '#'
-    else
+    if Rails.env.development?
       if current_user_facebook
         link_to "Sign out Facebook", facebook_signout_path, id: "sign_out"
       else
         link_to image_tag("fb_login.png"), '/auth/facebook', {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"}
       end
     end
-
   end
 
   # Show a link to the current offer - no need for this if we are at the Collection page or if there's no current offer.
@@ -279,10 +276,19 @@ module ApplicationHelper
   def link_to_navbar(menu)
     text = t(".menu_#{menu}")
     if (is_mock? or @admin_customer_email.nil?)
-      if (@link_back)
-        link_to t('.menu_infos_samples'), samples_my_studio_infos_path
-      else
-        link_to text, "#"
+      case menu
+        when :about
+          link_to t(".menu_#{menu}", studio_name: @studio.try(:brand)), "#"
+        when :shopping_cart
+          if (@link_back)
+            link_to t('.menu_infos_samples'), "#"
+          else
+            link_to text, "#"
+          end
+        when :facebook
+          link_to image_tag("fb_login.png"), '#'
+        else
+          link_to text, "#"
       end
     else
       case menu
@@ -293,7 +299,7 @@ module ApplicationHelper
         when :chains
           link_to_your_chains_or_not(text, @admin_customer_email)
         when :about
-          link_to_your_about_or_not(t(".menu_#{menu}", studio_name: @studio.try(:name)), @admin_customer_email)
+          link_to_your_about_or_not(t(".menu_#{menu}", studio_name: @studio.try(:brand)), @admin_customer_email)
         when :shopping_cart
           link_to_your_cart_or_not
         when :facebook

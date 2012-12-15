@@ -1,7 +1,7 @@
 class MyStudio::Minisite < ActiveRecord::Base
 
   attr_accessible :image, :remote_image_url, :image_cache,
-                  :bgcolor, :font_color, :font_family, :theme,
+                  :name, :bgcolor, :font_color, :font_family, :theme,
                   :image_width, :image_height
 
   belongs_to :studio, inverse_of: :minisite
@@ -10,6 +10,7 @@ class MyStudio::Minisite < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
+  validates :name, length: {maximum: 20}
   validates :bgcolor, :presence => true,
             :format             => {:with => CustomValidators::Colors.css_color_validator}
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121213081530) do
+ActiveRecord::Schema.define(:version => 20121215125038) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -267,6 +267,7 @@ ActiveRecord::Schema.define(:version => 20121213081530) do
     t.datetime "updated_at"
     t.integer  "image_width"
     t.integer  "image_height"
+    t.string   "name",         :limit => 20
   end
 
   add_index "my_studio_minisites", ["studio_id"], :name => "index_my_studio_minisites_on_studio_id"
