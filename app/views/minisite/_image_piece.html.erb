@@ -1,41 +1,34 @@
-<div class="row">
+<div class="media">
+  <%= image_tag(piece.image.url_cache_buster,
+                :title => piece.name,
+                :alt => piece.name,
+                :class => "img-rounded media-object pull-left",
+                :editable => "true",
+                :label => "Image") %>
 
-  <div class="media">
-    <a class="pull-left">
+  <div class="media-body pull-left">
 
-      <%= image_tag(piece.image.url_cache_buster,
-                    :title    => piece.name,
-                    :alt      => piece.name,
-                    :class    => "img-rounded media-object",
-                    :editable => "true",
-                    :label    => "Image") %>
-    </a>
+    <h4 class="media-heading"><%= piece.name %></h4>
 
-    <div class="media-body">
+    <%= piece.short_description %>
+    <span class="price"><%= number_to_currency(piece.price) %></span>
 
-      <h4 class="media-heading"><%= piece.name %></h4>
+    <% unless @show_status_only %>
+        <% if is_client? %>
+            <%= form_for(@shopping_item, :remote => true) do |f| %>
+                <p>
+                  <%= f.hidden_field :piece_id %>
+                  <%= f.hidden_field :cart_id %>
+                  <%= submit_tag 'Add to Cart', :id => "my_submit_#{@shopping_item.piece_id}", :class => 'likeabutton multi-submits' %>
+                  <span id='<%= "spinner_#{@shopping_item.piece_id}" %>' style='display:none' class='spinner'></span>
+                </p>
+            <% end %>
+        <% end %>
+    <% end %>
 
-      <%= piece.short_description %>
-      <span class="price"><%= number_to_currency(piece.price) %></span>
+    <p class="shopping-item">
+      <span id='<%= "shopping_item_#{@shopping_item.piece_id}" %>'></span>
+    </p>
 
-      <% unless @show_status_only %>
-          <% if is_client? %>
-              <%= form_for(@shopping_item, :remote => true) do |f| %>
-                  <p>
-                    <%= f.hidden_field :piece_id %>
-                    <%= f.hidden_field :cart_id %>
-                    <%= submit_tag 'Add to Cart', :id => "my_submit_#{@shopping_item.piece_id}", :class => 'likeabutton multi-submits' %>
-                    <span id='<%= "spinner_#{@shopping_item.piece_id}" %>' style='display:none' class='spinner'></span>
-                  </p>
-              <% end %>
-          <% end %>
-      <% end %>
-
-      <p class="shopping-item">
-        <span id='<%= "shopping_item_#{@shopping_item.piece_id}" %>'></span>
-      </p>
-
-    </div>
   </div>
-
 </div>

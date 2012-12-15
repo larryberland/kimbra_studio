@@ -1,28 +1,27 @@
 <h2>About <%= @studio.name %></h2>
-<table class="table">
-  <tbody>
-  <tr>
-    <% span = @admin_customer_email.offers.try(:size) %>
+
+<div class='row' style='margin:auto;'>
+  <div style='text-align:center;'>
     <% @admin_customer_email.offers.each do |offer| %>
-        <td align=center>
-          <div>
-            <%= link_to image_tag_list(offer), url_for_offer_or_not(offer), :class => :no_border %>
-            <br>
-            <%= link_to "View", url_for_offer_or_not(offer) %>
-          </div>
-        </td>
+        <div class='pull-left' style='text-align:center; margin:10px;'>
+          <%= link_to image_tag_list(offer), url_for_offer_or_not(offer), :class => :no_border %>
+          <br>
+          <%= link_to 'View', url_for_offer_or_not(offer) %>
+        </div>
     <% end if @admin_customer_email.offers %>
-  </tr>
-  </tbody>
-</table>
-<p>
-  <%= t('.p1') %>
-</p>
+  </div>
+</div>
 
-<p>
-  <%= t('.p2', name: @studio.name) %>
-</p>
+<div class='row'>
+  <p>
+    <%= t('.p1') %>
+  </p>
 
-<p>
-  <%= link_to "Kimbra Studios", "http://kimbrastudios.com" %> <%= t('.p3') %>
-</p>
+  <p>
+    <%= t('.p2', name: @studio.name) %>
+  </p>
+
+  <p>
+    <%= link_to "Kimbra Studios", "http://kimbrastudios.com" %> <%= t('.p3') %>
+  </p>
+</div>

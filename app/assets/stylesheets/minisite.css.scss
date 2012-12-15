@@ -10,28 +10,6 @@
  *= require devise
 */
 
-html, body {
-  height: 100%;
-}
-
-body {
-  margin: 0;
-}
-
-/*Opera Fix*/
-body:before {
-  content: "";
-  height: 100%;
-  float: left;
-  width: 0;
-  margin-top: -32767px;
-}
-
-#content_wrapper {
-  overflow: auto;
-  padding-bottom: 51px; /* must be same height as the footer */
-}
-
 p {
   margin: 0 0 0 0;
   padding: 13px 0 13px 0;
@@ -223,6 +201,7 @@ div.offer_show img {
 
 .price {
   font-size: 1.3em;
+  margin-top: 0.9em;
 }
 
 #nav_minisite_wrapper {
@@ -254,7 +233,6 @@ div.offer_show img {
 
 #footer {
   position: relative;
-  margin-top: -51px; /* negative value of footer height */
   border-top: 1px solid;
   height: 50px;
   clear: both;
@@ -336,4 +314,12 @@ td.total {
 
 .studio-address {
   text-align: left;
+}
+
+.text_anchor_emphasis {
+  text-decoration: underline;
+}
+
+.container {
+  padding-left: 40px;
 }

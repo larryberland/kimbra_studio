@@ -3,7 +3,6 @@
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
         font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
         color: <%= @studio.try(:minisite).try(:font_color) %>;
-        padding: 60px;
         padding-top: <%=@studio.try(:minisite).try(:body_padding)%>px;
     }
 
@@ -76,10 +75,6 @@
         text-align: left;
     }
 
-    span.price {
-        display: block;
-    }
-
     .navbar-header-top-row {
         text-align: center;
     }
@@ -122,6 +117,4 @@
         text-align: left;
     }
 
-
 </style>
-

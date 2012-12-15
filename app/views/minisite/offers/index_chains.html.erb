@@ -1,7 +1,6 @@
 <% @pieces.each do |piece| %>
-
-    <% @shopping_item = Shopping::Item.new(piece_id: piece.id, :cart => @cart) %>
-
-    <%= render 'minisite/image_piece', piece: piece, studio: @studio, offer: @admin_customer_offers.first %>
-
+    <div class='row'>
+      <% @shopping_item = Shopping::Item.new(piece_id: piece.id, :cart => @cart) %>
+      <%= render 'minisite/image_piece', piece: piece, studio: @studio, offer: @admin_customer_offers.first %>
+    </div>
 <% end %>
