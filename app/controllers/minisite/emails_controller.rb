@@ -4,6 +4,7 @@ module Minisite
     skip_before_filter :set_by_tracking, :set_cart_and_client_and_studio, only: [:order_status, :about]
 
     def about
+      @navbar_active = :about
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
       @studio = @admin_customer_email.my_studio_session.studio
       set_cart_and_client_and_studio

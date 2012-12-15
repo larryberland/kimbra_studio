@@ -22,6 +22,7 @@ module Minisite
     # GET /minisite/index_charms
     # GET /minisite/index_charms.json
     def index_charms
+      @navbar_active = :charms
       if @admin_customer_email
         @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
         @admin_customer_offers = @admin_customer_email.offers
@@ -44,6 +45,7 @@ module Minisite
     # GET /minisite/index_chains
     # GET /minisite/index_chains.json
     def index_chains
+      @navbar_active = :chains
       if @admin_customer_email
         @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
         @admin_customer_offers = @admin_customer_email.offers

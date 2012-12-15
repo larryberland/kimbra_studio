@@ -267,31 +267,11 @@ module ApplicationHelper
     css
   end
 
-  def li_navbar_class(menu)
-    css_class = {}
-    #puts "menu:#{menu} controller:#{controller.class.name} params:#{params[:controller]}"
-    case
-      when controller.kind_of?(Minisite::OffersController)
-        case controller.action_name
-          when 'index_chains'
-            css_class[:class] = 'active' if (menu == :chains)
-          when 'index_charms'
-            css_class[:class] = 'active' if (menu == :charms)
-          else
-            css_class[:class] = 'active' if (menu == :collection)
-        end
-      when controller.kind_of?(Minisite::EmailsController)
-        css_class[:class] = 'active' if (menu == :about)
-      when controller.kind_of?(Shopping::CartsController)
-        css_class[:class] = 'active' if (menu == :shopping_cart)
-      when controller.kind_of?(Minisite::ItemSidesController)
-        css_class[:class] = 'active' if (menu == :collection)
-    end
-    css_class
-  end
-
+  # @navbar_active is set in controller before_filter
+  #   and overridden in controller actions
   def li_navbar(menu)
-    content_tag(:li, li_navbar_class(menu)) do
+    html = (menu == @navbar_active) ? {class: 'active'} : {}
+    content_tag(:li, html) do
       link_to_navbar(menu)
     end
   end

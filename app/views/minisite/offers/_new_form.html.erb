@@ -40,11 +40,12 @@
         }
 
         a.dd-option:hover {
-            background-color: white;
+            background-color: white !important;
         }
 
         a.dd-option:hover label,
         a.dd-option:hover small {
+            background-color: white;
             color: black;
         }
 
@@ -58,18 +59,16 @@
 
 <% select_id = "admin_customer_offer_piece_id" %>
 <% select_portrait_id = "admin_customer_offer_portrait_id" %>
+<div class="platypus-form">
 
-<%= render 'shared/error_messages', record: @admin_customer_offer %>
+  <%= render 'shared/error_messages', record: @admin_customer_offer %>
 
-<% url = @admin_customer_offer.new_record? ?
-        minisite_email_offers_path(@admin_customer_email) :
-        minisite_email_offer_path(@admin_customer_email, @admin_customer_offer) %>
-<div class="row span3">
-</div>
-<div class="span4">
+  <% url = @admin_customer_offer.new_record? ?
+          minisite_email_offers_path(@admin_customer_email) :
+          minisite_email_offer_path(@admin_customer_email, @admin_customer_offer) %>
 
 
-  <%= form_for(@admin_customer_offer, :url => url, :html => {multipart: true}) do |f| %>
+  <%= form_for(@admin_customer_offer, url: url, html: {multipart: true}) do |f| %>
 
       <%= f.hidden_field :frozen_offer %>
       <%= f.hidden_field :piece_id %>
@@ -95,9 +94,6 @@
       </div>
 
   <% end %>
-</div>
-<!-- platypus-form -->
-<div class="row span3">
 </div>
 
 

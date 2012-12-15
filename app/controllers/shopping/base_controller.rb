@@ -3,10 +3,19 @@ class Shopping::BaseController < InheritedResources::Base
   skip_filter :authenticate_user!
   before_filter :set_client_and_cart
   before_filter :setup_story, except: [:edit_delivery_tracking, :update_delivery_tracking]
+  before_filter :navbar_active
 
   layout 'minisite'
 
   private #================================================================================
+
+  # current navbar menu
+  # :collection, :charms, :chains, :about, :shopping_cart
+  def navbar_active
+
+    # reset in controller for active navbar menu item
+    @navbar_active = :shopping_cart
+  end
 
   # We don't support changing between multiple clients or emails in one session.
   def set_client_and_cart
@@ -14,9 +23,9 @@ class Shopping::BaseController < InheritedResources::Base
 
     if si = params[:shopping_item]
       if si[:offer_id]
-        @admin_customer_offer = Admin::Customer::Offer.find(si[:offer_id])
+        @admin_customer_offer             = Admin::Customer::Offer.find(si[:offer_id])
         session[:admin_customer_offer_id] = @admin_customer_offer.id
-        @shopping_item_id = si[:offer_id]
+        @shopping_item_id                 = si[:offer_id]
       elsif si[:piece_id]
         @shopping_item_id = si[:piece_id]
       end
