@@ -15,9 +15,9 @@ module MyStudio::SessionsHelper
         icon_class   = 'icon-upload icon-white'
         case session.portraits.count
           when 0
-            button_to_with_icon(button_to(t(:my_studio_sessions_upload_now_link), url, html_options), icon_class)
+            button_icon_to(icon_class, t(:my_studio_sessions_upload_now_link), url, html_options)
           when 1..MyStudio::Session::BEST_PORTRAITS
-            button_to_with_icon(button_to(t(:my_studio_sessions_upload_more_link), url, html_options), icon_class)
+            button_icon_to(icon_class, t(:my_studio_sessions_upload_more_link), url, html_options)
           else
             link_to name, url, title: title
         end

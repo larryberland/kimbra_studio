@@ -387,12 +387,46 @@ module ApplicationHelper
             'count-layout' => 'none'
   end
 
-  def button_to_with_icon(button_to_html, icon_class=nil)
-    icon_class ||= 'icon-ok-sign icon-white'
-    # add a span with icon to the div
-    html       = button_to_html.gsub('<div><input', "<div><span class='btn btn-success'><i class='#{icon_class}'></i><input")
-    html.gsub!('</div>', '</span></div>')
-    html.html_safe
+  # override of button_to
+  #   uses <button> tag instead of <input>
+  #   allows an icon_class to show before the name
+  def button_icon_to(icon_class, name, options = {}, html_options = {})
+
+    html_options = html_options.stringify_keys
+    convert_boolean_attributes!(html_options, %w( disabled ))
+
+    method_tag = ''
+    if (method = html_options.delete('method')) && %w{put delete}.include?(method.to_s)
+      method_tag = tag('input', :type => 'hidden', :name => '_method', :value => method.to_s)
+    end
+
+    form_method = method.to_s == 'get' ? 'get' : 'post'
+    form_options = html_options.delete('form') || {}
+    form_options[:class] ||= html_options.delete('form_class') || 'button_to'
+
+    remote = html_options.delete('remote')
+
+    request_token_tag = ''
+    if form_method == 'post' && protect_against_forgery?
+      request_token_tag = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
+    end
+
+    url = options.is_a?(String) ? options : self.url_for(options)
+    name ||= url
+
+    html_options = convert_options_to_data_attributes(options, html_options)
+
+    #html_options.merge!("type" => "submit", "value" => name, "class" => 'btn btn-success')
+    html_options.merge!("type" => "submit", "class" => 'btn btn-success')
+
+    # use a button tag instead of input
+    button = content_tag(:button, html_options) do
+      content_tag(:i, "", "class"=>icon_class) + " #{name}"
+    end
+
+    form_options.merge!(:method => form_method, :action => url)
+    form_options.merge!("data-remote" => "true") if remote
+    "#{tag(:form, form_options, true)}<div>#{method_tag}#{button}#{request_token_tag}</div></form>".html_safe
   end
 
 end
