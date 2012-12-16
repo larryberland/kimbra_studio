@@ -47,7 +47,7 @@
                   <b><%= offer.name %></b><br/>
                   <%= offer.piece.short_description %><br/>
                   <span class="price"><%= number_to_currency(offer.price) %></span><br/>
-                  <%= link_to "Details...", url_for_offer_or_not(offer), {:style => "color: #{@studio.minisite.font_color}; text-decoration: dotted;"} %><br>
+                  <%= link_to "Details...", minisite_email_offers_url(email), {:style => "color: #{studio.minisite.font_color}; text-decoration: dotted;"} %><br>
                 </p>
               </div>
             </td>
