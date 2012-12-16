@@ -85,7 +85,11 @@ class ApplicationController < ActionController::Base
   end
 
   def load_my_studio
-    @my_studio = current_user.studio if current_user
+    if (is_admin?)
+      @my_studio = Studio.find_by_id(session[:mock_collection_studio_id]) rescue nil
+    else
+      @my_studio = current_user.studio if current_user
+    end
   end
 
   def log_session

@@ -69,6 +69,9 @@ class StudiosController < ApplicationController
   # GET /studios/1/edit
   def edit
     @studio = Studio.find(params[:id])
+    if (is_admin?)
+      session[:mock_collection_studio_id] = @studio.id
+    end
   end
 
   # POST /studios

@@ -65,6 +65,9 @@ class MyStudio::Minisite < ActiveRecord::Base
           rgb = hex.scan(/../).map { |color| color.to_i(16) }
         end
         @background_brightness = Math.sqrt(0.299 * (rgb[0]*rgb[0]) + 0.587 * (rgb[1]*rgb[1]) + 0.114 * (rgb[2]*rgb[2]))
+      else
+        # TODO: need to figure out non Hex Values
+        @background_brightness = 131 # assume light background
       end
     end
     @background_brightness
