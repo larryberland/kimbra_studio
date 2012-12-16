@@ -31,7 +31,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   #  when the Holiday's start we can just add to this array
   # ["Photo Bracelets", "Photo Necklaces", "Holiday", "Photo Charms"] as of 10/7/2012
   def self.strategy_categories
-    if Rails.env.development?
+    if false # Rails.env.development?
       Admin::Merchandise::Piece.select('distinct(category)').collect(&:category)
     else
       ['Photo Necklaces', 'Photo Charms']

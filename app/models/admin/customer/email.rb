@@ -23,7 +23,6 @@ class Admin::Customer::Email < ActiveRecord::Base
     tracking
   end
 
-  # Typically called as a rake task from the cron hourly.
   def self.send_offer_emails
     sent = 0
     Admin::Customer::Email.where('sent_at is NULL and active = ?', true).each do |email|
@@ -82,7 +81,7 @@ class Admin::Customer::Email < ActiveRecord::Base
     categories << 'Holiday'
     # Photo Bracelets
     # Photo Necklaces
-    if Rails.env.development?
+    if false # Rails.env.development?
       # This will generate an Email with an offer from every piece in a specific category
       #  just enter in
       # the Category you want to be generated

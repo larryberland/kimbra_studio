@@ -33,7 +33,7 @@ class PieceStrategy
     @piece_list
   end
 
-  private
+  private #===========================================================================
 
   # Photo bracelets will be picked based on the current email for this client
   def pick_photo_bracelet
@@ -48,7 +48,8 @@ class PieceStrategy
     end
     # reload categories if we have sent all of them out already
     Admin::Merchandise::Piece.strategy_categories.each do |category|
-      @by_categories[category] = Admin::Merchandise::Piece.to_strategy_category(category) if @by_categories[category].empty?
+      @by_categories[category] = Admin::Merchandise::Piece.to_strategy_category(category) if @by_categories[category].blank?
     end
   end
+
 end
