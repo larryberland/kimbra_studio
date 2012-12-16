@@ -10,7 +10,7 @@
           <tr>
             <% klass = offer.frozen_offer? ? "frozen" : "" %>
             <td class="w280" align="right" width="280">
-              <%= link_to image_tag(offer.image.url_cache_buster,
+              <%= link_to image_tag(attachments['offer_image.jpg'].url,
                                     :title    => offer.name,
                                     :alt      => offer.name,
                                     :width    => offer.width,
@@ -19,7 +19,7 @@
                                     :editable => "true",
                                     :label    => "Image",
                                     :border   => 0),
-                          url_for_offer_or_not_image(offer),
+                          minisite_email_offers_url(email),
                           {:style => "text-decoration: none;"} %>
             </td>
           </tr>

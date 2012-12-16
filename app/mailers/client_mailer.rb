@@ -10,16 +10,8 @@ class ClientMailer < ActionMailer::Base
     @client = @email.my_studio_session.client
     @studio = @email.my_studio_session.studio
     raise "this email already unsubscribed: #{@client.email}" if Unsubscribe.exists?(email: @client.email)
-    logo = ''
-    open('image.jpg', 'w') do |file|
-      logo << open(@studio.minisite.image_url).read
-    end
-    attachments.inline['logo.png'] = logo
-    offer_image = ''
-        open('offer_image.jpg', 'w') do |file|
-          offer_image << open(@offer.piece.image_url).read
-        end
-        attachments.inline['offer_image.png'] = offer_image
+    attachments.inline['logo.jpg'] = open(@studio.minisite.image_url).read
+    attachments.inline['offer_image.jpg'] = open(@offer.image_url).read
     mail(to: "#{@client.name} <#{@client.email}>",
          bcc: ['support@kimbraclickplus.com'],
          subject: 'Your recent photos in heirloom jewelry.',

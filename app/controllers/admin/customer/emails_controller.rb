@@ -99,7 +99,7 @@ class Admin::Customer::EmailsController < ApplicationController
 
   def send_offers
     email = Admin::Customer::Email.find_by_tracking(params[:id])
-    email.send_offers
+    email.send_offers(email.offers.first)
     flash[:notice] = "Sending offer email to #{email.my_studio_session.client.name} from #{email.my_studio_session.studio.name}."
     redirect_to admin_overview_path
   end

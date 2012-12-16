@@ -136,8 +136,8 @@ class Admin::Customer::Email < ActiveRecord::Base
     my_studio_session.name
   end
 
-  def send_offers
-    ClientMailer.delay.send_offers(self.id)
+  def send_offers(offer_id)
+    ClientMailer.delay.send_offers(self.id, offer_id)
   end
 
   def in_send_offers_queue?

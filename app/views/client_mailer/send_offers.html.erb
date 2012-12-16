@@ -499,7 +499,7 @@
                 <tr>
                   <td class="w580" width="580" bgcolor="<%= @studio.minisite.bgcolor -%>">
                     <div style="text-align: center;" align="center">
-                      <%= image_tag attachments['logo.png'].url,
+                      <%= image_tag attachments['logo.jpg'].url,
                                     :alt => "#{@studio.name} logo",
                                     :class => "w640",
                                     :id => "studio_logo",
@@ -520,9 +520,9 @@
             </layout>
 
             <% if @offer.width.to_i < 250 %>
-                <%= render 'client_mailer/minisite/narrow_image', offer: @offer, studio: @studio -%>
+                <%= render 'client_mailer/minisite/narrow_image', offer: @offer, studio: @studio, email: @email -%>
             <% else %>
-                <%= render 'client_mailer/minisite/wide_image', offer: @offer, studio: @studio -%>
+                <%= render 'client_mailer/minisite/wide_image', offer: @offer, studio: @studio, email: @email -%>
             <% end -%>
 
           </repeater>
