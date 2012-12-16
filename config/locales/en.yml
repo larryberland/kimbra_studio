@@ -390,6 +390,7 @@ en:
 
   shared:
     main_header:
+      menu_brand: "My Studio"
       menu_photo_sessions: "Photo Sessions"
       menu_dashboard: "Dashboard"
       menu_minisite:  "Branding"
