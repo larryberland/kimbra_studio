@@ -4,8 +4,9 @@ class ClientMailer < ActionMailer::Base
 
   default from: KIMBRA_STUDIO_CONFIG[:mailer][:support]
 
-  def send_offers(email_id)
+  def send_offers(email_id, offer_id)
     @email = Admin::Customer::Email.find(email_id)
+    @offer = Admin::Customer::Offer.find(offer_id)
     @client = @email.my_studio_session.client
     @studio = @email.my_studio_session.studio
     raise "this email already unsubscribed: #{@client.email}" if Unsubscribe.exists?(email: @client.email)
@@ -14,6 +15,11 @@ class ClientMailer < ActionMailer::Base
       logo << open(@studio.minisite.image_url).read
     end
     attachments.inline['logo.png'] = logo
+    offer_image = ''
+        open('offer_image.jpg', 'w') do |file|
+          offer_image << open(@offer.piece.image_url).read
+        end
+        attachments.inline['offer_image.png'] = offer_image
     mail(to: "#{@client.name} <#{@client.email}>",
          bcc: ['support@kimbraclickplus.com'],
          subject: 'Your recent photos in heirloom jewelry.',

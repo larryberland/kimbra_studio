@@ -37,6 +37,7 @@ class BaseUploader < CarrierWave::Uploader::Base
           else
             # fog file?
             p = model.send("#{mounted_as}_url", version)
+            puts "p= #{p}"
             #puts "#{model.class.name}[#{model.id}] for #{mounted_as} version=>#{version} #{p}"
             #puts "#{model.class.name}[#{model.id}] for #{mounted_as} version=>#{version} #{p}"
             raise "#{model.class.name} for #{mounted_as} using amazon file#{p}" if p.blank?
