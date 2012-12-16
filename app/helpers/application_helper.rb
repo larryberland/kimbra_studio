@@ -281,7 +281,7 @@ module ApplicationHelper
           link_to t(".menu_#{menu}"), "#", title: @studio.name
         when :shopping_cart
           if (@link_back)
-            link_to t('.menu_infos_samples'), "#"
+            link_to t('.menu_infos_samples'), samples_my_studio_infos_path
           else
             link_to text, "#"
           end

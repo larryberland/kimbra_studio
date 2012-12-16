@@ -340,7 +340,7 @@ en:
         your_collection: "Your Collection"
         shopping_cart:  "Shopping Cart (0 items)"
         about: "About %{studio_name}"
-        back_samples: "Back to Samples"
+        back_samples: "Back to How It Works"
       samples_herald:
         title: "The information on the left is used to create the Herald Email."
         body: "The Herald Email introduces your client to custom heirloom photo jewelry and helps build excitement and
@@ -408,7 +408,7 @@ en:
         menu_shopping_cart: "Shopping Cart"
         menu_chains: "Chains"
         menu_charms: "Charms"
-        menu_infos_samples: "Back to Samples"
+        menu_infos_samples: "Back to How It Works"
 
   studios:
     edit:
