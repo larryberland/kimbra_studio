@@ -4,8 +4,6 @@
   <%= link_to image_tag(offer.image.url_cache_buster,
                         :title    => offer.name,
                         :alt      => offer.name,
-                        :width    => constrain_to_500_px_wide(offer, :width),
-                        :height   => constrain_to_500_px_wide(offer, :height),
                         :class    => "img-rounded #{klass} media-object",
                         :editable => "true",
                         :label    => "Image",
