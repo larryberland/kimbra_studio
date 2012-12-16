@@ -3,7 +3,7 @@ module Admin::Customer::OffersHelper
   def kimbra_piece_ddslick_data(offer)
     @ddslick_default_selected_index = 0
     index = 0
-    info = Admin::Merchandise::Piece.where("photo='true'").order("name ASC").all.collect do |c|
+    info = Admin::Merchandise::Piece.are_active_with_photo.all.collect do |c|
       @ddslick_default_selected_index = index if c.id == offer.piece_id
       index += 1
       {value:       c.id,

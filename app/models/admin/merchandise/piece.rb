@@ -20,6 +20,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   scope :for_bracelets, lambda { by_category('Photo Bracelets') }
   scope :non_photo_charms, lambda { where('photo=? AND category NOT IN(?)', false, 'Chains').order('name ASC')}
   scope :for_chains, lambda { by_category('Chains').order('name ASC')}
+  scope :are_active_with_photo, lambda {where('active=? and photo=?', true, true).order("name ASC")}
 
   scope :search, lambda {|value|
     like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_','\_')}%" : "%"
