@@ -13,7 +13,8 @@
         <span class="icon-bar"></span>
       </a>
 
-      <%= link_to t('.menu_brand'), root_path, class: "brand", title: nav_bar_title %>
+      <% text = is_admin? ? "ClickPLUS" : t('menu_brand') %>
+      <%= link_to text, root_path, class: "brand", title: nav_bar_title %>
 
       <ul class='nav pull-right'>
         <!-- devise signup, logout, edit account -->
@@ -24,8 +25,8 @@
             <%= coffee_script_tag do %>
                 # BEWARE FORMATTING! ALL 3 OF THE LINE SBELOW MUST BE SUCCESSIVELY INDENTED!
                 $ ->
-                    olark('api.chat.updateVisitorNickname',
-                        snippet:'<%= current_user.name %>, <%= current_user.studio.try(:name) %>')
+                olark('api.chat.updateVisitorNickname',
+                snippet:'<%= current_user.name %>, <%= current_user.studio.try(:name) %>')
             <% end if Rails.env.production? %>
         <% else %>
             <li><%= link_to translate(:sign_in), new_user_session_path %></li>
