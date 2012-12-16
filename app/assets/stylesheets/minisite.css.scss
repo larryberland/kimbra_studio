@@ -314,7 +314,10 @@ td.total {
 
 .studio-address {
   text-align: left;
-  padding-left: 10px;
+  padding-left: 20px;
+}
+.studio-address > address{
+  margin-left: 20px;
 }
 
 .text_anchor_emphasis {
