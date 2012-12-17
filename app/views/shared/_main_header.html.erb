@@ -26,7 +26,7 @@
                 window.currentUserName = '<%= current_user.name %>'
                 window.currentUserStudio = '<%= current_user.studio.try(:name) %>'
                 setOlarkUser()
-            <% end if Rails.env.production? %>
+            <% end if user_signed_in? && Rails.env.production? %>
         <% else %>
             <li><%= link_to translate(:sign_in), new_user_session_path %></li>
             <!-- <li>> link_to translate(:sign_up), new_user_registration_path %></li>-->
