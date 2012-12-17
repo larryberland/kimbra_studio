@@ -4,12 +4,57 @@
  <title>BLOG_NAME</title>
  <link href="YOUR_URL/atom.xml" rel="self"/>
  <link href="YOUR_URL"/>
- <updated>2012-11-13T20:20:17-05:00</updated>
+ <updated>2012-12-17T15:00:15-05:00</updated>
  <id>BLOG_URL</id>
  <author>
    <name>BLOG_NAME</name>
  </author>
 
+ 
+ <entry>
+   <title>Holiday Ornaments</title>
+   <link href="YOUR_URL/holiday-ornaments.html"/>
+   <updated>2012-12-17T00:00:00-05:00</updated>
+   <id>BLOG_URL/holiday-ornaments</id>
+   <content type="html">&lt;p&gt;The holiday season is a great time to reconnect with your clients from the past year.
+It's an excellent excuse to remind them about the magic memories captured by your portraits.&lt;/p&gt;
+
+&lt;p&gt;We have a special program for the holiday season to help you rekindle the excitement that
+your clients had about their photo session. Go back through your shoots for the entire year
+and create a new session for each client -- be sure to select the category Holiday Ornaments --
+and upload a handful of the most iconic portraits you did for them.&lt;/p&gt;
+
+&lt;p&gt;Bear in mind the usuable area for holiday ornaments tend to be smaller than most photo jewelry so we'll
+crop tightly and look for group shots. But don't worry about that because, as always, we do all the work
+for you in creating the offers.&lt;/p&gt;
+
+&lt;p&gt;We'll create a special mailing consisting of just holiday ornaments. These ornaments will remind your
+clients, their friends, and families of your photographic business, year after year.&lt;/p&gt;
+
+&lt;p&gt;If you are an existing PPP Program participant (you know who you are!) please contact us before creating one of these
+sessions - we want to make sure there is no conflict with your pricing strategy.&lt;/p&gt;
+
+&lt;p&gt;Happy Holidays from us here at ClickPLUS!&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Now your clients can select jewelry pieces!</title>
+   <link href="YOUR_URL/now-i-can-select-pieces.html"/>
+   <updated>2012-12-10T00:00:00-05:00</updated>
+   <id>BLOG_URL/now-i-can-select-pieces</id>
+   <content type="html">&lt;p&gt;Just released! Your clients can now swap out the jewelry piece in their offer. That means that they have full freedom to
+create their heirloom piece exactly the way they want it.&lt;/p&gt;
+
+&lt;p&gt;We also include rings (sizeable) and jewelry accessories like chains and charms.&lt;/p&gt;
+
+&lt;p&gt;We still do not support the studio selecting which pices should be used in the offer. That's because we want you to focus
+on your business, not designing jewelry -- that's our job!&lt;/p&gt;
+
+&lt;p&gt;As always, if you have any special requests, go ahead and upload the session portraits and email us or use the instant message
+chat feature on the site, or just call us. We are here to help you make your business successful.&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Family portraits for Thanksgiving</title>
