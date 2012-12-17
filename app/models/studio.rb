@@ -62,6 +62,18 @@ class Studio < ActiveRecord::Base
     search_by_email_or_fname_or_lname_or_key ? by_search(search_by_email_or_fname_or_lname_or_key) : where('id>0').order('updated_at DESC')
   end
 
+  def navbar_background
+    background_dark? ? minisite.bgcolor : minisite.font_color
+  end
+
+  def navbar_color
+    background_dark? ? minisite.font_color : minisite.bgcolor
+  end
+
+  def navbar_border_color
+    minisite.try(:calc_border_color)
+  end
+
   def background_dark?
     if @background_dark.nil?
       if (minisite)

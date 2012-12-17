@@ -12,19 +12,6 @@
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
-    .navbar .navbar-inner {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-        background-image: none;
-    }
-
-    div.navbar {
-        border-bottom: 1px solid <%=@studio.try(:minisite).try(:calc_border_color) %>;
-    }
-
-    .form-actions {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-    }
-
     .likeabutton {
         background: ButtonFace;
         color: ButtonText;
@@ -46,15 +33,10 @@
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
     }
 
-    a.link {
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
-    }
-
-    a.visited {
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
-    }
-
-    a.focus, a.hover {
+    a:link,
+    a:visited,
+    a:focus,
+    a:hover{
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
@@ -62,6 +44,55 @@
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
+    /* bootstrap navbar and navbar-inverse */
+    .navbar .navbar-inner {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        background-image: none;
+    }
+
+    div.navbar {
+        border-bottom: 1px solid <%=@studio.navbar_border_color %>;
+    }
+
+    .navbar-header-top-row {
+        text-align: center;
+    }
+
+    .navbar-header-top-row .pull-left,
+    .navbar-header-top-row .pull-right {
+        padding: 20px;
+    }
+
+    /*.navbar-header-top-row .pull-left {*/
+        /*padding-left: 40px;*/
+    /*}*/
+
+    .navbar-inverse .nav > .active > a,
+    .navbar-inverse .nav > .active > a:hover,
+    .navbar-inverse .nav > .active > a:focus {
+        background-color: <%= @studio.navbar_background %>;
+        color: <%= @studio.navbar_color %>;
+    }
+
+    <% unless @studio.minisite.background_dark? %>
+    .navbar-inverse .nav > li > a {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    .navbar-inverse .nav > li > a:focus,
+    .navbar-inverse .nav > li > a:hover {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+    <% end %>
+
+    /* bootstrap form_actions div */
+    .form-actions {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+    }
+
+    /* bootstrap media tag overrides */
     div.row div.media {
         padding: 10px;
         text-align: left;
@@ -75,39 +106,6 @@
         text-align: left;
     }
 
-    .navbar-header-top-row {
-        text-align: center;
-    }
-
-    .navbar-header-top-row .pull-left,
-    .navbar-header-top-row .pull-right {
-        padding: 20px;
-    }
-
-    .navbar-header-top-row .pull-left {
-        padding-left: 40px;
-    }
-
-    <% unless @studio.minisite.background_dark? %>
-    .navbar-inverse .nav > li > a {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
-    }
-
-    .navbar-inverse .nav > .active > a,
-    .navbar-inverse .nav > .active > a:hover,
-    .navbar-inverse .nav > .active > a:focus {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
-    }
-
-    .navbar-inverse .nav > li > a:focus,
-    .navbar-inverse .nav > li > a:hover {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
-    }
-
-    <% end %>
 
     div.platypus-form {
         padding: 10px 15px;
