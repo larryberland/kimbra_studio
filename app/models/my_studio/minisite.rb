@@ -54,6 +54,13 @@ class MyStudio::Minisite < ActiveRecord::Base
     font_rgb[2]
   end
 
+  def background_dark?
+    if @background_dark.nil?
+      @background_dark = calc_background_brightness < 130 ? true : false
+    end
+    @background_dark
+  end
+
   # http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
   def calc_background_brightness
     if (@background_brightness.nil?)
@@ -83,13 +90,7 @@ class MyStudio::Minisite < ActiveRecord::Base
 
   def calc_border_color
     if (@border_color.nil?)
-      if (calc_background_brightness < 130)
-        # background is dark use white
-        @border_color = "#ffffff"
-      else
-        # use black
-        @border_color = "#000000"
-      end
+      @border_color = background_dark? ? "#ffffff" : "#000000"
     end
     @border_color
   end

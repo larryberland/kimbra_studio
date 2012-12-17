@@ -387,6 +387,11 @@ module ApplicationHelper
             'count-layout' => 'none'
   end
 
+  def icon_minisite(icon_class)
+    icon_class += " icon-white" if @studio and @studio.background_dark?
+    "<i class='#{icon_class}'></i>".html_safe
+  end
+
   # override of button_to
   #   uses <button> tag instead of <input>
   #   allows an icon_class to show before the name

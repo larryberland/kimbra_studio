@@ -62,6 +62,15 @@ class Studio < ActiveRecord::Base
     search_by_email_or_fname_or_lname_or_key ? by_search(search_by_email_or_fname_or_lname_or_key) : where('id>0').order('updated_at DESC')
   end
 
+  def background_dark?
+    if @background_dark.nil?
+      if (minisite)
+        @background_dark = minisite.background_dark?
+      end
+    end
+    @background_dark
+  end
+
   def sum_purchases
     sum = carts.collect { |c| c.purchase.try(:total_cents).to_i / 100.0 }.sum if carts.present?
     sum ||= 0.0
@@ -104,6 +113,11 @@ class Studio < ActiveRecord::Base
     "\"#{name}\" <#{info.email}>"
   end
 
+  # the studio owner or contact info
+  def owner_email_address_with_name
+    "\"#{name}\" <#{owner.email}>"
+  end
+
   # Use this method to represent the state abbreviation
   #  it is possible the state is nil. in that case the abbreviation will be stored in
   #  the state_name column in the DB
@@ -134,7 +148,7 @@ class Studio < ActiveRecord::Base
     info = [address_1]
     info << address_2
     info << city_state_zip
-    info.compact
+    info.compact - [""]
   end
 
   private #===================================================================

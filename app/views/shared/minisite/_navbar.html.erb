@@ -8,11 +8,17 @@
         <div class='studio-address'>
           <address>
             <strong><%= @studio.name %></strong><br>
-            <%= @studio.address_1 %>
-            <br>
-            <%= @studio.city_state_zip %>
-            <br>
-            <abbr title="Phone">P:</abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
+            <% @studio.address_array.each do |line| %>
+                <%= line %>
+                <br>
+            <% end %>
+            <% if @studio.phone_number %>
+                <abbr title="<%=t(:phone_abbr)%>"><%= icon_minisite("icon-volume-up") %></abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
+                <br>
+            <% end %>
+            <% if @studio.info and @studio.info.email %>
+                <abbr title=""<%=t(:email_abbr)%>""><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
+            <% end %>
           </address>
         </div>
       </div>
@@ -52,13 +58,13 @@
 
             <ul class='nav'>
               <li>
-                <a class="brand" href="#" title="<%=@studio.try(:name)%>"><%= t('.menu_brand') %></a>
+                <a class="brand" href="#" title="<%= @studio.try(:name) %>"><%= t('.menu_brand') %></a>
               </li>
-                <%= li_navbar(:collection) %>
-                <%= li_navbar(:charms)%>
-                <%= li_navbar(:chains)%>
-                <%= li_navbar(:about)%>
-                <%= li_navbar(:shopping_cart) %>
+              <%= li_navbar(:collection) %>
+              <%= li_navbar(:charms) %>
+              <%= li_navbar(:chains) %>
+              <%= li_navbar(:about) %>
+              <%= li_navbar(:shopping_cart) %>
             </ul>
           </div>
       <% end %>

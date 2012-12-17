@@ -44,6 +44,8 @@ en:
   snap: "Oh Snap! "
   cancel: "Cancel"
   img_title_view: "Click to view"
+  phone_abbr: "Phone"
+  email_abbr: "Click to send email"
 
   facebook_share_title: "Send this to friends or post it on your timeline."
   facebook_like_title: "Like this on your timeline."

@@ -1,49 +1,43 @@
 <h2>Contact us</h2>
 
-<table width="500" cellspacing="0" cellpadding="4" border="0" align="center">
-  <tbody>
-  <tr>
-    <td align=center>
-      <div style="text-align:center;width:100%">
-        <p>
-          Would you like to schedule another photography session?
-          Or would you like a different piece of custom photo jewelry prepared?
-          We look forward to chatting with you about it.
-        </p>
+<p>
+  Would you like to schedule another photography session?
+  Or would you like a different piece of custom photo jewelry prepared?
+  We look forward to chatting with you about it.
+</p>
 
-        <p>
-          <%= @studio.name %><br/>
-          <%= @studio.owner.name %> (<%= mail_to @studio.owner.email, nil, {:encode => :javascript} %>)<br/>
-          <%= number_to_phone @studio.phone_number, area_code: true %><br/>
-          <%= @studio.address_1 %><br/>
-          <%= "#{@studio.address_2}<br/>".html_safe if @studio.address_2 %>
-          <%= @studio.city %>, <%= @studio.state.abbreviation %> <%= @studio.zip_code %>
-        </p>
-      </div>
-    </td>
-  </tr>
-  <tr>
-    <td align=center>
-      <div style="text-align:center;width:100%">
-        <p>
-          If you have any questions about your order or any technical questions about the pieces in our offer,
-          please go straight to the people who are hand-making the pieces!
-        </p>
+<p>
+<address>
+  <strong><%= @studio.name %></strong><br>
+  <% @studio.address_array.each do |line| %>
+      <%= line %>
+      <br>
+  <% end %>
+  <% if @studio.phone_number %>
+      <abbr title="<%=t(:phone_abbr)%>"><%= icon_minisite("icon-volume-up") %></abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
+      <br>
+  <% end %>
+  <% if @studio.owner_email_address_with_name.present? %>
+      <abbr title="<%=t(:email_abbr)%>"><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.owner_email_address_with_name, nil, {:encode => :javascript} %>
+  <% end %>
+</address>
 
-        <p>
-          Kimbra's ClickPLUS program for professional photography studios.<br/>
-          Call us direct 9am - 7pm Eastern<br/>
-          (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
-          <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com', encode: :javascript %><br/>
-          <%= link_to 'Kimbra Studios', 'http://KimbraStudios.com' %>
-        </p>
+</p>
 
-        <p>
-          <%= link_to image_tag("http://badge.facebook.com/badge/333860214613.6156.966267155.png", width: '120', height: 195, style: 'border:0px;'),
-                      'http://www.facebook.com/pages/Littleton-CO/Kimbra-Studios-Custom-Photo-Jewelry/333860214613', title: 'Kimbra Studios : Custom Photo Jewelry', target: '_top' %>
-        </p>
-      </div>
-    </td>
-  </tr>
-  </tbody>
-</table>
+<p>
+  If you have any questions about your order or any technical questions about the pieces in our offer,
+  please go straight to the people who are hand-making the pieces!
+</p>
+
+<p>
+  Kimbra's ClickPLUS program for professional photography studios.<br/>
+  Call us direct 9am - 7pm Eastern<br/>
+  (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
+  <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com', encode: :javascript %><br/>
+  <%= link_to 'Kimbra Studios', 'http://KimbraStudios.com' %>
+</p>
+
+<p>
+  <%= link_to image_tag("http://badge.facebook.com/badge/333860214613.6156.966267155.png", width: '120', height: 195, style: 'border:0px;'),
+              'http://www.facebook.com/pages/Littleton-CO/Kimbra-Studios-Custom-Photo-Jewelry/333860214613', title: 'Kimbra Studios : Custom Photo Jewelry', target: '_top' %>
+</p>

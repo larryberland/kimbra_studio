@@ -1,0 +1,8 @@
+<address>
+  <strong><%= @studio.name %></strong><br>
+  <% @studio.address_array.each do |line| %>
+      <%= line %><br>
+  <% end %>
+  <abbr title="Phone">P:</abbr> <%= number_to_phone @studio.phone_number, area_code: true %><br>
+  (<%= mail_to @studio.email_address_with_name, nil, {:encode => :javascript} %>)
+</address>
