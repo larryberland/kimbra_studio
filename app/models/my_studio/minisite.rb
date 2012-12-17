@@ -62,6 +62,7 @@ class MyStudio::Minisite < ActiveRecord::Base
   end
 
   # http://www.nbdtech.com/Blog/archive/2008/04/27/Calculating-the-Perceived-Brightness-of-a-Color.aspx
+  # value less than 130 is considered a dark background
   def calc_background_brightness
     if (@background_brightness.nil?)
       if bgcolor.starts_with?('#')

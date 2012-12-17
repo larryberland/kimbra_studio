@@ -43,7 +43,7 @@
 
     a {
         color: <%= @studio.try(:minisite).try(:font_color) %>;
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %> !important;
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
     }
 
     a.link {
@@ -88,23 +88,23 @@
         padding-left: 40px;
     }
 
-    <% if @studio.minisite.calc_background_brightness >130 %>
+    <% unless @studio.minisite.background_dark? %>
     .navbar-inverse .nav > li > a {
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
-    .navbar-inverse .nav > li > .active > a,
-    .navbar-inverse .nav > li > .active > a:hover,
-    .navbar-inverse .nav > li > .active > a:focus {
-        background-color: <%= @studio.try(:minisite).try(:font_color) %>;
-        color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+    .navbar-inverse .nav > .active > a,
+    .navbar-inverse .nav > .active > a:hover,
+    .navbar-inverse .nav > .active > a:focus {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
     .navbar-inverse .nav > li > a:focus,
     .navbar-inverse .nav > li > a:hover {
-        background-color: <%= @studio.try(:minisite).try(:font_color) %>;
-        color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
     <% end %>

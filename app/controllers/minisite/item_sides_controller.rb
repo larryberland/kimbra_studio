@@ -8,6 +8,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
   layout 'minisite'
 
   def update
+    @navbar_active = :collection
     portrait_attrs                               = params[:admin_customer_item_side].delete(:portrait_attributes)
     @portrait                                    = MyStudio::Portrait.find(portrait_attrs[:id])
     params[:admin_customer_item_side][:portrait] = @portrait
@@ -41,6 +42,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
   end
 
   def edit
+    @navbar_active = :collection
     @storyline.describe 'Editing item side.'
   end
 
