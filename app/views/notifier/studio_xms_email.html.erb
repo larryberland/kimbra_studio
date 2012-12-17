@@ -137,16 +137,7 @@
         color: #e2e2e2;
     }
 
-    .ReadMsgBody {
-        width: 100%;
-    }
-
-    .ExternalClass {
-        width: 100%;
-        display: block !important;
-    }
-
-        /* Force Hotmail to display emails at full width */
+       /* Force Hotmail to display emails at full width */
         /* Reset Styles */
         /* Add 100px so mobile switch bar doesn't cover street address. */
     html, body {
@@ -160,7 +151,7 @@
         line-height: 100%;
         outline: none;
         text-decoration: none;
-        display: block;
+        display: inline;
     }
 
     br, strong br, b br, em br, i br {
@@ -369,6 +360,9 @@
         color: #e2e2e2;
         white-space: normal;
     }
+.padded {
+    padding: 15px;
+}
 </style>
 <!--[if gte mso 9]>
 <style _tmplitem="502">
@@ -504,12 +498,12 @@
                                     :alt => "#{@studio.name} logo",
                                     :class => "w640",
                                     :id => "studio_logo",
-                                    :style => "display:inline",
+                                    :style => "display:inline;",
                                     :border => "0",
                                     :align => "top" -%>
 
                       <p class="price" align="center" style="color: <%= @studio.minisite.font_color -%>; font-size: 15px;">
-                        BEST MARKETING for STUDIOS -- EVER! &#153;
+                        Easiest Holiday Gifts to your Clients, Ever &trade;
                       </p>
                     </div>
                   </td>
@@ -521,97 +515,66 @@
               </table>
             </layout>
 
-            <layout label="Narrow image">
+            <layout>
               <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580">
                 <tbody>
                 <tr>
-                  <td class="w280" valign="top" width="280">
-                    <table class="w280" border="0" cellpadding="0" cellspacing="0"
-                           width="280">
-                      <tbody>
-                      <tr>
-                        <td class="w280" align="right" width="280">
-                          <%= image_tag attachments['sample.jpg'].url,
-                                        :alt => 'sample pieces',
-                                        :class => "w640",
-                                        :id => "sample",
-                                        :style => "display:inline",
-                                        :width => 260,
-                                        :height => 265,
-                                        :border => "0",
-                                        :align => "top" -%>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="w280" height="10" width="280"></td>
-                      </tr>
-                      </tbody>
-                    </table>
-                  </td>
-                  <td width="20"></td>
-                  <td class="w280" valign="middle" width="280">
-                    <table class="w280" border="0" cellpadding="0" cellspacing="0"
-                           width="280">
-                      <tbody>
-                      <tr>
-                        <td class="w280" height="10" width="280"></td>
-                      </tr>
-                      <tr>
-                        <td class="w280" width="280">
-                          <div class="article-content" align="left">
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              FREE! In fact, we pay you!
-                            </p>
+                  <td class="w200" align="left" width="580">
+                    <%= image_tag attachments['ornament.jpg'].url,
+                                  :alt => 'sample pieces',
+                                  :class => "w640 padded",
+                                  :id => "sample",
+                                  :style => "display:inline; padding:15px; float:left;",
+                                  :width => 200,
+                                  :height => 200,
+                                  :border => "0",
+                                  :align => "top" -%>
 
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              Gorgeous heirloom photo jewelry that your clients can post to Pinterest (one click button)
-                            </p>
+                    <p style="color: <%= @studio.minisite.font_color %>;">
+                      Gorgeous heirloom photo holiday ornaments that your clients can post to Pinterest (one click
+                      button) and spread your brand.
+                    </p>
 
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              Facebook share button coming soon!
-                            </p>
+                    <p style="color: <%= @studio.minisite.font_color %>;">
+                      Free! In fact, we pay you! Effortless!
+                    </p>
 
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              Holiday ornaments are now fully integrated. Select "Holiday Ornament" category
-                              for your Session and we'll create a special emailing with just ornaments for your client!
-                              Perfect for clients whose sessions were earlier in the year to remind them about you!
-                            </p>
+                    <p style="color: <%= @studio.minisite.font_color %>;">
+                      Holiday ornaments are now fully integrated. Select "Holiday Ornament" category
+                      for your Session and we'll create a special emailing with just ornaments for your client!
+                      Perfect for clients whose sessions were earlier in the year to remind them about you!
+                    </p>
 
-                            <h3 style="color: <%= @studio.minisite.font_color %>;">
-                              To get started go to
-                              <%= link_to 'KimbraClickPLUS.com', xms_studio_url(@studio), style: "color: #{@studio.minisite.font_color};" %>
-                            </h3>
+                    <p style="color: <%= @studio.minisite.font_color %>; clear:both;">
+                      To get started go to
+                      <%= link_to 'KimbraClickPLUS.com', xms_studio_url(@studio), style: "color: #{@studio.minisite.font_color};" %>
+                    </p>
 
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              <b>Sign-in with your email address: <b><%= @email %></b> and password:
-                                <b><%= @password %></b> (note it is lowercase and not the same as your current login on
-                                Kimbra's site).</b>
-                            </p>
+                    <p style="color: <%= @studio.minisite.font_color %>;">
+                      <b>Sign-in with your email address: <b><%= @email %></b> and password:
+                        <b><%= @password %></b> (note it is lowercase and not the same as your current login on
+                        Kimbra's site).</b>
+                    </p>
 
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              We're here to answer your questions.<br/>
-                              Call: (303) 586-1371<br/>
-                              Skype: KimbraClickPLUS<br/>
-                              Email: <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com' %>
-                            </p>
+                    <p style="color: <%= @studio.minisite.font_color %>;">
+                      We're here to answer your questions.<br/>
+                      Call: (303) 586­&#173;1371<br/>
+                      Skype: KimbraClickPLUS<br/>
+                      Email: <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com' %>
+                    </p>
 
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              (&#153; -- just kidding. But it's that good.)
-                            </p>
+                    <p style="color: <%= @studio.minisite.font_color %>;">
+                      (not really &trade;, but it's that good) Kimbra's PPP participants - don't let this offer
+                      conflict with your own ornament pricing strategy - call, email, or chat with us.
+                    </p>
 
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              Happy Holidays from us here at
-                              <%= link_to 'ClickPLUS', 'https://www.KimbraClickPLUS.com', style: "color: #{@studio.minisite.font_color};" %>
-                              .
-                            </p>
-                          </div>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td class="w280" height="10" width="280"></td>
-                      </tr>
-                      </tbody>
-                    </table>
+                    <p style="color: <%= @studio.minisite.font_color %>;">
+                      Happy Holidays from us here at
+                      <%= link_to 'ClickPLUS', 'https://www.KimbraClickPLUS.com', style: "color: #{@studio.minisite.font_color};" %>
+                      .
+                    </p>
+
+
                   </td>
                 </tr>
                 </tbody>
@@ -651,7 +614,7 @@
             <%= @studio.name -%><br/>
             <%= @studio.address_1 -%><br/>
             <%= @studio.city %>, <%= @studio.state.abbreviation -%><br/>
-            <%= number_to_phone @studio.phone_number, area_code: true -%>
+            <%= number_to_phone @studio.phone_number, area_code: true, delimiter: '-&#173;' -%>
           </p>
 
           <p class="footer-content-left" align="left" style="color: #e2e2e2">
