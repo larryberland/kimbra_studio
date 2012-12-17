@@ -2,7 +2,7 @@ require 'rubygems'
 require 'optparse'
 require 'yaml'
 
-desc "create new post with textmate"
+desc "create new post with rubymine. Usage:rake np my_post_title"
 task :np do
   OptionParser.new.parse!
   ARGV.shift
@@ -14,7 +14,7 @@ task :np do
   	puts "[WARN] File exists - skipping create"
   else
     File.open(path, "w") do |file|
-      file.puts YAML.dump({'layout' => 'default', 'published' => true, 'title' => title, 'comments' => true, 'author' => 'Jim James', 'excerpt' => 'brief excerpt sentences'})
+      file.puts YAML.dump({'layout' => 'post', 'published' => true, 'title' => title, 'comments' => true, 'author' => 'Jim James', 'excerpt' => 'brief excerpt sentences'})
       file.puts "---"
     end
   end
