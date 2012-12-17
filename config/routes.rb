@@ -153,9 +153,11 @@ KimbraStudio::Application.routes.draw do
       put :create_owner
       get :eap
       get :tkg
+      get :xms
       get :new_owner
       post :send_new_account_email
       post :send_tkg_email
+      post :send_xms_email
       get :show_branding
       get :unsubscribe, path: 'unsubscribe/:email'
     end

@@ -10,7 +10,7 @@ class ClientMailer < ActionMailer::Base
     @client = @email.my_studio_session.client
     @studio = @email.my_studio_session.studio
     raise "this email already unsubscribed: #{@client.email}" if Unsubscribe.exists?(email: @client.email)
-    attachments.inline['logo.jpg'] = open(@studio.minisite.image_url).read
+    attachments.inline['studio_logo.jpg'] = open(@studio.minisite.image_url).read
     attachments.inline['offer_image.jpg'] = open(@offer.image_url).read
     mail(to: "#{@client.name} <#{@client.email}>",
          bcc: ['support@kimbraclickplus.com'],
@@ -45,16 +45,8 @@ class ClientMailer < ActionMailer::Base
     @client = @session.client
     @studio = @session.studio
     raise "this email already unsubscribed: #{@client.email}" if Unsubscribe.exists?(email: @client.email)
-    logo = ''
-    open('image.jpg', 'w') do |file|
-      logo << open(@studio.minisite.image_url).read
-    end
-    attachments.inline['logo.png'] = logo
-    sample = ''
-    open('sample.jpg', 'w') do |file|
-      sample << open(File.join(Rails.root, '/app/assets/images/kimbra_sample.jpg')).read
-    end
-    attachments.inline['sample.jpg'] = sample
+    attachments.inline['studio_logo.jpg'] = open(@studio.minisite.image_url).read
+    attachments.inline['sample.jpg'] = open(File.join(Rails.root, '/app/assets/images/kimbra_sample.jpg')).read
     mail(to: "#{@client.name} <#{@client.email}>",
          subject: "Heirloom jewelry from your recent photo shoot with #{@studio.name}",
          bcc: ['support@kimbraclickplus.com'],

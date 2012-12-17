@@ -507,6 +507,10 @@
                                     :style => "display:inline",
                                     :border => "0",
                                     :align => "top" -%>
+
+                      <p class="price" align="center" style="color: <%= @studio.minisite.font_color -%>; font-size: 15px;">
+                        BEST MARKETING for STUDIOS -- EVER! &#153;
+                      </p>
                     </div>
                   </td>
                 </tr>
@@ -517,63 +521,71 @@
               </table>
             </layout>
 
-
-            <layout label="Wide image">
+            <layout label="Narrow image">
               <table class="w580" border="0" cellpadding="0" cellspacing="0" width="580">
                 <tbody>
                 <tr>
-                  <td class="w580" valign="top" width="580">
-                    <table class="w580" border="0" cellpadding="0" cellspacing="0"
-                           width="580">
+                  <td class="w280" valign="top" width="280">
+                    <table class="w280" border="0" cellpadding="0" cellspacing="0"
+                           width="280">
                       <tbody>
                       <tr>
-                        <td class="w580" width="580">
+                        <td class="w280" align="right" width="280">
+                          <%= image_tag attachments['sample.jpg'].url,
+                                        :alt => 'sample pieces',
+                                        :class => "w640",
+                                        :id => "sample",
+                                        :style => "display:inline",
+                                        :width => 260,
+                                        :height => 265,
+                                        :border => "0",
+                                        :align => "top" -%>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="w280" height="10" width="280"></td>
+                      </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                  <td width="20"></td>
+                  <td class="w280" valign="middle" width="280">
+                    <table class="w280" border="0" cellpadding="0" cellspacing="0"
+                           width="280">
+                      <tbody>
+                      <tr>
+                        <td class="w280" height="10" width="280"></td>
+                      </tr>
+                      <tr>
+                        <td class="w280" width="280">
                           <div class="article-content" align="left">
-
-
-
-
-
-                            <h2 style="color: <%= @studio.minisite.font_color %>;">Welcome <%= @name %>!</h2>
-
-                            <h3 style="color: <%= @studio.minisite.font_color %>;">EARLY ADOPTER PROGRAM</h3>
-
                             <p style="color: <%= @studio.minisite.font_color %>;">
-                              <%= link_to 'Kimbra', 'http://KimbraStudios.com', style: "color: #{@studio.minisite.font_color};" %>
-                              introduces her ClickPLUS program for professional photography studios. You are a candidate for the
-                              program because you are a registered partner in Kimbra's Professional Photographer Program (PPP).
-                             </p>
-
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              Kimbra's ClickPLUS program helps you:
-                            <ul style="color: <%= @studio.minisite.font_color %>;">
-                              <li style="color: <%= @studio.minisite.font_color %>;">E<small>STABLISH</small> a whole new <small>MARKETING PROGRAM</small> with your clients and their most influential friends and family</li>
-                              <li style="color: <%= @studio.minisite.font_color %>;">G<small>ENERATE</small> reliable <small>COMMISSIONS</small> with gorgeous products that you already trust and consumers love</li>
-                              <li style="color: <%= @studio.minisite.font_color %>;">O<small>FFER</small> your photos in <small>HEIRLOOM JEWELRY</small> pieces that your clients show off to their friends and family
-                              <li style="color: <%= @studio.minisite.font_color %>;">B<small>UILD</small> your studio's <small>IMAGE</small> and artistic <small>REPUTATION</small> by word of mouth</li>
-                            </ul>
-                            <span style="color: <%= @studio.minisite.font_color %>;">all with little effort from you. You can see from this email we have incorporated your branding into all aspects of your clients' experience with the offers.
-                            It costs you NOTHING to join or participate.</span>
+                              FREE! In fact, we pay you!
                             </p>
 
                             <p style="color: <%= @studio.minisite.font_color %>;">
-                              Create a <small>PHOTO SESSION</small> by uploading 6 portraits and entering your client's name and email. That's all you have to do!
-                              We'll review your portraits and create a gorgeous personalized offer for your client and send it to them within a day. We take care of
-                              everything for you. A couple weeks after your clients purchase an offer, we send you a commission check for 10% of the
-                              total (excluding shipping and tax) as soon as it exceeds $100 on the first of the month.
+                              Gorgeous heirloom photo jewelry that your clients can post to Pinterest (one click button)
+                            </p>
+
+                            <p style="color: <%= @studio.minisite.font_color %>;">
+                              Facebook share button coming soon!
+                            </p>
+
+                            <p style="color: <%= @studio.minisite.font_color %>;">
+                              Holiday ornaments are now fully integrated. Select "Holiday Ornament" category
+                              for your Session and we'll create a special emailing with just ornaments for your client!
+                              Perfect for clients whose sessions were earlier in the year to remind them about you!
                             </p>
 
                             <h3 style="color: <%= @studio.minisite.font_color %>;">
-                              To Get Started Go To <%= link_to 'KimbraClickPLUS.com', eap_studio_url(@studio), style: "color: #{@studio.minisite.font_color};" %>
+                              To get started go to
+                              <%= link_to 'KimbraClickPLUS.com', xms_studio_url(@studio), style: "color: #{@studio.minisite.font_color};" %>
                             </h3>
 
                             <p style="color: <%= @studio.minisite.font_color %>;">
-                              <b>Sign-in with your email address: <b><%= @email %></b> and password: <b><%= @password %></b> (note it is lowercase and not the same as your current login on Kimbra's site).</b>
-                            </p>
-
-                            <p style="color: <%= @studio.minisite.font_color %>;">
-                              Watch the excitement grow as your clients forward the offer email with your beautiful portraits to their friends and post on Facebook and Twitter,
-                              your clients' friends will want to engage you for their own photographic events.
+                              <b>Sign-in with your email address: <b><%= @email %></b> and password:
+                                <b><%= @password %></b> (note it is lowercase and not the same as your current login on
+                                Kimbra's site).</b>
                             </p>
 
                             <p style="color: <%= @studio.minisite.font_color %>;">
@@ -584,29 +596,19 @@
                             </p>
 
                             <p style="color: <%= @studio.minisite.font_color %>;">
-                              powered by<br/>
-                              <%= link_to image_tag(attachments['kimbra_logo.jpg'].url,
-                                                    alt: "Kimbra's logo",
-                                                    style: "display:inline",
-                                                    border: "0",
-                                                    align: "top"),
-                                          'http://KimbraStudios.com',
-                                          style: "color: #{@studio.minisite.font_color};"  -%>
+                              (&#153; -- just kidding. But it's that good.)
                             </p>
 
-
-
-
-
-
-
-
-
+                            <p style="color: <%= @studio.minisite.font_color %>;">
+                              Happy Holidays from us here at
+                              <%= link_to 'ClickPLUS', 'https://www.KimbraClickPLUS.com', style: "color: #{@studio.minisite.font_color};" %>
+                              .
+                            </p>
                           </div>
                         </td>
                       </tr>
                       <tr>
-                        <td class="w580" height="10" width="580"></td>
+                        <td class="w280" height="10" width="280"></td>
                       </tr>
                       </tbody>
                     </table>
@@ -615,7 +617,6 @@
                 </tbody>
               </table>
             </layout>
-
 
 
           </repeater>

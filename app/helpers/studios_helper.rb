@@ -15,18 +15,32 @@ module StudiosHelper
   end
 
   def tkg_link(studio)
-      if studio.owner
-        if SentEmail.sent_studio_tkg_email?(studio.owner.email)
-          'sent TKG'
-        elsif  Unsubscribe.exists?(email: studio.owner.email)
-          'opted out'
-        elsif studio.logoize
-          content_tag :span, {id: "send_tkg_email_#{studio.id}"} do
-            link_to 'send TKG email', send_tkg_email_studio_path(studio), method: :post, remote: true
-          end
+    if studio.owner
+      if SentEmail.sent_studio_tkg_email?(studio.owner.email)
+        'sent TKG'
+      elsif  Unsubscribe.exists?(email: studio.owner.email)
+        'opted out'
+      elsif studio.logoize
+        content_tag :span, {id: "send_tkg_email_#{studio.id}"} do
+          link_to 'send TKG email', send_tkg_email_studio_path(studio), method: :post, remote: true
         end
       end
     end
+  end
+
+  def xms_link(studio)
+    if studio.owner
+      if SentEmail.sent_studio_xms_email?(studio.owner.email)
+        'sent XMS'
+      elsif  Unsubscribe.exists?(email: studio.owner.email)
+        'opted out'
+      elsif studio.logoize
+        content_tag :span, {id: "send_xms_email_#{studio.id}"} do
+          link_to 'send XMS email', send_xms_email_studio_path(studio), method: :post, remote: true
+        end
+      end
+    end
+  end
 
   def studio_email_link(studio)
     if studio.info

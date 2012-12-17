@@ -156,15 +156,26 @@ class StudiosController < ApplicationController
   end
 
   # Ajax action that sends email and returns text.
-    def send_tkg_email
-      studio = Studio.find(params[:id])
-      Notifier.delay.studio_tkg_email(studio.id)
-      respond_to do |format|
-        format.js do
-          render text: "$('#send_tkg_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"
-        end
+  def send_tkg_email
+    studio = Studio.find(params[:id])
+    Notifier.delay.studio_tkg_email(studio.id)
+    respond_to do |format|
+      format.js do
+        render text: "$('#send_tkg_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"
       end
     end
+  end
+
+  # Ajax action that sends email and returns text.
+  def send_xms_email
+    studio = Studio.find(params[:id])
+    Notifier.studio_xms_email(studio.id).deliver
+    respond_to do |format|
+      format.js do
+        render text: "$('#send_xms_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"
+      end
+    end
+  end
 
   # DELETE /studios/1
           # DELETE /studios/1.json
@@ -207,10 +218,16 @@ class StudiosController < ApplicationController
   end
 
   def tkg
-      studio = Studio.find(params[:id])
-      studio.update_attribute(:tkg_click, Time.now) if studio
-      redirect_to root_path
-    end
+    studio = Studio.find(params[:id])
+    studio.update_attribute(:tkg_click, Time.now) if studio
+    redirect_to root_path
+  end
+
+  def xms
+    studio = Studio.find(params[:id])
+    studio.update_attribute(:xms_click, Time.now) if studio
+    redirect_to root_path
+  end
 
   private #==========================================================================
 

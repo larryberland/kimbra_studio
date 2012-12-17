@@ -15,7 +15,11 @@ class SentEmail < ActiveRecord::Base
   end
 
   def self.sent_studio_tkg_email?(email)
-      SentEmail.where(email: email).collect(&:subject).select{|s| s.match /TKG/ }.present?
-    end
+    SentEmail.where(email: email).collect(&:subject).select { |s| s.match /TKG/ }.present?
+  end
+
+  def self.sent_studio_xms_email?(email)
+    SentEmail.where(email: email).collect(&:subject).select { |s| s.match /XMS/ }.present?
+  end
 
 end

@@ -17,16 +17,8 @@ class Notifier < ActionMailer::Base
     @name = @studio.owner.name
     @email = @studio.owner.email
     raise "this email already unsubscribed: #{@email}" if Unsubscribe.exists?(email: @email)
-    studio_logo = ''
-    open('studio_logo.jpg', 'w') do |file|
-      studio_logo << open(@studio.minisite.image_url).read
-    end
-    attachments.inline['logo.png'] = studio_logo
-    kimbra_logo = ''
-    open('kimbra_logo.png', 'w') do |file|
-      kimbra_logo << open(File.join(Rails.root, '/app/assets/images/kimbra_logo.png')).read
-    end
-    attachments.inline['kimbra_logo.png'] = kimbra_logo
+    attachments.inline['studio_logo.jpg'] = open(@studio.minisite.image_url).read
+    attachments.inline['kimbra_logo.jpg'] = open(File.join(Rails.root, '/app/assets/images/kimbra_logo.png')).read
     mail(to: @email,
          subject: "New KimbraClickPLUS program - welcome to #{@studio.name} (EAP)",
          bcc: 'support@KimbraClickPLUS.com')
@@ -46,18 +38,23 @@ class Notifier < ActionMailer::Base
     @name = @studio.owner.name
     @email = @studio.owner.email
     raise "this email already unsubscribed: #{@email}" if Unsubscribe.exists?(email: @email)
-    studio_logo = ''
-    open('studio_logo.jpg', 'w') do |file|
-      studio_logo << open(@studio.minisite.image_url).read
-    end
-    attachments.inline['logo.png'] = studio_logo
-    kimbra_logo = ''
-    open('kimbra_logo.png', 'w') do |file|
-      kimbra_logo << open(File.join(Rails.root, '/app/assets/images/kimbra_logo.png')).read
-    end
-    attachments.inline['kimbra_logo.png'] = kimbra_logo
+    attachments.inline['studio_logo.jpg'] = open(@studio.minisite.image_url).read
+    attachments.inline['kimbra_logo.jpg'] = open(File.join(Rails.root, '/app/assets/images/kimbra_logo.png')).read
     mail(to: @email,
          subject: "New KimbraClickPLUS program - Thanksgiving (TKG)",
+         bcc: 'support@KimbraClickPLUS.com')
+  end
+
+  def studio_xms_email(studio_id)
+    @studio = Studio.find(studio_id)
+    @password = @studio.owner.first_pass
+    @name = @studio.owner.name
+    @email = @studio.owner.email
+    raise "this email already unsubscribed: #{@email}" if Unsubscribe.exists?(email: @email)
+    attachments.inline['studio_logo.jpg'] = open(@studio.minisite.image_url).read
+    attachments.inline['sample.jpg'] = open(File.join(Rails.root, '/app/assets/images/kimbra_sample.jpg')).read
+    mail(to: @email,
+         subject: "New Pinterest button for your clients (XMS)",
          bcc: 'support@KimbraClickPLUS.com')
   end
 
