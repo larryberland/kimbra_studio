@@ -169,7 +169,7 @@ class StudiosController < ApplicationController
   # Ajax action that sends email and returns text.
   def send_xms_email
     studio = Studio.find(params[:id])
-    Notifier.studio_xms_email(studio.id).deliver
+    Notifier.delay.studio_xms_email(studio.id)
     respond_to do |format|
       format.js do
         render text: "$('#send_xms_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"
