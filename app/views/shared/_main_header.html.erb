@@ -23,10 +23,9 @@
             <li><%= link_to "Log out", destroy_user_session_path, method: :delete %>
             </li>
             <%= coffee_script_tag do %>
-                # BEWARE FORMATTING! ALL 3 OF THE LINE SBELOW MUST BE SUCCESSIVELY INDENTED!
-                $ ->
-                    olark('api.chat.updateVisitorNickname',
-                        snippet:'<%= current_user.name %>, <%= current_user.studio.try(:name) %>')
+                window.currentUserName = '<%= current_user.name %>'
+                window.currentUserStudio = '<%= current_user.studio.try(:name) %>'
+                setOlarkUser()
             <% end if Rails.env.production? %>
         <% else %>
             <li><%= link_to translate(:sign_in), new_user_session_path %></li>

@@ -34,3 +34,7 @@ $ ->
   clientSideValidations.callbacks.form.fail = (element, message, callback) ->
     callback()
     $('#spinner').hide()
+
+setOlarkUser ->
+  olark('api.chat.updateVisitorNickname',
+    snippet: "#{window.currentUserName}, #{window.currentUserStudio}")
