@@ -20,10 +20,12 @@
             <li><%= link_to "Edit account", edit_user_registration_path %></li>
             <li><%= link_to "Log out", destroy_user_session_path, method: :delete %>
             </li>
-            <%= coffee_script_tag do %>
+            <%= javascript_tag do %>
                 window.currentUserName = '<%= current_user.name %>'
                 window.currentUserStudio = '<%= current_user.studio.try(:name) %>'
-                setOlarkUser()
+                $(document).ready(function() {
+                    setOlarkUser();
+                });
             <% end if user_signed_in? && Rails.env.production? %>
         <% else %>
             <li><%= link_to translate(:sign_in), new_user_session_path %></li>
