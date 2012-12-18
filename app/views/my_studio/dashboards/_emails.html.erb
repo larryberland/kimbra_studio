@@ -37,11 +37,11 @@
                   <td><%= link_to session.name, my_studio_session_path(session) %></td>
                   <td><%= session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %></td>
                   <td><%= email.try(:offers).try(:count).to_words %></td>
-                  <td><%= email.sent_at ? "#{time_ago_in_words email.sent_at} ago" : 'not yet' %></td>
-                  <td><%= email.opened_at ? "#{time_ago_in_words email.opened_at} ago" : 'not yet' %></td>
-                  <td><%= email.visited_at ? "#{time_ago_in_words email.visited_at} ago" : 'not yet' %></td>
+                  <td><%= email.sent_at ? "#{time_ago_in_words email.sent_at} ago" : '' %></td>
+                  <td><%= email.opened_at ? "#{time_ago_in_words email.opened_at} ago" : '' %></td>
+                  <td><%= email.visited_at ? "#{time_ago_in_words email.visited_at} ago" : '' %></td>
                   <td><%= email.offers.select { |o| o.purchased_at.present? }.count.to_words %></td>
-                  <td><%= date = email.carts.collect { |c| c.shipping.try(:updated_at) if c.shipping }.compact.max ? "#{time_ago_in_words(date)} days ago" : 'not yet' %></td>
+                  <td><%= most_recent_shipment_for(email) %></td>
                 </tr>
             <% end %>
         <% end %>
