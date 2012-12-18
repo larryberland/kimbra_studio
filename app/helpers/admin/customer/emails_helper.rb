@@ -4,9 +4,9 @@ module Admin::Customer::EmailsHelper
     if admin_customer_email.in_send_offers_queue?
       'in queue'
     elsif admin_customer_email.sent_at?
-      time_short_index(admin_customer_email.sent_at)
+      admin_customer_email.sent_at.to_s
     else
-      'not sent'
+      ''
     end
   end
 

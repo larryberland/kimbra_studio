@@ -4,7 +4,7 @@
 
 <div class='panel-container'>
   <% if emails.present? %>
-      <table class="table">
+      <table class="table" id='ready_emails_table'>
         <thead>
         <tr>
           <% if is_admin? %>
@@ -17,6 +17,7 @@
           <% end %>
           <th>client</th>
           <th>how many<br/>offers</th>
+          <th>Created</th>
         </tr>
         </thead>
         <tbody>
@@ -35,6 +36,7 @@
 
               <td><%= email.my_studio_session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
               <td><%= email.try(:offers).try(:count).to_words %></td>
+              <td><%= date_short email.created_at %></td>
             </tr>
         <% end %>
         </tbody>
@@ -43,3 +45,11 @@
       <p>None</p>
   <% end %>
 </div>
+
+<%= javascript_tag do %>
+    $(document).ready(function(){
+        $('#ready_emails_table').dataTable( {
+            "aaSorting": [[ <%= is_admin? ? 6 : 4 %>, "desc" ]]
+         } );
+    });
+<% end %>

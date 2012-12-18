@@ -8,11 +8,13 @@
   <% elsif sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
       <h4>&#x2718; No emails this past week - no portraits uploaded?</h4>
   <% else %>
-      <table class="table">
+      <table class="table" id='offer_emails_table'>
         <thead>
         <tr>
+          <% sent_column = 3 %>
           <% if current_user.admin? %>
               <th>studio</th>
+              <% sent_column = 4 %>
           <% end %>
           <th>photo session</th>
           <th>client</th>
@@ -49,3 +51,11 @@
 
 </div>
 </div>
+
+<%= javascript_tag do %>
+    $(document).ready(function(){
+        $('#offer_emails_table').dataTable( {
+            "aaSorting": [[ <%= sent_column %>, "desc" ]]
+         } );
+    });
+<% end %>

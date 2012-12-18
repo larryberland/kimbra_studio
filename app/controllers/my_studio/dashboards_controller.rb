@@ -7,7 +7,7 @@ class MyStudio::DashboardsController < MyStudio::BaseController
   def show
     # redirect in sessions controller is passing in the my_studio_id for admin
     @my_studio ||= Studio.find(params[:my_studio_id]) if params[:my_studio_id]
-    @sessions          = @my_studio.sessions.recent
+    @sessions          = @my_studio.sessions
     @sum_purchases     = @my_studio.sum_purchases
     @commission_rate   = @my_studio.info.commission_rate.to_i
     @total_commissions = @my_studio.total_commission

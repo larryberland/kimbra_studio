@@ -2,14 +2,9 @@
 
   <h2>
     <%= t('.title') %>
-    <small>result set count: <%= number_to_human @record_count %></small>
   </h2>
 
-  <div class="paginate">
-    <%= paginate @admin_customer_emails %>
-  </div>
-
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered" id='emails_table'>
     <thead>
     <tr>
       <th colspan="<%= is_admin? ? 4 : 1 %>">Actions</th>
@@ -37,7 +32,7 @@
           <% end %>
           <td><%= admin_customer_email.my_studio_session.studio.name %></td>
           <td><%= admin_customer_email.my_studio_session.client.name %></td>
-          <td><%= time_short_index(admin_customer_email.generated_at) %></td>
+          <td><%= admin_customer_email.generated_at.to_s %></td>
           <td><%= sent_or_queue(admin_customer_email) %></td>
           <td><%= admin_customer_email.active %></td>
         </tr>
@@ -45,7 +40,12 @@
     </tbody>
   </table>
 
-  <div class="paginate">
-    <%= paginate @admin_customer_emails %>
-  </div>
 </div>
+
+<%= javascript_tag do %>
+    $(document).ready(function(){
+        $('#emails_table').dataTable( {
+            "aaSorting": [[ 6, "desc" ]]
+         } );
+    });
+<% end %>

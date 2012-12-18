@@ -8,7 +8,7 @@ module StudiosHelper
         'opted out'
       elsif studio.logoize
         content_tag :span, {id: "send_new_account_email_#{studio.id}"} do
-          link_to 'send EAP email', send_new_account_email_studio_path(studio), method: :post, remote: true
+          link_to 'send EAP', send_new_account_email_studio_path(studio), method: :post, remote: true
         end
       end
     end
@@ -22,7 +22,7 @@ module StudiosHelper
         'opted out'
       elsif studio.logoize
         content_tag :span, {id: "send_tkg_email_#{studio.id}"} do
-          link_to 'send TKG email', send_tkg_email_studio_path(studio), method: :post, remote: true
+          link_to 'send TKG', send_tkg_email_studio_path(studio), method: :post, remote: true
         end
       end
     end
@@ -36,7 +36,7 @@ module StudiosHelper
         'opted out'
       elsif studio.logoize
         content_tag :span, {id: "send_xms_email_#{studio.id}"} do
-          link_to 'send XMS email', send_xms_email_studio_path(studio), method: :post, remote: true
+          link_to 'send XMS', send_xms_email_studio_path(studio), method: :post, remote: true
         end
       end
     end

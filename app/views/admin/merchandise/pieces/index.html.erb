@@ -2,37 +2,20 @@
 
   <h2>
     <%= t(:admin_merchandise_pieces_index_title) %>
-    <small>Result Set Count:<%= @record_count %></small>
   </h2>
 
   <div class="row">
-    <div class="span6">
-      <%= form_tag admin_merchandise_pieces_path, method: :get, class: "form-search" do %>
-          <div class="input-append">
-            <%= text_field_tag(:search, session[:search_pieces], class: "span4 search-query", placeholder: "By Name or Category") %>
-            <%= submit_tag "Search", name: nil, class: "btn" %>
-          </div>
-      <% end %>
-
-    </div>
-
-    <div class="span3">
+    <div class="span3 pull-right">
       <%= form_tag new_admin_merchandise_piece_path, method: :get do %>
           <button type="submit" class="btn btn-success">
             <i class="icon-plus icon-white"></i>
             <%= t(:admin_merchandise_pieces_new_link) %>...
           </button>
       <% end %>
-
     </div>
-
   </div>
 
-  <div class="paginate">
-    <%= paginate @admin_merchandise_pieces %>
-  </div>
-
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered" id='pieces_table'>
     <thead>
     <tr>
       <th>Actions</th>
@@ -75,8 +58,13 @@
     <% end %>
     </tbody>
   </table>
-  <div class="paginate">
-    <%= paginate @admin_merchandise_pieces %>
-  </div>
-  <!-- row span12 -->
+
 </div>
+
+<%= javascript_tag do %>
+    $(document).ready(function(){
+        $('#pieces_table').dataTable( {
+            "aaSorting": [[ 3, "asc" ]]
+         } );
+    });
+<% end %>

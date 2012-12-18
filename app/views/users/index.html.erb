@@ -2,36 +2,20 @@
 
   <h2>
     <%= t('.title') %>
-    <small>result set count:<%= @record_count %></small>
   </h2>
 
   <div class="row">
-
-    <div class="span6">
-      <%= form_tag users_path, method: :get, class: 'form-search' do %>
-          <div class="input-append">
-            <%= text_field_tag(:search, session[:search_users], class: "span4 search-query", placeholder: "By Name or Email or Studio Name") %>
-            <%= submit_tag "Search", name: nil, class: "btn" %>
-          </div>
-      <% end %>
-    </div>
-
-    <div class="span3">
+    <div class="span3 pull-right">
       <%= form_tag new_user_path, method: :get do %>
           <button type="submit" class="btn btn-success">
             <i class="icon-plus icon-white"></i>
             <%= t('.new') %>...
           </button>
       <% end %>
-
     </div>
   </div>
 
-  <div class="paginate">
-    <%= paginate @users %>
-  </div>
-
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered" id='users_table'>
     <thead>
     <tr>
       <th>Actions</th>
@@ -64,8 +48,12 @@
     </tbody>
   </table>
 
-  <div class="paginate">
-    <%= paginate @users %>
-  </div>
 </div>
 
+<%= javascript_tag do %>
+    $(document).ready(function(){
+        $('#users_table').dataTable( {
+            "aaSorting": [[ 2, "asc" ]]
+        } );
+    });
+<% end %>

@@ -7,19 +7,19 @@ class StudiosController < ApplicationController
   # GET /studios
   # GET /studios.json
   def index
-    set                = if params[:search_logoize].blank?
-                           if session[:search_logoize].blank?
-                             Studio.search(params[:search])
-                           else
-                             Studio.search_logoize(session[:search_logoize])
-                           end
-                         elsif params[:search_logoize] == 'any'
-                           session[:search_logoize] = 'any'
-                           Studio.search(params[:search])
-                         else
-                           session[:search_logoize] = params[:search_logoize]
-                           Studio.search_logoize(params[:search_logoize])
-                         end
+    set = if params[:search_logoize].blank?
+            if session[:search_logoize].blank?
+              Studio.search(params[:search])
+            else
+              Studio.search_logoize(session[:search_logoize])
+            end
+          elsif params[:search_logoize] == 'any'
+            session[:search_logoize] = 'any'
+            Studio.search(params[:search])
+          else
+            session[:search_logoize] = params[:search_logoize]
+            Studio.search_logoize(params[:search_logoize])
+          end
     @logo_search_value = params[:search_logoize] || session[:search_logoize]
     @record_count      = set.count
     @studios           = set.page(params[:page])

@@ -3,7 +3,7 @@ class Admin::OverviewsController < ApplicationController
   # GET /admin/overview
   # GET /admin/overview.json
   def show
-    @sessions = MyStudio::Session.recent
+    @sessions = MyStudio::Session.all
     @emails = Admin::Customer::Email.unsent
     @studio_users = User.with_studio_role
     respond_to do |format|

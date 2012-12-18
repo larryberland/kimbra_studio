@@ -1,19 +1,22 @@
 <div class="panel-container">
-  <table class="table table-striped table-bordered">
+  <table class="table table-striped table-bordered" id='sessions_table'>
     <thead>
     <tr>
+      <% created_column_index =  4 %>
       <% if is_admin? %>
+          <% created_column_index =  8 %>
           <th><span class='explainer' title='Need at least 2 portraits to generate an email.'>Actions</span></th>
           <th>New Portrait?</th>
           <th>Complete?</th>
       <% end %>
-      <th>Step 1. Photo Session</th>
-      <th>Step 2. Portraits <i class="icon-camera"> </i></th>
+      <th>Step 1.<br/>Photo Session</th>
+      <th>Step 2.<br/>Portraits <i class="icon-camera"> </i></th>
       <th>Offer Email <i class="icon-envelope"> </i></th>
       <% if is_admin? %>
           <th>Studio</th>
       <% end %>
       <th>Session Date</th>
+      <th>Created</th>
     </tr>
     </thead>
     <tbody>
@@ -40,6 +43,7 @@
               <td><%= link_to session.try(:studio).try(:name), studio_path(session.studio), title: t(:studios_show_link) %></td>
           <% end %>
           <td><%= date_short session.session_at %></td>
+          <td><%= date_short session.created_at %></td>
         </tr>
     <% end %>
 
@@ -59,9 +63,18 @@
           <td></td>
           <td></td>
           <td></td>
+          <td></td>
         </tr>
     <% end %>
 
     </tbody>
   </table>
 </div>
+
+<%= javascript_tag do %>
+    $(document).ready(function(){
+        $('#sessions_table').dataTable( {
+            "aaSorting": [[ <%= created_column_index %>, "desc" ]]
+         } );
+    });
+<% end %>
