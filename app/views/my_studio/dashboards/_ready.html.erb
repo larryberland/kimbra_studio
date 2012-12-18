@@ -48,8 +48,6 @@
 
 <%= javascript_tag do %>
     $(document).ready(function(){
-        $('#ready_emails_table').dataTable( {
-            "aaSorting": [[ <%= is_admin? ? 6 : 4 %>, "desc" ]]
-         } );
+    setUpDataTable($('#ready_emails_table'), <%= is_admin? ? 6 : 4 %>);
     });
 <% end %>

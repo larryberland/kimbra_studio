@@ -5,7 +5,7 @@
   </h2>
 
   <div class="row">
-    <div class="span3 pull-right">
+    <div class="span3 dataTables_filter">
       <%= form_tag new_user_path, method: :get do %>
           <button type="submit" class="btn btn-success">
             <i class="icon-plus icon-white"></i>
@@ -52,8 +52,6 @@
 
 <%= javascript_tag do %>
     $(document).ready(function(){
-        $('#users_table').dataTable( {
-            "aaSorting": [[ 2, "asc" ]]
-        } );
+    setUpDataTable($('#users_table'), 2, 'asc');
     });
 <% end %>

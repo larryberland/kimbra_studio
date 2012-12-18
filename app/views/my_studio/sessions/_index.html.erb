@@ -57,7 +57,7 @@
               <td></td>
               <td>Placeholder row</td>
           <% else %>
-              <td><%= render 'new_session_button' %></td>
+              <td><%= render 'my_studio/sessions/new_session_button' %></td>
           <% end %>
 
           <td></td>
@@ -73,8 +73,6 @@
 
 <%= javascript_tag do %>
     $(document).ready(function(){
-        $('#sessions_table').dataTable( {
-            "aaSorting": [[ <%= created_column_index %>, "desc" ]]
-         } );
+    setUpDataTable($('#sessions_table'), <%= created_column_index %>);
     });
 <% end %>

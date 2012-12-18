@@ -54,8 +54,6 @@
 
 <%= javascript_tag do %>
     $(document).ready(function(){
-        $('#offer_emails_table').dataTable( {
-            "aaSorting": [[ <%= sent_column %>, "desc" ]]
-         } );
+    setUpDataTable($('#offer_emails_table'), <%= sent_column %>);
     });
 <% end %>

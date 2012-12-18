@@ -30,3 +30,43 @@ div.info{
   position: fixed;
   top: 50px;
 }
+
+// DataTables extras
+div.dataTables_length label {
+  float: left;
+  text-align: left;
+}
+
+div.dataTables_length select {
+  width: 75px;
+}
+
+div.dataTables_filter label {
+  float: right;
+}
+
+div.dataTables_info {
+  padding-top: 8px;
+}
+
+div.dataTables_paginate {
+  float: right;
+  margin: 0;
+}
+
+table {
+  margin-bottom: 6px !important;
+  clear: both;
+}
+table.table thead .sorting,
+table.table thead .sorting_asc,
+table.table thead .sorting_desc,
+table.table thead .sorting_asc_disabled,
+table.table thead .sorting_desc_disabled {
+  cursor: pointer;
+  *cursor: hand;
+}
+
+.sorting { background: url('/images/sort_both.png') no-repeat center right; }
+.headerSortUp { background: url('/images/sort_asc.png') no-repeat center right; }
+.headerSortDown { background: url('/images/sort_desc.png') no-repeat center right; }

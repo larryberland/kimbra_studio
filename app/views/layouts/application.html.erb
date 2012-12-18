@@ -3,13 +3,15 @@
 <head>
   <title>KimbraClickPLUS loves photographers!</title>
   <meta name='description' content="Kimbra Studio's photo jewelry platform for photography studios. You upload choice portraits and we take care of the rest.">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
   <meta http-equiv='content-type' content='text/html;charset=UTF-8'>
+  <link rel='icon' type='image/png' href='/favicon.png'>
   <%= stylesheet_link_tag 'application' %>
   <%= stylesheet_link_tag 'bootstrap' %>
   <%= javascript_include_tag 'application' %>
-  <link rel="stylesheet" type="text/css" href="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css">
-  <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js"></script>
+  <link rel='stylesheet' type='text/css' href='http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css'>
+  <script type='text/javascript' charset='utf8' src='http://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js'></script>
+  <%= javascript_include_tag 'dataTablePagination' %>
   <%= render 'shared/firefly' if Rails.env.production? %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
