@@ -483,7 +483,7 @@ module ApplicationHelper
     if email.carts.present?
       date = email.carts.collect{ |c| c.try(:shipping).try(:updated_at)}.compact.max
       if !!date
-        "#{time_ago_in_words(date)} days ago"
+        "#{time_ago_in_words(date)} ago"
       else
         ''
       end
