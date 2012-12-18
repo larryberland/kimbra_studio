@@ -479,17 +479,4 @@ module ApplicationHelper
     "#{tag(:form, form_options, true)}<div>#{method_tag}#{button}#{request_token_tag}</div></form>".html_safe
   end
 
-  def most_recent_shipment_for(email)
-    if email.carts.present?
-      date = email.carts.collect{ |c| c.try(:shipping).try(:updated_at)}.compact.max
-      if !!date
-        "#{time_ago_in_words(date)} ago"
-      else
-        ''
-      end
-    else
-      ''
-    end
-  end
-
 end

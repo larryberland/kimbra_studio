@@ -41,7 +41,7 @@
                   <td><%= email.opened_at ? "#{time_ago_in_words email.opened_at} ago" : '' %></td>
                   <td><%= email.visited_at ? "#{time_ago_in_words email.visited_at} ago" : '' %></td>
                   <td><%= email.offers.select { |o| o.purchased_at.present? }.count.to_words %></td>
-                  <td><%= most_recent_shipment_for(email) %></td>
+                  <td><%= email.most_recent_shipment_at.nil? ? '' : "#{time_ago_in_words(email.most_recent_shipment_at)} ago" %></td>
                 </tr>
             <% end %>
         <% end %>

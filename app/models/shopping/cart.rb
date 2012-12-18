@@ -63,6 +63,10 @@ class Shopping::Cart < ActiveRecord::Base
     (taxable_sub_total * email.my_studio_session.studio.info.commission_rate.to_i).round(2)
   end
 
+  def shipment_at
+    shipping ? shipping.updated_at : nil
+  end
+
   private #========================================================================
 
   def set_tracking

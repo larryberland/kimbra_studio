@@ -152,6 +152,10 @@ class Admin::Customer::Email < ActiveRecord::Base
     return shopping_cart_list, clickplus_list
   end
 
+  def most_recent_shipment_at
+    @most_recent_shipment_at ||= carts.collect(&:shipment_at).compact.max
+  end
+
   private #================================================
 
   def set_message
