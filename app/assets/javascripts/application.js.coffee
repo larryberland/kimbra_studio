@@ -35,6 +35,6 @@ $ ->
     callback()
     $('#spinner').hide()
 
-setOlarkUser ->
+window.setOlarkUser = ->
   olark('api.chat.updateVisitorNickname',
     snippet: "#{window.currentUserName}, #{window.currentUserStudio}")
