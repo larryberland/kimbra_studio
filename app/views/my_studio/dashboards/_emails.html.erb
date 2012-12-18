@@ -41,7 +41,7 @@
                   <td><%= email.opened_at ? "#{time_ago_in_words email.opened_at} ago" : 'not yet' %></td>
                   <td><%= email.visited_at ? "#{time_ago_in_words email.visited_at} ago" : 'not yet' %></td>
                   <td><%= email.offers.select { |o| o.purchased_at.present? }.count.to_words %></td>
-                  <td><%= email.carts.collect { |c| c.shipping.updated_at if c.shipping.try(:tracking) }.compact.max ? "#{time_ago_in_words(date)} days ago" : 'not yet' %></td>
+                  <td><%= date = email.carts.collect { |c| c.shipping.updated_at if c.shipping.try(:tracking) }.compact.max ? "#{time_ago_in_words(date)} days ago" : 'not yet' %></td>
                 </tr>
             <% end %>
         <% end %>
