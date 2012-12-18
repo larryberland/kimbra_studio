@@ -4,13 +4,14 @@ class ApplicationController < ActionController::Base
   before_filter :log_session
   before_filter :authenticate_user!
   before_filter :load_my_studio
+  before_filter :navbar_active
 
   layout 'application'
 
   # override devise url reference
-  #  based on user's current roles
+          #  based on user's current roles
   def after_sign_in_path_for(resource)
-    u = stored_location_for(resource)
+    u  = stored_location_for(resource)
     u2 = signed_in_root_path(resource)
     puts "u=>#{u}\nu2=>#{u2}"
     u || u2
@@ -63,6 +64,7 @@ class ApplicationController < ActionController::Base
   def current_user_facebook
     @current_user_facebook ||= FacebookUser.find(session[:facebook_user_id]) if session[:facebook_user_id]
   end
+
   helper_method :current_user_facebook
 
   def authenticate_admin!
@@ -80,8 +82,8 @@ class ApplicationController < ActionController::Base
 
   def do_not_cache
     response.headers['Cache-Control'] = 'no-chache, no-store, max-age=0, must-revalidate'
-    response.headers['Pragma'] = 'no-cache'
-    response.headers['Expires'] = 'Fri, 01 Jan 1990 00:00:00 GMT'
+    response.headers['Pragma']        = 'no-cache'
+    response.headers['Expires']       = 'Fri, 01 Jan 1990 00:00:00 GMT'
   end
 
   def load_my_studio
@@ -95,6 +97,17 @@ class ApplicationController < ActionController::Base
   def log_session
     puts "RAILS SESSION: #{session.inspect}"
     logger.info "RAILS SESSION: #{session.inspect}"
+  end
+
+  # current navbar main menu
+  #  :blog
+  #  is_admin?
+  #   :overview, :offer_emails, :studios, :users, :merchandise, :samples, :stories, :faqs
+  #  is_studio?
+  #   :photo_sessions, :infos_samples, :minisite, :dashboard
+  def navbar_active
+    # reset in controller for active navbar menu item
+    @navbar_active = :overview
   end
 
 end

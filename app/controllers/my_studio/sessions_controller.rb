@@ -105,4 +105,8 @@ class MyStudio::SessionsController < MyStudio::BaseController
     @categories = Category.order(:name).all.map { |c| [c.name, c.id] }
   end
 
+  def navbar_active
+    @navbar_active = :photo_sessions
+  end
+
 end

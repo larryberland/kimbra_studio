@@ -7,16 +7,14 @@ module Minisite
     before_filter :set_by_tracking
     before_filter :set_cart_and_client_and_studio
     before_filter :setup_story
-    before_filter :navbar_active
 
     layout 'minisite'
 
     private #===========================================================================
 
-    # current navbar menu
+    # current navbar minisite menu
     # :collection, :charms, :chains, :about, :shopping_cart
     def navbar_active
-
       # reset in controller for active navbar menu item
       @navbar_active = :collection
     end

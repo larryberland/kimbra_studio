@@ -32,5 +32,11 @@ module Admin
       end
     end
 
+    private
+
+    def navbar_active
+      @navbar_active = :stories
+    end
+
   end
 end

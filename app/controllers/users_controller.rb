@@ -100,4 +100,9 @@ class UsersController < ApplicationController
     @states = State.form_selector
   end
 
+  def navbar_active
+    # reset in controller for active navbar menu item
+    @navbar_active = :users
+  end
+
 end

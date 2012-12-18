@@ -86,4 +86,11 @@ class Admin::Merchandise::PiecesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  private
+
+  def navbar_active
+    @navbar_active = :merchandise
+  end
+
 end

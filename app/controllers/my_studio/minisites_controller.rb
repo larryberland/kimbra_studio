@@ -105,5 +105,10 @@ class MyStudio::MinisitesController < MyStudio::BaseController
     render layout: 'layouts/minisite'
   end
 
+  private
+
+  def navbar_active
+    @navbar_active = :minisite
+  end
 
 end

@@ -88,6 +88,7 @@ class MyStudio::InfosController < MyStudio::BaseController
   end
 
   def faq
+    @navbar_active = :infos_faqs
     # Static text.
   end
 
@@ -105,4 +106,9 @@ class MyStudio::InfosController < MyStudio::BaseController
     render action: 'mock_collection', layout: false
   end
 
+  private
+
+  def navbar_active
+    @navbar_active = :infos_samples
+  end
 end

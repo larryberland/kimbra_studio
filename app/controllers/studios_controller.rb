@@ -235,4 +235,8 @@ class StudiosController < ApplicationController
     @states = State.form_selector
   end
 
+  def navbar_active
+    @navbar_active = is_admin? ? :studios : :minisite
+  end
+
 end

@@ -109,4 +109,9 @@ class MyStudio::PortraitsController < MyStudio::BaseController
     end
   end
 
+  def navbar_active
+    @navbar_active = :photo_sessions
+  end
+
+
 end

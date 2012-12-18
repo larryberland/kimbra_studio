@@ -127,4 +127,9 @@ class Admin::Customer::EmailsController < ApplicationController
     @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id]) if params[:id]
   end
 
+  def navbar_active
+    # reset in controller for active navbar menu item
+    @navbar_active = :offer_emails
+  end
+
 end

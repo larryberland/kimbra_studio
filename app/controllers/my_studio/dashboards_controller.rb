@@ -18,4 +18,10 @@ class MyStudio::DashboardsController < MyStudio::BaseController
     end
   end
 
+  private
+
+  def navbar_active
+    @navbar_active = :dashboard
+  end
+
 end

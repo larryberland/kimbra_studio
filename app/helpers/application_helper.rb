@@ -264,13 +264,74 @@ module ApplicationHelper
     css
   end
 
-  # @navbar_active is set in controller before_filter
-  #   and overridden in controller actions
+  # controllers before_filter#navbar_active
+  #   sets the menu symbol that should be set with css_class active
   def li_navbar(menu)
-    html = (menu == @navbar_active) ? {class: 'active'} : {}
-    content_tag(:li, html) do
+    css_class = (menu == @navbar_active) ? 'active' : ''
+    content_tag(:li, {class: css_class}) do
       link_to_navbar(menu)
     end
+  end
+
+  # expect link_to name and title to be in
+  #   locales
+  #     shared/main_header/menus/#{menu}/name
+  #     shared/main_header/menus/#{menu}/title
+  def li_navbar_path(menu, link_path)
+    css_class = menu == @navbar_active ? 'active' : ''
+    content_tag(:li, {class: css_class}) do
+      link_to(t(".menus.#{menu}.name"), link_path, title: t(".menus.#{menu}.title"))
+    end
+  end
+
+  def navbar_dropdown(menu)
+    name  = t(".menus.#{menu}.name")
+    title = t(".menus.#{menu}.title")
+    "<a href='#' class='dropdown-toggle', data-toggle='dropdown' title='#{title}'> #{name} <b class='caret'></b></a>"
+  end
+
+  # create a navbar dropdown menu item
+  # menu => menu symbol in locales.en
+  # link_path => route path for menu item
+  # menu_en_path => locales.en path to parent menu item (ex. '.menus.misc')
+  def navbar_dropdown_li(menu, link_path, menu_en_path)
+    name         = t("#{menu_en_path}.#{menu}.name")
+    title        = t("#{menu_en_path}.#{menu}.title")
+    html_options = {class: menu == @navbar_active ? 'active' : ''}
+    content_tag(:li, link_to(name, link_path, {title: title}), html_options)
+  end
+
+  # construct the navbar dropdown markup for our Misc Menu Item
+  def li_navbar_dropdown_misc
+    menu      = :misc
+
+    # drop down list for the Misc menu
+    sub_menus = {merchandise:   admin_merchandise_pieces_path,
+                 infos_samples: samples_my_studio_infos_path,
+                 stories:       admin_stories_path,
+                 infos_faqs:    faq_my_studio_infos_path}
+
+    dropdown_active = false
+    menu_en_path    = ".menus.#{menu}"
+    html_options    = {class: 'dropdown-menu'}
+    # dropdown ul tag containing our sub_menu li tags
+    ul              = content_tag(:ul, html_options) do
+
+      dropdown_tags = sub_menus.collect do |sub_menu, link_path|
+        dropdown_active = true if (sub_menu == @navbar_active)
+        navbar_dropdown_li(sub_menu, link_path, menu_en_path)
+      end
+
+      dropdown_tags.join(" ").html_safe
+    end
+
+    html_options[:class] = 'dropdown'
+    html_options[:class] += " active" if (menu == @navbar_active) or dropdown_active
+    html = content_tag(:li, html_options) do
+      "#{navbar_dropdown(menu)}#{ul}".html_safe
+    end
+    html.html_safe
+
   end
 
   def link_to_navbar(menu)
@@ -306,23 +367,6 @@ module ApplicationHelper
           link_to_your_facebook_or_not
       end
     end
-  end
-
-  def link_to_nav_pill(label, url, selected, title="")
-    css_class = selected ? {class: 'active'} : {}
-    html      = content_tag(:li, css_class) do
-      link_to(label, url, title: title)
-    end
-    html.html_safe
-  end
-
-  def link_to_nav_drop_down(label, url, selected, title="")
-    css_class = {class: "dropdown-menu"}
-    css_class[:class] += " active" if selected
-    html = content_tag(:ul, css_class) do
-      link_to(label, url, title: title)
-    end
-    html.html_safe
   end
 
   def link_to_button(label, url, selected, title="")
@@ -378,12 +422,12 @@ module ApplicationHelper
   end
 
   def link_to_pinterest(offer)
-    image_url = offer.image.url_cache_buster
-    page_url = minisite_email_offers_url(offer.email)  # studio: offer.email.my_studio_session.studio.info.website
+    image_url   = offer.image.url_cache_buster
+    page_url    = minisite_email_offers_url(offer.email) # studio: offer.email.my_studio_session.studio.info.website
     description = url_encode("Gorgeous photo jewelry from #{offer.email.my_studio_session.studio.name} (#{offer.email.my_studio_session.studio.info.website}).")
     link_to image_tag('https://assets.pinterest.com/images/PinExt.png', title: 'Pin It'),
             "http://pinterest.com/pin/create/button/?url=#{page_url}&media=#{image_url}&description=#{description}",
-            class: 'pin-it-button',
+            class:         'pin-it-button',
             'count-layout' => 'none'
   end
 
@@ -405,8 +449,8 @@ module ApplicationHelper
       method_tag = tag('input', :type => 'hidden', :name => '_method', :value => method.to_s)
     end
 
-    form_method = method.to_s == 'get' ? 'get' : 'post'
-    form_options = html_options.delete('form') || {}
+    form_method          = method.to_s == 'get' ? 'get' : 'post'
+    form_options         = html_options.delete('form') || {}
     form_options[:class] ||= html_options.delete('form_class') || 'button_to'
 
     remote = html_options.delete('remote')
@@ -416,18 +460,19 @@ module ApplicationHelper
       request_token_tag = tag(:input, :type => "hidden", :name => request_forgery_protection_token.to_s, :value => form_authenticity_token)
     end
 
-    url = options.is_a?(String) ? options : self.url_for(options)
+    url  = options.is_a?(String) ? options : self.url_for(options)
     name ||= url
 
     html_options = convert_options_to_data_attributes(options, html_options)
 
-    #html_options.merge!("type" => "submit", "value" => name, "class" => 'btn btn-success')
+    # start of platypus override
     html_options.merge!("type" => "submit", "class" => 'btn btn-success')
 
     # use a button tag instead of input
     button = content_tag(:button, html_options) do
-      content_tag(:i, "", "class"=>icon_class) + " #{name}"
+      content_tag(:i, "", "class" => icon_class) + " #{name}"
     end
+    # end of platypus override
 
     form_options.merge!(:method => form_method, :action => url)
     form_options.merge!("data-remote" => "true") if remote

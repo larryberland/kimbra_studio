@@ -391,14 +391,57 @@ en:
       cancel: "Cancel"
 
   shared:
-    main_header:
-      menu_brand: "My Studio"
-      menu_photo_sessions: "Photo Sessions"
-      menu_dashboard: "Dashboard"
-      menu_minisite:  "Branding"
-      menu_infos_samples: "How It Works"
-      menu_infos_faqs: "FAQ"
-      menu_blog: "Blog"
+    # shared/navbar application layouts
+    navbar:
+      menus:
+        brand:
+          name: "My Studio"
+          title: "My Studio"
+        overview:
+          name: "Overview"
+          title: "Click to view Overviews"
+        offer_emails:
+          name: "Offer Emails"
+          title: "Click to view Offer Emails"
+        studios:
+          name: "Studios"
+          title: "Click to view Studios"
+        users:
+          name: "Users"
+          title: "Click to view Users"
+        misc:
+          name: "Misc"
+          title: "Click to see sub menus"
+          merchandise:
+            name: "Merchandise"
+            title: "Click to view Merchandise"
+          infos_samples:
+            name: "How It Works"
+            title: "Click to view How It All Works"
+          stories:
+            name: "Stories"
+            title: "Click to view Stories"
+          infos_faqs:
+            name: "FAQ"
+            title: "Click to view Frequently Asked Questions"
+        photo_sessions:
+          name: "Photo Sessions"
+          title: "Click to view Your Photo Sessions"
+        dashboard:
+          name: "Dashboard"
+          title: "Click to view Dashboard"
+        minisite:
+          name: "Branding"
+          title: "Click to view your Branding Info"
+        infos_samples:
+          name: "How It Works"
+          title: "Click to view How It All Works"
+        infos_faqs:
+          name: "FAQ"
+          title: "Click to view Frequently Asked Questions"
+        blog:
+          name: "Blog"
+          title: "Click to view ClickPLUS Blog"
 
     minisite:
       navbar:
