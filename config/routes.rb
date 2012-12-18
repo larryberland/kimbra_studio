@@ -4,8 +4,6 @@ KimbraStudio::Application.routes.draw do
   match 'auth/failure', to: 'facebook_sessions#failure'
   match 'facebook_signout', to: 'facebook_sessions#destroy', as: 'facebook_signout'
 
-  ActiveAdmin.routes(self)
-
   root :to => "welcome#index"
 
   resource :about do

@@ -184,12 +184,8 @@ class StudiosController < ApplicationController
     @studio.destroy
     respond_to do |format|
       format.html do
-        if params[:aa]
-          redirect_to admin_studios_path
-        else
-          flash[:notice] = 'Successfully deleted a studio!'
-          redirect_to studios_url
-        end
+        flash[:notice] = 'Successfully deleted a studio!'
+        redirect_to studios_url
       end
       format.json { head :ok }
     end

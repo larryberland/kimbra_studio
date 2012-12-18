@@ -46,7 +46,6 @@ gem 'gmaps4rails'
 
 gem 'newrelic_rpm'
 gem 'jeditable-rails'
-gem 'activeadmin'
 
 gem 'bloggy'
 

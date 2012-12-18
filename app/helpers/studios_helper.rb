@@ -58,11 +58,4 @@ module StudiosHelper
     end
   end
 
-  def active_admin_actions_link(studio)
-    [eap_link(studio),
-     link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}"),
-     link_to('Edit', edit_studio_path(studio)),
-     link_to('Delete', {action: :destroy, controller: :studios, id: studio, aa: true}, confirm: t(:link_destroy_confirm), method: :delete)].compact.join('<br/>').html_safe
-  end
-
 end

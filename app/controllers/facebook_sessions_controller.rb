@@ -1,4 +1,5 @@
 class FacebookSessionsController < ApplicationController
+
   skip_before_filter :authenticate_user!
 
   respond_to :js, :only => [:share]
@@ -35,11 +36,14 @@ class FacebookSessionsController < ApplicationController
   end
 
   def share
-    if (current_user_facebook)
+    if current_user_facebook
+      offer = Admin::Customer::Offer.find_by_id(params[:id])
       @shopping_item_id = offer.id
       @item = offer
-      offer = Admin::Customer::Offer.find_by_id(params[:id])
+      puts "XXXX: #{@item.inspect}"
       current_user_facebook.share(offer, minisite_offer_url(offer))
+    else
+      return render text: ''
     end
   end
 

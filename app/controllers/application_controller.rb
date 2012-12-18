@@ -71,15 +71,6 @@ class ApplicationController < ActionController::Base
     current_user && current_user.admin?
   end
 
-  def authenticate_admin_user!
-    authenticate_admin!
-  end
-
-  def current_admin_user
-    return nil if user_signed_in? && !current_user.admin?
-    current_user
-  end
-
   def do_not_cache
     response.headers['Cache-Control'] = 'no-chache, no-store, max-age=0, must-revalidate'
     response.headers['Pragma']        = 'no-cache'
