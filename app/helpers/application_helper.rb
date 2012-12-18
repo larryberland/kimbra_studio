@@ -275,8 +275,8 @@ module ApplicationHelper
 
   # expect link_to name and title to be in
   #   locales
-  #     shared/main_header/menus/#{menu}/name
-  #     shared/main_header/menus/#{menu}/title
+  #     shared/navbar/menus/#{menu}/name
+  #     shared/navbar/menus/#{menu}/title
   def li_navbar_path(menu, link_path)
     css_class = menu == @navbar_active ? 'active' : ''
     content_tag(:li, {class: css_class}) do

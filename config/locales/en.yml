@@ -105,13 +105,6 @@ en:
   # stripe
   stripe_description_prefix: "Kimbra Studio via ClickPLUS"
 
-  admin_menu_overview: "Overview"
-  admin_menu_emails:   "Offer Emails"
-  admin_menu_merchandise: "Merchandise"
-  admin_menu_studios: "Studios"
-  admin_menu_users:   "Users"
-  admin_menu_stories: "Stories"
-
   # admin/customer/items
   admin_customer_items_new_title: "New Offer Item"
   admin_customer_items_new_link: "New Item"
