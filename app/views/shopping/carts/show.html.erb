@@ -10,7 +10,8 @@
              new_shopping_address_path
            end %>
   <% if @cart.try(:items).try(:size).to_i > 0 %>
-      <%= link_to 'Checkout', url, :class => 'button-link' %>
+      <% name = "#{icon_minisite('icon-shopping-cart')} #{t('.checkout')}".html_safe %>
+      <%= link_to name, url, class: "btn btn-success" %>
   <% end %>
 </div>
 

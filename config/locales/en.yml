@@ -477,6 +477,7 @@ en:
     carts:
       show:
         title: "Your Shopping Cart"
+        checkout: "Ready to Checkout"
   studios:
     edit:
       title: "Editing ClickPLUS Branding Info"
