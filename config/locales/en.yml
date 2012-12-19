@@ -473,6 +473,10 @@ en:
               name: "Back to Sessions List"
               title: "Click to view the Sessions List"
 
+  shopping:
+    carts:
+      show:
+        title: "Your Shopping Cart"
   studios:
     edit:
       title: "Editing ClickPLUS Branding Info"

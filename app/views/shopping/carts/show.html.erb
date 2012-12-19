@@ -1,4 +1,5 @@
 <div class='shopping-item-index'>
+  <h2><%= t('.title') %></h2>
   You have <span id="cart_count"><%= pluralize @cart.quantity, 'piece' %></span> in your cart.
 
   <% url = if @cart.purchase.present?
