@@ -4,15 +4,15 @@ module NavbarHelper
   # menu => menu symbol in locales.en
   # link_path => route path for menu item
   # menu_en_path => locales.en path to parent menu item (ex. '.menus.misc')
-  def li_navbar(menu, link_path, menu_en_path=".menus")
+  def li_navbar(menu, link_path, en_path=".menus")
 
     name_method = "navbar_#{menu}_name"
     name = send(name_method) if respond_to?(name_method.to_sym, include_private=true)
-    name ||= t("#{menu_en_path}.#{menu}.name")
+    name ||= t("#{en_path}.#{menu}.name")
 
     title_method = "navbar_#{menu}_title"
     title = send(title_method) if respond_to?(title_method.to_sym, include_private=true)
-    title ||= t("#{menu_en_path}.#{menu}.title")
+    title ||= t("#{en_path}.#{menu}.title")
 
     link_options = {title: title}
     link_options[:class] = "brand" if menu == :brand
@@ -22,6 +22,15 @@ module NavbarHelper
 
   # controllers before_filter#navbar_active
   #   sets the menu symbol that should be set with css_class active
+  #
+  # li_navbar_or_not(:collection) =>
+  #
+  #   <li class="active">
+  #     <a title="Click to view your custom jewelry collection"
+  #         href="/minisite/emails/hydh0yezkf/offers">
+  #       Your Collection
+  #     </a>
+  #   </li>
   def li_navbar_or_not(menu)
     # path for the navbar menu item
     path_method = "navbar_#{menu}_path"
@@ -31,36 +40,20 @@ module NavbarHelper
     li_navbar(menu, path)
   end
 
-  # expect link_to name and title to be in
-  #   locales
-  #     shared/navbar/menus/#{menu}/name
-  #     shared/navbar/menus/#{menu}/title
-  def li_navbar_path(menu, link_path)
-    css_class = menu == @navbar_active ? 'active' : ''
-    content_tag(:li, {class: css_class}) do
-      link_to(t(".menus.#{menu}.name"), link_path, title: t(".menus.#{menu}.title"))
+  # top level navbar menu that contains a sub_menu
+  # dropdown_active sets the menu item highlighted when true
+  def li_navbar_dropdown_menu(menu, ul_sub_menu_html, dropdown_active)
+    html_options = {class: 'dropdown'}
+    html_options[:class] += " active" if (menu == @navbar_active) or dropdown_active
+
+    html = content_tag(:li, html_options) do
+      "#{navbar_dropdown(menu)}#{ul_sub_menu_html}".html_safe
     end
-  end
-
-  def navbar_dropdown(menu)
-    name  = t(".menus.#{menu}.name")
-    title = t(".menus.#{menu}.title")
-    "<a href='#' class='dropdown-toggle', data-toggle='dropdown' title='#{title}'> #{name} <b class='caret'></b></a>"
-  end
-
-  # create a navbar dropdown menu item
-  # menu => menu symbol in locales.en
-  # link_path => route path for menu item
-  # menu_en_path => locales.en path to parent menu item (ex. '.menus.misc')
-  def navbar_dropdown_li(menu, link_path, menu_en_path)
-    name         = t("#{menu_en_path}.#{menu}.name")
-    title        = t("#{menu_en_path}.#{menu}.title")
-    html_options = {class: menu == @navbar_active ? 'active' : ''}
-    content_tag(:li, link_to(name, link_path, {title: title}), html_options)
+    html.html_safe
   end
 
   # construct the navbar dropdown markup for our Misc Menu Item
-  def li_navbar_dropdown_misc
+  def li_navbar_misc
     menu      = :misc
 
     # drop down list for the Misc menu
@@ -69,30 +62,42 @@ module NavbarHelper
                  stories:       admin_stories_path,
                  infos_faqs:    faq_my_studio_infos_path}
 
-    dropdown_active = false
-    menu_en_path    = ".menus.#{menu}"
-    html_options    = {class: 'dropdown-menu'}
-    # dropdown ul tag containing our sub_menu li tags
-    ul              = content_tag(:ul, html_options) do
+    dropdown_active, sub_menu_html = navbar_dropdown_sub_menus(menu, sub_menus)
 
-      dropdown_tags = sub_menus.collect do |sub_menu, link_path|
-        dropdown_active = true if (sub_menu == @navbar_active)
-        navbar_dropdown_li(sub_menu, link_path, menu_en_path)
-      end
-
-      dropdown_tags.join(" ").html_safe
-    end
-
-    html_options[:class] = 'dropdown'
-    html_options[:class] += " active" if (menu == @navbar_active) or dropdown_active
-    html = content_tag(:li, html_options) do
-      "#{navbar_dropdown(menu)}#{ul}".html_safe
-    end
-    html.html_safe
+    li_navbar_dropdown_menu(menu, sub_menu_html, dropdown_active)
 
   end
 
   private
+
+  # top level navbar menu that has dropdown menus
+  def navbar_dropdown(menu)
+    name  = t(".menus.#{menu}.name")
+    title = t(".menus.#{menu}.title")
+    "<a href='#' class='dropdown-toggle' data-toggle='dropdown' title='#{title}'> #{name} <b class='caret'></b></a>"
+  end
+
+  # generates the sub_menu_html for all sub_menus items
+  # returns dropdown_active => true if this sub_menu is currently active
+  # the sub_menu_html markup for everything in the sub_menus hash
+  # sub_menus => {menu_symbol: link_path_for_sub_menu}
+  def navbar_dropdown_sub_menus(menu, sub_menus)
+    dropdown_active = false
+    en_path         = ".menus.#{menu}"
+    html_options    = {class: 'dropdown-menu'}
+
+    # dropdown ul tag containing our sub_menu li tags
+    sub_menu_html   = content_tag(:ul, html_options) do
+
+      li_navbars = sub_menus.collect do |sub_menu, link_path|
+        dropdown_active = true if (sub_menu == @navbar_active)
+        li_navbar(sub_menu, link_path, en_path)
+      end
+      li_navbars.join(" ").html_safe
+    end
+    return dropdown_active, sub_menu_html
+  end
+
 
   # Customize navbar Menu Items
   #   path, name, or title
@@ -239,7 +244,7 @@ module NavbarHelper
       elsif is_studio?
         t('.menus.shopping_cart.studio.title')
       else
-          t('.menus.shopping_cart.title')
+        t('.menus.shopping_cart.title')
       end
     end
   end
