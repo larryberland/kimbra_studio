@@ -438,15 +438,40 @@ en:
 
     minisite:
       navbar:
-        menu_brand: "My Studio"
-        menu_sessions: "Return to sessions list"
-        menu_about:    "About My Studio"
-        menu_collection: "Your Collection"
-        menu_custom_work: "Custom Work"
-        menu_shopping_cart: "Shopping Cart"
-        menu_chains: "Chains"
-        menu_charms: "Charms"
-        menu_infos_samples: "Back to How It Works"
+        menus:
+          about:
+            name: "About My Studio"
+            title: "Click to view About %{name}"
+          brand:
+            name: "My Studio"
+            title: "%{name}"
+          chains:
+            name: "Chains"
+            title: "Click to view Chain collection"
+          charms:
+            name: "Charms"
+            title: "Click to view Charms collection"
+          collection:
+            name: "Your Collection"
+            title: "Click to view your custom jewelry collection"
+          facebook:
+            name: "Log In"
+            title: "Click to Log In to your Facebook"
+            sign_out:
+              name: "Sign Out Facebook"
+              title: "Click to sign out of Facebook"
+          shopping_cart:
+            name: "Shopping Cart"
+            title: "Click to view your Shopping Cart"
+            admin:
+              name: "Back to Sessions List"
+              title: "Click to view the Sessions List"
+            mock:
+              name: "Return to How It Works"
+              title: "Click to return to How It Works"
+            studio:
+              name: "Back to Sessions List"
+              title: "Click to view the Sessions List"
 
   studios:
     edit:

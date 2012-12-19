@@ -46,7 +46,7 @@
 
       <ul class="nav pull-right">
         <li>
-          <%= link_to_navbar(:facebook) %>
+          <%= li_navbar_or_not(:facebook) %>
         </li>
       </ul>
 
@@ -57,14 +57,12 @@
           <div class="nav-collapse collapse">
 
             <ul class='nav'>
-              <li>
-                <a class="brand" href="#" title="<%= @studio.try(:name) %>"><%= t('.menu_brand') %></a>
-              </li>
-              <%= li_navbar(:collection) %>
-              <%= li_navbar(:charms) %>
-              <%= li_navbar(:chains) %>
-              <%= li_navbar(:about) %>
-              <%= li_navbar(:shopping_cart) %>
+              <%= li_navbar(:brand, "#") %>
+              <%= li_navbar_or_not(:collection) %>
+              <%= li_navbar_or_not(:charms) %>
+              <%= li_navbar_or_not(:chains) %>
+              <%= li_navbar_or_not(:about) %>
+              <%= li_navbar_or_not(:shopping_cart) %>
             </ul>
           </div>
       <% end %>
