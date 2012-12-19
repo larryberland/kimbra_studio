@@ -1,3 +1,5 @@
+<%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
+
 <div class="row span12">
 
   <h2>
@@ -29,6 +31,8 @@
       <th>Phone number</th>
       <th>Location</th>
       <th>Sales<br/>status</th>
+      <th>Created</th>
+      <th>created for DataTable</th>
     </tr>
     </thead>
     <tbody>
@@ -66,6 +70,8 @@
           <td><%= number_to_phone studio.phone_number, area_code: true %></td>
           <td><%= studio.try(:city_state_name) %></td>
           <td><%= editable_field studio, :sales_status, {tooltip: studio.sales_notes} %></td>
+          <td><%= date_short studio.created_at %></td>
+          <td><%= studio.created_at %></td>
         </tr>
     <% end %>
     </tbody>
@@ -73,8 +79,4 @@
 
 </div>
 
-<%= javascript_tag do %>
-    $(document).ready(function(){
-        setUpDataTable($('#studios_table'), 5, 'asc');
-    });
-<% end %>
+<%= javascript_include_tag 'data_tables/studios' %>

@@ -38,11 +38,16 @@ window.setOlarkUser = ->
   olark('api.chat.updateVisitorNickname',
     snippet: "#{window.currentUserName}, #{window.currentUserStudio}")
 
-window.setUpDataTable = (tableEl, defaultSortCol, order='desc') ->
-  $(tableEl).dataTable
-    "aaSorting": [[ defaultSortCol, order ]],
+window.setUpDataTable = (tableEl, optHash) ->
+  console.log optHash
+  defaults =
+    "aaSorting": [[ 0, 'desc' ]],
     "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
     "sPaginationType": "bootstrap"
+  opts = $.extend(true, defaults, optHash)
+  console.log opts
+  $(tableEl).dataTable(opts)
+
   $.extend $.fn.dataTableExt.oStdClasses,
     "sSortAsc": "header headerSortDown",
     "sSortDesc": "header headerSortUp",
