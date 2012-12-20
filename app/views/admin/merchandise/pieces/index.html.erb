@@ -1,3 +1,6 @@
+<%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
+<%= javascript_include_tag 'data_tables/pieces' %>
+
 <div class="row span12">
 
   <h2>
@@ -29,6 +32,7 @@
       <th>Active</th>
       <th>Featured</th>
       <th>Deleted at</th>
+      <th>Deleted at for datatables</th>
     </tr>
     </thead>
     <tbody>
@@ -53,7 +57,8 @@
           <td><%= number_to_currency(admin_merchandise_piece.price) %></td>
           <td><%= admin_merchandise_piece.active %></td>
           <td><%= admin_merchandise_piece.featured %></td>
-          <td><%= admin_merchandise_piece.deleted_at %></td>
+          <td><%= date_short admin_merchandise_piece.deleted_at %></td>
+          <td><%= admin_merchandise_piece.deleted_at.to_s(:javascript) if admin_merchandise_piece.deleted_at %></td>
         </tr>
     <% end %>
     </tbody>
@@ -61,8 +66,3 @@
 
 </div>
 
-<%= javascript_tag do %>
-    $(document).ready(function(){
-    setUpDataTable($('#pieces_table'), 3, 'asc');
-    });
-<% end %>

@@ -11,7 +11,7 @@
   <%= javascript_include_tag 'application' %>
   <link rel='stylesheet' type='text/css' href='https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/css/jquery.dataTables.css'>
   <script type='text/javascript' charset='utf8' src='https://ajax.aspnetcdn.com/ajax/jquery.dataTables/1.9.4/jquery.dataTables.min.js'></script>
-  <%= javascript_include_tag 'data_tables/pagination', 'data_tables/sort_dates_with_nils' %>
+  <%= javascript_include_tag 'data_tables/pagination', 'data_tables/sort_dates_with_nils', 'data_tables/sort_currency' %>
   <%= render 'shared/firefly' if Rails.env.production? %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
