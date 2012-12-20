@@ -10,8 +10,7 @@
   <table class="table table-striped table-bordered" id='emails_table'>
     <thead>
     <tr>
-   <!--   <th colspan="<%= is_admin? ? 4 : 1 %>">Actions</th> -->
-      <th>Actions</th>
+
       <th></th>
       <th></th>
       <th></th>
@@ -22,6 +21,9 @@
       <th>Sent at</th>
       <th>Sent at for datatables</th>
       <th>Comment</th>
+      <% if is_admin? %>
+          <th>Actions</th>
+      <% end %>
     </tr>
     </thead>
     <tbody>
@@ -35,6 +37,7 @@
               </td>
           <% end %>
           <td><%= link_to t(:show), admin_customer_email_path(admin_customer_email.tracking) %></td>
+          <td><%= link_to t(:show), show_collection_my_studio_minisite_path(admin_customer_email.tracking) %></td>
           <% if is_admin? %>
               <td><%= link_to t(:edit), edit_admin_customer_email_path(admin_customer_email) %></td>
               <td><%= link_to t(:destroy), admin_customer_email, confirm: t(:link_destroy_confirm), method: :delete %></td>
@@ -46,6 +49,13 @@
           <td><%= date_short admin_customer_email.sent_at %></td>
           <td><%= admin_customer_email.sent_at.to_s(:javascript) if admin_customer_email.sent_at %></td>
           <td><%= admin_customer_email.in_send_offers_queue? ? 'in queue' : nil %></td>
+          <% if is_admin? %>
+              <td>
+                <%= link_to "#{admin_customer_email.offers.size.to_i.to_words} #{t(:offers)}", admin_customer_email_offers_path(admin_customer_email.tracking), title: 'View All Offers for this Email' %>
+                <br>
+                <%= link_to('Edit Portraits', minisite_email_offers_path(admin_customer_email.tracking)) %>
+              </td>
+          <% end %>
         </tr>
     <% end %>
     </tbody>

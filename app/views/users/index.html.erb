@@ -1,3 +1,6 @@
+<%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
+<%= javascript_include_tag 'data_tables/users' %>
+
 <div class="row span12">
 
   <h2>
@@ -18,17 +21,24 @@
   <table class="table table-striped table-bordered" id='users_table'>
     <thead>
     <tr>
-      <th>Actions</th>
       <th>setup</th>
+      <th>last sign in at for datatables</th>
       <th title="send a user email">Name</th>
       <th title="send a studio email">Studio</th>
       <th>Phone</th>
       <th>Location</th>
+      <th>Actions</th>
     </tr>
     </thead>
     <tbody>
     <% @users.all.each do |user| %>
         <tr>
+          <td><%= "#{time_short_index(user.last_sign_in_at)} (#{user.try(:first_pass)})" %></td>
+          <td><%= user.last_sign_in_at.to_s(:javascript) if user.last_sign_in_at %></td>
+          <td><%= user_email_link(user) %></td>
+          <td><%= studio_email_link(user.try(:studio)) %></td>
+          <td><%= number_to_phone user.phone_number_display, area_code: true %></td>
+          <td><%= user.try(:city_state_name) %></td>
           <td>
             <%= link_to 'Impersonate', "/switch_user?scope_identifier=user_#{user.id}" %>
             <br>
@@ -38,20 +48,9 @@
             <br>
             <%= link_to t(:destroy), user, confirm: 'Are you sure?', method: :delete %>
           </td>
-          <td><%= "#{time_short_index(user.last_sign_in_at)} (#{user.try(:first_pass)})" %></td>
-          <td><%= user_email_link(user) %></td>
-          <td><%= studio_email_link(user.try(:studio)) %></td>
-          <td><%= number_to_phone user.phone_number_display, area_code: true %></td>
-          <td><%= user.try(:city_state_name) %></td>
         </tr>
     <% end %>
     </tbody>
   </table>
 
 </div>
-
-<%= javascript_tag do %>
-    $(document).ready(function(){
-    setUpDataTable($('#users_table'), 2, 'asc');
-    });
-<% end %>

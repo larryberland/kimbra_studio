@@ -11,14 +11,9 @@
   <% elsif sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
       <h4>&#x2718; No emails this past week - no portraits uploaded?</h4>
   <% else %>
-      <table class="table" id='offer_emails_table'>
+      <table class="table table-striped table-bordered" id='offer_emails_table'>
         <thead>
         <tr>
-          <% sent_column = 3 %>
-          <% if current_user.admin? %>
-              <th>studio</th>
-              <% sent_column = 4 %>
-          <% end %>
           <th>photo session</th>
           <th>client</th>
           <th>how many<br/>offers</th>
@@ -31,6 +26,9 @@
           <th>purchased</th>
           <th>shipped</th>
           <th>shipped for datatables</th>
+          <% if current_user.admin? %>
+              <th>studio</th>
+          <% end %>
         </tr>
         </thead>
         <tbody>
@@ -38,9 +36,6 @@
         <% sessions.each do |session| %>
             <% session.emails.each do |email| %>
                 <tr>
-                  <% if current_user.admin? %>
-                      <td><%= session.studio.name %></td>
-                  <% end %>
                   <td><%= link_to session.name, my_studio_session_path(session) %></td>
                   <td><%= session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %></td>
                   <td><%= email.try(:offers).try(:count) %></td>
@@ -53,6 +48,9 @@
                   <td><%= email.offers.select { |o| o.purchased_at.present? }.count.to_words %></td>
                   <td><%= email.most_recent_shipment_at.nil? ? '' : "#{time_ago_in_words(email.most_recent_shipment_at)} ago" %></td>
                   <td><%= email.most_recent_shipment_at.to_s(:javascript) if email.most_recent_shipment_at %></td>
+                  <% if current_user.admin? %>
+                      <td><%= session.studio.name %></td>
+                  <% end %>
                 </tr>
             <% end %>
         <% end %>
@@ -62,7 +60,3 @@
 
 </div>
 </div>
-
-<%= javascript_tag do %>
-sentColumn = <%= sent_column %>
-<% end %>

@@ -14,7 +14,7 @@ class ClientMailer < ActionMailer::Base
     attachments.inline['offer_image.jpg'] = open(@offer.image_url).read
     mail(to: "#{@client.name} <#{@client.email}>",
          bcc: ['support@kimbraclickplus.com'],
-         subject: 'Your recent photos in heirloom jewelry.',
+         subject: "Your #{@studio.name} photos in heirloom jewelry.",
          from: "#{@studio.name} <support@KimbraClickPLUS.com>")
     # Mark this email with the datetime sent.
     @email.update_attributes(:sent_at => Time.now.to_s(:db))
@@ -35,7 +35,7 @@ class ClientMailer < ActionMailer::Base
     @studio = Studio.find(studio_id)
     @show_status_only = true
     mail(to: "#{@cart.address.first_name} #{@cart.address.last_name} <#{@cart.address.email}>",
-         subject: "Your Photo Jewelry order has shipped. #{@studio.name}",
+         subject: "Your #{@studio.name} Photo Jewelry order has shipped. #{@studio.name}",
          bcc: ['support@kimbraclickplus.com'],
          from: "#{@studio.name} <support@KimbraClickPLUS.com>")
   end

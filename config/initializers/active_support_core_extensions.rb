@@ -1,1 +1,1 @@
-Time::DATE_FORMATS.merge!( {javascript: "%m/%d/%Y %H:%M:%S"} )
+Time::DATE_FORMATS.merge!( {javascript: "%Y/%m/%d %H:%M:%S"} )
