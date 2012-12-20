@@ -46,7 +46,7 @@ KimbraStudio::Application.configure do
   config.assets.precompile += %w( minisite.js minisite.css stories.css orbit-1.2.3.css )
   config.assets.precompile += %w( bootstrap-ie6.min.css bootstrap.css )
   config.assets.precompile += %w( platypus_dd.js )
-  config.assets.precompile += Dir.glob(File.join(Rails.root, 'app/assets/javascripts/data_tables',"*.js*")).collect{|i| i.split('/')[-2,2].join('/') }
+#  config.assets.precompile += Dir.glob(File.join(Rails.root, 'app/assets/javascripts/data_tables',"*.js*")).collect{|i| i.split('/')[-2,2].join('/') }
   config.assets.precompile += %w( fileuploads.css fileuploads.js xdr.js )
 
   # Disable delivery errors, bad email addresses will be ignored
