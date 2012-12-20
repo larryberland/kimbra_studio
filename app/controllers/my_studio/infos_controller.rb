@@ -94,12 +94,14 @@ class MyStudio::InfosController < MyStudio::BaseController
 
   # Non-functioning mockup of the Your Collection page.
   def mock_collection
+    @mock_collection = true
     @studio = @my_studio
     @studio = Studio.first if @studio.nil? # handle admin
     render layout: false
   end
 
   def mock_collection_return
+    @mock_collection = :return
     @link_back = true
     @studio = @my_studio
     @studio = Studio.first if @studio.nil? # handle admin

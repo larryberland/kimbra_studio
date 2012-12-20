@@ -25,7 +25,7 @@
                 <%= link_to('Edit Portraits', minisite_email_offers_path(admin_customer_email.tracking)) %>
               </td>
           <% end %>
-          <td><%= link_to t(:show), show_collection_my_studio_minisite_path(admin_customer_email.tracking) %></td>
+          <td><%= link_to t(:show), admin_customer_email_path(admin_customer_email.tracking) %></td>
           <% if is_admin? %>
               <td><%= link_to t(:edit), edit_admin_customer_email_path(admin_customer_email) %></td>
               <td><%= link_to t(:destroy), admin_customer_email, confirm: t(:link_destroy_confirm), method: :delete %></td>

@@ -35,42 +35,64 @@ module Minisite
       @admin_customer_email ||= @admin_customer_offer.email if @admin_customer_offer
     end
 
+    # this should only be called by set_cart_and_client_and_studio
+    def set_session_cart
+      # Pull cart from current session; usually normal shopping activity.
+      if @cart.nil? && session[:cart_id]
+        # incoming url does not have a cart
+        #   see if the session has a valid cart
+        @cart = Shopping::Cart.find(session[:cart_id]) rescue nil
+        if @cart
+          # override the email record with the cart's info
+          @admin_customer_email = @cart.email
+        end
+      end
+
+      # Otherwise create new cart; we are starting a new shopping session.
+      # Offer and email are already set.
+      if @cart.nil?
+        @cart             = Shopping::Cart.create(email: @admin_customer_email)
+        session[:cart_id] = @cart.id
+      end
+
+    end
+
     # TODO This logic is tortured. Need to outline the different ways we get to this controller and set session vars accordingly.
     # 1. From session begun by offer email.
     # 2. From session begun by confirmation email offer status link.
     # 3. From bookmarks to any interior page.
     # 4. where else?!? don't forget combinations of the above.
     def set_cart_and_client_and_studio
+
       # Pull cart from incoming link; usually confirmation email order status link.
       if params[:cart]
+        # have a shopping cart to use
         @cart                 = Shopping::Cart.find_by_tracking(params[:cart])
         @admin_customer_email = @cart.email
         @admin_customer_offer = nil
       end
 
       if (is_client?)
-        # Pull cart from current session; usually normal shopping activity.
-        if @cart.nil? && session[:cart_id]
-          @cart = Shopping::Cart.find(session[:cart_id]) rescue nil
-          @admin_customer_email = @cart.email if @cart
-        end
-        # Otherwise create new cart; we are starting a new shopping session.
-        # Offer and email are already set.
-        if @cart.nil?
-          @cart             = Shopping::Cart.create(:email => @admin_customer_email)
-          session[:cart_id] = @cart.id
-        end
+        set_session_cart
         session[:admin_customer_email_id] = @admin_customer_email.id
-        @client                           = @admin_customer_email.my_studio_session.client
-        session[:client_id]               ||= @client.id
-        @studio                           = @admin_customer_email.my_studio_session.studio
-        session[:studio_id]               ||= @studio.id
+
+        @client             = @admin_customer_email.my_studio_session.client
+        session[:client_id] ||= @client.id
+
+        @studio             = @admin_customer_email.my_studio_session.studio
+        session[:studio_id] ||= @studio.id
+
       elsif (is_studio?)
         # studio and admin should have @cart and @client nil
         @studio = current_user.studio
+
       else
-        # studio and admin should have @cart and @client nil
-        @studio = @admin_customer_email.my_studio_session.studio
+
+        set_session_cart
+        @studio             = @admin_customer_email.my_studio_session.studio
+        # shopping session info
+        session[:studio_id] = @studio.id
+
       end
     end
 

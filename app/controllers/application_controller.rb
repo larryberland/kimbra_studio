@@ -13,26 +13,8 @@ class ApplicationController < ActionController::Base
   def after_sign_in_path_for(resource)
     u  = stored_location_for(resource)
     u2 = signed_in_root_path(resource)
-    puts "u=>#{u}\nu2=>#{u2}"
+    # puts "u=>#{u}\nu2=>#{u2}"
     u || u2
-    #u = if resource.acadia_staff?
-    #      admin_merchant_accounts_url
-    #    elsif resource.merchant?
-    #      if resource.respond_to?(:account)
-    #        if resource.account.nil?
-    #          new_merchant_account_url
-    #        else
-    #          merchant_account_daily_deals_url(resource.account)
-    #        end
-    #
-    #      else
-    #
-    #      end
-    #
-    #    else
-    #      nil
-    #    end
-    #u || root_url
   end
 
   def is_admin?
@@ -99,6 +81,19 @@ class ApplicationController < ActionController::Base
   def navbar_active
     # reset in controller for active navbar menu item
     @navbar_active = :overview
+  end
+
+  def reset_session_info
+    if (is_admin?)
+      # reset our minisite session info when an admin
+      #   role leaves the minisite controllers
+      if cart = Shopping::Cart.find_by_id(session[:cart_id])
+        cart.destroy
+      end
+      session[:cart_id] = nil
+      session[:admin_customer_email_id] = nil
+      session[:client_id] = nil
+    end
   end
 
 end

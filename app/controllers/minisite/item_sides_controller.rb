@@ -83,7 +83,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     else
       if (is_admin? and (!offer.has_back?))
           # go directly to collection
-          show_collection_my_studio_minisite_path(offer.email.tracking)
+          minisite_email_offers_path(offer.email.tracking)
       else
         minisite_offer_url(offer) # go to offer edit
       end

@@ -68,6 +68,17 @@ module NavbarHelper
 
   end
 
+  def li_navbar_photo_sessions
+    menu = :photo_sessions
+    unless is_client?
+      if @mock_collection.nil? or (@mock_collection == :return)
+        li_navbar_or_not(menu)
+      end
+    else
+      ''
+    end
+  end
+
   private
 
   # top level navbar menu that has dropdown menus
@@ -126,11 +137,11 @@ module NavbarHelper
   def navbar_collection_path
     if @admin_customer_email
       #link_to_your_collection_or_not(text, @admin_customer_email)
-      if is_client?
-        minisite_email_offers_path(@admin_customer_email.tracking)
-      else
-        show_collection_my_studio_minisite_path(@admin_customer_email.tracking)
-      end
+      #if is_client?
+      minisite_email_offers_path(@admin_customer_email.tracking)
+      #else
+      #show_collection_my_studio_minisite_path(@admin_customer_email.tracking)
+      #end
     else
       '#'
     end
@@ -165,10 +176,14 @@ module NavbarHelper
   def navbar_facebook_path
     #link_to_your_facebook_or_not
     if Rails.env.development?
-      if current_user_facebook
-        facebook_signout_path
+      if @mock_collection
+        '#'
       else
-        '/auth/facebook'
+        if current_user_facebook
+          facebook_signout_path
+        else
+          '/auth/facebook'
+        end
       end
     else
       '#'
@@ -200,53 +215,53 @@ module NavbarHelper
     end
   end
 
+  def navbar_photo_sessions_path
+    #link_to_your_cart_or_not
+    if @mock_collection == :return
+      samples_my_studio_infos_path
+    else
+      if is_admin?
+        admin_overview_path
+      elsif is_studio?
+        my_studio_sessions_path
+      else
+        '#'
+      end
+
+    end
+  end
+
+  def navbar_photo_sessions_name
+    if @mock_collection == :return
+      t(".menus.photo_sessions.mock.name")
+    else
+      t(".menus.photo_sessions.name")
+    end
+  end
+
+  def navbar_photo_sessions_title
+    if @mock_collection == :return
+      t(".menus.photo_sessions.mock.title")
+    else
+      t(".menus.photo_sessions.title")
+    end
+  end
+
   def navbar_shopping_cart_path
     #link_to_your_cart_or_not
-    if is_admin?
-      admin_overview_path
-    elsif is_studio?
-      my_studio_sessions_path
-    else
-      shopping_cart_path(@cart.tracking)
-    end
+    @cart ? shopping_cart_path(@cart.tracking) : '#'
   end
 
   # customize the navbar name for shopping_cart
   def navbar_shopping_cart_name
-    if @link_back
-      t('.menus.shopping_cart.mock.name')
-    else
-      if is_admin?
-        t('.menus.shopping_cart.admin.name')
-      elsif is_studio?
-        t('.menus.shopping_cart.studio.name')
-      else
-        if @cart
-
-          cart_numericality = content_tag(:span, id: :cart_numericality) do
-            pluralize(@cart.try(:quantity), 'piece')
-          end
-          "#{icon_minisite("icon-shopping-cart")} #{t('.menus.shopping_cart.name')} #{cart_numericality}".html_safe
-        else
-          Rails.logger.info("KCP::navbar_shopping_cart_name() called without a @cart attribute.")
-          t('.menus.shopping_cart.name')
-        end
+    name = "#{icon_minisite("icon-shopping-cart")} #{t('.menus.shopping_cart.name')}"
+    if @cart
+      cart_numericality = content_tag(:span, id: :cart_numericality) do
+        pluralize(@cart.try(:quantity), 'piece')
       end
+      name              += " #{cart_numericality}"
     end
-  end
-
-  def navbar_shopping_cart_title
-    if @link_back
-      t('.menus.shopping_cart.mock.title')
-    else
-      if is_admin?
-        t('.menus.shopping_cart.admin.title')
-      elsif is_studio?
-        t('.menus.shopping_cart.studio.title')
-      else
-        t('.menus.shopping_cart.title')
-      end
-    end
+    name.html_safe
   end
 
 end

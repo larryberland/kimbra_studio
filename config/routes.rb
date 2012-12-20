@@ -105,7 +105,6 @@ KimbraStudio::Application.routes.draw do
     end
     resources :minisites do
       member do
-        get :show_collection
         get :show_chains
         get :show_charms
       end

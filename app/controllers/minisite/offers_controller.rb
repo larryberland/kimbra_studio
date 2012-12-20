@@ -11,7 +11,7 @@ module Minisite
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
-      @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
+      @shopping_item = Shopping::Item.new(offer: @admin_customer_offer, cart: @cart)
       @storyline.describe 'Viewing collection page.'
       respond_to do |format|
         format.html # index.html.erb

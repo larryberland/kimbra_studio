@@ -1,5 +1,7 @@
 class Admin::OverviewsController < ApplicationController
 
+  before_filter :reset_session_info
+
   # GET /admin/overview
   # GET /admin/overview.json
   def show

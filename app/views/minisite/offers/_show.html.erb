@@ -71,25 +71,8 @@
 
     <%= button_to t('.adjust'), edit_url, method: :get if @admin_customer_offer.adjust_picture? %>
 
-    <% if current_user_facebook && Rails.env.development? %>
-        <p class="share_facebook-item">
-          <span id='<%= "share_facebook_item_#{@admin_customer_offer.id}" %>'></span>
-        </p>
-
-        <p>
-          <%= link_to "Share on Facebook",
-                      share_facebook_session_path(@admin_customer_offer.id),
-                      remote: true,
-                      method: :post,
-                      title:  "Share my Custom Heirloom Jewelry Piece",
-                      class:  "btn likeabutton",
-                      id:     "share_facebook" %>
-          <span id='<%= "spinner_share_facebook" %>' style='display:none' class='spinner'></span>
-        </p>
-    <% end %>
-
     <p>
-      <%= link_to(t('.new_offer', name: @studio.name), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer_title')) %>
+      <%= link_to(t('.new_offer.name'), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer.title')) %>
     </p>
 
 <% end %>

@@ -206,7 +206,6 @@ en:
   my_studio_sessions_edit_link: "Edit ClickPLUS Photo Session"
   my_studio_sessions_index_title: "ClickPLUS Photo Sessions"
   my_studio_sessions_show_title: "Session Info"
-  my_studio_sessions_offer_email_link: "ClickPLUS work queue %{length}. Check back soon to view your offer email."
   my_studio_sessions_finished_uploading_notice_html: "Thanks! We'll start photoshopping those portraits into Kimbra's jewelry pieces soon.<br>Your Photo Session has been placed in the ClickPLUS Work Queue.<br>Check back shortly to View your Client's Offer Email."
 
   my_studio_sessions_complete_link: "Send to ClickPLUS work queue..."
@@ -291,8 +290,9 @@ en:
         front: "Front"
         back:   "Back"
         adjust: "Adjust Photo"
-        new_offer: "Change heirloom jewelry piece"
-        new_offer_title: "Design your very own custom heirloom piece"
+        new_offer:
+          name: "Change heirloom jewelry piece"
+          title: "Design your very own custom heirloom piece"
       index:
         shopping_cart_list: "Your Shopping Cart Items"
         clickplus_list_html: "Add to Cart or Adjust Photo"
@@ -373,6 +373,11 @@ en:
         legend_session: "Client Session Info"
       index:
         view_email: "Click to View Offer Email"
+        offer_email:
+          name: "View"
+          title: "Click to view the Offer Email"
+          queue: "ClickPLUS work queue %{length}. Check back soon to view your offer email."
+          waiting: "Waiting for you to upload more portraits."
 
   photos:
     add_files: "Add Portraits..."
@@ -463,15 +468,12 @@ en:
           shopping_cart:
             name: "Shopping Cart"
             title: "Click to view your Shopping Cart"
-            admin:
-              name: "Back to Sessions List"
-              title: "Click to view the Sessions List"
+          photo_sessions:
+            name: "Back to Sessions List"
+            title: "Click to view the Sessions List"
             mock:
-              name: "Return to How It Works"
+              name: "Back to How It Works"
               title: "Click to return to How It Works"
-            studio:
-              name: "Back to Sessions List"
-              title: "Click to view the Sessions List"
 
   shopping:
     carts:

@@ -32,11 +32,11 @@
           <td><%= upload_link(session) %></td>
           <td>
             <% if session.emails.last %>
-                <%= link_to(t(:view), show_collection_my_studio_minisite_path(session.emails.last.tracking), title: t('.view_email')) %>
+                <%= link_to(t('.offer_email.name'), minisite_email_offers_path(session.emails.last.tracking), title: t('.offer_email.title')) %>
             <% elsif session.finished_uploading_at %>
-                <%= t(:my_studio_sessions_offer_email_link, length: time_ago_in_words(session.finished_uploading_at)) %>
+                <%= t('.offer_email.queue', length: time_ago_in_words(session.finished_uploading_at)) %>
             <% else %>
-                Waiting for you to upload more portraits.
+                <%= t('.offer_email.waiting') %>
             <% end %>
           </td>
           <% if is_admin? %>
