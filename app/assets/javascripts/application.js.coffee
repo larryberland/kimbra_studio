@@ -14,7 +14,6 @@
 #= require jeditable
 #= require ./bootstrap/bootstrap
 #= require ./bootstrap/client-side-validation
-#= require_tree ./data_tables
 
 $ ->
   $('.flash_notice').each (index, element) ->
