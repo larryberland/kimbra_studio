@@ -1,3 +1,6 @@
+<%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
+<%= javascript_include_tag 'data_tables/ready_emails' %>
+
 <div id='title_bar'>
   <h3><%= t('.title') %></h3>
 </div>
@@ -7,36 +10,27 @@
       <table class="table" id='ready_emails_table'>
         <thead>
         <tr>
+          <th>Photo session</th>
+          <th>Client</th>
+          <th>How many<br/>offers</th>
+          <th>Created</th>
+          <th>Created for datatables</th>
           <% if is_admin? %>
               <th>Actions</th>
-              <th>been waiting</th>
           <% end %>
-          <th>photo session</th>
-          <% if is_admin? %>
-              <th>studio</th>
-          <% end %>
-          <th>client</th>
-          <th>how many<br/>offers</th>
-          <th>Created</th>
         </tr>
         </thead>
         <tbody>
         <% emails.each do |email| %>
             <tr>
+              <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session), title: email.my_studio_session.studio.name %></td>
+              <td><%= content_tag :span, email.my_studio_session.client.name, title: email.my_studio_session.studio.name %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
+              <td><%= email.try(:offers).try(:count).to_words %></td>
+              <td><%= date_short email.created_at %></td>
+              <td><%= email.created_at.to_s(:javascript) %></td>
               <% if is_admin? %>
                   <td><%= email.in_send_offers_queue? ? 'queued' : link_to('Edit Portraits', minisite_email_offers_path(email.tracking)) %></td>
-                  <td><%= time_ago_in_words email.created_at %></td>
               <% end %>
-
-              <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session) %></td>
-
-              <% if is_admin? %>
-                  <td><%= email.my_studio_session.studio.name %></td>
-              <% end %>
-
-              <td><%= email.my_studio_session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
-              <td><%= email.try(:offers).try(:count).to_words %></td>
-              <td><%= email.created_at %></td>
             </tr>
         <% end %>
         </tbody>
@@ -45,9 +39,3 @@
       <p>None</p>
   <% end %>
 </div>
-
-<%= javascript_tag do %>
-    $(document).ready(function(){
-    setUpDataTable($('#ready_emails_table'), <%= is_admin? ? 6 : 4 %>);
-    });
-<% end %>
