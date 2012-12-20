@@ -9,5 +9,5 @@
     %dl.dl-horizontal
       - story.storylines.sort{|a,b| a.created_at <=> b.created_at}.each do |storyline|
         %dt= storyline.seconds_comment
-        %dd{ :title=> storyline.url}= storyline.description.html_safe
+        %dd{ :title=> storyline.url}= storyline.description.to_s.html_safe
     %hr
