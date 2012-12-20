@@ -39,17 +39,15 @@ window.setOlarkUser = ->
     snippet: "#{window.currentUserName}, #{window.currentUserStudio}")
 
 window.setUpDataTable = (tableEl, optHash) ->
-  console.log optHash
   defaults =
-    "aaSorting": [[ 0, 'desc' ]],
-    "sDom": "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>",
-    "sPaginationType": "bootstrap"
-  opts = $.extend(true, defaults, optHash)
-  console.log opts
-  $(tableEl).dataTable(opts)
+    'aaSorting': [ [ 0, 'desc' ] ]
+    'sDom': "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>"
+    'sPaginationType': 'bootstrap'
+  finalOpts = $.extend(defaults, optHash)
+  $(tableEl).dataTable(finalOpts)
 
   $.extend $.fn.dataTableExt.oStdClasses,
-    "sSortAsc": "header headerSortDown",
-    "sSortDesc": "header headerSortUp",
-    "sSortable": "header sorting",
-    "sWrapper": "dataTables_wrapper form-inline"
+    'sSortAsc': 'header headerSortDown'
+    'sSortDesc': 'header headerSortUp'
+    'sSortable': 'header sorting'
+    'sWrapper': 'dataTables_wrapper form-inline'

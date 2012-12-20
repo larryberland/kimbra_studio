@@ -1,4 +1,5 @@
 <%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
+<%= javascript_include_tag 'data_tables/studios' %>
 
 <div class="row span12">
 
@@ -71,12 +72,10 @@
           <td><%= studio.try(:city_state_name) %></td>
           <td><%= editable_field studio, :sales_status, {tooltip: studio.sales_notes} %></td>
           <td><%= date_short studio.created_at %></td>
-          <td><%= studio.created_at %></td>
+          <td><%= studio.created_at.to_s(:javascript) %></td>
         </tr>
     <% end %>
     </tbody>
   </table>
 
 </div>
-
-<%= javascript_include_tag 'data_tables/studios' %>

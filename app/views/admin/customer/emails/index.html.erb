@@ -1,3 +1,6 @@
+<%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
+<%= javascript_include_tag 'data_tables/emails' %>
+
 <div class="row span12">
 
   <h2>
@@ -7,12 +10,18 @@
   <table class="table table-striped table-bordered" id='emails_table'>
     <thead>
     <tr>
-      <th colspan="<%= is_admin? ? 4 : 1 %>">Actions</th>
+   <!--   <th colspan="<%= is_admin? ? 4 : 1 %>">Actions</th> -->
+      <th>Action</th>
+      <th>Studio</th>
+      <th>Studio</th>
+      <th>Studio</th>
       <th>Studio</th>
       <th>Client</th>
       <th>Generated</th>
+      <th>Generated for datatables</th>
       <th>Sent at</th>
-      <th>Active</th>
+      <th>Sent at for datatables</th>
+      <th>Comment</th>
     </tr>
     </thead>
     <tbody>
@@ -32,18 +41,14 @@
           <% end %>
           <td><%= admin_customer_email.my_studio_session.studio.name %></td>
           <td><%= admin_customer_email.my_studio_session.client.name %></td>
-          <td><%= admin_customer_email.generated_at.to_s %></td>
-          <td><%= sent_or_queue(admin_customer_email) %></td>
-          <td><%= admin_customer_email.active %></td>
+          <td><%= date_short admin_customer_email.generated_at %></td>
+          <td><%= admin_customer_email.generated_at.to_s(:javascript) if admin_customer_email.generated_at %></td>
+          <td><%= date_short admin_customer_email.sent_at %></td>
+          <td><%= admin_customer_email.sent_at.to_s(:javascript) if admin_customer_email.sent_at %></td>
+          <td><%= admin_customer_email.in_send_offers_queue? ? 'in queue' : nil %></td>
         </tr>
     <% end %>
     </tbody>
   </table>
 
 </div>
-
-<%= javascript_tag do %>
-    $(document).ready(function(){
-    setUpDataTable($('#studios_table'), 5);
-    });
-<% end %>

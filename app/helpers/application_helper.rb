@@ -57,8 +57,23 @@ module ApplicationHelper
   end
 
   def date_short(date)
-    date = date.in_time_zone("Eastern Time (US & Canada)").to_date if date.is_a?(Time)
-    date.strftime('%b %d') if date.is_a?(Date)
+    case date
+      when Time
+        date_short = date.in_time_zone("Eastern Time (US & Canada)").to_date.strftime('%b %d')
+        tooltip = date.in_time_zone("Eastern Time (US & Canada)").to_s(:long)
+      when Date
+        date_short = date.strftime('%b %d')
+        tooltip = date.date.strftime('%b %d, %Y')
+      when NilClass
+        date_short = nil
+        tooltip = nil
+      else
+        date_short = date
+        tooltip = 'could not recognize this date'
+    end
+    content_tag :span, title: tooltip do
+      date_short
+    end
   end
 
   def image_tag_title(image_url)
