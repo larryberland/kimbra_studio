@@ -1,3 +1,6 @@
+<%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
+<%= javascript_include_tag 'data_tables/offer_emails' %>
+
 <div class="page-header">
 <h3><%= t('.title') %></h3>
 
@@ -20,10 +23,14 @@
           <th>client</th>
           <th>how many<br/>offers</th>
           <th>sent</th>
+          <th>sent for datatables</th>
           <th>last read</th>
+          <th>last read for datatables</th>
           <th>clicked through</th>
+          <th>clicked through for datatables</th>
           <th>purchased</th>
           <th>shipped</th>
+          <th>shipped for datatables</th>
         </tr>
         </thead>
         <tbody>
@@ -36,12 +43,16 @@
                   <% end %>
                   <td><%= link_to session.name, my_studio_session_path(session) %></td>
                   <td><%= session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %></td>
-                  <td><%= email.try(:offers).try(:count).to_words %></td>
+                  <td><%= email.try(:offers).try(:count) %></td>
                   <td><%= email.sent_at ? "#{time_ago_in_words email.sent_at} ago" : '' %></td>
+                  <td><%= email.sent_at.to_s(:javascript) if email.sent_at %></td>
                   <td><%= email.opened_at ? "#{time_ago_in_words email.opened_at} ago" : '' %></td>
+                  <td><%= email.opened_at.to_s(:javascript) if email.opened_at %></td>
                   <td><%= email.visited_at ? "#{time_ago_in_words email.visited_at} ago" : '' %></td>
+                  <td><%= email.visited_at.to_s(:javascript) if email.visited_at %></td>
                   <td><%= email.offers.select { |o| o.purchased_at.present? }.count.to_words %></td>
                   <td><%= email.most_recent_shipment_at.nil? ? '' : "#{time_ago_in_words(email.most_recent_shipment_at)} ago" %></td>
+                  <td><%= email.most_recent_shipment_at.to_s(:javascript) if email.most_recent_shipment_at %></td>
                 </tr>
             <% end %>
         <% end %>
@@ -53,7 +64,5 @@
 </div>
 
 <%= javascript_tag do %>
-    $(document).ready(function(){
-    setUpDataTable($('#offer_emails_table'), <%= sent_column %>);
-    });
+sentColumn = <%= sent_column %>
 <% end %>

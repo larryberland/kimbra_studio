@@ -63,7 +63,7 @@ module ApplicationHelper
         tooltip = date.in_time_zone("Eastern Time (US & Canada)").to_s(:long)
       when Date
         date_short = date.strftime('%b %d')
-        tooltip = date.date.strftime('%b %d, %Y')
+        tooltip = date.strftime('%b %d, %Y')
       when NilClass
         date_short = nil
         tooltip = nil
