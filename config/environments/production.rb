@@ -45,7 +45,7 @@ KimbraStudio::Application.configure do
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( minisite.js minisite.css stories.css orbit-1.2.3.css )
   config.assets.precompile += %w( bootstrap-ie6.min.css bootstrap.css )
-  config.assets.precompile += %w( platypus_dd.js data_tables/pagination.js )
+  config.assets.precompile += %w( platypus_dd.js data_tables/pagination.js data_tables/sort_dates_with_nils.js data_tables/sort_currency.js )
   config.assets.precompile += %w( fileuploads.css fileuploads.js xdr.js )
 
   # Disable delivery errors, bad email addresses will be ignored
