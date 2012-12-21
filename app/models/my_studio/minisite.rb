@@ -110,7 +110,7 @@ class MyStudio::Minisite < ActiveRecord::Base
   # value less than 130 is considered a dark background
   def calc_background_brightness
     if (@background_brightness.nil?)
-      if bgcolor.starts_with?('#')
+      if bgcolor.to_s.starts_with?('#')
         hex = bgcolor[1..-1]
         if (hex.size > 3)
           rgb = hex.scan(/../).map { |color| color.to_i(16) }

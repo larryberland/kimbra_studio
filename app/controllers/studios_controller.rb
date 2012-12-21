@@ -7,22 +7,7 @@ class StudiosController < ApplicationController
   # GET /studios
   # GET /studios.json
   def index
-    set = if params[:search_logoize].blank?
-            if session[:search_logoize].blank?
-              Studio.search(params[:search])
-            else
-              Studio.search_logoize(session[:search_logoize])
-            end
-          elsif params[:search_logoize] == 'any'
-            session[:search_logoize] = 'any'
-            Studio.search(params[:search])
-          else
-            session[:search_logoize] = params[:search_logoize]
-            Studio.search_logoize(params[:search_logoize])
-          end
-    @logo_search_value = params[:search_logoize] || session[:search_logoize]
-    @record_count      = set.count
-    @studios           = set.page(params[:page])
+    @studios           = Studio.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @studios }
@@ -42,7 +27,6 @@ class StudiosController < ApplicationController
   # GET /studios/new
   # GET /studios/new.json
   def new
-    puts "params:#{params.inspect}"
     if current_user.admin?
       @studio          = Studio.new(info:     MyStudio::Info.new,
                                     minisite: MyStudio::Minisite.new)
