@@ -10,7 +10,7 @@ class Shopping::BaseController < InheritedResources::Base
   private #================================================================================
 
   # current navbar menu
-  # :collection, :charms, :chains, :about, :shopping_cart
+  # :collection, :charms, :chains, :brand, :shopping_cart
   def navbar_active
 
     # reset in controller for active navbar menu item

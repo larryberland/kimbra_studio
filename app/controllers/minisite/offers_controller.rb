@@ -5,6 +5,7 @@ module Minisite
     # GET /minisite/offers
     # GET /minisite/offers.json
     def index
+      @navbar_active = :suggestions
       if @admin_customer_email
         @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
         @admin_customer_offers = @admin_customer_email.offers
@@ -16,6 +17,30 @@ module Minisite
       respond_to do |format|
         format.html # index.html.erb
         format.json { render json: @admin_customer_offers }
+      end
+    end
+
+    # GET /minisite/index_custom
+    # GET /minisite/index_custom.json
+    def index_custom
+      if @admin_customer_email
+        @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
+        @admin_customer_offers = @admin_customer_email.offers.select { |r| r.frozen_offer? || r.client? }
+      else
+        @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
+      end
+
+      if (@admin_customer_offers.size > 0)
+
+        @shopping_item = Shopping::Item.new(offer: @admin_customer_offers.first, cart: @cart)
+        @storyline.describe 'Viewing collection page.'
+        respond_to do |format|
+          format.html # index.html.erb
+          format.json { render json: @admin_customer_offers }
+        end
+      else
+        # redirect to offers#new
+        redirect_to new_minisite_email_offer_path(@admin_customer_email)
       end
     end
 
@@ -99,6 +124,7 @@ module Minisite
       # LDB: Changing this pretty sure this was just copied
       #      from admin_customer_offers
       # sure seems like i need a generate here with the portrait etc...
+      params[:admin_customer_offer][:client] = is_client?
       @admin_customer_offer       = Admin::Customer::Offer.new(params[:admin_customer_offer])
       @admin_customer_offer.email = @admin_customer_email
 
@@ -129,6 +155,7 @@ module Minisite
     # PUT /minisite/offers/1t7t7rye
     # PUT /minisite/offers/1t7t7rye.json
     def update
+      params[:admin_customer_offer][:client] = is_client?
       @admin_customer_offer.email = @email
       respond_to do |format|
         if @admin_customer_offer.update_attributes(params[:admin_customer_offer])

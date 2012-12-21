@@ -1,10 +1,8 @@
-<% shopping_cart_list, clickplus_list = @admin_customer_email.offers_lists %>
-
-<% if clickplus_list.size > 0 %>
-    <div class='row'>
-      <h4><%= t('.clickplus_list_html') %></h4>
-    </div>
-    <% clickplus_list.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
+<div class='row'>
+  <h4><%= t('.title') %></h4>
+</div>
+<% if @admin_customer_offers.size > 0 %>
+    <% @admin_customer_offers.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
         <div class='row'>
           <% if offer.width.to_i < 250 %>
               <%= render 'minisite/narrow_image', offer: offer, studio: @studio %>
@@ -18,11 +16,14 @@
 <% if is_client? %>
     <!-- only clients allowed to upload and select new piece -->
     <div class='row'>
-      <div class='media'>
-        <br>
-        <%= link_to(t(".upload_photo"), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo_title')) %>
-      </div>
+      <p>
+        <%= link_to(t('.upload_photo.name'), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo.title')) %>
+      </p>
+      <p>
+        <%= link_to(t('.new_offer.name'), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer.title')) %>
+      </p>
     </div>
+
 <% elsif is_admin? %>
     <div class='row'>
       <div class='media'>

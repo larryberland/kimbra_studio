@@ -13,7 +13,7 @@ module Minisite
     private #===========================================================================
 
     # current navbar minisite menu
-    # :collection, :charms, :chains, :about, :shopping_cart
+    # :collection, :charms, :chains, :brand, :shopping_cart
     def navbar_active
       # reset in controller for active navbar menu item
       @navbar_active = :collection
@@ -26,13 +26,24 @@ module Minisite
     # TODO See TODO below.
     def load_email
       puts "SESSION: #{session.inspect}"
-      @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id]) if params[:email_id]
+      @client_info          ||= {}
+      if params[:email_id]
+        @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
+        @client_info[:honor_email] = true if @admin_customer_email.present?
+      end
     end
 
     # TODO See TODO below.
     def set_by_tracking
-      @admin_customer_offer = Admin::Customer::Offer.find_by_tracking(params[:id]) if params[:id]
-      @admin_customer_email ||= @admin_customer_offer.email if @admin_customer_offer
+      @client_info               ||= {}
+      if params[:id]
+        @admin_customer_offer = Admin::Customer::Offer.find_by_tracking(params[:id])
+        if @admin_customer_offer
+          @client_info[:honor_offer] = true
+          # if email has not already been set then override with this offers email
+          @admin_customer_email ||= @admin_customer_offer.email
+        end
+      end
     end
 
     # this should only be called by set_cart_and_client_and_studio
@@ -64,6 +75,9 @@ module Minisite
     # 4. where else?!? don't forget combinations of the above.
     def set_cart_and_client_and_studio
 
+      puts params.inspect
+      puts @admin_customer_email
+      puts @admin_customer_offer
       # Pull cart from incoming link; usually confirmation email order status link.
       if params[:cart]
         # have a shopping cart to use

@@ -18,7 +18,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
                   :piece, :custom_layout, :item_options_list,
                   :piece, :piece_id,
                   :tracking, :active, :activation_code,
-                  :portrait_id
+                  :portrait_id, :client
 
   # parts list having portraits assigned to which part
   attr_accessor :item_options_list, :portrait_id, :image_front_cache
@@ -154,7 +154,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   # reassemble this piece using the current piece_id and portrait_id
   #   sent in from the form
-  def on_create
+  def on_create()
     on_update(-1)
   end
 

@@ -158,11 +158,11 @@ en:
   minisite_items_show_link: "Make adjustments to this piece"
 
   # minisite/item_sides
-  minisite_item_sides_update_notice_success: "Item was successfully updated."
+  minisite_item_sides_update_notice_success: "Your custom %{name} piece was successfully updated."
 
   # minisite/emails/show
   minisite_your_collection: "Your Collection"
-  minisite_offers_create_success: "Your Custom Heirloom Piece was succesfuly created."
+  minisite_offers_create_success: "Your Custom Heirloom Piece was successfully created."
 
   # my_studio/clients
   my_studio_clients_show_title: "Client Info"
@@ -294,10 +294,17 @@ en:
           name: "Change heirloom jewelry piece"
           title: "Design your very own custom heirloom piece"
       index:
-        shopping_cart_list: "Your Shopping Cart Items"
         clickplus_list_html: "Add to Cart or Adjust Photo"
         upload_photo: "Upload Your Own Photos"
         upload_photo_title: "Add Your Own Photos"
+      index_custom:
+        title: "Your Collection of custom heirloom jewelry pieces"
+        upload_photo:
+          name: "Upload Your Own Photos"
+          title: "Add Your Own Photos"
+        new_offer:
+          name: "Create another heirloom jewelry piece"
+          title: "Design your very own custom heirloom piece"
       new:
         title: "Below are some examples of unique designs that we felt were creative and could help you design your very own custom heirloom piece."
       new_form:
@@ -444,12 +451,9 @@ en:
     minisite:
       navbar:
         menus:
-          about:
-            name: "About My Studio"
-            title: "Click to view About %{name}"
           brand:
             name: "My Studio"
-            title: "%{name}"
+            title: "Click to view About %{name}"
           chains:
             name: "Chains"
             title: "Click to view Chain collection"
@@ -468,6 +472,9 @@ en:
           shopping_cart:
             name: "Shopping Cart"
             title: "Click to view your Shopping Cart"
+          suggestions:
+            name: "Suggestions"
+            title: "Click to view your Suggested jewelry collection"
           photo_sessions:
             name: "Back to Sessions List"
             title: "Click to view the Sessions List"

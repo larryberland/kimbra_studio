@@ -65,6 +65,7 @@ KimbraStudio::Application.routes.draw do
         collection do
           get :index_chains
           get :index_charms
+          get :index_custom
         end
 
       end

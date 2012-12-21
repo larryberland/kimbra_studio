@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216220259) do
+ActiveRecord::Schema.define(:version => 20121221102102) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20121216220259) do
 
   add_index "active_admin_comments", ["author_type", "author_id"], :name => "index_active_admin_comments_on_author_type_and_author_id"
   add_index "active_admin_comments", ["namespace"], :name => "index_active_admin_comments_on_namespace"
+  add_index "active_admin_comments", ["resource_type", "resource_id"], :name => "index_admin_notes_on_resource_type_and_resource_id"
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -123,6 +124,7 @@ ActiveRecord::Schema.define(:version => 20121216220259) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "frozen_offer",    :default => false
+    t.boolean  "client"
   end
 
   add_index "admin_customer_offers", ["email_id"], :name => "index_admin_customer_offers_on_email_id"

@@ -113,7 +113,7 @@ module NavbarHelper
   # Customize navbar Menu Items
   #   path, name, or title
 
-  def navbar_about_path
+  def navbar_brand_path
     if @admin_customer_email
       #link_to_your_about_or_not(text, @admin_customer_email)
       about_minisite_email_path(@admin_customer_email.tracking)
@@ -123,8 +123,8 @@ module NavbarHelper
   end
 
   # customize about menu title text
-  def navbar_about_title
-    t('.menus.about.title', name: @studio.try(:name))
+  def navbar_brand_title
+    t('.menus.brand.title', name: @studio.try(:name))
   end
 
   # customize about menu title text
@@ -136,12 +136,7 @@ module NavbarHelper
   #   the link_path for this menu item
   def navbar_collection_path
     if @admin_customer_email
-      #link_to_your_collection_or_not(text, @admin_customer_email)
-      #if is_client?
-      minisite_email_offers_path(@admin_customer_email.tracking)
-      #else
-      #show_collection_my_studio_minisite_path(@admin_customer_email.tracking)
-      #end
+      index_custom_minisite_email_offers_path(@admin_customer_email.tracking)
     else
       '#'
     end
@@ -264,5 +259,13 @@ module NavbarHelper
     name.html_safe
   end
 
+  def navbar_suggestions_path
+    if @admin_customer_email
+      minisite_email_offers_path(@admin_customer_email.tracking)
+    else
+      '#'
+    end
+
+  end
 end
 

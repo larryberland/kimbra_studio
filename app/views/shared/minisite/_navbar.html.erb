@@ -57,11 +57,11 @@
           <div class="nav-collapse collapse">
 
             <ul class='nav'>
-              <%= li_navbar(:brand, "#") %>
+              <%= li_navbar_or_not(:brand) %>
+              <%= li_navbar_or_not(:suggestions) %>
               <%= li_navbar_or_not(:collection) %>
               <%= li_navbar_or_not(:charms) %>
               <%= li_navbar_or_not(:chains) %>
-              <%= li_navbar_or_not(:about) %>
               <%= li_navbar_or_not(:shopping_cart) %>
               <%= li_navbar_photo_sessions %>
             </ul>

@@ -20,7 +20,8 @@ class Minisite::ItemSidesController < InheritedResources::Base
     end
     respond_to do |format|
       if success
-        format.html { redirect_to url_for_workflow(@item_side.item.offer), notice: t(:minisite_item_sides_update_notice_success) }
+        format.html { redirect_to url_for_workflow(@item_side.item.offer),
+                                  notice: t(:minisite_item_sides_update_notice_success, name: @offer.piece.to_offer_name) }
         format.json { head :ok }
       else
         format.html { render action: 'edit' }
