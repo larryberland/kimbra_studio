@@ -60,7 +60,7 @@ module ApplicationHelper
     case date
       when Time
         date_short = date.in_time_zone("Eastern Time (US & Canada)").to_date.strftime('%b %d')
-        tooltip = date.in_time_zone("Eastern Time (US & Canada)").to_s(:long)
+        tooltip = date.in_time_zone("Eastern Time (US & Canada)").to_s(:long_tz)
       when Date
         date_short = date.strftime('%b %d')
         tooltip = date.strftime('%b %d, %Y')
