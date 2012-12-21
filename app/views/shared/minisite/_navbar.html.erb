@@ -13,11 +13,12 @@
                 <br>
             <% end %>
             <% if @studio.phone_number %>
-                <abbr title="<%=t(:phone_abbr)%>"><%= icon_minisite("icon-volume-up") %></abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
+                <abbr title="<%= t(:phone_abbr) %>"><%= icon_minisite("icon-volume-up") %></abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
                 <br>
             <% end %>
             <% if @studio.info and @studio.info.email %>
-                <abbr title=""<%=t(:email_abbr)%>""><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
+                <abbr title=""<%= t(:email_abbr) %>
+                ""><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
             <% end %>
           </address>
         </div>
@@ -60,6 +61,9 @@
               <%= li_navbar_or_not(:brand) %>
               <%= li_navbar_or_not(:suggestions) %>
               <%= li_navbar_or_not(:collection) %>
+              <% if Rails.env.development? %>
+                  <%= li_navbar_friends %>
+              <% end %>
               <%= li_navbar_or_not(:charms) %>
               <%= li_navbar_or_not(:chains) %>
               <%= li_navbar_or_not(:shopping_cart) %>

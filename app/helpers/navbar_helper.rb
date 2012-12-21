@@ -79,6 +79,20 @@ module NavbarHelper
     end
   end
 
+  def li_navbar_friends
+    menu      = :friends
+
+    # drop down list for the Misc menu
+    sub_menus = {send_offer_email:   "#"}
+
+    # TODO: add all friends names that are associated with this Admin::Customer::Email
+
+    dropdown_active, sub_menu_html = navbar_dropdown_sub_menus(menu, sub_menus)
+
+    li_navbar_dropdown_menu(menu, sub_menu_html, dropdown_active)
+
+  end
+
   private
 
   # top level navbar menu that has dropdown menus

@@ -13,4 +13,15 @@
     <% end %>
 <% end %>
 
+<%= form_for(@admin_customer_email.name, :remote => true) do |f| %>
+    <p>
+      <%= f.hidden_field :email_id %>
+      <%= f.hidden_field :offer_id %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
+      <%= submit_tag 'Name My Collection', :id => 'my_submit2', :class => 'likeabutton' %>
+      <span id="spinner" style="display:none" class='spinner'></span>
+    </p>
+<% end %>
+
 <%= render "index_footer" %>

@@ -289,7 +289,9 @@ en:
       show:
         front: "Front"
         back:   "Back"
-        adjust: "Adjust Photo"
+        adjust_photo:
+          name: "Adjust Photo"
+          title: "Click to Adjust Photo in your custom Piece."
         new_offer:
           name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
@@ -468,6 +470,13 @@ en:
             sign_out:
               name: "Sign Out Facebook"
               title: "Click to sign out of Facebook"
+          friends:
+            name: "My Friends"
+            title: "Click to Share with friends or view friends Collection"
+            send_offer_email:
+              name: "Share Offer Email with a friend"
+              title: "Click to share with a friend."
+
           shopping_cart:
             name: "Shopping Cart"
             title: "Click to view your Shopping Cart"

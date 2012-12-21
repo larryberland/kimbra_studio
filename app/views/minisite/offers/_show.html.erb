@@ -34,7 +34,7 @@
     </h4>
 
     <% if @admin_customer_offer.frozen_offer? %>
-        <b><%= icon_minisite('icon-shopping-cart')%>&nbsp;<%= t('in_shopping_cart') %></b><br>
+        <b><%= icon_minisite('icon-shopping-cart') %>&nbsp;<%= t('in_shopping_cart') %></b><br>
     <% end %>
 
     <%= content_tag :p do %>
@@ -71,14 +71,16 @@
               <span id="spinner" style="display:none" class='spinner'></span>
             </p>
         <% end %>
+
     <% end %>
 
-    <%= button_to t('.adjust'), edit_url, method: :get if @admin_customer_offer.adjust_picture? %>
-
     <p>
+      <%= button_to t('.adjust_photo.name'), edit_url,
+                    method: :get, title: t('.adjust_photo.title') if @admin_customer_offer.adjust_picture? %>
+
       <%= button_to(t('.new_offer.name', size: Admin::Merchandise::Piece.inventory_size.to_words),
-                  new_minisite_email_offer_path(@admin_customer_email),
-                  method: :get, title: t('.new_offer.title')) %>
+                    new_minisite_email_offer_path(@admin_customer_email),
+                    method: :get, title: t('.new_offer.title')) %>
     </p>
 
 <% end %>
