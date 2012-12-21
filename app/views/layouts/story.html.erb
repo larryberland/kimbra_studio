@@ -5,15 +5,18 @@
   <meta name='viewport' content='width=device-width, initial-scale=1, maximum-scale=1'>
   <link rel='icon' type='image/png' href='favicon.png'>
 
-  <%= stylesheet_link_tag 'application', 'stories' %>
+  <%= stylesheet_link_tag 'application', 'bootstrap', 'stories' %>
 
   <%= javascript_include_tag 'application' %>
   <%= csrf_meta_tags %>
   <%= yield :head %>
   <!--[if !IE 7]>
-  	<style type='text/css'>
-  		#wrap {display:table;height:100%}
-  	</style>
+  <style type='text/css'>
+      #wrap {
+          display: table;
+          height: 100%
+      }
+  </style>
   <![endif]-->
 </head>
 <body>
@@ -25,7 +28,7 @@
     <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
   </div>
 
-  <%= render 'shared/navbar'%>
+  <%= render 'shared/navbar' %>
 
   <div id='content' class='container'>
     <%= yield %>
