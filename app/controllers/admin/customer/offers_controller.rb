@@ -6,15 +6,7 @@ class Admin::Customer::OffersController < ApplicationController
   # GET /admin/customer/offers
   # GET /admin/customer/offers.json
   def index
-    set                    = if @email
-                               @email.offers
-                             else
-                               Admin::Customer::Offer.where(:tracking => params[:email_id]).all
-                             end
-    @record_count          = set.count
-    @admin_customer_offers = set.page(params[:page])
-
-
+    @admin_customer_offers = Admin::Customer::Offer.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @admin_customer_offers }
