@@ -72,7 +72,9 @@
     <%= button_to t('.adjust'), edit_url, method: :get if @admin_customer_offer.adjust_picture? %>
 
     <p>
-      <%= link_to(t('.new_offer.name'), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer.title')) %>
+      <%= button_to(t('.new_offer.name', size: Admin::Merchandise::Piece.inventory_size.to_words),
+                  new_minisite_email_offer_path(@admin_customer_email),
+                  method: :get, title: t('.new_offer.title')) %>
     </p>
 
 <% end %>

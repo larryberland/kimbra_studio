@@ -78,6 +78,7 @@ module Minisite
       puts params.inspect
       puts @admin_customer_email
       puts @admin_customer_offer
+
       # Pull cart from incoming link; usually confirmation email order status link.
       if params[:cart]
         # have a shopping cart to use

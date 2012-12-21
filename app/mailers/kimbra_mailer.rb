@@ -3,6 +3,7 @@ class KimbraMailer < ActionMailer::Base
   include Shopping::PurchasesHelper
   helper :application
   helper 'shopping/purchases'
+  helper :facebook
 
   default from: 'ClickPLUS Support <support@kimbraclickplus.com>'
   default to: 'jim@jimjames.org'

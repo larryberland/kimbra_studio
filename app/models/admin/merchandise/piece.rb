@@ -27,6 +27,11 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
     where( 'category ilike ? OR name ilike ?', like_exp, like_exp).order('active desc, category desc, name asc')
   }
 
+  @@inventory_size = are_active_with_photo.size
+
+  def self.inventory_size
+    @@inventory_size
+  end
   # determines both the number of offers we send out and from which category
   #  when the Holiday's start we can just add to this array
   # ["Photo Bracelets", "Photo Necklaces", "Holiday", "Photo Charms"] as of 10/7/2012

@@ -219,7 +219,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
       # create a composite of all the items
       create_images
 
-      if (errors.messages)
+      if (errors.present?)
         Rails.logger.warn "CHALLENGE:: offer save errors:#{errors.full_messages}"
       end
     end
@@ -241,6 +241,12 @@ class Admin::Customer::Offer < ActiveRecord::Base
     offer
   end
 
+  def suggestion?
+    if @suggestion.nil?
+      @suggestion = (frozen? or client?) ? false : true
+    end
+    @suggestion
+  end
   # list of portrait's used by all items in this offer
   def item_portrait_list
     items.each.collect { |item| item.portrait_list }.compact if items.present?

@@ -13,24 +13,4 @@
     <% end %>
 <% end %>
 
-<% if is_client? %>
-    <!-- only clients allowed to upload and select new piece -->
-    <div class='row'>
-      <p>
-        <%= link_to(t('.upload_photo.name'), minisite_email_portraits_path(@admin_customer_email), method: :get, title: t('.upload_photo.title')) %>
-      </p>
-      <p>
-        <%= link_to(t('.new_offer.name'), new_minisite_email_offer_path(@admin_customer_email), method: :get, title: t('.new_offer.title')) %>
-      </p>
-    </div>
-
-<% elsif is_admin? %>
-    <div class='row'>
-      <div class='media'>
-        <br>
-        <% btn_message = @admin_customer_email.sent_at? ? "This email already sent on #{time_short_index @admin_customer_email.sent_at}. Click to send again." : 'If all offers are fixed, click me to send the offer email!' %>
-        <%= button_to btn_message, send_offers_admin_customer_email_url(@admin_customer_email), method: :post %>
-      </div>
-    </div>
-<% end %>
-<br>
+<%= render "index_footer" %>

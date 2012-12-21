@@ -162,7 +162,7 @@ en:
 
   # minisite/emails/show
   minisite_your_collection: "Your Collection"
-  minisite_offers_create_success: "Your Custom Heirloom Piece was successfully created."
+  minisite_offers_create_success: "Your Custom Heirloom Piece was successfully created and put into Your Collection List."
 
   # my_studio/clients
   my_studio_clients_show_title: "Client Info"
@@ -291,20 +291,19 @@ en:
         back:   "Back"
         adjust: "Adjust Photo"
         new_offer:
-          name: "Change heirloom jewelry piece"
-          title: "Design your very own custom heirloom piece"
+          name: "Create a new heirloom jewelry piece from our inventory of %{size} pieces"
+          title: "Click to design your very own custom heirloom piece."
       index:
-        clickplus_list_html: "Add to Cart or Adjust Photo"
-        upload_photo: "Upload Your Own Photos"
-        upload_photo_title: "Add Your Own Photos"
+        title: "%{studio} suggests the following Pieces"
       index_custom:
         title: "Your Collection of custom heirloom jewelry pieces"
+      index_footer:
         upload_photo:
           name: "Upload Your Own Photos"
           title: "Add Your Own Photos"
         new_offer:
-          name: "Create another heirloom jewelry piece"
-          title: "Design your very own custom heirloom piece"
+          name: "Create a new heirloom jewelry piece from %{size} unique designs."
+          title: "Click to design your very own custom heirloom piece."
       new:
         title: "Below are some examples of unique designs that we felt were creative and could help you design your very own custom heirloom piece."
       new_form:

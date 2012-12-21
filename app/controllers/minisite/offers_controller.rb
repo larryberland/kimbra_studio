@@ -8,11 +8,12 @@ module Minisite
       @navbar_active = :suggestions
       if @admin_customer_email
         @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
-        @admin_customer_offers = @admin_customer_email.offers
+        @admin_customer_offers = @admin_customer_email.offers.select { |r| r.suggestion? }
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
-      @shopping_item = Shopping::Item.new(offer: @admin_customer_offer, cart: @cart)
+      # LDB:? Changed this to offers.first it was @admin_custoer_offer
+      @shopping_item = Shopping::Item.new(offer: @admin_customer_offers.first, cart: @cart)
       @storyline.describe 'Viewing collection page.'
       respond_to do |format|
         format.html # index.html.erb
@@ -29,6 +30,7 @@ module Minisite
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
+      # LDB:? Changed this to offers.first it was @admin_custoer_offer
 
       if (@admin_customer_offers.size > 0)
 
@@ -94,8 +96,9 @@ module Minisite
     # GET /minisite/offers/1t7t7rye.json
     def show
       @admin_customer_offer.update_attribute(:visited_at, Time.now) if is_client?
-      @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
+      @shopping_item = Shopping::Item.new(offer: @admin_customer_offer, cart: @cart)
       @storyline.describe "Viewing #{@admin_customer_offer.name} offer."
+      @navbar_active = :suggestions if (@admin_customer_offer.suggestion?)
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @admin_customer_offer }
