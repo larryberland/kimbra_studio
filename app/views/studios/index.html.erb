@@ -38,7 +38,7 @@
     </tr>
     </thead>
     <tbody>
-    <% @studios.all.each do |studio| %>
+    <% @studios.each do |studio| %>
         <tr>
           <td><%= studio.try(:logoize) ? 'logo' : 'nologo' %></td>
           <td title='<%= time_short_index studio.eap_click %>'><%= date_short studio.eap_click %></td>
