@@ -63,7 +63,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   # generate an offer directly from a kimbra piece
   # NOTE: So far these are all non-photo charms or chains
-  def self.generate_from_piece(email, piece_id)
+  def self.generate_from_piece(email, piece_id, is_client)
     piece = Admin::Merchandise::Piece.find(piece_id)
     offer = Admin::Customer::Offer.create(
         tracking:          UUID.random_tracking_number,
@@ -71,6 +71,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
         piece:             piece, # parent merchandise.piece
         item_options_list: [])
     offer.frozen_offer = true
+    offer.client = is_client
     offer.assemble(piece)
     offer
   end
@@ -243,7 +244,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   def suggestion?
     if @suggestion.nil?
-      @suggestion = (frozen? or client?) ? false : true
+      @suggestion = (frozen_offer? or client?) ? false : true
     end
     @suggestion
   end
@@ -307,7 +308,9 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def adjust_picture?
     # NOTE: if piece.photo? not properly set run
     #       rake kimbra:seed_piece_photo
-    piece.photo? and (not frozen_offer?)
+    if piece.photo?
+      frozen_offer? ? false : true
+    end
   end
 
   def has_picture?

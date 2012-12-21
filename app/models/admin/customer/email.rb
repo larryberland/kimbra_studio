@@ -146,12 +146,6 @@ class Admin::Customer::Email < ActiveRecord::Base
     jobs.detect { |job| YAML.load(job.handler).args.include? self.id }.present?
   end
 
-  def offers_lists
-    shopping_cart_list = offers.select { |r| r.frozen_offer? or r.client? }
-    clickplus_list = offers - shopping_cart_list
-    return shopping_cart_list, clickplus_list
-  end
-
   def most_recent_shipment_at
     @most_recent_shipment_at ||= carts.collect(&:shipment_at).compact.max
   end

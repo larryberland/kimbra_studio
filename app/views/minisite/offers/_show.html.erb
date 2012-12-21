@@ -33,6 +33,10 @@
       <%= @admin_customer_offer.name %>
     </h4>
 
+    <% if @admin_customer_offer.frozen_offer? %>
+        <b><%= icon_minisite('icon-shopping-cart')%>&nbsp;<%= t('in_shopping_cart') %></b><br>
+    <% end %>
+
     <%= content_tag :p do %>
         <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
             <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>

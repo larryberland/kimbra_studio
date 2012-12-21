@@ -291,7 +291,7 @@ en:
         back:   "Back"
         adjust: "Adjust Photo"
         new_offer:
-          name: "Create a new heirloom jewelry piece from our inventory of %{size} pieces"
+          name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
       index:
         title: "%{studio} suggests the following Pieces"
@@ -302,7 +302,7 @@ en:
           name: "Upload Your Own Photos"
           title: "Add Your Own Photos"
         new_offer:
-          name: "Create a new heirloom jewelry piece from %{size} unique designs."
+          name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
       new:
         title: "Below are some examples of unique designs that we felt were creative and could help you design your very own custom heirloom piece."

@@ -14,12 +14,16 @@ module Shopping
     def create
       item_already_in_cart = @cart.find_item(@admin_customer_offer.id) if @admin_customer_ofer
 
+      @create_notice = :add_to_collection
+
       if params[:shopping_item] && params[:shopping_item][:piece_id]
         # Someone has picked one of the Kimbra Pieces that is not associated
         #   with our email offer (ex. chains or charms)
         # create an offer from this kimbra_piece and add to the shopping cart
+
         @admin_customer_offer               = Admin::Customer::Offer.generate_from_piece(@admin_customer_email,
-                                                                                         params[:shopping_item][:piece_id])
+                                                                                         params[:shopping_item][:piece_id],
+                                                                                        is_client?)
         params[:shopping_item][:offer_id]   = @admin_customer_offer.id
         session[:admin_customer_offer_id]   = @admin_customer_offer.id
         @shopping_item_id                   = params[:shopping_item][:piece_id]
@@ -35,7 +39,13 @@ module Shopping
           @shopping_item_id                 = @admin_customer_offer.id
 
           # create our new frozen_offer? record that no one can adjust picture
-          @admin_customer_offer             = @admin_customer_offer.generate_for_cart
+          if @admin_customer_offer.suggestion?
+            @admin_customer_offer  = @admin_customer_offer.generate_for_cart
+          else
+            # freeze this offer and add this to cart
+            @admin_customer_offer.update_attributes(frozen_offer: true)
+            @create_notice = :add_to_cart
+          end
 
           # reset our info to the new frozen offer
           session[:admin_customer_offer_id] = @admin_customer_offer.id
