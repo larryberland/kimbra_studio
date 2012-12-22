@@ -311,9 +311,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def adjust_picture?
     # NOTE: if piece.photo? not properly set run
     #       rake kimbra:seed_piece_photo
-    if piece.photo?
-      frozen_offer? ? false : true
-    end
+    piece.photo?
   end
 
   def has_picture?

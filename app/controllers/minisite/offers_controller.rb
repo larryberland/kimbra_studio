@@ -12,8 +12,6 @@ module Minisite
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
-      # LDB:? Changed this to offers.first it was @admin_custoer_offer
-      @shopping_item = Shopping::Item.new(offer: @admin_customer_offers.first, cart: @cart)
       @storyline.describe 'Viewing collection page.'
       respond_to do |format|
         format.html # index.html.erb
@@ -24,18 +22,21 @@ module Minisite
     # GET /minisite/index_custom
     # GET /minisite/index_custom.json
     def index_custom
+      session[:index_customs] = {friend_id: @admin_customer_friend.id} if @admin_customer_friend
+
       if @admin_customer_email
         @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
-        @admin_customer_offers = @admin_customer_email.offers.select { |r| r.frozen_offer? || r.client? }
+
+        @admin_customer_friend ||= @admin_customer_email.new_friend(@cart)
+
+        @admin_customer_offers = @admin_customer_email.offers_by_friend(@admin_customer_friend.id)
+
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
-      # LDB:? Changed this to offers.first it was @admin_customer_offer
-      @admin_customer_friend = @admin_customer_email.current_friend
 
       if (@admin_customer_offers.size > 0)
 
-        @shopping_item = Shopping::Item.new(offer: @admin_customer_offers.first, cart: @cart)
         @storyline.describe 'Viewing collection page.'
         respond_to do |format|
           format.html # index.html.erb
@@ -50,17 +51,16 @@ module Minisite
     # GET /minisite/index_friends
     # GET /minisite/index_friends.json
     def index_friends
-      friend = Admin::Customer::Friend.find_by_id(params[:friend])
-      if friend.present?
-        session[:admin_customer_friend_id] = friend.id
-        @admin_customer_friend = friend
-        @navbar_active = "friend_#{friend.id}".to_sym
+      @friend = Admin::Customer::Friend.find_by_id(params[:friend])
+      if @friend.present?
+        session[:index_friends] = {friend_id: @friend.id}
+        @navbar_active = "friend_#{@friend.id}".to_sym
       end
 
       if @admin_customer_email
         @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
-        if (@admin_customer_friend)
-          @admin_customer_offers = @admin_customer_email.offers_by_friend(@admin_customer_friend.id)
+        if (@friend)
+          @admin_customer_offers = @admin_customer_email.offers_by_friend(@friend.id)
         else
           @admin_customer_offers = @admin_customer_email.offers.select { |r| r.frozen_offer? || r.client? }
         end
@@ -69,11 +69,8 @@ module Minisite
       end
 
       # LDB:? Changed this to offers.first it was @admin_customer_offer
-      @admin_customer_friend ||= @admin_customer_email.current_friend
-
       if (@admin_customer_offers.size > 0)
 
-        @shopping_item = Shopping::Item.new(offer: @admin_customer_offers.first, cart: @cart)
         @storyline.describe 'Viewing collection page.'
         respond_to do |format|
           format.html # index.html.erb
@@ -147,6 +144,7 @@ module Minisite
     # GET /minisite/offers/new
     # GET /minisite/offers/new.json
     def new
+      @navbar_active = :create_custom
       @storyline.describe "New email offer #{@admin_customer_email.my_studio_session.client.email}"
       @admin_customer_offer = Admin::Customer::Offer.new(email: @admin_customer_email)
       respond_to do |format|

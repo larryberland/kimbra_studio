@@ -33,7 +33,7 @@ module NavbarHelper
   #   <li class="active">
   #     <a title="Click to view your custom jewelry collection"
   #         href="/minisite/emails/hydh0yezkf/offers">
-  #       Your Collection
+  #       My Collection
   #     </a>
   #   </li>
   def li_navbar_or_not(menu)
@@ -85,11 +85,21 @@ module NavbarHelper
   end
 
   def li_navbar_friends
-    menu      = :friends
+    menu = :friends
 
     # drop down list for the Misc menu
-    sub_menus = {send_offer_email: "#"}
+    if Rails.env.development?
+      url = "<li >
+           <!-- Button to trigger modal -->
+             <a href='#mySendOfferEmail' data-toggle='modal' title='#{t('.new_friend.title')}'>
+               #{t('.new_friend.name')}
+             </a>
+           </li>"
 
+      sub_menus = {}
+    else
+    end
+    sub_menus = {send_offer_email: "#mySendOfferEmail"}
     # TODO: add all friends names that are associated with this Admin::Customer::Email
     if (@admin_customer_email)
       current_friend_id = @admin_customer_friend.id if @admin_customer_friend
@@ -101,7 +111,7 @@ module NavbarHelper
     end
 
     dropdown_active, sub_menu_html = navbar_dropdown_sub_menus(menu, sub_menus)
-
+    sub_menu_html.gsub!('#mySendOfferEmail"', '#mySendOfferEmail" data-toggle="modal"')
     li_navbar_dropdown_menu(menu, sub_menu_html, dropdown_active)
 
   end
@@ -304,6 +314,22 @@ module NavbarHelper
       '#'
     end
 
+  end
+
+  def navbar_upload_path
+    if (@admin_customer_email)
+      minisite_email_portraits_path(@admin_customer_email)
+    else
+      '#'
+    end
+  end
+
+  def navbar_create_custom_path
+    if (@admin_customer_email)
+      new_minisite_email_offer_path(@admin_customer_email)
+    else
+      '#'
+    end
   end
 end
 

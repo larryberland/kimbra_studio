@@ -1,0 +1,22 @@
+<% if is_client? %>
+    <% shopping_item = Shopping::Item.new(offer: offer, cart: @cart)%>
+    <%= form_for(shopping_item, :remote => true) do |f| %>
+        <%= f.hidden_field :offer_id %>
+        <%= f.hidden_field :cart_id %>
+        <%= submit_tag 'Add to Cart', :id => "my_submit_#{offer.id}", :class => 'likeabutton multi-submits' %>
+        <span id="spinner_#{offer.id}" style="display:none" class='spinner'></span>
+    <% end %>
+
+<% end %>
+
+<% if offer.has_picture? %>
+    <% if offer.items.size > 1 %>
+        <% edit_url = minisite_offer_items_path(offer) %>
+    <% else %>
+        <% edit_url = edit_minisite_item_side_path(offer.items.first.front) %>
+    <% end %>
+<% end %>
+
+<%= button_to t('minisite.offers.show.adjust_photo.name'), edit_url,
+              method: :get, title: t('minisite.offers.show.adjust_photo.title') if offer.adjust_picture? %>
+

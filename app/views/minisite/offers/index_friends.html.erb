@@ -1,9 +1,9 @@
 <div class='row'>
   <h4>
-    <% if @admin_customer_friend.new_record? %>
+    <% if @friend.new_record? %>
         <%= t('.title') %>
     <% else %>
-        <%= t('.title_friend', name: @admin_customer_friend.name) %>
+        <%= t('.title_friend', name: @friend.name) %>
     <% end %>
   </h4>
 </div>
@@ -19,8 +19,3 @@
     <% end %>
 <% end %>
 
-<div class='row'>
-
-  <%= render "index_footer" %>
-
-</div>

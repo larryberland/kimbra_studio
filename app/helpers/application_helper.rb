@@ -135,7 +135,7 @@ module ApplicationHelper
     if model_with_carrier_wave_image
       options[:image]   ||= 'image'
       options[:version] ||= :thumb
-      image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]))
+      image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]), class: "rounded")
     end
   end
 

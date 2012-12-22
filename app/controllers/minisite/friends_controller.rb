@@ -43,7 +43,7 @@ module Minisite
 
           url =   index_custom_minisite_email_offers_url(@admin_customer_email.tracking)
 
-          format.html { redirect_to url, notice: "Your Collection has been named successfully" }
+          format.html { redirect_to url, notice: "My Collection has been named successfully" }
           format.json { render json: minisite_email_friend_url(@admin_customer_email, @admin_customer_friend), status: :created, location: @admin_customer_friend }
           format.js
         else

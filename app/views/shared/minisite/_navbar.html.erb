@@ -47,9 +47,7 @@
       </a>
 
       <ul class="nav pull-right">
-        <li>
-          <%= li_navbar_or_not(:facebook) %>
-        </li>
+        <%= li_navbar_or_not(:shopping_cart) %>
       </ul>
 
 <%# do not show the navigation bar if Kimbra is entering the delivery tracking number  %>
@@ -67,7 +65,8 @@
               <% end %>
               <%= li_navbar_or_not(:charms) %>
               <%= li_navbar_or_not(:chains) %>
-              <%= li_navbar_or_not(:shopping_cart) %>
+              <%= li_navbar_or_not(:upload, ) %>
+              <%= li_navbar_or_not(:create_custom) %>
               <%= li_navbar_photo_sessions %>
             </ul>
           </div>
@@ -76,3 +75,9 @@
 
   </div>
 </div>
+
+<% if Rails.env.development? %>
+
+    <%= render 'minisite/friends/form_email' %>
+
+<% end %>

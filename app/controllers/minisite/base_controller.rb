@@ -110,7 +110,12 @@ module Minisite
         session[:studio_id]    ||= @studio.id
 
         # current collection friend name
-        @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id])
+        if (session[:admin_customer_friend_id])
+          @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id])
+        else
+          # client is coming in with a new session
+          @admin_customer_friend = nil
+        end
 
       elsif (is_studio?)
         # studio and admin should have @cart and @client nil

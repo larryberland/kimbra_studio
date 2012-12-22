@@ -161,8 +161,7 @@ en:
   minisite_item_sides_update_notice_success: "Your custom %{name} piece was successfully updated."
 
   # minisite/emails/show
-  minisite_your_collection: "Your Collection"
-  minisite_offers_create_success: "Your Custom Heirloom Piece was successfully created and put into Your Collection List."
+  minisite_offers_create_success: "Your Custom Heirloom Piece was successfully created and added to My Collection."
 
   # my_studio/clients
   my_studio_clients_show_title: "Client Info"
@@ -270,7 +269,9 @@ en:
         p3: "is the pioneer in this field and will be doing the hand-crafting at our direction in their studio in Colorado. We love their work and are proud to partner with them to bring you this jewelry."
     friends:
       form:
-        title: "Name Your Collection"
+        title: "Name My Collection"
+      form_email:
+        title: "Send My Collection to a Friend"
 
     items:
       index:
@@ -283,6 +284,9 @@ en:
         title: "Move or resize selection by dragging"
         p1_html: "Please ignore any thin white lines appearing on the sides of your portraits in the jewelry pieces.<br/>These will not be present when we prepare your pieces."
         portraits_click: "Click to select a different portrait"
+        create_offer:
+          name: "Create new piece and add to My Collection"
+          title: "Click to create a copy of this piece and add it to My Collection."
     narrow_image:
       in_shopping_cart: "In your shopping cart"
     wide_image:
@@ -299,19 +303,19 @@ en:
           name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
       index:
-        title: "%{studio} suggests the following Pieces"
+        title: "%{studio} suggests the following Pieces for your collection."
       index_custom:
-        title: "Your Collection of custom heirloom jewelry pieces"
-        title_friend: "Your Collection of custom heirloom jewelry pieces, shared with Friends as %{name}"
+        title: "My Collection of custom heirloom jewelry pieces"
+        title_friend: "My Collection of custom heirloom jewelry pieces, shared with Friends as %{name}"
         new_friend:
-          name: "Name Your Collection for your Friends..."
-          title: "Click to Name Your Collection for your Friends."
+          name: "Name My Collection for your Friends..."
+          title: "Click to Name My Collection for your Friends."
       index_friends:
         title: "Your Friends Collection of custom heirloom jewelry pieces"
         title_friend: "%{name} Collection of custom heirloom jewelry pieces"
         new_friend:
-          name: "Name Your Collection for your Friends..."
-          title: "Click to Name Your Collection for your Friends."
+          name: "Name My Collection for your Friends..."
+          title: "Click to Name My Collection for your Friends."
       index_footer:
         upload_photo:
           name: "Upload Your Own Photos"
@@ -353,7 +357,7 @@ en:
         legend: "Your Studio ClickPLUS Info"
         ping_email_help: "receive emails from ClickPLUS about commissions, new features, etc"
       mock_collection:
-        your_collection: "Your Collection"
+        your_collection: "My Collection"
         shopping_cart:  "Shopping Cart (0 items)"
         about: "About %{studio_name}"
         back_samples: "Back to How It Works"
@@ -475,8 +479,11 @@ en:
             name: "Charms"
             title: "Click to view Charms collection"
           collection:
-            name: "Your Collection"
+            name: "My Collection"
             title: "Click to view your custom jewelry collection"
+          create_custom:
+            name: "Custom Piece"
+            title: "Click to design your very own custom heirloom piece."
           facebook:
             name: "Log In"
             title: "Click to Log In to your Facebook"
@@ -502,6 +509,10 @@ en:
             mock:
               name: "Back to How It Works"
               title: "Click to return to How It Works"
+          upload:
+            name: "Upload Photos"
+            title: "Click to Upload your own photos"
+
 
   shopping:
     carts:

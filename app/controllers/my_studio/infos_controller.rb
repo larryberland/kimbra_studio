@@ -92,7 +92,7 @@ class MyStudio::InfosController < MyStudio::BaseController
     # Static text.
   end
 
-  # Non-functioning mockup of the Your Collection page.
+  # Non-functioning mockup of the My Collection page.
   def mock_collection
     @mock_collection = true
     @studio = @my_studio

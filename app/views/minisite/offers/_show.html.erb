@@ -62,26 +62,21 @@
 
 <% unless @show_status_only %>
 
-    <% if is_client? %>
-        <%= form_for(@shopping_item, :remote => true) do |f| %>
-            <p>
+    <div>
+      <% if is_client? %>
+          <%= form_for(@shopping_item, :remote => true) do |f| %>
               <%= f.hidden_field :offer_id %>
               <%= f.hidden_field :cart_id %>
               <%= submit_tag 'Add to Cart', :id => 'my_submit', :class => 'likeabutton' %>
               <span id="spinner" style="display:none" class='spinner'></span>
-            </p>
-        <% end %>
+          <% end %>
 
-    <% end %>
+      <% end %>
 
-    <p>
       <%= button_to t('.adjust_photo.name'), edit_url,
                     method: :get, title: t('.adjust_photo.title') if @admin_customer_offer.adjust_picture? %>
 
-      <%= button_to(t('.new_offer.name', size: Admin::Merchandise::Piece.inventory_size.to_words),
-                    new_minisite_email_offer_path(@admin_customer_email),
-                    method: :get, title: t('.new_offer.title')) %>
-    </p>
+    </div>
 
 <% end %>
 

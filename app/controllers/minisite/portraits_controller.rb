@@ -6,6 +6,7 @@ module Minisite
     # GET /minisite/emails/:id/portraits
     # GET /minisite/emails/:id/portraits.json
     def index
+      @navbar_active = :upload
       @my_studio_session   = @admin_customer_email.my_studio_session
       @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @my_studio_session).order('created_at desc')
       @record_count        = @my_studio_portraits.size

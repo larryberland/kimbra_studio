@@ -2,8 +2,9 @@
 
     <%= render 'shared/error_messages', record: @item_side %>
 
+    <div class="span8">
     <div class='preview'>
-        <h3><%= t '.title' %></h3>
+      <h3><%= t '.title' %></h3>
       <table cellpadding='20px' class="table">
         <tbody>
         <tr>
@@ -35,22 +36,14 @@
     </div>
 
     <div class="form-actions">
-      <%= f.submit :id => 'my_submit', :value => 'Save' %>
-      <%= link_to t(:cancel), url_for_cancel_workflow(@offer), :style => 'margin-left: 15px;' %>
+      <%= f.submit :id => 'my_submit', :value => 'Save', class: 'btn btn-primary' %>
+      <%= link_to t('.create_offer.name'), url_for_cancel_workflow(@offer), class: 'btn', title: t('.create_offer.title') %>
+      <%= link_to t(:cancel), url_for_cancel_workflow(@offer), class: 'btn' %>
       <span id="spinner" style="display:none" class='spinner'></span>
     </div>
 
     <div id="portrait_form">
 
-    </div>
-
-    <div class="portraits">
-      <div><br/><br/><i><%= t '.portraits_click' %></i></div>
-      <% @admin_customer_offer.portraits.each do |portrait| %>
-          <div>
-            <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true %>
-          </div>
-      <% end %>
     </div>
 
     <div id='hidden_fields'>
@@ -62,17 +55,19 @@
       <% end %>
     </div>
 
-    <!-- remove for now, think should go on different page
-    <!-- upload a file for new portrait
-    <div class="field">
-       f.label :image_stock, 'Portrait:' %>
-       f.file_field :image_stock %>
-      <br/>
-       f.label :remote_image_stock_url, 'or Portrait URL' %>
-       f.text_field :remote_image_stock_url %>
     </div>
-     f.hidden_field :image_stock_cache %>
-    -->
+
+    <div class="span3 pull-right">
+      <div class="">
+        <div><br/><br/><i><%= t '.portraits_click' %></i></div>
+        <% @admin_customer_offer.portraits.each do |portrait| %>
+            <div>
+              <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true, class: "rounded" %>
+            </div>
+        <% end %>
+      </div>
+    </div>
+
 
 <% end %>
 

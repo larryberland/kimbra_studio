@@ -159,8 +159,20 @@ class Admin::Customer::Email < ActiveRecord::Base
     end
   end
 
+  def new_friend(cart)
+    client_name = my_studio_session.client.name
+    names = friends.collect(&:name)
+    name = if (names.include?(client_name))
+      "#{client_name} #{cart.id}"
+    else
+      client_name
+    end
+    Admin::Customer::Friend.new(email: self, name: name)
+  end
+
   def offers_by_friend(friend_id)
-    offers.select{|r| r.try(:friend).try(:id) == friend_id}
+    set = offers.reject{|r| r.suggestion?}
+    set.select{|r| r.try(:friend).try(:id) == friend_id}
   end
 
   private #================================================
