@@ -26,8 +26,9 @@ module Minisite
     # TODO See TODO below.
     def load_email
       puts "SESSION: #{session.inspect}"
-      @client_info          ||= {}
+      @client_info ||= {}
       if params[:email_id]
+        # client is usually going to the email offers index page
         @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
         @client_info[:honor_email] = true if @admin_customer_email.present?
       end
@@ -35,11 +36,20 @@ module Minisite
 
     # TODO See TODO below.
     def set_by_tracking
-      @client_info               ||= {}
+      @client_info ||= {}
       if params[:id]
+        # client selecting to view a single Offer within the Offer Email
         @admin_customer_offer = Admin::Customer::Offer.find_by_tracking(params[:id])
         if @admin_customer_offer
           @client_info[:honor_offer] = true
+          if Rails.env.development?
+            if @admin_customer_email
+              puts "params:#{params.inspect}"
+              puts "offer:#{@admin_customer_offer.inpsect}"
+              puts "offer:#{@admin_customer_email.inpsect}"
+              raise "who set the email for me it should be set from the Offer info"
+            end
+          end
           # if email has not already been set then override with this offers email
           @admin_customer_email ||= @admin_customer_offer.email
         end
@@ -75,9 +85,11 @@ module Minisite
     # 4. where else?!? don't forget combinations of the above.
     def set_cart_and_client_and_studio
 
-      puts params.inspect
+      if Rails.env.development?
+      puts "keys:#{params.keys.join(", ")}"
       puts @admin_customer_email
       puts @admin_customer_offer
+      end
 
       # Pull cart from incoming link; usually confirmation email order status link.
       if params[:cart]
@@ -94,8 +106,11 @@ module Minisite
         @client             = @admin_customer_email.my_studio_session.client
         session[:client_id] ||= @client.id
 
-        @studio             = @admin_customer_email.my_studio_session.studio
-        session[:studio_id] ||= @studio.id
+        @studio                = @admin_customer_email.my_studio_session.studio
+        session[:studio_id]    ||= @studio.id
+
+        # current collection friend name
+        @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id])
 
       elsif (is_studio?)
         # studio and admin should have @cart and @client nil

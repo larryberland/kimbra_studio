@@ -1,0 +1,44 @@
+<!-- Modal -->
+
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel"><%= t('.title') %></h3>
+  </div>
+
+  <div class="modal-body">
+    <% email = @admin_customer_friend.email %>
+    <% url = @admin_customer_friend.new_record? ? minisite_email_friends_path(email) : minisite_email_friend_path(email, @admin_customer_friend) %>
+    <%= form_for(@admin_customer_friend, url: url, remote: true) do |f| %>
+
+        <% if @admin_customer_friend.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@admin_customer_friend.errors.count, "error") %> prohibited this admin_customer_friend
+                from being saved:</h2>
+
+              <ul>
+                <% @admin_customer_friend.errors.full_messages.each do |msg| %>
+                    <li><%= msg %></li>
+                <% end %>
+              </ul>
+            </div>
+        <% end %>
+
+        <div class="field">
+          <%= f.label :name %>
+          <br/>
+          <%= f.text_field :name %>
+        </div>
+
+        <%= f.hidden_field :email_id %>
+
+        <div class="modal-footer form-actions">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          <%= f.submit class: 'btn btn-primary'%>
+        </div>
+    <% end %>
+  </div>
+
+
+</div>

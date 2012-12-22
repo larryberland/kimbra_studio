@@ -4,6 +4,7 @@ class Admin::Customer::Email < ActiveRecord::Base
                   :my_studio_session
 
   belongs_to :my_studio_session, class_name: 'MyStudio::Session', foreign_key: 'my_studio_session_id'
+  has_many :friends, class_name: 'Admin::Customer::Friend', dependent: :destroy, order: 'id DESC'
   has_many :offers, class_name: 'Admin::Customer::Offer', dependent: :destroy, order: 'id DESC'
   has_many :carts, class_name: 'Shopping::Cart'
 
@@ -148,6 +149,18 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   def most_recent_shipment_at
     @most_recent_shipment_at ||= carts.collect(&:shipment_at).compact.max
+  end
+
+  def current_friend
+    if (friends.present?)
+      friends.first
+    else
+      Admin::Customer::Friend.new(email: self, name: my_studio_session.client.name)
+    end
+  end
+
+  def offers_by_friend(friend_id)
+    offers.select{|r| r.try(:friend).try(:id) == friend_id}
   end
 
   private #================================================

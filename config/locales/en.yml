@@ -268,6 +268,9 @@ en:
         p1: "These are hand-crafted individual pieces of photo jewelry. Each piece is solid sterling silver or pewter, and is completely waterproof."
         p2: "%{name} has suggested some special pictures from your recent photo shoot to be created into personal pieces of jewelry."
         p3: "is the pioneer in this field and will be doing the hand-crafting at our direction in their studio in Colorado. We love their work and are proud to partner with them to bring you this jewelry."
+    friends:
+      form:
+        title: "Name Your Collection"
 
     items:
       index:
@@ -299,6 +302,16 @@ en:
         title: "%{studio} suggests the following Pieces"
       index_custom:
         title: "Your Collection of custom heirloom jewelry pieces"
+        title_friend: "Your Collection of custom heirloom jewelry pieces, shared with Friends as %{name}"
+        new_friend:
+          name: "Name Your Collection for your Friends..."
+          title: "Click to Name Your Collection for your Friends."
+      index_friends:
+        title: "Your Friends Collection of custom heirloom jewelry pieces"
+        title_friend: "%{name} Collection of custom heirloom jewelry pieces"
+        new_friend:
+          name: "Name Your Collection for your Friends..."
+          title: "Click to Name Your Collection for your Friends."
       index_footer:
         upload_photo:
           name: "Upload Your Own Photos"

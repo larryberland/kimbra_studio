@@ -1,5 +1,5 @@
 <div class='row'>
-  <h4 id="myTitle">
+  <h4>
     <% if @admin_customer_friend.new_record? %>
         <%= t('.title') %>
     <% else %>
@@ -23,14 +23,4 @@
 
   <%= render "index_footer" %>
 
-  <% if Rails.env.development? %>
-
-      <%= render 'minisite/friends/form' %>
-
-      <!-- Button to trigger modal -->
-      <a href="#myModal" role="button" class="btn" data-toggle="modal" title="<%= t('.new_friend.title') %>">
-        <%= t('.new_friend.name') %>
-      </a>
-
-  <% end %>
 </div>

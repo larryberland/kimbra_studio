@@ -1,6 +1,6 @@
 <div class="media">
   <% klass = offer.frozen_offer? ? "frozen" : "" %>
-  <%= link_to image_tag(offer.image.url_cache_buster,
+  <%= link_to image_tag(offer.try(:image).try(:url_cache_buster),
                         :title    => offer.name,
                         :alt      => offer.name,
                         :width    => offer.width,

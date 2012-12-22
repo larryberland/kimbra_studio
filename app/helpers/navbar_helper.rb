@@ -6,13 +6,18 @@ module NavbarHelper
   # menu_en_path => locales.en path to parent menu item (ex. '.menus.misc')
   def li_navbar(menu, link_path, en_path=".menus")
 
-    name_method = "navbar_#{menu}_name"
-    name = send(name_method) if respond_to?(name_method.to_sym, include_private=true)
-    name ||= t("#{en_path}.#{menu}.name")
+    if (menu.to_s.starts_with?("friend_"))
+      name, title = navbar_friends_name_and_title(menu)
+    else
 
-    title_method = "navbar_#{menu}_title"
-    title = send(title_method) if respond_to?(title_method.to_sym, include_private=true)
-    title ||= t("#{en_path}.#{menu}.title")
+      name_method = "navbar_#{menu}_name"
+      name = send(name_method) if respond_to?(name_method.to_sym, include_private=true)
+      name ||= t("#{en_path}.#{menu}.name")
+
+      title_method = "navbar_#{menu}_title"
+      title = send(title_method) if respond_to?(title_method.to_sym, include_private=true)
+      title ||= t("#{en_path}.#{menu}.title")
+    end
 
     link_options = {title: title}
     link_options[:class] = "brand" if menu == :brand
@@ -83,9 +88,17 @@ module NavbarHelper
     menu      = :friends
 
     # drop down list for the Misc menu
-    sub_menus = {send_offer_email:   "#"}
+    sub_menus = {send_offer_email: "#"}
 
     # TODO: add all friends names that are associated with this Admin::Customer::Email
+    if (@admin_customer_email)
+      current_friend_id = @admin_customer_friend.id if @admin_customer_friend
+      @admin_customer_email.friends.each do |friend|
+        if (friend.id != current_friend_id)
+          sub_menus["friend_#{friend.id}".to_sym] = index_friends_minisite_email_offers_path(@admin_customer_email, friend.id)
+        end
+      end
+    end
 
     dropdown_active, sub_menu_html = navbar_dropdown_sub_menus(menu, sub_menus)
 
@@ -222,6 +235,17 @@ module NavbarHelper
     else
       ''
     end
+  end
+
+  # customize the Name and Title for friends navbar
+  #`  based on the link_path info`
+  def navbar_friends_name_and_title(menu)
+    friend_id = menu.to_s.split('_').last
+    if friend = Admin::Customer::Friend.find_by_id(friend_id)
+      name  = friend.name.to_s
+      title = "Click to View #{name}'s collection"
+    end
+    return name, title
   end
 
   def navbar_photo_sessions_path

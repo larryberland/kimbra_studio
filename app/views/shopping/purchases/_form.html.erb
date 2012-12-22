@@ -1,4 +1,4 @@
-<div class="platypus-form span10">
+<div class="platypus-form span8">
 
   <% url = @purchase.new_record? ? shopping_cart_purchase_path(@cart) : shopping_cart_purchase_path(@cart) %>
   <% stripe_submit_klass = @purchase.new_record? ? 'new_shopping_purchase' : 'edit_shopping_purchase' %>
@@ -89,6 +89,7 @@
         <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
         <%= f.submit text, :id => 'my_submit' %>
         <span id="spinner" style="display:none" class='spinner'></span>
+        <%= link_to 'Back', shopping_cart_purchase_path(@cart), class: 'btn' %>
       </div>
 
   <% end %>

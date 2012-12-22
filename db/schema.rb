@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221102102) do
+ActiveRecord::Schema.define(:version => 20121221151841) do
 
   create_table "active_admin_comments", :force => true do |t|
     t.string   "resource_id",   :null => false
@@ -76,6 +76,15 @@ ActiveRecord::Schema.define(:version => 20121221102102) do
   add_index "admin_customer_emails", ["my_studio_session_id"], :name => "index_admin_customer_emails_on_my_studio_session_id"
   add_index "admin_customer_emails", ["tracking"], :name => "index_admin_customer_emails_on_tracking"
 
+  create_table "admin_customer_friends", :force => true do |t|
+    t.string   "name"
+    t.integer  "email_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "admin_customer_friends", ["email_id"], :name => "index_admin_customer_friends_on_email_id"
+
   create_table "admin_customer_item_sides", :force => true do |t|
     t.integer  "item_id"
     t.integer  "part_id"
@@ -125,6 +134,7 @@ ActiveRecord::Schema.define(:version => 20121221102102) do
     t.datetime "updated_at"
     t.boolean  "frozen_offer",    :default => false
     t.boolean  "client"
+    t.integer  "friend_id"
   end
 
   add_index "admin_customer_offers", ["email_id"], :name => "index_admin_customer_offers_on_email_id"

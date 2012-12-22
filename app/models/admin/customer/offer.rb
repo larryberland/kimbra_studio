@@ -6,6 +6,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   belongs_to :piece, :class_name => 'Admin::Merchandise::Piece' # kimbra piece
   belongs_to :email, :class_name => 'Admin::Customer::Email'
+  belongs_to :friend, :class_name => 'Admin::Customer::Friend'
 
   has_many :items, :class_name => 'Admin::Customer::Item'       # Items that make up the custom piece
 
@@ -18,10 +19,12 @@ class Admin::Customer::Offer < ActiveRecord::Base
                   :piece, :custom_layout, :item_options_list,
                   :piece, :piece_id,
                   :tracking, :active, :activation_code,
-                  :portrait_id, :client
+                  :portrait_id, :client,
+                  :friend, :friend_id
 
   # parts list having portraits assigned to which part
   attr_accessor :item_options_list, :portrait_id, :image_front_cache
+  accepts_nested_attributes_for :friend
 
   # active_model callbacks
   before_create :piece_create_default_and_tracking

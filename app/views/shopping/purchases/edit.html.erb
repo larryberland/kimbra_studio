@@ -1,29 +1,20 @@
 <div class='shopping_heading'>
   <h2>1. Delivery Details</h2>
-  <table align='center'>
-    <tr>
-      <td>
+  <div class="row span6">
         <%= render 'shopping/addresses/show', address: @cart.address %>
-      </td>
-    </tr>
-  </table>
+  </div>
 </div>
 
 <div class='shopping_heading'>
   <h2>2. Shipping Options</h2>
-  <table align='center'>
-    <tr>
-      <td>
+  <div class="row span6">
         <%= render 'shopping/shippings/show', shipping: @cart.shipping %>
-      </td>
-    </tr>
-  </table>
+  </div>
 </div>
 
 <div class='shopping_heading'>
   <h2>3. Credit Card</h2>
   <%= render 'form' %>
-  <%= link_to 'Back', shopping_cart_purchase_path(@cart) %>
 </div>
 
 <div class='shopping_heading'>

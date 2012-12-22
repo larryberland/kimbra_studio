@@ -28,6 +28,7 @@
 
   <%= render 'shared/minisite_header', studio: @studio, admin_customer_email: @admin_customer_email %>
 
+  <div class="span12">
   <% if notice || alert %>
       <div class="alert error rounded row">
         <i class="icon-hand-right"> </i>
@@ -38,6 +39,8 @@
   <% end %>
 
   <%= yield %>
+
+  </div>
 
 </div>
 
