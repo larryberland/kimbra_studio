@@ -8,8 +8,8 @@ module Admin
 
     def index
       @dates = (10.days.ago.to_date..Date.today)
-      @with_names = Story.with_name_grouped_by_day.size
-      @without_names = Story.without_name_grouped_by_day.size
+      @with_names = Story.with_name.grouped_by_day.size
+      @without_names = Story.without_name.grouped_by_day.size
       @stories = Story.today
       @heading = "Stories for today"
       @stats = Story.stats
@@ -32,7 +32,7 @@ module Admin
       end
     end
 
-    private
+    private #==============================================================
 
     def navbar_active
       @navbar_active = :stories

@@ -5,7 +5,7 @@ class Storyline < ActiveRecord::Base
   belongs_to :story
 
   def description=(s)
-    @description = s.to_s.truncate(254)
+    super s.to_s.truncate(254)
   end
 
   def describe(description)

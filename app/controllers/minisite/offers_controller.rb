@@ -225,10 +225,11 @@ module Minisite
       @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
     end
 
+    # TODO - currently linking to Collection - change to link to just the offer.
     def share
       if @admin_customer_offer
-        if (current_user_facebook)
-          current_user_facebook.share(@admin_customer_offer)
+        if current_user_facebook
+          current_user_facebook.share(@admin_customer_offer, minisite_email_offers_url(@admin_customer_offer.email))
         end
       end
     end
