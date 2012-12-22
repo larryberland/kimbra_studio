@@ -19,11 +19,15 @@ class Story < ActiveRecord::Base
         order('created_at ASC') }
 
   scope :with_name, where("name is not NULL")
-
-  scope :with_name_grouped_by_day, with_name.group("DATE(created_at)")
-
   scope :without_name, where("name is NULL")
-  scope :without_name_grouped_by_day, without_name.group("DATE(created_at)")
+
+  # scope :grouped_by_day, with_name.group("DATE(created_at)")
+
+  scope :grouped_by_day, lambda{|date|
+    # Use only Eastern timezone.
+    offset = Time.now.in_time_zone("Eastern Time (US & Canada)").formatted_offset
+      group("date(convert_tz(#{date}, '+00:00', '#{offset}'))")
+    }
 
   def self.setup(request, controller_name, action_name, client, studio, is_client)
     user_agent = UserAgent.parse(request.user_agent)
