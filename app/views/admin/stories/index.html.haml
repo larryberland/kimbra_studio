@@ -9,7 +9,7 @@
           - @dates.each do |date|
             %tr
               %td= date_with_day(date)
-              %td.right= remote_link_for_fetching_stories(date, @with_names, :with)
+              %td.right= remote_link_for_fetching_stories(date, @stories)
 
       %table#story_table.table.table-condensed
         %thead
@@ -32,5 +32,6 @@
             %tr
               %td= os
               %td.right= "#{((count.to_f / @stats[:total]) * 100).round(0)}%"
+
   .span11#stories_display
-    =render 'stories', :object => @stories, :locals => {:heading => @heading}
+    =render partial: 'stories', locals: {heading: @heading, stories: @todays_stories}

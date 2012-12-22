@@ -8,9 +8,8 @@ module Admin
 
     def index
       @dates = (10.days.ago.to_date..Date.today)
-      @with_names = Story.with_name.grouped_by_day.size
-      @without_names = Story.without_name.grouped_by_day.size
-      @stories = Story.today
+      @stories = Story.recent.group_by {|s| s.created_at.in_time_zone("Eastern Time (US & Canada)").to_date.to_s(:db)}
+      @todays_stories = Story.today
       @heading = "Stories for today"
       @stats = Story.stats
     end
@@ -20,13 +19,10 @@ module Admin
       type = params[:type]
       ip = params[:ip_address]
       case type
-        when 'with'
-          @stories = Story.with_name.on_date(date)
+        when 'by_date'
+          @stories = Story.on_date(date)
           @heading = "Stories for #{view_context.date_with_day(date)}".html_safe
-        when 'without'
-          @stories = Story.without_name.on_date(date)
-          @heading = "Anonymous Stories for #{view_context.date_with_day(date)}".html_safe
-        when 'related'
+        when 'by_ip'
           @stories = Story.where(:ip_address => ip).order("date DESC")
           @heading = "Stories from #{ip}"
       end
