@@ -85,9 +85,40 @@ class Admin::Customer::Offer < ActiveRecord::Base
     cart_offer = Admin::Customer::Offer.create(
         tracking: UUID.random_tracking_number,
         email:    email,
-        piece:    piece) # parent merchandise.piece
+        piece:    piece, # parent merchandise.piece
+        frozen_offer: true)
     cart_offer.assemble_cart(self)
     cart_offer
+  end
+
+  # create a copy of this offer and the
+  #   item_side we are currently working with
+  def generate_from_item_side(item_side)
+
+    # create a copy of this offer for the client
+    client_offer = Admin::Customer::Offer.create(
+        tracking: UUID.random_tracking_number,
+        email:    email,
+        piece:    piece, # parent merchandise.piece
+        client:   true)
+    client_offer.assemble_cart(self)
+
+    # figure out which item_side this is in the client's new offer
+    item_order_in_offer = item_side.item.order
+    my_items = client_offer.items.select{ |r| r.order == item_order_in_offer }
+
+    raise "found more than one item" if my_items.size != 1
+    my_item = my_items.first
+    raise "missing same item in my_offer looking for item.order:#{item_order_in_offer} my_offer:#{my_offer.items.inspect}" if my_item.nil?
+
+    # is the item_side the front or back?
+    my_item_side = if (item_side.item.front.id == item_side.id)
+                     my_item.front
+                   else
+                     my_item.back
+                   end
+
+    return client_offer, my_item_side
   end
 
   # assemble an offer that is identical to the from_offer
@@ -104,11 +135,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
       # Assemble the item and its sides
       items << Admin::Customer::Item.assemble_side(self, options)
-      puts "FINISHED item"
 
     end
-
-    self.frozen_offer = true
 
     create_images
 
@@ -251,6 +279,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     end
     @suggestion
   end
+
   # list of portrait's used by all items in this offer
   def item_portrait_list
     items.each.collect { |item| item.portrait_list }.compact if items.present?

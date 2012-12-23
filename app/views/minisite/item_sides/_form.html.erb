@@ -3,57 +3,61 @@
     <%= render 'shared/error_messages', record: @item_side %>
 
     <div class="span8">
-    <div class='preview'>
-      <h3><%= t '.title' %></h3>
-      <table cellpadding='20px' class="table">
-        <tbody>
-        <tr>
-          <td align='right'>
-            <div id='portrait_item' class='jcrop'>
-              <!-- Constrain stock image to be 300px wide. Height varies according to part. This is done in the css. -->
-              <%= image_tag @item_side.session_portrait.image_url(:face), id: 'cropbox' %>
-            </div>
-          </td>
-          <td align="top">
-            <!-- Constrain preview images to be 300px wide in this div. Height varies according to part. Can't do this bit in the css. -->
-            <% orig_width = @item_side.part.width.to_f %>
-            <% orig_height = @item_side.part.height.to_f %>
-            <% dest_width = 300.0 %>
-            <% dest_height = (dest_width * orig_height) / orig_width %>
-            <div id='part_item_preview' style='width:300px; height:<%=dest_height%>px;' class='jcrop'>
-              <%= image_tag @item_side.part.image_part_url, id: 'part_template' %>
-              <%= image_tag @item_side.portrait.image_url(:face), id: 'preview' %>
-            </div>
 
-            <p>
-              <%= t '.p1_html' %>
-            </p>
+      <div class='preview'>
+        <h3><%= t '.title' %></h3>
+        <table cellpadding='20px' class="table">
+          <tbody>
+          <tr>
+            <td align='right'>
+              <div id='portrait_item' class='jcrop'>
+                <!-- Constrain stock image to be 300px wide. Height varies according to part. This is done in the css. -->
+                <%= image_tag @item_side.session_portrait.image_url(:face), id: 'cropbox' %>
+              </div>
+            </td>
+            <td align="top">
+              <!-- Constrain preview images to be 300px wide in this div. Height varies according to part. Can't do this bit in the css. -->
+              <% orig_width = @item_side.part.width.to_f %>
+              <% orig_height = @item_side.part.height.to_f %>
+              <% dest_width = 300.0 %>
+              <% dest_height = (dest_width * orig_height) / orig_width %>
+              <div id='part_item_preview' style='width:300px; height:<%=dest_height%>px;' class='jcrop'>
+                <%= image_tag @item_side.part.image_part_url, id: 'part_template' %>
+                <%= image_tag @item_side.portrait.image_url(:face), id: 'preview' %>
+              </div>
 
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+              <p>
+                <%= t '.p1_html' %>
+              </p>
 
-    <div class="form-actions">
-      <%= f.submit :id => 'my_submit', :value => 'Save', class: 'btn btn-primary' %>
-      <%= link_to t('.create_offer.name'), url_for_cancel_workflow(@offer), class: 'btn', title: t('.create_offer.title') %>
-      <%= link_to t(:cancel), url_for_cancel_workflow(@offer), class: 'btn' %>
-      <span id="spinner" style="display:none" class='spinner'></span>
-    </div>
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
 
-    <div id="portrait_form">
+      <div class="form-actions">
+        <!-- only a client can save their own piece -->
+        <% if in_my_collection?(@offer) %>
+            <%= f.submit t('.save.name'), id: 'my_submit',class: 'btn btn-primary', title: t('.save.title')%>
+        <% end %>
+        <%= f.submit t('.create_offer.name'), id: 'my_submit_create', class: 'btn', title: t('.create_offer.title') %>
+        <%= link_to t(:cancel), url_for_cancel_workflow(@offer), class: 'btn' %>
+        <span id="spinner" style="display:none" class='spinner'></span>
+      </div>
 
-    </div>
+      <div id="portrait_form">
 
-    <div id='hidden_fields'>
-      <%= f.fields_for :portrait, @item_side.portrait do |p| %>
-          <%= p.hidden_field :id, :value => @item_side.portrait.id %>
-      <% end %>
-      <% %w[x y w h].each do |attr| %>
-          <%= f.hidden_field "crop_#{attr}" %>
-      <% end %>
-    </div>
+      </div>
+
+      <div id='hidden_fields'>
+        <%= f.fields_for :portrait, @item_side.portrait do |p| %>
+            <%= p.hidden_field :id, :value => @item_side.portrait.id %>
+        <% end %>
+        <% %w[x y w h].each do |attr| %>
+            <%= f.hidden_field "crop_#{attr}" %>
+        <% end %>
+      </div>
 
     </div>
 

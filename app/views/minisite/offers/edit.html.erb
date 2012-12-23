@@ -1,8 +1,10 @@
-<h2><%= t(:admin_customer_offers_edit_title) %></h2>
+<div class="row span8">
+  <h2><%= t(:admin_customer_offers_edit_title) %></h2>
 
-<%= render 'form' %>
+  <%= render 'form' %>
 
-<div class="show">
-  <%= link_to t(:show), minisite_offer_path(@admin_customer_offer) %> |
-  <%= link_to t(:back), minisite_email_path(@admin_customer_email) %>
+  <div class="show">
+    <%= link_to t(:show), minisite_offer_path(@admin_customer_offer) %> |
+    <%= link_to t(:back), minisite_email_path(@admin_customer_email) %>
+  </div>
 </div>

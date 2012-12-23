@@ -157,9 +157,6 @@ en:
   # minisite/items/show
   minisite_items_show_link: "Make adjustments to this piece"
 
-  # minisite/item_sides
-  minisite_item_sides_update_notice_success: "Your custom %{name} piece was successfully updated."
-
   # minisite/emails/show
   minisite_offers_create_success: "Your Custom Heirloom Piece was successfully created and added to My Collection."
 
@@ -287,6 +284,13 @@ en:
         create_offer:
           name: "Create new piece and add to My Collection"
           title: "Click to create a copy of this piece and add it to My Collection."
+        save:
+          name: "Save"
+          title: "Click to save adjustments for this piece."
+      update:
+        notice:
+          success: "Your custom %{name} piece was successfully updated in My Collection."
+          success_add: "Your custom %{name} piece was successfully updated and added to My Collection."
     narrow_image:
       in_shopping_cart: "In your shopping cart"
     wide_image:
@@ -308,8 +312,8 @@ en:
         title: "My Collection of custom heirloom jewelry pieces"
         title_friend: "My Collection of custom heirloom jewelry pieces, shared with Friends as %{name}"
         new_friend:
-          name: "Name My Collection for your Friends..."
-          title: "Click to Name My Collection for your Friends."
+          name: "Rename My Collection for your Friends..."
+          title: "Click to rename My Collection for your Friends."
       index_friends:
         title: "Your Friends Collection of custom heirloom jewelry pieces"
         title_friend: "%{name} Collection of custom heirloom jewelry pieces"
@@ -482,8 +486,8 @@ en:
             name: "My Collection"
             title: "Click to view your custom jewelry collection"
           create_custom:
-            name: "Custom Piece"
-            title: "Click to design your very own custom heirloom piece."
+            name: "Build a Piece"
+            title: "Click to build your own custom heirloom piece."
           facebook:
             name: "Log In"
             title: "Click to Log In to your Facebook"

@@ -13,9 +13,11 @@ class Admin::Customer::Friend < ActiveRecord::Base
   private
 
   def unique_in_email
-    if (email.friends.collect(&:name).include?(name))
-      errors.add(:name, "name must be unique")
-    end if email.present?
+    # TODO: on rename my collection need to assure
+    #       name uniqueness somehow
+    #if (email.friends.collect(&:name).include?(name))
+    #  errors.add(:name, "name must be unique")
+    #end if email.present?
     errors.empty?
   end
 

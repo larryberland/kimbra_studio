@@ -27,9 +27,9 @@ module Minisite
       if @admin_customer_email
         @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
 
-        @admin_customer_friend ||= @admin_customer_email.new_friend(@cart)
+        raise "should always have a friend here? email:#{@admin_customer_email.inspect}" unless @admin_customer_friend.present?
 
-        @admin_customer_offers = @admin_customer_email.offers_by_friend(@admin_customer_friend.id)
+        @admin_customer_offers = @admin_customer_email.offers_my_collection(@admin_customer_friend.id)
 
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
@@ -57,13 +57,11 @@ module Minisite
         @navbar_active = "friend_#{@friend.id}".to_sym
       end
 
+      raise "index_friend should always have a friend here? email:#{@admin_customer_email.inspect}" unless @friend.present?
+
       if @admin_customer_email
         @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
-        if (@friend)
-          @admin_customer_offers = @admin_customer_email.offers_by_friend(@friend.id)
-        else
-          @admin_customer_offers = @admin_customer_email.offers.select { |r| r.frozen_offer? || r.client? }
-        end
+        @admin_customer_offers = @admin_customer_email.offers_by_friend(@friend.id)
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end

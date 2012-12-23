@@ -21,6 +21,20 @@ module ApplicationHelper
     @my_studio.try(:name)
   end
 
+  # @admin_customer_friend identifies the client's
+  #   friend info for this session
+  def in_my_collection?(offer)
+    if (@admin_customer_friend)
+      if (offer.suggestion?)
+        false
+      elsif (offer.friend and offer.friend.id != @admin_customer_friend.id)
+        false
+      else
+        true
+      end
+    end
+  end
+
   def site_name
     I18n.t(:company)
   end

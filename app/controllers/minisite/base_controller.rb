@@ -87,8 +87,8 @@ module Minisite
 
       if Rails.env.development?
       puts "keys:#{params.keys.join(", ")}"
-      puts @admin_customer_email
-      puts @admin_customer_offer
+      puts @admin_customer_email.inspect
+      puts @admin_customer_offer.inspect
       end
 
       # Pull cart from incoming link; usually confirmation email order status link.
@@ -114,7 +114,8 @@ module Minisite
           @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id])
         else
           # client is coming in with a new session
-          @admin_customer_friend = nil
+          @admin_customer_friend = @admin_customer_email.create_friend(@cart)
+          session[:admin_customer_friend_id] = @admin_customer_friend.id
         end
 
       elsif (is_studio?)
