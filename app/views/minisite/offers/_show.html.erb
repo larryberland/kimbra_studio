@@ -37,19 +37,7 @@
         <b><%= icon_minisite('icon-shopping-cart') %>&nbsp;<%= t('in_shopping_cart') %></b><br>
     <% end %>
 
-    <%= content_tag :p do %>
-        <% @admin_customer_offer.piece.try(:short_description).to_s.split(". ").each do |sentence| %>
-            <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
-            <br/>
-        <% end %>
-    <% end if @admin_customer_offer.piece.try(:short_description).present? %>
-
-    <%= content_tag :p do %>
-        <% @admin_customer_offer.piece.try(:description_markup).to_s.split(". ").each do |sentence| %>
-            <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
-            <br/>
-        <% end %>
-    <% end if @admin_customer_offer.piece.try(:description_markup).present? %>
+    <%= render 'minisite/piece_description', offer: @admin_customer_offer %>
 
   </div>
 </div>

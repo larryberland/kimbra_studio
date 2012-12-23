@@ -30,7 +30,7 @@ module Minisite
 
         raise "should always have a friend here? email:#{@admin_customer_email.inspect}" unless @admin_customer_friend.present?
 
-        @admin_customer_offers = @admin_customer_email.offers_my_collection(@admin_customer_friend.id)
+        @admin_customer_offers = @admin_customer_email.offers_by_collection(@admin_customer_friend.id)
 
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all

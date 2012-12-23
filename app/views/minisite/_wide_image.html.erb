@@ -20,7 +20,7 @@
     <% if offer.frozen_offer? %>
         <b><%= icon_minisite('icon-shopping-cart')%>&nbsp;<%= t('in_shopping_cart') %></b><br>
     <% end %>
-    <%= offer.piece.short_description %>
+    <%= render 'minisite/piece_description', offer: offer %>
     <br>
     <span class="price"><%= number_to_currency(offer.price) %></span>
     <div>

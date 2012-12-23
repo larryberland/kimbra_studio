@@ -2,7 +2,7 @@
 
 <div class='row' style='margin:auto;'>
   <div style='text-align:center;'>
-    <% @admin_customer_email.offers.each do |offer| %>
+    <% @admin_customer_email.offers_by_suggestions.each do |offer| %>
         <div class='pull-left' style='text-align:center; margin:10px;'>
           <%= link_to image_tag_list(offer), url_for_offer_or_not(offer), :class => :no_border %>
           <br>
