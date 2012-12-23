@@ -129,6 +129,8 @@ module Minisite
         # shopping session info
         session[:studio_id] = @studio.id
 
+        @admin_customer_friend = Admin::Customer::Friend.new(email: @admin_customer_email,
+                                                             name: @admin_customer_email.my_studio_session.client.name)
       end
     end
 

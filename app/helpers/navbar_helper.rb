@@ -164,11 +164,6 @@ module NavbarHelper
     t('.menus.brand.title', name: @studio.try(:name))
   end
 
-  # customize about menu title text
-  def navbar_brand_title
-    t('.menus.brand.title', name: @studio.try(:name))
-  end
-
   # minisite menu options for returning
   #   the link_path for this menu item
   def navbar_collection_path
@@ -182,11 +177,7 @@ module NavbarHelper
   def navbar_charms_path
     if @admin_customer_email
       #link_to_your_charms_or_not(text, @admin_customer_email)
-      if is_client?
-        index_charms_minisite_email_offers_path(@admin_customer_email.tracking)
-      else
-        show_charms_my_studio_minisite_path(@admin_customer_email.tracking)
-      end
+      index_charms_minisite_email_offers_path(@admin_customer_email.tracking)
     else
       '#'
     end
@@ -195,11 +186,7 @@ module NavbarHelper
   def navbar_chains_path
     if @admin_customer_email
       # link_to_your_chains_or_not(text, @admin_customer_email)
-      if is_client?
-        index_chains_minisite_email_offers_path(@admin_customer_email.tracking)
-      else
-        show_chains_my_studio_minisite_path(@admin_customer_email.tracking)
-      end
+      index_chains_minisite_email_offers_path(@admin_customer_email.tracking)
     else
       '#'
     end

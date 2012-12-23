@@ -12,7 +12,11 @@ class Minisite::ItemSidesController < InheritedResources::Base
     submit_save    = t('minisite.item_sides.form.save.name')
     success        = if (params[:commit] == submit_save)
                        # only update this single side
-                       notice = t('minisite.item_sides.update.notice.success', name: @offer.piece.to_offer_name)
+                       if (is_client?)
+                         notice = t('minisite.item_sides.update.notice.success', name: @offer.piece.to_offer_name)
+                       else
+                         notice = t('minisite.item_sides.update.notice.success_suggestion', name: @offer.piece.to_offer_name)
+                       end
                        update_item_side
                      else
                        # we are creating a new offer for this item_side and all its item_sides
@@ -43,7 +47,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
   end
 
   def edit
-    @navbar_active = :collection
+    @navbar_active = is_client? ? :collection : :suggestions
     @storyline.describe 'Editing item side.'
   end
 

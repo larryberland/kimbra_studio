@@ -37,11 +37,16 @@
       </div>
 
       <div class="form-actions">
-        <!-- only a client can save their own piece -->
-        <% if in_my_collection?(@offer) %>
-            <%= f.submit t('.save.name'), id: 'my_submit',class: 'btn btn-primary', title: t('.save.title')%>
+        <% if is_client? %>
+            <!-- only a client can save their own piece -->
+            <% if in_my_collection?(@offer) %>
+                <%= f.submit t('.save.name'), id: 'my_submit', class: 'btn btn-primary', title: t('.save.title') %>
+            <% end %>
+            <%= f.submit t('.create_offer.name'), id: 'my_submit_create', class: 'btn', title: t('.create_offer.title') %>
+        <% else %>
+            <!-- admin and studio can only save to the current offer -->
+            <%= f.submit t('.save.name'), id: 'my_submit', class: 'btn btn-primary', title: t('.save.title') %>
         <% end %>
-        <%= f.submit t('.create_offer.name'), id: 'my_submit_create', class: 'btn', title: t('.create_offer.title') %>
         <%= link_to t(:cancel), url_for_cancel_workflow(@offer), class: 'btn' %>
         <span id="spinner" style="display:none" class='spinner'></span>
       </div>

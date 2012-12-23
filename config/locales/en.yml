@@ -291,6 +291,7 @@ en:
         notice:
           success: "Your custom %{name} piece was successfully updated in My Collection."
           success_add: "Your custom %{name} piece was successfully updated and added to My Collection."
+          success_suggestion: "Your custom %{name} piece was successfully updated in Suggestions."
     narrow_image:
       in_shopping_cart: "In your shopping cart"
     wide_image:
@@ -307,7 +308,7 @@ en:
           name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
       index:
-        title: "%{studio} suggests the following Pieces for your collection."
+        title: "%{studio} suggests the following Pieces for My collection."
       index_custom:
         title: "My Collection of custom heirloom jewelry pieces"
         title_friend: "My Collection of custom heirloom jewelry pieces, shared with Friends as %{name}"
