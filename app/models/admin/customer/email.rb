@@ -178,6 +178,10 @@ class Admin::Customer::Email < ActiveRecord::Base
     set.select{|r| r.try(:friend).try(:id) == friend_id}
   end
 
+  def offers_by_suggestion
+    offers.select{|r| r.suggestion?}
+  end
+
   def offers_my_collection(friend_id)
 
     set = offers.reject{|r| r.suggestion?}

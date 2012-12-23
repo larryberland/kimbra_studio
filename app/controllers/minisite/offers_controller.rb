@@ -2,13 +2,15 @@ module Minisite
 
   class OffersController < BaseController
 
+    before_filter :set_visited_at_email, only: [:index, :index_custom, :index_friends, :index_chains, :index_charms]
+    before_filter :set_visited_at_offer, only: [:show]
+
     # GET /minisite/offers
     # GET /minisite/offers.json
     def index
       @navbar_active = :suggestions
       if @admin_customer_email
-        @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
-        @admin_customer_offers = @admin_customer_email.offers.select { |r| r.suggestion? }
+        @admin_customer_offers = @admin_customer_email.offers_by_suggestions
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
@@ -25,7 +27,6 @@ module Minisite
       session[:index_customs] = {friend_id: @admin_customer_friend.id} if @admin_customer_friend
 
       if @admin_customer_email
-        @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
 
         raise "should always have a friend here? email:#{@admin_customer_email.inspect}" unless @admin_customer_friend.present?
 
@@ -60,7 +61,6 @@ module Minisite
       raise "index_friend should always have a friend here? email:#{@admin_customer_email.inspect}" unless @friend.present?
 
       if @admin_customer_email
-        @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
         @admin_customer_offers = @admin_customer_email.offers_by_friend(@friend.id)
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
@@ -85,7 +85,6 @@ module Minisite
     def index_charms
       @navbar_active = :charms
       if @admin_customer_email
-        @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
         @admin_customer_offers = @admin_customer_email.offers
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
@@ -108,7 +107,6 @@ module Minisite
     def index_chains
       @navbar_active = :chains
       if @admin_customer_email
-        @admin_customer_email.update_attribute(:visited_at, Time.now) if is_client?
         @admin_customer_offers = @admin_customer_email.offers
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
@@ -129,7 +127,6 @@ module Minisite
     # GET /minisite/offers/1t7t7rye
     # GET /minisite/offers/1t7t7rye.json
     def show
-      @admin_customer_offer.update_attribute(:visited_at, Time.now) if is_client?
       @shopping_item = Shopping::Item.new(offer: @admin_customer_offer, cart: @cart)
       @storyline.describe "Viewing #{@admin_customer_offer.name} offer."
       @navbar_active = :suggestions if (@admin_customer_offer.suggestion?)
@@ -227,6 +224,20 @@ module Minisite
         if current_user_facebook
           current_user_facebook.share(@admin_customer_offer, minisite_email_offers_url(@admin_customer_offer.email))
         end
+      end
+    end
+
+    private
+
+    def set_visited_at_email
+      if @admin_customer_email and is_client?
+        @admin_customer_email.update_attribute(:visited_at, Time.now)
+      end
+    end
+
+    def set_visited_at_offer
+      if @admin_customer_offer and is_client?
+        @admin_customer_offer.update_attribute(:visited_at, Time.now)
       end
     end
   end

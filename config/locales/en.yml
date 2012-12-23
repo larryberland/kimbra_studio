@@ -504,7 +504,7 @@ en:
 
           shopping_cart:
             name: "Shopping Cart"
-            title: "Click to view your Shopping Cart"
+            title: "Click to view My Shopping Cart"
           suggestions:
             name: "Suggestions"
             title: "Click to view your Suggested jewelry collection"
@@ -522,7 +522,7 @@ en:
   shopping:
     carts:
       show:
-        title: "Your Shopping Cart"
+        title: "My Shopping Cart"
         checkout: "Ready to Checkout"
   studios:
     edit:
