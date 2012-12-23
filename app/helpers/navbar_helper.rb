@@ -87,20 +87,9 @@ module NavbarHelper
   def li_navbar_friends
     menu = :friends
 
-    # drop down list for the Misc menu
-    if Rails.env.development?
-      url = "<li >
-           <!-- Button to trigger modal -->
-             <a href='#mySendOfferEmail' data-toggle='modal' title='#{t('.new_friend.title')}'>
-               #{t('.new_friend.name')}
-             </a>
-           </li>"
-
-      sub_menus = {}
-    else
-    end
+    # drop down list for the Friends menu
     sub_menus = {send_offer_email: "#mySendOfferEmail"}
-    # TODO: add all friends names that are associated with this Admin::Customer::Email
+
     if (@admin_customer_email)
       current_friend_id = @admin_customer_friend.id if @admin_customer_friend
       @admin_customer_email.friends.each do |friend|

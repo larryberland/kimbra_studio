@@ -276,7 +276,7 @@ en:
         title: "Name My Collection"
       form_email:
         title: "Send My Collection to a Friend"
-
+        p1_html: "Simply forward your Offer Email from your Inbox to any or all of your Friends.<br>They can then begin making their own Personalized Collection. They will be able to view your Collection in their Friend List."
     items:
       index:
         title: "Edit Your Custom Items"

@@ -25,31 +25,19 @@ module Minisite
 
     # TODO See TODO below.
     def load_email
-      puts "SESSION: #{session.inspect}"
-      @client_info ||= {}
+      Rails.logger.info "SESSION: #{session.inspect}"
       if params[:email_id]
         # client is usually going to the email offers index page
         @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
-        @client_info[:honor_email] = true if @admin_customer_email.present?
       end
     end
 
     # TODO See TODO below.
     def set_by_tracking
-      @client_info ||= {}
       if params[:id]
         # client selecting to view a single Offer within the Offer Email
         @admin_customer_offer = Admin::Customer::Offer.find_by_tracking(params[:id])
         if @admin_customer_offer
-          @client_info[:honor_offer] = true
-          if Rails.env.development?
-            if @admin_customer_email
-              puts "params:#{params.inspect}"
-              puts "offer:#{@admin_customer_offer.inpsect}"
-              puts "offer:#{@admin_customer_email.inpsect}"
-              raise "who set the email for me it should be set from the Offer info"
-            end
-          end
           # if email has not already been set then override with this offers email
           @admin_customer_email ||= @admin_customer_offer.email
         end
@@ -86,9 +74,9 @@ module Minisite
     def set_cart_and_client_and_studio
 
       if Rails.env.development?
-      puts "keys:#{params.keys.join(", ")}"
-      puts @admin_customer_email.inspect
-      puts @admin_customer_offer.inspect
+        puts "keys:#{params.keys.join(", ")}"
+        puts @admin_customer_email.inspect
+        puts @admin_customer_offer.inspect
       end
 
       # Pull cart from incoming link; usually confirmation email order status link.

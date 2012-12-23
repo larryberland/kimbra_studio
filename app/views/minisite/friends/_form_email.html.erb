@@ -8,36 +8,12 @@
   </div>
 
   <div class="modal-body">
-    <% @admin_customer_friend ||= Admin::Customer::Friend.new %>
-    <%= form_for(@admin_customer_friend, remote: true) do |f| %>
+    <p>
+      <%= t('.p1_html') %>
+    </p>
 
-        <% if @admin_customer_friend.errors.any? %>
-            <div id="error_explanation">
-              <h2><%= pluralize(@admin_customer_friend.errors.count, "error") %> prohibited this admin_customer_friend
-                from being saved:</h2>
-
-              <ul>
-                <% @admin_customer_friend.errors.full_messages.each do |msg| %>
-                    <li><%= msg %></li>
-                <% end %>
-              </ul>
-            </div>
-        <% end %>
-
-        <div class="field">
-          <%= f.label :name %>
-          <br/>
-          <%= f.text_field :name %>
-        </div>
-
-        <%= f.hidden_field :email_id %>
-
-        <div class="modal-footer form-actions">
-          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-          <%= f.submit class: 'btn btn-primary'%>
-        </div>
-    <% end %>
+    <div class="modal-footer form-actions">
+      <button class="btn btn-primary" data-dismiss="modal" aria-hidden="true">Close</button>
+    </div>
   </div>
-
-
 </div>

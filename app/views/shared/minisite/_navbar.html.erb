@@ -60,12 +60,10 @@
               <%= li_navbar_or_not(:brand) %>
               <%= li_navbar_or_not(:suggestions) %>
               <%= li_navbar_or_not(:collection) %>
-              <% if Rails.env.development? %>
-                  <%= li_navbar_friends %>
-              <% end %>
+              <%= li_navbar_friends %>
               <%= li_navbar_or_not(:charms) %>
               <%= li_navbar_or_not(:chains) %>
-              <%= li_navbar_or_not(:upload, ) %>
+              <%= li_navbar_or_not(:upload,) %>
               <%= li_navbar_or_not(:create_custom) %>
               <%= li_navbar_photo_sessions %>
             </ul>
@@ -75,9 +73,5 @@
 
   </div>
 </div>
-
-<% if Rails.env.development? %>
-
-    <%= render 'minisite/friends/form_email' %>
-
-<% end %>
+<!-- modal form to send an email -->
+<%= render 'minisite/friends/form_email' %>

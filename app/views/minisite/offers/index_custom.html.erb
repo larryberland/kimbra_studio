@@ -5,13 +5,10 @@
     <% else %>
         <%= t('.title_friend', name: @admin_customer_friend.name) %>
     <% end %>
-    <% if Rails.env.development? %>
-        <!-- Button to trigger modal -->
-        <a href="#myModal" role="button" class="btn" data-toggle="modal" title="<%= t('.new_friend.title') %>">
-          <%= t('.new_friend.name') %>
-        </a>
-
-    <% end %>
+    <!-- Button to trigger modal -->
+    <a href="#myModal" role="button" class="btn" data-toggle="modal" title="<%= t('.new_friend.title') %>">
+      <%= t('.new_friend.name') %>
+    </a>
   </h4>
 </div>
 <% if @admin_customer_offers.size > 0 %>
@@ -27,10 +24,6 @@
 <% end %>
 
 <div class='row'>
-
-  <% if Rails.env.development? %>
-
-      <%= render 'minisite/friends/form' %>
-
-  <% end %>
+  <!-- rename my friend collection list -->
+  <%= render 'minisite/friends/form' %>
 </div>
