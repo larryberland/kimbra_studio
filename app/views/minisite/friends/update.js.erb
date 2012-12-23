@@ -1,2 +1,9 @@
-$('#myTitle').html("<%= t('minisite.offers.index_custom.title_friend', name: @admin_customer_friend.name) %>");
-$('#myModal').modal('hide');
+<% if @admin_customer_friend.errors.any? %>
+<% lis = @admin_customer_friend.errors.full_messages.collect{|msg| "<li>#{ msg}</li>"} %>
+<%  html = "<h2> #{pluralize(@admin_customer_friend.errors.count, "error")} prohibited from being saved:</h2><ul>#{lis}</ul>" %>
+$('#error_explanation').html("<%= escape_javascript(html)%>");
+
+<% else %>
+    $('#myTitle').html("<%= t('minisite.offers.index_custom.title_friend', name: @admin_customer_friend.name) %>");
+    $('#myModal').modal('hide');
+<% end %>

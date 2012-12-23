@@ -58,13 +58,9 @@ module Minisite
     # PUT /minisite/friends/1t7t7rye.json
     def update
       @admin_customer_friend       = Admin::Customer::Friend.find_by_id(params[:id])
-      if (@admin_customer_friend.email.id != @admin_customer_email.id)
-        puts @admin_customer_email.inspect
-        puts @admin_customer_friend.inspect
-        raise "Want to know why they don't match "
-      end
+      success = @admin_customer_friend.on_update(params[:admin_customer_friend])
       respond_to do |format|
-        if @admin_customer_friend.update_attributes(params[:admin_customer_friend])
+        if success
           format.json { head :ok }
           format.js
         else

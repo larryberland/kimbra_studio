@@ -12,8 +12,8 @@
     <% url = @admin_customer_friend.new_record? ? minisite_email_friends_path(email) : minisite_email_friend_path(email, @admin_customer_friend) %>
     <%= form_for(@admin_customer_friend, url: url, remote: true) do |f| %>
 
-        <% if @admin_customer_friend.errors.any? %>
-            <div id="error_explanation">
+        <div id="error_explanation">
+          <% if @admin_customer_friend.errors.any? %>
               <h2><%= pluralize(@admin_customer_friend.errors.count, "error") %> prohibited this admin_customer_friend
                 from being saved:</h2>
 
@@ -22,8 +22,8 @@
                     <li><%= msg %></li>
                 <% end %>
               </ul>
-            </div>
-        <% end %>
+          <% end %>
+        </div>
 
         <div class="field">
           <%= f.label :name %>
@@ -35,7 +35,7 @@
 
         <div class="modal-footer form-actions">
           <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-          <%= f.submit class: 'btn btn-primary'%>
+          <%= f.submit class: 'btn btn-primary' %>
         </div>
     <% end %>
   </div>
