@@ -6,6 +6,7 @@ class Minisite::ItemsController < InheritedResources::Base
   skip_before_filter :authenticate_user!
   before_filter :set_by_tracking, :set_cart_and_client_and_studio
   before_filter :setup_story
+  before_filter :navbar_active
 
   layout 'minisite'
 
@@ -54,6 +55,24 @@ class Minisite::ItemsController < InheritedResources::Base
     session[:studio_id]               ||= @studio.id
     @admin_customer_email = @email
     @admin_customer_offer = @offer
+
+    # current collection friend name
+    if (session[:admin_customer_friend_id])
+      @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id])
+    else
+      # client is coming in with a new session
+      @admin_customer_friend = @admin_customer_email.create_friend(@cart)
+      session[:admin_customer_friend_id] = @admin_customer_friend.id
+    end
+
   end
+
+    # current navbar menu
+  # :collection, :charms, :chains, :brand, :shopping_cart
+  def navbar_active
+    # reset in controller for active navbar menu item
+    @navbar_active = :collection
+  end
+
 
 end
