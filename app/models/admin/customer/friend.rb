@@ -17,7 +17,7 @@ class Admin::Customer::Friend < ActiveRecord::Base
     names = email.friends.collect(&:name)
     names -= [prev_name]
     if names.include?(attrs[:name])
-      errors.add(:name, "duplicate collection name")
+      errors.add(:name, "There is already a collection with that name.")
     else
       update_attributes(attrs)
     end

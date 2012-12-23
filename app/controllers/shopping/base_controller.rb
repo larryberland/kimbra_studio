@@ -42,6 +42,16 @@ class Shopping::BaseController < InheritedResources::Base
     @cart = Shopping::Cart.find_by_tracking(params[:id]) if params[:id]
     @cart = Shopping::Cart.find(session[:cart_id]) if @cart.nil? && session[:cart_id]
     @admin_customer_email = @cart.email
+
+    # current collection friend name
+    if (session[:admin_customer_friend_id])
+      @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id])
+    else
+      # client is coming in with a new session
+      @admin_customer_friend             = @admin_customer_email.create_friend(@cart)
+      session[:admin_customer_friend_id] = @admin_customer_friend.id
+    end
+
   end
 
 end
