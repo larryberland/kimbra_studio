@@ -18,7 +18,7 @@
       <br>
   <% end %>
   <% if @studio.owner_email_address_with_name.present? %>
-      <abbr title="<%=t(:email_abbr)%>"><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.owner_email_address_with_name, nil, {:encode => :javascript} %>
+      <abbr title="<%=t(:email_abbr)%>"><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
   <% end %>
 </address>
 
@@ -31,10 +31,12 @@
 
 <p>
   Kimbra's ClickPLUS program for professional photography studios.<br/>
-  Call us direct 9am - 7pm Eastern<br/>
-  (303) 586-1371 or Skype us at KimbraClickPLUS<br/>
-  <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com', encode: :javascript %><br/>
-  <%= link_to 'Kimbra Studios', 'http://KimbraStudios.com' %>
+  <abbr title="<%=t(:open_abbr)%>"><%= icon_minisite("icon-time") %></abbr> Call us direct 9am - 7pm Eastern<br/>
+  <abbr title="<%=t(:phone_abbr)%>"><%= icon_minisite("icon-volume-up") %></abbr> (303) 586-1371 or Skype us at KimbraClickPLUS
+  <br/>
+  <abbr title="<%=t(:email_abbr)%>"><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com', {:encode => :javascript} %>
+  <br/>
+  <abbr title="<%=t(:site)%>"><%= icon_minisite("icon-globe") %></abbr> <%= link_to 'Kimbra Studios', 'http://KimbraStudios.com' %>
 </p>
 
 <p>
