@@ -256,6 +256,13 @@ en:
           title: "Editing Offer Email"
 
   minisite:
+    buttons:
+      adjust_photo:
+        name: "Adjust Photo"
+        title: "Click to Adjust Photo in your custom Piece."
+      adjust_photo_add:
+        name: "Adjust Photo and add to My Collection"
+        title: "Click to Adjust Photo and add to My Collection."
     emails:
       order_status:
         title: "Order Status"

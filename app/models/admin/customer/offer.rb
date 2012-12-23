@@ -105,7 +105,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
     # figure out which item_side this is in the client's new offer
     item_order_in_offer = item_side.item.order
-    my_items = client_offer.items.select{ |r| r.order == item_order_in_offer }
+    my_items = client_offer.items.select{|r| r.order == item_order_in_offer}
 
     raise "found more than one item" if my_items.size != 1
     my_item = my_items.first

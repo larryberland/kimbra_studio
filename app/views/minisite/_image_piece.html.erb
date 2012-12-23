@@ -19,7 +19,7 @@
                 <p>
                   <%= f.hidden_field :piece_id %>
                   <%= f.hidden_field :cart_id %>
-                  <%= submit_tag 'Add to Cart', :id => "my_submit_#{@shopping_item.piece_id}", :class => 'likeabutton multi-submits' %>
+                  <%= submit_tag 'Add to Cart', :id => "my_submit_#{@shopping_item.piece_id}", :class => 'btn btn-primary multi-submits' %>
                   <span id='<%= "spinner_#{@shopping_item.piece_id}" %>' style='display:none' class='spinner'></span>
                 </p>
             <% end %>
