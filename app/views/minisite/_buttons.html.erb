@@ -5,7 +5,7 @@
           <%= f.hidden_field :offer_id %>
           <%= f.hidden_field :cart_id %>
           <%= submit_tag 'Add to Cart', :id => "my_submit_#{offer.id}", :class => 'btn btn-primary multi-submits' %>
-          <span id="spinner_#{offer.id}" style="display:none" class='spinner'></span>
+          <span id='<%= "spinner_#{offer.id}" %>' style='display:none' class='spinner'></span>
       <% end %>
 
   <% end %>
@@ -20,6 +20,5 @@
 
   <%= button_to t('minisite.offers.show.adjust_photo.name'), edit_url,
                 method: :get, title: t('minisite.offers.show.adjust_photo.title'), class: 'btn' if offer.adjust_picture? %>
-
 
 </div>
