@@ -10,7 +10,7 @@ module Minisite
     def index
       @navbar_active = :suggestions
       if @admin_customer_email
-        @admin_customer_offers = @admin_customer_email.offers_by_suggestion
+        @admin_customer_offers = @admin_customer_email.offers_by_suggestions
       else
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
