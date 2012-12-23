@@ -2,7 +2,7 @@ module Admin::StoriesHelper
 
   def remote_link_for_fetching_stories(date, story_collection)
     stories = story_collection[date.to_s(:db)]
-    title = Story.on_date(date).collect(&:name).collect(&:titleize).join(', ')
+    title = Story.on_date(date).collect{|s| "#{s.name}/#{s.studio.name}" }.collect(&:titleize).join(', ')
     if stories
       link_to stories.size,
               url_for(:controller => :stories, :action => :fetch, :date => date.to_s(:db), :type => :by_date),

@@ -315,6 +315,7 @@ en:
         new_friend:
           name: "Rename My Collection for your Friends..."
           title: "Click to rename My Collection for your Friends."
+        redirect_to_build_a_piece_html: "The My Collection page is where you bring together the items that interest you most. It is empty until you:<ul><li>add something from a Friend's collection</li><li>add a Suggested piece</li><li>adjust a Suggested piece</li><li>add a Suggestion to your Shopping Cart</li><li>Build a Piece</li></ul> We took the liberty of taking you to the Build a Piece page now."
       index_friends:
         title: "Your Friends Collection of custom heirloom jewelry pieces"
         title_friend: "%{name} Collection of custom heirloom jewelry pieces"
@@ -329,7 +330,7 @@ en:
           name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
       new:
-        title: "Below are some examples of unique designs that we felt were creative and could help you design your very own custom heirloom piece."
+        title: "We have lots of unique jewelry designs for you design your own custom heirloom pieces."
       new_form:
         submit: "Create My Custom Heirloom Piece"
 

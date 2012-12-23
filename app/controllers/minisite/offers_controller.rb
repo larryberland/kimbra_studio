@@ -45,6 +45,7 @@ module Minisite
         end
       else
         # redirect to offers#new
+        flash[:notice] = t('minisite.offers.index_custom.redirect_to_build_a_piece_html')
         redirect_to new_minisite_email_offer_path(@admin_customer_email)
       end
     end
