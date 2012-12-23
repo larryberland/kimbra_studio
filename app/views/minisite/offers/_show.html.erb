@@ -12,16 +12,16 @@
 
       <p>
         <b><%= t('.front') %></b>
-        <%= link_to @admin_customer_offer.image_front.to_image_cache_buster, edit_url, class: "pull-left" %>
+        <%= link_to @admin_customer_offer.image_front.to_image_cache_buster, edit_url, class: "pull-left", title: t('.adjust_photo.title')  %>
       </p>
 
       <p>
         <b><%= t('.back') %></b>
-        <%= link_to @admin_customer_offer.image_back.to_image_cache_buster, edit_url, class: "pull-left" %>
+        <%= link_to @admin_customer_offer.image_back.to_image_cache_buster, edit_url, class: "pull-left", title: t('.adjust_photo.title')  %>
       </p>
   <% else %>
       <p>
-        <%= link_to @admin_customer_offer.image.to_image_cache_buster, edit_url, class: "pull-left" %>
+        <%= link_to @admin_customer_offer.image.to_image_cache_buster, edit_url, class: "pull-left", title: t('.adjust_photo.title')  %>
       </p>
   <% end %>
 
