@@ -12,7 +12,7 @@ module Shopping
     end
 
     def create
-      item_already_in_cart = @cart.find_item(@admin_customer_offer.id) if @admin_customer_ofer
+      item_already_in_cart = @cart.find_item(@admin_customer_offer.id) if @admin_customer_offer
 
       @create_notice = :add_to_collection
 

@@ -17,6 +17,7 @@
       <%= link_to_facebook(offer) %>
       <%= link_to_pinterest(offer) %>
       <%= offer.name %>
+      <%= "(#{offer.id})" if Rails.env.development? %>
     </h4>
 
     <% if offer.frozen_offer? %>

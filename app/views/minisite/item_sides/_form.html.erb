@@ -28,10 +28,6 @@
 
               <p>
                 <%= t '.p1_html' %>
-                <% if @cart and @cart.find_item(@offer.id).present? %>
-                    <br>
-                    <%= t('.in_cart') %>
-                <% end %>
               </p>
 
             </td>
@@ -42,6 +38,9 @@
 
       <div class="form-actions">
         <% if is_client? %>
+            <% if @cart and @cart.find_item(@offer.id).present? %>
+                <strong><%= t('.in_cart') %></strong><br>
+            <% end %>
             <% css_create = 'btn btn-primary' %>
             <!-- only a client can save their own piece -->
             <% if in_my_collection?(@offer) %>
