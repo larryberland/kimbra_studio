@@ -75,7 +75,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     attrs[:tracking] = UUID.random_tracking_number
 
     cart_offer = Admin::Customer::Offer.create(attrs)
-    cart_offer.assemble(piece)
+    cart_offer.assemble(attrs[:piece])
     cart_offer
   end
 

@@ -14,8 +14,8 @@ module Shopping
     def create
       # convert our nested form params
       piece_id          = params[:shopping_item].delete(:piece_id)
-      params[:offer_id] = params[:shopping_item][:offer_id]
-      params[:cart_id]  = params[:shopping_item][:cart_id]
+      #params[:offer_id] = params[:shopping_item][:offer_id]
+      #params[:cart_id]  = params[:shopping_item][:cart_id]
 
       # ajax unique id for <span> and <spinner>
       @shopping_item_id = piece_id.nil? ? params[:offer_id] : piece_id
@@ -60,7 +60,7 @@ module Shopping
       end
 
       # reset the offer_id in case we created a new offer item for the client
-      params[:offer_id]                 ||= @admin_customer_offer.id
+      params[:shopping_item][:offer_id] = @admin_customer_offer.id
 
       # set our session offer LDB:? Not sure why we ae setting this session info here
       session[:admin_customer_offer_id] = @admin_customer_offer.id
