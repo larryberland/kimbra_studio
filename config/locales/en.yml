@@ -257,6 +257,9 @@ en:
 
   minisite:
     buttons:
+      add_cart:
+        name: "Add to Cart"
+        title:  "Click to Add Piece to My Shopping Cart."
       adjust_photo:
         name: "Adjust Photo"
         title: "Click to Adjust Photo in your custom Piece."

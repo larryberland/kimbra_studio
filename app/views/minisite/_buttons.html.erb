@@ -1,31 +1,45 @@
 <div class="form-actions row-fluid">
-  <% if is_client? %>
-      <div class="span3">
+  <div class="span3">
+
+      <% if is_client? %>
+
         <% shopping_item = Shopping::Item.new(offer: offer, cart: @cart) %>
         <%= form_for(shopping_item, remote: true) do |f| %>
             <%= f.hidden_field :offer_id %>
             <%= f.hidden_field :cart_id %>
-            <%= submit_tag 'Add to Cart', :id => "my_submit_#{offer.id}", :class => 'btn btn-primary multi-submits' %>
+            <%= submit_tag t('.add_cart.name'), :id => "my_submit_#{offer.id}", :class => 'btn btn-primary multi-submits', title: t('.add_cart.title') %>
             <span id='<%= "spinner_#{offer.id}" %>' style='display:none' class='spinner'></span>
         <% end %>
+      <% else %>
+        <%= button_to t(".add_cart.name"), '#',
+                      method: :get, title: t(".add_cart.title"), class: 'btn btn-primary disabled' %>
+      <% end %>
+
+  </div>
+
+  <% if offer.adjust_picture? %>
+
+      <% if is_studio? %>
+          <% css = 'disabled btn' %>
+          <% edit_url = '#' %>
+      <% else %>
+          <% css = 'btn' %>
+          <% if offer.has_picture? %>
+              <% if offer.items.size > 1 %>
+                  <% edit_url = minisite_offer_items_path(offer) %>
+              <% else %>
+                  <% edit_url = edit_minisite_item_side_path(offer.items.first.front) %>
+              <% end %>
+          <% end %>
+      <% end %>
+
+      <div class="span3 offset1">
+        <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
+        <%= button_to t(".#{key}.name"), edit_url,
+                      method: :get, title: t(".#{key}.title"), class: css %>
 
       </div>
 
   <% end %>
-
-  <% if offer.has_picture? %>
-      <% if offer.items.size > 1 %>
-          <% edit_url = minisite_offer_items_path(offer) %>
-      <% else %>
-          <% edit_url = edit_minisite_item_side_path(offer.items.first.front) %>
-      <% end %>
-  <% end %>
-
-  <div class="span3 offset1">
-    <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
-    <%= button_to t(".#{key}.name"), edit_url,
-                  method: :get, title: t(".#{key}.title"), class: 'btn' if offer.adjust_picture? %>
-
-  </div>
 
 </div>

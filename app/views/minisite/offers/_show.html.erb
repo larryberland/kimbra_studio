@@ -1,8 +1,12 @@
-<% if @admin_customer_offer.has_picture? %>
-    <% if @admin_customer_offer.items.size > 1 %>
-        <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
-    <% else %>
-        <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
+<% if is_studio? %>
+    <% edit_url = '#' %>
+<% else %>
+    <% if @admin_customer_offer.has_picture? %>
+        <% if @admin_customer_offer.items.size > 1 %>
+            <% edit_url = minisite_offer_items_path(@admin_customer_offer) %>
+        <% else %>
+            <% edit_url = edit_minisite_item_side_path(@admin_customer_offer.items.first.front) %>
+        <% end %>
     <% end %>
 <% end %>
 

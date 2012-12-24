@@ -110,6 +110,9 @@ module Minisite
         # studio and admin should have @cart and @client nil
         @studio = current_user.studio
 
+        @admin_customer_friend = Admin::Customer::Friend.new(email: @admin_customer_email,
+                                                             name: @admin_customer_email.my_studio_session.client.name)
+
       else
 
         set_session_cart

@@ -43,7 +43,11 @@
     a.active {
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
-
+    a[role="button"]{
+        <% if @studio.minisite.background_dark? %>
+        color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        <% end %>
+    }
     /* bootstrap navbar and navbar-inverse */
     .navbar .navbar-inner {
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
@@ -85,6 +89,11 @@
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
+    <% else %>
+    div.modal {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
     <% end %>
 
     /* bootstrap form_actions div */
@@ -114,5 +123,6 @@
         border: 2px outset black;
         text-align: left;
     }
+
 
 </style>
