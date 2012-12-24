@@ -5,11 +5,12 @@ class Shopping::Item < ActiveRecord::Base
 
   attr_accessible :offer, :offer_attributes, :offer_id,
                   :cart, :cart_attributes, :cart_id,
-                  :from_piece,
                   :quantity,:option, :option_selected,
                   :piece_id, # kimbra non photo piece we are going to turn into an offer
                   :share_facebook
 
+  # added piece_id here so we can submit our ajax request for a new piece
+  #  that is not part of our Offer Email (ex charms and chains)
   attr_accessor :piece_id, :share_facebook
 
   accepts_nested_attributes_for :offer, :cart
@@ -45,7 +46,8 @@ class Shopping::Item < ActiveRecord::Base
     quantity.to_i * price.to_f
   end
 
-  private                   #================================================
+  #================================================
+  private
 
   def ensure_qty_1
     self.quantity = 1 unless quantity

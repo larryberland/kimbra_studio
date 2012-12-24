@@ -14,16 +14,7 @@
     <span class="price"><%= number_to_currency(piece.price) %></span>
 
     <% unless @show_status_only %>
-        <% if is_client? %>
-            <%= form_for(@shopping_item, :remote => true) do |f| %>
-                <p>
-                  <%= f.hidden_field :piece_id %>
-                  <%= f.hidden_field :cart_id %>
-                  <%= submit_tag 'Add to Cart', :id => "my_submit_#{@shopping_item.piece_id}", :class => 'btn btn-primary multi-submits' %>
-                  <span id='<%= "spinner_#{@shopping_item.piece_id}" %>' style='display:none' class='spinner'></span>
-                </p>
-            <% end %>
-        <% end %>
+        <%= render 'minisite/add_to_cart', attrs: {piece_id: piece.id}%>
     <% end %>
 
     <p class="shopping-item">

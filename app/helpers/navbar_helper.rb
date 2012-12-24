@@ -94,7 +94,9 @@ module NavbarHelper
       current_friend_id = @admin_customer_friend.id if @admin_customer_friend
       @admin_customer_email.friends.each do |friend|
         if (friend.id != current_friend_id)
-          sub_menus["friend_#{friend.id}".to_sym] = index_friends_minisite_email_offers_path(@admin_customer_email, friend.id)
+          if (@admin_customer_email.offers_by_friend(friend.id).size > 0)
+            sub_menus["friend_#{friend.id}".to_sym] = index_friends_minisite_email_offers_path(@admin_customer_email, friend.id)
+          end
         end
       end
     end

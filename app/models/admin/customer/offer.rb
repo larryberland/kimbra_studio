@@ -69,12 +69,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def self.generate_from_piece(attrs)
     raise "forget to set email? attrs:#{attrs.inspect}" if attrs[:email].nil?
     raise "forget to set friend? attrs:#{attrs.inspect}" if attrs[:friend].nil?
+    raise "forget to set piece? attrs:#{attrs.inspect}" if attrs[:piece].nil?
 
     attrs[:item_options_list] = []
     attrs[:tracking] = UUID.random_tracking_number
-
-    piece_id = attrs.delete(:piece_id)
-    attrs[:piece] = Admin::Merchandise::Piece.find(piece_id)
 
     cart_offer = Admin::Customer::Offer.create(attrs)
     cart_offer.assemble(piece)

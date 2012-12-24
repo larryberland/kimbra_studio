@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121222151445) do
+ActiveRecord::Schema.define(:version => 20121224165750) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -511,7 +511,6 @@ ActiveRecord::Schema.define(:version => 20121222151445) do
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "from_piece",      :default => false
     t.string   "option"
     t.string   "option_selected"
   end

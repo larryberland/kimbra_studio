@@ -1,0 +1,17 @@
+<% if is_client? %>
+
+    <% field = attrs.keys.first %>
+    <% value = attrs.values.first %>
+    <% shopping_item = Shopping::Item.new(attrs.merge(cart: @cart)) %>
+
+    <%= form_for(shopping_item, remote: true) do |f| %>
+
+        <%= f.hidden_field field %>
+        <%= f.hidden_field :cart_id %>
+        <%= submit_tag t('.add_cart.name'), :id => "my_submit_#{value}", :class => 'btn btn-primary multi-submits', title: t('.add_cart.title') %>
+        <span id='<%= "spinner_#{value}" %>' style='display:none' class='spinner'></span>
+    <% end %>
+<% else %>
+    <%= button_to t(".add_cart.name"), '#',
+                  method: :get, title: t(".add_cart.title"), class: 'btn btn-primary disabled' %>
+<% end %>
