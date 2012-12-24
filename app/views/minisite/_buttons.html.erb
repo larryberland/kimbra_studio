@@ -1,31 +1,46 @@
-<div class="form-actions row-fluid">
-  <div class="span3">
-    <%= render 'shopping/items/add_to_cart', attrs: {offer_id: offer.id}%>
+<div class="form-actions span8">
+  <div class="row-fluid">
+
+    <div class="span2">
+      <%= render 'shopping/items/add_to_cart', attrs: {offer_id: offer.id} %>
+    </div>
+
+    <% if offer.adjust_picture? %>
+
+        <% if is_studio? %>
+            <% css = 'disabled btn' %>
+            <% edit_url = '#' %>
+        <% else %>
+            <% css = 'btn' %>
+            <% if offer.has_picture? %>
+                <% if offer.items.size > 1 %>
+                    <% edit_url = minisite_offer_items_path(offer) %>
+                <% else %>
+                    <% edit_url = edit_minisite_item_side_path(offer.items.first.front) %>
+                <% end %>
+            <% end %>
+        <% end %>
+
+        <div class="span3">
+          <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
+          <%= button_to t(".#{key}.name"), edit_url,
+                        method: :get, title: t(".#{key}.title"), class: css %>
+
+        </div>
+
+    <% end %>
+    <% if params[:controller] == 'minisite/offers' and params[:action] == 'index_custom' %>
+        <div class="span4">
+          <% confirm = offer.in_cart?(@cart) ? '.delete.confirm_in_cart' : '.delete.confirm' %>
+          <%= button_icon_to 'icon-trash icon-white',
+                             t(".delete.name"), minisite_email_offer_path(offer.email, offer),
+                             method:       :delete, remote: true,
+                             confirm:      t(confirm),
+                             title:        t(".delete.title"),
+                             button_class: "btn btn-danger delete" %>
+
+        </div>
+    <% end %>
   </div>
-
-  <% if offer.adjust_picture? %>
-
-      <% if is_studio? %>
-          <% css = 'disabled btn' %>
-          <% edit_url = '#' %>
-      <% else %>
-          <% css = 'btn' %>
-          <% if offer.has_picture? %>
-              <% if offer.items.size > 1 %>
-                  <% edit_url = minisite_offer_items_path(offer) %>
-              <% else %>
-                  <% edit_url = edit_minisite_item_side_path(offer.items.first.front) %>
-              <% end %>
-          <% end %>
-      <% end %>
-
-      <div class="span3 offset1">
-        <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
-        <%= button_to t(".#{key}.name"), edit_url,
-                      method: :get, title: t(".#{key}.title"), class: css %>
-
-      </div>
-
-  <% end %>
 
 </div>

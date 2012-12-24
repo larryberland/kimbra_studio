@@ -265,6 +265,11 @@ en:
       adjust_photo_add:
         name: "Adjust Photo and add to My Collection"
         title: "Click to Adjust Photo and add to My Collection."
+      delete:
+        name: "Remove from My Collection"
+        title: "Click to remove your piece from My Collection."
+        confirm: "Are you sure?"
+        confirm_in_cart: "This piece is currently in the Shopping Cart. Are you sure?"
     emails:
       order_status:
         title: "Order Status"

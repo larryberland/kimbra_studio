@@ -207,10 +207,16 @@ module Minisite
     # DELETE /minisite/offers/1t7t7rye
     # DELETE /minisite/offers/1t7t7rye.json
     def destroy
+      if (@cart)
+        if item = @cart.find_item(@admin_customer_offer.id)
+          item.destroy
+        end
+      end
       @admin_customer_offer.destroy
       respond_to do |format|
         format.html { redirect_to admin_customer_offers_url }
         format.json { head :ok }
+        format.js
       end
     end
 

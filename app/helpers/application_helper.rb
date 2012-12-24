@@ -264,6 +264,8 @@ module ApplicationHelper
   def button_icon_to(icon_class, name, options = {}, html_options = {})
 
     html_options = html_options.stringify_keys
+    button_class = html_options.delete('button_class')
+
     convert_boolean_attributes!(html_options, %w( disabled ))
 
     method_tag = ''
@@ -288,7 +290,8 @@ module ApplicationHelper
     html_options = convert_options_to_data_attributes(options, html_options)
 
     # start of platypus override
-    html_options.merge!("type" => "submit", "class" => 'btn btn-success')
+    button_class ||= 'btn btn-success'
+    html_options.merge!("type" => "submit", "class" => button_class)
 
     # use a button tag instead of input
     button = content_tag(:button, html_options) do
