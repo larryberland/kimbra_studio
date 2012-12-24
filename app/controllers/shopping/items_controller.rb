@@ -14,11 +14,9 @@ module Shopping
     def create
       # convert our nested form params
       piece_id          = params[:shopping_item].delete(:piece_id)
-      #params[:offer_id] = params[:shopping_item][:offer_id]
-      #params[:cart_id]  = params[:shopping_item][:cart_id]
 
       # ajax unique id for <span> and <spinner>
-      @shopping_item_id = piece_id.nil? ? params[:offer_id] : piece_id
+      @shopping_item_id = piece_id.nil? ? params[:shopping_item][:offer_id] : piece_id
 
       item_already_in_cart = @cart.find_item(@admin_customer_offer.id) if @admin_customer_offer
 
