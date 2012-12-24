@@ -151,14 +151,6 @@ class Admin::Customer::Email < ActiveRecord::Base
     @most_recent_shipment_at ||= carts.collect(&:shipment_at).compact.max
   end
 
-  def current_friend
-    if (friends.present?)
-      friends.first
-    else
-      Admin::Customer::Friend.new(email: self, name: my_studio_session.client.name)
-    end
-  end
-
   # create a friend for this session based on the
   #   current session[:cart] info
   # the client can rename this whenever they want
@@ -183,12 +175,10 @@ class Admin::Customer::Email < ActiveRecord::Base
   end
 
   def offers_by_collection(friend_id)
-
     set = offers.reject{|r| r.suggestion?}
     list = set.select{|r| r.try(:friend).try(:id) == friend_id}
     list += set.select{|r| r.friend.nil?}
     list.flatten
-
   end
 
   private #================================================

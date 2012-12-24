@@ -145,11 +145,11 @@ module ApplicationHelper
   #<div class='image-thumb'>
   #  <%= image_tag_version(model) %>
   #</div>
-  def cw_div_image_only(model_with_carrier_wave_image, options={})
+  def cw_image_only(model_with_carrier_wave_image, options={})
     if model_with_carrier_wave_image
       options[:image]   ||= 'image'
       options[:version] ||= :thumb
-      image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]), class: "rounded")
+      image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]), class: "img-rounded")
     end
   end
 

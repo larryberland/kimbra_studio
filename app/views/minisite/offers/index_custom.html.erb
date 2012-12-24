@@ -3,7 +3,7 @@
     <% if @admin_customer_friend.new_record? %>
         <%= t('.title') %>
     <% else %>
-        <%= t('.title_friend', name: @admin_customer_friend.name) %>
+        <%= t('.title_friend_html', name: @admin_customer_friend.name) %>
     <% end %>
     <!-- Button to trigger modal -->
     <a href="#myModal" class="btn" role="button" data-toggle="modal" title="<%= t('.new_friend.title') %>">

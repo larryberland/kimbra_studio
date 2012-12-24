@@ -66,27 +66,31 @@ class Admin::Customer::Offer < ActiveRecord::Base
 
   # generate an offer directly from a kimbra piece
   # NOTE: So far these are all non-photo charms or chains
-  def self.generate_from_piece(email, piece_id, is_client)
-    piece = Admin::Merchandise::Piece.find(piece_id)
-    offer = Admin::Customer::Offer.create(
-        tracking:          UUID.random_tracking_number,
-        email:             email,
-        piece:             piece, # parent merchandise.piece
-        item_options_list: [])
-    offer.frozen_offer = true
-    offer.client = is_client
-    offer.assemble(piece)
-    offer
+  def self.generate_from_piece(attrs)
+    raise "forget to set email? attrs:#{attrs.inspect}" if attrs[:email].nil?
+    raise "forget to set friend? attrs:#{attrs.inspect}" if attrs[:friend].nil?
+
+    attrs[:item_options_list] = []
+    attrs[:tracking] = UUID.random_tracking_number
+
+    piece_id = attrs.delete(:piece_id)
+    attrs[:piece] = Admin::Merchandise::Piece.find(piece_id)
+
+    cart_offer = Admin::Customer::Offer.create(attrs)
+    cart_offer.assemble(piece)
+    cart_offer
   end
 
   # Create an offer for the cart that will not allow
   #   anyone to edit it
-  def generate_for_cart
-    cart_offer = Admin::Customer::Offer.create(
-        tracking: UUID.random_tracking_number,
-        email:    email,
-        piece:    piece, # parent merchandise.piece
-        frozen_offer: true)
+  def generate_for_cart(attrs)
+    raise "forget to set email? attrs:#{attrs.inspect}" if attrs[:email].nil?
+    raise "forget to set friend? attrs:#{attrs.inspect}" if attrs[:friend].nil?
+
+    attrs[:item_options_list] = []
+    attrs[:tracking] = UUID.random_tracking_number
+    attrs[:piece] = piece
+    cart_offer = Admin::Customer::Offer.create(attrs)
     cart_offer.assemble_cart(self)
     cart_offer
   end

@@ -17,7 +17,6 @@ class Shopping::Cart < ActiveRecord::Base
 
   scope :not_recent, lambda {where(" created_at < ? ", 2.hours.ago)}
 
-  scope :in_cart, lambda {|offer| }
   before_create :set_tracking
 
   def find_item(offer_id)

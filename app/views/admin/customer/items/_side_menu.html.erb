@@ -3,21 +3,21 @@
 
   <div class="span5">
     Custom Item:
-    <%= cw_div_image_only(@item.front, :image => :image_custom, :version => :original) %>
+    <%= cw_image_only(@item.front, :image => :image_custom, :version => :original) %>
   </div>
 
   <div class="span3">
-    Resized Portrait:<%= cw_div_image_only(@item.front, :image => :image_stock, :version => :original) %>
+    Resized Portrait:<%= cw_image_only(@item.front, :image => :image_stock, :version => :original) %>
   </div>
 
 </div>
 
 <div class="row-fluid">
   <div class="span3">
-    Kimbra Part:<%= cw_div_image_only(@item.part, :image => :image_part) %>
+    Kimbra Part:<%= cw_image_only(@item.part, :image => :image_part) %>
   </div>
   <div class="span3">
-    Kimbra Piece:<%= cw_div_image_only(@item.offer.piece) %>
+    Kimbra Piece:<%= cw_image_only(@item.offer.piece) %>
   </div>
 
 </div>

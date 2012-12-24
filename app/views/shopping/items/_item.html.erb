@@ -1,8 +1,7 @@
 <ul>
   <li>Added <%= @item.offer.piece.name %> to your Shopping cart.<br></li>
-  <% if @client_notice == :add_to_collection %>
-      <li>The Custom Jewelry Piece was added to My Collection.</li>
+  <% if @create_notice == :add_to_collection %>
+    <li>The Custom Jewelry Piece was added to My Collection.</li>
   <% end %>
-  <li>Adjust Photo has been turned off so your friends can view your selection.</li>
 </ul>
 

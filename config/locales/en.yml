@@ -291,6 +291,7 @@ en:
     item_sides:
       form:
         title: "Move or resize selection by dragging"
+        in_cart: "Notice: Saving this will also change your piece in your Shopping Cart."
         p1_html: "Please ignore any thin white lines appearing on the sides of your portraits in the jewelry pieces.<br/>These will not be present when we prepare your pieces."
         portraits_click: "Click to select a different portrait"
         create_offer:
@@ -323,7 +324,7 @@ en:
         title: "%{studio} suggests the following Pieces for My collection."
       index_custom:
         title: "My Collection of custom heirloom jewelry pieces"
-        title_friend: "My Collection of custom heirloom jewelry pieces, shared with Friends as %{name}"
+        title_friend_html: "My Collection of custom heirloom jewelry pieces,<br>shared with Friends as %{name}"
         new_friend:
           name: "Rename My Collection for your Friends..."
           title: "Click to rename My Collection for your Friends."

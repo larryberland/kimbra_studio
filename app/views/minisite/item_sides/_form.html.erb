@@ -28,6 +28,10 @@
 
               <p>
                 <%= t '.p1_html' %>
+                <% if @cart and @cart.find_item(@offer.id).present? %>
+                    <br>
+                    <%= t('.in_cart') %>
+                <% end %>
               </p>
 
             </td>
@@ -38,11 +42,13 @@
 
       <div class="form-actions">
         <% if is_client? %>
+            <% css_create = 'btn btn-primary' %>
             <!-- only a client can save their own piece -->
             <% if in_my_collection?(@offer) %>
                 <%= f.submit t('.save.name'), id: 'my_submit', class: 'btn btn-primary', title: t('.save.title') %>
+                <% css_create = 'btn' %>
             <% end %>
-            <%= f.submit t('.create_offer.name'), id: 'my_submit_create', class: 'btn', title: t('.create_offer.title') %>
+            <%= f.submit t('.create_offer.name'), id: 'my_submit_create', class: css_create, title: t('.create_offer.title') %>
         <% else %>
             <!-- admin and studio can only save to the current offer -->
             <%= f.submit t('.save.name'), id: 'my_submit', class: 'btn btn-primary', title: t('.save.title') %>
@@ -67,14 +73,14 @@
     </div>
 
     <div class="span3 pull-right">
-      <div class="">
-        <div><br/><br/><i><%= t '.portraits_click' %></i></div>
-        <% @admin_customer_offer.portraits.each do |portrait| %>
-            <div>
-              <%= link_to cw_div_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true, class: "rounded" %>
-            </div>
-        <% end %>
+      <div>
+        <i><%= t '.portraits_click' %></i>
       </div>
+      <% @admin_customer_offer.portraits.each do |portrait| %>
+          <div class="portrait-pick-vertical">
+            <%= link_to cw_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id), :remote => true, class: "rounded" %>
+          </div>
+      <% end %>
     </div>
 
 

@@ -9,7 +9,7 @@ class ApplicationController < ActionController::Base
   layout 'application'
 
   # override devise url reference
-          #  based on user's current roles
+  #  based on user's current roles
   def after_sign_in_path_for(resource)
     u  = stored_location_for(resource)
     u2 = signed_in_root_path(resource)
@@ -39,6 +39,20 @@ class ApplicationController < ActionController::Base
 
   def setup_story
     @story, @storyline = Story.setup(request, controller_name, action_name, @client, @studio, is_client?)
+  end
+
+  # @admin_customer_friend identifies the client's
+  #   friend info for this session
+  def in_my_collection?(offer)
+    if (@admin_customer_friend)
+      if (offer.suggestion?)
+        false
+      elsif (offer.friend and offer.friend.id != @admin_customer_friend.id)
+        false
+      else
+        true
+      end
+    end
   end
 
   private #=========================================================================
@@ -90,9 +104,9 @@ class ApplicationController < ActionController::Base
       if cart = Shopping::Cart.find_by_id(session[:cart_id])
         cart.destroy
       end
-      session[:cart_id] = nil
+      session[:cart_id]                 = nil
       session[:admin_customer_email_id] = nil
-      session[:client_id] = nil
+      session[:client_id]               = nil
     end
   end
 
