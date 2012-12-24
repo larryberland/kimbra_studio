@@ -1,0 +1,2 @@
+$('#cart_count').text(<%= @cart.quantity %>)
+$("#cart_numericality").html( '<%= pluralize(@cart.quantity, 'piece') %>' )

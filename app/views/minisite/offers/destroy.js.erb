@@ -1,4 +1,3 @@
 $("<%="#index_custom_offer_#{@admin_customer_offer.id}"%>").remove();
-$('#cart_count').text(<%= @cart.quantity %>)
-$("#cart_numericality").html( '<%= pluralize(@cart.quantity, 'piece') %>' )
+<%= render 'shopping/carts/navbar_info'%>
 
