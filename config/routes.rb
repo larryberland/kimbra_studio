@@ -1,7 +1,5 @@
 KimbraStudio::Application.routes.draw do
 
-  namespace :admin do  namespace :customer do resources :friends end end
-
   match 'auth/:provider/callback', to: 'facebook_sessions#create'
   match 'auth/failure', to: 'facebook_sessions#failure'
   match 'facebook_signout', to: 'facebook_sessions#destroy', as: 'facebook_signout'
@@ -29,6 +27,7 @@ KimbraStudio::Application.routes.draw do
           resources :items
         end
       end
+      resources :friends
     end
     namespace :merchandise do
       resources :pieces do
@@ -70,7 +69,6 @@ KimbraStudio::Application.routes.draw do
           get :index_custom
           get :index_friends, path: 'friend_id/:friend'
         end
-
       end
       resources :friends
       resources :portraits
@@ -176,5 +174,9 @@ KimbraStudio::Application.routes.draw do
   match 'delivery' => 'shopping/carts#find_by_tracking'
   match 'tracking/:id', to: 'tracking#image', as: 'tracking_image'
   match 'blog' => 'blog'
+
+  if Rails.env.development?
+    mount MailPreview => 'mail_view'
+  end
 
 end

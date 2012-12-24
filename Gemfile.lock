@@ -7,6 +7,13 @@ GIT
       thor (~> 0.14)
 
 GIT
+  remote: https://github.com/37signals/mail_view.git
+  revision: c8cc1315026ce85973ef56e628ac2e38a7a95563
+  specs:
+    mail_view (1.0.1)
+      tilt
+
+GIT
   remote: https://github.com/jilion/useragent.git
   revision: 923ab1e668bc60389ab1e7a983ca72c5b4a14a6f
   specs:
@@ -352,6 +359,7 @@ DEPENDENCIES
   jquery-ui-rails
   kaminari
   koala
+  mail_view!
   newrelic_rpm
   numbers_and_words
   omniauth-facebook

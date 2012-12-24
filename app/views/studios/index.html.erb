@@ -40,7 +40,7 @@
     <tbody>
     <% @studios.each do |studio| %>
         <tr>
-          <td><%= studio.try(:logoize) ? 'logo' : 'nologo' %></td>
+          <td><%= studio.logoize ? 'logo' : 'nologo' %></td>
           <td title='<%= time_short_index studio.eap_click %>'><%= date_short studio.eap_click %></td>
           <td title='<%= time_short_index studio.tkg_click %>'><%= date_short studio.tkg_click %></td>
           <td title='<%= time_short_index studio.xms_click %>'><%= date_short studio.xms_click %></td>
