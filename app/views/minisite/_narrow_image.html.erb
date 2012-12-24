@@ -20,7 +20,7 @@
       <%= "(#{offer.id})" if Rails.env.development? %>
     </h4>
 
-    <% if offer.frozen_offer? %>
+    <% if offer.in_cart?(@cart) %>
         <b><%= icon_minisite('icon-shopping-cart') %>&nbsp;<%= t('in_shopping_cart') %></b><br>
     <% end %>
 

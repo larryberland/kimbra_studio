@@ -73,12 +73,6 @@ module Minisite
     # 4. where else?!? don't forget combinations of the above.
     def set_cart_and_client_and_studio
 
-      if Rails.env.development?
-        puts "keys:#{params.keys.join(", ")}"
-        puts @admin_customer_email.inspect
-        puts @admin_customer_offer.inspect
-      end
-
       # Pull cart from incoming link; usually confirmation email order status link.
       if params[:cart]
         # have a shopping cart to use

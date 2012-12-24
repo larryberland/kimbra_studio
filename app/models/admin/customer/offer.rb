@@ -369,6 +369,10 @@ class Admin::Customer::Offer < ActiveRecord::Base
     baby_got_back
   end
 
+  def in_cart?(cart)
+    cart and cart.has_offer?(id)
+  end
+
   private #===========================================================================
 
   def piece_create_default_and_tracking

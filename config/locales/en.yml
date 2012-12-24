@@ -258,10 +258,6 @@ en:
           title: "Editing Offer Email"
 
   minisite:
-    add_to_cart:
-      add_cart:
-        name: "Add to Cart"
-        title:  "Click to Add Piece to My Shopping Cart."
     buttons:
       adjust_photo:
         name: "Adjust Photo"
@@ -539,6 +535,12 @@ en:
       show:
         title: "My Shopping Cart"
         checkout: "Ready to Checkout"
+    items:
+      add_to_cart:
+        add_cart:
+          name: "Add to Cart"
+          title:  "Click to Add Piece to My Shopping Cart."
+
   studios:
     edit:
       title: "Editing ClickPLUS Branding Info"

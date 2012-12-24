@@ -23,6 +23,11 @@ class Shopping::Cart < ActiveRecord::Base
     items.where(offer_id: offer_id).first
   end
 
+  def has_offer?(offer_id)
+    @in_cart ||= items.collect(&:offer_id)
+    @in_cart.include?(offer_id)
+  end
+
   def to_param
     tracking
   end
@@ -31,7 +36,7 @@ class Shopping::Cart < ActiveRecord::Base
     items.each do |item|
       if item.offer.nil?
         Rails.logger.warn("Missing offer in item=>#{item.inspect}")
-        item.destroy if Rails.env.development?
+        item.destroy
         #raise "missing offer in item=>#{item.inspect}"
       elsif item.offer.piece.nil?
         Rails.logger.warn("Missing piece in offer=>#{item.offer.inspect}")

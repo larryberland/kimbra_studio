@@ -14,7 +14,7 @@
     <span class="price"><%= number_to_currency(piece.price) %></span>
 
     <% unless @show_status_only %>
-        <%= render 'minisite/add_to_cart', attrs: {piece_id: piece.id}%>
+        <%= render 'shopping/items/add_to_cart', attrs: {piece_id: piece.id}%>
     <% end %>
 
     <p class="shopping-item">
