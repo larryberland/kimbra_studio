@@ -12,6 +12,7 @@
             text-align: left;
         }
 
+        <% if @studio.minisite.background_dark? %>
         div#myDropdown li,
         div#myDropdownPortrait li {
             background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
@@ -52,7 +53,11 @@
         a.dd-selected:hover label {
             color: white;
         }
-
+        <% else %>
+        .dd-desc {
+            color: black;
+        }
+        <% end %>
     </style>
 
 <% end %>
