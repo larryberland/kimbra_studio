@@ -80,14 +80,15 @@ $ ->
   window.updateQuantityLinks()
 
 window.updateQuantityLinks = ->
-  $('a.update_quantity').click (event) ->
-    td = $('this').prevUntil('td')
+  $('button.update_quantity').click (event) ->
+    sel = $(this).closest('td').find('select')
+    qty = $(this).closest('td').find('input')
     event.preventDefault()
     $.post(
       $(this).attr('href')
-      quantity: $(this).prev().val()
-      option: $(this).prevUntil(td,'select').attr('name')
-      option_selected: $(this).prevUntil(td,'select').val()
+      quantity: qty.val()
+      option: sel.attr('name')
+      option_selected: sel.val()
       (data) ->
         eval data
         updateQuantityLinks()

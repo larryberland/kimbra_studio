@@ -18,10 +18,10 @@ module Shopping::ItemsHelper
                         options_for_select(%w(2012 2011 2010 2009 2008 2007 2006), item.option_selected)
                       when 'Joy Love Peace Ornament'
                         option = :year
-                        options_for_select(%w(2012 2011), item.option_selected)
+                        options_for_select(%w(2012 2011 2010 2009 2008 2007), item.option_selected)
                       when 'Fairchild Ornament'
                         option = :year
-                        options_for_select(%w(2012 2011), item.option_selected)
+                        options_for_select(%w(2012 2011 2010 2009 2008 2007), item.option_selected)
                       else
                         nil
                     end

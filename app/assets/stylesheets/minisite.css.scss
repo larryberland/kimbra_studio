@@ -67,12 +67,12 @@ textarea {
   padding: 0;
 }
 
-select,
-textarea,
-input[type="text"] {
-  font-family: Verdana, Arial, sans-serif;
-  font-size: 0.95em;
-}
+//select,
+//textarea,
+//input[type="text"] {
+//  font-family: Verdana, Arial, sans-serif;
+//  font-size: 0.95em;
+//}
 
 input[type="submit"] {
   font-size: 1.0em;
@@ -126,6 +126,13 @@ input {
 
 div#shopping_item_index{
   margin-top: 10px;
+
+  table.table th.right {
+    text-align: right;
+  }
+  table.table td.right {
+    text-align: right;
+  }
 }
 td.shopping-item-index, th.shopping-item-index {
   padding: 5px 10px 5px 10px;

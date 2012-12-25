@@ -547,6 +547,10 @@ en:
         add_cart:
           name: "Add to Cart"
           title:  "Click to Add Piece to My Shopping Cart."
+      index:
+        update:
+          name: "Update!"
+          title: "Click to Update this Piece."
 
   studios:
     edit:
