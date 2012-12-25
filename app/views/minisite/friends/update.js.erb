@@ -4,6 +4,6 @@
 $('#error_explanation').html("<%= escape_javascript(html.html_safe)%>");
 
 <% else %>
-    $('#myTitle').html("<%= t('minisite.offers.index_custom.title_friend', name: @admin_customer_friend.name) %>");
-    $('#myModal').modal('hide');
+    $('#myTitle').html("<%= t('minisite.offers.index_custom.title_friend_html', name: @admin_customer_friend.name) %>");
+    $('#myModal').modal('toggle');
 <% end %>
