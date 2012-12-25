@@ -16,7 +16,7 @@
                 <%= item.try(:offer).try(:name) %>
                 <% if item.try(:option) %>
                     <br>
-                    <%= "#{item.option} #{item.option_selected}" %>
+                    <%= "#{item.option.to_s.titleize} #{item.option_selected}" %>
                 <% end %>
               </td>
               <td>

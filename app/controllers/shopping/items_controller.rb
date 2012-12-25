@@ -83,7 +83,7 @@ module Shopping
         if offer = @item.offer
           offer.update_attributes(frozen_offer: false)
           if (Rails.env.development? and (!in_my_collection?(offer)))
-            raise "setting offer that is not in my collection offer:#{offer.inspect}"
+            Rails.logger.info "setting offer that is not in my collection offer:#{offer.inspect}"
           end
         end
         @item.destroy
