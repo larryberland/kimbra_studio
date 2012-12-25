@@ -165,6 +165,16 @@ class Admin::Customer::Email < ActiveRecord::Base
     Admin::Customer::Friend.create(email: self, name: name)
   end
 
+  def reap_friends
+    names = offers.collect{|r| r.try(:friend).try(:name)}.compact
+    friends.each do |friend|
+      unless names.include?(friend.name)
+        friend.destroy
+      end
+    end
+  end
+
+
   def offers_by_friend(friend_id)
     set = offers.reject{|r| r.suggestion?}
     set.select{|r| r.try(:friend).try(:id) == friend_id}

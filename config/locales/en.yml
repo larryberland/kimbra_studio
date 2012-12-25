@@ -6,6 +6,8 @@ en:
     label:
       fieldset:
         admin: "Admin Only"
+      admin_customer_friend:
+        name_list: "Names already taken"
       admin_customer_offer:
         activation_code: "Activation Code"
         active: "Email Offer Active?"

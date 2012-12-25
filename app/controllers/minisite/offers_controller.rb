@@ -4,6 +4,7 @@ module Minisite
 
     before_filter :set_visited_at_email, only: [:index, :index_custom, :index_friends, :index_chains, :index_charms]
     before_filter :set_visited_at_offer, only: [:show]
+    before_filter :reap_friends, only: [:index]
 
     # GET /minisite/offers
     # GET /minisite/offers.json
@@ -246,6 +247,12 @@ module Minisite
       if @admin_customer_offer and is_client?
         @admin_customer_offer.update_attribute(:visited_at, Time.now)
       end
+    end
+
+    def reap_friends
+      # some friends for this email may not have any offers in them
+      #   so reclaim the names to be used by others
+      @admin_customer_email.reap_friends if @admin_customer_email
     end
   end
 

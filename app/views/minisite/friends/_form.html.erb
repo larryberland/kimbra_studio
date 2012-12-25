@@ -16,7 +16,6 @@
           <% if @admin_customer_friend.errors.any? %>
               <h2><%= pluralize(@admin_customer_friend.errors.count, "error") %> prohibited this admin_customer_friend
                 from being saved:</h2>
-
               <ul>
                 <% @admin_customer_friend.errors.full_messages.each do |msg| %>
                     <li><%= msg %></li>
@@ -30,6 +29,14 @@
           <br/>
           <%= f.text_field :name %>
         </div>
+
+        <% if @admin_customer_friend.email.try(:friends).try(:size).to_i > 1 %>
+            <div class="field">
+              <%= f.label :name_list %>
+              <br/>
+              <%= f.select :name_list, options_for_friends_names(@admin_customer_friend) %>
+            </div>
+        <% end %>
 
         <%= f.hidden_field :email_id %>
 

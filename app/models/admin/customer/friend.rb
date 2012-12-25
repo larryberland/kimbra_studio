@@ -1,6 +1,8 @@
 class Admin::Customer::Friend < ActiveRecord::Base
   belongs_to :email
-  attr_accessible :name, :email, :email_id
+  attr_accessible :name, :email, :email_id, :name_list
+
+  attr_accessor :name_list
 
   validates :name, presence: true
 
