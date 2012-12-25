@@ -42,7 +42,7 @@
                         <%= label_tag(option) %>
                         <br>
                     <% end %>
-                    <%= text_field_tag :quantity, item.quantity, size: 3 %>
+                    <%= text_field_tag :quantity, item.quantity, size: 3, class: 'input-small' %>
                     <%= link_to 'update', shopping_item_path(item),
                                 class: :update_quantity %>
                 <% end %>
