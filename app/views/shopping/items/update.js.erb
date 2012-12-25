@@ -1,2 +1,3 @@
 $("#shopping_item_index").html("<%= escape_javascript(render 'shopping/items/index', :cart => @cart, show_status_only: false )%>");
+$('#cart_count').text(<%= @cart.quantity %>)
 <%= render 'shopping/carts/navbar_info'%>

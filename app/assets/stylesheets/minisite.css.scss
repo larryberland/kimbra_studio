@@ -124,13 +124,9 @@ input {
   border: solid 1px #203E5F;
 }
 
-div.shopping-item-index {
-  overflow: hidden;
-  margin-left: auto;
-  margin-right: auto;
-  padding: 10px;
+div#shopping_item_index{
+  margin-top: 10px;
 }
-
 td.shopping-item-index, th.shopping-item-index {
   padding: 5px 10px 5px 10px;
 }

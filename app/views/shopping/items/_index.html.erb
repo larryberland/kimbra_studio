@@ -1,25 +1,25 @@
 <div id='shopping_item_index' class="row">
-  <table class='shopping-item-index table'>
+  <table class='table table-bordered rounded'>
     <thead>
-    <th class='shopping-item-index left'>Piece</th>
-    <th class='shopping-item-index'>&nbsp;</th>
-    <th class='shopping-item-index'>Price</th>
-    <th class='shopping-item-index'>Quantity</th>
-    <th class='shopping-item-index'>Total</th>
+    <th class='left'>Piece</th>
+    <th class=''>&nbsp;</th>
+    <th class=''>Price</th>
+    <th class=''>Quantity</th>
+    <th class=''>Total</th>
     </thead>
     <tbody>
     <% total = 0 %>
     <% cart.items.each do |item| %>
         <% if item.offer %>
             <tr>
-              <td class='shopping-item-index left'>
+              <td class='left'>
                 <%= item.try(:offer).try(:name) %>
                 <% if item.try(:option) %>
                     <br>
                     <%= "#{item.option} #{item.option_selected}" %>
                 <% end %>
               </td>
-              <td class='shopping-item-index'>
+              <td class=''>
                 <%= link_to image_tag(item.offer.image_url.to_s,
                                       :title  => item.offer.name,
                                       :alt    => item.offer.name,
@@ -29,10 +29,10 @@
                             minisite_offer_url(item.offer),
                             {:style => "text-decoration: none;"} %>
               </td>
-              <td class='shopping-item-index right'>
+              <td class='right'>
                 <%= number_to_currency item.price.to_f %>
               </td>
-              <td class="shopping-item-index <%= show_status_only ? 'right' : 'left' %>">
+              <td class=" <%= show_status_only ? 'right' : 'left' %>">
                 <% if show_status_only %>
                     <%= item.quantity %>
                 <% else %>
@@ -47,37 +47,37 @@
                                 class: :update_quantity %>
                 <% end %>
               </td>
-              <td class='shopping-item-index right'>
+              <td class='right'>
                 <%= number_to_currency item.extension %>
               </td>
             </tr>
         <% else %>
             <% Rails.logger.info("ORPHAN OFFER::Shopping Cart item=>#{item.inspect}") %>
         <% end %>
-    <% end if cart.items && cart.items.present? %>
+    <% end %>
     <tr>
       <td colspan=5>&nbsp;</td>
     </tr>
     <tr>
-      <td class='shopping-item-index left'>Shipping</td>
-      <td class='shopping-item-index'><%= cart.shipping ? cart.shipping.shipping_option : 'no shipping selected yet' %> </td>
-      <td class='shopping-item-index'>&nbsp;</td>
-      <td class='shopping-item-index'>&nbsp;</td>
-      <td class='shopping-item-index right'><%= cart.shipping ? number_to_currency(cart.shipping.total_cents / 100.0) : 'n/a' %></td>
+      <td class='left'>Shipping</td>
+      <td class=''><%= cart.shipping ? cart.shipping.shipping_option : 'no shipping selected yet' %> </td>
+      <td class=''>&nbsp;</td>
+      <td class=''>&nbsp;</td>
+      <td class='right'><%= cart.shipping ? number_to_currency(cart.shipping.total_cents / 100.0) : 'n/a' %></td>
     </tr>
     <tr>
-      <td class='shopping-item-index left'>Tax</td>
-      <td class='shopping-item-index'><%= cart.purchase ? cart.purchase.tax_short_description : 'tax calculated at checkout' %> </td>
-      <td class='shopping-item-index'>&nbsp;</td>
-      <td class='shopping-item-index'>&nbsp;</td>
-      <td class='shopping-item-index right'><%= cart.purchase ? number_to_currency(cart.purchase.tax) : 'n/a' %></td>
+      <td class='left'>Tax</td>
+      <td class=''><%= cart.purchase ? cart.purchase.tax_short_description : 'tax calculated at checkout' %> </td>
+      <td class=''>&nbsp;</td>
+      <td class=''>&nbsp;</td>
+      <td class='right'><%= cart.purchase ? number_to_currency(cart.purchase.tax) : 'n/a' %></td>
     </tr>
     <tr>
-      <td class='shopping-item-index left total'>Total</td>
-      <td class='shopping-item-index total'>&nbsp;</td>
-      <td class='shopping-item-index total'>&nbsp;</td>
-      <td class='shopping-item-index right total'><%= cart.quantity %></td>
-      <td class='shopping-item-index right total'><%= number_to_currency(cart.total) %></td>
+      <td class='left total'>Total</td>
+      <td class='total'>&nbsp;</td>
+      <td class='total'>&nbsp;</td>
+      <td class='right total'><%= cart.quantity %></td>
+      <td class='right total'><%= number_to_currency(cart.total) %></td>
     </tr>
     </tbody>
   </table>

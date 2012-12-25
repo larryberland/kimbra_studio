@@ -18,8 +18,7 @@
                 <br>
             <% end %>
             <% if @studio.info and @studio.info.email %>
-                <abbr title=""<%= t(:email_abbr) %>
-                ""><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
+                <abbr title="<%= t(:email_abbr) %>"><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
             <% end %>
           </address>
         </div>
@@ -27,11 +26,6 @@
 
       <img src="<%= @studio.minisite.image_url %>" title="<%= @studio.name %>">
 
-      <div class="pull-right">
-        <% if current_user_facebook %>
-            <%= image_tag current_user_facebook.image_url, class: "rounded" %>
-        <% end %>
-      </div>
     </div>
 
   </div>
@@ -46,13 +40,10 @@
         <span class="icon-bar"></span>
       </a>
 
-      <ul class="nav pull-right">
-        <%= li_navbar_or_not(:shopping_cart) %>
-      </ul>
-
 <%# do not show the navigation bar if Kimbra is entering the delivery tracking number  %>
       <% unless controller_name == 'carts' && action_name == 'edit_delivery_tracking' %>
           <!-- Everything you want hidden at 940px or less, place within here -->
+
 
           <div class="nav-collapse collapse">
 
@@ -67,6 +58,11 @@
               <%= li_navbar_or_not(:create_custom) %>
               <%= li_navbar_photo_sessions %>
             </ul>
+
+            <ul class="nav pull-right">
+              <%= li_navbar_or_not(:shopping_cart) %>
+            </ul>
+
           </div>
       <% end %>
     </div>
