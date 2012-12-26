@@ -30,7 +30,7 @@
 
       <div class="form-actions">
         <%= f.submit t(:shopping_submit_shipping), :id => 'my_submit' %>
-        <span id="spinner" style="display:none" class='spinner'></span>
+        <%= spinner %>
         <%= link_to 'Back', edit_shopping_address_path(@cart.address.id), class: 'btn' %>
       </div>
 

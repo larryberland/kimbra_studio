@@ -53,7 +53,7 @@
             <%= f.submit t('.save.name'), id: 'my_submit', class: 'btn btn-primary', title: t('.save.title') %>
         <% end %>
         <%= link_to t(:cancel), url_for_cancel_workflow(@offer), class: 'btn' %>
-        <span id="spinner" style="display:none" class='spinner'></span>
+        <%= spinner %>
       </div>
 
       <div id="portrait_form">

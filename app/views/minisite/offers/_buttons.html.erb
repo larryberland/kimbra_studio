@@ -28,7 +28,7 @@
                         id: "my_submit_adjust#{offer.id}",
                         class: css,
                         form_class: "button_to form-inline"%>
-          <%= spinner("adjust#{offer.id}") %>
+          <%= spinner_multi("adjust#{offer.id}") %>
 
         </div>
 
@@ -45,7 +45,7 @@
                              title:        t(".delete.title"),
                              button_class: "btn btn-danger delete multi-submits",
                              form_class: "form-inline button_to"%>
-          <%= spinner("delete#{offer.id}") %>
+          <%= spinner_multi("delete#{offer.id}") %>
 
         </div>
     <% end %>

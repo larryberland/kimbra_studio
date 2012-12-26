@@ -12,7 +12,7 @@
                        id: "my_submit_#{value}",
                        class: 'btn btn-primary multi-submits',
                        title: t('.add_cart.title') %>
-        <%= spinner(value) %>
+        <%= spinner_multi(value) %>
     <% end %>
 <% else %>
     <%= button_to t(".add_cart.name"), '#',
