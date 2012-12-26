@@ -17,7 +17,7 @@ module MyFormTagHelper
 
     # use a button tag instead of input
     content_tag(:button, options) do
-      content_tag(:i, "", "class" => icon_class) + value
+      content_tag(:i, "", "class" => icon_class) + " #{value}"
     end
     #
     #tag :input, html_options.update(options)
