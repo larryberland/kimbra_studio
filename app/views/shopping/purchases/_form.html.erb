@@ -87,7 +87,7 @@
 
       <div class="form-actions">
         <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
-        <%= f.submit text, :id => 'my_submit' %>
+        <%= f.submit text, id:'my_submit', class: 'btn btn-success' %>
         <%= spinner %>
         <%= link_to 'Back', shopping_cart_purchase_path(@cart), class: 'btn' %>
       </div>
