@@ -1,11 +1,16 @@
 <!-- class="navbar navbar-inverse navbar-fixed-top"-->
 <div id='navbar' class="navbar navbar-inverse">
 
-  <div class="row navbar-header-top-row">
+  <div class="navbar-inner no-border">
 
-    <div class="row">
+    <div class="media">
 
-      <div class="pull-left">
+      <img src="<%= @studio.minisite.image_url %>"
+           title="<%= @studio.name %>"
+           class="pull-left">
+
+      <div class="media-body pull-left">
+
         <div class='studio-address'>
           <address>
             <strong><%= @studio.name %></strong><br>
@@ -23,8 +28,6 @@
           </address>
         </div>
       </div>
-
-      <img src="<%= @studio.minisite.image_url %>" title="<%= @studio.name %>">
 
     </div>
 
