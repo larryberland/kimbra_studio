@@ -19,7 +19,7 @@
       <span id='<%= "shopping_item_#{@shopping_item.piece_id}" %>'></span>
     </p>
     <% unless @show_status_only %>
-        <div class="form-actions">
+        <div class="offer-actions">
           <%= render 'shopping/items/add_to_cart', attrs: {piece_id: piece.id} %>
         </div>
     <% end %>

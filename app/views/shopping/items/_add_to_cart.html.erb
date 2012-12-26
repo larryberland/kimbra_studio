@@ -8,7 +8,8 @@
 
         <%= f.hidden_field field %>
         <%= f.hidden_field :cart_id %>
-        <%= submit_tag t('.add_cart.name'),
+        <%= submit_icon_tag "icon-plus-sign icon-white",
+                            t('.add_cart.name'),
                        id: "my_submit_#{value}",
                        class: 'btn btn-primary multi-submits',
                        title: t('.add_cart.title') %>

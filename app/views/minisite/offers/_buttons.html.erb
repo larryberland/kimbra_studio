@@ -1,21 +1,24 @@
 <div class="offer-actions span9">
   <span class="price"><%= number_to_currency(offer.price) %></span>
+
   <p class="shopping-item">
     <span id='<%= "shopping_item_#{offer.id}" %>'></span>
   </p>
+
   <div class="row-fluid">
 
     <div class="span2">
       <%= render 'shopping/items/add_to_cart', attrs: {offer_id: offer.id} %>
+
     </div>
 
     <% if offer.adjust_picture? %>
 
         <% if is_studio? %>
-            <% css = 'disabled btn' %>
+            <% css = 'disabled' %>
             <% edit_url = '#' %>
         <% else %>
-            <% css = 'btn multi-submits' %>
+            <% css = 'multi-submits' %>
             <% if offer.has_picture? %>
                 <% if offer.items.size > 1 %>
                     <% edit_url = minisite_offer_items_path(offer) %>
@@ -24,33 +27,38 @@
                 <% end %>
             <% end %>
         <% end %>
+        <% if controller_name == 'offers' and action_name == 'index_custom' %>
+            <% adjust_span = "span3" %>
+        <% else %>
+            <% adjust_span = "span5" %>
+        <% end %>
 
-        <div class="span2">
           <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
-          <%= button_to t(".#{key}.name"), edit_url,
-                        method: :get, title: t(".#{key}.title"),
-                        id: "my_submit_adjust#{offer.id}",
-                        class: css,
-                        form_class: "button_to form-inline"%>
+        <div class="<%=adjust_span%>">
+          <%= button_icon_to 'icon-edit icon-white',
+                             t(".#{key}.name"), edit_url,
+                             method:     :get, title: t(".#{key}.title"),
+                             id:         "my_submit_adjust#{offer.id}",
+                             button_class: "btn btn-small btn-success #{css}",
+                             form_class: "button_to form-inline" %>
           <%= spinner_multi("adjust#{offer.id}") %>
-
-        </div>
+         </div>
 
     <% end %>
 
-    <% if params[:controller] == 'minisite/offers' and params[:action] == 'index_custom' %>
-        <div class="span5">
-          <% confirm = offer.in_cart?(@cart) ? '.delete.confirm_in_cart' : '.delete.confirm' %>
+    <% if controller_name == 'offers' and action_name == 'index_custom' %>
+        <% confirm = offer.in_cart?(@cart) ? '.delete.confirm_in_cart' : '.delete.confirm' %>
+        <div class="span4">
+
           <%= button_icon_to 'icon-trash icon-white',
                              t(".delete.name"), minisite_email_offer_path(offer.email, offer),
                              method:       :delete, remote: true,
                              id:           "my_submit_delete#{offer.id}",
                              confirm:      t(confirm),
                              title:        t(".delete.title"),
-                             button_class: "btn btn-danger delete multi-submits",
-                             form_class: "form-inline button_to"%>
+                             button_class: "btn btn-small btn-danger delete multi-submits",
+                             form_class:   "form-inline button_to" %>
           <%= spinner_multi("delete#{offer.id}") %>
-
         </div>
     <% end %>
   </div>
