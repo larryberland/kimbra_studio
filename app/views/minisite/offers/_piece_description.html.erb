@@ -1,0 +1,14 @@
+<%= content_tag :p do %>
+    <% piece.try(:short_description).to_s.split(". ").each do |sentence| %>
+        <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
+        <br/>
+    <% end %>
+<% end if piece.try(:short_description).present? %>
+
+<%= content_tag :p do %>
+    <% piece.try(:description_markup).to_s.split(". ").each do |sentence| %>
+        <%= sentence.strip %><%= "." unless sentence.strip.last == '.' %>
+        <br/>
+    <% end %>
+<% end if piece.try(:description_markup).present? %>
+

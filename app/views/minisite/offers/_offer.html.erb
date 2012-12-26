@@ -21,7 +21,7 @@
         <b><%= icon_minisite('icon-shopping-cart') %>&nbsp;<%= t('in_shopping_cart') %></b><br>
     <% end %>
 
-    <%= render 'minisite/piece_description', offer: offer %>
+    <%= render 'piece_description', piece: offer.piece %>
     <br>
     <span class="price"><%= number_to_currency(offer.price) %></span>
     <p class="shopping-item">
@@ -29,4 +29,4 @@
     </p>
   </div>
 </div>
-  <%= render 'minisite/buttons', offer: offer%>
+  <%= render 'buttons', offer: offer%>

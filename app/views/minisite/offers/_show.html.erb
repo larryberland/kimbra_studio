@@ -40,7 +40,7 @@
         <b><%= icon_minisite('icon-shopping-cart') %>&nbsp;<%= t('in_shopping_cart') %></b><br>
     <% end %>
 
-    <%= render 'minisite/piece_description', offer: @admin_customer_offer %>
+    <%= render 'piece_description', piece: @admin_customer_offer.piece %>
 
   </div>
 </div>
@@ -54,7 +54,7 @@
 <% unless @show_status_only %>
 
     <div>
-      <%= render 'minisite/buttons', offer: @admin_customer_offer %>
+      <%= render 'buttons', offer: @admin_customer_offer %>
     </div>
 
 <% end %>
