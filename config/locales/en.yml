@@ -328,7 +328,7 @@ en:
         title: "My Collection of custom heirloom jewelry pieces"
         title_friend_html: "My Collection of custom heirloom jewelry pieces,<br>shared with Friends as %{name}"
         new_friend:
-          name: "Rename My Collection for your Friends..."
+          name: "Rename..."
           title: "Click to rename My Collection for your Friends."
         redirect_to_build_a_piece_html: "The My Collection page is where you bring together the items that interest you most. It is empty until you:<ul><li>add something from a Friend's collection</li><li>add a Suggested piece</li><li>adjust a Suggested piece</li><li>add a Suggestion to your Shopping Cart</li><li>Build a Piece</li></ul> We took the liberty of taking you to the Build a Piece page now."
       index_friends:

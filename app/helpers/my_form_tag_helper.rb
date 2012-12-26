@@ -1,4 +1,4 @@
-module MyButtonHelper
+module MyFormTagHelper
   # override of submit_tag form_tag_helper
   def submit_icon_tag(icon_class, value = "Save changes", options = {})
     options = options.stringify_keys
