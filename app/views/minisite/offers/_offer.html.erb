@@ -23,10 +23,6 @@
 
     <%= render 'piece_description', piece: offer.piece %>
     <br>
-    <span class="price"><%= number_to_currency(offer.price) %></span>
-    <p class="shopping-item">
-      <span id='<%= "shopping_item_#{offer.id}" %>'></span>
-    </p>
+    <%= render 'buttons', offer: offer%>
   </div>
 </div>
-  <%= render 'buttons', offer: offer%>
