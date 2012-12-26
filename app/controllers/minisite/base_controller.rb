@@ -26,7 +26,6 @@ module Minisite
 
     # TODO See TODO below.
     def load_email
-      Rails.logger.info "SESSION: #{session.inspect}"
       if params[:email_id]
         # client is usually going to the email offers index page
         @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])

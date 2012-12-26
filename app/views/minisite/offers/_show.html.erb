@@ -45,12 +45,6 @@
   </div>
 </div>
 
-<p class="price"><%= number_to_currency(@admin_customer_offer.price) %></p>
-
-<p class="shopping-item">
-  <span id='<%= "shopping_item_#{@admin_customer_offer.id}" %>'></span>
-</p>
-
 <% unless @show_status_only %>
     <div>
       <%= render 'buttons', offer: @admin_customer_offer %>
