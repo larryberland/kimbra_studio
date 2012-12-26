@@ -3,33 +3,26 @@
 
   <div class="navbar-inner no-border">
 
-    <div class="media">
-
-      <img src="<%= @studio.minisite.image_url %>"
-           title="<%= @studio.name %>"
-           class="pull-left">
-
-      <div class="media-body pull-left">
-
-        <div class='studio-address'>
-          <address>
-            <strong><%= @studio.name %></strong><br>
-            <% @studio.address_array.each do |line| %>
-                <%= line %>
-                <br>
-            <% end %>
-            <% if @studio.phone_number %>
-                <abbr title="<%= t(:phone_abbr) %>"><%= icon_minisite("icon-volume-up") %></abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
-                <br>
-            <% end %>
-            <% if @studio.info and @studio.info.email %>
-                <abbr title="<%= t(:email_abbr) %>"><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
-            <% end %>
-          </address>
-        </div>
+    <div class="pull-left">
+      <div class='studio-address'>
+        <address>
+          <strong><%= @studio.name %></strong><br>
+          <% @studio.address_array.each do |line| %>
+              <%= line %>
+              <br>
+          <% end %>
+          <% if @studio.phone_number %>
+              <abbr title="<%= t(:phone_abbr) %>"><%= icon_minisite("icon-volume-up") %></abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
+              <br>
+          <% end %>
+          <% if @studio.info and @studio.info.email %>
+              <abbr title="<%= t(:email_abbr) %>"><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
+          <% end %>
+        </address>
       </div>
-
     </div>
+
+    <img src="<%= @studio.minisite.image_url %>" title="<%= @studio.name %>">
 
   </div>
 
