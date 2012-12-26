@@ -100,14 +100,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     @admin_customer_offer             = @offer
 
     # current collection friend name
-    if (session[:admin_customer_friend_id])
-      @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id])
-    else
-      # client is coming in with a new session
-      @admin_customer_friend = @admin_customer_email.create_friend(@cart)
-      session[:admin_customer_friend_id] = @admin_customer_friend.id
-    end
-
+    setup_friend
   end
 
   # handle some workflow for admin when adjusting pictures

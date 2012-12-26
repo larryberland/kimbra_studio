@@ -12,7 +12,6 @@ class Shopping::BaseController < InheritedResources::Base
   # current navbar menu
   # :collection, :charms, :chains, :brand, :shopping_cart
   def navbar_active
-
     # reset in controller for active navbar menu item
     @navbar_active = :shopping_cart
   end
@@ -44,13 +43,7 @@ class Shopping::BaseController < InheritedResources::Base
     @admin_customer_email = @cart.email
 
     # current collection friend name
-    if (session[:admin_customer_friend_id])
-      @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id])
-    else
-      # client is coming in with a new session
-      @admin_customer_friend             = @admin_customer_email.create_friend(@cart)
-      session[:admin_customer_friend_id] = @admin_customer_friend.id
-    end
+    setup_friend
 
   end
 

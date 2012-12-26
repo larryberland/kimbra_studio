@@ -42,7 +42,7 @@ class ApplicationController < ActionController::Base
   end
 
   # @admin_customer_friend identifies the client's
-  #   friend info for this session
+          #   friend info for this session
   def in_my_collection?(offer)
     if (@admin_customer_friend)
       if (offer.suggestion?)
@@ -51,6 +51,20 @@ class ApplicationController < ActionController::Base
         false
       else
         true
+      end
+    end
+  end
+
+  def setup_friend
+    # current collection friend name
+    @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id]) if (session[:admin_customer_friend_id])
+    if @admin_customer_friend.nil?
+      if @admin_customer_email
+        # client is coming in with a new session
+        @admin_customer_friend             = @admin_customer_email.create_friend(@cart)
+        session[:admin_customer_friend_id] = @admin_customer_friend.id
+      else
+        Rails.logger.info("WARN:setup_friend() missing email session:#{session.inspect}")
       end
     end
   end

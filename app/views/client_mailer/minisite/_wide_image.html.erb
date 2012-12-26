@@ -9,13 +9,12 @@
           <tbody>
           <tr>
             <td class="w580" align="center" width="580">
-              <% klass = offer.frozen_offer? ? "frozen" : "" %>
               <%= link_to image_tag(attachments['offer_image.jpg'].url,
                                     :title => offer.name,
                                     :alt => offer.name,
                                     :width => constrain_to_500_px_wide(offer, :width),
                                     :height => constrain_to_500_px_wide(offer, :height),
-                                    :class => "w280 img-rounded #{klass}",
+                                    :class => "w280 img-rounded",
                                     :editable => "true",
                                     :label => "Image",
                                     :border => 0),

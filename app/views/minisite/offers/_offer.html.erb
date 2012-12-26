@@ -1,10 +1,8 @@
 <div class="media">
-
-  <% klass = offer.frozen_offer? ? "frozen" : "" %>
-  <%= link_to image_tag(offer.image.url_cache_buster,
+  <%= link_to image_tag(offer.try(:image).try(:url_cache_buster),
                         :title    => offer.name,
                         :alt      => offer.name,
-                        :class    => "img-rounded #{klass} media-object",
+                        :class    => "img-rounded media-object",
                         :editable => "true",
                         :label    => "Image",
                         :border   => 0),
@@ -18,9 +16,11 @@
       <%= offer.name %>
       <%= "(#{offer.id})" if Rails.env.development? %>
     </h4>
+
     <% if offer.in_cart?(@cart) %>
-        <b><%= icon_minisite('icon-shopping-cart')%>&nbsp;<%= t('in_shopping_cart') %></b><br>
+        <b><%= icon_minisite('icon-shopping-cart') %>&nbsp;<%= t('in_shopping_cart') %></b><br>
     <% end %>
+
     <%= render 'minisite/piece_description', offer: offer %>
     <br>
     <span class="price"><%= number_to_currency(offer.price) %></span>
@@ -29,6 +29,4 @@
     </p>
   </div>
 </div>
-<div>
   <%= render 'minisite/buttons', offer: offer%>
-</div>
