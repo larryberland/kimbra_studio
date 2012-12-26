@@ -1,13 +1,10 @@
 module Minisite
   class EmailsController < BaseController
 
-    skip_before_filter :set_by_tracking, :set_cart_and_client_and_studio, only: [:order_status, :about]
+    skip_before_filter :set_by_tracking, :set_cart_and_client_and_studio, only: [:order_status]
 
     def about
       @navbar_active = :brand
-      @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id])
-      @studio = @admin_customer_email.my_studio_session.studio
-      set_cart_and_client_and_studio
       @storyline.describe "Viewing About #{@studio.name}."
     end
 
@@ -54,6 +51,7 @@ module Minisite
 
     private #================================================
 
+    # overriding BaseController's to get email instead of offer
     def set_by_tracking
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id]) if params[:id]
     end

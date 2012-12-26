@@ -2,6 +2,7 @@ module Minisite
 
   class BaseController < ApplicationController
 
+    # These filters do not get called by Inherited Resource Controllers
     skip_before_filter :authenticate_user!
     before_filter :load_email
     before_filter :set_by_tracking
@@ -12,7 +13,7 @@ module Minisite
 
     private #===========================================================================
 
-    # current navbar minisite menu
+    # override the ApplicationController's navbar_active
     # :collection, :charms, :chains, :brand, :shopping_cart
     def navbar_active
       # reset in controller for active navbar menu item
@@ -41,75 +42,6 @@ module Minisite
           # if email has not already been set then override with this offers email
           @admin_customer_email ||= @admin_customer_offer.email
         end
-      end
-    end
-
-    # this should only be called by set_cart_and_client_and_studio
-    def set_session_cart
-      # Pull cart from current session; usually normal shopping activity.
-      if @cart.nil? && session[:cart_id]
-        # incoming url does not have a cart
-        #   see if the session has a valid cart
-        @cart = Shopping::Cart.find(session[:cart_id]) rescue nil
-        if @cart
-          # override the email record with the cart's info
-          @admin_customer_email = @cart.email
-        end
-      end
-
-      # Otherwise create new cart; we are starting a new shopping session.
-      # Offer and email are already set.
-      if @cart.nil?
-        @cart             = Shopping::Cart.create(email: @admin_customer_email)
-        session[:cart_id] = @cart.id
-      end
-
-    end
-
-    # TODO This logic is tortured. Need to outline the different ways we get to this controller and set session vars accordingly.
-    # 1. From session begun by offer email.
-    # 2. From session begun by confirmation email offer status link.
-    # 3. From bookmarks to any interior page.
-    # 4. where else?!? don't forget combinations of the above.
-    def set_cart_and_client_and_studio
-
-      # Pull cart from incoming link; usually confirmation email order status link.
-      if params[:cart]
-        # have a shopping cart to use
-        @cart                 = Shopping::Cart.find_by_tracking(params[:cart])
-        @admin_customer_email = @cart.email
-        @admin_customer_offer = nil
-      end
-
-      if (is_client?)
-        set_session_cart
-        session[:admin_customer_email_id] = @admin_customer_email.id
-
-        @client             = @admin_customer_email.my_studio_session.client
-        session[:client_id] ||= @client.id
-
-        @studio                = @admin_customer_email.my_studio_session.studio
-        session[:studio_id]    ||= @studio.id
-
-        # current collection friend name
-        setup_friend
-
-      elsif (is_studio?)
-        # studio and admin should have @cart and @client nil
-        @studio = current_user.studio
-
-        @admin_customer_friend = Admin::Customer::Friend.new(email: @admin_customer_email,
-                                                             name: @admin_customer_email.my_studio_session.client.name)
-
-      else
-
-        set_session_cart
-        @studio             = @admin_customer_email.my_studio_session.studio
-        # shopping session info
-        session[:studio_id] = @studio.id
-
-        @admin_customer_friend = Admin::Customer::Friend.new(email: @admin_customer_email,
-                                                             name: @admin_customer_email.my_studio_session.client.name)
       end
     end
 

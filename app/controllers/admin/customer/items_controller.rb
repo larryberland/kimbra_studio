@@ -4,7 +4,6 @@ class Admin::Customer::ItemsController < InheritedResources::Base
              :parent_class => Admin::Customer::Offer
 
   def update
-    puts "params=>#{params.inspect}"
     @item  = Admin::Customer::Item.find(params[:id])
     offset = [@item.part.part_layout.x, @item.part.part_layout.y]
     size   = [@item.part.part_layout.w, @item.part.part_layout.h]

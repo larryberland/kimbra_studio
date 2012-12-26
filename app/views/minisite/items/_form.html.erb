@@ -1,4 +1,5 @@
-<% url = @item.id.nil? ? admin_customer_email_offer_items_path(@offer.email, @offer, @item) : admin_customer_email_offer_item_path(@offer.email, @offer, @item) %>
+<% url = @item.new_record? ? admin_customer_email_offer_items_path(@admin_customer_offer.email, @admin_customer_offer, @item) :
+        admin_customer_email_offer_item_path(@admin_customer_offer.email, @admin_customer_offer, @item) %>
 <%= form_for(@item, :url => url, :html => {:multipart => true}) do |f| %>
 
     <%= render 'shared/error_messages', record: @item %>
