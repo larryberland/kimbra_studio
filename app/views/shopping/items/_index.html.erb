@@ -46,11 +46,13 @@
                     <div class="input-append">
                       <%= text_field_tag :quantity, item.quantity, class: 'span1' %>
                       <button href="<%= shopping_item_path(item) %>"
-                              class='update_quantity btn btn-success'
+                              id='<%="my_submit_update#{item.id}"%>'
+                              class='update_quantity btn btn-success multi-submits'
                               type="button"
                               title="<%=t('.update.title')%>">
                               <%= t('.update.name') %>
                               </button>
+                      <%= spinner("update#{item.id}") %>
                     </div>
                 <% end %>
               </td>

@@ -8,8 +8,11 @@
 
         <%= f.hidden_field field %>
         <%= f.hidden_field :cart_id %>
-        <%= submit_tag t('.add_cart.name'), :id => "my_submit_#{value}", :class => 'btn btn-primary multi-submits', title: t('.add_cart.title') %>
-        <span id='<%= "spinner_#{value}" %>' style='display:none' class='spinner'></span>
+        <%= submit_tag t('.add_cart.name'),
+                       id: "my_submit_#{value}",
+                       class: 'btn btn-primary multi-submits',
+                       title: t('.add_cart.title') %>
+        <%= spinner(value) %>
     <% end %>
 <% else %>
     <%= button_to t(".add_cart.name"), '#',

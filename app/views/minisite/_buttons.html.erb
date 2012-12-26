@@ -11,7 +11,7 @@
             <% css = 'disabled btn' %>
             <% edit_url = '#' %>
         <% else %>
-            <% css = 'btn' %>
+            <% css = 'btn multi-submits' %>
             <% if offer.has_picture? %>
                 <% if offer.items.size > 1 %>
                     <% edit_url = minisite_offer_items_path(offer) %>
@@ -21,23 +21,31 @@
             <% end %>
         <% end %>
 
-        <div class="span3">
+        <div class="span2">
           <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
           <%= button_to t(".#{key}.name"), edit_url,
-                        method: :get, title: t(".#{key}.title"), class: css %>
+                        method: :get, title: t(".#{key}.title"),
+                        id: "my_submit_adjust#{offer.id}",
+                        class: css,
+                        form_class: "button_to form-inline"%>
+          <%= spinner("adjust#{offer.id}") %>
 
         </div>
 
     <% end %>
+
     <% if params[:controller] == 'minisite/offers' and params[:action] == 'index_custom' %>
-        <div class="span4">
+        <div class="span5">
           <% confirm = offer.in_cart?(@cart) ? '.delete.confirm_in_cart' : '.delete.confirm' %>
           <%= button_icon_to 'icon-trash icon-white',
                              t(".delete.name"), minisite_email_offer_path(offer.email, offer),
                              method:       :delete, remote: true,
+                             id:           "my_submit_delete#{offer.id}",
                              confirm:      t(confirm),
                              title:        t(".delete.title"),
-                             button_class: "btn btn-danger delete" %>
+                             button_class: "btn btn-danger delete multi-submits",
+                             form_class: "form-inline button_to"%>
+          <%= spinner("delete#{offer.id}") %>
 
         </div>
     <% end %>
