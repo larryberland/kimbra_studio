@@ -12,19 +12,6 @@ module Platypus
       #content_tag(:div, (label+input), { :class => 'labeled_input' }
     end
 
-    def spinner_multi(unique_id=nil, options={})
-      options[:id] ||= "spinner"
-      options[:id] += "_#{unique_id}" if unique_id
-      spinner(options)
-    end
-
-    def spinner(options={})
-      options[:id]    ||= "spinner"
-      options[:style] ||= 'display:none'
-      options[:class] ||= 'spinner'
-      content_tag(:span, nil, options)
-    end
-
   end
 end
 
