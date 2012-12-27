@@ -29,18 +29,6 @@ $ ->
       $('#spinner').toggle()
 
 $ ->
-  $('.multi-submits').each (index, el) ->
-    # Insert spinner object and append it to the corresponding #spinner_xx element.
-    [first, mid..., itemNum] = el.id.split('_')
-    spinner = new Spinner(spinnerOpts).spin()
-    $("#spinner_#{itemNum}").append(spinner.el)
-    # Add spinner show to #my_submit click event.
-    $("#my_submit_#{itemNum}").click ->
-      $("#spinner_#{itemNum}").toggle()
-
-    $("#my_submit_#{itemNum}").bind 'invalid', ->
-      $("#spinner_#{itemNum}").toggle()
-$ ->
   $('div.spin').each (index, el) ->
     # Insert spinner object and append it to the corresponding #spinner_xx element.
     span = $(el).find('.spinner')
