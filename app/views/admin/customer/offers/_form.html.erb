@@ -76,9 +76,9 @@
           </fieldset>
       <% end %>
 
+      <%= f.labeled_input :id %>
       <div class="form-actions">
-        <%= f.submit id: 'my_submit', class: "btn btn-primary" %>
-        <%= spinner %>
+        <%= f.submit_spinner class: "btn-primary" %>
       </div>
   <% end %>
   <!-- platypus-form -->

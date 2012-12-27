@@ -1,5 +1,4 @@
 $("#<%= "shopping_item_#{@shopping_item_id}" %>").html( "<%= escape_javascript(render(@item))%>" );
 $("#shopping_item").effect("highlight", {}, 1500);
-$("#spinner").toggle();
 $("#<%= "spinner_#{@shopping_item_id}" %>").toggle();
 <%= render "shopping/carts/navbar_info" %>

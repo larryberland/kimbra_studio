@@ -10,9 +10,59 @@ module SpinnerHelper
   end
 
   def spinner(options={})
-    options[:id]    ||= "spinner"
+    options ||= {}
+    #options[:id]    ||= "spinner"
     options[:style] ||= 'display:none'
     options[:class] ||= 'spinner'
+    #unless options[:id].starts_with?("spinner")
+    #  options[:id] = "spinner_#{options[:id]}"
+    #end
+    if (options['id'])
+      options['id'] = "spinner_#{options['id']}"
+    end
     content_tag(:span, '', options)
   end
+
+  #<%= link_to_spinner t(:cancel),
+  #                    url_for_cancel_workflow(@offer),
+  #                    id: 'my_cancel',
+  #                    class: 'btn'%>
+  # outputs:
+  #<div class="spin">
+  #  <a id="my_cancel"
+  #     class="btn"
+  #     href="http://localhost:3000/minisite/offers/vns3a5w2tp">
+  #         Cancel
+  #  </a>
+  #  <span style="display:none" id="spinner_my_cancel" class="spinner"></span>
+  #</div>
+  #
+  def link_to_spinner(*args, &block)
+    if block_given?
+      options      = args.first || {}
+      html_options = args.second
+      link_to_spinner(capture(&block), options, html_options)
+    else
+      name            = args[0]
+      options         = args[1] || {}
+      html_options    = args[2]
+      spinner_options = html_options.delete(:spinner)
+
+      html_options    = convert_options_to_data_attributes(options, html_options)
+      url             = url_for(options)
+
+      href        = html_options['href']
+      tag_options = tag_options(html_options)
+
+      spinner_options ||= {}
+      spinner_options['id'] ||= html_options['id']
+
+      href_attr = "href=\"#{ERB::Util.html_escape(url)}\"" unless href
+      html = content_tag(:div, class: 'spin') do
+        "<a #{href_attr}#{tag_options}>#{ERB::Util.html_escape(name || url)}</a>#{spinner(spinner_options)}".html_safe
+      end
+      html.html_safe
+    end
+  end
+
 end

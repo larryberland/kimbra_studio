@@ -15,10 +15,8 @@
     <% if offer.adjust_picture? %>
 
         <% if is_studio? %>
-            <% css = 'disabled' %>
             <% edit_url = '#' %>
         <% else %>
-            <% css = 'multi-submits' %>
             <% if offer.has_picture? %>
                 <% if offer.items.size > 1 %>
                     <% edit_url = minisite_offer_items_path(offer) %>
@@ -33,16 +31,17 @@
             <% adjust_span = "span5" %>
         <% end %>
 
-          <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
-        <div class="<%=adjust_span%>">
-          <%= button_icon_to 'icon-edit icon-white',
-                             t(".#{key}.name"), edit_url,
-                             method:     :get, title: t(".#{key}.title"),
-                             id:         "my_submit_adjust#{offer.id}",
-                             button_class: "btn btn-small btn-success #{css}",
-                             form_class: "button_to form-inline" %>
-          <%= spinner_multi("adjust#{offer.id}") %>
-         </div>
+        <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
+        <div class="<%= adjust_span %>">
+          <%= button_icon_to t(".#{key}.name"),
+                             edit_url,
+                             method:       :get,
+                             id:           "adjust#{offer.id}",
+                             title:        t(".#{key}.title"),
+                             icon_class:   'icon-edit icon-white',
+                             button_class: "btn btn-small btn-success",
+                             form_class:   "button_to form-inline" %>
+        </div>
 
     <% end %>
 
@@ -50,15 +49,15 @@
         <% confirm = offer.in_cart?(@cart) ? '.delete.confirm_in_cart' : '.delete.confirm' %>
         <div class="span4">
 
-          <%= button_icon_to 'icon-trash icon-white',
-                             t(".delete.name"), minisite_email_offer_path(offer.email, offer),
-                             method:       :delete, remote: true,
-                             id:           "my_submit_delete#{offer.id}",
-                             confirm:      t(confirm),
+          <%= button_icon_to t(".delete.name"), minisite_email_offer_path(offer.email, offer),
+                             method:       :delete,
+                             remote:       true,
+                             id:           "delete#{offer.id}",
                              title:        t(".delete.title"),
-                             button_class: "btn btn-small btn-danger delete multi-submits",
+                             confirm:      t(confirm),
+                             icon_class:   'icon-trash icon-white',
+                             button_class: "btn btn-small btn-danger delete",
                              form_class:   "form-inline button_to" %>
-          <%= spinner_multi("delete#{offer.id}") %>
         </div>
     <% end %>
   </div>

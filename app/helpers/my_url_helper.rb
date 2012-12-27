@@ -2,10 +2,13 @@ module MyUrlHelper
     # override of button_to
   #   uses <button> tag instead of <input>
   #   allows an icon_class to show before the name
-  def button_icon_to(icon_class, name, options = {}, html_options = {})
+  def button_icon_to(name, options = {}, html_options = {})
 
     html_options = html_options.stringify_keys
     button_class = html_options.delete('button_class')
+    icon_class   = html_options.delete('icon_class')
+    spinner_options = html_options.delete('spinner')
+    spinner_options ||= {}
 
     convert_boolean_attributes!(html_options, %w( disabled ))
 
@@ -37,6 +40,15 @@ module MyUrlHelper
     # use a button tag instead of input
     button = content_tag(:button, html_options) do
       content_tag(:i, "", "class" => icon_class) + " #{name}"
+    end
+
+    unless spinner_options['disabled']
+      # grab what should be a unique id for the spinner if there was an id passed in
+      spinner_options['id'] = html_options['id']
+      # wrap button and spinner inside an inline div
+      button = content_tag(:div, class: 'spin') do
+          button + spinner(spinner_options)
+      end
     end
     # end of platypus override
 

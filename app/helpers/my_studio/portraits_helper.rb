@@ -28,14 +28,11 @@ module MyStudio::PortraitsHelper
     if my_studio_session.finished_uploading_at?
       'You marked this photo session as complete and it has been scheduled for photoshopping.'
     elsif my_studio_session.complete?
-      #button_icon_to(t(:my_studio_sessions_complete_link2, portrait_count: my_studio_session.portraits.count),
-      #               'icon-ok-sign icon-white',
-      #               my_studio_session_is_finished_uploading_portraits_path,
-      #               {method: :get, class: "btn btn-success", title: t(:my_studio_sessions_complete_title)})
-      button_icon_to('icon-ok-sign icon-white',
-                     t(:my_studio_sessions_complete_link2, portrait_count: my_studio_session.portraits.count),
+      button_icon_to(t(:my_studio_sessions_complete_link2, portrait_count: my_studio_session.portraits.count),
                      my_studio_session_is_finished_uploading_portraits_path,
-                     {method: :get, title: t(:my_studio_sessions_complete_title)})
+                     {method: :get,
+                      title: t(:my_studio_sessions_complete_title),
+                      icon_class: 'icon-ok-sign icon-white'})
     end
   end
 

@@ -12,4 +12,4 @@ window.viewportOffsetY = <%= @item_side.part.part_layout.layout.y %>;
 $('#portrait_item').imagesLoaded(wait(500, function () {
     new PortraitCropper()
 }));
-$('#spinner').toggle();
+$("<%="#spinner_#{@portrait.id}"%>").toggle();

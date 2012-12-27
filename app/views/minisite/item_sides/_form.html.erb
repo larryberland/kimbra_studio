@@ -41,19 +41,27 @@
             <% if @cart and @cart.find_item(@offer.id).present? %>
                 <strong><%= t('.in_cart') %></strong><br>
             <% end %>
-            <% css_create = 'btn btn-primary' %>
+            <% css_create = 'btn-primary' %>
             <!-- only a client can save their own piece -->
             <% if in_my_collection?(@offer) %>
-                <%= f.submit t('.save.name'), id: 'my_submit', class: 'btn btn-primary', title: t('.save.title') %>
-                <% css_create = 'btn' %>
+                <%= f.submit_spinner t('.save.name'),
+                                    title: t('.save.title'),
+                                    class: 'btn-primary' %>
+                <% css_create = '' %>
             <% end %>
-            <%= f.submit t('.create_offer.name'), id: 'my_submit_create', class: css_create, title: t('.create_offer.title') %>
+            <%= f.submit_spinner t('.create_offer.name'),
+                                 id: 'my_submit_create',
+                                 title: t('.create_offer.title'),
+                                 class: css_create %>
         <% else %>
             <!-- admin and studio can only save to the current offer -->
-            <%= f.submit t('.save.name'), id: 'my_submit', class: 'btn btn-primary', title: t('.save.title') %>
+            <%= f.submit_spinner t('.save.name'),
+                                title: t('.save.title'),
+                                 class: 'btn-primary' %>
         <% end %>
-        <%= link_to t(:cancel), url_for_cancel_workflow(@offer), class: 'btn' %>
-        <%= spinner %>
+        <%= link_to_spinner t(:cancel), url_for_cancel_workflow(@offer),
+                            id: 'my_cancel',
+                            class: 'btn'%>
       </div>
 
       <div id="portrait_form">
@@ -77,8 +85,11 @@
       </div>
       <% @admin_customer_offer.portraits.each do |portrait| %>
           <div class="portrait-pick-vertical">
-            <%= link_to cw_image_only(portrait), portrait_minisite_item_side_path(@item_side, portrait.id),
-                        :remote => true, class: "rounded portraits" %>
+            <%= link_to_spinner cw_image_only(portrait),
+                                portrait_minisite_item_side_path(@item_side, portrait.id),
+                        :remote => true,
+                        class: "rounded portraits",
+                        id: portrait.id%>
           </div>
       <% end %>
     </div>
@@ -99,8 +110,4 @@
     // Create the jCrop object on the page when portrait has finished loading.
     $('#preview').imagesLoaded( wait(500, function(){new PortraitCropper()}) );
 
-    // Show spinner when any portrait clicked.
-    $('.portraits').click(function () {
-    $('#spinner').toggle();
-    });
 <% end %>
