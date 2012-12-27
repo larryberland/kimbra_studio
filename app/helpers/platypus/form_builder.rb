@@ -27,7 +27,7 @@ module Platypus::FormBuilder
       spinner_options ||= {}
       options[:class] = bootstrap_btn_css(options[:class])
 
-      value           ||= submit_default_value
+      value ||= submit_default_value
 
       # pass the id onto the spinner for uniqueness
       spinner_options['id'] ||= options[:id] if options[:id]
@@ -47,26 +47,24 @@ module Platypus::FormBuilder
     options[:class] = bootstrap_btn_css(options[:class])
     value           ||= submit_default_value
 
-    # add a bootstrap icon class if there is one
-    value = icon(icon_class) + value if icon_class
+    button = @template.button_tag(value, options) do
+      # add a bootstrap icon class if there is one
+      icon_class ? icon(icon_class) + value : value
+    end
 
     # pass the id onto the spinner for uniqueness
     spinner_options['id'] ||= options[:id] if options[:id]
+    spinner = @template.spinner(spinner_options)
 
     @template.content_tag(:div, class: 'spin') do
-      @template.button_tag(value, options) + @template.spinner(spinner_options)
+      button + spinner
     end
-
   end
 
   private
 
   def icon(klass)
     "<i class='#{klass}'></i> ".html_safe
-  end
-
-  def button_icon_tag(value, options)
-
   end
 
   def bootstrap_btn_css(klass)
