@@ -43,13 +43,13 @@
                           <span class="add-on"><%= option.to_s.titleize %></span>
                         </div>
                     <% end %>
-                    <div class="input-append">
+                    <div class="input-append spin">
                       <%= text_field_tag :quantity, item.quantity, class: 'span1' %>
                       <button href="<%= shopping_item_path(item) %>"
                               id='<%="my_submit_update#{item.id}"%>'
-                              class='update_quantity btn btn-success multi-submits'
-                              type="button"
-                              title="<%=t('.update.title')%>">
+                              title="<%=t('.update.title')%>"
+                              class='update_quantity btn btn-success'
+                              type="button">
                               <%= t('.update.name') %>
                               </button>
                       <%= spinner_multi("update#{item.id}") %>
