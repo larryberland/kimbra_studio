@@ -5,6 +5,12 @@
         color: <%= @studio.try(:minisite).try(:font_color) %>;
         /*padding-top: <%=@studio.try(:minisite).try(:body_padding)%>px;*/
     }
+    input,
+    button,
+    select,
+    textarea {
+      font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
+    }
 
     .hero-unit, .navbar {
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;

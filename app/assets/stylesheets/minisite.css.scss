@@ -30,9 +30,10 @@ p {
   margin-right: auto;
 }
 
-body, button, input, select, textarea {
-  font: 13px/17px Arial, sans-serif;
-}
+//body, button, input, select, textarea {
+//body {
+//  font: 13px/17px Arial, sans-serif;
+//}
 
 textarea {
   height: 100px;
@@ -74,17 +75,17 @@ textarea {
 //  font-size: 0.95em;
 //}
 
-input[type="submit"] {
-  font-size: 1.0em;
-}
+//input[type="submit"] {
+//  font-size: 1.0em;
+//}
 
-input {
-  border: 1px solid #cccccc;
-  border-radius: 5px 5px 5px 5px;
-  box-shadow: 0 2px 3px 0 #ebebeb inset;
-  font-size: 1.0em;
-  padding: 6px 10px;
-}
+//input {
+//  border: 1px solid #cccccc;
+//  border-radius: 5px 5px 5px 5px;
+//  box-shadow: 0 2px 3px 0 #ebebeb inset;
+//  font-size: 1.0em;
+//  padding: 6px 10px;
+//}
 
 .likabutton,
 .button-link {

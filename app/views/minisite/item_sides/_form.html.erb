@@ -45,23 +45,24 @@
             <!-- only a client can save their own piece -->
             <% if in_my_collection?(@offer) %>
                 <%= f.submit_spinner t('.save.name'),
-                                    title: t('.save.title'),
-                                    class: 'btn-primary' %>
+                                     title: t('.save.title'),
+                                     class: 'btn-primary' %>
                 <% css_create = '' %>
             <% end %>
             <%= f.submit_spinner t('.create_offer.name'),
-                                 id: 'my_submit_create',
+                                 id:    'my_submit_create',
                                  title: t('.create_offer.title'),
                                  class: css_create %>
         <% else %>
             <!-- admin and studio can only save to the current offer -->
             <%= f.submit_spinner t('.save.name'),
-                                title: t('.save.title'),
+                                 title: t('.save.title'),
                                  class: 'btn-primary' %>
         <% end %>
-        <%= link_to_spinner t(:cancel), url_for_cancel_workflow(@offer),
-                            id: 'my_cancel',
-                            class: 'btn'%>
+        <%= link_to_spinner t(:cancel),
+                            url_for_cancel_workflow(@offer),
+                            id:    'my_cancel',
+                            class: 'btn' %>
       </div>
 
       <div id="portrait_form">
@@ -87,9 +88,9 @@
           <div class="portrait-pick-vertical">
             <%= link_to_spinner cw_image_only(portrait),
                                 portrait_minisite_item_side_path(@item_side, portrait.id),
-                        :remote => true,
-                        class: "rounded portraits",
-                        id: portrait.id%>
+                                id:     portrait.id,
+                                class:  "portraits",
+                                remote: true %>
           </div>
       <% end %>
     </div>

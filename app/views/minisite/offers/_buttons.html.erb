@@ -1,3 +1,9 @@
+<style type="text/css">
+    .offer-actions .row .pull-left {
+      margin-right: 20px;
+    }
+</style>
+
 <div class="offer-actions span9">
   <span class="price"><%= number_to_currency(offer.price) %></span>
 
@@ -5,9 +11,9 @@
     <span id='<%= "shopping_item_#{offer.id}" %>'></span>
   </p>
 
-  <div class="row-fluid">
+  <div class="row">
 
-    <div class="span2">
+    <div class="pull-left">
       <%= render 'shopping/items/add_to_cart', attrs: {offer_id: offer.id} %>
 
     </div>
@@ -32,7 +38,7 @@
         <% end %>
 
         <% key = in_my_collection?(offer) ? 'adjust_photo' : 'adjust_photo_add' %>
-        <div class="<%= adjust_span %>">
+        <div class="pull-left">
           <%= button_icon_to t(".#{key}.name"),
                              edit_url,
                              method:       :get,
@@ -47,7 +53,7 @@
 
     <% if controller_name == 'offers' and action_name == 'index_custom' %>
         <% confirm = offer.in_cart?(@cart) ? '.delete.confirm_in_cart' : '.delete.confirm' %>
-        <div class="span4">
+        <div class="pull-left">
 
           <%= button_icon_to t(".delete.name"), minisite_email_offer_path(offer.email, offer),
                              method:       :delete,
