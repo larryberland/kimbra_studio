@@ -127,6 +127,7 @@ KimbraStudio::Application.routes.draw do
   resources :order_items
   resources :orders
   resources :payment_profiles
+  resources :pictures, :only => [:index, :create, :destroy]
   resources :prospects
 
   namespace :shopping do
@@ -149,21 +150,23 @@ KimbraStudio::Application.routes.draw do
 
   resources :states, :only => [:index]
   resources :studios, constraints: {email: /.*/} do
+    collection do
+      get :emails
+      post :send_studio_email_campaign
+    end
     member do
       put :create_owner
-      get :eap
-      get :tkg
-      get :xms
+      get :eap # TODO obsolete
+      get :tkg # TODO obsolete
+      get :xms # TODO obsolete
       get :new_owner
-      post :send_new_account_email
-      post :send_tkg_email
-      post :send_xms_email
+      post :send_new_account_email # TODO obsolete
+      post :send_studio_email
       get :show_branding
       get :unsubscribe, path: 'unsubscribe/:email'
     end
   end
 
-  resources :pictures, :only => [:index, :create, :destroy]
   resources :terms, :only => [:index]
   devise_for :users, path_names: {sign_up: 'register'}
   resources :users do

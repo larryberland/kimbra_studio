@@ -18,13 +18,10 @@
     </div>
   </div>
 
-  <table class="table table-bordered table-striped" id='studios_table'>
+  <table class="table table-bordered table-striped datatables-hidden" id='studios_table'>
     <thead>
     <tr>
       <th>Logo?</th>
-      <th title='date studio clicked through EAP email'>EAP</th>
-      <th title='date studio clicked through TKG email'>TKG</th>
-      <th title='date studio clicked through XMS email'>XMS</th>
       <th title='send studio an email'>Name</th>
       <th title='send owner an email'>Owner</th>
       <th>Website</th>
@@ -41,9 +38,6 @@
     <% @studios.each do |studio| %>
         <tr>
           <td><%= studio.logoize ? 'logo' : 'nologo' %></td>
-          <td title='<%= time_short_index studio.eap_click %>'><%= date_short studio.eap_click %></td>
-          <td title='<%= time_short_index studio.tkg_click %>'><%= date_short studio.tkg_click %></td>
-          <td title='<%= time_short_index studio.xms_click %>'><%= date_short studio.xms_click %></td>
           <td><%= studio_email_link(studio) %></td>
           <td><%= user_email_link(studio.owner) %></td>
           <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
@@ -53,18 +47,6 @@
           <td><%= date_short studio.created_at %></td>
           <td><%= studio.created_at.to_s(:javascript) %></td>
           <td>
-            <% if elink = eap_link(studio) %>
-                <%= elink %>
-                <br>
-            <% end %>
-            <% if tlink = tkg_link(studio) %>
-                <%= tlink %>
-                <br>
-            <% end %>
-            <% if xlink = xms_link(studio) %>
-                <%= xlink %>
-                <br>
-            <% end %>
             <%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %>
             <br>
             <%= link_to 'Branding', show_branding_studio_path(studio) %>

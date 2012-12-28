@@ -22,6 +22,8 @@ class Studio < ActiveRecord::Base
   has_one :info, class_name: 'MyStudio::Info', dependent: :destroy, inverse_of: :studio
   has_one :minisite, class_name: 'MyStudio::Minisite', dependent: :destroy, inverse_of: :studio
 
+  has_many :studio_emails
+
   attr_accessible :sessions, :name, :phone_number,
                   :address_1, :address_2, :city, :state_id, :zip_code,
                   :info, :info_attributes,
@@ -161,6 +163,16 @@ class Studio < ActiveRecord::Base
     info << address_2
     info << city_state_zip
     info.compact - [""]
+  end
+
+  # Returns an array of email name symbols.
+  def available_emails
+    sent_emails = StudioEmail.sent_to(self).collect(&:email_name).collect(&:to_sym)
+    Notifier.studio_emails - sent_emails
+  end
+
+  def already_sent_email?(email='')
+    studio_emails.exists?(:email_name => email)
   end
 
   private #===================================================================

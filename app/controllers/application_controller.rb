@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
   before_filter :authenticate_user!
   before_filter :load_my_studio
   before_filter :navbar_active
+  before_filter :track_a_studio_email
 
   layout 'application'
 
@@ -188,7 +189,7 @@ class ApplicationController < ActionController::Base
       @admin_customer_offer = nil
     end
 
-    if (is_client?)
+    if is_client?
       set_session_cart
       session[:admin_customer_email_id] = @admin_customer_email.id
 
@@ -201,7 +202,7 @@ class ApplicationController < ActionController::Base
       # current collection friend name
       setup_friend
 
-    elsif (is_studio?)
+    elsif is_studio?
       # studio and admin should have @cart and @client nil
       @studio = current_user.studio
 
@@ -209,7 +210,6 @@ class ApplicationController < ActionController::Base
                                                            name:  @admin_customer_email.my_studio_session.client.name)
 
     else
-
       set_session_cart
       @studio             = @admin_customer_email.my_studio_session.studio
       # shopping session info
@@ -217,6 +217,17 @@ class ApplicationController < ActionController::Base
 
       @admin_customer_friend = Admin::Customer::Friend.new(email: @admin_customer_email,
                                                            name:  @admin_customer_email.my_studio_session.client.name)
+    end
+  end
+
+  def track_a_studio_email
+    if params[:studio_email] && params[:studio_id]
+      # Check that the email name is recognized.
+      puts "RIGHT HRERE"
+      if Notifier.instance_methods(false).include?(params[:studio_email].to_sym)
+        puts "HERE!"
+        StudioEmail.update_click_through(params[:studio_id], params[:studio_email])
+      end
     end
   end
 

@@ -7,7 +7,7 @@ class StudiosController < ApplicationController
   # GET /studios
   # GET /studios.json
   def index
-    @studios           = Studio.all
+    @studios = Studio.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @studios }
@@ -128,6 +128,7 @@ class StudiosController < ApplicationController
     end
   end
 
+  # TODO obsolete
   # Ajax action that sends email and returns text.
   def send_new_account_email
     studio = Studio.find(params[:id])
@@ -139,6 +140,7 @@ class StudiosController < ApplicationController
     end
   end
 
+  # TODO obsolete
   # Ajax action that sends email and returns text.
   def send_tkg_email
     studio = Studio.find(params[:id])
@@ -150,6 +152,7 @@ class StudiosController < ApplicationController
     end
   end
 
+  # TODO obsolete
   # Ajax action that sends email and returns text.
   def send_xms_email
     studio = Studio.find(params[:id])
@@ -191,22 +194,58 @@ class StudiosController < ApplicationController
     end
   end
 
+  # TODO obsolete
   def eap
     studio = Studio.find(params[:id])
     studio.update_attribute(:eap_click, Time.now) if studio
     redirect_to root_path
   end
 
+  # TODO obsolete
   def tkg
     studio = Studio.find(params[:id])
     studio.update_attribute(:tkg_click, Time.now) if studio
     redirect_to root_path
   end
 
+  # TODO obsolete
   def xms
     studio = Studio.find(params[:id])
     studio.update_attribute(:xms_click, Time.now) if studio
     redirect_to root_path
+  end
+
+  def send_studio_email
+    studio = Studio.find(params[:id])
+    email = params[:email]
+    Notifier.delay.send(email, studio.id)
+    StudioEmail.create(email_name: email, studio: studio, sent_at: Time.now)
+    respond_to do |format|
+      format.js do
+        render text: "$('#send_email_#{studio.id}_#{email}').html('queueing email...').effect('highlight', 2000)"
+      end
+    end
+  end
+
+  def send_studio_email_campaign
+    email = params[:email]
+    count = 0
+    Studio.all.each do |studio|
+      unless StudioEmail.exists?(email_name: email, studio_id: studio) ||
+        StudioEmail.create(email_name: email, studio: studio, sent_at: Time.now)
+        count += 1
+        Notifier.delay.send(email, studio.id)
+      end
+    end
+    respond_to do |format|
+      format.js do
+        render text: "$('#send_email_campaign_#{email}').html('queueing #{count} emails..').effect('highlight', 2000)"
+      end
+    end
+  end
+
+  def emails
+    @studios = Studio.where("my_studio_minisites.image IS NOT NULL").joins(:minisite).includes(:studio_emails).all
   end
 
   private #==========================================================================

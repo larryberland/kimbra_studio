@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121224165750) do
+ActiveRecord::Schema.define(:version => 20121228194237) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -615,6 +615,18 @@ ActiveRecord::Schema.define(:version => 20121224165750) do
   add_index "storylines", ["story_id"], :name => "index_storylines_on_story_id"
   add_index "storylines", ["url"], :name => "index_storylines_on_url"
 
+  create_table "studio_emails", :force => true do |t|
+    t.integer  "studio_id"
+    t.string   "email_name"
+    t.datetime "sent_at"
+    t.datetime "clicked_through_at"
+  end
+
+  add_index "studio_emails", ["clicked_through_at"], :name => "index_studio_emails_on_clicked_through_at"
+  add_index "studio_emails", ["email_name"], :name => "index_studio_emails_on_email_name"
+  add_index "studio_emails", ["sent_at"], :name => "index_studio_emails_on_sent_at"
+  add_index "studio_emails", ["studio_id"], :name => "index_studio_emails_on_studio_id"
+
   create_table "studios", :force => true do |t|
     t.string   "name"
     t.string   "address_1"
@@ -628,9 +640,6 @@ ActiveRecord::Schema.define(:version => 20121224165750) do
     t.datetime "updated_at"
     t.string   "sales_status", :default => "none"
     t.text     "sales_notes"
-    t.datetime "eap_click"
-    t.datetime "tkg_click"
-    t.datetime "xms_click"
   end
 
   create_table "unsubscribes", :force => true do |t|

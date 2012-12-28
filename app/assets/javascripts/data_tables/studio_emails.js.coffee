@@ -1,8 +1,10 @@
 $ ->
   setUpDataTable(
-    $('#emails_table'),
-    'aaSorting': [ [ 2, 'desc' ] ]                   # sort on long format created_at desc
+    $('#studio_emails_table'),
+    'aaSorting': [ [ 0, 'asc' ], [ 1, 'desc' ] ]      # sort on studio name, email name
     'aoColumnDefs': [
+      {'bSearchable': false, 'aTargets': [ 2,3,4,5,6 ]}   # do not search on dates or actions
+      {'bSortable': false, 'aTargets': [ 6 ]}        # do not sort on actions
       {'bVisible': false, 'aTargets': [ 3 ]}         # hide the generated_at long format column
       {'iDataSort': 3, 'aTargets': [ 2 ]}            # but use it when you sort on short format column
       {'sType': 'dateswithnils', 'aTargets': [ 3 ]}  # declare generated_at to be a date column even though it contains nils

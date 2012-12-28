@@ -11,7 +11,7 @@
   <% elsif sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
       <h4>&#x2718; No emails this past week - no portraits uploaded?</h4>
   <% else %>
-      <table class="table table-striped table-bordered" id='offer_emails_table'>
+      <table class="table table-striped table-bordered datatables-hidden" id='offer_emails_table'>
         <thead>
         <tr>
           <th>photo session</th>

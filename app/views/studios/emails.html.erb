@@ -1,0 +1,69 @@
+<%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
+<%= javascript_include_tag 'data_tables/studio_emails' %>
+<%= javascript_include_tag 'data_tables/campaigns' %>
+
+<div class='row span12'>
+  <h2>
+    <%= t(:studios_emails_title) %>
+  </h2>
+
+  <table class='table table-bordered table-striped datatables-hidden' id='studio_emails_table'>
+    <thead>
+    <tr>
+      <th>Studios with branding</th>
+      <th>Email</th>
+      <th>Sent</th>
+      <th>Sent for datatables</th>
+      <th>Clicked<br>through</th>
+      <th>Clicked through for datatables</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% @studios.each do |studio| %>
+        <% Notifier.studio_emails.each do |studio_email| %>
+            <tr>
+              <td><%= link_to "#{studio.name} (#{studio.id})", studio_path(studio), target: '_blank', title: 'Click to view in new tab.' %></td>
+              <td><%= link_to studio_email, "/mail_view/#{studio_email}", target: '_blank', title: 'Click to view in new tab.' %></td>
+              <td><%= date_short studio_email_sent_for(studio, studio_email) %></td>
+              <td><%= studio_email_sent_for(studio, studio_email).to_s(:javascript) if studio_email_sent_for(studio, studio_email) %></td>
+              <td><%= date_short studio_email_clicked_through(studio, studio_email) %></td>
+              <td><%= studio_email_clicked_through(studio, studio_email).to_s(:javascript) if studio_email_clicked_through(studio, studio_email) %></td>
+              <td><%= send_studio_email_for(studio, studio_email) unless studio.already_sent_email?(studio_email) %></td>
+            </tr>
+        <% end %>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class='row span12'>
+  <h2>Email campaigns</h2>
+  <table class='table table-bordered table-striped datatables-hidden' id='campaigns_table'>
+    <thead>
+    <tr>
+      <th>Email</th>
+      <th>Sent</th>
+      <th>Sent</th>
+      <th>Clicked<br/>through</th>
+      <th>Click<br/>throughs</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    <% Notifier.studio_emails.each do |studio_email| %>
+        <tr>
+          <td><%= link_to studio_email, "/mail_view/#{studio_email}", target: '_blank', title: 'Click to view in new tab.' %></td>
+          <td><%= studio_email_sent_range(studio_email) %></td>
+          <td><%= StudioEmail.where(email_name: studio_email).count %></td>
+          <td><%= studio_email_clicked_through_range(studio_email) %></td>
+          <td><%= StudioEmail.where(email_name: studio_email).where('clicked_through_at IS NOT NULL').count %></td>
+          <td><%= send_studio_email_campaign_for(studio_email) %></td>
+        </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+</div>
