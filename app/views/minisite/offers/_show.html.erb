@@ -36,7 +36,7 @@
       <%= @admin_customer_offer.name %>
     </h4>
 
-    <% if @admin_customer_offer.frozen_offer? %>
+    <% if @admin_customer_offer.in_cart?(@cart) %>
         <b><%= icon_minisite('icon-shopping-cart') %>&nbsp;<%= t('in_shopping_cart') %></b><br>
     <% end %>
 
