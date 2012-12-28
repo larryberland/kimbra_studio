@@ -4,9 +4,12 @@
   <div style='text-align:center;'>
     <% @admin_customer_email.offers_by_suggestions.each do |offer| %>
         <div class='pull-left' style='text-align:center; margin:10px;'>
-          <%= link_to image_tag_list(offer), url_for_offer_or_not(offer), :class => :no_border %>
+          <%= link_to_spinner image_tag_list(offer),
+                      url_for_offer_or_not(offer),
+                      id: offer.id,
+                      class: :no_border %>
           <br>
-          <%= link_to 'View', url_for_offer_or_not(offer) %>
+          <%= link_to_spinner 'View', url_for_offer_or_not(offer), id: "view#{offer.id}"%>
         </div>
     <% end if @admin_customer_email.offers %>
   </div>
