@@ -313,6 +313,8 @@ en:
           title: "Click to remove your piece from My Collection."
           confirm: "Are you sure?"
           confirm_in_cart: "This piece is currently in the Shopping Cart. Are you sure?"
+      create_custom_form:
+        submit: "Create My Custom Heirloom Piece"
       offer:
         in_shopping_cart: "In your shopping cart"
       show:
@@ -348,8 +350,6 @@ en:
           title: "Click to design your very own custom heirloom piece."
       new:
         title: "We have lots of unique jewelry designs for you design your own custom heirloom pieces."
-      new_form:
-        submit: "Create My Custom Heirloom Piece"
 
     portraits:
       index:
