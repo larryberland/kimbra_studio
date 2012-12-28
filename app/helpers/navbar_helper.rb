@@ -183,6 +183,14 @@ module NavbarHelper
     end
   end
 
+  def navbar_create_custom_path
+    if (@admin_customer_email)
+      new_minisite_email_offer_path(@admin_customer_email)
+    else
+      '#'
+    end
+  end
+
   def navbar_facebook_path
     #link_to_your_facebook_or_not
     if Rails.env.development?
@@ -302,12 +310,5 @@ module NavbarHelper
     end
   end
 
-  def navbar_create_custom_path
-    if (@admin_customer_email)
-      new_minisite_email_offer_path(@admin_customer_email)
-    else
-      '#'
-    end
-  end
 end
 
