@@ -18,13 +18,17 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   scope :by_category, lambda { |category| where('active=? and category IN(?)', true, category) }
   scope :for_strategy, lambda { |categories| where('active=? and category IN(?)', true, categories) }
   scope :for_bracelets, lambda { by_category('Photo Bracelets') }
-  scope :non_photo_charms, lambda { where('photo=? AND category NOT IN(?)', false, 'Chains').order('name ASC')}
-  scope :for_chains, lambda { by_category('Chains').order('name ASC')}
-  scope :are_active_with_photo, lambda {where('active=? and photo=?', true, true).order("name ASC")}
+  scope :non_photo_charms, lambda { where('photo=? AND category NOT IN(?)', false, 'Chains').order('name ASC') }
+  scope :for_chains, lambda { by_category('Chains').order('name ASC') }
+  scope :are_active_with_photo, lambda { where('active=? and photo=?', true, true).order("name ASC") }
 
-  scope :search, lambda {|value|
-    like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_','\_')}%" : "%"
-    where( 'category ilike ? OR name ilike ?', like_exp, like_exp).order('active desc, category desc, name asc')
+  scope :search, lambda { |value|
+    if value
+      like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_', '\_')}%" : "%"
+      where('category ilike ? OR name ilike ?', like_exp, like_exp).order('active desc, category desc, name asc')
+    else
+      order('active desc, category desc, name asc')
+    end
   }
 
   @@inventory_size = are_active_with_photo.size
@@ -32,6 +36,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   def self.inventory_size
     @@inventory_size
   end
+
   # determines both the number of offers we send out and from which category
   #  when the Holiday's start we can just add to this array
   # ["Photo Bracelets", "Photo Necklaces", "Holiday", "Photo Charms"] as of 10/7/2012
@@ -46,7 +51,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   # get all kimbra merchandise pieces for this category
   # that have photo_parts AND also are marked active?
   def self.to_strategy_category(category)
-    by_category(category).all.select{|r| r.photo_parts.present?}
+    by_category(category).all.select { |r| r.photo_parts.present? }
   end
 
   # return a hash of all piece categories to use when deciding
@@ -56,7 +61,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
     #   strategy_categories Array
     #   10/7/2012 => using Photo Necklaces and Photo Charms according to thie
     # TODO:  I don't think this is the case as i see charms and bracelets right now?
-    strategy_categories.collect{|category| to_strategy_category(category)}.flatten.group_by{|r| r.category}
+    strategy_categories.collect { |category| to_strategy_category(category) }.flatten.group_by { |r| r.category }
   end
 
   def self.fog_buster(piece_id)

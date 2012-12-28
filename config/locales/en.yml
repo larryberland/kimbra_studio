@@ -276,7 +276,7 @@ en:
         p1_html: "Simply forward your Offer Email from your Inbox to any or all of your Friends.<br>They can then begin making their own Personalized Collection. They will be able to view your Collection in their Friend List."
     items:
       index:
-        title: "Edit Your Custom Items"
+        title: "Adjust your %{name} pieces."
         title_front: "Custom Piece Front"
         title_back:  "Custom Piece Back"
 
@@ -286,6 +286,8 @@ en:
         in_cart: "Notice: Saving this will also change your piece in your Shopping Cart."
         p1_html: "Please ignore any thin white lines appearing on the sides of your portraits in the jewelry pieces.<br/>These will not be present when we prepare your pieces."
         portraits_click: "Click to select a different portrait"
+        portraits:
+          title: "Click to select this portrait."
         create_offer:
           name: "Create new piece and add to My Collection"
           title: "Click to create a copy of this piece and add it to My Collection."

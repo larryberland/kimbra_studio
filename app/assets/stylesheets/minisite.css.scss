@@ -68,25 +68,6 @@ textarea {
   padding: 0;
 }
 
-//select,
-//textarea,
-//input[type="text"] {
-//  font-family: Verdana, Arial, sans-serif;
-//  font-size: 0.95em;
-//}
-
-//input[type="submit"] {
-//  font-size: 1.0em;
-//}
-
-//input {
-//  border: 1px solid #cccccc;
-//  border-radius: 5px 5px 5px 5px;
-//  box-shadow: 0 2px 3px 0 #ebebeb inset;
-//  font-size: 1.0em;
-//  padding: 6px 10px;
-//}
-
 .likabutton,
 .button-link {
   padding: 10px 15px;
@@ -331,4 +312,8 @@ td.total {
 }
 .spin{
   display: inline-block;
+}
+ //extend bootstrap .table class
+.table td.td-center{
+  text-align: center;
 }

@@ -1,4 +1,4 @@
-<h2><%= t '.title' %></h2>
+<h2><%= t '.title', name: @offer.name %></h2>
 
 <% items_by_order = @items.sort_by(&:order) %>
 <table class="table">
@@ -18,10 +18,19 @@
   </tr>
   <tr>
     <% items_by_order.each do |item| %>
-        <td>
-          <%= link_to item.front.image_custom.to_image_cache_buster(:list), edit_minisite_item_side_path(item.front) %>
+        <td class="td-center">
+          <%= link_to_spinner item.front.image_custom.to_image_cache_buster(:list),
+                              edit_minisite_item_side_path(item.front),
+                              id: item.id,
+                              title: t('minisite.offers.buttons.adjust_photo.title')%>
           <br>
-          <%= link_to t(:edit), edit_minisite_item_side_path(item.front) %>
+          <%= link_to_spinner t('minisite.offers.buttons.adjust_photo.name'),
+                              edit_minisite_item_side_path(item.front),
+                              id: "edit#{item.id}",
+                              title: t('minisite.offers.buttons.adjust_photo.title'),
+                              icon_class: 'icon-edit icon-white',
+                              class: "btn btn-small btn-success"
+                               %>
         </td>
     <% end %>
   </tr>
@@ -40,10 +49,10 @@
       <tr>
         <% @items.each do |item| %>
             <% if item.back.present? %>
-                <td>
+                <td class="td-center">
                   <%= item.back.image_custom.to_image_cache_buster(:list) %>
                   <br>
-                  <%= link_to t(:edit), edit_minisite_item_side_path(item.back) %>
+                  <%= link_to_spinner t(:edit), edit_minisite_item_side_path(item.back), id: "editback#{item.id}" %>
                 </td>
             <% end %>
         <% end %>
