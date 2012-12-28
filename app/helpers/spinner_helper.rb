@@ -36,7 +36,7 @@ module SpinnerHelper
       options         = args[1] || {}
       html_options    = args[2]
       spinner_options = html_options.delete(:spinner)
-
+      icon_class      = html_options.delete(:icon_class)
       html_options    = convert_options_to_data_attributes(options, html_options)
       url             = url_for(options)
 
@@ -45,6 +45,8 @@ module SpinnerHelper
 
       spinner_options ||= {}
       spinner_options['id'] ||= html_options['id']
+
+      name = icon_class ? "<i class='#{icon_class}'></i> #{name || url}".html_safe : name
 
       href_attr = "href=\"#{ERB::Util.html_escape(url)}\"" unless href
       html = content_tag(:div, class: 'spin') do

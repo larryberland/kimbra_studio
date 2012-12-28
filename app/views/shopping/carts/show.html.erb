@@ -10,8 +10,12 @@
              new_shopping_address_path
            end %>
   <% if @cart.try(:items).try(:size).to_i > 0 %>
-      <% name = "#{icon_minisite('icon-shopping-cart')} #{t('.checkout')}".html_safe %>
-      <%= link_to name, url, class: "btn btn-success" %>
+      <%= link_to_spinner t('.checkout.name'),
+                          url,
+                          id:         "checkout",
+                          title:      t('.checkout.title'),
+                          class:      "btn btn-success",
+                          icon_class: 'icon-shopping-cart icon-white' %>
   <% end %>
 </div>
 

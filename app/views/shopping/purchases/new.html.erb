@@ -1,22 +1,22 @@
 <div class='row'>
-  <h2>1. Delivery Details</h2>
+  <h2><%= t('shopping.addresses.title') %></h2>
   <div class="row span6">
         <%= render 'shopping/addresses/show', address: @cart.address %>
   </div>
 </div>
 
 <div class='row'>
-  <h2>2. Shipping Options</h2>
+  <h2><%= t('shopping.shippings.title') %></h2>
   <div class="row span6">
         <%= render 'shopping/shippings/show', shipping: @cart.shipping %>
   </div>
 </div>
 
 <div class='row'>
-  <h2>3. Review and Credit Card</h2>
+  <h2><%= t('shopping.purchases.title') %></h2>
   <%= render 'form' %>
 </div>
 
 <div class='row'>
-  <h2>4. Finished!</h2>
+  <h2><%= t('shopping.finished.title') %></h2>
 </div>

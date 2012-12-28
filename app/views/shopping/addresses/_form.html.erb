@@ -88,9 +88,8 @@
       </div>
 
       <div class="form-actions">
-        <%= f.submit t(:shopping_submit_address), id: 'my_submit', class: 'btn btn-success' %>
-        <%= link_to 'Back', shopping_cart_path(@cart.tracking), class: 'btn' %>
-        <%= spinner %>
+        <%= f.submit_spinner t(:shopping_submit_address), id: 'my_submit', class: 'btn btn-success' %>
+        <%= link_to_spinner 'Back', shopping_cart_path(@cart.tracking), id: 'back', class: 'btn' %>
       </div>
 
   <% end %>

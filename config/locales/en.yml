@@ -536,10 +536,16 @@ en:
 
 
   shopping:
+    addresses:
+      title: "1. Delivery Details"
     carts:
       show:
         title: "My Shopping Cart"
-        checkout: "Ready to Checkout"
+        checkout:
+          name: "Ready to Checkout"
+          title: "Click to fill in Delivery Details, Shipping, and Credit Cart information."
+    finished:
+      title: "4. Finished!"
     items:
       add_to_cart:
         add_cart:
@@ -549,7 +555,10 @@ en:
         update:
           name: "Update!"
           title: "Click to Update this Piece."
-
+    purchases:
+      title: "3. Credit Card"
+    shippings:
+      title: "2. Shipping Options"
   studios:
     edit:
       title: "Editing ClickPLUS Branding Info"
