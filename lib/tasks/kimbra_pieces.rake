@@ -2,22 +2,22 @@ namespace 'kimbra_pieces' do
   desc "Seed the new photo_accessories for merchandise pieces"
   task :accessories => :environment do
     category = "Photo Accessories"
-    images   = %w(calvin_photo_keychain.jpeg
+    images   = %w(calvin_photo_keychain.png
     everyday_photo_keychain.jpeg
     iphone_3_case.jpeg
     iphone_4_case.jpeg
     iphone_5_case.jpeg
-    leather_photo_bag_tag.jpeg
-    napa_photo_wine_charms_vertical.jpeg
-    napa_photo_wine_charms.jpeg
-    napa_wine_stopper_horizontal.jpeg
-    napa_wine_stopper_vertical.jpeg
-    owen_photo_bottle_opener.jpeg
-    photo_key_chain_bag_tag.jpeg
-    raney_photo_purse_charm.jpeg
-    round_pill_box.jpeg
-    studio_photo_business_card_holder.jpeg
-    willard_photo_key_chain.jpeg)
+    leather_photo_bag_tag.png
+    napa_photo_wine_charms_vertical.png
+    napa_photo_wine_charms.png
+    napa_wine_stopper_horizontal.png
+    napa_wine_stopper_vertical.png
+    owen_photo_bottle_opener.png
+    photo_key_chain_bag_tag.png
+    raney_photo_purse_charm.png
+    round_pill_box.png
+    studio_photo_business_card_holder.png
+    willard_photo_key_chain.png)
 
     data = [{name:  'Calvin Photo Keychain',
              price: "24.00", short_description: 'Photo measuring: 1" round. Leather keychain. Completely waterproof.', description_markup: ''},
@@ -25,34 +25,43 @@ namespace 'kimbra_pieces' do
             {name:  'Everyday Photo Keychain',
              price: "24.00", short_description: 'Photo measuring: 1" square. Pewter photo charm. Completely Waterproof.', description_markup: ''},
 
-            {name:  'iPhone 3 Case',
-             price: "35.00", short_description: "The best-selling iPhone 3/3S case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
-             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!", description_markup: ''},
+            {name:               'iPhone 3 Case',
+             price:              "35.00",
+             short_description:  "The best-selling iPhone 3 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
+             description_markup: "The best-selling iPhone 3 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
+             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+            },
 
-            {name:  "iPhone 4 Case",
-             price: "35.00", short_description: "The best-selling iPhone 4/4S case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
-             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!", description_markup: ""},
+            {name:               "iPhone 4 Case",
+             price:              "35.00",
+             short_description:  "The best-selling iPhone 4 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
+             description_markup: "The best-selling iPhone 4 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
+             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+            },
 
-            {name:  "iPhone 5 Case",
-             price: "35.00", short_description: "The best-selling iPhone 5/5S case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
-             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!", description_markup: ""},
+            {name:               "iPhone 5 Case",
+             price:              "35.00",
+             short_description:  "The best-selling iPhone 5 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
+             description_markup: "The best-selling iPhone 5 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
+             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+            },
 
             {name:  "Leather Photo Bag Tag",
              price: "36.00", short_description: "Photo measuring 2\" round. Round leather bag tag with buckle attachment. Completely waterproof.", description_markup: ""},
 
-            {name:         "Napa Photo Wine Charms (set of 2) Vertical",
-             part_layouts: [
-                               {x: 41, y: 23, w: 182, h: 132},
-                               {x: 41, y: 23, w: 182, h: 132}
-                           ],
-             price:        "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 3/8" x 1/2"', description_markup: ""},
+            {name:  "Napa Photo Wine Charms (set of 2) Vertical",
+             parts: [
+                        {x: 41, y: 23, w: 182, h: 132},
+                        {x: 41, y: 23, w: 182, h: 132}
+                    ],
+             price: "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 3/8" x 1/2"', description_markup: ""},
 
-            {name:         "Napa Photo Wine Charms (set of 2) Horizontal",
-             part_layouts: [
-                               {x: 41, y: 23, w: 182, h: 132},
-                               {x: 41, y: 23, w: 182, h: 132}
-                           ],
-             price:        "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 1/2" x 3/8"', description_markup: ""},
+            {name:  "Napa Photo Wine Charms (set of 2) Horizontal",
+             parts: [
+                        {part_layout_attributes:{layout_attributes: {x: 67, y: 204, w: 72, h: 59}}},
+                        {part_layout_attributes:{layout_attributes: {x: 67, y: 204, w: 72, h: 59}}},
+                    ],
+             price: "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 1/2" x 3/8"', description_markup: ""},
 
             {name:  "Napa Wine Stopper Horizontal",
              price: "42.00", short_description: 'Pewter Wine Cork. Pairs with our set of Pewter Wine charms. Photo size: 1 3/8" x 1"', description_markup: ""},
@@ -78,12 +87,13 @@ namespace 'kimbra_pieces' do
             {name:  "Willard Photo Key Chain",
              price: "32.00", short_description: 'Photo measuring: 1-1/4" square. Pewter and Genuine Leather. ', description_markup: ""}]
 
-    path = Rails.root.join('public', 'kimbra', 'photo_accessories')
+    path           = Rails.root.join('public', 'kimbra', 'photo_accessories')
+    default_layout = {x: 0, y: 0, w: 100, h: 100}
+
     images.each_with_index do |file, i|
 
       info = data[i]
 
-      info[:image]         = file
       info[:category]      = category
       info[:active]        = false
       info[:photo]         = true
@@ -91,6 +101,7 @@ namespace 'kimbra_pieces' do
 
       puts "piece=>#{info[:name]}"
       p = Admin::Merchandise::Piece.find_or_create_by_category_and_name(info[:category], info[:name])
+      p.update_attributes(info)
 
       piece_image_fname = file
       if piece_image_fname
@@ -103,12 +114,34 @@ namespace 'kimbra_pieces' do
         end
       end
 
-      if (info[:parts])
+      p.parts.destroy_all
 
-      else
-        # have to always have 1 part
+
+      sub_dir = file.split('.').first
+      parts   = info.delete(:parts)
+      parts   ||= [{}]
+      parts.each_with_index do |part, order|
+
+        attrs = {piece: p, order: order}
+        attrs[:part_layout_attributes] = part[:part_layout_attributes] if part.key?(:part_layout_attributes)
+
+        my_part = Admin::Merchandise::Part.create(attrs)
+        #piece_layout_attributes: default_layout,
+        #part_layout_attributes: default_layout)
+        p2      = path.join(sub_dir, "part_#{order}.png")
+        f       = if (File.exist?(p2.to_s))
+                    p2.to_s
+                  else
+                    path.join(sub_dir, file).to_s
+                  end
+        my_part.image_part.store!(File.open(f))
+        my_part.save
+        p.parts << my_part
       end
-      puts "#{p.id} #{p.width}x#{p.height} #{file}"
+      p.update_attributes(info)
+      p.parts.each{|r| r.save}
+
+      puts "#{p.id} #{p.width}x#{p.height} price:#{p.price} #{file}"
 
     end
 

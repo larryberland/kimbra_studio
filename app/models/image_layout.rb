@@ -3,6 +3,8 @@ class ImageLayout < ActiveRecord::Base
 
   belongs_to :layout, :polymorphic => true
 
+  after_create :set_default
+
   def resize(image)
     #puts "imageLayout resize:#{image.columns}x#{image.rows} to:#{w}x#{h}"
     new_image = image.resize_to_fit(w, h) if w and h
@@ -66,5 +68,12 @@ class ImageLayout < ActiveRecord::Base
 
   private
 
+  def set_default
+    self.x = 10 if x.nil?
+    self.y = 10 if y.nil?
+    self.w = 100 if w.nil?
+    self.h = 100 if h.nil?
+    save
+  end
 
 end
