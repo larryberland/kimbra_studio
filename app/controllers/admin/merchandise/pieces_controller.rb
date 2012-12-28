@@ -2,14 +2,7 @@ class Admin::Merchandise::PiecesController < ApplicationController
   # GET /admin/merchandise/pieces
   # GET /admin/merchandise/pieces.json
   def index
-
-    search                  = params[:search] || session[:search_pieces]
-    session[:search_pieces] = search
-
-    set                       = Admin::Merchandise::Piece.search(search)
-    @record_count             = set.count
-    @admin_merchandise_pieces = set.page(params[:page])
-
+    @admin_merchandise_pieces = Admin::Merchandise::Piece.all
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @admin_merchandise_pieces }
