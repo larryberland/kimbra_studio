@@ -244,12 +244,13 @@ module ApplicationHelper
   end
 
   def link_to_pinterest(offer)
+    return nil unless offer.email.my_studio_session.studio.info.pinterest_for_clients
     image_url   = offer.image.url_cache_buster
     page_url    = minisite_email_offers_url(offer.email) # studio: offer.email.my_studio_session.studio.info.website
     description = url_encode("Gorgeous photo jewelry from #{offer.email.my_studio_session.studio.name} (#{offer.email.my_studio_session.studio.info.website}).")
     link_to image_tag('https://assets.pinterest.com/images/PinExt.png', title: 'Pin It'),
             "http://pinterest.com/pin/create/button/?url=#{page_url}&media=#{image_url}&description=#{description}",
-            class:         'pin-it-button',
+            class: 'pin-it-button',
             'count-layout' => 'none'
   end
 
