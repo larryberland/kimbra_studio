@@ -21,12 +21,6 @@ $ ->
     # Insert spinner object and append it to the #spinner element.
     spinner = new Spinner(spinnerOpts).spin()
     $('#spinner').append(spinner.el)
-    # Add spinner show to #my_submit click event.
-    $('#my_submit').click ->
-      $('#spinner').toggle()
-
-    $('#my_submit').bind 'invalid', ->
-      $('#spinner').toggle()
 
 $ ->
   $('div.spin').each (index, el) ->
