@@ -51,15 +51,20 @@ namespace 'kimbra_pieces' do
 
             {name:  "Napa Photo Wine Charms (set of 2) Vertical",
              parts: [
-                        {x: 41, y: 23, w: 182, h: 132},
-                        {x: 41, y: 23, w: 182, h: 132}
+                        {part_layout_attributes: {layout_attributes: {x: 65, y: 190, w: 52, h: 68}}},
+                        {part_layout_attributes: {layout_attributes: {x: 65, y: 190, w: 52, h: 68}}},
                     ],
              price: "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 3/8" x 1/2"', description_markup: ""},
 
             {name:  "Napa Photo Wine Charms (set of 2) Horizontal",
              parts: [
-                        {part_layout_attributes:{layout_attributes: {x: 67, y: 204, w: 72, h: 59}}},
-                        {part_layout_attributes:{layout_attributes: {x: 67, y: 204, w: 72, h: 59}}},
+                        {part_layout_attributes:  {layout_attributes: {x: 67, y: 204, w: 72, h: 59}},
+                         piece_layout_attributes: {layout_attributes: {x: 82, y: 211, w: 71, h: 56, degrees: 16.39}}
+                        },
+                        {part_layout_attributes:  {layout_attributes: {x: 67, y: 204, w: 72, h: 59}},
+                         piece_layout_attributes: {layout_attributes: {x: 241, y: 223, w: 72, h: 57, degrees: 16.39}}
+
+                        },
                     ],
              price: "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 1/2" x 3/8"', description_markup: ""},
 
@@ -103,6 +108,7 @@ namespace 'kimbra_pieces' do
       p = Admin::Merchandise::Piece.find_or_create_by_category_and_name(info[:category], info[:name])
       p.update_attributes(info)
 
+      # kimbra piece image
       piece_image_fname = file
       if piece_image_fname
         fname = path.join(piece_image_fname)
@@ -114,32 +120,39 @@ namespace 'kimbra_pieces' do
         end
       end
 
-      p.parts.destroy_all
-
-
+      # handle the piece's parts
       sub_dir = file.split('.').first
       parts   = info.delete(:parts)
       parts   ||= [{}]
+
+      # create the new parts
       parts.each_with_index do |part, order|
 
         attrs = {piece: p, order: order}
         attrs[:part_layout_attributes] = part[:part_layout_attributes] if part.key?(:part_layout_attributes)
+        attrs[:piece_layout_attributes] = part[:piece_layout_attributes] if part.key?(:piece_layout_attributes)
 
-        my_part = Admin::Merchandise::Part.create(attrs)
-        #piece_layout_attributes: default_layout,
-        #part_layout_attributes: default_layout)
-        p2      = path.join(sub_dir, "part_#{order}.png")
-        f       = if (File.exist?(p2.to_s))
-                    p2.to_s
-                  else
-                    path.join(sub_dir, file).to_s
-                  end
+        if my_part = p.parts[order]
+          my_part.update_attributes(attrs)
+        else
+          my_part = Admin::Merchandise::Part.create(attrs)
+          p.parts << my_part
+        end
+
+        # update the parts transparent image
+        p2 = path.join(sub_dir, "part_#{order}.png")
+        f  = if (File.exist?(p2.to_s))
+               p2.to_s
+             else
+               path.join(sub_dir, file).to_s
+             end
         my_part.image_part.store!(File.open(f))
         my_part.save
-        p.parts << my_part
+
       end
+
       p.update_attributes(info)
-      p.parts.each{|r| r.save}
+      p.parts.each { |r| r.save }
 
       puts "#{p.id} #{p.width}x#{p.height} price:#{p.price} #{file}"
 

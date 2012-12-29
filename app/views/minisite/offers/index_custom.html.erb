@@ -16,7 +16,7 @@
 
 <% if @admin_customer_offers.size > 0 %>
     <% @admin_customer_offers.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
-        <div id="<%="index_custom_offer_#{offer.id}"%>" class='row'>
+        <div id="<%="div_offer_#{offer.id}"%>" class='row'>
             <%= render 'offer', offer: offer, studio: @studio %>
         </div>
     <% end %>

@@ -1,10 +1,4 @@
-<style type="text/css">
-    .offer-actions .row .pull-left {
-      margin-right: 20px;
-    }
-</style>
-
-<div class="offer-actions span9">
+<div class="offer-actions">
   <span class="price"><%= number_to_currency(offer.price) %></span>
 
   <p class="shopping-item">
@@ -51,7 +45,7 @@
 
     <% end %>
 
-    <% if controller_name == 'offers' and action_name == 'index_custom' %>
+    <% if is_admin? or (controller_name == 'offers' and action_name == 'index_custom') %>
         <% confirm = offer.in_cart?(@cart) ? '.delete.confirm_in_cart' : '.delete.confirm' %>
         <div class="pull-left">
 

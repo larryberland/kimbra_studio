@@ -317,3 +317,11 @@ td.total {
 .table td.td-center{
   text-align: center;
 }
+// minisite offers index buttons
+.offer-actions .row {
+  margin-left: 0px;  // override .row margin
+}
+.offer-actions .row .pull-left {
+  margin-right: 20px;
+}
+
