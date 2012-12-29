@@ -20,6 +20,13 @@ namespace 'kimbra_pieces' do
     willard_photo_key_chain.png)
 
     data = [{name:  'Calvin Photo Keychain',
+             active: true,
+             use_part_image: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 78, y: 218, w: 137, h: 137}},
+                         piece_layout_attributes: {layout_attributes: {x: 78, y: 218, w: 137, h: 137}}
+                        },
+                    ],
              price: "24.00", short_description: 'Photo measuring: 1" round. Leather keychain. Completely waterproof.', description_markup: ''},
 
             {name:  'Everyday Photo Keychain',
@@ -50,9 +57,17 @@ namespace 'kimbra_pieces' do
              price: "36.00", short_description: "Photo measuring 2\" round. Round leather bag tag with buckle attachment. Completely waterproof.", description_markup: ""},
 
             {name:  "Napa Photo Wine Charms (set of 2) Vertical",
+             active: true,
              parts: [
-                        {part_layout_attributes: {layout_attributes: {x: 65, y: 190, w: 52, h: 68}}},
-                        {part_layout_attributes: {layout_attributes: {x: 65, y: 190, w: 52, h: 68}}},
+                        {part_layout_attributes:  {layout_attributes: {x: 65, y: 190, w: 52, h: 68}},
+                         piece_layout_attributes: {layout_attributes: {x: 82, y: 197, w: 52, h: 68, degrees: -19.13},
+                                                   operator: 'SrcOverCompositeOp'}
+                        },
+                        {part_layout_attributes:  {layout_attributes: {x: 65, y: 190, w: 52, h: 68}},
+                         piece_layout_attributes: {layout_attributes: {x: 256, y: 213, w: 52, h: 68, degrees: -19.13},
+                                                   operator: 'SrcOverCompositeOp'}
+
+                        },
                     ],
              price: "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 3/8" x 1/2"', description_markup: ""},
 

@@ -4,7 +4,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
                   :category, :name, :short_description, :description_markup,
                   :sku, :price, :photo, :custom_layout,
                   :active, :featured, :deleted_at,
-                  :width, :height
+                  :width, :height, :use_part_image
 
   mount_uploader :image, ImageUploader
 
@@ -82,7 +82,13 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   end
 
   def get_image
-    image.to_image
+    if use_part_image?
+      # use the background image from the part instead of the
+      #   default kimbra piece
+      parts.first.image_part.to_image
+    else
+      image.to_image
+    end
   end
 
   def category_view
