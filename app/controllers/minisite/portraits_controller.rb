@@ -20,7 +20,6 @@ module Minisite
     # GET /minisite/emails/:id/portraits/1.json
     def show
       @my_studio_portrait = MyStudio::Portrait.find(params[:id])
-
       respond_to do |format|
         format.html # show.html.erb
         format.json { render json: @my_studio_portrait }
@@ -47,7 +46,6 @@ module Minisite
       p_attrs                        = params[:my_studio_portrait]
       p_attrs[:my_studio_session_id] = @my_studio_session.id
       p_attrs[:image] = params[:my_studio_portrait][:file].first if params[:my_studio_portrait][:file].class == Array
-
       @my_studio_portrait                   = MyStudio::Portrait.new(p_attrs)
       @my_studio_portrait.my_studio_session = @my_studio_session
       if @my_studio_portrait.save
@@ -99,7 +97,6 @@ module Minisite
       @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @my_studio_session).order('created_at desc')
       @record_count        = @my_studio_portraits.size
     end
-
 
   end
 end

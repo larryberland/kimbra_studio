@@ -74,6 +74,4 @@ class Notifier < ActionMailer::Base
          bcc: 'support@KimbraClickPLUS.com')
   end
 
-
-
 end
