@@ -17,6 +17,7 @@ namespace 'kimbra_pieces' do
     raney_photo_purse_charm.png
     round_pill_box.png
     studio_photo_business_card_holder.png
+    studio_photo_business_card_holder_horizontal.png
     willard_photo_key_chain.png)
 
     data = [{name:  'Calvin Photo Keychain',
@@ -94,33 +95,92 @@ namespace 'kimbra_pieces' do
                         {part_layout_attributes:  {layout_attributes: {x: 67, y: 204, w: 74, h: 59}},
                          piece_layout_attributes: {layout_attributes: {x: 239, y: 223, w: 74, h: 59, degrees: -16.39},
                                                    operator: 'SrcOverCompositeOp'}
-
                         },
                     ],
              price: "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 1/2" x 3/8"', description_markup: ""},
 
             {name:  "Napa Wine Stopper Horizontal",
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 80, y: 56, w: 151, h: 111}},
+                         piece_layout_attributes: {layout_attributes: {x: 56, y: 74, w: 151, h: 111, degrees:-12.21}}
+                         },
+                    ],
              price: "42.00", short_description: 'Pewter Wine Cork. Pairs with our set of Pewter Wine charms. Photo size: 1 3/8" x 1"', description_markup: ""},
 
             {name:  "Napa Wine Stopper Vertical",
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 116, y: 58, w: 75, h: 100}},
+                         piece_layout_attributes: {layout_attributes: {x: 104, y: 64, w: 75, h: 100, degrees:-7.66},
+                                                   operator: 'SrcOverCompositeOp'}},
+                    ],
              price: "42.00", short_description: 'Pewter Wine Cork. Pairs with our set of Pewter Wine Charms. Photo size: 1" x 1 3/8"', description_markup: ""},
 
             {name:  "Owen Photo Bottle Opener",
-             price: "26.00", short_description: 'Photo measuring: 1-1/4"w x 3"h. Alloy/Pewter. Completely waterproof. Magnetic Back keeps it handy!', description_markup: ""},
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 137, y: 82, w: 333, h: 139}},
+                         piece_layout_attributes: {layout_attributes: {x: 164, y: 69, w: 353, h: 139, degrees:5.53}}
+                         },
+                    ],
+             price: "26.00", short_description: 'Photo measuring: 3"w x 1-1/4"h. Alloy/Pewter. Completely waterproof. Magnetic Back keeps it handy!', description_markup: ""},
 
             {name:  "Photo Key Chain/Bag tag",
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 120, y: 185, w: 80, h: 80}},
+                         piece_layout_attributes: {layout_attributes: {x: 134, y: 193, w: 80, h: 80, degrees:-18.64}}
+                         },
+                    ],
              price: "28.00", short_description: 'Solid pewter photo charm measuring 1" square. Comes with trigger snap attachment and key ring. Completely waterproof.', description_markup: ""},
 
             {name:  "Raney Photo Purse Charm",
+             active: true,
+             use_part_image: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 96, y: 325, w: 103, h: 100}},
+                         piece_layout_attributes: {layout_attributes: {x: 96, y: 325, w: 103, h: 100}}
+                         },
+                    ],
              price: "38.00", short_description: 'Solid pewter photo charm measuring 1" square. Comes with trigger snap attachment and pewter crystal heart charm.', description_markup: ""},
 
             {name:  "Round Pill Box",
+             active: true,
+             use_part_image: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 49, y: 61, w: 176, h: 178}},
+                         piece_layout_attributes: {layout_attributes: {x: 49, y: 61, w: 176, h: 178}}
+                         },
+                    ],
              price: "30.00", short_description: 'Measuring: 1-1/2" round. Mirror inside lid. Silver tone finish. Completely waterproof.', description_markup: ""},
 
             {name:  "Studio Photo Business Card Holder",
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 82, y: 44, w: 115, h: 209}},
+                         piece_layout_attributes: {layout_attributes: {x: 45, y: 82, w: 115, h: 209, degrees: -25.01}}
+                         },
+                    ],
+             price: "32.00", short_description: 'Photo measuring: 2"w x 3-1/2"h. Brushed metal finish. Completely waterproof.', description_markup: ""},
+
+            {name:  "Studio Photo Business Card Holder Horizontal",
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 47, y: 82, w: 210, h: 117}},
+                         piece_layout_attributes: {layout_attributes: {x: 47, y: 82, w: 210, h: 117}}
+                         },
+                    ],
              price: "32.00", short_description: 'Photo measuring: 3-1/2"w x 2"h. Brushed metal finish. Completely waterproof.', description_markup: ""},
 
             {name:  "Willard Photo Key Chain",
+             active: true,
+             use_part_image: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 62, y: 283, w: 172, h: 173}},
+                         piece_layout_attributes: {layout_attributes: {x: 62, y: 283, w: 172, h: 173}}
+                         },
+                    ],
              price: "32.00", short_description: 'Photo measuring: 1-1/4" square. Pewter and Genuine Leather. ', description_markup: ""}]
 
     path           = Rails.root.join('public', 'kimbra', 'photo_accessories')
