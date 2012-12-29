@@ -24,7 +24,7 @@ class Minisite::ItemsController < InheritedResources::Base
         render action: "edit"
       end
       failure.html do
-        @storyline.describe 'Failed saving item.'
+        @storyline.describe "Failed saving item #{@item.errors.full_messages}."
         render action: "edit"
       end
     end

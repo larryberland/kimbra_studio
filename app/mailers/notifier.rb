@@ -69,12 +69,9 @@ class Notifier < ActionMailer::Base
     @name = @studio.owner.name
     @email = @studio.owner.email
     raise "this email already unsubscribed: #{@email}" if Unsubscribe.exists?(email: @email)
-    attachments.inline['studio_logo.jpg'] = open(@studio.minisite.image_url).read
     mail(to: @email,
          subject: "Your portraits + Pinterest = Viral Success",
          bcc: 'support@KimbraClickPLUS.com')
   end
-
-
 
 end

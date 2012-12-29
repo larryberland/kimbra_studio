@@ -24,16 +24,18 @@ class Minisite::ItemSidesController < InheritedResources::Base
                      end
     respond_to do |format|
       if success
+        @storyline.describe "Updated piece. Redirecting to #{@item_side.item.offer.name}"
         format.html { redirect_to url_for_workflow(@item_side.item.offer), notice: notice}
         format.json { head :ok }
       else
+        @storyline.describe "Updating piece failed #{@item_side.errors.full_messages}."
         format.html { render action: 'edit' }
         format.json { render json: @item_side.errors, status: :unprocessable_entity }
       end
     end
   end
 
-          # get /minisite/offers/tracking/portrait
+  # get /minisite/offers/tracking/portrait
   def portrait
     @storyline.describe 'Selecting a new portrait.'
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil

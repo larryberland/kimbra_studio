@@ -14,7 +14,7 @@ module Shopping
           @storyline.describe "Error in creating new address: #{@address.errors.full_messages}"
           return render(:new)
         else
-          @storyline.describe 'Creating new address.'
+          @storyline.describe 'Created new address.'
           if @cart.shipping
             edit_shopping_shipping_path(@cart.shipping)
           else
@@ -37,7 +37,7 @@ module Shopping
           @storyline.describe "Error in updating new address: #{@address.errors.full_messages}"
           edit_shopping_address_path(@address)
         else
-          @storyline.describe 'Updating the address.'
+          @storyline.describe 'Updated the address.'
           if @cart.shipping
             edit_shopping_shipping_path(@cart.shipping)
           else
