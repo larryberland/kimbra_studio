@@ -3,25 +3,22 @@ module NavbarHelper
   # create a navbar menu markup for a bootstrap li tag
   # menu => menu symbol in locales.en
   # link_path => route path for menu item
-  # menu_en_path => locales.en path to parent menu item (ex. '.menus.misc')
+  # en_path => locales.en path to parent menu item (ex. '.menus.misc')
   def li_navbar(menu, link_path, en_path=".menus")
-
     if (menu.to_s.starts_with?("friend_"))
       name, title = navbar_friends_name_and_title(menu)
     else
-
       name_method = "navbar_#{menu}_name"
       name = send(name_method) if respond_to?(name_method.to_sym, include_private=true)
       name ||= t("#{en_path}.#{menu}.name")
-
       title_method = "navbar_#{menu}_title"
       title = send(title_method) if respond_to?(title_method.to_sym, include_private=true)
       title ||= t("#{en_path}.#{menu}.title")
     end
-
+    element_id = name.gsub(' ','')
     link_options = {title: title}
     link_options[:class] = "brand" if menu == :brand
-    html_options = {class: menu == @navbar_active ? 'active' : ''}
+    html_options = {class: menu == @navbar_active ? 'active' : '', id: element_id}
     content_tag(:li, link_to(name, link_path, link_options), html_options).html_safe
   end
 
@@ -50,7 +47,6 @@ module NavbarHelper
   def li_navbar_dropdown_menu(menu, ul_sub_menu_html, dropdown_active)
     html_options = {class: 'dropdown'}
     html_options[:class] += " active" if (menu == @navbar_active) or dropdown_active
-
     html = content_tag(:li, html_options) do
       "#{navbar_dropdown(menu)}#{ul_sub_menu_html}".html_safe
     end
@@ -60,17 +56,13 @@ module NavbarHelper
   # construct the navbar dropdown markup for our Misc Menu Item
   def li_navbar_misc
     menu      = :misc
-
     # drop down list for the Misc menu
     sub_menus = {merchandise:   admin_merchandise_pieces_path,
                  infos_samples: samples_my_studio_infos_path,
                  stories:       admin_stories_path,
                  infos_faqs:    faq_my_studio_infos_path}
-
     dropdown_active, sub_menu_html = navbar_dropdown_sub_menus(menu, sub_menus)
-
     li_navbar_dropdown_menu(menu, sub_menu_html, dropdown_active)
-
   end
 
   def li_navbar_photo_sessions
@@ -86,10 +78,8 @@ module NavbarHelper
 
   def li_navbar_friends
     menu = :friends
-
     # drop down list for the Friends menu
     sub_menus = {send_offer_email: "#mySendOfferEmail"}
-
     if (@admin_customer_email)
       current_friend_id = @admin_customer_friend.id if @admin_customer_friend
       @admin_customer_email.friends.each do |friend|
@@ -100,14 +90,12 @@ module NavbarHelper
         end
       end
     end
-
     dropdown_active, sub_menu_html = navbar_dropdown_sub_menus(menu, sub_menus)
     sub_menu_html.gsub!('#mySendOfferEmail"', '#mySendOfferEmail" data-toggle="modal"')
     li_navbar_dropdown_menu(menu, sub_menu_html, dropdown_active)
-
   end
 
-  private
+  private #=================================================================
 
   # top level navbar menu that has dropdown menus
   def navbar_dropdown(menu)
@@ -124,10 +112,8 @@ module NavbarHelper
     dropdown_active = false
     en_path         = ".menus.#{menu}"
     html_options    = {class: 'dropdown-menu'}
-
     # dropdown ul tag containing our sub_menu li tags
     sub_menu_html   = content_tag(:ul, html_options) do
-
       li_navbars = sub_menus.collect do |sub_menu, link_path|
         dropdown_active = true if (sub_menu == @navbar_active)
         li_navbar(sub_menu, link_path, en_path)
@@ -137,10 +123,8 @@ module NavbarHelper
     return dropdown_active, sub_menu_html
   end
 
-
   # Customize navbar Menu Items
-  #   path, name, or title
-
+  # path, name, or title
   def navbar_brand_path
     if @admin_customer_email
       #link_to_your_about_or_not(text, @admin_customer_email)
@@ -156,7 +140,7 @@ module NavbarHelper
   end
 
   # minisite menu options for returning
-  #   the link_path for this menu item
+  # the link_path for this menu item
   def navbar_collection_path
     if @admin_customer_email
       index_custom_minisite_email_offers_path(@admin_customer_email.tracking)
@@ -256,7 +240,6 @@ module NavbarHelper
       else
         '#'
       end
-
     end
   end
 
@@ -311,4 +294,3 @@ module NavbarHelper
   end
 
 end
-

@@ -3,6 +3,7 @@
 #= require jquery_ujs
 #= require jquery.ui.widget
 #= require jquery.ui.rlightbox.min
+#= require jquery.cookie
 #= require jcrop
 #= require spin
 #= require spinner
@@ -14,6 +15,8 @@
 #= require jeditable
 #= require ./bootstrap/bootstrap
 #= require ./bootstrap/client-side-validation
+#= require bootstrap-tour
+#= require clickplus-tour
 
 $ ->
   $('.flash_notice').each (index, element) ->
