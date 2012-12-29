@@ -245,6 +245,7 @@ class StudiosController < ApplicationController
   end
 
   def emails
+    @navbar_active = :studios_emails
     @studios = Studio.where("my_studio_minisites.image IS NOT NULL").joins(:minisite).includes(:studio_emails).all
   end
 

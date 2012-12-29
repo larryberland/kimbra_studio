@@ -363,6 +363,9 @@
     .padded {
         padding: 15px;
     }
+    p {
+        padding: 0 10px 0 10px;
+    }
 </style>
 <!--[if gte mso 9]>
 <style _tmplitem="502">
@@ -612,7 +615,7 @@
             <%= @studio.name -%><br/>
             <%= @studio.address_1 -%><br/>
             <%= @studio.city %>, <%= @studio.state.abbreviation -%><br/>
-            <%= number_to_phone @studio.phone_number, area_code: true, delimiter: '-&#173;' -%>
+            <%= number_to_phone @studio.phone_number, area_code: true -%>
           </p>
 
           <p class="footer-content-left" align="left" style="color: #e2e2e2">

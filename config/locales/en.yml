@@ -453,6 +453,9 @@ en:
         studios:
           name: "Studios"
           title: "Click to view Studios"
+        studios_emails:
+          name: "Marketing"
+          title: "Click to view Studio Emails"
         users:
           name: "Users"
           title: "Click to view Users"
