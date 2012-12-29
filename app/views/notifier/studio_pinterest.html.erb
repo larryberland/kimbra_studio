@@ -497,7 +497,7 @@
                 <tr>
                   <td class="w580" width="580" bgcolor="<%= @studio.minisite.bgcolor -%>">
                     <div style="text-align: center;" align="center">
-                      <%= image_tag attachments['studio_logo.jpg'].url,
+                      <%= image_tag @studio.minisite.image_url,
                                     :alt => "#{@studio.name} logo",
                                     :class => "w640",
                                     :id => "studio_logo",
@@ -568,9 +568,9 @@
 
                     <p style="color: <%= @studio.minisite.font_color %>;">
                       We're here to answer your questions.<br/>
-                      Call: (303) 586­&#173;1371<br/>
+                      Call: (303) 586­1371<br/>
                       Skype: KimbraClickPLUS<br/>
-                      Email: <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com' %>
+                      Email: <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com', style: "color: #{@studio.minisite.font_color};"  %>
                     </p>
 
 
