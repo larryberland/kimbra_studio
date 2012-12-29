@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121229150438) do
+ActiveRecord::Schema.define(:version => 20121229164950) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -162,6 +162,7 @@ ActiveRecord::Schema.define(:version => 20121229150438) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "photo"
+    t.boolean  "use_part_image"
   end
 
   add_index "admin_merchandise_pieces", ["name", "category"], :name => "index_admin_merchandise_pieces_on_name_and_category", :unique => true
