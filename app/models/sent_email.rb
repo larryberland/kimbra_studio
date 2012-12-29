@@ -10,16 +10,4 @@ class SentEmail < ActiveRecord::Base
     SentEmail.in_last_month.where(email: address.downcase).count > 0
   end
 
-  def self.sent_studio_eap_email?(email)
-    SentEmail.where(email: email).collect(&:subject).select{|s| s.match /EAP/ }.present?
-  end
-
-  def self.sent_studio_tkg_email?(email)
-    SentEmail.where(email: email).collect(&:subject).select { |s| s.match /TKG/ }.present?
-  end
-
-  def self.sent_studio_xms_email?(email)
-    SentEmail.where(email: email).collect(&:subject).select { |s| s.match /XMS/ }.present?
-  end
-
 end

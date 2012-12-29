@@ -132,7 +132,7 @@ class StudiosController < ApplicationController
   # Ajax action that sends email and returns text.
   def send_new_account_email
     studio = Studio.find(params[:id])
-    Notifier.delay.studio_eap_email(studio.id)
+    #Notifier.delay.studio_eap_email(studio.id)
     respond_to do |format|
       format.js do
         render text: "$('#send_new_account_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"
@@ -144,7 +144,7 @@ class StudiosController < ApplicationController
   # Ajax action that sends email and returns text.
   def send_tkg_email
     studio = Studio.find(params[:id])
-    Notifier.delay.studio_tkg_email(studio.id)
+    #Notifier.delay.studio_tkg_email(studio.id)
     respond_to do |format|
       format.js do
         render text: "$('#send_tkg_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"
@@ -156,7 +156,7 @@ class StudiosController < ApplicationController
   # Ajax action that sends email and returns text.
   def send_xms_email
     studio = Studio.find(params[:id])
-    Notifier.delay.studio_xms_email(studio.id)
+    #Notifier.delay.studio_xms_email(studio.id)
     respond_to do |format|
       format.js do
         render text: "$('#send_xms_email_#{studio.id}').html('queueing email...').effect('highlight', 2000)"
@@ -196,22 +196,22 @@ class StudiosController < ApplicationController
 
   # TODO obsolete
   def eap
-    studio = Studio.find(params[:id])
-    studio.update_attribute(:eap_click, Time.now) if studio
+    #studio = Studio.find(params[:id])
+    #studio.update_attribute(:eap_click, Time.now) if studio
     redirect_to root_path
   end
 
   # TODO obsolete
   def tkg
-    studio = Studio.find(params[:id])
-    studio.update_attribute(:tkg_click, Time.now) if studio
+    #studio = Studio.find(params[:id])
+    #studio.update_attribute(:tkg_click, Time.now) if studio
     redirect_to root_path
   end
 
   # TODO obsolete
   def xms
-    studio = Studio.find(params[:id])
-    studio.update_attribute(:xms_click, Time.now) if studio
+    #studio = Studio.find(params[:id])
+    #studio.update_attribute(:xms_click, Time.now) if studio
     redirect_to root_path
   end
 
