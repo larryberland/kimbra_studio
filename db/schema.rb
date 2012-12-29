@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121228194237) do
+ActiveRecord::Schema.define(:version => 20121229150438) do
 
   create_table "address_types", :force => true do |t|
     t.string   "name"
@@ -235,7 +235,7 @@ ActiveRecord::Schema.define(:version => 20121228194237) do
 
   create_table "my_studio_infos", :force => true do |t|
     t.integer  "studio_id"
-    t.boolean  "active",             :default => true
+    t.boolean  "active",                :default => true
     t.string   "website"
     t.string   "email"
     t.string   "email_notification"
@@ -244,10 +244,11 @@ ActiveRecord::Schema.define(:version => 20121228194237) do
     t.boolean  "smug_mug_member"
     t.boolean  "mac_user"
     t.boolean  "windows_user"
-    t.boolean  "ping_email",         :default => true
+    t.boolean  "ping_email",            :default => true
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "commission_rate",    :default => 15
+    t.integer  "commission_rate",       :default => 15
+    t.boolean  "pinterest_for_clients", :default => true
   end
 
   add_index "my_studio_infos", ["studio_id"], :name => "index_my_studio_infos_on_studio_id"
