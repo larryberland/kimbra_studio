@@ -57,7 +57,8 @@ class ImageLayout < ActiveRecord::Base
 
   # use DstOutCompositeOp to see the exact rectangle
   # use SrcOverCompositeOp to see the photo image on top of background
-  def draw_custom_part2(part_image, src_image, operator=Magick::DstOverCompositeOp)
+  #=Magick::DstOverCompositeOp
+  def draw_custom_part2(part_image, src_image, operator)
     #puts "\n draw_custom() portrait src_image #{src_image.columns}x#{src_image.rows}"
     @new_x = x
     @new_y = y

@@ -17,7 +17,7 @@ class MigrateStudioClickThrusToStudioEmailsTable < ActiveRecord::Migration
       owner = User.where(email: sent.email).first
       if owner
         if owner.studio
-          puts studio.name
+          puts owner.studio.name
           StudioEmail.create(studio: owner.studio, email_name: 'studio_tkg_email', sent_at: sent.created_at) if sent.subject.match(/TKG/)
           StudioEmail.create(studio: owner.studio, email_name: 'studio_xms_email', sent_at: sent.created_at) if sent.subject.match(/XMS/)
           StudioEmail.create(studio: owner.studio, email_name: 'studio_eap_email', sent_at: sent.created_at) if sent.subject.match(/EAP/)

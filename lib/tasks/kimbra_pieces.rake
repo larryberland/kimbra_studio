@@ -57,12 +57,15 @@ namespace 'kimbra_pieces' do
              price: "20.00", short_description: 'Pewter Wine Charms - Set of 2. Pairs with our Pewter Napa Wine Stop. Photo Size: 3/8" x 1/2"', description_markup: ""},
 
             {name:  "Napa Photo Wine Charms (set of 2) Horizontal",
+             active: true,
              parts: [
-                        {part_layout_attributes:  {layout_attributes: {x: 67, y: 204, w: 72, h: 59}},
-                         piece_layout_attributes: {layout_attributes: {x: 82, y: 211, w: 71, h: 56, degrees: 16.39}}
+                        {part_layout_attributes:  {layout_attributes: {x: 67, y: 204, w: 73, h: 59}},
+                         piece_layout_attributes: {layout_attributes: {x: 80, y: 212, w: 73, h: 59, degrees: -16.39},
+                                                   operator: 'SrcOverCompositeOp'}
                         },
-                        {part_layout_attributes:  {layout_attributes: {x: 67, y: 204, w: 72, h: 59}},
-                         piece_layout_attributes: {layout_attributes: {x: 241, y: 223, w: 72, h: 57, degrees: 16.39}}
+                        {part_layout_attributes:  {layout_attributes: {x: 67, y: 204, w: 74, h: 59}},
+                         piece_layout_attributes: {layout_attributes: {x: 239, y: 223, w: 74, h: 59, degrees: -16.39},
+                                                   operator: 'SrcOverCompositeOp'}
 
                         },
                     ],
@@ -100,7 +103,9 @@ namespace 'kimbra_pieces' do
       info = data[i]
 
       info[:category]      = category
-      info[:active]        = false
+      unless info.key?(:active)
+        info[:active]        = false
+      end
       info[:photo]         = true
       info[:custom_layout] = "composite"
 

@@ -1,5 +1,5 @@
 class PieceLayout < ActiveRecord::Base
-  attr_accessible :layout, :layout_attributes
+  attr_accessible :operator, :layout, :layout_attributes
 
   belongs_to :part, :class_name => 'Admin::Merchandise::Part'
 
@@ -29,7 +29,17 @@ class PieceLayout < ActiveRecord::Base
 
   def draw_kimbra_piece(dest_image, src_image)
     #puts "LDB:draw_kimbra_piece() #{self}=>#{layout.inspect}"
-    layout.draw_custom_part2(dest_image, src_image)
+    op = case operator
+           when 'DstOverOverCompositeOp'
+             Magick::DstOverCompositeOp
+           when 'DstOutCompositeOp'
+             Magick::DstOutCompositeOp
+           when 'SrcOverCompositeOp'
+             Magick::SrcOverCompositeOp
+           else
+             Magick::DstOverCompositeOp
+         end
+    layout.draw_custom_part2(dest_image, src_image, op)
   end
 
 end
