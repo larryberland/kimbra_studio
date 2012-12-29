@@ -207,7 +207,7 @@ en:
   my_studio_sessions_edit_link: "Edit ClickPLUS Photo Session"
   my_studio_sessions_index_title: "ClickPLUS Photo Sessions"
   my_studio_sessions_show_title: "Session Info"
-  my_studio_sessions_finished_uploading_notice_html: "Thanks! We'll start photoshopping those portraits into Kimbra's jewelry pieces soon.<br>Your Photo Session has been placed in the ClickPLUS Work Queue.<br>Check back shortly to View your Client's Offer Email."
+  my_studio_sessions_finished_uploading_notice_html: "Thanks! We'll start photoshopping those portraits into Kimbra's jewelry pieces soon.<br>Your Photo Session has been placed in the ClickPLUS Work Queue.<br>Afterwards, check back here to view the Offer Email we sent to your client."
 
   my_studio_sessions_complete_link: "Send to ClickPLUS work queue..."
   my_studio_sessions_complete_link2: "I'm finished! These %{portrait_count} portraits are enough. Send to ClickPLUS work queue."

@@ -9,25 +9,24 @@
   <% if sessions.empty? %>
       <h4>&#x2713; This will display your Offer Emails sent to your clients.</h4>
   <% elsif sessions.collect { |s| s.emails.count }.sum.to_i == 0 %>
-      <h4>&#x2718; No emails this past week - no portraits uploaded?</h4>
+      <h4>&#x2718; No emails to display yet.</h4>
   <% else %>
       <table class="table table-striped table-bordered datatables-hidden" id='offer_emails_table'>
         <thead>
         <tr>
-          <th>photo session</th>
-          <th>client</th>
-          <th>how many<br/>offers</th>
-          <th>sent</th>
+          <th>Photo session <i class="icon-user"> </i></th>
+          <th>How many<br/>offers</th>
+          <th>Sent</th>
           <th>sent for datatables</th>
-          <th>last read</th>
+          <th>Last read</th>
           <th>last read for datatables</th>
-          <th>clicked through</th>
+          <th>Clicked through</th>
           <th>clicked through for datatables</th>
-          <th>purchased</th>
-          <th>shipped</th>
+          <th>Purchased</th>
+          <th>Shipped</th>
           <th>shipped for datatables</th>
           <% if current_user.admin? %>
-              <th>studio</th>
+              <th>Studio</th>
           <% end %>
         </tr>
         </thead>
@@ -36,8 +35,10 @@
         <% sessions.each do |session| %>
             <% session.emails.each do |email| %>
                 <tr>
-                  <td><%= link_to session.name, my_studio_session_path(session) %></td>
-                  <td><%= session.try(:client).try(:name) %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %></td>
+                  <td>
+                    <%= link_to session.try(:title), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %>
+                    <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %>
+                  </td>
                   <td><%= email.try(:offers).try(:count) %></td>
                   <td><%= email.sent_at ? "#{time_ago_in_words email.sent_at} ago" : '' %></td>
                   <td><%= email.sent_at.to_s(:javascript) if email.sent_at %></td>
