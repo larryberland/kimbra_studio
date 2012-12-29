@@ -2,13 +2,44 @@
   <div class='span12'>
     <%= render 'my_studio/dashboards/sessions', sessions: @sessions %>
   </div>
+</div>
+<div class='row'>
   <div class='span12'>
     <%= render 'my_studio/dashboards/emails', sessions: @sessions %>
   </div>
+</div>
+<div class='row'>
   <div class='span12'>
     <%= render 'my_studio/dashboards/ready', sessions: @sessions, emails: @emails %>
   </div>
+</div>
+
+<% if @unsubscribes.present? %>
+    <div class='row'>
+      <div class='span12'>
+        <h3>Unsubscribed from emails</h3>
+        <% @unsubscribes.each do |unsub| %>
+            <% studio = User.where(email: unsub.email).first.try(:studio)  %>
+            <li><%= unsub.email %> on <%= date_short unsub.created_at %> <%= "(#{studio.name})" if studio %></li>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+
+<% if @prospects.present? %>
+    <div class='row'>
+      <div class='span12'>
+        <h3>Prospects who contacted us</h3>
+        <% @prospects.each do |prospect| %>
+            <li><%= mail_to prospect.email %> on <%= date_short prospect.created_at %></li>
+        <% end %>
+      </div>
+    </div>
+<% end %>
+
+<div class='row'>
   <div class='span6'>
     <%= link_to image_tag('kimbra_logo.png') %>
   </div>
+
 </div>
