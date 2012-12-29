@@ -290,7 +290,7 @@ en:
         portraits:
           title: "Click to select this portrait."
         create_offer:
-          name: "Create new piece and add to My Collection"
+          name: "Update piece and add to My Collection"
           title: "Click to create a copy of this piece and add it to My Collection."
         save:
           name: "Save"
@@ -328,7 +328,7 @@ en:
           name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
       index:
-        title: "%{studio} suggests the following Pieces for My collection."
+        title: "%{studio} suggests the following Pieces for My Collection."
       index_custom:
         title: "My Collection of custom heirloom jewelry pieces"
         title_friend_html: "My Collection of custom heirloom jewelry pieces,<br>shared with Friends as %{name}"

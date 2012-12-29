@@ -1,7 +1,4 @@
-<ul>
-  <li>Added <%= @item.offer.piece.name %> to your Shopping cart.<br></li>
-  <% if @create_notice == :add_to_collection %>
-    <li>The Custom Jewelry Piece was added to My Collection.</li>
-  <% end %>
-</ul>
-
+Added <%= @item.offer.piece.name %> to your Shopping cart.<br>
+<% if @create_notice == :add_to_collection %>
+    The Custom Jewelry Piece was added to My Collection.
+<% end %>
