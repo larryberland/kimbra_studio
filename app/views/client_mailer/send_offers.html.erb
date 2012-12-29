@@ -554,9 +554,9 @@
         <td class="w580" valign="top" width="360">
           <p id="permission-reminder" class="footer-content-left" align="left" style="color: #e2e2e2">
             We sent you this email this because you are a customer of <%= @studio.name -%>.
-            If you like to schedule a photo session with <%= @studio.name -%>,
+            If you would like to schedule a photo session with us,
             <% msg = 'My name is ... I am interested in a new photo session. Would you please contact me to discuss arrangements.' %>
-            <u><%= mail_to @studio.info.email, 'please send us a note!', subject: 'Interested in new photo session!', body: msg  %></u>
+            <u><%= mail_to @studio.info.email, 'please send us a note!', subject: 'Interested in new photo session!', body: msg, style: "color: #e2e2e2" %></u>.
           </p>
 
           <p class="footer-content-left" align="left" style="color: #e2e2e2">
