@@ -60,6 +60,7 @@ class ImageLayout < ActiveRecord::Base
   #=Magick::DstOverCompositeOp
   def draw_custom_part2(part_image, src_image, operator)
     #puts "\n draw_custom() portrait src_image #{src_image.columns}x#{src_image.rows}"
+    #operator = Magick::DstOutCompositeOp
     @new_x = x
     @new_y = y
     image  = rotate(resize(src_image))

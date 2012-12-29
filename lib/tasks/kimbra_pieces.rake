@@ -3,7 +3,7 @@ namespace 'kimbra_pieces' do
   task :accessories => :environment do
     category = "Photo Accessories"
     images   = %w(calvin_photo_keychain.png
-    everyday_photo_keychain.jpeg
+    everyday_photo_keychain.png
     iphone_3_case.jpeg
     iphone_4_case.jpeg
     iphone_5_case.jpeg
@@ -30,6 +30,13 @@ namespace 'kimbra_pieces' do
              price: "24.00", short_description: 'Photo measuring: 1" round. Leather keychain. Completely waterproof.', description_markup: ''},
 
             {name:  'Everyday Photo Keychain',
+             active: true,
+             use_part_image: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 98, y: 280, w: 95, h: 95}},
+                         piece_layout_attributes: {layout_attributes: {x: 98, y: 280, w: 95, h: 95}}
+                        },
+                    ],
              price: "24.00", short_description: 'Photo measuring: 1" square. Pewter photo charm. Completely Waterproof.', description_markup: ''},
 
             {name:               'iPhone 3 Case',
@@ -54,6 +61,12 @@ namespace 'kimbra_pieces' do
             },
 
             {name:  "Leather Photo Bag Tag",
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 106, y: 211, w: 103, h: 103}},
+                         piece_layout_attributes: {layout_attributes: {x: 145, y: 253, w: 103, h: 103, degrees:-44.01}}
+                        },
+                    ],
              price: "36.00", short_description: "Photo measuring 2\" round. Round leather bag tag with buckle attachment. Completely waterproof.", description_markup: ""},
 
             {name:  "Napa Photo Wine Charms (set of 2) Vertical",
