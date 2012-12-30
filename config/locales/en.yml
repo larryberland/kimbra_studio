@@ -350,7 +350,7 @@ en:
           name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
       new:
-        title: "We have lots of unique jewelry designs for you design your own custom heirloom pieces."
+        title: "We have lots of unique jewelry designs for you to design your own custom heirloom pieces."
 
     portraits:
       index:
