@@ -152,7 +152,7 @@ class ApplicationController < ActionController::Base
       @cart = Shopping::Cart.find(session[:cart_id]) rescue nil
       if @cart
         # override the email record with the cart's info
-        if Rails.env.development?
+        if Rails.env.development? && @admin_customer_email
           if @cart.email.id != @admin_customer_email.id
             puts "session:#{session.inspect}"
             puts "email:#{@email.inspect}"
