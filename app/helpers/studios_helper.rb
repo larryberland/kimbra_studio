@@ -49,8 +49,8 @@ module StudiosHelper
   def studio_email_clicked_through_range(studio_email)
     start = StudioEmail.where(email_name: studio_email).order('clicked_through_at asc').first.try(:clicked_through_at)
     stop = StudioEmail.where(email_name: studio_email).order('clicked_through_at asc').last.try(:clicked_through_at)
-    if start && stop && start == stop
-      date_short(start || stop)
+    if start && stop && start.to_date == stop.to_date
+      date_short([start, stop].min)
     elsif start && stop
       date_short(start) + ' - ' + date_short(stop)
     elsif start || stop
@@ -59,10 +59,11 @@ module StudiosHelper
   end
 
   def send_studio_email_campaign_for(email)
-    link_to 'send to all studios who have not been sent',
+    count = Studio.with_logo.count - StudioEmail.sent_email(email).count
+    link_to "send to #{pluralize count, 'unsent studio'}",
             send_studio_email_campaign_studios_path(email: email),
             id: "send_email_campaign_#{email}",
-            confirm: "This will send approx #{Studio.count} #{email} emails.",
+            confirm: "This will send approx #{count} #{email} emails.",
             method: :post,
             remote: true
   end

@@ -230,16 +230,17 @@ class StudiosController < ApplicationController
   def send_studio_email_campaign
     email = params[:email]
     count = 0
-    Studio.all.each do |studio|
-      unless StudioEmail.exists?(email_name: email, studio_id: studio) ||
-        StudioEmail.create(email_name: email, studio: studio, sent_at: Time.now)
+    Studio.with_logo.each do |studio|
+      unless StudioEmail.exists?(email_name: email, studio_id: studio)
         count += 1
         Notifier.delay.send(email, studio.id)
+        puts "DJCOUNT: #{DelayedJob.count}"
+        StudioEmail.create(email_name: email, studio: studio, sent_at: Time.now)
       end
     end
     respond_to do |format|
       format.js do
-        render text: "$('#send_email_campaign_#{email}').html('queueing #{count} emails..').effect('highlight', 2000)"
+        render text: "$('#send_email_campaign_#{email}').html('queueing #{count} emails...').effect('highlight', 2000)"
       end
     end
   end

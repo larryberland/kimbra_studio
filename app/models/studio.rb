@@ -56,6 +56,8 @@ class Studio < ActiveRecord::Base
     where("my_studio_minisites.image #{clause}").joins(:minisite).order('updated_at DESC')
   }
 
+  scope :with_logo, where("my_studio_minisites.image IS NOT NULL").joins(:minisite)
+
   def self.search_logoize(value)
     value ? by_logoize(value) : scoped
   end
