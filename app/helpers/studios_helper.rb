@@ -59,10 +59,11 @@ module StudiosHelper
   end
 
   def send_studio_email_campaign_for(email)
-    link_to 'send to all studios who have not been sent',
+    count = Studio.with_logo.count - StudioEmail.sent_email(email).count
+    link_to "send to #{count} studios who have not been sent",
             send_studio_email_campaign_studios_path(email: email),
             id: "send_email_campaign_#{email}",
-            confirm: "This will send approx #{Studio.count} #{email} emails.",
+            confirm: "This will send approx #{count} #{email} emails.",
             method: :post,
             remote: true
   end

@@ -230,7 +230,7 @@ class StudiosController < ApplicationController
   def send_studio_email_campaign
     email = params[:email]
     count = 0
-    Studio.all.each do |studio|
+    Studio.with_logo.each do |studio|
       unless StudioEmail.exists?(email_name: email, studio_id: studio) ||
         StudioEmail.create(email_name: email, studio: studio, sent_at: Time.now)
         count += 1
