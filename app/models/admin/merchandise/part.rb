@@ -70,6 +70,10 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     self.image_part_height # height of the original kimbra background image part graphic
   end
 
+  def to_title_size
+    "size: #{width}x#{height}"
+  end
+
   # the portrait viewport dimensions onto the image_part background image
   def viewport
     viewport_offset.merge(viewport_size)

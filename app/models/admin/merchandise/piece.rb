@@ -108,4 +108,7 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
     text
   end
 
+  def to_title_size
+    "size: #{width}x#{height}"
+  end
 end
