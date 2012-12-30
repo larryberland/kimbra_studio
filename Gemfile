@@ -48,6 +48,7 @@ gem 'newrelic_rpm'
 gem 'jeditable-rails'
 
 gem 'bloggy'
+gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 
 # Facebook gems
 gem 'omniauth-facebook'
@@ -65,7 +66,6 @@ end
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'  # replaces fixtures
-  gem 'mail_view', :git => 'https://github.com/37signals/mail_view.git'
 end
 
 group :test do
