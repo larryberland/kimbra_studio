@@ -49,8 +49,8 @@ module StudiosHelper
   def studio_email_clicked_through_range(studio_email)
     start = StudioEmail.where(email_name: studio_email).order('clicked_through_at asc').first.try(:clicked_through_at)
     stop = StudioEmail.where(email_name: studio_email).order('clicked_through_at asc').last.try(:clicked_through_at)
-    if start && stop && start == stop
-      date_short(start || stop)
+    if start && stop && start.to_date == stop.to_date
+      date_short([start, stop].min)
     elsif start && stop
       date_short(start) + ' - ' + date_short(stop)
     elsif start || stop
