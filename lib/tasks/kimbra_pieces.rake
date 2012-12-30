@@ -4,9 +4,9 @@ namespace 'kimbra_pieces' do
     category = "Photo Accessories"
     images   = %w(calvin_photo_keychain.png
     everyday_photo_keychain.png
-    iphone_3_case.jpeg
-    iphone_4_case.jpeg
-    iphone_5_case.jpeg
+    iphone_3_case.png
+    iphone_4_case.png
+    iphone_5_case.png
     leather_photo_bag_tag.png
     napa_photo_wine_charms_vertical.png
     napa_photo_wine_charms.png
@@ -41,24 +41,27 @@ namespace 'kimbra_pieces' do
              price: "24.00", short_description: 'Photo measuring: 1" square. Pewter photo charm. Completely Waterproof.', description_markup: ''},
 
             {name:               'iPhone 3 Case',
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 44, y: 25, w: 160, h: 304}},
+                         piece_layout_attributes: {layout_attributes: {x: 36, y: 30, w: 160, h: 304, degrees:-2.5}}
+                        },
+                    ],
              price:              "35.00",
              short_description:  "The best-selling iPhone 3 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
-             description_markup: "The best-selling iPhone 3 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
-             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+             description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
             },
 
             {name:               "iPhone 4 Case",
              price:              "35.00",
              short_description:  "The best-selling iPhone 4 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
-             description_markup: "The best-selling iPhone 4 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
-             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+             description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
             },
 
             {name:               "iPhone 5 Case",
              price:              "35.00",
              short_description:  "The best-selling iPhone 5 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
-             description_markup: "The best-selling iPhone 5 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone. Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack.
-             The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+             description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
             },
 
             {name:  "Leather Photo Bag Tag",
