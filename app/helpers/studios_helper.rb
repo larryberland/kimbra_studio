@@ -60,12 +60,16 @@ module StudiosHelper
 
   def send_studio_email_campaign_for(email)
     count = Studio.with_logo.count - StudioEmail.sent_email(email).count
-    link_to "send to #{pluralize count, 'unsent studio'}",
-            send_studio_email_campaign_studios_path(email: email),
-            id: "send_email_campaign_#{email}",
-            confirm: "This will send approx #{count} #{email} emails.",
-            method: :post,
-            remote: true
+    if count > 0
+      link_to "send to #{pluralize count, 'unsent studio'}",
+              send_studio_email_campaign_studios_path(email: email),
+              id: "send_email_campaign_#{email}",
+              confirm: "This will send approx #{count} #{email} emails.",
+              method: :post,
+              remote: true
+    else
+      'all sent'
+    end
   end
 
 end
