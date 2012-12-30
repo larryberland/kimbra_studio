@@ -5,8 +5,11 @@ namespace 'kimbra_pieces' do
     images   = %w(calvin_photo_keychain.png
     everyday_photo_keychain.png
     iphone_3_case.png
+    iphone_3_case_horizontal.png
     iphone_4_case.png
+    iphone_4_case_horizontal.png
     iphone_5_case.png
+    iphone_5_case_horizontal.png
     leather_photo_bag_tag.png
     napa_photo_wine_charms_vertical.png
     napa_photo_wine_charms.png
@@ -52,6 +55,18 @@ namespace 'kimbra_pieces' do
              description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
             },
 
+            {name:               'iPhone 3 Case Horizontal',
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 27, y: 46, w: 304, h: 160}},
+                         piece_layout_attributes: {layout_attributes: {x: 15, y: 50, w: 304, h: 160, degrees:-2.5}}
+                        },
+                    ],
+             price:              "35.00",
+             short_description:  "The best-selling iPhone 3 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
+             description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+            },
+
             {name:               "iPhone 4 Case",
              active: true,
              use_part_image: true,
@@ -65,11 +80,36 @@ namespace 'kimbra_pieces' do
              description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
             },
 
+            {name:               "iPhone 4 Case Horizontal",
+             active: true,
+             use_part_image: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 18, y: 141, w: 308, h: 156}},
+                         piece_layout_attributes: {layout_attributes: {x: 18, y: 141, w: 308, h: 156}}
+                        },
+                    ],
+             price:              "35.00",
+             short_description:  "The best-selling iPhone 4 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
+             description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+            },
+
             {name:               "iPhone 5 Case",
              active: true,
              parts: [
                         {part_layout_attributes:  {layout_attributes: {x: 114,y: 27, w: 146, h: 301}},
                          piece_layout_attributes: {layout_attributes: {x: 45, y: 26, w: 146, h: 301}}
+                        },
+                    ],
+             price:              "35.00",
+             short_description:  "The best-selling iPhone 5 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
+             description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
+            },
+
+            {name:               "iPhone 5 Case Horizontal",
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 21,y: 115, w: 301, h: 146}},
+                         piece_layout_attributes: {layout_attributes: {x: 25, y: 48, w: 301, h: 146}}
                         },
                     ],
              price:              "35.00",
