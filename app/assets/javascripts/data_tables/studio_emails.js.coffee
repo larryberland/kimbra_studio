@@ -1,7 +1,7 @@
 $ ->
   setUpDataTable(
     $('#studio_emails_table'),
-    'aaSorting': [ [ 0, 'asc' ], [ 1, 'desc' ] ]      # sort on studio name, email name
+    'aaSorting': [ [ 4, 'desc' ] ]                   # sort on click throughs
     'aoColumnDefs': [
       {'bSearchable': false, 'aTargets': [ 2,3,4,5,6 ]}   # do not search on dates or actions
       {'bSortable': false, 'aTargets': [ 6 ]}        # do not sort on actions
