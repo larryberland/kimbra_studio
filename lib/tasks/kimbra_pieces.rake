@@ -53,12 +53,25 @@ namespace 'kimbra_pieces' do
             },
 
             {name:               "iPhone 4 Case",
+             active: true,
+             use_part_image: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 137, y: 23, w: 156, h: 308}},
+                         piece_layout_attributes: {layout_attributes: {x: 137, y: 23, w: 156, h: 308}}
+                        },
+                    ],
              price:              "35.00",
              short_description:  "The best-selling iPhone 4 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
              description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
             },
 
             {name:               "iPhone 5 Case",
+             active: true,
+             parts: [
+                        {part_layout_attributes:  {layout_attributes: {x: 114,y: 27, w: 146, h: 301}},
+                         piece_layout_attributes: {layout_attributes: {x: 45, y: 26, w: 146, h: 301}}
+                        },
+                    ],
              price:              "35.00",
              short_description:  "The best-selling iPhone 5 case is ultra-lightweight with a slim silhouette that enhances the overall aesthetic of the phone.",
              description_markup: "Express yourself by creating an individual design that no one else has. Simply choose your own picture to be wrapped around the entire case. Images have brilliant color and clarity and won't fade, peel or crack. The slender impact-resistant polycarbonate shell protects against falls and maintains access to all of your device features. The smooth finish makes it simple to slide in and out of pockets. Made in the USA!",
