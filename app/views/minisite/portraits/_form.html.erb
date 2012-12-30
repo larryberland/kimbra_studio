@@ -3,11 +3,11 @@
     <!--[if IE]><!--meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><![endif]-->
 
     <!-- Bootstrap CSS fixes for IE6 -->
-    <!--[if lt IE 7]><%=stylesheet_link_tag "bootstrap-ie6.min.css" %><![endif]-->
+    <!--[if lt IE 7]><%=stylesheet_link_tag 'bootstrap-ie6.min.css' %><![endif]-->
 
     <!-- CSS to style the file input field as button and adjust the Bootstrap progress bars -->
-    <%= stylesheet_link_tag "fileuploads" %>
-    <%= stylesheet_link_tag "bootstrap" %>
+    <%= stylesheet_link_tag 'fileuploads' %>
+    <%= stylesheet_link_tag 'bootstrap' %>
     <%= javascript_include_tag 'application' %>
 
     <!-- Shim to make HTML5 elements usable in older Internet Explorer versions -->
@@ -19,16 +19,16 @@
 
     <%= f.hidden_field :my_studio_session_id %>
 
-    <div class="row fileupload-buttonbar">
+    <div class='row fileupload-buttonbar'>
 
-      <div class="span7">
+      <div class='span7'>
 
-        <span class="btn btn-success fileinput-button">
-          <i class="icon-plus icon-white"></i>
+        <span class='btn btn-success fileinput-button'>
+          <i class='icon-plus icon-white'></i>
           <span><%= t('minisite.portraits.index.add_files') %></span>
           <%= f.file_field :file, :multiple => true %>
         </span>
-        <button type="submit" class="btn btn-primary start">
+        <button type="submit" class='btn btn-primary start'>
           <i class="icon-upload icon-white"></i>
           <%= t('photos.start_upload') %>
         </button>
@@ -182,18 +182,4 @@
 <%= javascript_include_tag 'fileuploads.js' %>
 
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
-<!--[if gte IE 8]><%= javascript_include_tag "xdr.js" %><![endif]-->
-
-<%= coffee_script_tag do %>
-# BEWARE FORMATTING! ALL 3 OF THE LINE SBELOW MUST BE SUCCESSIVELY INDENTED!
-# After portraits are added or deleted, update the studio message at the top of the page.
-$ ->
-    $('#fileupload').live 'fileuploaddone', ->
-        request = $.get '/my_studio/sessions/<%= @my_studio_session.id %>/portraits/upload_status_messages.js'
-        request.success (data) -> data
-        request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "<br/>Error: #{errorThrown} Status: #{textStatus}"
-    $('#fileupload').live 'fileuploaddestroy', ->
-        request = $.get '/my_studio/sessions/<%= @my_studio_session.id %>/portraits/upload_status_messages.js'
-        request.success (data) -> data
-        request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "<br/>Error: #{errorThrown} Status: #{textStatus}"
-<% end %>
+<!--[if gte IE 8]><%= javascript_include_tag 'xdr.js' %><![endif]-->
