@@ -41,6 +41,7 @@ KimbraStudio::Application.configure do
 
   # Enable serving of images, stylesheets, and JavaScripts from an asset server
   config.action_controller.asset_host = "https://www.kimbraclickplus.com"
+  config.action_mailer.asset_host = config.action_controller.asset_host
 
   # Precompile additional assets (application.js, application.css, and all non-JS/CSS are already added)
   config.assets.precompile += %w( minisite.js minisite.css stories.css orbit-1.2.3.css )
