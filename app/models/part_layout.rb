@@ -6,6 +6,14 @@ class PartLayout < ActiveRecord::Base
   has_one :layout, :class_name => 'ImageLayout', :as => :layout
   accepts_nested_attributes_for :layout
 
+  def aspect_ratio
+    layout.aspect_ratio
+  end
+
+  def landscape?
+    layout.landscape?
+  end
+
   def x
     layout.x.to_i
   end

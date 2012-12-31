@@ -5,6 +5,16 @@ class ImageLayout < ActiveRecord::Base
 
   after_create :set_default
 
+  def aspect_ratio
+    @aspect_ratio = w.to_f / h.to_f if @aspect_ratio.nil?
+    @aspect_ratio
+  end
+
+  # true if layout is in landscape
+  def landscape?
+    w < h ? true : false
+  end
+
   def resize(image)
     #puts "imageLayout resize:#{image.columns}x#{image.rows} to:#{w}x#{h}"
     new_image = image.resize_to_fit(w, h) if w and h

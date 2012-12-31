@@ -152,9 +152,9 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                                 #puts "  using adjusted picture url"
                                 src_image
                               elsif portrait
-                                crop, crop_box = auto_crop(src_image)
-                                img = src_image.resize(crop_box[0], crop_box[1])
-                                img.crop!(crop[0], crop[1], crop[2], crop[3])
+                                crop, crop_box = part.cropilize
+                                img = src_image.resize(crop_box.w, crop_box.h)
+                                img.crop!(crop.x, crop.y, crop.w, crop.h)
                                 clear_cropping
                                 img.resize!(size[:w], size[:h])
                                 img

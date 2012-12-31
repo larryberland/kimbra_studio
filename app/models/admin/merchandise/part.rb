@@ -126,6 +126,38 @@ class Admin::Merchandise::Part < ActiveRecord::Base
     text
   end
 
+  def cropilize
+
+    if @crop.nil? or @cropbox.nil?
+
+      # cropbox size based on the part's wxh into a 300 wide
+      orig_width  = width.to_f
+      orig_height = height.to_f
+      dest_width  = 300.0
+      dest_height = (dest_width * orig_height) / orig_width
+
+      cropbox_w = dest_width  # $('#cropbox').width()
+      cropbox_h = dest_height # $('#cropbox').height()
+      @cropbox  = ImageLayout.new(w: cropbox_w.round, h: cropbox_h.round)
+
+      viewport_aspect_ratio = part_layout.aspect_ratio
+
+      if part_layout.landscape?
+        x1 = cropbox_w / 6     # one-sixth the way across
+        y1 = (cropbox_h / 6) + 0.5 * (cropbox_h * 4 / 6 - cropbox_w * 4 / 6 / viewport_aspect_ratio)
+        x2 = cropbox_w * 5 / 6 # five-sixths the way across
+        y2 = (cropbox_h * 5 / 6) - 0.5 * (cropbox_h * 4 / 6 - cropbox_w * 4 / 6 / viewport_aspect_ratio)
+      else # landscape style
+        x1 = (cropbox_w / 6) + 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewport_aspect_ratio)
+        y1 = cropbox_h / 6 # one-sixth the way down
+        x2 = (cropbox_w * 5 / 6) - 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewport_aspect_ratio)
+        y2 = cropbox_h * 5 / 6 # five-sixths the way down
+      end
+      @crop = ImageLayout.new(x: x1.round, y: y1.round, w: (x2.round - x1.round), h: y2.round - y1.round)
+    end
+    return @crop, @cropbox
+  end
+
   private
 
   def part_image
