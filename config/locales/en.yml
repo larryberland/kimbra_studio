@@ -314,9 +314,9 @@ en:
           title: "Click to remove your piece from My Collection."
           confirm: "Are you sure?"
           confirm_in_cart: "This piece is currently in the Shopping Cart. Are you sure?"
-      create_custom_form:
+      create_build_pieces_by_category_form:
         submit: "Create My Custom Heirloom Piece"
-      create_custom_category_form:
+      create_build_a_piece_form:
         submit: "Create My Custom Heirloom Piece"
       offer:
         in_shopping_cart: "In your shopping cart"
