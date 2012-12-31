@@ -7,6 +7,7 @@ module FacebookHelper
   end
 
   def link_to_facebook_login(offer)
+    # todo: this is not currently working
     link_to "Log in with Facebook",
             "/auth/facebook?offer_email=#{offer.email.id}",
             :class => "popup", :"data-width" => 600, :"data-height" => 400

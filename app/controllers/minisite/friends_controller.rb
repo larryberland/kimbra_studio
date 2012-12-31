@@ -5,7 +5,7 @@ module Minisite
 
     # GET /minisite/friends/1t7t7rye/edit
     def edit
-      @storyline.describe "Editing friend #{@admin_customer_offer.name}"
+      @storyline.describe "Editing friend #{@admin_customer_friend.name}"
     end
 
     # PUT /minisite/friends/1t7t7rye
@@ -15,11 +15,11 @@ module Minisite
       success = @admin_customer_friend.on_update(params[:admin_customer_friend])
       respond_to do |format|
         if success
-          @storyline.describe "Updating friend #{@admin_customer_offer.name}"
+          @storyline.describe "Updating friend #{@admin_customer_friend.name}"
           format.json { head :ok }
           format.js
         else
-          @storyline.describe "Updating friend #{@admin_customer_offer.name} errors: #{@admin_customer_friend.errors.full_messages}"
+          @storyline.describe "Updating friend errors: #{@admin_customer_friend.errors.full_messages}"
           format.json { render json: @admin_customer_friend.errors, status: :unprocessable_entity }
           format.js
         end
