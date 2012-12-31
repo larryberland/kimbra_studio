@@ -117,7 +117,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     if layout_is_portrait
       x1 = (cropbox_w / 6) + 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewport_aspect_ratio)
       y1 = cropbox_h / 6 # one-sixth the way down
-      x2 = (cropbox_w * 5 / 6) - 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewport_spect_ratio)
+      x2 = (cropbox_w * 5 / 6) - 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewport_aspect_ratio)
       y2 = cropbox_h * 5 / 6 # five-sixths the way down
     else # landscape style
       x1 = cropbox_w / 6     # one-sixth the way across

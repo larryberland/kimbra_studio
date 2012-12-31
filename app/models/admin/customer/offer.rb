@@ -237,12 +237,21 @@ class Admin::Customer::Offer < ActiveRecord::Base
         item_options_list << {photo_part: part, portrait: nil}
       end
 
+      portrait_index = 0
+      studio_portraits_size = email.my_studio_session.portraits.size
+
       piece.photo_parts.each_with_index do |part, index|
         options = {photo_part: part}
         if (index < current_portraits.size)
           options[:portrait] = current_portraits[index]
         else
-          options[:portrait] = email.my_studio_session.portraits.first
+          if portrait_index < studio_portraits_size
+            options[:portrait] = email.my_studio_session.portraits[portrait_index]
+            portrait_index += 1
+          else
+            portrait_index = 0
+            options[:portrait] = email.my_studio_session.portraits[portrait_index]
+          end
         end
         item_options_list << options
       end
