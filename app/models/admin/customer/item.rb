@@ -40,6 +40,27 @@ class Admin::Customer::Item < ActiveRecord::Base
     item
   end
 
+  def self.assemble_side_quick(offer, options)
+    raise "did you forget to assign the item_sides options?" if options.nil?
+
+    # if this only a hash turn it into an array of 1 for the front_side
+    sides = [options] if options.kind_of?(Hash)
+
+    # otherwise the caller has set up an array for front and back
+    sides           ||= options
+
+    # Create the item, and its part information
+    item            = assemble(offer, sides.first[:photo_part])
+
+    # Create the sides
+    item.item_sides = sides.collect do |item_side_options|
+      Admin::Customer::ItemSide.assemble(item, item_side_options)
+    end
+
+    item.save
+    item
+  end
+
   # list of portraits used in this item's front and back sides
   def portrait_list
     item_sides.collect { |item_side| item_side.try(:portrait) } if item_sides.present?

@@ -22,6 +22,9 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   scope :non_photo_charms, lambda { where('photo=? AND category NOT IN(?)', false, 'Chains').order('name ASC') }
   scope :for_chains, lambda { by_category('Chains').order('name ASC') }
   scope :are_active_with_photo, lambda { where('active=? and photo=?', true, true).order("name ASC") }
+  scope :for_build_a_piece, lambda {|category|
+    where('active=? and photo=? and category IN(?)', true, true, category).order('name ASC')
+  }
 
   scope :search, lambda { |value|
     if value
@@ -38,6 +41,9 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
     @@inventory_size
   end
 
+  def self.categories
+    Admin::Merchandise::Piece.select('distinct(category)').collect(&:category) - ['Chains']
+  end
   # determines both the number of offers we send out and from which category
   #  when the Holiday's start we can just add to this array
   # ["Photo Bracelets", "Photo Necklaces", "Holiday", "Photo Charms"] as of 10/7/2012
@@ -111,4 +117,5 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
   def to_title_size
     "size: #{width}x#{height}"
   end
+
 end

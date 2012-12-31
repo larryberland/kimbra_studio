@@ -186,6 +186,13 @@ class Admin::Customer::Offer < ActiveRecord::Base
     self
   end
 
+  # jobs:work delay_job method to create the offer in the background
+  #   using this portrait_id
+  def on_create_delay(portrait_id)
+    self.portrait_id = portrait_id
+    on_create()
+  end
+
   # reassemble this piece using the current piece_id and portrait_id
   #   sent in from the form
   def on_create()
@@ -342,11 +349,11 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def adjust_picture?
     # NOTE: if piece.photo? not properly set run
     #       rake kimbra:seed_piece_photo
-    piece.photo?
+    piece and piece.photo?
   end
 
   def has_picture?
-    piece.photo_parts.present?
+    piece and piece.photo_parts.present?
   end
 
   # Adjusted one of the item.item_sides for this offer

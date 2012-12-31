@@ -49,7 +49,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   # clone a merchandises part for the customer's custom part
   def self.create_clone(merchandise_part)
-    # clone a new copy for our customer's custom paort
+    # clone a new copy for our customer's custom part
     item_part       = merchandise_part.clone
 
                    # use the same merchandise part's, piece (no clone)

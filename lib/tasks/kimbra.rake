@@ -60,14 +60,14 @@ namespace 'kimbra' do
     #{category: 'Photo Charms', name: 'Wendy Bead Charm', image: 'wendy_bead_charm.png', layout: {x: 81, y: 110, w: 36, h: 49}},
     #{category: 'Photo Charms', name: 'Baby Foot Bead Charm', image: 'baby_foot_bead_charm.png', layout: {x: 78, y: 107, w: 39, h: 51}},
     #{category: 'Photo Charms', name: 'Paw Print Bead Charm', image: 'paw_print_bead_charm.png', layout: {x: 78, y: 108, w: 39, h: 47}},
-    #{category: 'Holiday', name: 'Aspen Ornament', image: 'aspen_ornament.png', layout: {x: 81, y: 95, w: 43, h: 43}},
-    #{category: 'Holiday', name: 'Awareness Ornament', image: 'awareness_ornament.png', layout: {x: 60, y: 42, w: 75, h: 99}},
-    #{category: 'Holiday', name: 'Evergreen Ornament', image: 'evergreen_ornament.png', layout: {x: 77, y: 101, w: 47, h: 47}},
-    #{category: 'Holiday', name: 'Fairchild Ornament', image: 'fairchild_ornament.png', layout: {x: 63, y: 91, w: 77, h: 77}},
-    #{category: 'Holiday', name: 'Joy Love Peace Ornament', image: 'joy_love_peace_ornament.png', layout: {x: 59, y: 90, w: 83, h: 83}},
-    #{category: 'Holiday', name: 'Keepsake Year Frame', image: 'keepsake_year_frame.png', layout: {x: 67, y: 60, w: 66, h: 86}},
-    #{category: 'Holiday', name: 'Keepsake Year Frame (horizontal)', image: 'keepsake_year_frame_horizontal.png', layout: {x: 61, y: 73, w: 86, h: 66}},
-    #{category: 'Holiday', name: 'Memorial Ornament', image: 'memorial_ornament.png', layout: {x: 60, y: 72, w: 81, h: 113}}
+    #{category: 'Photo Holiday', name: 'Aspen Ornament', image: 'aspen_ornament.png', layout: {x: 81, y: 95, w: 43, h: 43}},
+    #{category: 'Photo Holiday', name: 'Awareness Ornament', image: 'awareness_ornament.png', layout: {x: 60, y: 42, w: 75, h: 99}},
+    #{category: 'Photo Holiday', name: 'Evergreen Ornament', image: 'evergreen_ornament.png', layout: {x: 77, y: 101, w: 47, h: 47}},
+    #{category: 'Photo Holiday', name: 'Fairchild Ornament', image: 'fairchild_ornament.png', layout: {x: 63, y: 91, w: 77, h: 77}},
+    #{category: 'Photo Holiday', name: 'Joy Love Peace Ornament', image: 'joy_love_peace_ornament.png', layout: {x: 59, y: 90, w: 83, h: 83}},
+    #{category: 'Photo Holiday', name: 'Keepsake Year Frame', image: 'keepsake_year_frame.png', layout: {x: 67, y: 60, w: 66, h: 86}},
+    #{category: 'Photo Holiday', name: 'Keepsake Year Frame (horizontal)', image: 'keepsake_year_frame_horizontal.png', layout: {x: 61, y: 73, w: 86, h: 66}},
+    #{category: 'Photo Holiday', name: 'Memorial Ornament', image: 'memorial_ornament.png', layout: {x: 60, y: 72, w: 81, h: 113}}
     ]
     data.each do |options|
       p = Admin::Merchandise::Piece.find_by_category_and_name(options[:category], options[:name])

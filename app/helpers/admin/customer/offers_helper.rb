@@ -15,6 +15,21 @@ module Admin::Customer::OffersHelper
     info.to_json.html_safe
   end
 
+  def kimbra_piece_ddslick_data_by_category(offer, category)
+    @ddslick_default_selected_index = 0
+    index = 0
+    set = Admin::Merchandise::Piece.for_build_a_piece(category)
+    info = set.all.collect do |c|
+      @ddslick_default_selected_index = index if c.id == offer.piece_id
+      index += 1
+      {value:       c.id,
+       text:        c.name,
+       imageSrc:    c.image_url(:thumb),
+       description: c.short_description}
+    end
+    info.to_json.html_safe
+  end
+
   def portrait_ddslick_data(offer)
     info = offer.email.my_studio_session.portraits.collect do |p|
       {value:       p.id,

@@ -78,8 +78,7 @@ class Admin::Customer::Email < ActiveRecord::Base
 
     # for testing each category piece just set the categories array index below
     # Categories
-    categories = %w(Necklaces Bracelets Charms Rings ).collect { |e| "Photo #{e}" }
-    categories << 'Holiday'
+    categories = %w(Necklaces Bracelets Charms Rings Holiday).collect { |e| "Photo #{e}" }
     # Photo Bracelets
     # Photo Necklaces
     if false # Rails.env.development?

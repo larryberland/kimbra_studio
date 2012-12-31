@@ -316,6 +316,8 @@ en:
           confirm_in_cart: "This piece is currently in the Shopping Cart. Are you sure?"
       create_custom_form:
         submit: "Create My Custom Heirloom Piece"
+      create_custom_category_form:
+        submit: "Create My Custom Heirloom Piece"
       offer:
         in_shopping_cart: "In your shopping cart"
       show:

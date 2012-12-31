@@ -14,7 +14,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                   :portrait_id, :portrait, :portrait_attributes,
                   :item, :item_attributes,
                   :part, :part_attributes,
-                  :adjusted_picture_url,    # stock_image url from another item_side record
+                  :adjusted_picture_url, # stock_image url from another item_side record
                   :crop_x, :crop_y, :crop_h, :crop_w,
                   :x, :y, :w, :h
 
@@ -95,6 +95,46 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   end
 
+  def auto_crop(src_image)
+
+    portraitWidth   = src_image.rows
+    portraitHeight  = src_image.columns
+    partWidth       = part.width
+    viewportOffsetX = part.part_layout.layout.x
+    viewportOffsetY = part.part_layout.layout.y
+    viewportWidth   = part.part_layout.layout.w
+    viewportHeight  = part.part_layout.layout.h
+
+    viewportAspectRatio = viewportWidth.to_f / viewportHeight.to_f
+                            # Is the part layout a portrait or landscape?
+    layoutIsPortrait    = viewportHeight >= viewportWidth
+
+    orig_width  = part.width.to_f
+    orig_height = part.height.to_f
+    dest_width  = 300.0
+    dest_height = (dest_width * orig_height) / orig_width
+
+    cropbox_w = dest_width  # $('#cropbox').width()
+    cropbox_h = dest_height # $('#cropbox').height()
+    puts "cropbox #{cropbox_w}x#{cropbox_h}"
+    # Position initial select box one-sixth inside principal dimension of cropbox.
+    # Sixths seems pleasing since the resulting selection box will be two-thirds the principal dimension.
+    if layoutIsPortrait
+      x1 = (cropbox_w / 6) + 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewportAspectRatio)
+      y1 = cropbox_h / 6 # one-sixth the way down
+      x2 = (cropbox_w * 5 / 6) - 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewportAspectRatio)
+      y2 = cropbox_h * 5 / 6 # five-sixths the way down
+    else # landscape style
+      x1 = cropbox_w / 6     # one-sixth the way across
+      y1 = (cropbox_h / 6) + 0.5 * (cropbox_h * 4 / 6 - cropbox_w * 4 / 6 / viewportAspectRatio)
+      x2 = cropbox_w * 5 / 6 # five-sixths the way across
+      y2 = (cropbox_h * 5 / 6) - 0.5 * (cropbox_h * 4 / 6 - cropbox_w * 4 / 6 / viewportAspectRatio)
+    end
+
+    return [x1.to_i, y1.to_i, x2.to_i - x1.to_i, y2.to_i-y1.to_i], [cropbox_w.to_i, cropbox_h.to_i]
+
+  end
+
   # carrier_wave callback to process the stock_image
   #  for whatever processing we need to do
   def image_stock_process(src_image)
@@ -118,7 +158,19 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                                 src_image
                               elsif portrait
                                 puts "  using Full Portrait"
-                                src_image.resize_to_fit(size[:w], size[:h])
+
+                                # src_image.resize_to_fit(size[:w], size[:h])
+
+                                crop, crop_box = auto_crop(src_image)
+                                puts "crop::#{crop.inspect}"
+                                puts "crop_box::#{crop.inspect}"
+                                img = src_image.resize(crop_box[0], crop_box[1])
+                                img.crop!(crop[0], crop[1], crop[2], crop[3])
+                                clear_cropping
+                                img.resize!(size[:w], size[:h])
+                                #puts "img size:#{img.columns}x#{img.rows}"
+                                #puts "  resize to #{size[:w]}x#{size[:h]}"
+                                img
                               else
                                 puts "  using No photo"
                                 image_transparent(size[:w], size[:h])

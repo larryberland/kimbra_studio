@@ -669,7 +669,7 @@
         :part_layout: {layout: {x: 102, y: 78, w: 301, h: 372}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Holiday
+  - category: Photo Holiday
     name: Joy Love Peace Ornament
     price: 42.00
     short_description: 'Solid pewter, photo measuring 2" round, comes with gray satin ribbon and 2012 oval year tag. The back of the ornament says" "Joy Love Peace".'
@@ -682,7 +682,7 @@
         :part_layout: {layout: {x: 138, y: 205, w: 178, h: 178}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Holiday
+  - category: Photo Holiday
     name: Fairchild Ornament
     price: 42.00
     short_description: 'Solid pewter, photo measuring 2" round, comes with gray satin ribbon and 2012 oval year tag. The back of the ornament says" "Joy Love Peace".'
@@ -695,7 +695,7 @@
         :part_layout: {layout: {x: 145, y: 222, w: 168, h: 168}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Holiday
+  - category: Photo Holiday
     name: Aspen Ornament
     price: 28.00
     short_description: 'Photo measuring: 7/8" round. Pewter ornament. Gray satin ribbon included. Completely waterproof.'
@@ -708,7 +708,7 @@
         :part_layout: {layout: {x: 201, y: 251, w: 90, h: 90}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Holiday
+  - category: Photo Holiday
     name: Evergreen Ornament
     price: 32.00
     short_description: 'Solid pewter, photo measuring 7/8" round, comes with gray satin ribbon'
@@ -721,7 +721,7 @@
         :part_layout: {layout: {x: 169, y: 309, w: 166, h: 166}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Holiday
+  - category: Photo Holiday
     name: Keepsake Year Frame
     price: 32.00
     short_description: 'Photo measuring: 1-1/4"w x 1-3/4"h. Pewter ornament. Completely waterproof. Gray satin ribbon included.'
@@ -733,7 +733,7 @@
         :part_layout: {layout: {x: 111, y: 100, w: 149, h: 196}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Holiday
+  - category: Photo Holiday
     name: Keepsake Year Frame (horizontal)
     price: 32.00
     short_description: 'Photo measuring: 1-3/4"w x 1-1/4"h. Pewter ornament. Completely waterproof. Gray satin ribbon included.'
@@ -745,7 +745,7 @@
         :part_layout: {layout: {x: 127, y: 168, w: 236, h: 179}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Holiday
+  - category: Photo Holiday
     name: Awareness Ornament
     price: 40.00
     short_description: 'Honor a Breast Cancer Survivor or memorialize a loved one with this beautiful pewter ornament. Photo measures 1-1/4" w x 1-3/4" h.'
@@ -758,7 +758,7 @@
         :part_layout: {layout: {x: 88, y: 61, w: 114, h: 151}}
         :piece_layout: {layout: {x: 0, y: 0, w: 200, h: 200}}
 
-  - category: Holiday
+  - category: Photo Holiday
     name: Memorial Ornament
     price: 32.00
     short_description: 'Photo measuring: 1-1/2"w X 2-1/4"h. Solid Pewter ornament. Completely waterproof. Gray satin ribbon included. Made in USA.'

@@ -150,12 +150,39 @@ module Minisite
       # LDB: Changing this pretty sure this was just copied
       #      from admin_customer_offers
       # sure seems like i need a generate here with the portrait etc...
+
       params[:admin_customer_offer][:client] = is_client?
-      @admin_customer_offer = Admin::Customer::Offer.new(params[:admin_customer_offer])
-      @admin_customer_offer.email = @admin_customer_email
-      result = @admin_customer_offer.save
-      @admin_customer_offer.on_create if result
-      @storyline.describe "Created new offer #{@admin_customer_offer.name}."
+
+      pieces = params[:admin_customer_offer].delete(:pieces)
+
+      attrs = params[:admin_customer_offer]
+      attrs[:email] = @admin_customer_email # attach the email from the incoming_request tracking_number
+
+      # in case the create fails then redirect will have an offer object
+      @admin_customer_offer = Admin::Customer::Offer.new(attrs)
+
+      result = false
+      if (pieces)
+
+        piece_ids = pieces.collect{|category_tag, piece_info| piece_info[:piece_id].to_i}.select{|r| r > 0}
+
+        if piece_ids.present?
+
+          # create the first one in real-time
+          attrs[:piece_id] = piece_ids.shift
+          @admin_customer_offer = Admin::Customer::Offer.create(attrs)
+          result = @admin_customer_offer.on_create
+          @storyline.describe "Created new offer #{@admin_customer_offer.name}." if @admin_customer_offer
+
+          # delay the other offer pieces
+          piece_ids.each do |piece_id|
+            attrs[:piece_id] = piece_id
+            offer = Admin::Customer::Offer.create(attrs)
+            offer.delay.on_create_delay(attrs[:portrait_id])
+          end
+        end
+      end
+
       respond_to do |format|
         if result
           url = if @admin_customer_offer.has_picture?
