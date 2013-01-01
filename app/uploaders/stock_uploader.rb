@@ -2,14 +2,9 @@
 
 class StockUploader < BaseUploader
 
-  # Override the directory where uploaded files will be stored.
-  # This is a sensible default for uploaders that are meant to be mounted:
-  def store_dir
-    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
-  end
-
   # Create different versions of your uploaded files:
-  process :model_process   # let the model manipulate the image
+  # let the model manipulate the image
+  process :model_process   # model should implement this method => "#{mounted_as}_process"
   process :convert => 'png'
   process :store_geometry  # do after crop so we store current geometry
 

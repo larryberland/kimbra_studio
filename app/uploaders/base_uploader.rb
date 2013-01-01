@@ -8,6 +8,13 @@ class BaseUploader < CarrierWave::Uploader::Base
   # Choose what kind of storage to use for this uploader:
   storage KIMBRA_STUDIO_CONFIG[:carrier_wave][:storage]
 
+  # Override the directory where uploaded files will be stored.
+  # This is a sensible default for uploaders that are meant to be mounted:
+  def store_dir
+    raise "#{model.class.to_s.underscore}/#{mounted_as} needs a valid record id before storing" if (model.id.to_s.blank?)
+    "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
+  end
+
   # Provide a default URL as a default if there hasn't been a file uploaded:
   def default_url
     version = version_name.downcase if version_name

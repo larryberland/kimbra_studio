@@ -95,65 +95,27 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
 
   end
 
-  def auto_crop(src_image)
-
-    viewport_width   = part.part_layout.layout.w.to_f
-    viewport_height  = part.part_layout.layout.h.to_f
-
-    viewport_aspect_ratio = viewport_width / viewport_height
-                            # Is the part layout a portrait or landscape?
-    layout_is_portrait    = viewport_height >= viewport_width
-
-    orig_width  = part.width.to_f
-    orig_height = part.height.to_f
-    dest_width  = 300.0
-    dest_height = (dest_width * orig_height) / orig_width
-
-    cropbox_w = dest_width  # $('#cropbox').width()
-    cropbox_h = dest_height # $('#cropbox').height()
-    # puts "cropbox #{cropbox_w}x#{cropbox_h}"
-    # Position initial select box one-sixth inside principal dimension of cropbox.
-    # Sixths seems pleasing since the resulting selection box will be two-thirds the principal dimension.
-    if layout_is_portrait
-      x1 = (cropbox_w / 6) + 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewport_aspect_ratio)
-      y1 = cropbox_h / 6 # one-sixth the way down
-      x2 = (cropbox_w * 5 / 6) - 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewport_aspect_ratio)
-      y2 = cropbox_h * 5 / 6 # five-sixths the way down
-    else # landscape style
-      x1 = cropbox_w / 6     # one-sixth the way across
-      y1 = (cropbox_h / 6) + 0.5 * (cropbox_h * 4 / 6 - cropbox_w * 4 / 6 / viewport_aspect_ratio)
-      x2 = cropbox_w * 5 / 6 # five-sixths the way across
-      y2 = (cropbox_h * 5 / 6) - 0.5 * (cropbox_h * 4 / 6 - cropbox_w * 4 / 6 / viewport_aspect_ratio)
-    end
-
-    return [x1.round, y1.round, x2.round - x1.round, y2.round-y1.round], [cropbox_w.round, cropbox_h.round]
-
-  end
-
   # carrier_wave callback to process the stock_image
   #  for whatever processing we need to do
   def image_stock_process(src_image)
     # puts ""
     # puts "ItemSide create image_stock"
-    size = part.viewport_size
+    size            = part.viewport_size
     #puts "src_img size:#{src_image.columns}x#{src_image.rows} viewport size=>#{size[:w]}x#{size[:h]}"
 
     new_stock_image = if cropping?
-                        #puts "crop #{crop_x} #{crop_y} #{crop_w}x#{crop_h}"
                         img = src_image.crop(crop_x.to_i, crop_y.to_i, crop_w.to_i, crop_h.to_i)
                         clear_cropping
-                        #puts "img size:#{img.columns}x#{img.rows}"
-                        #puts "  resize to #{size[:w]}x#{size[:h]}"
                         img.resize!(size[:w], size[:h])
                         img
                       elsif assembly?
-                        puts "  Assembly"
                         img = if adjusted_picture_url
-                                #puts "  using adjusted picture url"
-                                src_image
+                                src_image   # src_image has been previously adjusted so no-op
                               elsif portrait
+                                # coming from the original portrait, perform an auto-crop
+                                #   similar to what we do in JCropper
                                 crop, crop_box = part.cropilize
-                                img = src_image.resize(crop_box.w, crop_box.h)
+                                img            = src_image.resize(crop_box.w, crop_box.h)
                                 img.crop!(crop.x, crop.y, crop.w, crop.h)
                                 clear_cropping
                                 img.resize!(size[:w], size[:h])
@@ -167,8 +129,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                       else
                         puts "no-op"
                         src_image # no op
-                                  # need to create a transparent image here somehow
-                                  #image_transparent(size[:w], size[:h])
+                        # need to create a transparent image here somehow
+                        #image_transparent(size[:w], size[:h])
                       end
     #puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
     new_stock_image
@@ -190,14 +152,7 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     end
     dump_1(viewport) if KIMBRA_STUDIO_CONFIG[:dump_image]
 
-    # old method try number 1
-    #operator = Magick::SrcOverCompositeOp
-    #part_image.composite(stock_image, part_layout.x, part_layout.y, Magick::AtopCompositeOp)
-
-    operator = Magick::DstOverCompositeOp
-    img      = part_image.composite(stock_image, viewport[:x], viewport[:y], operator)
-    #puts "#{self} custom_image #{img.columns}x#{img.rows}"
-    img
+    part_image.composite(stock_image, viewport[:x], viewport[:y], Magick::DstOverCompositeOp)
   end
 
   def to_image_span
