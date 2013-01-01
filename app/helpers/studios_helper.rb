@@ -37,8 +37,8 @@ module StudiosHelper
   def studio_email_sent_range(studio_email)
     start = StudioEmail.where(email_name: studio_email).order('sent_at asc').first.try(:sent_at)
     stop = StudioEmail.where(email_name: studio_email).order('sent_at asc').last.try(:sent_at)
-    if start && stop && start == stop
-      date_short(start || stop)
+    if start && stop && start.to_date == stop.to_date
+      date_short([start, stop].min)
     elsif start && stop
       date_short(start) + ' - ' + date_short(stop)
     elsif start || stop
