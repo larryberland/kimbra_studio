@@ -110,14 +110,13 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                         img
                       elsif assembly?
                         img = if adjusted_picture_url
-                                src_image   # src_image has been previously adjusted so no-op
+                                src_image # src_image has been previously adjusted so no-op
                               elsif portrait
                                 # coming from the original portrait, perform an auto-crop
                                 #   similar to what we do in JCropper
-                                crop, crop_box = part.cropilize
-                                img            = src_image.resize(crop_box.w, crop_box.h)
-                                img.crop!(crop.x, crop.y, crop.w, crop.h)
-                                clear_cropping
+                                crop_box = part.cropilize
+                                img      = src_image.resize(crop_box[:w], crop_box[:h])
+                                img.crop!(crop_box[:crop][:x], crop_box[:crop][:y], crop_box[:crop][:w], crop_box[:crop][:h])
                                 img.resize!(size[:w], size[:h])
                                 img
                               else
@@ -129,8 +128,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
                       else
                         puts "no-op"
                         src_image # no op
-                        # need to create a transparent image here somehow
-                        #image_transparent(size[:w], size[:h])
+                                  # need to create a transparent image here somehow
+                                  #image_transparent(size[:w], size[:h])
                       end
     #puts "item_side=>#{id} image_stock new image size #{new_stock_image.columns}x#{new_stock_image.rows}"
     new_stock_image

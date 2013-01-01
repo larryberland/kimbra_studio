@@ -128,7 +128,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
   def cropilize
 
-    if @crop.nil? or @cropbox.nil?
+    if @cropilize.nil?
 
       # cropbox size based on the part's wxh into a 300 wide
       orig_width  = width.to_f
@@ -138,7 +138,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
 
       cropbox_w = dest_width  # $('#cropbox').width()
       cropbox_h = dest_height # $('#cropbox').height()
-      @cropbox  = ImageLayout.new(w: cropbox_w.round, h: cropbox_h.round)
+      @cropilize = {w: cropbox_w.round, h: cropbox_h.round}
 
       viewport_aspect_ratio = part_layout.aspect_ratio
 
@@ -153,9 +153,9 @@ class Admin::Merchandise::Part < ActiveRecord::Base
         x2 = (cropbox_w * 5 / 6) - 0.5 * (cropbox_w * 4 / 6 - cropbox_h * 4 / 6 * viewport_aspect_ratio)
         y2 = cropbox_h * 5 / 6 # five-sixths the way down
       end
-      @crop = ImageLayout.new(x: x1.round, y: y1.round, w: (x2.round - x1.round), h: y2.round - y1.round)
+      @cropilize[:crop] = {x: x1.round, y: y1.round, w: (x2.round - x1.round), h: (y2.round - y1.round)}
     end
-    return @crop, @cropbox
+    return @cropilize
   end
 
   private
