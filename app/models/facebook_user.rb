@@ -79,7 +79,7 @@ class FacebookUser < ActiveRecord::Base
           description: offer.piece.short_description,
           link:        url,
           picture:     offer.image_url}
-      #hash[:link] = "www.kimbraclickplus.com" unless Rails.env.production?
+      hash[:link] = "www.kimbraclickplus.com" unless Rails.env.production?
 
       facebook.put_wall_post("#{offer.email.my_studio_session.studio.name} via Kimbra ClickPLUS", hash)
     end
