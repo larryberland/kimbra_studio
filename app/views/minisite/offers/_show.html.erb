@@ -35,6 +35,7 @@
       <%= link_to_pinterest(@admin_customer_offer) %>
       <%= @admin_customer_offer.name %>
     </h4>
+    <span id='<%= "facebook_item_#{@admin_customer_offer.id}"%>' style="display:none"></span>
 
     <% if @admin_customer_offer.in_cart?(@cart) %>
         <b><%= icon_minisite('icon-shopping-cart') %>&nbsp;<%= t('in_shopping_cart') %></b><br>
