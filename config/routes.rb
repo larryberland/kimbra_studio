@@ -87,14 +87,6 @@ KimbraStudio::Application.routes.draw do
     end
   end
 
-  namespace :myaccount do
-    resources :addresses
-    resources :credit_cards
-    resources :orders, :only => [:index, :show]
-    resource :overview, :only => [:show]
-    resource :store_credit, :only => [:show]
-  end
-
   namespace :my_studio do
     resources :clients
     resource :dashboard, :only => [:show]
@@ -124,10 +116,6 @@ KimbraStudio::Application.routes.draw do
     resources :staffers
   end
 
-  resources :order_items
-  resources :orders
-  resources :payment_profiles
-  resources :pictures, :only => [:index, :create, :destroy]
   resources :prospects
 
   namespace :shopping do
