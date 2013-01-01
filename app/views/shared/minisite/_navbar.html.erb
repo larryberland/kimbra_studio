@@ -40,7 +40,6 @@
       <% unless controller_name == 'carts' && action_name == 'edit_delivery_tracking' %>
           <!-- Everything you want hidden at 940px or less, place within here -->
 
-
           <div class="nav-collapse collapse">
 
             <ul class='nav'>
@@ -54,6 +53,7 @@
               <%= li_navbar_or_not(:create_custom) %>
               <%= li_navbar_photo_sessions %>
               <%= li_navbar_or_not(:shopping_cart) %>
+              <%= li_navbar_facebook %>
             </ul>
           </div>
       <% end %>

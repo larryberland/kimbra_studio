@@ -7,9 +7,10 @@ class FacebookSessionsController < ApplicationController
   def create
     user                       = FacebookUser.from_omniauth(env["omniauth.auth"])
     session[:facebook_user_id] = user.id
-    email = Admin::Customer::Email.find_by_id(session[:admin_customer_email_id]) rescue nil
-    if email
-      redirect_to minisite_email_offers_url(email.tracking)
+    if (params[:state])
+      post_to_time_line(params[:state])
+      flash[:notice] = t(:facebook_post_to_time_line, name: @offer.name)
+      redirect_to minisite_email_offers_url(@offer.email.tracking)
     else
       redirect_to root_url
     end
@@ -35,53 +36,23 @@ class FacebookSessionsController < ApplicationController
     end
   end
 
-  def share
-    unless current_user_facebook
-      redirect_to '/auth/facebook'
-      ## log them in
-      #user                       = FacebookUser.from_omniauth(env["omniauth.auth"])
-      #session[:facebook_user_id] = user.id
-      #email = Admin::Customer::Email.find_by_id(session[:admin_customer_email_id]) rescue nil
-      #if email
-      #  #redirect_to minisite_email_offers_url(email.tracking)
-      #  offer = Admin::Customer::Offer.find_by_id(params[:id])
-      #  @shopping_item_id = offer.id
-      #  @item = offer
-      #  puts "XXXX1: #{@item.inspect}"
-      #  current_user_facebook.share(offer, minisite_offer_url(offer))
-      #else
-      #  render text: ''
-      #end
-    else
-      offer = Admin::Customer::Offer.find_by_id(params[:id])
-      @shopping_item_id = offer.id
-      @item = offer
-      puts "XXXX2: #{@item.inspect}"
-      current_user_facebook.share(offer, minisite_offer_url(offer))
-    end
-    #if current_user_facebook
-    #  offer = Admin::Customer::Offer.find_by_id(params[:id])
-    #  @shopping_item_id = offer.id
-    #  @item = offer
-    #  puts "XXXX: #{@item.inspect}"
-    #  current_user_facebook.share(offer, minisite_offer_url(offer))
-    #else
-    #  return render text: ''
-    #end
-  end
-
   def like
     # TODO: Figure out the difference between share and like
     if (current_user_facebook)
-      @shopping_item_id = offer.id
-      @item = offer
-      offer = Admin::Customer::Offer.find_by_id(params[:id])
-      current_user_facebook.like(offer, minisite_offer_url(offer))
+      post_to_time_line(params[:id])
     else
-      redirect_to url_for('/auth/facebook', {method: :post})
+      #redirect_to url_for('/auth/facebook', {method: :post})
     end
   end
+
   private
+
+  def post_to_time_line(offer_id)
+    @offer             = Admin::Customer::Offer.find_by_id(offer_id)
+    @shopping_item_id = @offer.id
+    @item             = @offer
+    current_user_facebook.like(@offer, minisite_offer_url(@offer))
+  end
 
   def facebook_logout
     split_token    = current_user_facebook.oauth_token.split("|")

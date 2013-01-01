@@ -95,6 +95,12 @@ module NavbarHelper
     li_navbar_dropdown_menu(menu, sub_menu_html, dropdown_active)
   end
 
+  def li_navbar_facebook
+    if (current_user_facebook)
+      li_navbar_or_not(:facebook)
+    end
+  end
+
   private #=================================================================
 
   # top level navbar menu that has dropdown menus
@@ -176,7 +182,6 @@ module NavbarHelper
   end
 
   def navbar_facebook_path
-    #link_to_your_facebook_or_not
     if Rails.env.development?
       if @mock_collection
         '#'
@@ -197,8 +202,6 @@ module NavbarHelper
     if Rails.env.development?
       if current_user_facebook
         t('.menus.facebook.sign_out.name')
-      else
-        image_tag("fb_login.png")
       end
     else
       ''
@@ -209,8 +212,6 @@ module NavbarHelper
     if Rails.env.development?
       if current_user_facebook
         t('.menus.facebook.sign_out.title')
-      else
-        t('.menus.facebook.title')
       end
     else
       ''

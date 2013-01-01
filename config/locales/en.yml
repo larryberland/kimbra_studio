@@ -53,6 +53,7 @@ en:
 
   facebook_share_title: "Send this to friends or post it on your timeline."
   facebook_like_title: "Like this on your timeline."
+  facebook_post_to_time_line: "Posted %{name} to Facebook Timeline."
 
   # customer_mailer/send_offer.html.erb
   client_send_offers_subject: "%{name} custom jewelry offer"

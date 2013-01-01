@@ -1,20 +1,24 @@
 module FacebookHelper
   def link_to_facebook(offer)
     if Rails.env.development?
-      #link_to_facebook_login(offer) + link_to_facebook_like(offer)
-      link_to_facebook_like(offer)
+      if current_user_facebook
+        #link_to_facebook_login(offer) + link_to_facebook_like(offer)
+        link_to_facebook_like(offer)
+      else
+        link_to_facebook_login(offer)
+      end
     end
   end
 
   def link_to_facebook_login(offer)
-    # todo: this is not currently working
-    link_to "Log in with Facebook",
-            "/auth/facebook?offer_email=#{offer.email.id}",
+    link_to image_tag("fb_login.png"),
+            "/auth/facebook?display=popup&state=#{offer.id}",
             :class => "popup", :"data-width" => 600, :"data-height" => 400
   end
+
   def link_to_facebook_like(offer)
 
-     link_to image_tag("facebook/like.png"),
+    link_to image_tag("facebook/like.png"),
             like_facebook_session_path(offer.id),
             remote: true,
             method: :post,
@@ -22,15 +26,5 @@ module FacebookHelper
             id:     "like_facebook_#{offer.id}"
 
   end
-
-  def link_to_facebook_share(offer)
-    link_to image_tag("facebook/send.png"),
-            share_facebook_session_path(offer.id),
-            remote: true,
-            method: :post,
-            title:  t(:facebook_share_title),
-            id:     "share_facebook_#{offer.id}"
-  end
-
 
 end
