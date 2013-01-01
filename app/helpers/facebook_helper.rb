@@ -1,12 +1,11 @@
 module FacebookHelper
+
   def link_to_facebook(offer)
-    if Rails.env.development?
-      if current_user_facebook
-        #link_to_facebook_login(offer) + link_to_facebook_like(offer)
-        link_to_facebook_like(offer)
-      else
-        link_to_facebook_login(offer)
-      end
+    if current_user_facebook
+      #link_to_facebook_login(offer) + link_to_facebook_like(offer)
+      link_to_facebook_like(offer)
+    else
+      link_to_facebook_login(offer)
     end
   end
 
@@ -22,8 +21,8 @@ module FacebookHelper
             like_facebook_session_path(offer.id),
             remote: true,
             method: :post,
-            title:  t(:facebook_like_title),
-            id:     "like_facebook_#{offer.id}"
+            title: t(:facebook_like_title),
+            id: "like_facebook_#{offer.id}"
 
   end
 
