@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130101122835) do
+ActiveRecord::Schema.define(:version => 20130102110818) do
 
   create_table "admin_customer_emails", :force => true do |t|
     t.integer  "my_studio_session_id"
@@ -214,6 +214,7 @@ ActiveRecord::Schema.define(:version => 20130101122835) do
     t.datetime "updated_at"
     t.integer  "commission_rate",       :default => 15
     t.boolean  "pinterest_for_clients", :default => true
+    t.boolean  "facebook_for_clients",  :default => true
   end
 
   add_index "my_studio_infos", ["studio_id"], :name => "index_my_studio_infos_on_studio_id"
