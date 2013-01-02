@@ -15,7 +15,8 @@ class MyStudio::Info < ActiveRecord::Base
                   :created_at,
                   :updated_at,
                   :commission_rate,
-                  :pinterest_for_clients
+                  :pinterest_for_clients,
+                  :facebook_for_clients
 
   # Email not required yet while we are setting up studios manually.
   # validates :email, presence: true, email: true
