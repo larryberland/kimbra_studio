@@ -151,7 +151,10 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     end
     dump_1(viewport) if KIMBRA_STUDIO_CONFIG[:dump_image]
 
-    part_image.composite(stock_image, viewport[:x], viewport[:y], Magick::DstOverCompositeOp)
+    img = part_image.composite(stock_image, viewport[:x], viewport[:y], Magick::DstOverCompositeOp)
+    #puts "item_side.#{id} stock_image: x:#{viewport[:x]} y:#{viewport[:y]} #{stock_image.columns}x#{stock_image.rows}"
+    #puts "item_side.#{id} image_custom: #{img.columns}x#{img.rows}"
+    img
   end
 
   def to_image_span
