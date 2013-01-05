@@ -14,17 +14,7 @@
   </div>
 </div>
 
-<% if @unsubscribes.present? %>
-    <div class='row'>
-      <div class='span12'>
-        <h3>Unsubscribed from emails</h3>
-        <% @unsubscribes.each do |unsub| %>
-            <% studio = User.where(email: unsub.email).first.try(:studio)  %>
-            <li><%= unsub.email %> on <%= date_short unsub.created_at %> <%= "(#{studio.name})" if studio %></li>
-        <% end %>
-      </div>
-    </div>
-<% end %>
+<%= render partial: 'shared/unsubscribes', locals: {unsubscribes: @unsubscribes} %>
 
 <% if @prospects.present? %>
     <div class='row'>
@@ -39,6 +29,7 @@
 
 <div class='row'>
   <div class='span6'>
+    <br>
     <%= link_to image_tag('kimbra_logo.png') %>
   </div>
 
