@@ -74,7 +74,7 @@ class ImageLayout < ActiveRecord::Base
     @new_x = x
     @new_y = y
     image  = rotate(resize(src_image))
-    #puts " draw_custom() resized image #{image.columns}x#{image.rows}"
+    #puts " draw_custom() at x:#{@new_x} y:#{@new_y} resized image #{image.columns}x#{image.rows}"
     part_image.composite(image, @new_x, @new_y, operator)
   end
 
