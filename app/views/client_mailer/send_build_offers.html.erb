@@ -1,482 +1,250 @@
-﻿<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional //EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+﻿<!DOCTYPE HTML>
 <html>
 <head><title></title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<style type="text/css">
-        /* Mobile-specific Styles */
-    @media only screen and (max-device-width: 480px) {
-        table[class=w0], td[class=w0] {
-            width: 0 !important;
-        }
-
-        table[class=w10], td[class=w10], img[class=w10] {
-            width: 5px !important;
-        }
-
-        table[class=w15], td[class=w15], img[class=w15] {
-            width: 5px !important;
-        }
-
-        table[class=w30], td[class=w30], img[class=w30] {
-            width: 10px !important;
-        }
-
-        table[class=w60], td[class=w60], img[class=w60] {
-            width: 10px !important;
-        }
-
-        table[class=w125], td[class=w125], img[class=w125] {
-            width: 80px !important;
-        }
-
-        table[class=w130], td[class=w130], img[class=w130] {
-            width: 55px !important;
-        }
-
-        table[class=w140], td[class=w140], img[class=w140] {
-            width: 90px !important;
-        }
-
-        table[class=w160], td[class=w160], img[class=w160] {
-            width: 180px !important;
-        }
-
-        table[class=w170], td[class=w170], img[class=w170] {
-            width: 100px !important;
-        }
-
-        table[class=w180], td[class=w180], img[class=w180] {
-            width: 80px !important;
-        }
-
-        table[class=w195], td[class=w195], img[class=w195] {
-            width: 80px !important;
-        }
-
-        table[class=w220], td[class=w220], img[class=w220] {
-            width: 80px !important;
-        }
-
-        table[class=w240], td[class=w240], img[class=w240] {
-            width: 180px !important;
-        }
-
-        table[class=w255], td[class=w255], img[class=w255] {
-            width: 185px !important;
-        }
-
-        table[class=w275], td[class=w275], img[class=w275] {
-            width: 135px !important;
-        }
-
-        table[class=w280], td[class=w280], img[class=w280] {
-            width: 135px !important;
-        }
-
-        table[class=w300], td[class=w300], img[class=w300] {
-            width: 140px !important;
-        }
-
-        table[class=w325], td[class=w325], img[class=w325] {
-            width: 95px !important;
-        }
-
-        table[class=w360], td[class=w360], img[class=w360] {
-            width: 140px !important;
-        }
-
-        table[class=w410], td[class=w410], img[class=w410] {
-            width: 180px !important;
-        }
-
-        table[class=w470], td[class=w470], img[class=w470] {
-            width: 200px !important;
-        }
-
-        table[class=w580], td[class=w580], img[class=w580] {
-            width: 280px !important;
-        }
-
-        table[class=w640], td[class=w640], img[class=w640] {
-            width: 300px !important;
-        }
-
-        table[class=hide], td[class=hide], img[class=hide], p[class=hide], span[class=hide], .hide {
-            display: none !important;
-        }
-
-        table[class=h0], td[class=h0] {
-            height: 0 !important;
-        }
-
-        p[class=footer-content-left] {
-            text-align: center !important;
-        }
-
-        #headline p {
-            font-size: 30px !important;
-        }
-    }
-
-        /* Client-specific Styles */
-    #outlook a {
-        padding: 0;
-    }
-
-        /* Get rid of Outlook 2007-10 3px spacing left and right of table with an align attribute.  */
-    table {
-        border-collapse: collapse;
-        mso-table-lspace: 0pt;
-        mso-table-rspace: 0pt;
-    }
-
-        /* Force Outlook to provide a "view in browser" button. */
-    body {
-        width: 100% !important;
-        color: #e2e2e2;
-    }
-
-        /* Force Hotmail to display emails at full width */
-        /* Reset Styles */
-        /* Add 100px so mobile switch bar doesn't cover street address. */
-    html, body {
-        background-color: #ececec;
-        margin: 0;
-        padding: 0;
-    }
-
-    img {
-        height: auto;
-        line-height: 100%;
-        outline: none;
-        text-decoration: none;
-        display: block;
-    }
-
-    br, strong br, b br, em br, i br {
-        line-height: 100%;
-    }
-
-    h1, h2, h3, h4, h5, h6 {
-        line-height: 100% !important;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    h1 a, h2 a, h3 a, h4 a, h5 a, h6 a {
-        color: white !important;
-    }
-
-    h1 a:active, h2 a:active, h3 a:active, h4 a:active, h5 a:active, h6 a:active {
-        color: white !important;
-    }
-
-        /* Preferably not the same color as the normal header link color.  There is limited support for psuedo classes in email clients, this was added just for good measure. */
-    h1 a:visited, h2 a:visited, h3 a:visited, h4 a:visited, h5 a:visited, h6 a:visited {
-        color: white !important;
-    }
-
-        /* Preferably not the same color as the normal header link color. There is limited support for psuedo classes in email clients, this was added just for good measure. */
-    table td, table tr {
-        border-collapse: collapse;
-    }
-
-    code {
-        white-space: normal;
-        word-break: break-all;
-    }
-
-    #background-table {
-        background-color: #ececec;
-    }
-
-        /* Webkit Elements */
-    #top-bar {
-        border-radius: 6px 6px 0px 0px;
-        -moz-border-radius: 6px 6px 0px 0px;
-        -webkit-border-radius: 6px 6px 0px 0px;
-        -webkit-font-smoothing: antialiased;
-        background-color: #555555;
-        color: #e2e2e2;
-    }
-
-    #top-bar a {
-        font-weight: bold;
-        color: #e2e2e2;
-        text-decoration: none;
-    }
-
-    #footer {
-        border-radius: 0px 0px 6px 6px;
-        -moz-border-radius: 0px 0px 6px 6px;
-        -webkit-border-radius: 0px 0px 6px 6px;
-        -webkit-font-smoothing: antialiased;
-    }
-
-        /* Fonts and Content */
-    body {
-        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-    }
-
-    .header-content a {
-        font-weight: bold;
-        color: <%= @studio.minisite.font_color -%>;
-        text-decoration: none;
-    }
-
-    #headline p {
-        color: <%= @studio.minisite.font_color -%>;
-        font-family: Georgia, Times New Roman, Times, serif;
-        font-size: 18px;
-        text-align: center;
-        margin-top: 0px;
-        margin-bottom: 30px;
-    }
-
-    #headline p a {
-        color: <%= @studio.minisite.font_color -%>;
-        text-decoration: none;
-    }
-
-    .article-title {
-        font-size: 14px;
-        line-height: 18px;
-        color: <%= @studio.minisite.font_color -%>;
-        margin-top: 0px;
-        margin-bottom: 15px;
-        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-    }
-
-    .article-title a {
-        color: <%= @studio.minisite.font_color -%>;
-        text-decoration: none;
-    }
-
-    .price {
-        font-size: 15px;
-        line-height: 18px;
-        color: <%= @studio.minisite.font_color -%>;
-        margin-top: 0px;
-        margin-bottom: 18px;
-        font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
-    }
-
-    .article-content a {
-        color: <%= @studio.minisite.font_color -%>;
-        text-decoration: underline;
-    }
-
-    .article-content img {
-        max-width: 100%
-    }
-
-    .article-content ol, .article-content ul {
-        margin-top: 0px;
-        margin-bottom: 18px;
-        margin-left: 19px;
-        padding: 0;
-    }
-
-    .article-content li {
-        font-size: 13px;
-        line-height: 18px;
-        color: <%= @studio.minisite.font_color -%>;
-    }
-
-    .article-content li a {
-        color: <%= @studio.minisite.font_color -%>;
-        text-decoration: underline;
-    }
-
-    .article-content p {
-        margin-bottom: 15px;
-    }
-
-    .footer-content-left {
-        font-size: 12px;
-        line-height: 15px;
-        color: #e2e2e2;
-        margin-top: 0px;
-        margin-bottom: 15px;
-    }
-
-    .footer-content-left a {
-        color: #e2e2e2;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    .footer-content-right {
-        font-size: 11px;
-        line-height: 16px;
-        color: #e2e2e2;
-        margin-top: 0px;
-        margin-bottom: 15px;
-    }
-
-    .footer-content-right a {
-        color: #e2e2e2;
-        font-weight: bold;
-        text-decoration: none;
-    }
-
-    #footer {
-        background-color: #666666;
-        color: #e2e2e2;
-    }
-
-    #footer a {
-        color: #e2e2e2;
-        text-decoration: none;
-        font-weight: bold;
-    }
-
-    #permission-reminder {
-        white-space: normal;
-    }
-
-    #street-address {
-        color: #e2e2e2;
-        white-space: normal;
-    }
-</style>
-<!--[if gte mso 9]>
-<style _tmplitem="502">
-    .article-content ol, .article-content ul {
-        margin: 0 0 0 24px;
-        padding: 0;
-        list-style-position: inside;
-    }
-</style>
-<![endif]-->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <style type="text/css">
+      @media only screen and (max-device-width: 480px) { }
+      @import url(http://fonts.googleapis.com/css?family=Bad+Script);
+  </style>
 </head>
 <body>
-<table id="background-table" border="0" cellpadding="0" cellspacing="0" width="100%" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-  <tbody>
-  <tr>
-    <td bgcolor="#ececec" align="center">
-      <table border="0" cellpadding="0" cellspacing="0" width="640" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-        <tbody>
-        <tr>
-          <td class="w640" align="middle" height="20" colspan='6'>
-            <%= @studio.name %> suggests heirloom jewelry crafted from your recent photo session.
+
+<!-- pale gray background -->
+<table cellspacing='0' cellpadding='0' border='0' style="color: #333; background: #fff; padding: 0; margin: 0; width: 100%; height: 100%">
+<tbody>
+<tr width='100%'>
+<td valign='top' align="left" style="background: #EEF0F1; font: 15px/19px 'Helvetica Neue', Arial, Helvetica;">
+<!-- main panel of email - 460px width -->
+  <table style="border: none; padding: 10px; margin: 10px auto; width: 460px;" cellspacing='0' cellpadding='0' border='0'>
+    <tbody>
+    <!-- top rounded corners -->
+    <tr width='100%'>
+      <td style='border-top-left-radius: 6px; border-top-right-radius: 6px; text-align: center;' bgcolor='<%= @studio.minisite.bgcolor %>' colspan='3' height='5px'>
+      </td>
+    </tr>
+    <tr width='100%' bgcolor="<%= @studio.minisite.bgcolor %>">
+      <td colspan='3' valign='top' align='left' style='text-align: center;'>
+        <%= image_tag @studio.minisite.image_url,
+                      alt: "#{@studio.name} logo",
+                      title: "#{@studio.name} logo",
+                      width: studio_logo_max_460_width(@studio),
+                      height: studio_logo_max_460_height(@studio),
+                      id: 'studio_logo',
+                      style: 'display:inline;',
+                      border: 0,
+                      align: 'top',
+                      vertical_align: 'top' %>
+        <br>
+
+        <p style="font: 18px/20px 'Bad Script','Helvetica Neue', Arial, Helvetica; color: <%= @studio.minisite.font_color %>; ">
+          <%= two_line_intro(@email) %>
+        </p>
+      </td>
+    </tr>
+
+    <tr bgcolor='<%= @studio.minisite.bgcolor %>'>
+      <td colspan='3' height='10' valign='top' bgcolor='<%= @studio.minisite.bgcolor %>'>
+        &nbsp;
+      </td>
+    </tr>
+
+    <% count = 0 %>
+    <% @email.offers.each do |offer| %>
+        <% count += 1; break if count > 2 %>
+        <tr width='100%' bgcolor="<%= @studio.minisite.bgcolor %>">
+          <td valign='top' align='right' width='220' style='width: 220px;'>
+            <%= link_to image_tag(offer.image.url_cache_buster,
+                                  title: offer.name,
+                                  alt: offer.name,
+                                  width: offer.width,
+                                  class: "img-rounded",
+                                  border: 0,
+                                  style: 'text-decoration: none; border-top-left-radius: 4px; border-top-right-radius: 4px; border-bottom-left-radius: 4px; border-bottom-right-radius: 4px;'),
+                        minisite_email_offers_url(@email) %>
           </td>
-        </tr>
-        <tr>
-          <td width="640" height='25' colspan='6' id="top-bar" bgcolor="#555555"></td>
-        </tr>
-        <tr>
-          <td bgcolor="<%= @studio.minisite.bgcolor -%>" colspan='6'>
-            <div style="text-align: center;" align="center">
-              <%= image_tag @studio.minisite.image_url,
-                            :alt => "#{@studio.name} logo",
-                            :class => "w640",
-                            :id => "studio_logo",
-                            :style => "display:inline",
-                            :border => "0",
-                            :align => "top" -%>
-            </div>
-            <p class="article-title" align="center" style="color: <%= @studio.minisite.font_color -%>;">
-              <%= @email.message %>
+          <td valign='top' align='center' width='20' style='width: 20px;' bgcolor='<%= @studio.minisite.bgcolor %>'>
+
+          </td>
+          <td valign='top' align='left' width='220' style='width: 220px;'>
+            <p style="font: 15px/19px ' Helvetica Neue', Arial, Helvetica;
+                    color: <%= @studio.minisite.font_color %>; margin-top: 10px;">
+              <% if offer.frozen_offer? %>
+                  <b><%= t('in_shopping_cart') %></b><br>
+              <% end %>
+              <b><%= offer.name %></b><br/>
+              <%= offer.piece.short_description %><br/>
+              <span class="price"><%= number_to_currency(offer.price) %></span><br/>
+              <%= link_to "View", minisite_email_offers_url(@email), {:style => "color: #{@studio.minisite.font_color}; text-decoration-style: dotted;"} %>
+              <br>
             </p>
           </td>
-        </tr>
-        <tr bgcolor="<%= @studio.minisite.bgcolor -%>">
-          <td>
-            <%= image_tag 'spacer.gif', width: '50px' %>
-          </td>
-          <td>
-            <%= image_tag 'portrait.jpg' %>
-          </td>
-          <td>
-            <%= image_tag 'plus.jpg' %>
-          </td>
-          <td align="center">
-            <%= link_to image_tag(@offer.piece.image.url_cache_buster,
-                                  :title => @offer.name,
-                                  :alt => @offer.name,
-                                  :width => '100px',
-                                  :class => "img-rounded",
-                                  :editable => "true",
-                                  :label => "Image",
-                                  :border => 0),
-                        minisite_email_offers_url(@email),
-                        {:style => "text-decoration: none;"} %>
-          </td>
-          <td>
-            <%= image_tag 'equals.jpg' %>
-          </td>
-          <td align="center">
-            <%= link_to image_tag(@offer.image.url_cache_buster,
-                                  :title => @offer.name,
-                                  :alt => @offer.name,
-                                  :width => '200px',
-                                  :class => "img-rounded",
-                                  :editable => "true",
-                                  :label => "Image",
-                                  :border => 0),
-                        minisite_email_offers_url(@email),
-                        {:style => "text-decoration: none;"} %>
-          </td>
-        </tr>
 
-        <tr>
-          <td colspan='6'>
-            <table id="footer" bgcolor="#555555" border="0" cellpadding="0" cellspacing="0"
-                   width="640" style="border-collapse:collapse; mso-table-lspace:0pt; mso-table-rspace:0pt;">
-              <tbody>
-              <tr>
-                <td class="w30" width="30"></td>
-                <td class="w580 h0" height="30" width="360"></td>
-                <td class="w0" width="60"></td>
-                <td class="w0" width="160"></td>
-                <td class="w30" width="30"></td>
-              </tr>
-              <tr>
-                <td class="w30" width="30"></td>
-                <td class="w580" valign="top" width="360">
-                  <p id="permission-reminder" class="footer-content-left" align="left" style="color: #e2e2e2">
-                    We sent you this email this because you are a customer of <%= @studio.name -%>.
-                    If you would like to schedule a photo session with us,
-                    <% msg = 'My name is ... I am interested in a new photo session. Would you please contact me to discuss arrangements.' %>
-                    <u><%= mail_to @studio.info.email, 'please send us a note!', subject: 'Interested in new photo session!', body: msg, style: "color: #e2e2e2" %></u>.
-                  </p>
-
-                  <p class="footer-content-left" align="left" style="color: #e2e2e2">
-                    <unsubscribe><%= link_to 'Unsubscribe instantly', unsubscribe_minisite_email_url(@email.tracking), style: "color: #e2e2e2" %></unsubscribe>
-                    <%= image_tag tracking_image_url(@email), :alt => '', :title => '' %>
-                  </p>
-                </td>
-                <td class="hide w0" width="60"></td>
-                <td class="hide w0" valign="top" width="160">
-                  <p id="street-address" class="footer-content-right" align="right" style="color: #e2e2e2">
-                    <%= @studio.name -%> •
-                    <%= @studio.address_1 -%> •
-                    <%= @studio.city %>, <%= @studio.state.abbreviation -%> •
-                    <%= number_to_phone @studio.phone_number, area_code: true -%>
-                  </p>
-                </td>
-                <td class="w30" width="30"></td>
-              </tr>
-              <tr>
-                <td class="w30" width="30"></td>
-                <td class="w580 h0" height="15" width="360"></td>
-                <td class="w0" width="60"></td>
-                <td class="w0" width="160"></td>
-                <td class="w30" width="30"></td>
-              </tr>
-              </tbody>
-            </table>
-          </td>
         </tr>
         <tr>
-          <td class="w640" height="60" width="640" colspan='6'></td>
+          <td colspan='3' height='10' bgcolor='<%= @studio.minisite.bgcolor %>'>
+            &nbsp;
+          </td>
         </tr>
-        </tbody>
-      </table>
-    </td>
-  </tr>
-  </tbody>
+    <% end %>
+
+    <tr width='100%' bgcolor="<%= @studio.minisite.bgcolor %>">
+      <td valign='top' align='right' width='220' style='width: 220px;'>
+        <a href="<%= minisite_email_offers_url(@email) %>"
+           style="border-radius: 3px;
+                   -moz-border-radius: 3px;
+                   -webkit-border-radius: 3px;
+                   background: #3AA54C;
+                   color: #fff;
+                   cursor:pointer;
+                   display: block;
+                   font-weight: 500;
+                   font-size: 16px;
+                   line-height: 20px;
+                   padding: 10px 18px;
+                   text-decoration: underline;
+                   width: 164px;
+                   text-align: center;">
+          View your collection
+        </a>
+      </td>
+      <td valign='top' align='center' width='20' style='width: 20px;'>
+        &nbsp;
+      </td>
+      <td valign='top' align='right' width='220' style='width: 220px;'>
+        &nbsp;
+      </td>
+    </tr>
+
+    <tr bgcolor='<%= @studio.minisite.bgcolor %>'>
+      <td colspan='3' height='40px' align='center'>
+        <p style="font: 18px/20px 'Bad Script', 'Helvetica Neue', Arial, Helvetica;
+                color: <%= @studio.minisite.font_color %>;
+                margin-top: 10px;">
+          Or create your own from more than 50 jewelry pieces.
+        </p>
+      </td>
+    </tr>
+
+    <tr bgcolor='<%= @studio.minisite.bgcolor %>'>
+      <td colspan='3'>
+
+        <table bgcolor="<%= @studio.minisite.bgcolor %>" style="border: none; padding: 0px; width: 100%; background-color: <%= @studio.minisite.bgcolor %>;" cellspacing='0' cellpadding='0' border='0'>
+          <tbody>
+          <tr width='100%' bgcolor="<%= @studio.minisite.bgcolor %>">
+            <td width='30px' style='width:30px;'>&nbsp;</td>
+            <td width='80px' style='width:80px'>
+              <%= image_tag @email.offers[2].piece.parts.first.item.front.portrait.image.thumb,
+                                          title: @email.offers[2].name,
+                                          alt: @email.offers[2].name,
+                                          class: "img-rounded",
+                                          border: 0, style: 'width: 80px;' %>
+            </td>
+            <td width='80px' style='width:80px'>
+              <%= image_tag (@studio.background_dark? ? 'plus_dark.gif' : 'plus_light.gif'), style: 'width: 80px' %>
+            </td>
+            <td width='80px' style='width:80px'>
+              <%= image_tag @email.offers[2].piece.image.thumb,
+                                          title: @email.offers[2].name,
+                                          alt: @email.offers[2].name,
+                                          class: "img-rounded",
+                                          border: 0, style: 'width: 80px; height: 80px;' %>
+            </td>
+            <td width='80px' style='width:80px'>
+              <%= image_tag (@studio.background_dark? ? 'equals_dark.gif' : 'equals_light.gif'), style: 'width: 80px' %>
+            </td>
+            <td width='80px' style='width:80px'>
+              <%= image_tag @email.offers[2].image.url_cache_buster,
+                                                        title: @email.offers[2].name,
+                                                        alt: @email.offers[2].name,
+                                                        class: "img-rounded",
+                                                        border: 0, style: 'width: 80px; height: 80px;' %>
+            </td>
+            <td width='30' style='width:30px;'>&nbsp;</td>
+          </tr>
+          <tr>
+            <td colspan='7' height='10px'>
+              &nbsp;
+            </td>
+          </tr>
+          <tr>
+            <td colspan='4'></td>
+            <td colspan='2' align='right'>
+              <a href="<%= minisite_email_offers_url(@email) %>"
+                 style="border-radius: 3px;
+                         -moz-border-radius: 3px;
+                         -webkit-border-radius: 3px;
+                         background: #3AA54C;
+                         color: #fff;
+                         cursor:pointer;
+                         display: block;
+                         font-weight: 500;
+                         font-size: 16px;
+                         line-height: 20px;
+                         text-decoration: underline;
+                         padding: 10px 18px;
+                         width: 100px;
+                         text-align: center;">
+                Build now
+              </a>
+            </td>
+            <td></td>
+          </tr>
+          <tr>
+            <td colspan='7' height='10px'>
+              &nbsp;
+            </td>
+          </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+
+    <tr width='100%'>
+      <td style='border-bottom-left-radius: 6px; border-bottom-right-radius: 6px; text-align: center;' bgcolor='<%= @studio.minisite.bgcolor %>' colspan='3'>
+        &nbsp;
+      </td>
+    </tr>
+
+    <tr>
+      <td valign='top' width='220px'>
+        <p align='left' style="color: #333; font-size: 0.8em; margin-top: 10px;">
+          We sent you this email this because you are a customer of <%= @studio.name -%>.
+          If you would like to schedule a photo session with us,
+          <% msg = 'My name is ... I am interested in a new photo session. Would you please contact me to discuss arrangements.' %>
+          <u>
+            <%= mail_to @studio.info.email,
+                        'please send us a note!',
+                        subject: 'Interested in new photo session!',
+                        body: msg,
+                        style: "color: #333; text-decoration-style: none;" %>
+          </u>
+        </p>
+        <p align='left' style="color: #333; font-size: 0.8em;">
+          <unsubscribe>
+            <%= link_to 'Unsubscribe instantly',
+                        unsubscribe_minisite_email_url(@email.tracking),
+                        style: "color: #333" %>
+          </unsubscribe>
+          <%= image_tag tracking_image_url(@email), alt: '', title: '' %>
+        </p>
+      </td>
+      <td width='20px'></td>
+      <td valign='top' width='220px'>
+        <p align='right' style="color: #333; font-size: 0.8em; margin-top: 10px;">
+          <%= @studio.name %><br>
+          <%= @studio.address_1 %><br>
+          <%= @studio.city %>, <%= @studio.state.abbreviation %><br>
+          <%= number_to_phone @studio.phone_number, area_code: true %>
+        </p>
+      </td>
+    </tr>
+
+    </tbody>
+  </table>
+</td>
+</tr>
+</tbody>
 </table>
+
 </body>
 </html>

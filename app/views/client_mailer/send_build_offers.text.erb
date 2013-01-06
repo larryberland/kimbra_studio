@@ -1,0 +1,20 @@
+Hi <%= @email.my_studio_session.client.name %>,
+
+We designed some heirloom photo jewelry for you from your recent session with us.
+It's heavy quality sterling silver and looks great.
+View the pieces we designed at: <%= minisite_email_offers_url(@email) %>
+
+We sent you this email this because you are a customer of <%= @studio.name -%>.
+If you would like to schedule a photo session with us please send us a note!
+<%= @studio.info.email %>
+
+Best regards from the folks at <%= @studio.name %>
+
+------------------------------------------------------------------------------
+
+You can unsubscribe here: <%= unsubscribe_minisite_email_url(@email.tracking) %>
+
+<%= @studio.name %>
+<%= @studio.address_1 %>
+<%= @studio.city %>, <%= @studio.state.abbreviation %>
+<%= number_to_phone @studio.phone_number, area_code: true %>
