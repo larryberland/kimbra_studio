@@ -223,9 +223,7 @@ class ApplicationController < ActionController::Base
   def track_a_studio_email
     if params[:studio_email] && params[:studio_id]
       # Check that the email name is recognized.
-      puts "RIGHT HRERE"
       if Notifier.instance_methods(false).include?(params[:studio_email].to_sym)
-        puts "HERE!"
         StudioEmail.update_click_through(params[:studio_id], params[:studio_email])
       end
     end
