@@ -16,7 +16,8 @@ class MailPreview < MailView
 
   def send_build_offers
     # This will use the most recent offer email you constructed.
-    email = Admin::Customer::Email.find_by_tracking('n7kdadxjzh')
+    email = Admin::Customer::Email.last
+    # email = Admin::Customer::Email.find_by_tracking('n7kdadxjzh')
     ClientMailer.send_build_offers(email.id, view_only=true)
   end
 
