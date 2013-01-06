@@ -14,6 +14,13 @@ class MailPreview < MailView
     ClientMailer.send_offers(email.id, offer.id)
   end
 
+  def send_build_offers
+    # This will use the most recent offer email you constructed.
+    email = Admin::Customer::Email.last
+    offer = email.offers.last
+    ClientMailer.send_build_offers(email.id, offer.id)
+  end
+
   def send_offer_herald
     # This will use the most recent session you constructed.
     session = MyStudio::Session.last

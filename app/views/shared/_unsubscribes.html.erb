@@ -1,0 +1,9 @@
+<% if unsubscribes.present? %>
+    <div class='row span12'>
+      <h3>Unsubscribed from emails</h3>
+      <% unsubscribes.each do |unsub| %>
+          <% studio = User.where(email: unsub.email).first.try(:studio) %>
+          <li><%= unsub.email %> on <%= date_short unsub.created_at %> <%= "(#{studio.name})" if studio %></li>
+      <% end %>
+    </div>
+<% end %>
