@@ -49,6 +49,12 @@ module Minisite
       end
     end
 
+    # Use this to wipe your session so you can view a different offer email.
+    def kill_session
+      reset_session
+      return render(text: "Session has been wiped at #{Time.now.in_time_zone("Eastern Time (US & Canada)").to_s(:day_time)}.")
+    end
+
     private #================================================
 
     # overriding BaseController's to get email instead of offer

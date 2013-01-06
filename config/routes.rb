@@ -53,6 +53,9 @@ KimbraStudio::Application.routes.draw do
 
   namespace :minisite do
     resources :emails do
+      collection do
+        get :kill_session
+      end
       member do
         get :about
         get :contact

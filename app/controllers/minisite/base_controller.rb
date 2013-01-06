@@ -4,10 +4,10 @@ module Minisite
 
     # These filters do not get called by Inherited Resource Controllers
     skip_before_filter :authenticate_user!
-    before_filter :load_email
-    before_filter :set_by_tracking
-    before_filter :set_cart_and_client_and_studio
-    before_filter :setup_story
+    before_filter :load_email, except: [:kill_session]
+    before_filter :set_by_tracking, except: [:kill_session]
+    before_filter :set_cart_and_client_and_studio, except: [:kill_session]
+    before_filter :setup_story, except: [:kill_session]
 
     layout 'minisite'
 
