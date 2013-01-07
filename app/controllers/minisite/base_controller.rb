@@ -4,9 +4,8 @@ module Minisite
 
     # These filters do not get called by Inherited Resource Controllers
     skip_before_filter :authenticate_user!
-    before_filter :load_email, except: [:kill_session]
-    before_filter :set_by_tracking, except: [:kill_session]
-    before_filter :set_cart_and_client_and_studio, except: [:kill_session]
+    before_filter :setup_session, except: [:kill_session]
+    before_filter :handle_roles
     before_filter :setup_story, except: [:kill_session]
 
     layout 'minisite'
@@ -20,27 +19,12 @@ module Minisite
       @navbar_active = :collection
     end
 
-    # TODO - REMEMBER THIS! This logic is not multi-session safe. Meaning that if you flit from one
-    # offer email to another, only the first offer email data is kept in the rails session. Unlikely
-    # to be a problem in real life, but worth refactoring away some time.
-
-    # TODO See TODO below.
-    def load_email
-      if params[:email_id]
-        # client is usually going to the email offers index page
-        @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
-      end
-    end
-
-    # TODO See TODO below.
-    def set_by_tracking
-      if params[:id]
-        # client selecting to view a single Offer within the Offer Email
-        @admin_customer_offer = Admin::Customer::Offer.find_by_tracking(params[:id])
-        if @admin_customer_offer
-          # if email has not already been set then override with this offers email
-          @admin_customer_email ||= @admin_customer_offer.email
-        end
+    def handle_roles
+      unless (is_client?)
+        puts "base handle roles"
+        @studio             = @admin_customer_email.my_studio_session.studio
+        @admin_customer_friend = Admin::Customer::Friend.new(email: @admin_customer_email,
+                                                             name:  @admin_customer_email.my_studio_session.client.name)
       end
     end
 

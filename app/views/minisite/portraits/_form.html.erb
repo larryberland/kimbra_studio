@@ -15,7 +15,7 @@
 
 <% end %>
 
-<%= form_for( MyStudio::Portrait.new, url: minisite_email_portraits_path(@my_studio_session), html: {multipart: true, id: 'fileupload'}) do |f| %>
+<%= form_for( MyStudio::Portrait.new, url: minisite_email_portraits_path(@admin_customer_email.tracking), html: {multipart: true, id: 'fileupload'}) do |f| %>
 
     <%= f.hidden_field :my_studio_session_id %>
 

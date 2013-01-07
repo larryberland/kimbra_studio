@@ -17,6 +17,7 @@
                           class:      "btn btn-success",
                           icon_class: 'icon-shopping-cart icon-white' %>
   <% end %>
+  <%= render "minisite/offers/dev_debug" if Rails.env.development? %>
 </div>
 
 <%= render('shopping/items/index', cart: @cart, show_status_only: false) %>

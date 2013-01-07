@@ -1,6 +1,6 @@
 <div class="row span8">
   <h4><%= t('.title') %></h4>
-
+  <%= render "dev_debug" if Rails.env.development? %>
   <%= render 'create_build_pieces_by_category_form' %>
 
 </div>

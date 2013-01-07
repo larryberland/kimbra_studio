@@ -1,5 +1,6 @@
 <div class='row'>
   <h4><%= t('.title', studio: @studio.name) %></h4>
+  <%= render "dev_debug" if Rails.env.development? %>
 </div>
 
 <% if @admin_customer_offers.size > 0 %>

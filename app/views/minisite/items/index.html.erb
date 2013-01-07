@@ -1,5 +1,7 @@
 <h2><%= t '.title', name: @offer.name %></h2>
 
+<%= render "minisite/offers/dev_debug" if Rails.env.development? %>
+
 <% items_by_order = @items.sort_by(&:order) %>
 <table class="table">
   <thead>

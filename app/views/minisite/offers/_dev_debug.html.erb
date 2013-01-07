@@ -1,0 +1,8 @@
+<br>
+<%= "session: cart_id: #{session[:cart_id]} email:#{session[:email_id]} "%>
+<%= "offer_id:#{@admin_customer_offers.first.id}" if @admin_customer_offers.present?%>
+<br>
+<%= "models:"%>
+<%= @cart.present? ? "@cart: #{@cart.id}" : "@cart not set"%>
+<%= "email:#{@admin_customer_email.id} tracking:#{@admin_customer_email.tracking} offers.size:#{@admin_customer_email.offers.size}"%>
+<%= "custom:#{@admin_customer_offers.size}" if @admin_customer_offers.present?%>

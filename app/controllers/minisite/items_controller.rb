@@ -4,8 +4,7 @@ class Minisite::ItemsController < InheritedResources::Base
              :parent_class => Admin::Customer::Offer
 
   skip_before_filter :authenticate_user!
-  # handle all the filters BaseController runs
-  before_filter :minisite_info_inherited_resources
+  before_filter :setup_story
 
   layout 'minisite'
 
@@ -32,18 +31,38 @@ class Minisite::ItemsController < InheritedResources::Base
 
   private #=================================================================
 
-  def set_by_tracking
-    # override baseController to set inherited resources @offer, @email
-    @offer = Admin::Customer::Offer.find_by_tracking(params[:id]) if params[:id]
-    @offer = Admin::Customer::Offer.find_by_tracking(params[:offer_id]) if params[:offer_id]
-    @email ||= @offer.email if @offer
-  end
-
-    # current navbar menu
+  # current navbar menu
   # :collection, :charms, :chains, :brand, :shopping_cart
   def navbar_active
     # reset in controller for active navbar menu item
     @navbar_active = is_client? ? :collection : :suggestions
+  end
+
+  # override ApplicationController so we can
+  #   set our email and offer based on this controllers info
+  def minisite_info_inherited_resources
+    # override baseController to set inherited resources @offer, @email
+
+    if ("#{params[:id].to_i}" == params[:id])
+      raise "this is not a tracking number"
+    end
+    @offer = Admin::Customer::Offer.find_by_tracking(params[:id]) if params[:id]
+    @offer = Admin::Customer::Offer.find_by_tracking(params[:offer_id]) if params[:offer_id]
+    @email ||= @offer.email if @offer
+
+    if @email
+
+      sync_session_email(@email) # sync email and cart info
+                                 # setup our common controller email
+      @admin_customer_email = @email
+
+    else
+      raise "Is there a reason we dont' have an email?"
+    end
+
+    # convert inherited resources to our BaseController attrs
+    @admin_customer_offer = @offer if @offer
+
   end
 
 end

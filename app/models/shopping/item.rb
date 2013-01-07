@@ -29,7 +29,7 @@ class Shopping::Item < ActiveRecord::Base
             "KBS::Missing piece info for offer=>#{offer.inspect}"
           end
         else
-          "KBS::Missing offer for item=>#{item.inspect}"
+          "KBS::Missing offer for item=>#{self.inspect}"
         end
     # TODO make these exceptions and prevent item from being sold.
     if p.kind_of? String

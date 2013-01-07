@@ -1,7 +1,7 @@
 module Minisite
   class EmailsController < BaseController
 
-    skip_before_filter :set_by_tracking, :set_cart_and_client_and_studio, only: [:order_status]
+    skip_before_filter :setup_session, only: [:order_status]
 
     def about
       @navbar_active = :brand
@@ -58,8 +58,11 @@ module Minisite
     private #================================================
 
     # overriding BaseController's to get email instead of offer
-    def set_by_tracking
+    def load_email_or_cart
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id]) if params[:id]
+      if @admin_customer_email
+          sync_session_email(@admin_customer_email)
+      end
     end
 
   end

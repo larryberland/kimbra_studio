@@ -6,7 +6,7 @@ module Minisite
     # GET /minisite/emails/:id/portraits
     # GET /minisite/emails/:id/portraits.json
     def index
-      @navbar_active = :upload
+      @navbar_active       = :upload
       @my_studio_session   = @admin_customer_email.my_studio_session
       @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @my_studio_session).order('created_at desc')
       @record_count        = @my_studio_portraits.size
@@ -95,6 +95,37 @@ module Minisite
         format.html { redirect_to my_studio_session_portraits_url }
         format.json { head :ok }
       end
+    end
+
+    private
+
+    # override load_email
+    #  currently the exact same as offers hoping to move this
+    #  into minisite base
+    def load_email_or_cart
+      raise "Portraits controller should always have an email_id" unless params.key?(:email_id)
+      # TODO: in portraits we seem to have an id instead of tracking
+      if "#{params[:email_id].to_i}" == params[:email_id]
+        raise "we should be using tracking not email_id"
+        @admin_customer_email = Admin::Customer::Email.find_by_id(params[:email_id])
+      else
+        # tracking number
+        @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
+      end
+      raise "we should redirect to somewhere helpful looking for tracking:#{params[:email_id]}" if @admin_customer_email.nil?
+
+      puts ""
+      puts "Portraits Controller"
+      puts "load_email session: email tracking:#{params[:email_id]}"
+      puts "session email_id:#{session[:email_id]} cart_id:#{session[:cart_id]}"
+      puts "email_id:#{@admin_customer_email.id})"
+
+      puts ""
+
+      sync_session_email(@admin_customer_email)
+
+      puts "Portraits sess_email_id:#{session[:email_id]} sess_cart_id:#{session[:cart_id]}"
+
     end
 
   end

@@ -1,8 +1,7 @@
 class Minisite::ItemSidesController < InheritedResources::Base
 
   skip_before_filter :authenticate_user!
-  # handle all the filters BaseController runs
-  before_filter :minisite_info_inherited_resources
+  before_filter :setup_story
 
   layout 'minisite'
 
@@ -25,7 +24,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     respond_to do |format|
       if success
         @storyline.describe "Updated piece. Redirecting to #{@item_side.item.offer.name}"
-        format.html { redirect_to url_for_workflow(@item_side.item.offer), notice: notice}
+        format.html { redirect_to url_for_workflow(@item_side.item.offer), notice: notice }
         format.json { head :ok }
       else
         @storyline.describe "Updating piece failed #{@item_side.errors.full_messages}."
@@ -35,7 +34,7 @@ class Minisite::ItemSidesController < InheritedResources::Base
     end
   end
 
-  # get /minisite/offers/tracking/portrait
+          # get /minisite/offers/tracking/portrait
   def portrait
     @storyline.describe 'Selecting a new portrait.'
     @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
@@ -75,13 +74,6 @@ class Minisite::ItemSidesController < InheritedResources::Base
     update_item_side
   end
 
-  def set_by_tracking
-    @item_side = Admin::Customer::ItemSide.find(params[:id]) if params[:id]
-    @offer = Admin::Customer::Offer.find_by_tracking(params[:offer_id]) if params[:offer_id]
-    @offer ||= @item_side.item.offer
-    @email ||= @offer.email if @offer
-  end
-
   # handle some workflow for admin when adjusting pictures
   #  in the offers.
   # when offer only has a single front item
@@ -93,11 +85,35 @@ class Minisite::ItemSidesController < InheritedResources::Base
     else
       if (is_admin? and (!offer.has_back?))
         # go directly to collection
-        minisite_email_offers_path(offer.email.tracking)
+        minisite_email_offers_url(offer.email.tracking)
       else
-        minisite_offer_url(offer) # go to offer edit
+        minisite_email_offer_url(offer.email.tracking, offer) # go to offer edit
       end
     end
+  end
+
+  # override ApplicationController so we can
+  #   set our email and offer based on this controllers info
+  def minisite_info_inherited_resources
+
+    @item_side = Admin::Customer::ItemSide.find(params[:id]) if params[:id]
+    @offer = Admin::Customer::Offer.find_by_tracking(params[:offer_id]) if params[:offer_id]
+    @offer ||= @item_side.item.offer
+    @email ||= @offer.email if @offer
+
+    if @email
+
+      sync_session_email(@email) # sync email and cart info
+                                 # setup our common controller email
+      @admin_customer_email = @email
+
+    else
+      raise "Is there a reason we dont' have an email?"
+    end
+
+    # set attributes that are used later in the filters
+    @admin_customer_offer = @offer if @offer
+
   end
 
 

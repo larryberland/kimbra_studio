@@ -26,7 +26,7 @@
                                       :width  => 150,
                                       :class  => "img-rounded",
                                       :border => 0),
-                            minisite_offer_url(item.offer),
+                            minisite_email_offer_url(item.offer.email.tracking, item.offer),
                             {:style => "text-decoration: none;"} %>
               </td>
               <td class='right'>

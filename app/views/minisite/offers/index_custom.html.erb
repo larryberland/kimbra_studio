@@ -1,5 +1,5 @@
 <div class='row'>
-  <%= "email:#{@admin_customer_offers.first.email.id} offers:#{@admin_customer_email.offers.size} custom:#{@admin_customer_offers.size}" if Rails.env.development? %>
+  <%= render "dev_debug" if Rails.env.development? %>
   <h4 id="myTitle">
     <% if @admin_customer_friend.new_record? %>
         <%= t('.title') %>

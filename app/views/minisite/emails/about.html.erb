@@ -1,5 +1,5 @@
 <h2>About <%= @studio.name %></h2>
-
+<%= render "minisite/offers/dev_debug" if Rails.env.development? %>
 <div class='row' style='margin:auto;'>
   <div style='text-align:center;'>
     <% @admin_customer_email.offers_by_suggestions.each do |offer| %>

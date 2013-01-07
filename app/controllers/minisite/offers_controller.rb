@@ -6,8 +6,8 @@ module Minisite
     before_filter :set_visited_at_offer, only: [:show]
     before_filter :reap_friends, only: [:index]
 
-    # GET /minisite/offers
-    # GET /minisite/offers.json
+    # GET /minisite/emails/:tracking/offers
+    # GET /minisite/emails/:tracking/offers.json
     def index
       @navbar_active = :suggestions
       if @admin_customer_email
@@ -52,7 +52,7 @@ module Minisite
       @friend = Admin::Customer::Friend.find_by_id(params[:friend])
       if @friend.present?
         session[:index_friends] = {friend_id: @friend.id}
-        @navbar_active = "friend_#{@friend.id}".to_sym
+        @navbar_active          = "friend_#{@friend.id}".to_sym
       end
       raise "index_friend should always have a friend here? email:#{@admin_customer_email.inspect}" unless @friend.present?
       if @admin_customer_email
@@ -86,7 +86,7 @@ module Minisite
       # only show charms that have not already been added to their offers page
       existing_offers = @admin_customer_offers.collect { |r| r.piece.id }
       @pieces         = Admin::Merchandise::Piece.non_photo_charms.all.select { |p| !existing_offers.include?(p.id) }
-      @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
+      @shopping_item  = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
       @storyline.describe 'Viewing charms page.'
       respond_to do |format|
         format.html # index_charms.html.erb
@@ -115,9 +115,10 @@ module Minisite
       end
     end
 
-    # GET /minisite/offers/1t7t7rye
-    # GET /minisite/offers/1t7t7rye.json
+    # GET /minisite/emails/:tracking/offers/1t7t7rye
+    # GET /minisite/emails/:tracking/offers/1t7t7rye.json
     def show
+      load_offer
       @shopping_item = Shopping::Item.new(offer: @admin_customer_offer, cart: @cart)
       @storyline.describe "Viewing #{@admin_customer_offer.name} offer."
       @navbar_active = :suggestions if (@admin_customer_offer.suggestion?)
@@ -155,8 +156,8 @@ module Minisite
 
       pieces = params[:admin_customer_offer].delete(:pieces)
 
-      attrs = params[:admin_customer_offer]
-      attrs[:email] = @admin_customer_email # attach the email from the incoming_request tracking_number
+      attrs                 = params[:admin_customer_offer]
+      attrs[:email]         = @admin_customer_email # attach the email from the incoming_request tracking_number
 
       # in case the create fails then redirect will have an offer object
       @admin_customer_offer = Admin::Customer::Offer.new(attrs)
@@ -164,20 +165,20 @@ module Minisite
       result = false
       if (pieces)
 
-        piece_ids = pieces.collect{|category_tag, piece_info| piece_info[:piece_id].to_i}.select{|r| r > 0}
+        piece_ids = pieces.collect { |category_tag, piece_info| piece_info[:piece_id].to_i }.select { |r| r > 0 }
 
         if piece_ids.present?
 
           # create the first one in real-time
-          attrs[:piece_id] = piece_ids.shift
+          attrs[:piece_id]      = piece_ids.shift
           @admin_customer_offer = Admin::Customer::Offer.create(attrs)
-          result = @admin_customer_offer.on_create
+          result                = @admin_customer_offer.on_create
           @storyline.describe "Created new offer #{@admin_customer_offer.name}." if @admin_customer_offer
 
           # delay the other offer pieces
           piece_ids.each do |piece_id|
             attrs[:piece_id] = piece_id
-            offer = Admin::Customer::Offer.create(attrs)
+            offer            = Admin::Customer::Offer.create(attrs)
             offer.delay.on_create_delay(attrs[:portrait_id])
           end
         end
@@ -207,7 +208,7 @@ module Minisite
     # PUT /minisite/offers/1t7t7rye.json
     def update
       params[:admin_customer_offer][:client] = is_client?
-      @admin_customer_offer.email = @email
+      @admin_customer_offer.email            = @email
       @storyline.describe "Updated offer #{@admin_customer_offer.name}."
       respond_to do |format|
         if @admin_customer_offer.update_attributes(params[:admin_customer_offer])
@@ -243,7 +244,7 @@ module Minisite
       @portrait = MyStudio::Portrait.find(params[:portrait_id]) rescue nil
     end
 
-    # TODO - currently linking to Collection - change to link to just the offer.
+            # TODO - currently linking to Collection - change to link to just the offer.
     def share
       @storyline.describe "Sharing offer #{@admin_customer_offer.name} on Facebook."
       if @admin_customer_offer
@@ -254,6 +255,33 @@ module Minisite
     end
 
     private #===================================================================
+
+    def load_offer
+      if params[:id]
+        if ("#{params[:id].to_i}" == params[:id])
+          @admin_customer_offer = Admin::Customer::Offer.find_by_id(params[:id])
+        else
+          @admin_customer_offer = Admin::Customer::Offer.find_by_tracking(params[:id])
+        end
+        raise "missing some kind of offer info?" if @admin_customer_offer.nil?
+      end
+    end
+
+    def load_email_or_cart
+      raise "Offers controller should always have an email_id" unless params.key?(:email_id)
+      @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
+      raise "we should redirect to somewhere helpful" if @admin_customer_email.nil?
+
+      puts ""
+      puts "load_email session: email tracking:#{params[:email_id]}"
+      puts "session email_id:#{session[:email_id]} cart_id:#{session[:cart_id]}"
+      puts "email_id:#{@admin_customer_email.id})"
+
+      sync_session_email(@admin_customer_email)
+
+      load_offer
+
+    end
 
     def set_visited_at_email
       if @admin_customer_email and is_client?

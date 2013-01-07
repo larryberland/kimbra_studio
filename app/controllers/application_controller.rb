@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :log_session
   before_filter :authenticate_user!
-  before_filter :load_my_studio
+  before_filter :setup_session
   before_filter :navbar_active
   before_filter :track_a_studio_email
 
@@ -38,12 +38,8 @@ class ApplicationController < ActionController::Base
     !current_user
   end
 
-  def setup_story
-    @story, @storyline = Story.setup(request, controller_name, action_name, @client, @studio, is_client?)
-  end
-
   # @admin_customer_friend identifies the client's
-          #   friend info for this session
+  #   friend info for this session
   def in_my_collection?(offer)
     if (@admin_customer_friend)
       if (offer.suggestion?)
@@ -54,6 +50,91 @@ class ApplicationController < ActionController::Base
         true
       end
     end
+  end
+
+  # entry point to properly coordinate session info
+  #   for a client when viewing our site
+  def setup_session
+
+    session[:email_cart] ||= {}
+
+    # minisite controllers that have inherited_resources
+    #   get first crack at determining current session email
+    # currently items and item_sides
+    minisite_info_inherited_resources
+
+    # Shopping controllers that are expecting a params[:cart_id]
+    # Minisite controllers that are expecting a params[:email_id]
+    # some controllers that are expecting a params[:id]
+    load_email_or_cart
+
+    setup_friend
+
+    @studio = load_my_studio
+    load_my_client
+
+  end
+
+  # Shopping controllers that are expecting a params[:cart_id]
+  # Minisite controllers that are expecting a params[:email_id]
+  # some controllers that are expecting a params[:id]
+  def load_email_or_cart
+    # no-op for everyone except minisite and shopping controllers
+    # implement this method in your controller to handle any special
+    # processing to pull out model info based on inherited resources
+    #   and/or tracking numbers
+  end
+
+  def push_session_email_cart
+
+    # hash of cart_id key with a value of the email it belongs to
+    session[:email_cart][session[:email_id]] = session[:cart_id]
+
+  end
+
+  # using the email passed in verify our current
+          #   session[:cart_id] ad session[:email_id] are in sync
+  def sync_session_email(email)
+    raise "Do not call sync_session_email() without a valid id email:#{email}" if email.new_record?
+
+    Rails.logger.info "sync_session_email(email_id:#{email.id} session[:email_id]:#{session[:email_id]} session[:cart_id]:#{session[:cart_id]} "
+
+    session_cart_id = session[:cart_id]
+
+    if (session[:email_id])
+
+      if (session[:email_id] != email.id)
+
+        # push the current session info into our emails array
+        push_session_email_cart
+
+        # return the cart_id referenced by this email_id
+        #   could be nil
+        session_cart_id = session[:email_cart][email_id]
+
+      end
+
+      carts = email.carts.select { |r| r.id == session_cart_id }
+
+      @cart = if carts.empty?
+                # this email is in the system but the current session is not pointing at it
+                Shopping::Cart.create(email: email)
+              else
+                carts.first
+              end
+    else
+      # first time session for this email
+      @cart = Shopping::Cart.create(email: email)
+    end
+
+    # this is our current session info going forward
+    session[:cart_id]  = @cart.id
+    session[:email_id] = email.id
+
+    session[:email_cart][email.id] = @cart.id
+
+    Rails.logger.info("session [:email_id]:#{session[:email_id]} [:cart_id]:#{session[:cart_id]} ")
+
   end
 
   def setup_friend
@@ -73,21 +154,16 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def setup_story
+    Rails.logger.info("some filter did not set our current @client") if @client.nil?
+    Rails.logger.info("some filter did not set our current @studio") if @studio.nil?
+    @story, @storyline = Story.setup(request, controller_name, action_name, @client, @studio, is_client?)
+  end
+
   private #=========================================================================
 
   def minisite_info_inherited_resources
-    set_by_tracking
-
-    # convert inherited resources to our BaseController attrs
-    @admin_customer_offer = @offer if @offer
-    @admin_customer_email = @email if @email
-
-    # minisite BaseController before_filter
-    set_cart_and_client_and_studio
-
-    # need @studio, @client
-    setup_story
-
+    # override if you need to handle this
   end
 
   def current_user_facebook
@@ -109,8 +185,16 @@ class ApplicationController < ActionController::Base
   def load_my_studio
     if (is_admin?)
       @my_studio = Studio.find_by_id(session[:mock_collection_studio_id]) rescue nil
-    else
+    elsif current_user
       @my_studio = current_user.studio if current_user
+    elsif @admin_customer_email
+      @my_studio = @admin_customer_email.my_studio_session.studio
+    end
+  end
+
+  def load_my_client
+    if @admin_customer_email
+      @client = @admin_customer_email.my_studio_session.client
     end
   end
 
@@ -137,86 +221,9 @@ class ApplicationController < ActionController::Base
       if cart = Shopping::Cart.find_by_id(session[:cart_id])
         cart.destroy
       end
-      session[:cart_id]                 = nil
-      session[:admin_customer_email_id] = nil
-      session[:client_id]               = nil
-    end
-  end
-
-  # this should only be called by set_cart_and_client_and_studio
-  def set_session_cart
-    # Pull cart from current session; usually normal shopping activity.
-    if @cart.nil? && session[:cart_id]
-      # incoming url does not have a cart
-      #   see if the session has a valid cart
-      @cart = Shopping::Cart.find(session[:cart_id]) rescue nil
-      if @cart
-        # override the email record with the cart's info
-        if Rails.env.development? && @admin_customer_email
-          if @cart.email.id != @admin_customer_email.id
-            puts "session:#{session.inspect}"
-            puts "email:#{@email.inspect}"
-            puts "cart:#{@cart.inspect}"
-            raise "mismatched email and cart"
-          end
-        end
-        @admin_customer_email ||= @cart.email
-      end
-    end
-
-    # Otherwise create new cart; we are starting a new shopping session.
-    # Offer and email are already set.
-    if @cart.nil?
-      @cart             = Shopping::Cart.create(email: @admin_customer_email)
-      session[:cart_id] = @cart.id
-    end
-
-  end
-
-  # TODO This logic is tortured. Need to outline the different ways we get to this controller and set session vars accordingly.
-  # Used by all controllers in the minisite Module
-  # 1. From session begun by offer email.
-  # 2. From session begun by confirmation email offer status link.
-  # 3. From bookmarks to any interior page.
-  # 4. where else?!? don't forget combinations of the above.
-  def set_cart_and_client_and_studio
-
-    # Pull cart from incoming link; usually confirmation email order status link.
-    if params[:cart]
-      # have a shopping cart to use
-      @cart                 = Shopping::Cart.find_by_tracking(params[:cart])
-      @admin_customer_email = @cart.email
-      @admin_customer_offer = nil
-    end
-
-    if is_client?
-      set_session_cart
-      session[:admin_customer_email_id] = @admin_customer_email.id
-
-      @client             = @admin_customer_email.my_studio_session.client
-      session[:client_id] ||= @client.id
-
-      @studio             = @admin_customer_email.my_studio_session.studio
-      session[:studio_id] ||= @studio.id
-
-      # current collection friend name
-      setup_friend
-
-    elsif is_studio?
-      # studio and admin should have @cart and @client nil
-      @studio = current_user.studio
-
-      @admin_customer_friend = Admin::Customer::Friend.new(email: @admin_customer_email,
-                                                           name:  @admin_customer_email.my_studio_session.client.name)
-
-    else
-      set_session_cart
-      @studio             = @admin_customer_email.my_studio_session.studio
-      # shopping session info
-      session[:studio_id] = @studio.id
-
-      @admin_customer_friend = Admin::Customer::Friend.new(email: @admin_customer_email,
-                                                           name:  @admin_customer_email.my_studio_session.client.name)
+      session[:cart_id]    = nil
+      session[:email_id]   = nil
+      session[:email_cart] = {}
     end
   end
 

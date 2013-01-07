@@ -1,4 +1,10 @@
 namespace 'kimbra_pieces' do
+  desc "Seed the non_photo charms for merchandise pieces"
+  task charms: :environment do
+    list = Admin::Merchandise::Piece.non_photo_charms.all
+
+  end
+
   desc "Seed the photo_bracelets for merchandise pieces"
   task :bracelets => :environment do
     category = "Photo Bracelets"
