@@ -20,18 +20,17 @@ class ClientMailer < ActionMailer::Base
     @email.update_attributes(:sent_at => Time.now.to_s(:db))
   end
 
-  def send_build_offers(email_id, offer_id)
+  def send_build_offers(email_id, view_only=false)
     @email = Admin::Customer::Email.find(email_id)
-    @offer = Admin::Customer::Offer.find(offer_id)
     @client = @email.my_studio_session.client
     @studio = @email.my_studio_session.studio
     raise "this email already unsubscribed: #{@client.email}" if Unsubscribe.exists?(email: @client.email)
     mail(to: "#{@client.name} <#{@client.email}>",
-         bcc: ['support@kimbraclickplus.com'],
+         bcc: 'support@kimbraclickplus.com',
          subject: "Your #{@studio.name} photos in heirloom jewelry.",
          from: "#{@studio.name} <support@KimbraClickPLUS.com>")
-    # Mark this email with the datetime sent.
-    @email.update_attributes(:sent_at => Time.now.to_s(:db))
+    # Mark this email with the datetime sent unless we are viewing.
+    @email.update_attributes(:sent_at => Time.now.to_s(:db)) unless view_only
   end
 
   def send_order_confirmation(cart_id, studio_id)
