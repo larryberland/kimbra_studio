@@ -101,16 +101,16 @@ class ApplicationController < ActionController::Base
 
     session_cart_id = session[:cart_id]
 
-    if (session[:email_id])
+    if session[:email_id]
 
-      if (session[:email_id] != email.id)
+      if session[:email_id] != email.id
 
         # push the current session info into our emails array
         push_session_email_cart
 
         # return the cart_id referenced by this email_id
         #   could be nil
-        session_cart_id = session[:email_cart][email_id]
+        session_cart_id = session[:email_cart][email.id]
 
       end
 
