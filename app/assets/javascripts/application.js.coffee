@@ -33,8 +33,8 @@ $ ->
 
   $('.lb_sample').rlightbox();
 
-  if clientSideValidations?
-    clientSideValidations.callbacks.form.fail = (element, message, callback) ->
+  if ClientSideValidations?
+    ClientSideValidations.callbacks.form.fail = (element, message, callback) ->
       callback()
       $('#spinner').hide()
 
