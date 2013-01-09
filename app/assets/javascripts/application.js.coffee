@@ -33,9 +33,9 @@ $ ->
 
   $('.lb_sample').rlightbox();
 
-  clientSideValidations.callbacks.form.fail = (element, message, callback) ->
-    callback()
-    $('#spinner').hide()
+#  clientSideValidations.callbacks.form.fail = (element, message, callback) ->
+#    callback()
+#    $('#spinner').hide()
 
 window.setOlarkUser = ->
   olark('api.chat.updateVisitorNickname',
