@@ -27,6 +27,13 @@ en:
         bgcolor: "Background color"
         remote_image_url: "or Logo URL"
 
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              email: "email"
 
   hello: "Hello world"
   company: "Kimbra Studios ClickPLUS"

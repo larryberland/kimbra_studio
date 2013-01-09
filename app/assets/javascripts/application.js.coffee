@@ -10,10 +10,10 @@
 #= require jquery_ui_timepicker_addon
 #= require wait
 #= require imagesloaded
-#= require rails.validations
 #= require jquery.orbit-1.2.3.min
 #= require jeditable
 #= require ./bootstrap/bootstrap
+#= require rails.validations
 #= require ./bootstrap/client-side-validation
 #= require bootstrap-tour
 #= require clickplus-tour

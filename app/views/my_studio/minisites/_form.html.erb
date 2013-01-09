@@ -4,7 +4,7 @@
     <div class="control-group">
       <%= g.label :image, class: "control-label" %>
       <div class="controls">
-        <%= g.file_field :image, class:'input-medium btn-small' %>
+        <%= g.file_field :image, class:'input-medium btn-small', validate: false %>
         <span class="help-inline"><%= t(".image_help") %></span>
       </div>
     </div>
