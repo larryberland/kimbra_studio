@@ -3,8 +3,9 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
-  Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
-  subscription.setupForm()
+  if Stripe?
+    Stripe.setPublishableKey($('meta[name="stripe-key"]').attr('content'))
+    subscription.setupForm()
 
 subscription =
   setupForm: ->
