@@ -113,19 +113,7 @@ module Minisite
         @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
       end
       raise "we should redirect to somewhere helpful looking for tracking:#{params[:email_id]}" if @admin_customer_email.nil?
-
-      puts ""
-      puts "Portraits Controller"
-      puts "load_email session: email tracking:#{params[:email_id]}"
-      puts "session email_id:#{session[:email_id]} cart_id:#{session[:cart_id]}"
-      puts "email_id:#{@admin_customer_email.id})"
-
-      puts ""
-
       sync_session_email(@admin_customer_email)
-
-      puts "Portraits sess_email_id:#{session[:email_id]} sess_cart_id:#{session[:cart_id]}"
-
     end
 
   end

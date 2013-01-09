@@ -57,6 +57,7 @@ class ApplicationController < ActionController::Base
   def setup_session
 
     session[:email_cart] ||= {}
+    Rails.logger.info "SETUP_SESSION:email_cart:#{session[:email_cart].inspect}"
 
     # minisite controllers that have inherited_resources
     #   get first crack at determining current session email
@@ -67,8 +68,6 @@ class ApplicationController < ActionController::Base
     # Minisite controllers that are expecting a params[:email_id]
     # some controllers that are expecting a params[:id]
     load_email_or_cart
-
-    setup_friend
 
     @studio = load_my_studio
     load_my_client
@@ -88,70 +87,61 @@ class ApplicationController < ActionController::Base
   def push_session_email_cart
 
     # hash of cart_id key with a value of the email it belongs to
-    session[:email_cart][session[:email_id]] = session[:cart_id]
+    session[:email_cart][session[:email_id]] = {cart_id: session[:cart_id],
+                                                friend_id: session[:friend_id]}
 
   end
 
   # using the email passed in verify our current
           #   session[:cart_id] ad session[:email_id] are in sync
   def sync_session_email(email)
+    raise "Expecting @cart to always be nil here" if @cart.present?
     raise "Do not call sync_session_email() without a valid id email:#{email}" if email.new_record?
 
     Rails.logger.info "sync_session_email(email_id:#{email.id} session[:email_id]:#{session[:email_id]} session[:cart_id]:#{session[:cart_id]} "
-
-    session_cart_id = session[:cart_id]
 
     if session[:email_id]
 
       if session[:email_id] != email.id
 
+        raise "want to know if we have a non-existing email" if email.new_record?
+
         # push the current session info into our emails array
         push_session_email_cart
 
-        # return the cart_id referenced by this email_id
-        #   could be nil
-        session_cart_id = session[:email_cart][email.id]
+        # return the previous session data referenced
+        # by this email.id
+        session[:email_cart][email.id] ||= {}
+
+        # any email specific session info
+        session[:cart_id]   = session[:email_cart][email.id][:cart_id]
+        session[:friend_id] = session[:email_cart][email.id][:friend_id]
 
       end
 
-      carts = email.carts.select { |r| r.id == session_cart_id }
+      # verify this cart may exist or not
+      @cart = Shopping::Cart.find_by_id(session[:cart_id])
+      @cart = Shopping::Cart.create(email: email) if @cart.nil?
 
-      @cart = if carts.empty?
-                # this email is in the system but the current session is not pointing at it
-                Shopping::Cart.create(email: email)
-              else
-                carts.first
-              end
+      @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:friend_id])
+      @admin_customer_friend  = email.create_friend(@cart) if @admin_customer_friend.nil?
+
     else
       # first time session for this email
       @cart = Shopping::Cart.create(email: email)
+      @admin_customer_friend  = email.create_friend(@cart)
     end
 
     # this is our current session info going forward
-    session[:cart_id]  = @cart.id
-    session[:email_id] = email.id
+    session[:email_id]  = email.id
+    session[:cart_id]   = @cart.id
+    session[:friend_id] = @admin_customer_friend.id
 
-    session[:email_cart][email.id] = @cart.id
+    # persist our email specific data into our email_cart
+    push_session_email_cart
 
-    Rails.logger.info("session [:email_id]:#{session[:email_id]} [:cart_id]:#{session[:cart_id]} ")
+    Rails.logger.info("session [:email_id]:#{session[:email_id]} [:cart_id]:#{session[:cart_id]} [:friend_id]:#{session[:friend_id]}")
 
-  end
-
-  def setup_friend
-    # current collection friend name
-    if session[:admin_customer_friend_id]
-      @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:admin_customer_friend_id]) rescue nil
-    end
-    if @admin_customer_friend.nil?
-      if @admin_customer_email
-        # client is coming in with a new session
-        @admin_customer_friend             = @admin_customer_email.create_friend(@cart)
-        session[:admin_customer_friend_id] = @admin_customer_friend.id
-      else
-        # did you forget to include a before_filter to load @admin_customer_email
-        Rails.logger.info("WARN:setup_friend() missing email session:#{session.inspect}")
-      end
-    end
   end
 
   def setup_story

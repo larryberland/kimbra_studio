@@ -31,10 +31,7 @@ module Minisite
     def load_email_or_cart
       raise "Friends controller should always have an email_id" unless params.key?(:email_id)
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
-      raise "we should redirect to somewhere helpful" if @admin_customer_email.nil?
-
       sync_session_email(@admin_customer_email)
-
     end
 
   end
