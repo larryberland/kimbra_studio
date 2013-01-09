@@ -60,9 +60,7 @@ module Minisite
     # overriding BaseController's to get email instead of offer
     def load_email_or_cart
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id]) if params[:id]
-      if @admin_customer_email
-          sync_session_email(@admin_customer_email)
-      end
+      sync_session_email(@admin_customer_email)
     end
 
   end

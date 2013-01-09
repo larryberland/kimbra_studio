@@ -272,11 +272,6 @@ module Minisite
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
       raise "we should redirect to somewhere helpful" if @admin_customer_email.nil?
 
-      puts ""
-      puts "load_email session: email tracking:#{params[:email_id]}"
-      puts "session email_id:#{session[:email_id]} cart_id:#{session[:cart_id]}"
-      puts "email_id:#{@admin_customer_email.id})"
-
       sync_session_email(@admin_customer_email)
 
       load_offer

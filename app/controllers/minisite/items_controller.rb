@@ -50,15 +50,9 @@ class Minisite::ItemsController < InheritedResources::Base
     @offer = Admin::Customer::Offer.find_by_tracking(params[:offer_id]) if params[:offer_id]
     @email ||= @offer.email if @offer
 
-    if @email
-
-      sync_session_email(@email) # sync email and cart info
-                                 # setup our common controller email
-      @admin_customer_email = @email
-
-    else
-      raise "Is there a reason we dont' have an email?"
-    end
+    sync_session_email(@email) # sync email and cart info
+                               # setup our common controller email
+    @admin_customer_email = @email
 
     # convert inherited resources to our BaseController attrs
     @admin_customer_offer = @offer if @offer

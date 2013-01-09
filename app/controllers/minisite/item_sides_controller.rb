@@ -101,15 +101,9 @@ class Minisite::ItemSidesController < InheritedResources::Base
     @offer ||= @item_side.item.offer
     @email ||= @offer.email if @offer
 
-    if @email
-
-      sync_session_email(@email) # sync email and cart info
-                                 # setup our common controller email
-      @admin_customer_email = @email
-
-    else
-      raise "Is there a reason we dont' have an email?"
-    end
+    sync_session_email(@email) # sync email and cart info
+                               # setup our common controller email
+    @admin_customer_email = @email
 
     # set attributes that are used later in the filters
     @admin_customer_offer = @offer if @offer
