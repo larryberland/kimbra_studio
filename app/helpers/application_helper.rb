@@ -178,7 +178,7 @@ module ApplicationHelper
         end
       end
     else
-      minisite_offer_url(offer)
+      minisite_email_offer_url(offer.email, offer)
     end
   end
 

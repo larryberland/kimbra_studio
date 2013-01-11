@@ -51,7 +51,7 @@ class FacebookSessionsController < ApplicationController
     @offer             = Admin::Customer::Offer.find_by_id(offer_id)
     @shopping_item_id = @offer.id
     @item             = @offer
-    current_user_facebook.like(@offer, minisite_offer_url(@offer))
+    current_user_facebook.like(@offer, minisite_email_offer_url(@offer.email, @offer))
   end
 
   def facebook_logout

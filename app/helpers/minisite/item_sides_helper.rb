@@ -8,7 +8,7 @@ module Minisite::ItemSidesHelper
           # go directly to collection
           minisite_email_offers_path(offer.email.tracking)
       else
-        minisite_offer_url(offer) # go to offer edit
+        minisite_email_offer_url(offer.email, offer) # go to offer edit
       end
     end
   end
