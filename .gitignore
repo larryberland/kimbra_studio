@@ -53,3 +53,9 @@ face*.jpg
 
 /config/database.yml
 /config/kimbra_studio.yml
+
+# kimbra doc spreadsheets
+app/kimbra_studios.csv
+config/kimbra_studios.ods
+foo*.*
+

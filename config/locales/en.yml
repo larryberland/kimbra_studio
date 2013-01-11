@@ -554,6 +554,8 @@ en:
   shopping:
     addresses:
       title: "1. Delivery Details"
+      show:
+        no_address: "No Address information."
     carts:
       show:
         title: "My Shopping Cart"

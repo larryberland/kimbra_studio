@@ -1,5 +1,8 @@
 class MyStudio::InfosController < MyStudio::BaseController
 
+  before_filter :load_my_studio_mock, only: [:mock_collection, :mock_collection_return]
+  after_filter :setup_session_studio_infos
+
   # GET /my_studio/infos
   # GET /my_studio/infos.json
   def index
@@ -92,19 +95,17 @@ class MyStudio::InfosController < MyStudio::BaseController
     # Static text.
   end
 
-  # Non-functioning mockup of the My Collection page.
+  # Non-functioning mock of the My Collection page.
   def mock_collection
     @mock_collection = true
-    @studio = @my_studio
-    @studio = Studio.first if @studio.nil? # handle admin
+    raise "missing session info for studio" if @studio.nil? # handle admin
     render layout: false
   end
 
   def mock_collection_return
     @mock_collection = :return
     @link_back = true
-    @studio = @my_studio
-    @studio = Studio.first if @studio.nil? # handle admin
+    raise "missing session info for studio" if @studio.nil? # handle admin
     render action: 'mock_collection', layout: false
   end
 
@@ -113,4 +114,19 @@ class MyStudio::InfosController < MyStudio::BaseController
   def navbar_active
     @navbar_active = :infos_samples
   end
+
+  def setup_session_studio_infos
+    session[:my_studio_infos] ||= {}
+    if @my_studio_info and @my_studio_info.studio
+      session[:my_studio_infos][:studio_id] = @my_studio_info.studio.id
+    end
+  end
+
+  # override the load_my_studio filter
+  def load_my_studio_mock
+    raise "someone forget to set my session info? #{session.inspect}" if session[:my_studio_infos][:studio_id].nil?
+    @my_studio = Studio.find_by_id(session[:my_studio_infos][:studio_id])
+    @studio = @my_studio
+  end
+
 end

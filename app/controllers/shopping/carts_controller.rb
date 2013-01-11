@@ -1,24 +1,25 @@
 module Shopping
   class CartsController < BaseController
 
-    skip_before_filter :authenticate_user!,
-                       only: [:find_by_tracking, :edit_delivery_tracking, :update_delivery_tracking]
-    skip_before_filter :set_client_and_cart, :setup_story,
-                       only: [:find_by_tracking, :commissions]
+    skip_before_filter :handle_roles, only: [:edit_delivery_tracking, :update_delivery_tracking, :find_by_tracking]
+    skip_before_filter :setup_story, only: [:edit_delivery_tracking, :update_delivery_tracking, :find_by_tracking]
 
-    def find_by_tracking
-      @cart = Shopping::Cart.new
-      render layout: false
-    end
+    before_filter :override_setup_session, only: [:edit_delivery_tracking, :update_delivery_tracking]
 
     def show
       @storyline.describe "Viewing cart (#{@cart.quantity} pieces present)."
     end
 
+    def find_by_tracking
+      @shopping_cart = Shopping::Cart.new
+      render layout: false
+    end
+
     def edit_delivery_tracking
       if params[:shopping_cart] && params[:shopping_cart][:tracking].present?
-        if @cart = Shopping::Cart.find_by_tracking(params[:shopping_cart][:tracking])
-          @shipping = @cart.shipping
+        if @shopping_cart
+          @shipping = @shopping_cart.shipping
+          @shipping ||= Shopping::Shipping.new
           # allow to render.
         else
           flash[:notice] = "Could not find any order with number like #{params[:shopping_cart][:tracking]}."
@@ -31,14 +32,14 @@ module Shopping
     end
 
     def update_delivery_tracking
-      if @cart = Shopping::Cart.find_by_tracking(params[:id])
+      if @shopping_cart = Shopping::Cart.find_by_tracking(params[:id])
         if tracking = params[:shopping_shipping] && params[:shopping_shipping][:tracking]
-          @shipping = @cart.shipping
+          @shipping = @shopping_cart.shipping
           @shipping.tracking = tracking
           if @shipping.save
-            flash[:notice] = "Delivery tracking number #{@shipping.tracking} saved for #{@cart.address.last_name}. Sent them an email with shipping update."
-            @studio = @cart.email.my_studio_session.studio
-            ClientMailer.delay.send_shipping_update(@cart.id, @studio.id)
+            flash[:notice] = "Delivery tracking number #{@shipping.tracking} saved for #{@shopping_cart.address.last_name}. Sent them an email with shipping update."
+            @studio = @shopping_cart.email.my_studio_session.studio
+            ClientMailer.delay.send_shipping_update(@shopping_cart.id, @studio.id)
             return redirect_to '/delivery'
           else # errors on save
             return render :edit_delivery_tracking
@@ -50,6 +51,18 @@ module Shopping
       else # no cart
         flash[:error] = "Could not find order with number #{params[:id]}"
         return redirect_to '/delivery'
+      end
+    end
+
+    private
+
+    def override_setup_session
+      if params[:shopping_cart] && params[:shopping_cart][:tracking].present?
+        if @shopping_cart = Shopping::Cart.find_by_tracking(params[:shopping_cart][:tracking])
+          @admin_customer_email = @shopping_cart.email
+          @studio = @admin_customer_email.my_studio_session.studio
+          @client = @admin_customer_email.my_studio_session.client
+        end
       end
     end
 

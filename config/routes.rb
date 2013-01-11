@@ -121,10 +121,10 @@ KimbraStudio::Application.routes.draw do
   resources :prospects
 
   namespace :shopping do
-    match 'edit_delivery_tracking' => 'carts#edit_delivery_tracking'
     resources :addresses
     resources :carts do
-      member do
+      new do
+        post :edit_delivery_tracking
         post :update_delivery_tracking
       end
       resource :purchase
@@ -164,7 +164,10 @@ KimbraStudio::Application.routes.draw do
   end
 
   match 'admin' => 'admin/overviews#index'
+
+  # sets up the Find edit/update shopping/carts actions
   match 'delivery' => 'shopping/carts#find_by_tracking'
+
   match 'tracking/:id', to: 'tracking#image', as: 'tracking_image'
   match 'blog' => 'blog'
 

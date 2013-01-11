@@ -156,7 +156,9 @@ module ApplicationHelper
   def url_for_offer_or_not(offer)
     # currently opening this offer up for amyone to change
     #  may re-think this later on security or Save issues
-    minisite_offer_url(offer)
+    # was minisite_offer_url(offer)
+    # we should always use the email path to maintain our session info
+    minisite_email_offer_url(offer.email, offer)
   end
 
   # on image do some workflow for the admin user

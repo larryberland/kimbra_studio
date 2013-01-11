@@ -59,19 +59,21 @@ class ApplicationController < ActionController::Base
     session[:email_cart] ||= {}
     Rails.logger.info "SETUP_SESSION:email_cart:#{session[:email_cart].inspect}"
 
-    # minisite controllers that have inherited_resources
-    #   get first crack at determining current session email
-    # currently items and item_sides
-    minisite_info_inherited_resources
+    # retrieve the email offer we are working with
+    load_email
 
-    # Shopping controllers that are expecting a params[:cart_id]
-    # Minisite controllers that are expecting a params[:email_id]
-    # some controllers that are expecting a params[:id]
-    load_email_or_cart
+    # retrieve the studio we are working with
+    load_my_studio
 
-    @studio = load_my_studio
-    load_my_client
+    # finally uncover the client we are working with
+    load_client
 
+  end
+
+  private #=========================================================================
+
+  def minisite_info_inherited_resources
+    # override if you need to handle this
   end
 
   # Shopping controllers that are expecting a params[:cart_id]
@@ -82,6 +84,37 @@ class ApplicationController < ActionController::Base
     # implement this method in your controller to handle any special
     # processing to pull out model info based on inherited resources
     #   and/or tracking numbers
+  end
+
+  # wrapper for the many ways we figure out the email we are
+  #   working with in our views and controllers
+  def load_email
+
+    # minisite controllers that have inherited_resources
+    #   get first crack at determining current session email
+    # currently items and item_sides
+    minisite_info_inherited_resources
+
+    # Shopping controllers that are expecting a params[:cart_id]
+    # Minisite controllers that are expecting a params[:email_id]
+    # some controllers that are expecting a params[:id]
+    load_email_or_cart
+  end
+
+  def load_my_studio
+    if (is_studio?)
+      @my_studio = current_user.studio if current_user
+    elsif @admin_customer_email
+      @my_studio = @admin_customer_email.my_studio_session.studio
+    end
+    # namespace and non_namespace to make everyone happy
+    @studio = @my_studio
+  end
+
+  def load_client
+    if @admin_customer_email
+      @client = @admin_customer_email.my_studio_session.client
+    end
   end
 
   def push_session_email_cart
@@ -150,12 +183,6 @@ class ApplicationController < ActionController::Base
     @story, @storyline = Story.setup(request, controller_name, action_name, @client, @studio, is_client?)
   end
 
-  private #=========================================================================
-
-  def minisite_info_inherited_resources
-    # override if you need to handle this
-  end
-
   def current_user_facebook
     @current_user_facebook ||= FacebookUser.find(session[:facebook_user_id]) if session[:facebook_user_id]
   end
@@ -170,22 +197,6 @@ class ApplicationController < ActionController::Base
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'
     response.headers['Pragma']        = 'no-cache'
     response.headers['Expires']       = 'Fri, 01 Jan 1990 00:00:00 GMT'
-  end
-
-  def load_my_studio
-    if (is_admin?)
-      @my_studio = Studio.find_by_id(session[:mock_collection_studio_id]) rescue nil
-    elsif current_user
-      @my_studio = current_user.studio if current_user
-    elsif @admin_customer_email
-      @my_studio = @admin_customer_email.my_studio_session.studio
-    end
-  end
-
-  def load_my_client
-    if @admin_customer_email
-      @client = @admin_customer_email.my_studio_session.client
-    end
   end
 
   def log_session

@@ -6,10 +6,13 @@
   <%= raw "<p class='flash_error'>#{alert}</p>" if alert %>
 </div>
 
-<%= form_for @cart, :url => shopping_edit_delivery_tracking_path do |f| %>
+<!-- url = @shopping_cart.id.nil? ? admin_customer_email_offer_items_path(@offer.email, @offer, @item) : admin_customer_email_offer_item_path(@offer.email, @offer, @item) -->
+<!-- url = @shopping_cart.id.nil? ? edit_delivery_tracking_shopping_cart_path() : update_delivery_tracking_shopping_cart_path -->
+
+<%= form_for @shopping_cart, url: edit_delivery_tracking_new_shopping_cart_path do |f| %>
 
     <%= f.label 'Order number' %>
     <%= f.text_field :tracking, placeholder: 'Eg. k2s4f921ms' %>
-    <%= submit_tag 'Fetch' %>
+    <%= f.submit 'Fetch' %>
 
 <% end %>

@@ -3,6 +3,7 @@ class StudiosController < ApplicationController
   before_filter :form_info
   before_filter :authenticate_admin!
   skip_before_filter :authenticate_user!, only: [:unsubscribe, :eap]
+  after_filter :setup_session_studio_infos, only: [:edit]
 
   # GET /studios
   # GET /studios.json
@@ -53,9 +54,6 @@ class StudiosController < ApplicationController
   # GET /studios/1/edit
   def edit
     @studio = Studio.find(params[:id])
-    if (is_admin?)
-      session[:mock_collection_studio_id] = @studio.id
-    end
   end
 
   # POST /studios
@@ -202,6 +200,11 @@ class StudiosController < ApplicationController
 
   def navbar_active
     @navbar_active = is_admin? ? :studios : :minisite
+  end
+
+  def setup_session_studio_infos
+    session[:my_studio_infos] ||= {}
+    session[:my_studio_infos][:studio_id] = @studio.id
   end
 
 end
