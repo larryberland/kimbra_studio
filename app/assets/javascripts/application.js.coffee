@@ -2,7 +2,7 @@
 #= require jquery-ui
 #= require jquery_ujs
 #= require jquery.ui.widget
-#= require jquery.ui.rlightbox.min
+#= require jquery.ui.rlightbox
 #= require jquery.cookie
 #= require jcrop
 #= require spin
@@ -31,7 +31,8 @@ $ ->
 
   $('#user_email').focus()
 
-  $('.lb_sample').rlightbox();
+  if $('.lb_sample')
+    $('.lb_sample').rlightbox()
 
   if ClientSideValidations?
     ClientSideValidations.callbacks.form.fail = (element, message, callback) ->
