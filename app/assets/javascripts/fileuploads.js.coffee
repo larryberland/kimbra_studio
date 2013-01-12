@@ -1,4 +1,3 @@
-#= require vendor/jquery.ui.widget.js
 #= require fileuploads/templates/tmpl.min.js
 #= require fileuploads/load-image/load-image.min.js
 #= require fileuploads/canvas-to-blob/canvas-to-blob.min.js

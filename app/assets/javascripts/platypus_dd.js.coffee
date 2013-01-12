@@ -1,1 +1,1 @@
-#= require vendor/jquery.ddslick.min.js
+#= require jquery.ddslick.min.js
