@@ -88,7 +88,7 @@
       <div class="form-actions">
         <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
         <%= f.submit_spinner text, id:'my_submit', class: 'btn btn-success' %>
-        <%= link_to_spinner 'Back', edit_shopping_shipping_path(@cart.shipping), id: 'back', class: 'btn' %>
+        <%= link_to_spinner 'Back', edit_shopping_cart_shipping_path(@cart, @cart.shipping), id: 'back', class: 'btn' %>
       </div>
 
   <% end %>

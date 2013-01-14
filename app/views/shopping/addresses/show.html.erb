@@ -1,4 +1,4 @@
 <%= render :show, local: {address: @address} %>
 
-<%= link_to 'Edit', edit_shopping_address_path(@address) %> |
-<%= link_to 'Back', shopping_addresses_path %>
+<%= link_to 'Edit', edit_shopping_cart_address_path(@address.cart, @address) %> |
+<%= link_to 'Back', shopping_cart_addresses_path(@address.cart) %>

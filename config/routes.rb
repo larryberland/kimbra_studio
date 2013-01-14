@@ -121,20 +121,20 @@ KimbraStudio::Application.routes.draw do
   resources :prospects
 
   namespace :shopping do
-    resources :addresses
     resources :carts do
       new do
         post :edit_delivery_tracking
         post :update_delivery_tracking
       end
+      resources :addresses
       resource :purchase
-    end
-    resources :items do
-      member do
-        post :update
+      resources :shippings
+      resources :items do
+        member do
+          post :update
+        end
       end
     end
-    resources :shippings
     resources :stripe_cards
   end
 

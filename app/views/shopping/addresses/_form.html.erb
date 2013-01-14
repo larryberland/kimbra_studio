@@ -1,6 +1,7 @@
 <div class="platypus-form span8">
 
-  <%= form_for(@address, html: {class: 'form-horizontal'}) do |f| %>
+  <% url = @address.new_record? ? shopping_cart_addresses_path(@cart) : shopping_cart_address_path(@cart, @address) %>
+  <%= form_for(@address, url: url, html: {class: 'form-horizontal'}) do |f| %>
 
       <%= render 'shared/error_messages', record: @address, h2_msg: 'stopped this delivery address from being saved:' %>
 

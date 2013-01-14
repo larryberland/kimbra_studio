@@ -1,6 +1,6 @@
 class Shopping::Shipping < ActiveRecord::Base
 
-  belongs_to :cart, :class_name => 'Shopping::Cart'
+  belongs_to :cart, class_name: 'Shopping::Cart'
 
   attr_accessible :cart_id, :cart,
                   :shipping_option, :tracking, :total_cents

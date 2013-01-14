@@ -1,6 +1,11 @@
 module Shopping
   class ShippingsController < BaseController
 
+    belongs_to :cart,
+               parent_class: Shopping::Cart,
+               singleton:    true,
+               finder: :find_by_tracking
+
     def new
       @storyline.describe 'Viewing shipping options.'
       @shipping_options = ShippingOption.form_selections
@@ -33,7 +38,7 @@ module Shopping
       update! do
         if @shipping.errors.present?
           @storyline.describe "Errors in shipping: #{@shipping.errors.full_messages}."
-          edit_shopping_shipping_path(@shipping)
+          edit_shopping_cart_shipping_path(@shipping.cart, @shipping)
         else
           @storyline.describe "Shipping option selected: #{@shipping.shipping_option}."
           @shipping.total_cents = ShippingOption.find_by_name(params[:shopping_shipping][:shipping_option]).cost_cents

@@ -3,8 +3,9 @@
     <% field = attrs.keys.first %>
     <% value = attrs.values.first %>
     <% shopping_item = Shopping::Item.new(attrs.merge(cart: @cart)) %>
+    <% url_cart = shopping_cart_items_path(@cart) %>
 
-    <%= form_for(shopping_item, remote: true) do |f| %>
+    <%= form_for(shopping_item, url: url_cart, remote: true) do |f| %>
 
         <%= f.hidden_field field %>
         <%= f.hidden_field :cart_id %>

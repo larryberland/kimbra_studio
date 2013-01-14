@@ -1,6 +1,8 @@
 <div class="platypus-form span8">
 
-  <%= form_for(@shipping) do |f| %>
+  <% url = @shipping.new_record? ? shopping_cart_shippings_path(@cart) : shopping_cart_shipping_path(@cart, @shipping) %>
+
+  <%= form_for(@shipping, url: url) do |f| %>
 
       <%= render 'shared/error_messages',
                  record: @shipping,
@@ -30,7 +32,7 @@
 
       <div class="form-actions">
         <%= f.submit_spinner t(:shopping_submit_shipping), id: 'my_submit', class: 'btn btn-success' %>
-        <%= link_to_spinner 'Back', edit_shopping_address_path(@cart.address.id), id: 'back', class: 'btn' %>
+        <%= link_to_spinner 'Back', edit_shopping_cart_address_path(@cart, @cart.address), id: 'back', class: 'btn' %>
       </div>
 
   <% end %>

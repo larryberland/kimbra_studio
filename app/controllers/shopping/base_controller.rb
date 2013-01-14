@@ -24,20 +24,9 @@ class Shopping::BaseController < InheritedResources::Base
     @navbar_active = :shopping_cart
   end
 
-  # override the ApplicationController's handling of
-  # session cart information
-  def load_email_or_cart
-    load_shopping_item_or_not
-
-    if params[:id]
-      raise "who is overriding my client id by tracking?" unless @cart.nil?
-
-      @cart = Shopping::Cart.find_by_tracking(params[:id])
-      raise "want to know why we dont have a cart and should redirect probably" if @cart.nil?
-    end
+  def sync_cart
 
     if (@cart)
-
       # if we have a current session email and cart that is different than the
       #   current request, push it onto the session[:email_cart] hash for referencing later
       if session[:cart_id] or session[:email_id]
@@ -54,22 +43,29 @@ class Shopping::BaseController < InheritedResources::Base
 
       @admin_customer_email = @cart.email
 
-      # TODO: ? this should all be going through sync_email I think
-
     else
-      # need to find out what isle the shopping cart is on?
-      # TODO:? comes here from Ready to Checkout sure seems like
-      #   we should be using an url instead of relying on session here
-      @cart = Shopping::Cart.find_by_id(session[:cart_id])
-
-      session[:email_cart][@cart.email.id] = @cart.id
-      @admin_customer_email = @cart.email
-
+      raise "want to know why we don't have a cart"
     end
 
     @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:friend_id])
     @admin_customer_friend  = @cart.email.create_friend(@cart) if @admin_customer_friend.nil?
 
+  end
+  # override the ApplicationController's handling of
+  # session cart information
+  def load_email_or_cart
+    load_shopping_item_or_not
+
+    if params[:cart_id]
+      # for inherited resources
+      @cart = Shopping::Cart.find_by_tracking(params[:cart_id])
+    elsif params[:id]
+      # for non inherited resources
+      raise "who is overriding my client id by tracking?" unless @cart.nil?
+      @cart = Shopping::Cart.find_by_tracking(params[:id])
+      raise "want to know why we dont have a cart and should redirect probably" if @cart.nil?
+    end
+    sync_cart
   end
 
   # We don't support changing between multiple clients or emails in one session.

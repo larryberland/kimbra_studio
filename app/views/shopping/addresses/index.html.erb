@@ -25,9 +25,9 @@
     <td><%= shopping_address.city %></td>
     <td><%= shopping_address.state.abbreviation %></td>
     <td><%= shopping_address.zip_code %></td>
-    <td><%= link_to 'Show', shopping_address %></td>
-    <td><%= link_to 'Edit', edit_shopping_address_path(shopping_address) %></td>
-    <td><%= link_to 'Destroy', shopping_address, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', shopping_cart_address(shopping_address.cart) %></td>
+    <td><%= link_to 'Edit', edit_shopping_cart_address_path(shopping_address.cart, shopping_address) %></td>
+    <td><%= link_to 'Destroy', shopping_cart_address(shopping_address.cart), confirm: 'Are you sure?', method: :delete %></td>
   </tr>
 <% end %>
 </table>

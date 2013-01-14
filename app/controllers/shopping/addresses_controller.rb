@@ -1,6 +1,11 @@
 module Shopping
   class AddressesController < BaseController
 
+    belongs_to :cart,
+               parent_class: Shopping::Cart,
+               singleton:    true,
+               finder: :find_by_tracking
+
     def new
       @states = State.form_selector
       @storyline.describe 'Entering new address.'
@@ -16,9 +21,9 @@ module Shopping
         else
           @storyline.describe 'Created new address.'
           if @cart.shipping
-            edit_shopping_shipping_path(@cart.shipping)
+            edit_shopping_cart_shipping_path(@cart, @cart.shipping)
           else
-            new_shopping_shipping_path
+            new_shopping_cart_shipping_path(@cart)
           end
         end
       end
@@ -35,13 +40,13 @@ module Shopping
         if @address.errors.present?
           @states = State.form_selector
           @storyline.describe "Error in updating new address: #{@address.errors.full_messages}"
-          edit_shopping_address_path(@address)
+          edit_shopping_cart_address_path(@cart, @address)
         else
           @storyline.describe 'Updated the address.'
           if @cart.shipping
-            edit_shopping_shipping_path(@cart.shipping)
+            edit_shopping_cart_shipping_path(@cart, @cart.shipping)
           else
-            new_shopping_shipping_path
+            new_shopping_cart_shipping_path(@cart)
           end
         end
       end

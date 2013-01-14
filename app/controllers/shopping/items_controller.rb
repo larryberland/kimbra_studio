@@ -1,8 +1,10 @@
 module Shopping
   class ItemsController < BaseController
 
-    #belongs_to :cart,
-    #           :parent_class => Shopping::Cart
+    belongs_to :cart,
+               :parent_class => Shopping::Cart,
+               finder:       :find_by_tracking
+
     #belongs_to :offer,
     #           :parent_class => Admin::Customer::Offer
     respond_to :js, :only => [:create, :destroy]
@@ -13,7 +15,7 @@ module Shopping
 
     def create
       # convert our nested form params
-      piece_id = params[:shopping_item].delete(:piece_id)
+      piece_id          = params[:shopping_item].delete(:piece_id)
       # ajax unique id for <span> and <spinner>
       @shopping_item_id = piece_id.nil? ? params[:shopping_item][:offer_id] : piece_id
       item_already_in_cart = @cart.find_item(@admin_customer_offer.id) if @admin_customer_offer
@@ -28,7 +30,7 @@ module Shopping
         # Someone has picked one of the Kimbra Pieces that is not associated
         #   with our email offer (ex. chains or charms)
         # create an offer from this kimbra_piece and add to the shopping cart
-        offer_attrs[:piece] = Admin::Merchandise::Piece.find(piece_id)
+        offer_attrs[:piece]   = Admin::Merchandise::Piece.find(piece_id)
         @admin_customer_offer = Admin::Customer::Offer.generate_from_piece(offer_attrs)
       else
         # sending an offer that has been adjusted and going to the shopping cart
