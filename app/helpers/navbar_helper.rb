@@ -10,12 +10,12 @@ module NavbarHelper
     else
       name_method = "navbar_#{menu}_name"
       name = send(name_method) if respond_to?(name_method.to_sym, include_private=true)
-      name ||= t("#{en_path}.#{menu}.name")
+      name         ||= t("#{en_path}.#{menu}.name")
       title_method = "navbar_#{menu}_title"
       title = send(title_method) if respond_to?(title_method.to_sym, include_private=true)
       title ||= t("#{en_path}.#{menu}.title")
     end
-    element_id = name.gsub(' ','')
+    element_id   = name.gsub(' ', '')
     link_options = {title: title}
     link_options[:class] = "brand" if menu == :brand
     html_options = {class: menu == @navbar_active ? 'active' : '', id: element_id}
@@ -53,14 +53,14 @@ module NavbarHelper
     html.html_safe
   end
 
-  # construct the navbar dropdown markup for our Misc Menu Item
+          # construct the navbar dropdown markup for our Misc Menu Item
   def li_navbar_misc
-    menu      = :misc
+    menu                           = :misc
     # drop down list for the Misc menu
-    sub_menus = {merchandise:   admin_merchandise_pieces_path,
-                 infos_samples: samples_my_studio_infos_path,
-                 stories:       admin_stories_path,
-                 infos_faqs:    faq_my_studio_infos_path}
+    sub_menus                      = {merchandise:   admin_merchandise_pieces_path,
+                                      infos_samples: samples_my_studio_infos_path,
+                                      stories:       admin_stories_path,
+                                      infos_faqs:    faq_my_studio_infos_path}
     dropdown_active, sub_menu_html = navbar_dropdown_sub_menus(menu, sub_menus)
     li_navbar_dropdown_menu(menu, sub_menu_html, dropdown_active)
   end
@@ -77,7 +77,7 @@ module NavbarHelper
   end
 
   def li_navbar_friends
-    menu = :friends
+    menu      = :friends
     # drop down list for the Friends menu
     sub_menus = {send_offer_email: "#mySendOfferEmail"}
     if (@admin_customer_email)
@@ -290,7 +290,11 @@ module NavbarHelper
     if (@admin_customer_email)
       minisite_email_portraits_path(@admin_customer_email)
     else
-      '#'
+      if (is_client?)
+        minisite_email_portraits_path('xyz')
+      else
+        '#'
+      end
     end
   end
 

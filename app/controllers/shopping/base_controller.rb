@@ -53,7 +53,22 @@ class Shopping::BaseController < InheritedResources::Base
       session[:email_cart][@cart.email.id] = @cart.id
 
       @admin_customer_email = @cart.email
+
+      # TODO: ? this should all be going through sync_email I think
+
+    else
+      # need to find out what isle the shopping cart is on?
+      # TODO:? comes here from Ready to Checkout sure seems like
+      #   we should be using an url instead of relying on session here
+      @cart = Shopping::Cart.find_by_id(session[:cart_id])
+
+      session[:email_cart][@cart.email.id] = @cart.id
+      @admin_customer_email = @cart.email
+
     end
+
+    @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:friend_id])
+    @admin_customer_friend  = @cart.email.create_friend(@cart) if @admin_customer_friend.nil?
 
   end
 

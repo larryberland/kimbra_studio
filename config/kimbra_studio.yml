@@ -29,6 +29,8 @@ development: &non_production_settings
     :publishable_key: 'pk_T5rlG8nj6zwCgBOHUmXTbRGcSdDXs'
   :facebook:
     :name: 'KimbraStudiosClickPlus'
+  :gypsy_studio:
+    :email: 'teststudio@kimbraclickplus.com'
 
 test:
   <<: *non_production_settings
@@ -42,6 +44,8 @@ production:
   :carrier_wave:
     :storage: :fog
     :dump_image: false
+  :gypsy_studio:
+    :email: 'teststudio@kimbraclickplus.com'
   :mailer:
     :dummy:
   :stripe:

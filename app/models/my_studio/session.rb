@@ -85,7 +85,7 @@ class MyStudio::Session < ActiveRecord::Base
     finished_uploading_at.present?
   end
 
-  # allow the forms to send in a text name
+          # allow the forms to send in a text name
   def category_name=(category_name)
     self.category = Category.find_or_initialize_by_name(category_name)
   end

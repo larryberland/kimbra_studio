@@ -58,7 +58,8 @@
               <% end %>
               <%= li_navbar(:infos_faqs, faq_my_studio_infos_path) %>
               <%= li_navbar(:dashboard, my_studio_dashboard_path) %>
-
+          <% else %>
+              <%= li_navbar_or_not(:upload) %>
           <% end %>
           <%= li_navbar(:blog, blog_path) %>
 

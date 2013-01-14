@@ -35,6 +35,13 @@ en:
             email:
               email: "email"
 
+  gypsy:
+    client:
+      name: 'new client'
+      email: 'my_email@kimbraclickplus.com'
+    session:
+      name: 'Welcome'
+
   hello: "Hello world"
   company: "Kimbra Studios ClickPLUS"
   company_brand: "Kimbra ClickPLUS"
@@ -451,24 +458,24 @@ en:
     # shared/navbar application layouts
     navbar:
       menus:
+        blog:
+          name: "Blog"
+          title: "Click to view ClickPLUS Blog"
         brand:
           name: "My Studio"
           title: "My Studio"
-        overview:
-          name: "Overview"
-          title: "Click to view Overviews"
-        offer_emails:
-          name: "Offer Emails"
-          title: "Click to view Offer Emails"
-        studios:
-          name: "Studios"
-          title: "Click to view Studios"
-        studios_emails:
-          name: "Marketing"
-          title: "Click to view Studio Emails"
-        users:
-          name: "Users"
-          title: "Click to view Users"
+        dashboard:
+          name: "Dashboard"
+          title: "Click to view Dashboard"
+        infos_faqs:
+          name: "FAQ"
+          title: "Click to view Frequently Asked Questions"
+        infos_samples:
+          name: "How It Works"
+          title: "Click to view How It All Works"
+        minisite:
+          name: "Branding"
+          title: "Click to view your Branding Info"
         misc:
           name: "Misc"
           title: "Click to see sub menus"
@@ -484,24 +491,27 @@ en:
           infos_faqs:
             name: "FAQ"
             title: "Click to view Frequently Asked Questions"
+        offer_emails:
+          name: "Offer Emails"
+          title: "Click to view Offer Emails"
+        overview:
+          name: "Overview"
+          title: "Click to view Overviews"
         photo_sessions:
           name: "Photo Sessions"
           title: "Click to view Your Photo Sessions"
-        dashboard:
-          name: "Dashboard"
-          title: "Click to view Dashboard"
-        minisite:
-          name: "Branding"
-          title: "Click to view your Branding Info"
-        infos_samples:
-          name: "How It Works"
-          title: "Click to view How It All Works"
-        infos_faqs:
-          name: "FAQ"
-          title: "Click to view Frequently Asked Questions"
-        blog:
-          name: "Blog"
-          title: "Click to view ClickPLUS Blog"
+        studios:
+          name: "Studios"
+          title: "Click to view Studios"
+        studios_emails:
+          name: "Marketing"
+          title: "Click to view Studio Emails"
+        upload:
+          name: "Build a Custom Piece Now!"
+          title: "Click to Upload your own pictures and build your own custom heirloom piece."
+        users:
+          name: "Users"
+          title: "Click to view Users"
 
     minisite:
       navbar:
@@ -533,7 +543,6 @@ en:
             send_offer_email:
               name: "Share Offer Email with a friend"
               title: "Click to share with a friend."
-
           shopping_cart:
             name: "Shopping Cart"
             title: "Click to view My Shopping Cart"
@@ -549,7 +558,6 @@ en:
           upload:
             name: "Upload Photos"
             title: "Click to Upload your own photos"
-
 
   shopping:
     addresses:

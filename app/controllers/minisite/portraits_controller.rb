@@ -110,7 +110,26 @@ module Minisite
         @admin_customer_email = Admin::Customer::Email.find_by_id(params[:email_id])
       else
         # tracking number
-        @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
+        if params[:email_id] == 'xyz'
+          # new client without a studio to start building their own piece
+          # create an email for this client to work with on the minisite
+          now                   = Time.now
+          owner                 = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
+          attrs                 = {studio:  owner.studio,
+                                   session: {name:              t('gypsy.session.name'),
+                                             session_at:        10.minutes.ago(now),
+                                             active:            true,
+                                             category:          Category.find_by_name('Other'),
+                                             client_attributes: {name:  t('gypsy.client.name'),
+                                                                 email: t('gypsy.client.email')}},
+                                   email:   {generated_at: 5.minutes.ago(now),
+                                             sent_at:      now}
+          }
+          @admin_customer_email = Admin::Customer::Email.create_gypsy(attrs)
+          params[:email_id]     = @admin_customer_email.tracking
+        else
+          @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
+        end
       end
       raise "we should redirect to somewhere helpful looking for tracking:#{params[:email_id]}" if @admin_customer_email.nil?
       sync_session_email(@admin_customer_email)

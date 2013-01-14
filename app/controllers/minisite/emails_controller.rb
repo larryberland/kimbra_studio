@@ -1,6 +1,7 @@
 module Minisite
   class EmailsController < BaseController
 
+    before_filter :setup_new_client, only: [:new]
     skip_before_filter :setup_session, only: [:order_status]
 
     def about
@@ -10,14 +11,6 @@ module Minisite
 
     def contact
       @storyline.describe 'Viewing Contact Us.'
-    end
-
-    def privacy
-      @storyline.describe 'Viewing Privacy statement.'
-    end
-
-    def returns
-      @storyline.describe 'Viewing Returns statement.'
     end
 
             # Accepts cart tracking.
@@ -36,6 +29,14 @@ module Minisite
         @storyline.describe "Try to view order status for non-existent cart: #{params[:cart]}"
         return render(text: "No cart found with tracking number: #{params[:cart]}.")
       end
+    end
+
+    def privacy
+      @storyline.describe 'Viewing Privacy statement.'
+    end
+
+    def returns
+      @storyline.describe 'Viewing Returns statement.'
     end
 
     def unsubscribe
@@ -59,6 +60,7 @@ module Minisite
 
     # overriding BaseController's to get email instead of offer
     def load_email_or_cart
+      Rails.logger.info("Filter: load_email_or_cart params id:#{params[:id]}")
       @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:id]) if params[:id]
       sync_session_email(@admin_customer_email)
     end

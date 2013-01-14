@@ -24,6 +24,15 @@ class Admin::Customer::Email < ActiveRecord::Base
     tracking
   end
 
+  # we have a client that wants to build a piece and they do not have a studio
+  def self.create_gypsy(attrs)
+    # create a session for this user
+    session = MyStudio::Session.create(attrs[:session])
+    attrs[:studio].sessions << session
+    attrs[:studio].save
+    create(attrs[:email].merge(my_studio_session: session))
+  end
+
   def self.send_offer_emails
     sent = 0
     Admin::Customer::Email.where('sent_at is NULL and active = ?', true).each do |email|
@@ -82,10 +91,10 @@ class Admin::Customer::Email < ActiveRecord::Base
     # Photo Bracelets
     # Photo Necklaces
     if false # Rails.env.development?
-      # This will generate an Email with an offer from every piece in a specific category
-      #  just enter in
-      # the Category you want to be generated
-      #  (ie categories[2]  will do all charms)
+             # This will generate an Email with an offer from every piece in a specific category
+             #  just enter in
+             # the Category you want to be generated
+             #  (ie categories[2]  will do all charms)
       piece_strategy_list = PieceStrategy.new(email).pick_category(categories[1])
     else
 
@@ -126,7 +135,7 @@ class Admin::Customer::Email < ActiveRecord::Base
     @previous_emails
   end
 
-          # list of all previous offers sent to the studio_session's clients
+  # list of all previous offers sent to the studio_session's clients
   def previous_offers
     raise "did you forget to set my_studio_session" if my_studio_session.nil?
     my_studio_session.previous_offers
@@ -152,20 +161,20 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   # create a friend for this session based on the
   #   current session[:cart] info
-  # the client can rename this whenever they want
+          # the client can rename this whenever they want
   def create_friend(cart)
     client_name = my_studio_session.client.name
-    names = friends.collect(&:name)
-    name = if (names.include?(client_name))
-      "#{client_name} #{cart.id}"
-    else
-      client_name
-    end
+    names       = friends.collect(&:name)
+    name        = if (names.include?(client_name))
+                    "#{client_name} #{cart.id}"
+                  else
+                    client_name
+                  end
     Admin::Customer::Friend.create(email: self, name: name)
   end
 
   def reap_friends
-    names = offers.collect{|r| r.try(:friend).try(:name)}.compact
+    names = offers.collect { |r| r.try(:friend).try(:name) }.compact
     friends.each do |friend|
       unless names.include?(friend.name)
         friend.destroy
@@ -175,18 +184,18 @@ class Admin::Customer::Email < ActiveRecord::Base
 
 
   def offers_by_friend(friend_id)
-    set = offers.reject{|r| r.suggestion?}
-    set.select{|r| r.try(:friend).try(:id) == friend_id}
+    set = offers.reject { |r| r.suggestion? }
+    set.select { |r| r.try(:friend).try(:id) == friend_id }
   end
 
   def offers_by_suggestions
-    offers.select{|r| r.suggestion?}
+    offers.select { |r| r.suggestion? }
   end
 
   def offers_by_collection(friend_id)
-    set = offers.reject{|r| r.suggestion?}
-    list = set.select{|r| r.try(:friend).try(:id) == friend_id}
-    list += set.select{|r| r.friend.nil?}
+    set  = offers.reject { |r| r.suggestion? }
+    list = set.select { |r| r.try(:friend).try(:id) == friend_id }
+    list += set.select { |r| r.friend.nil? }
     list.flatten
   end
 
