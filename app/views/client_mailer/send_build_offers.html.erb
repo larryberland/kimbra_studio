@@ -49,7 +49,7 @@
     </tr>
 
     <% count = 0 %>
-    <% @email.offers.each do |offer| %>
+    <% @email.offers.sort{|a,b|a.id <=> b.id}.each do |offer| %>
         <% count += 1; break if count > 2 %>
         <tr width='100%' bgcolor="<%= @studio.minisite.bgcolor %>">
           <td valign='top' align='right' width='220' style='width: 220px;'>

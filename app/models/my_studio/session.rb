@@ -8,9 +8,8 @@ class MyStudio::Session < ActiveRecord::Base
   belongs_to :category
   belongs_to :client, :class_name => 'MyStudio::Client'
 
-  has_many :portraits, :class_name => 'MyStudio::Portrait', :foreign_key => 'my_studio_session_id', :dependent => :destroy
-  has_many :emails, :class_name => 'Admin::Customer::Email', :foreign_key => 'my_studio_session_id', :dependent => :destroy
-  has_many :pictures, foreign_key: 'my_studio_session_id', dependent: :destroy
+  has_many :portraits, :class_name => 'MyStudio::Portrait', :foreign_key => 'my_studio_session_id', dependent: :destroy
+  has_many :emails, :class_name => 'Admin::Customer::Email', :foreign_key => 'my_studio_session_id', dependent: :destroy
 
   attr_accessible :name, :session_at, :active,
                   :studio_id, :client_id, :category_id,

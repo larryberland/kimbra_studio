@@ -5,13 +5,13 @@
   <%= t(:admin_customer_offers_index_title) %>
 </h2>
 
-<div class="row">
+<div class='row'>
 
   <% if is_admin? %>
-      <div class="span3 dataTables_filter">
+      <div id='offers' class='span3 dataTables_filter'>
         <%= form_tag new_admin_customer_email_offer_path(@email), method: :get do %>
-            <button type="submit" class="btn btn-success">
-              <i class="icon-plus icon-white"></i>
+            <button type='submit' class='btn btn-success'>
+              <i class='icon-plus icon-white'></i>
               <%= t(:admin_customer_offers_new_link) %>...
             </button>
         <% end %>
@@ -20,10 +20,11 @@
 
 </div>
 
-<table class="table table-striped table-bordered">
+<table class='table table-striped table-bordered'>
   <thead>
   <tr>
     <th>ID</th>
+    <th>Sort</th>
     <th>Studio</th>
     <th>Name</th>
     <th>Kimbra Piece</th>
@@ -38,6 +39,7 @@
   <% @admin_customer_offers.each do |offer| %>
       <tr>
         <td><%= offer.id %></td>
+        <td><%= offer.sort %></td>
         <td><%= offer.try(:email).try(:my_studio_session).try(:studio).try(:name) %></td>
         <td><%= offer.name %></td>
         <td><%= image_tag_list(offer.piece) %></td>
@@ -53,10 +55,40 @@
               <br>
               <%= link_to t(:destroy), admin_customer_email_offer_path(@email, offer), confirm: t(:link_destroy_confirm), method: :delete %>
           <% else %>
-              <i class="icon-shopping-cart"></i>
+              <i class='icon-shopping-cart' title='Offer is frozen (in cart maybe?)'></i>
           <% end %>
         </td>
       </tr>
   <% end %>
   </tbody>
 </table>
+
+<script>
+  //var startPosition;
+  //var endPosition;
+  $("#offers tbody").sortable({
+      cursor: "move",
+      /*start:function(event, ui){
+          startPosition = ui.item.prevAll().length + 1;
+      },*/
+      update: function(event, ui) {
+          //endPosition = ui.item.prevAll().length + 1;
+          var szUUIDList = "";
+          $('#myQueryList input[name=uuidWhatever]').each(function(i){
+              szUUIDList = szUUIDList + ',' + $(this).val();
+          });
+          $.getJSON('/path/to/handler.cfc', {
+              method:'YourMethod',
+              returnFormat:'JSON',
+              listUUIDs:szUUIDList
+          },
+          function(data){
+              if(data.intSuccess == 1){
+                  alert('Display order updated');
+              } else {
+                  alert('Sorry, there was a problem updating the display order.');
+              }
+          });
+       }
+  });
+</script>

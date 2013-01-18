@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130102110818) do
+ActiveRecord::Schema.define(:version => 20130118111415) do
 
   create_table "admin_customer_emails", :force => true do |t|
     t.integer  "my_studio_session_id"
@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20130102110818) do
     t.boolean  "frozen_offer",    :default => false
     t.boolean  "client"
     t.integer  "friend_id"
+    t.integer  "sort",            :default => 0
   end
 
   add_index "admin_customer_offers", ["email_id"], :name => "index_admin_customer_offers_on_email_id"
@@ -310,18 +311,6 @@ ActiveRecord::Schema.define(:version => 20130102110818) do
   end
 
   add_index "part_layouts", ["part_id"], :name => "index_part_layouts_on_part_id"
-
-  create_table "pictures", :force => true do |t|
-    t.string   "avatar"
-    t.integer  "width",                :default => 0
-    t.integer  "height",               :default => 0
-    t.boolean  "active",               :default => true
-    t.integer  "my_studio_session_id"
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
-  end
-
-  add_index "pictures", ["my_studio_session_id"], :name => "index_pictures_on_my_studio_session_id"
 
   create_table "piece_layouts", :force => true do |t|
     t.integer  "part_id"
