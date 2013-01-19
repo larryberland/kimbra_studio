@@ -39,7 +39,7 @@ class Admin::Customer::EmailsController < ApplicationController
 
   # GET /admin/customer/emails/1s6s5e5d/edit
   def edit
-
+    @offers = @admin_customer_email.offers.sort {|a,b| a.sort <=> b.sort}
   end
 
   # POST /admin/customer/emails

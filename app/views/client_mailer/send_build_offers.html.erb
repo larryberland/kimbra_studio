@@ -48,9 +48,7 @@
       </td>
     </tr>
 
-    <% count = 0 %>
-    <% @email.offers.sort{|a,b|a.id <=> b.id}.each do |offer| %>
-        <% count += 1; break if count > 2 %>
+    <% @offers[0,2].each do |offer| %>
         <tr width='100%' bgcolor="<%= @studio.minisite.bgcolor %>">
           <td valign='top' align='right' width='220' style='width: 220px;'>
             <%= link_to image_tag(offer.image.url_cache_buster,
@@ -133,31 +131,31 @@
           <tr width='100%' bgcolor="<%= @studio.minisite.bgcolor %>">
             <td width='30px' style='width:30px;'>&nbsp;</td>
             <td width='80px' style='width:80px'>
-              <%= image_tag @email.offers[2].piece.parts.first.item.front.portrait.image.thumb,
-                                          title: @email.offers[2].name,
-                                          alt: @email.offers[2].name,
-                                          class: "img-rounded",
-                                          border: 0, style: 'width: 80px;' %>
+              <%= image_tag @offers[2].piece.parts.first.item.front.portrait.image.thumb,
+                            title: @offers[2].name,
+                            alt: @offers[2].name,
+                            class: "img-rounded",
+                            border: 0, style: 'width: 80px;' %>
             </td>
             <td width='80px' style='width:80px'>
               <%= image_tag (@studio.background_dark? ? 'plus_dark.gif' : 'plus_light.gif'), style: 'width: 80px' %>
             </td>
             <td width='80px' style='width:80px'>
-              <%= image_tag @email.offers[2].piece.image.thumb,
-                                          title: @email.offers[2].name,
-                                          alt: @email.offers[2].name,
-                                          class: "img-rounded",
-                                          border: 0, style: 'width: 80px; height: 80px;' %>
+              <%= image_tag @offers[2].piece.image.thumb,
+                            title: @offers[2].name,
+                            alt: @offers[2].name,
+                            class: "img-rounded",
+                            border: 0, style: 'width: 80px; height: 80px;' %>
             </td>
             <td width='80px' style='width:80px'>
               <%= image_tag (@studio.background_dark? ? 'equals_dark.gif' : 'equals_light.gif'), style: 'width: 80px' %>
             </td>
             <td width='80px' style='width:80px'>
-              <%= image_tag @email.offers[2].image.url_cache_buster,
-                                                        title: @email.offers[2].name,
-                                                        alt: @email.offers[2].name,
-                                                        class: "img-rounded",
-                                                        border: 0, style: 'width: 80px; height: 80px;' %>
+              <%= image_tag @offers[2].image.url_cache_buster,
+                            title: @offers[2].name,
+                            alt: @offers[2].name,
+                            class: "img-rounded",
+                            border: 0, style: 'width: 80px; height: 80px;' %>
             </td>
             <td width='30' style='width:30px;'>&nbsp;</td>
           </tr>

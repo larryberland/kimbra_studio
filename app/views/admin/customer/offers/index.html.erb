@@ -1,5 +1,8 @@
 <%# DANGER, WILL ROBINSON - this table's columns are referenced in the javascript - so consider your changes carefully.  %>
 <%= javascript_include_tag 'data_tables/offers' %>
+<%= coffee_script_tag do %>
+    window.emailTrack = '<%= @email.tracking %>'
+<% end %>
 
 <h2>
   <%= t(:admin_customer_offers_index_title) %>
@@ -8,7 +11,10 @@
 <div class='row'>
 
   <% if is_admin? %>
-      <div id='offers' class='span3 dataTables_filter'>
+      <div class='span2'>
+        <small>Drag and drop rows to re-order.</small>
+      </div>
+      <div class='span3 dataTables_filter'>
         <%= form_tag new_admin_customer_email_offer_path(@email), method: :get do %>
             <button type='submit' class='btn btn-success'>
               <i class='icon-plus icon-white'></i>
@@ -20,11 +26,11 @@
 
 </div>
 
-<table class='table table-striped table-bordered'>
+<table id='offers_table' class='table table-striped table-bordered datatables-hidden'>
   <thead>
   <tr>
-    <th>ID</th>
     <th>Sort</th>
+    <th>ID</th>
     <th>Studio</th>
     <th>Name</th>
     <th>Kimbra Piece</th>
@@ -32,14 +38,15 @@
     <th>Description</th>
     <th>Activation code</th>
     <th>Active</th>
+    <th>Frozen</th>
     <th>Actions</th>
   </tr>
   </thead>
   <tbody>
   <% @admin_customer_offers.each do |offer| %>
-      <tr>
-        <td><%= offer.id %></td>
+      <tr id='<%= offer.id %>'>
         <td><%= offer.sort %></td>
+        <td><%= offer.id %></td>
         <td><%= offer.try(:email).try(:my_studio_session).try(:studio).try(:name) %></td>
         <td><%= offer.name %></td>
         <td><%= image_tag_list(offer.piece) %></td>
@@ -47,6 +54,7 @@
         <td><%= offer.description %></td>
         <td><%= offer.activation_code %></td>
         <td><%= offer.active %></td>
+        <td><%= 'frozen' if offer.frozen_offer %></td>
         <td>
           <%= link_to t(:show), admin_customer_email_offer_path(@email, offer) %>
           <% unless offer.frozen_offer? %>
@@ -62,33 +70,3 @@
   <% end %>
   </tbody>
 </table>
-
-<script>
-  //var startPosition;
-  //var endPosition;
-  $("#offers tbody").sortable({
-      cursor: "move",
-      /*start:function(event, ui){
-          startPosition = ui.item.prevAll().length + 1;
-      },*/
-      update: function(event, ui) {
-          //endPosition = ui.item.prevAll().length + 1;
-          var szUUIDList = "";
-          $('#myQueryList input[name=uuidWhatever]').each(function(i){
-              szUUIDList = szUUIDList + ',' + $(this).val();
-          });
-          $.getJSON('/path/to/handler.cfc', {
-              method:'YourMethod',
-              returnFormat:'JSON',
-              listUUIDs:szUUIDList
-          },
-          function(data){
-              if(data.intSuccess == 1){
-                  alert('Display order updated');
-              } else {
-                  alert('Sorry, there was a problem updating the display order.');
-              }
-          });
-       }
-  });
-</script>

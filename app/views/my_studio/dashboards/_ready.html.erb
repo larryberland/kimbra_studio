@@ -29,7 +29,11 @@
               <td><%= date_short email.created_at %></td>
               <td><%= email.created_at.to_s(:javascript) %></td>
               <% if is_admin? %>
-                  <td><%= email.in_send_offers_queue? ? 'queued' : link_to('Edit Portraits', minisite_email_offers_path(email.tracking)) %></td>
+                  <td>
+                    <%= email.in_send_offers_queue? ? 'queued' : link_to('Edit Portraits', minisite_email_offers_path(email.tracking)) %>
+                    <br>
+                    <%= link_to "#{email.offers.size.to_i.to_words} #{t(:offers)}", admin_customer_email_offers_path(email.tracking), title: 'View All Offers for this Email' %>
+                  </td>
               <% end %>
             </tr>
         <% end %>

@@ -389,6 +389,18 @@ class Admin::Customer::Offer < ActiveRecord::Base
     cart and cart.has_offer?(id)
   end
 
+  def update_sort_position(from, to)
+    # Not optimized for blazing spped, but good enough.
+    from = from.to_i
+    to = to.to_i
+    list_of_offers = self.email.offers.sort {|a,b| a.sort <=> b.sort}
+    # Pluck out the item to move and insert it into the required spot.
+    item_to_move = list_of_offers.delete_at(from)
+    list_of_offers.insert(to, item_to_move)
+    # Now update sort attribute with new order.
+    list_of_offers.each_with_index {|o,index| o.update_attribute :sort, index}
+  end
+
   private #===========================================================================
 
   def piece_create_default_and_tracking

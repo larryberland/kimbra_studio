@@ -22,6 +22,7 @@ class ClientMailer < ActionMailer::Base
 
   def send_build_offers(email_id, view_only=false)
     @email = Admin::Customer::Email.find(email_id)
+    @offers = @email.offers.sort {|a,b|a.sort <=> b.sort}
     @client = @email.my_studio_session.client
     @studio = @email.my_studio_session.studio
     raise "this email already unsubscribed: #{@client.email}" if Unsubscribe.exists?(email: @client.email)

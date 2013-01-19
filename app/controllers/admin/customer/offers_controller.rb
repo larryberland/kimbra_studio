@@ -2,15 +2,13 @@ class Admin::Customer::OffersController < ApplicationController
 
   before_filter :load_email
   before_filter :set_by_tracking
+  skip_filter :authenticate_user!, only: :update_sort
 
   # GET /admin/customer/offers
   # GET /admin/customer/offers.json
   def index
-    if @email
-      @admin_customer_offers = @email.offers
-    else
-      @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
-    end
+    @email = Admin::Customer::Email.find_by_tracking(params[:email_id]) if @email.nil?
+    @admin_customer_offers = @email.offers
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @admin_customer_offers }
@@ -94,6 +92,17 @@ class Admin::Customer::OffersController < ApplicationController
       format.html { redirect_to admin_customer_email_offers_url(@email) }
       format.json { head :ok }
     end
+  end
+
+  def update_sort
+    # "id"=>"115", "fromPosition"=>"3", "toPosition"=>"0"
+    offer = Admin::Customer::Offer.find(params[:id])
+    offer.update_sort_position(params['fromPosition'], params['toPosition'])
+    render json: {head: :ok}
+  rescue e
+    Rails.logger.error e.message
+    Rails.logger.error e.backtrace.join("\n")
+    render json: {head: :not_ok}
   end
 
   private #===========================================================================

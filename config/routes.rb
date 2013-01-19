@@ -24,6 +24,9 @@ KimbraStudio::Application.routes.draw do
           post :send_offers
         end
         resources :offers do
+          collection do
+            post :update_sort
+          end
           resources :items
         end
       end

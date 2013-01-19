@@ -136,7 +136,7 @@ module ApplicationHelper
       options[:version] ||= :thumb
       content_tag(:div, :class => 'image-thumb') do
         cw_span(model_with_carrier_wave_image) +
-            content_tag(:br) +
+            tag(:br) +
             image_tag(cw_url(model_with_carrier_wave_image, options[:image], options[:version]))
       end
     end
