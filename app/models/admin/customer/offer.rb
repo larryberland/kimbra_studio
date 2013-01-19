@@ -18,7 +18,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
                   :name, :email, :description, :frozen_offer,
                   :piece, :custom_layout, :item_options_list,
                   :piece, :piece_id,
-                  :tracking, :active, :activation_code,
+                  :tracking, :active, :activation_code, :sort,
                   :portrait_id, :client,
                   :friend, :friend_id
 
