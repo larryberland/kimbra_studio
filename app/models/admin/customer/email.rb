@@ -146,7 +146,6 @@ class Admin::Customer::Email < ActiveRecord::Base
   end
 
   def send_build_offers
-    puts "sending BUILD_OFFERS"
     ClientMailer.delay.send_build_offers(self.id, false)
   end
 
