@@ -19,6 +19,7 @@
               <th>Fix</th>
               <th>Reorder<br>offers</th>
               <th>Send</th>
+              <th class='id'>Id</th>
           <% end %>
         </tr>
         </thead>
@@ -43,6 +44,7 @@
                                 send_offers_admin_customer_email_url(email),
                                 method: :post %>
                   </td>
+                  <td class='id'><%= email.id %></td>
               <% end %>
             </tr>
         <% end %>

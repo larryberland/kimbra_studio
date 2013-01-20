@@ -79,6 +79,8 @@ table.table thead .sorting_desc_disabled {
   display: none;
 }
 
+.id {text-align: right !important;}
+
 // Used for slideshow on Home page to prevent overlap with text on tablets.
 .overflow-hidden {
   overflow: hidden;

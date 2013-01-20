@@ -17,6 +17,7 @@
           <th>New portrait?</th>
           <th>Complete?</th>
           <th><span class='explainer' title='Need at least 2 portraits to generate an email.'>Actions</span></th>
+          <th class='id'>Id</th>
       <% end %>
     </tr>
     </thead>
@@ -44,6 +45,7 @@
               <td title="portraits have been uploaded in last 2 days"><%= session.portraits.last_day.count > 0 ? '&#x2713;'.html_safe : '&#x2718;'.html_safe %></td>
               <td class="first span2"><%= complete?(session) %></td>
               <td><span id="generate_email_<%= session.id %>"><%= actions_for_session(session) %></span></td>
+              <td class='id'><%= session.id %></td>
           <% end %>
         </tr>
     <% end %>
@@ -60,6 +62,7 @@
           <td></td>
           <td></td>
           <% if is_admin? %>
+              <td></td>
               <td></td>
               <td></td>
               <td></td>

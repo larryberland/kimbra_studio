@@ -27,6 +27,7 @@
           <th>shipped for datatables</th>
           <% if current_user.admin? %>
               <th>Studio</th>
+              <th class='id'>Id</th>
           <% end %>
         </tr>
         </thead>
@@ -36,7 +37,7 @@
             <% session.emails.each do |email| %>
                 <tr>
                   <td>
-                    <%= link_to session.try(:title), edit_my_studio_session_path(session), title: t(:my_studio_sessions_edit_link) %>
+                    <%= link_to session.try(:title), edit_my_studio_session_path(session), title: "id: #{session.id}" %>
                     <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %>
                   </td>
                   <td><%= email.try(:offers).try(:count) %></td>
@@ -51,6 +52,7 @@
                   <td><%= email.most_recent_shipment_at.to_s(:javascript) if email.most_recent_shipment_at %></td>
                   <% if current_user.admin? %>
                       <td><%= session.studio.name %></td>
+                      <td class='id'><%= email.id %></td>
                   <% end %>
                 </tr>
             <% end %>

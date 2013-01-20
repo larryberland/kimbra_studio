@@ -30,7 +30,7 @@
   <thead>
   <tr>
     <th>Sort</th>
-    <th>ID</th>
+    <th class='id'>Id</th>
     <th>Studio</th>
     <th>Name</th>
     <th>Kimbra Piece</th>
@@ -46,7 +46,7 @@
   <% @admin_customer_offers.each do |offer| %>
       <tr id='<%= offer.id %>'>
         <td><%= offer.sort %></td>
-        <td><%= offer.id %></td>
+        <td class='id'><%= offer.id %></td>
         <td><%= offer.try(:email).try(:my_studio_session).try(:studio).try(:name) %></td>
         <td><%= offer.name %></td>
         <td><%= image_tag_list(offer.piece) %></td>
