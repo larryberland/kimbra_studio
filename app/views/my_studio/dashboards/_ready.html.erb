@@ -10,14 +10,14 @@
       <table class="table table-striped table-bordered datatables-hidden" id='ready_emails_table'>
         <thead>
         <tr>
-          <th>Photo session <i class="icon-user"/></th>
+          <th>Photo session <i class="icon-user"> </i></th>
           <th>Client</th>
           <th>How many<br/>offers</th>
           <th>Created</th>
           <th>Created for datatables</th>
           <% if is_admin? %>
               <th>Fix</th>
-              <th>Reorder<br>offers</th>
+              <th>Reorder<br>or edit</th>
               <th>Send</th>
               <th class='id'>Id</th>
           <% end %>
@@ -36,7 +36,7 @@
                     <%= email.in_send_offers_queue? ? 'queued' : button_to('Edit portraits for sending', minisite_email_offers_path(email.tracking), method: :get) %>
                   </td>
                   <td>
-                    <%= button_to 'Reorder', admin_customer_email_offers_path(email.tracking), method: :get, title: 'View and reorder all offers for this email' %>
+                    <%= button_to 'Reorder or edit', admin_customer_email_offers_path(email.tracking), method: :get, title: 'View and reorder all offers for this email, also edit offers' %>
                   </td>
                   <td>
                     <% message = email.sent_at? ? "Already sent #{time_short_index email.sent_at}. Send again." : 'Queue to send!' %>
