@@ -13,6 +13,8 @@
   <% if is_admin? %>
       <div class='span2'>
         <small>Drag and drop rows to re-order.</small>
+        <br>
+        <%= button_to('Edit portraits', minisite_email_offers_path(@email.tracking), method: :get) %>
       </div>
       <div class='span3 dataTables_filter'>
         <%= form_tag new_admin_customer_email_offer_path(@email), method: :get do %>
