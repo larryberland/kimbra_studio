@@ -147,7 +147,7 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   def send_build_offers
     puts "sending BUILD_OFFERS"
-    ClientMailer.send_build_offers(self.id, false).deliver  # TODO add .delay back
+    ClientMailer.delay.send_build_offers(self.id, false)
   end
 
   def in_send_offers_queue?
