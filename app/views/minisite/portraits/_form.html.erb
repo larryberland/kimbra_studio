@@ -24,20 +24,20 @@
       <div class='span7'>
 
         <span class='btn btn-success fileinput-button'>
-          <i class='icon-plus icon-white'></i>
+          <i class='icon-plus icon-white'/>
           <span><%= t('minisite.portraits.index.add_files') %></span>
           <%= f.file_field :file, :multiple => true %>
         </span>
         <button type="submit" class='btn btn-primary start'>
-          <i class="icon-upload icon-white"></i>
+          <i class="icon-upload icon-white"/>
           <%= t('photos.start_upload') %>
         </button>
         <button type="reset" class="btn btn-warning cancel">
-          <i class="icon-ban-circle icon-white"></i>
+          <i class="icon-ban-circle icon-white"/>
           <%= t('photos.cancel_upload') %>
         </button>
         <!--<button type="button" class="btn btn-danger delete">-->
-          <!--<i class="icon-trash icon-white"></i>-->
+          <!--<i class="icon-trash icon-white"/>-->
           <!--<%= t('photos.delete_selected') %>-->
         <!--</button>-->
         <%# label_tag 'select_all', 'Select all: ', style: 'display: inline-block' %>
@@ -83,20 +83,20 @@
   </div>
   <div class="modal-footer">
     <a class="btn modal-download" target="_blank">
-      <i class="icon-download"></i>
+      <i class="icon-download"/>
       <span>Download</span>
     </a>
     <a class="btn btn-success modal-play modal-slideshow" data-slideshow="5000">
-      <i class="icon-play icon-white"></i>
+      <i class="icon-play icon-white"/>
       <span>Slideshow</span>
     </a>
     <a class="btn btn-info modal-prev">
-      <i class="icon-arrow-left icon-white"></i>
+      <i class="icon-arrow-left icon-white"/>
       <span>Previous</span>
     </a>
     <a class="btn btn-primary modal-next">
       <span>Next</span>
-      <i class="icon-arrow-right icon-white"></i>
+      <i class="icon-arrow-right icon-white"/>
     </a>
   </div>
 </div>
@@ -131,7 +131,7 @@
     </td>
     <td class="start">{% if (!o.options.autoUpload) { %}
       <button class="btn btn-primary">
-        <i class="icon-upload icon-white"></i>
+        <i class="icon-upload icon-white"/>
         <%= t('photos.template.start') %>
       </button>
       {% } %}
@@ -141,7 +141,7 @@
     {% } %}
     <td class="cancel">{% if (!i) { %}
       <button class="btn btn-warning">
-        <i class="icon-ban-circle icon-white"></i>
+        <i class="icon-ban-circle icon-white"/>
         <%= t('photos.template.cancel') %>
       </button>
       {% } %}

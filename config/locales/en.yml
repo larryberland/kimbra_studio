@@ -384,11 +384,11 @@ en:
     # my_studio/dashboard
     dashboards:
       emails:
-        title: "Offer Emails"
+        title: "Offer emails results"
       ready:
-        title: "Offer Emails ready to be sent"
+        title: "Offer emails ready to QA and send"
       sessions:
-        title: "ClickPLUS Photo Sessions"
+        title_html: "ClickPLUS Photo Sessions <small>(%{count} waiting for processing)</small>"
       show:
         create_photo_session: "Create new photo session and upload portraits now!"
         revenue: "Total revenue so far: %{purchases} Your commission (at %{rate}%): %{total}"

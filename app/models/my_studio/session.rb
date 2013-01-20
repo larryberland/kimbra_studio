@@ -48,6 +48,8 @@ class MyStudio::Session < ActiveRecord::Base
               like_exp, like_exp, like_exp).joins(:client).order('my_studio_clients.updated_at desc, my_studio_sessions.updated_at desc')
   }
 
+  scope :ready_to_generate_email, where('finished_uploading_at IS NOT NULL').includes(:emails).where('admin_customer_emails.id IS NULL')
+
   def complete?
     portraits and portraits.count >= MIN_PORTRAITS
   end
@@ -84,7 +86,7 @@ class MyStudio::Session < ActiveRecord::Base
     finished_uploading_at.present?
   end
 
-          # allow the forms to send in a text name
+  # allow the forms to send in a text name
   def category_name=(category_name)
     self.category = Category.find_or_initialize_by_name(category_name)
   end

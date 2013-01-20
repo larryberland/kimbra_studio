@@ -23,7 +23,7 @@ module Admin
           @stories = Story.on_date(date)
           @heading = "Stories for #{view_context.date_with_day(date)}".html_safe
         when 'by_ip'
-          @stories = Story.where(:ip_address => ip).order("date DESC")
+          @stories = Story.where(:ip_address => ip).order("created_at DESC")
           @heading = "Stories from #{ip}"
       end
     end

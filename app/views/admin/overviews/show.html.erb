@@ -3,14 +3,16 @@
     <%= render 'my_studio/dashboards/sessions', sessions: @sessions %>
   </div>
 </div>
-<div class='row'>
-  <div class='span12'>
-    <%= render 'my_studio/dashboards/emails', sessions: @sessions %>
-  </div>
-</div>
+
 <div class='row'>
   <div class='span12'>
     <%= render 'my_studio/dashboards/ready', sessions: @sessions, emails: @emails %>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='span12'>
+    <%= render 'my_studio/dashboards/emails', sessions: @sessions %>
   </div>
 </div>
 

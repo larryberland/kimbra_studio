@@ -10,13 +10,15 @@
       <table class="table table-striped table-bordered datatables-hidden" id='ready_emails_table'>
         <thead>
         <tr>
-          <th>Photo session</th>
+          <th>Photo session <i class="icon-user"/></th>
           <th>Client</th>
           <th>How many<br/>offers</th>
           <th>Created</th>
           <th>Created for datatables</th>
           <% if is_admin? %>
-              <th>Actions</th>
+              <th>Fix</th>
+              <th>Reorder<br>offers</th>
+              <th>Send</th>
           <% end %>
         </tr>
         </thead>
@@ -24,15 +26,22 @@
         <% emails.each do |email| %>
             <tr>
               <td><%= link_to email.my_studio_session.name, my_studio_session_path(email.my_studio_session), title: email.my_studio_session.studio.name %></td>
-              <td><%= content_tag :span, email.my_studio_session.client.name, title: email.my_studio_session.studio.name %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
+              <td><%= content_tag :span, email.my_studio_session.client.name, title: email.my_studio_session.client.email %> <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: email.my_studio_session.client.email) %></td>
               <td><%= email.try(:offers).try(:count).to_words %></td>
               <td><%= date_short email.created_at %></td>
               <td><%= email.created_at.to_s(:javascript) %></td>
               <% if is_admin? %>
                   <td>
-                    <%= email.in_send_offers_queue? ? 'queued' : link_to('Edit Portraits', minisite_email_offers_path(email.tracking)) %>
-                    <br>
-                    <%= link_to "#{email.offers.size.to_i.to_words} #{t(:offers)}", admin_customer_email_offers_path(email.tracking), title: 'View All Offers for this Email' %>
+                    <%= email.in_send_offers_queue? ? 'queued' : button_to('Edit Portraits and Send', minisite_email_offers_path(email.tracking), method: :get) %>
+                  </td>
+                  <td>
+                    <%= button_to 'Reorder', admin_customer_email_offers_path(email.tracking), method: :get, title: 'View and reorder all offers for this email' %>
+                  </td>
+                  <td>
+                    <% message = email.sent_at? ? "Already sent #{time_short_index email.sent_at}. Send again." : 'Queue to send!' %>
+                    <%= link_to message,
+                                send_offers_admin_customer_email_url(email),
+                                method: :post %>
                   </td>
               <% end %>
             </tr>

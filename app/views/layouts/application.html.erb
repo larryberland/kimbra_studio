@@ -34,7 +34,7 @@
 
     <% if notice || alert %>
         <div class="alert error rounded row">
-          <i class="icon-hand-right"> </i>
+          <i class="icon-hand-right"/>
           <button type="button" class="close" data-dismiss="alert"><%= t(:alert_close_button) %></button>
           <%= raw "<p> #{notice}</p>" if notice %>
           <%= raw "<p><strong>#{t(:snap)}</strong>#{alert}</p>" if alert %>

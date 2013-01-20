@@ -3,7 +3,7 @@ class Story < ActiveRecord::Base
   attr_accessor :crawler
 
   has_many :storylines, dependent: :destroy
-  belongs_to :client, :class_name => 'MyStudio::Client'
+  belongs_to :client, class_name: 'MyStudio::Client'
   belongs_to :studio
 
   @@offset = Time.now.in_time_zone("Eastern Time (US & Canada)").formatted_offset
@@ -30,36 +30,39 @@ class Story < ActiveRecord::Base
 
   def self.setup(request, controller_name, action_name, client, studio, is_client)
     user_agent = UserAgent.parse(request.user_agent)
-    if user_agent.crawler? || action_name == "health_check"  || !is_client
+    if user_agent.bot? || !is_client
       # Make objects that will essentially ignore all updates and never get saved.
-      story = Story.new(:crawler => true)
-      storyline = Storyline.new(:crawler => true)
+      story = Story.new(crawler: true)
+      storyline = Storyline.new(crawler: true)
     else
       session_id = request.session_options[:id]
-      if story = Story.where(:session_id => session_id).last
+      if story = Story.where(session_id: session_id).last
         # Update duration of previous storyline if there is one.
         if previous_storyline = story.storylines.last
           previous_storyline.update_attribute :seconds, (Time.now - previous_storyline.created_at)
         end
       else
         referer = request.referer
-        # TODO Change this to Larry and Jim's home IP addresses and Clarity.
+        # TODO Add Larry's home IP addresses.
+        puts "REFERRER: #{referer}"
         referer = 'Clarity' if request.remote_ip == '24.73.119.18'
+        referer = 'Jim' if request.remote_ip == '71.180.211.214'
+        referer = 'localhost' if request.referer.match(/localhost/i)
         story = Story.create(
-            :session_id => session_id,
-            :referer => referer,
-            :browser => user_agent.browser,
-            :version => user_agent.version,
-            :os => user_agent.os,
-            :ip_address => request.remote_ip,
-            :name => client.try(:name),
-            :client => client,
-            :studio => studio)
+            session_id: session_id,
+            referer: referer,
+            browser: user_agent.browser,
+            version: user_agent.version.to_s,
+            os: user_agent.os,
+            ip_address: request.remote_ip,
+            name: client.try(:name),
+            client: client,
+            studio: studio)
       end
       # Create a storyline for the current request/action. It will get updated later with the correct description.
       storyline = story.storylines.create(
-          :url => "#{controller_name}/#{action_name}",
-          :description => 'no story written yet')
+          url: "#{controller_name}/#{action_name}",
+          description: 'no story written yet')
     end
     return story, storyline
   end
@@ -69,9 +72,9 @@ class Story < ActiveRecord::Base
   end
 
   def self.stats
-      {:total => Story.count,
-       :browsers => Story.group(:browser).count,
-       :oses => Story.group(:os).count}
+      {total: Story.count,
+       browsers: Story.group(:browser).count,
+       oses: Story.group(:os).count}
     end
 
 end

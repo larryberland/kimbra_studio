@@ -10,11 +10,11 @@ If you would like to schedule a photo session with us please send us a note!
 
 Best regards from the folks at <%= @studio.name %>
 
-------------------------------------------------------------------------------
-
-You can unsubscribe here: <%= unsubscribe_minisite_email_url(@email.tracking) %>
+-------------------------------------------------------------------------------------------------------------------
 
 <%= @studio.name %>
 <%= @studio.address_1 %>
 <%= @studio.city %>, <%= @studio.state.abbreviation %>
 <%= number_to_phone @studio.phone_number, area_code: true %>
+
+We are committed to no spam! If this email is unwelcome, you can unsubscribe here: <%= unsubscribe_minisite_email_url(@email.tracking) %>

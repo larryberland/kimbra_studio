@@ -17,8 +17,8 @@
       <ul class='nav pull-right'>
         <!-- devise signup, logout, edit account -->
         <% if user_signed_in? %>
-            <li><%= link_to "Edit account", edit_user_registration_path, id: 'Editaccount' %></li>
-            <li><%= link_to "Log out", destroy_user_session_path, method: :delete, id: 'Logout' %>
+            <li><%= link_to "Edit account", edit_user_registration_path, id: 'Editaccount', title: current_user.name %></li>
+            <li><%= link_to "Log out", destroy_user_session_path, method: :delete, id: 'Logout', title: current_user.name %>
             </li>
             <%= javascript_tag do %>
                 window.currentUserName = '<%= current_user.name %>'

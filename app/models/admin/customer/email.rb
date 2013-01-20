@@ -145,13 +145,14 @@ class Admin::Customer::Email < ActiveRecord::Base
     my_studio_session.name
   end
 
-  def send_offers(offer_id)
-    ClientMailer.delay.send_offers(self.id, offer_id)
+  def send_build_offers
+    puts "sending BUILD_OFFERS"
+    ClientMailer.send_build_offers(self.id, false).deliver  # TODO add .delay back
   end
 
   def in_send_offers_queue?
     # Look for a send_offer job waiting.
-    jobs = DelayedJob.where(" handler like '%:send_offers%' ")
+    jobs = DelayedJob.where(" handler like '%:send_build_offers%' ")
     jobs.detect { |job| YAML.load(job.handler).args.include? self.id }.present?
   end
 

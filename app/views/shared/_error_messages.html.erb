@@ -1,6 +1,6 @@
 <% if record and record.errors.present? %>
     <div class="alert error rounded">
-      <i class="icon-hand-right"> </i>
+      <i class="icon-hand-right"/>
       <button type="button" class="close" data-dismiss="alert"><%= t(:alert_close_button) %></button>
       <ul>
         <% messages = record.to_error_messages if record.respond_to?(:to_error_messages) %>

@@ -26,7 +26,7 @@ gem 'state_machine', '~> 1.1'
 
 gem 'stripe'
 
-gem "useragent", :git => "https://github.com/jilion/useragent.git"
+gem 'useragent'
 gem 'haml'
 gem 'valid_email'
 
