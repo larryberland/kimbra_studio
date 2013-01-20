@@ -1,5 +1,3 @@
-puts "include File Platypus::FormBuilder"
-
 module Platypus::FormBuilder
   # ActionPack's metaprogramming would have done this for us, if FormHelper#labeled_input
   # had been defined  at load.   Instead we define it ourselves here.

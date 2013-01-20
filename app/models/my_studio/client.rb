@@ -10,6 +10,8 @@ class MyStudio::Client < ActiveRecord::Base
             format:   {with: CustomValidators::Emails.email_validator},
             length:   {maximum: 50}
 
+  before_validation :filter_data
+
   def to_error_messages
     kustom = {}
     messages =[]
@@ -34,4 +36,10 @@ class MyStudio::Client < ActiveRecord::Base
     super num.to_s.gsub(/\D/,'')[0,10]
   end
 
+  private
+
+  def filter_data
+    self.email.downcase! if email.present?
+    true
+  end
 end

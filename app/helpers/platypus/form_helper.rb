@@ -1,4 +1,3 @@
-puts "include File Platypus::FormHelper"
 require 'platypus/form_builder.rb'
 
 # Inside LRD::FormHelper, add this method:

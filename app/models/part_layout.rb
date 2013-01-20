@@ -1,5 +1,5 @@
 class PartLayout < ActiveRecord::Base
-  attr_accessible :operator, :layout, :layout_attributes
+  attr_accessible :operator, :layout, :layout_attributes, :part
 
   belongs_to :part, :class_name => 'Admin::Merchandise::Part'
 

@@ -71,6 +71,14 @@ FactoryGirl.define do
     end
 
   end
+  #create_table "categories", :force => true do |t|
+  #  t.string   "name"
+  #  t.datetime "created_at"
+  #  t.datetime "updated_at"
+  #end
+  factory :category do
+    name 'Photo Charms'
+  end
 
   #create_table "countries", :force => true do |t|
   #  t.string "name"
@@ -112,7 +120,7 @@ FactoryGirl.define do
     address_1 '322 Highland Ave'
     address_2 'Suite 123'
     city 'Plentywood'
-    association :state, factory: :state, strategy: :build
+    association :state, factory: :state, strategy: :create
     zip_code '59254'
     association :country, factory: :country, strategy: :build
     phone_number '406.765.1845'
@@ -217,23 +225,5 @@ FactoryGirl.define do
   #  height 400
   #end
   #
-  ##create_table "my_studio_sessions", :force => true do |t|
-  ##  t.integer  "studio_id"
-  ##  t.integer  "client_id"
-  ##  t.integer  "category_id"
-  ##  t.string   "name"
-  ##  t.datetime "session_at"
-  ##  t.boolean  "active",      :default => true
-  ##  t.datetime "created_at"
-  ##  t.datetime "updated_at"
-  ##end
-  #factory :session, class: MyStudio::Session do
-  #  association :studio
-  #  association :client
-  #  association :category
-  #  name 'rspec studio session'
-  #  active true
-  #  session_at Time.now
-  #end
 
 end

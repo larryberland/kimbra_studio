@@ -3,7 +3,7 @@
 class AmazonUploader < BaseUploader
 
 
-  storage :fog # always use fog for this
+  storage Rails.env.test? ? :file : :fog
 
   # Create different versions of your uploaded files:
   version :thumb do

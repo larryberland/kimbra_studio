@@ -4,6 +4,7 @@ describe Studio do
 
   before(:each) do
     @s = create(:studio) # use factory_girl
+
     @s.should be_persisted
   end
 
