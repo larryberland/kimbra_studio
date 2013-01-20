@@ -3,6 +3,8 @@
   <%= render "dev_debug" if Rails.env.development? %>
 </div>
 
+<%= render 'admin_buttons' if is_admin? %>
+
 <% if @admin_customer_offers.size > 0 %>
     <% @admin_customer_offers.sort { |a, b| a.sort <=> b.sort }.each do |offer| %>
         <div id="<%= "div_offer_#{offer.id}" %>" class='row'>
@@ -11,9 +13,4 @@
     <% end %>
 <% end %>
 
-<% if is_admin? %>
-    <% btn_message = @admin_customer_email.sent_at? ? "This email already sent on #{time_short_index @admin_customer_email.sent_at}. Click to send again." : 'If all offers are fixed, click me to send the offer email!' %>
-    <%= button_to btn_message,
-                  send_offers_admin_customer_email_url(@admin_customer_email),
-                  method: :post %>
-<% end %>
+<%= render 'admin_buttons' if is_admin? %>

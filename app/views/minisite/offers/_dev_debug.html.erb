@@ -1,8 +1,32 @@
 <br>
-<%= "session: cart_id: #{session[:cart_id]} email:#{session[:email_id]} "%>
-<%= "offer_id:#{@admin_customer_offers.first.id}" if @admin_customer_offers.present?%>
-<br>
-<%= "models:"%>
-<%= @cart.present? ? "@cart: #{@cart.id}" : "@cart not set"%>
-<%= "email:#{@admin_customer_email.id} tracking:#{@admin_customer_email.tracking} offers.size:#{@admin_customer_email.offers.size}"%>
-<%= "custom:#{@admin_customer_offers.size}" if @admin_customer_offers.present?%>
+<table class="table table-bordered">
+  <tr>
+    <th>Scope</th>
+    <th>cart</th>
+    <th>admin_customer_email</th>
+    <th>@admin_customer_email.offers</th>
+    <th>@admin_customer_offers</th>
+  </tr>
+  <tr>
+    <td>session</td>
+    <td><%= "id: #{session[:cart_id]}" %></td>
+    <td><%= "id: #{session[:email_id]}" %></td>
+    <td></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>models</td>
+    <td><%= @cart.present? ? "id: #{@cart.id}" : "@cart not set" %></td>
+    <td><%= "id: #{@admin_customer_email.id} tracking: #{@admin_customer_email.tracking}" %></td>
+    <td>
+      <%= "ids: #{@admin_customer_email.offers.collect(&:id).join(', ')}" if @admin_customer_email.present? %>
+      <br>
+      <%= "size: #{@admin_customer_email.offers.size}" if @admin_customer_email.present? %>
+    </td>
+    <td>
+      <%= "ids: #{@admin_customer_offers.collect(&:id).join(', ')}" if @admin_customer_offers.present? %>
+      <br>
+      <%= "size: #{@admin_customer_offers.size}" if @admin_customer_offers.present? %>
+    </td>
+  </tr>
+</table>

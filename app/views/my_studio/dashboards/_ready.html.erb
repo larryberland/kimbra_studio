@@ -32,7 +32,7 @@
               <td><%= email.created_at.to_s(:javascript) %></td>
               <% if is_admin? %>
                   <td>
-                    <%= email.in_send_offers_queue? ? 'queued' : button_to('Edit Portraits and Send', minisite_email_offers_path(email.tracking), method: :get) %>
+                    <%= email.in_send_offers_queue? ? 'queued' : button_to('Edit portraits for sending', minisite_email_offers_path(email.tracking), method: :get) %>
                   </td>
                   <td>
                     <%= button_to 'Reorder', admin_customer_email_offers_path(email.tracking), method: :get, title: 'View and reorder all offers for this email' %>
