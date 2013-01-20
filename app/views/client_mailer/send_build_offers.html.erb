@@ -132,28 +132,28 @@
             <td width='30px' style='width:30px;'>&nbsp;</td>
             <td width='80px' style='width:80px'>
               <%= image_tag @offers[2].piece.parts.first.item.front.portrait.image.thumb,
-                            title: @offers[2].name,
-                            alt: @offers[2].name,
+                            title: 'your portrait',
+                            alt: 'your portrait',
                             class: "img-rounded",
                             border: 0, style: 'width: 80px;' %>
             </td>
             <td width='80px' style='width:80px'>
-              <%= image_tag (@studio.background_dark? ? 'plus_dark.gif' : 'plus_light.gif'), style: 'width: 80px' %>
+              <%= image_tag (@studio.background_dark? ? 'plus_dark.gif' : 'plus_light.gif'), title: 'plus', style: 'width: 80px' %>
             </td>
             <td width='80px' style='width:80px'>
               <%= image_tag @offers[2].piece.image.thumb,
-                            title: @offers[2].name,
-                            alt: @offers[2].name,
+                            title: 'our jewelry',
+                            alt: 'our jewelry',
                             class: "img-rounded",
                             border: 0, style: 'width: 80px; height: 80px;' %>
             </td>
             <td width='80px' style='width:80px'>
-              <%= image_tag (@studio.background_dark? ? 'equals_dark.gif' : 'equals_light.gif'), style: 'width: 80px' %>
+              <%= image_tag (@studio.background_dark? ? 'equals_dark.gif' : 'equals_light.gif'), title: 'equals', style: 'width: 80px' %>
             </td>
             <td width='80px' style='width:80px'>
               <%= image_tag @offers[2].image.url_cache_buster,
-                            title: @offers[2].name,
-                            alt: @offers[2].name,
+                            title: 'your heirloom',
+                            alt: 'your heirloom',
                             class: "img-rounded",
                             border: 0, style: 'width: 80px; height: 80px;' %>
             </td>
