@@ -138,7 +138,7 @@
                             border: 0, style: 'width: 80px;' %>
             </td>
             <td width='80px' style='width:80px'>
-              <%= image_tag (@studio.background_dark? ? 'plus_dark.gif' : 'plus_light.gif'), title: 'plus', style: 'width: 80px' %>
+              <%= image_tag (@studio.background_dark? ? 'plus_dark.gif' : 'plus_light.gif'), title: 'plus', alt: 'plus', style: 'width: 80px' %>
             </td>
             <td width='80px' style='width:80px'>
               <%= image_tag @offers[2].piece.image.thumb,
@@ -148,7 +148,7 @@
                             border: 0, style: 'width: 80px; height: 80px;' %>
             </td>
             <td width='80px' style='width:80px'>
-              <%= image_tag (@studio.background_dark? ? 'equals_dark.gif' : 'equals_light.gif'), title: 'equals', style: 'width: 80px' %>
+              <%= image_tag (@studio.background_dark? ? 'equals_dark.gif' : 'equals_light.gif'), title: 'equals', alt: 'equals', style: 'width: 80px' %>
             </td>
             <td width='80px' style='width:80px'>
               <%= image_tag @offers[2].image.url_cache_buster,
