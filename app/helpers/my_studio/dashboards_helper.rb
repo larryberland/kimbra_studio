@@ -47,4 +47,24 @@ module MyStudio::DashboardsHelper
     '<tr><td>No emails this week yet.</td></tr>'.html_safe
   end
 
+  def link_to_send(email)
+    case
+      # If already sent.
+      when email.sent_at?
+        message = "Already sent #{time_short_index email.sent_at}. Send again."
+        link_to message,
+                send_offers_admin_customer_email_url(email),
+                method: :post
+      # If in send queue.
+      when email.in_send_offers_queue?
+        'in send queue'
+      else
+        # Not sent yet.
+        message = 'Queue to send!'
+        link_to message,
+                send_offers_admin_customer_email_url(email),
+                method: :post
+    end
+  end
+
 end

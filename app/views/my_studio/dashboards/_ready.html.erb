@@ -39,10 +39,7 @@
                     <%= button_to 'Reorder or edit', admin_customer_email_offers_path(email.tracking), method: :get, title: 'View and reorder all offers for this email, also edit offers' %>
                   </td>
                   <td>
-                    <% message = email.sent_at? ? "Already sent #{time_short_index email.sent_at}. Send again." : 'Queue to send!' %>
-                    <%= link_to message,
-                                send_offers_admin_customer_email_url(email),
-                                method: :post %>
+                    <%= link_to_send(email) %>
                   </td>
                   <td class='id'><%= email.id %></td>
               <% end %>

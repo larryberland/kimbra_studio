@@ -37,7 +37,7 @@
             <% session.emails.each do |email| %>
                 <tr>
                   <td>
-                    <%= link_to session.try(:title), edit_my_studio_session_path(session), title: "id: #{session.id}" %>
+                    <%= link_to session.try(:title), edit_my_studio_session_path(session), title: "session id: #{session.id}" %>
                     <%= '<br/>(unsubscribed from emails)'.html_safe if Unsubscribe.exists?(email: session.client.email) %>
                   </td>
                   <td><%= email.try(:offers).try(:count) %></td>
