@@ -50,7 +50,7 @@ class Admin::Customer::OffersController < ApplicationController
 
     respond_to do |format|
       if result
-        format.html { redirect_to admin_customer_email_offer_url(@email, @admin_customer_offer), notice: 'Offer was successfully created.' }
+        format.html { redirect_to admin_customer_email_offers_url(@email), notice: 'Offer was successfully created.' }
         format.json { render json: admin_customer_email_offer_url(@email, @admin_customer_offer), status: :created, location: @admin_customer_offer }
       else
         format.html { render action: "new" }
@@ -75,7 +75,7 @@ class Admin::Customer::OffersController < ApplicationController
 
     respond_to do |format|
       if result
-        format.html { redirect_to admin_customer_email_offer_url(@email, @admin_customer_offer), notice: 'Offer was successfully updated.' }
+        format.html { redirect_to admin_customer_email_offers_url(@email), notice: 'Offer was successfully updated.' }
         format.json { head :ok }
       else
         format.html { render action: "edit" }
