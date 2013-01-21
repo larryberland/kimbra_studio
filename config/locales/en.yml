@@ -592,6 +592,8 @@ en:
       title: "New ClickPLUS Studio Info"
     form:
       legend: "Your Studio Contact Info"
+    sales_notes:
+      title: "%{name}: sales notes"
   # users
   users:
     index:

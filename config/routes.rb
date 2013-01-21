@@ -149,11 +149,8 @@ KimbraStudio::Application.routes.draw do
     end
     member do
       put :create_owner
-      get :eap # TODO obsolete
-      get :tkg # TODO obsolete
-      get :xms # TODO obsolete
       get :new_owner
-      post :send_new_account_email # TODO obsolete
+      get :sales_notes
       post :send_studio_email
       get :show_branding
       get :unsubscribe, path: 'unsubscribe/:email'

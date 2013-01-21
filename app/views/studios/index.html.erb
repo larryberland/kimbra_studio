@@ -30,6 +30,8 @@
       <th>Sales<br/>status</th>
       <th>Created</th>
       <th>created for DataTable</th>
+      <th>Updated</th>
+      <th>updated for DataTable</th>
       <th>Actions</th>
     </tr>
     </thead>
@@ -43,9 +45,15 @@
           <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
           <td><%= number_to_phone studio.phone_number, area_code: true %></td>
           <td><%= studio.try(:city_state_name) %></td>
-          <td><%= editable_field studio, :sales_status, {tooltip: studio.sales_notes} %></td>
+          <td>
+            <%= editable_field studio, :sales_status, {tooltip: 'Click me to edit in place!'} %>
+            <br>
+            <%= link_to 'notes', sales_notes_studio_path(studio), title: studio.sales_notes %>
+          </td>
           <td><%= date_short studio.created_at %></td>
           <td><%= studio.created_at.to_s(:javascript) %></td>
+          <td><%= date_short studio.updated_at %></td>
+          <td><%= studio.updated_at.to_s(:javascript) %></td>
           <td>
             <%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %>
             <br>

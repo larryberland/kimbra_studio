@@ -1,0 +1,34 @@
+<h2><%= t('.title', name: @studio.name) %></h2>
+
+<div class="row-fluid span12">
+
+  <div class="platypus-form span6">
+
+    <%= render 'shared/error_messages', record: @studio %>
+
+    <%= form_for(@studio, html: {class: 'form-horizontal'}) do |f| %>
+
+        <%= hidden_field_tag :updating_sales, true %>
+
+        <div class="control-group">
+          <%= f.label 'Sales status', class: "control-label" %>
+          <div class="controls">
+            <%= f.text_field :sales_status %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <%= f.label 'Sales notes', class: "control-label" %>
+          <div class="controls">
+            <%= f.text_area :sales_notes, rows: 5, class: "input-xlarge" %>
+          </div>
+        </div>
+
+        <div class="actions controls">
+          <%= f.submit :id => 'my_submit' %>
+          <%= spinner %>
+        </div>
+
+    <% end %>
+  </div>
+</div>

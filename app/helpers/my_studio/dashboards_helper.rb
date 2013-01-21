@@ -19,14 +19,18 @@ module MyStudio::DashboardsHelper
   end
 
   def actions_for_session(session)
-    if session.email_ready? # need 2 or more portraits
-      if session.emails.present? # already have an email
+    # need 2 or more portraits
+    if session.email_ready?
+      # already have an email
+      if session.emails.present?
         'done'
       else
-        if session.in_generate_queue? # look in the queue for pending email generation
+        # look in the queue for pending email generation
+        if session.in_generate_queue?
           'in queue'
         else
-          link_to 'Generate Email', generate_admin_customer_email_path(session.id), method: :post, remote: true # enough portraits and ready to generate!
+          # enough portraits and ready to generate!
+          button_to 'Generate email', generate_admin_customer_email_path(session.id), method: :post, remote: true
         end
       end
     else

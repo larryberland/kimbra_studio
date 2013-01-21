@@ -114,6 +114,8 @@ class StudiosController < ApplicationController
         format.html do
           if request.xhr?
             render text: @studio.sales_status
+          elsif params[:updating_sales]
+            redirect_to studios_path, notice: "#{@studio.name} sales notes updated."
           else
             redirect_to edit_studio_path(@studio), notice: "Studio was successfully updated."
           end
@@ -175,7 +177,6 @@ class StudiosController < ApplicationController
       unless StudioEmail.exists?(email_name: email, studio_id: studio)
         count += 1
         Notifier.delay.send(email, studio.id)
-        puts "DJCOUNT: #{DelayedJob.count}"
         StudioEmail.create(email_name: email, studio: studio, sent_at: Time.now)
       end
     end
@@ -190,6 +191,10 @@ class StudiosController < ApplicationController
     @navbar_active = :studios_emails
     @studios = Studio.where("my_studio_minisites.image IS NOT NULL").joins(:minisite).includes(:studio_emails).all
     @unsubscribes = Unsubscribe.all
+  end
+
+  def sales_notes
+    @studio = Studio.find(params[:id])
   end
 
   private #==========================================================================
