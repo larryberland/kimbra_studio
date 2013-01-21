@@ -47,7 +47,7 @@ class Story < ActiveRecord::Base
         puts "REFERRER: #{referer}"
         referer = 'Clarity' if request.remote_ip == '24.73.119.18'
         referer = 'Jim' if request.remote_ip == '71.180.211.214'
-        referer = 'localhost' if request.referer.match(/localhost/i)
+        referer = 'localhost' if request.referer.to_s.match(/localhost/i)
         story = Story.create(
             session_id: session_id,
             referer: referer,
