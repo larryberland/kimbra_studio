@@ -3,9 +3,7 @@
 <%= javascript_include_tag 'data_tables/campaigns' %>
 
 <div class='row span12'>
-  <h2>
-    <%= t(:studios_emails_title) %>
-  </h2>
+  <h2><%= t(:studios_emails_title) %></h2>
 
   <table class='table table-bordered table-striped datatables-hidden' id='studio_emails_table'>
     <thead>
@@ -24,7 +22,7 @@
     <% @studios.each do |studio| %>
         <% Notifier.studio_emails.each do |studio_email| %>
             <tr>
-              <td><%= link_to "#{studio.name} (#{studio.id})", studio_path(studio), target: '_blank', title: 'Click to view in new tab.' %></td>
+              <td><%= link_to "#{studio.name} (id: #{studio.id})", studio_path(studio), target: '_blank', title: 'Click to view in new tab.' %></td>
               <td><%= link_to studio_email, "/mail_view/#{studio_email}", target: '_blank', title: 'Click to view in new tab.' %></td>
               <td><%= date_short studio_email_sent_for(studio, studio_email) %></td>
               <td><%= studio_email_sent_for(studio, studio_email).to_s(:javascript) if studio_email_sent_for(studio, studio_email) %></td>
@@ -39,13 +37,13 @@
 </div>
 
 <div class='row span12'>
-  <h2>Email campaigns</h2>
+  <h2><%= t(:studios_email_campaigns_title) %></h2>
   <table class='table table-bordered table-striped datatables-hidden' id='campaigns_table'>
     <thead>
     <tr>
       <th>Email</th>
       <th>Sent</th>
-      <th>Sent</th>
+      <th>How<br>many</th>
       <th>Clicked<br/>through</th>
       <th>Click<br/>throughs</th>
       <th>Action</th>

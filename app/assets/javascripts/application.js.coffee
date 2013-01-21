@@ -49,7 +49,8 @@ window.setUpDataTable = (tableEl, optHash) ->
     'aaSorting': [ [ 0, 'desc' ] ]
     'sDom': "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>"
     'sPaginationType': 'bootstrap'
-    'bProcessing': true,
+    'bProcessing': true
+    'bStateSave': true
   finalOpts = $.extend(defaults, optHash)
   $(tableEl).dataTable(finalOpts)
   $(tableEl).show()
