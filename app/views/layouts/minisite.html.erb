@@ -47,6 +47,10 @@
 <div id='footer'>
   <ul>
     <li>
+      <%= link_to_with_current_local 'About', about_minisite_email_path(@admin_customer_email.tracking) %>
+    </li>
+    |
+    <li>
       <%= link_to_with_current_local 'Privacy',
                                  privacy_minisite_email_path(@admin_customer_email.tracking) %>
     </li>
