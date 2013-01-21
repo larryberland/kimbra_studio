@@ -4,12 +4,38 @@
  <title>BLOG_NAME</title>
  <link href="YOUR_URL/atom.xml" rel="self"/>
  <link href="YOUR_URL"/>
- <updated>2013-01-12T15:24:12-05:00</updated>
+ <updated>2013-01-21T17:37:04-05:00</updated>
  <id>BLOG_URL</id>
  <author>
    <name>BLOG_NAME</name>
  </author>
 
+ 
+ <entry>
+   <title>We kick-start your New Year for 2013!</title>
+   <link href="YOUR_URL/new-year-2013.html"/>
+   <updated>2013-01-21T00:00:00-05:00</updated>
+   <id>BLOG_URL/new-year-2013</id>
+   <content type="html">&lt;p&gt;We are already working for you in the New Year!&lt;/p&gt;
+
+&lt;p&gt;We sent a fresh offer email to each of your clients to remind them about the beauty and value of your photography
+sessions. Each offer has been retooled with fresh jewelry pieces and stylish recropping of your portraits. We also
+selected the more inexpensive jewelry pieces in recognition that many of us will be paying holiday bills for a few
+months to come!&lt;/p&gt;
+
+&lt;p&gt;But our service is not just about incremental revenue for your business. Our most important benefit is sending a regular
+set of gorgeous emails featuring your portraits to your clients. We take great care not to spam your clients, but we know
+they love seeing your portraits in fresh compositions and the reminder that your work is heirloom quality.&lt;/p&gt;
+
+&lt;p&gt;Savvy studios may already market to their existing clients, but are your emails &lt;em&gt;viral&lt;/em&gt;? Do your clients forward them
+to their friends and family to show off the beautiful portraits in heirloom quality silver? Are your emails completely
+customized and personalized to each client? Our email marketing campaigns are subtle and perfectly complimentary to
+your other efforts.&lt;/p&gt;
+
+&lt;p&gt;Start by creating a new session today and leverage the work we do for you. Add existing clients from last year, and get
+in the habit of creating a ClickPLUS session for each new session you have. Our work is fast and free!&lt;/p&gt;
+</content>
+ </entry>
  
  <entry>
    <title>Now With Pinterest</title>

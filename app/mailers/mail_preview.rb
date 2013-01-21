@@ -76,4 +76,11 @@ class MailPreview < MailView
     Notifier.studio_pinterest(studio.id)
   end
 
+  def studio_kick_start_2013
+      # Most recent studio with a logo.
+      studio = MyStudio::Minisite.where('image is not null').last.studio
+      studio = Studio.find(1)
+      Notifier.studio_kick_start_2013(studio.id)
+    end
+
 end

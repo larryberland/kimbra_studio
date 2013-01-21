@@ -2,6 +2,8 @@ class Notifier < ActionMailer::Base
 
   default from: "Kimbra Support <support@KimbraClickPLUS.com>"
 
+  helper :client_mailer
+
   # Returns an array of symbols that name email actions that include text 'studio'.
   def self.studio_emails
     Notifier.instance_methods(false).find_all{|e| e.match(/studio/) }
@@ -73,5 +75,16 @@ class Notifier < ActionMailer::Base
          subject: "Your portraits + Pinterest = Viral Success",
          bcc: 'support@KimbraClickPLUS.com')
   end
+
+  def studio_kick_start_2013(studio_id)
+      @studio = Studio.find(studio_id)
+      @password = @studio.owner.first_pass
+      @name = @studio.owner.name
+      @email = @studio.owner.email
+      raise "this email already unsubscribed: #{@email}" if Unsubscribe.exists?(email: @email)
+      mail(to: @email,
+           subject: "We kick-start your 2013",
+           bcc: 'support@KimbraClickPLUS.com')
+    end
 
 end
