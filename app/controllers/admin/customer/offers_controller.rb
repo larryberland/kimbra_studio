@@ -83,7 +83,9 @@ class Admin::Customer::OffersController < ApplicationController
   # DELETE /admin/customer/offers/1t7t7rye
           # DELETE /admin/customer/offers/1t7t7rye.json
   def destroy
+    email = @admin_customer_offer.email
     @admin_customer_offer.destroy
+    email.reorder_offers!
     respond_to do |format|
       format.html { redirect_to admin_customer_email_offers_url(@email) }
       format.json { head :ok }
@@ -95,7 +97,7 @@ class Admin::Customer::OffersController < ApplicationController
     offer = Admin::Customer::Offer.find(params[:id])
     offer.update_sort_position(params['fromPosition'], params['toPosition'])
     render json: {head: :ok}
-  rescue e
+  rescue Exception => e
     Rails.logger.error e.message
     Rails.logger.error e.backtrace.join("\n")
     render json: {head: :not_ok}
