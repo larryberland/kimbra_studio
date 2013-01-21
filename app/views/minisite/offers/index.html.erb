@@ -6,7 +6,7 @@
 <%= render 'admin_buttons' if is_admin? %>
 
 <% if @admin_customer_offers.size > 0 %>
-    <% @admin_customer_offers.sort { |a, b| a.sort <=> b.sort }.each do |offer| %>
+    <% @admin_customer_offers.each do |offer| %>
         <div id="<%= "div_offer_#{offer.id}" %>" class='row'>
           <%= render 'offer', offer: offer, studio: @studio %>
         </div>

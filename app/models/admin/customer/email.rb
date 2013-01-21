@@ -5,7 +5,7 @@ class Admin::Customer::Email < ActiveRecord::Base
 
   belongs_to :my_studio_session, class_name: 'MyStudio::Session', foreign_key: 'my_studio_session_id'
   has_many :friends, class_name: 'Admin::Customer::Friend', dependent: :destroy, order: 'id DESC'
-  has_many :offers, class_name: 'Admin::Customer::Offer', dependent: :destroy, order: 'id DESC'
+  has_many :offers, class_name: 'Admin::Customer::Offer', dependent: :destroy, order: 'id DESC', order: 'sort asc'
   has_many :carts, class_name: 'Shopping::Cart'
 
   # active_model callbacks

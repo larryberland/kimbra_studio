@@ -44,10 +44,8 @@ class Admin::Customer::OffersController < ApplicationController
   def create
     @admin_customer_offer       = Admin::Customer::Offer.new(params[:admin_customer_offer])
     @admin_customer_offer.email = @email
-
     result = @admin_customer_offer.save
-    @admin_customer_offer.on_create if (result)
-
+    @admin_customer_offer.on_create if result
     respond_to do |format|
       if result
         format.html { redirect_to admin_customer_email_offers_url(@email), notice: 'Offer was successfully created.' }
@@ -68,11 +66,9 @@ class Admin::Customer::OffersController < ApplicationController
       # send this to the worker to generate a new offer
       #   using the new kimbra piece
       @admin_customer_offer.on_update(previous_piece_id)
-
       # recreate our offer image versions in fog
       #Admin::Customer::Offer.fog_buster(@admin_customer_offer.id)
     end
-
     respond_to do |format|
       if result
         format.html { redirect_to admin_customer_email_offers_url(@email), notice: 'Offer was successfully updated.' }

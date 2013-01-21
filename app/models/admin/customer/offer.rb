@@ -70,10 +70,8 @@ class Admin::Customer::Offer < ActiveRecord::Base
     raise "forget to set email? attrs:#{attrs.inspect}" if attrs[:email].nil?
     raise "forget to set friend? attrs:#{attrs.inspect}" if attrs[:friend].nil?
     raise "forget to set piece? attrs:#{attrs.inspect}" if attrs[:piece].nil?
-
     attrs[:item_options_list] = []
     attrs[:tracking] = UUID.random_tracking_number
-
     cart_offer = Admin::Customer::Offer.create(attrs)
     cart_offer.assemble(attrs[:piece])
     cart_offer
@@ -84,7 +82,6 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def generate_for_cart(attrs)
     raise "forget to set email? attrs:#{attrs.inspect}" if attrs[:email].nil?
     raise "forget to set friend? attrs:#{attrs.inspect}" if attrs[:friend].nil?
-
     attrs[:item_options_list] = []
     attrs[:tracking] = UUID.random_tracking_number
     attrs[:piece] = piece
@@ -96,7 +93,6 @@ class Admin::Customer::Offer < ActiveRecord::Base
   # create a copy of this offer and the
   #   item_side we are currently working with
   def generate_from_item_side(item_side)
-
     # create a copy of this offer for the client
     client_offer = Admin::Customer::Offer.create(
         tracking: UUID.random_tracking_number,
@@ -104,22 +100,18 @@ class Admin::Customer::Offer < ActiveRecord::Base
         piece:    piece, # parent merchandise.piece
         client:   true)
     client_offer.assemble_cart(self)
-
     # figure out which item_side this is in the client's new offer
     item_order_in_offer = item_side.item.order
     my_items = client_offer.items.select{|r| r.order == item_order_in_offer}
-
     raise "found more than one item" if my_items.size != 1
     my_item = my_items.first
     raise "missing same item in my_offer looking for item.order:#{item_order_in_offer} my_offer:#{my_offer.items.inspect}" if my_item.nil?
-
     # is the item_side the front or back?
     my_item_side = if (item_side.item.front.id == item_side.id)
                      my_item.front
                    else
                      my_item.back
                    end
-
     return client_offer, my_item_side
   end
 
@@ -128,20 +120,15 @@ class Admin::Customer::Offer < ActiveRecord::Base
   def assemble_cart(from_offer)
     # create our images from the items
     from_offer.items.each do |item|
-
       options = item.item_sides.collect do |item_side|
         {adjusted_picture_url: item_side.image_stock.url,
          portrait:             item_side.portrait,
          photo_part:           item.part}
       end
-
       # Assemble the item and its sides
       items << Admin::Customer::Item.assemble_side(self, options)
-
     end
-
     create_images
-
     save
   end
 
@@ -162,27 +149,22 @@ class Admin::Customer::Offer < ActiveRecord::Base
     raise "did you forget to assign a piece for this offer?" if merchandise_piece.nil?
     raise "did you forget to assign a item_options_list for this offer?" if item_options_list.nil?
     raise "did you forget to convert your item_options_list into an array?" unless item_options_list.kind_of?(Array)
-
     # create all of our non_photo items and store them in our
     # item_options_list. LDB: sure seems like this variable should be called part_items_list
-
     # for every non_photo part defined in the merchandise.piece
     #   create an offer item representing that non_photo part
     #   and add it out item_options_list for this offer.
     merchandise_piece.non_photo_parts.each do |part|
       item_options_list << {photo_part: part, portrait: nil}
     end
-
     # Turn our requested item_options_list into the Offer
     #   items array
     Rails.logger.info("offer\nitem_options_list:#{item_options_list.flatten.inspect}")
     item_options_list.flatten.each do |item_options|
       self.items << Admin::Customer::Item.assemble_side(self, item_options)
     end
-
     # create a composite of all the items
     create_images
-
     self
   end
 
@@ -194,52 +176,51 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   # reassemble this piece using the current piece_id and portrait_id
-  #   sent in from the form
-  def on_create()
+  # sent in from the form
+  def on_create
     on_update(-1)
+    reorder_email_with_new_offer
+  end
+
+  # Insert new offer as first offer for this email.
+  def reorder_email_with_new_offer
+    # No need to reorder if this is the only offer.
+    return if self.email.offers.count == 1
+    # This new offer already has sort value 0. Simply add 1 to all other offers to move them down by one.
+    (self.email.offers - [self]).each do |offer|
+      offer.update_attribute :sort, offer.sort += 1
+    end
   end
 
   # Using the existing offer information, going to reassemble
   #  this offer with the new kimbra merchandise piece
   def on_update(previous_piece_id)
-
     new_piece    = previous_piece_id != piece_id
     new_portrait = portrait_id.to_i > 0
-
     if (new_piece or new_portrait)
-
       # grab any existing portrait info from items
       current_portraits = []
-
       if (new_portrait)
-
         current_portraits << MyStudio::Portrait.find_by_id(portrait_id)
-
       end
-
       # pull out the portraits this offer is currently using
       items.each do |item|
         item.item_sides.each do |side|
           current_portraits << side.portrait
         end
       end
-
       # remove any old items we had
       items.destroy_all if items.present?
-
       # setup our item options
       item_options_list = []
-
       # for every non_photo part defined in the merchandise.piece
       #   create an offer item representing that non_photo part
       #   and add it out item_options_list for this offer.
       piece.non_photo_parts.each do |part|
         item_options_list << {photo_part: part, portrait: nil}
       end
-
       portrait_index = 0
       studio_portraits_size = email.my_studio_session.portraits.size
-
       piece.photo_parts.each_with_index do |part, index|
         options = {photo_part: part}
         if (index < current_portraits.size)
@@ -255,20 +236,16 @@ class Admin::Customer::Offer < ActiveRecord::Base
         end
         item_options_list << options
       end
-
       item_options_list.flatten.each do |item_options|
         self.items << Admin::Customer::Item.assemble_side(self, item_options)
       end
-
       # LDB:? NOTE
       # this is a before_create right now and i am going
       #  to leave it there until we know we want to do this on
       #  updates as well
       piece_create_default_and_tracking
-
       # create a composite of all the items
       create_images
-
       if (errors.present?)
         Rails.logger.warn "CHALLENGE:: offer save errors:#{errors.full_messages}"
       end
@@ -282,11 +259,9 @@ class Admin::Customer::Offer < ActiveRecord::Base
   #  out different versions
   def self.fog_buster(offer_id)
     offer = find(offer_id)
-
     offer.image_front.fog_buster if (offer.image_front.present?)
     offer.image_back.fog_buster if offer.image_back.present?
     offer.image.fog_buster if offer.image.present?
-
     offer.save!
     offer
   end
@@ -393,7 +368,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
     # Not optimized for blazing spped, but good enough.
     from = from.to_i
     to = to.to_i
-    list_of_offers = self.email.offers.sort {|a,b| a.sort <=> b.sort}
+    list_of_offers = self.email.offers
     # Pluck out the item to move and insert it into the required spot.
     item_to_move = list_of_offers.delete_at(from)
     list_of_offers.insert(to, item_to_move)
