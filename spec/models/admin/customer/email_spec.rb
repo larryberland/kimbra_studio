@@ -3,12 +3,16 @@ require 'spec_helper'
 describe Admin::Customer::Email do
 
   context "factories" do
+    before do
+      @message = "rspec studio name suggests heirloom jewelry for Jane Doe Client."
+      @email = 'janedoe@email.com'
+    end
     it 'has a admin_customer_email' do
       r = create(:admin_customer_email)
       r.should be_persisted
       r.tracking.should_not be_nil
-      r.message.should == "rspec studio name suggests heirloom jewelry for Jane Doe Client1."
-      r.my_studio_session.client.email.should == 'janedoe1@email.com'
+      r.message.should == @message
+      r.my_studio_session.client.email.should == @email
       r.carts.size.should == 0
       r.friends.size.should == 0
       r.offers.size.should == 0
@@ -20,16 +24,16 @@ describe Admin::Customer::Email do
         r = create(:offer_email)
         r.should be_persisted
         r.tracking.should_not be_nil
-        r.message.should == "rspec studio name suggests heirloom jewelry for Jane Doe Client1."
-        r.my_studio_session.client.email.should == 'janedoe1@email.com'
+        r.message.should == @message
+        r.my_studio_session.client.email.should == @email
       end
 
       it 'has a trait with_cart' do
         r = create(:email, :with_cart)
         r.should be_persisted
         r.tracking.should_not be_nil
-        r.message.should == "rspec studio name suggests heirloom jewelry for Jane Doe Client1."
-        r.my_studio_session.client.email.should == 'janedoe1@email.com'
+        r.message.should == @message
+        r.my_studio_session.client.email.should == @email
         r.carts.size.should == 1
         r.friends.size.should == 0
         r.offers.size.should == 0
@@ -39,8 +43,8 @@ describe Admin::Customer::Email do
         r = create(:email, :with_friend)
         r.should be_persisted
         r.tracking.should_not be_nil
-        r.message.should == "rspec studio name suggests heirloom jewelry for Jane Doe Client1."
-        r.my_studio_session.client.email.should == 'janedoe1@email.com'
+        r.message.should == @message
+        r.my_studio_session.client.email.should == @email
         r.carts.size.should == 0
         r.friends.size.should == 1
         r.offers.size.should == 0
@@ -50,8 +54,8 @@ describe Admin::Customer::Email do
         r = create(:email, :with_offer)
         r.should be_persisted
         r.tracking.should_not be_nil
-        r.message.should == "rspec studio name suggests heirloom jewelry for Jane Doe Client1."
-        r.my_studio_session.client.email.should == 'janedoe1@email.com'
+        r.message.should == @message
+        r.my_studio_session.client.email.should == @email
         r.carts.size.should == 0
         r.friends.size.should == 0
         r.offers.size.should == 1
@@ -60,9 +64,7 @@ describe Admin::Customer::Email do
   end
 
   context 'ar validations' do
-    it 'requires a name' do
-      build(:admin_customer_email, name: nil).should_not be_valid
-    end
+    # no validatons currently
   end
 
   context 'class methods' do

@@ -8,7 +8,6 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
 
   mount_uploader :image, ImageUploader
 
-  has_many :offers, :class_name => 'Admin::Email::Offer'
   has_many :parts, :class_name => 'Admin::Merchandise::Part', :dependent => :destroy
 
   scope :pick, lambda { |previous_picks| where('id not in (?)', previous_picks) }

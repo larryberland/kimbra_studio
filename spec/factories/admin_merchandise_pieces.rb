@@ -38,45 +38,37 @@ FactoryGirl.define do
       # pass in a different directory or name
       #   that exist in the public/kimbra/:piece_directory/:piece_name.png
       #   create(:piece, piece_directory: 'photo_bracelets', piece_name: 'alexis_bracelet')
-      piece_directory 'photo_charms'
-      piece_name 'annika_charm'
+      dir 'photo_charms'
+      file 'annika_charm.png'
     end
 
     before(:create) do |piece, evaluator|
 
-      Rails.logger.info("ev:#{evaluator.inspect}")
-      a = evaluator.piece_directory
-      puts "a:#{a}"
-      piece.name = evaluator.piece_name.titleize
-      piece.category = Category.find_or_create_by_name(evaluator.piece_directory.titleize)
+      # expecting the following directory structure
+      # kimbra
+      # |
+      # |-- photo_charms (:dir)
+      # |
+      # |---- annika_charm.png (:file)
+      # |---- annika_charm
+      # |
+      # |-------- part0.png => part imaages
 
-      file_name = evaluator.piece_name + ".png"
-      path = Rails.root.join("public/kimbra", evaluator.piece_directory)
-      piece.image = File.open(path.join(file_name).to_s)
+      category_dir   = evaluator.dir
+      piece_dir      = evaluator.file.split('.').first
+      piece.name     = piece_dir.titleize
+      piece.category = Category.find_or_create_by_name(category_dir.titleize)
+
+      path        = Rails.root.join("public/kimbra", category_dir)
+      piece.image = File.open(path.join(evaluator.file).to_s)
 
       # grab any parts
-      Rails.logger.info("piece parts dir:#{path.join('*png')}")
+      Rails.logger.info("piece parts dir:#{path.join(piece_dir, '*png')}")
 
-      Dir[path.join("*.png")].each do |part_image|
+      # all the png images under the piece_dir
+      Dir[path.join(piece_dir, "*.png")].each do |part_image|
         Rails.logger.info("piece part:#{part_image}")
         piece.parts << create(:part, path: path.to_s, file: part_image)
-      end
-    end
-
-
-    trait :with_part do
-      after :create do |piece|
-        FactoryGirl.create_list :part, 1, piece: piece
-      end
-    end
-
-    factory :piece_with_parts do
-      ignore do
-        parts_count 3
-      end
-
-      after(:create) do |piece, evaluator|
-        FactoryGirl.create_list(:part, evaluator.parts_count, piece: piece)
       end
     end
   end
