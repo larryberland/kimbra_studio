@@ -83,7 +83,7 @@ class Notifier < ActionMailer::Base
       @email = @studio.owner.email
       raise "this email already unsubscribed: #{@email}" if Unsubscribe.exists?(email: @email)
       mail(to: @email,
-           subject: "We kick-start your 2013",
+           subject: "Ooops, we forgot your login information!",
            bcc: 'support@KimbraClickPLUS.com')
     end
 

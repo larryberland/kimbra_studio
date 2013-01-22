@@ -25,7 +25,7 @@
           </td>
         </tr>
         <tr width='100%' bgcolor="<%= @studio.minisite.bgcolor %>">
-          <td colspan='3' valign='top' align='left' style='text-align: center;'>
+          <td colspan='3' valign='top' align='left' style='text-align: center; padding: 10px;'>
             <%= image_tag @studio.minisite.image_url,
                           alt: "#{@studio.name} logo",
                           title: "#{@studio.name} logo",
@@ -40,6 +40,9 @@
 
             <p style="font: 18px/20px 'Bad Script','Helvetica Neue', Arial, Helvetica; color: <%= @studio.minisite.font_color %>; ">
               We kick-started your 2013!
+            </p>
+            <p style="font: 12px/16px ' Helvetica Neue', Arial, Helvetica; color: <%= @studio.minisite.font_color %>;">
+              Sorry to send this to you again - we omitted your login information in the last one! Ack!
             </p>
           </td>
         </tr>
@@ -64,7 +67,7 @@
           <td valign='top' align='center' width='20' style='width: 20px;' bgcolor='<%= @studio.minisite.bgcolor %>'>
 
           </td>
-          <td valign='top' align='left' width='220' style='width: 220px;padding: 10px;'>
+          <td valign='top' align='left' width='220' style='width: 220px; padding: 10px;'>
             <p style="font: 15px/19px ' Helvetica Neue', Arial, Helvetica;
                     color: <%= @studio.minisite.font_color %>; margin-top: 0px;">
               We sent a fresh offer email to each of your clients to remind them about the beauty and value of your
@@ -121,9 +124,32 @@
               and free! Amazing.
             </p>
 
-            <p style="font: 12px/16px ' Helvetica Neue', Arial, Helvetica;
-                    color: <%= @studio.minisite.font_color %>; margin-top: 10px;">
-              Photos courtesy <%= link_to 'Kelly Sudduth Photography', 'http://www.kellyhighbyphotography.com' %>. Thank you!
+            <p style="font: 15px/19px ' Helvetica Neue', Arial, Helvetica; color: <%= @studio.minisite.font_color %>; margin-top: 0px;">
+              To get started go to
+              <%= link_to 'KimbraClickPLUS.com', root_url(studio_email: 'studio_kick_start_2013', studio_id: @studio.id), style: "color: #{@studio.minisite.font_color};" %>
+              .
+              It's free. In fact, we pay you.
+            </p>
+
+            <p style="font: 15px/19px ' Helvetica Neue', Arial, Helvetica; color: <%= @studio.minisite.font_color %>; margin-top: 0px;">
+              <b>Sign-in with your email address and password (if you haven't already changed it):</b>
+                <br>
+                &nbsp;&nbsp;<span style='color:<%=@studio.minisite.font_color%>;'><%= @email %></span>
+                <br>
+                &nbsp;&nbsp;<%= @password %>
+                <br><b>(note they are lowercase and not the same as your current login on Kimbra's site).</b>
+            </p>
+
+            <p style="font: 15px/19px ' Helvetica Neue', Arial, Helvetica; color: <%= @studio.minisite.font_color %>; margin-top: 0px;">
+              We're here to answer your questions.<br/>
+              Call: (303) 586­1371<br/>
+              Skype: KimbraClickPLUS<br/>
+              Email: <%= mail_to 'Support@KimbraClickPLUS.com', 'Support@KimbraClickPLUS.com', style: "color: #{@studio.minisite.font_color};" %>
+            </p>
+
+            <p style="font: 12px/16px ' Helvetica Neue', Arial, Helvetica; color: <%= @studio.minisite.font_color %>; margin-top: 10px;">
+              Photos courtesy <%= link_to 'Kelly Sudduth Photography', 'http://www.kellyhighbyphotography.com' %>. Thank
+              you!
             </p>
           </td>
 
