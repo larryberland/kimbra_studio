@@ -77,10 +77,10 @@ class MailPreview < MailView
   end
 
   def studio_kick_start_2013
-      # Most recent studio with a logo.
-      studio = MyStudio::Minisite.where('image is not null').last.studio
-      studio = Studio.find(1)
-      Notifier.studio_kick_start_2013(studio.id)
-    end
+    # Most recent studio with a logo.
+    studio = MyStudio::Minisite.where('image is not null').last.studio
+    # studio = Studio.find(1)  # much better for dev env.
+    Notifier.studio_kick_start_2013(studio.id)
+  end
 
 end

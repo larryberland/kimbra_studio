@@ -171,8 +171,6 @@ KimbraStudio::Application.routes.draw do
   match 'tracking/:id', to: 'tracking#image', as: 'tracking_image'
   match 'blog' => 'blog'
 
-  if Rails.env.development?
-    mount MailPreview => 'mail_view'
-  end
+  mount MailPreview => 'mail_view'
 
 end
