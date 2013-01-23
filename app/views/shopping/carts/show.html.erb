@@ -7,7 +7,7 @@
            elsif @cart.address.present?
              edit_shopping_cart_address_path(@cart, @cart.address)
            else
-             new_shopping_cart_addresses_path(@cart)
+             new_shopping_cart_address_path(@cart)
            end %>
   <% if @cart.try(:items).try(:size).to_i > 0 %>
       <!-- should be a form with Cart.id -->
