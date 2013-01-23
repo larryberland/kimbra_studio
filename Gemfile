@@ -35,7 +35,7 @@ gem 'client_side_validations'
 
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'exceptional'
+gem 'airbrake'
 gem 'hirefire-resource'
 
 gem 'numbers_and_words'
