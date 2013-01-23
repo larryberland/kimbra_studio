@@ -54,6 +54,11 @@
         color: <%= @studio.try(:minisite).try(:bgcolor) %>;
         <% end %>
     }
+    a.btn{
+        <% if @studio.minisite.background_dark? %>
+        color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        <% end %>
+    }
     /* bootstrap navbar and navbar-inverse */
     .navbar .navbar-inner {
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;

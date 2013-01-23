@@ -13,13 +13,30 @@ FactoryGirl.define do
   #  t.datetime "updated_at"
   #  t.datetime "finished_uploading_at"
   #end
-  factory :my_studio_session, :class => 'MyStudio::Session' do
+  factory :my_studio_session, class: 'MyStudio::Session' do
     active true
     sequence(:name) { |n| "Jane Doe Session#{n}" }
     category { build(:category) }
     client { build(:my_studio_client) }
     studio { build(:studio) }
     finished_uploading_at nil
+
+    ignore do
+      portraits_count 1
+      emails_count 1
+    end
+
+    trait :with_portraits do
+      after :create do |session, evaluator|
+        FactoryGirl.create_list :portrait, evaluator.portraits_count, my_studio_session: session
+      end
+    end
+
+    trait :with_emails do
+      after :create do |session, evaluator|
+        FactoryGirl.create_list :email, evaluator.emails_count, my_studio_session: session
+      end
+    end
 
   end
 end

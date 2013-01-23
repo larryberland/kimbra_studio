@@ -177,7 +177,7 @@ class User < ActiveRecord::Base
                    else
                      Role::STUDIO
                    end
-      self.roles = [Role.where('name = ?', role_name).first]
+      self.roles = [Role.find_or_create_by_name(role_name)]
     end
   end
 

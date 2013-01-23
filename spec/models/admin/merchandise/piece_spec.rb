@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::Merchandise::Piece do
 
-  before do
+  before(:all) do
     @upload_path = "/uploads/admin/merchandise/piece/image"
   end
 

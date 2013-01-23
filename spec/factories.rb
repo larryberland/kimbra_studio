@@ -71,6 +71,20 @@ FactoryGirl.define do
     end
 
   end
+  # owner of a studio
+  factory :owner, class: 'User' do
+    email 'Owner@Studio.com'
+    first_name 'Studio'
+    last_name 'Owner'
+    address_1 '322 Studio Ave'
+    address_2 'Suite 345'
+    city 'Plentywood'
+    password 'password'
+    password_confirmation 'password'
+    association :state, factory: :state, strategy: :build
+    zip_code '59254'
+
+  end
   #create_table "categories", :force => true do |t|
   #  t.string   "name"
   #  t.datetime "created_at"
@@ -115,7 +129,7 @@ FactoryGirl.define do
   #  t.datetime "created_at"
   #  t.datetime "updated_at"
   #end
-  factory :studio do |r|
+  factory :studio do
     name 'rspec studio name'
     address_1 '322 Highland Ave'
     address_2 'Suite 123'
@@ -124,106 +138,29 @@ FactoryGirl.define do
     zip_code '59254'
     association :country, factory: :country, strategy: :build
     phone_number '406.765.1845'
-  end
 
-  ##create_table "admin_customer_emails", :force => true do |t|
-  ##  t.integer  "my_studio_session_id"
-  ##  t.boolean  "active",               :default => true
-  ##  t.text     "message"
-  ##  t.string   "tracking"
-  ##  t.string   "activation_code"
-  ##  t.datetime "generated_at"
-  ##  t.datetime "sent_at"
-  ##  t.datetime "opened_at"
-  ##  t.datetime "visited_at"
-  ##  t.datetime "created_at"
-  ##  t.datetime "updated_at"
-  ##end
-  #factory :email, class: AdminCustomer::Email do
-  #  association my_studio_session
-  #  active true
-  #  message 'email message text'
-  #  tracking UUID.random_tracking_number
-  #  activation_code nil
-  #  generated_at nil
-  #  sent_at nil
-  #  opened_at nil
-  #  visited_at nil
-  #end
-  #
-  ##create_table "admin_customer_items", :force => true do |t|
-  ##  t.integer  "offer_id"
-  ##  t.integer  "part_id"
-  ##  t.boolean  "photo",      :default => true
-  ##  t.integer  "width"
-  ##  t.integer  "height"
-  ##  t.datetime "created_at"
-  ##  t.datetime "updated_at"
-  ##end
-  #factory :item, class: AdminCustomer::Item do
-  #  association :offer
-  #  association :part
-  #  photo true
-  #  width 400
-  #  height 400
-  #end
-  #
-  ##create_table "admin_customer_item_sides", :force => true do |t|
-  ##  t.integer  "item_id"
-  ##  t.integer  "part_id"
-  ##  t.integer  "portrait_id"
-  ##  t.integer  "face_id"
-  ##  t.datetime "changed_layout_at"
-  ##  t.string   "image_stock"
-  ##  t.string   "image_custom"
-  ##  t.datetime "created_at"
-  ##  t.datetime "updated_at"
-  ##end
-  #factory :item_side, class: AdminCustomer::ItemSide do |r|
-  #  r.association :item
-  #  r.association :part
-  #  r.association :portrait
-  #  r.association :face
-  #  r.changed_layout_at nil
-  #  image_stock { fixture_file_upload("files/example.jpg", "image/jpeg") }
-  #  image_custom { fixture_file_upload("files/example.jpg", "image/jpeg") }
-  #end
-  #
-  ##create_table "admin_customer_offers", :force => true do |t|
-  ##  t.integer "email_id"
-  ##  t.integer "piece_id"
-  ##  t.string "tracking"
-  ##  t.string "image"
-  ##  t.string "image_front"
-  ##  t.string "image_back"
-  ##  t.boolean "active", :default => true
-  ##  t.string "name"
-  ##  t.text "description"
-  ##  t.string "custom_layout", :default => "order"
-  ##  t.string "activation_code"
-  ##  t.datetime "visited_at"
-  ##  t.datetime "purchased_at"
-  ##  t.integer "width"
-  ##  t.integer "height"
-  ##  t.datetime "created_at"
-  ##  t.datetime "updated_at"
-  ##end
-  #factory :offer, class: AdminCustomer::Offer do
-  #  association email
-  #  association piece
-  #  tracking UUID.random_string
-  #  image
-  #  image_front
-  #  image_back
-  #  name 'rspec_offer_name'
-  #  description 'rspec_offer_description text'
-  #  custom_layout 'order'
-  #  activation_code
-  #  visited_at nil
-  #  purchased_at nil
-  #  width 400
-  #  height 400
-  #end
-  #
+    owner {create(:owner)}
+    info {create(:info)}
+    minisite {create(:minisite)}
+
+    # the following most likely will be added
+    #   during testing
+    #staffers
+    #studio_emails
+    #clients
+    #emails
+    #carts
+
+    ignore do
+      sessions_count 1
+    end
+
+    trait :with_session do
+      after :create do |studio, evaluator|
+        FactoryGirl.create_list :my_studio_session, evaluator.sessions_count, studio: studio
+      end
+    end
+
+  end
 
 end
