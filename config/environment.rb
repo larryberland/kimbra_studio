@@ -29,13 +29,13 @@ begin
   end
 rescue Exception => e
   puts "#{ e } (#{ e.class })!"
+  puts e.backtrace.join("\n")
   raise "
   ############################################################################################
   ############################################################################################
-    You need to setup the config.yml
-    copy config.yml.example to config.yml
+    You need to setup the kimbra_studio.yml and sensitive.yml
 
-    Make sure you personalize the passwords in this file and for security never check this file in.
+    Make sure for security never check this file in.
   ############################################################################################
   ############################################################################################
   "
