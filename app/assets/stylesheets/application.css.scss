@@ -79,8 +79,14 @@ table.table thead .sorting_desc_disabled {
   display: none;
 }
 
-.inactive {
-  background-image: url('/assets/grid.png')
+.odd .inactive {
+  background-image: url('/assets/grid.png');
+  background-color: #E2E4FF;
+}
+
+.even .inactive {
+  background-image: url('/assets/grid.png');
+  background-color: #FFFFFF;
 }
 
 // end of DataTables
