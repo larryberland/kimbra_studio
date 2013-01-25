@@ -38,7 +38,7 @@
 
     <tbody>
     <% @studios.each do |studio| %>
-        <tr>
+        <tr class='<%= studio.inactive? ? 'inactive' : '' %>' id='studio_<%= studio.id %>'>
           <td><%= studio.logoize ? 'logo' : 'nologo' %></td>
           <td><%= studio_email_link(studio) %></td>
           <td><%= user_email_link(studio.owner) %></td>
@@ -48,7 +48,7 @@
           <td>
             <%= editable_field studio, :sales_status, {tooltip: 'Click me to edit in place!'} %>
             <br>
-            <%= link_to 'notes', sales_notes_studio_path(studio), title: studio.sales_notes %>
+            <%= link_to 'notes', sales_notes_studio_path(studio), title: studio_sales_notes(studio) %>
           </td>
           <td><%= date_short studio.created_at %></td>
           <td><%= studio.created_at.to_s(:javascript) %></td>

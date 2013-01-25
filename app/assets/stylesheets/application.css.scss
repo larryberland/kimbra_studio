@@ -79,6 +79,12 @@ table.table thead .sorting_desc_disabled {
   display: none;
 }
 
+.inactive {
+  background-image: url('/assets/grid.png')
+}
+
+// end of DataTables
+
 .id {text-align: right !important;}
 
 // Used for slideshow on Home page to prevent overlap with text on tablets.
