@@ -67,6 +67,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'  # replaces fixtures
   gem 'rb-fsevent'
+  gem 'wirble'
+  gem 'interactive_editor'
 end
 
 group :test do
