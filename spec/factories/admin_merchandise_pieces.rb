@@ -57,7 +57,12 @@ FactoryGirl.define do
       category_dir   = evaluator.dir
       piece_dir      = evaluator.file.split('.').first
       piece.name     = piece_dir.titleize
-      piece.category = Category.find_or_create_by_name(category_dir.titleize)
+      piece.category = category_dir.titleize
+
+      # remove piece if it currently exists
+      if (p = Admin::Merchandise::Piece.find_by_name_and_category(piece.name, piece.category))
+        p.destroy
+      end
 
       path        = Rails.root.join("public/kimbra", category_dir)
       piece.image = File.open(path.join(evaluator.file).to_s)

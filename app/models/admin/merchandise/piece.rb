@@ -1,5 +1,7 @@
 class Admin::Merchandise::Piece < ActiveRecord::Base
 
+  has_many :parts, class_name: 'Admin::Merchandise::Part', dependent: :destroy
+
   attr_accessible :image, :image_cache, :remote_image_url,
                   :category, :name, :short_description, :description_markup,
                   :sku, :price, :photo, :custom_layout,
@@ -7,8 +9,6 @@ class Admin::Merchandise::Piece < ActiveRecord::Base
                   :width, :height, :use_part_image
 
   mount_uploader :image, ImageUploader
-
-  has_many :parts, :class_name => 'Admin::Merchandise::Part', :dependent => :destroy
 
   scope :pick, lambda { |previous_picks| where('id not in (?)', previous_picks) }
   scope :are_active, lambda { where('active = ?', true) }

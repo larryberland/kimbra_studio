@@ -23,13 +23,11 @@ FactoryGirl.define do
       file 'portrait.png'
     end
     before(:create) do |portrait, evaluator|
-      Rails.logger.info("one")
       portrait.image = File.open(Rails.root.join("spec/support/images/portraits/#{evaluator.file}").to_s)
     end
 
     trait :with_landscape do
       before :create do |portrait|
-        Rails.logger.info("two")
         portrait.image.remove!
         portrait.image = File.open(Rails.root.join("spec/support/images/portraits/landscape.png").to_s)
       end

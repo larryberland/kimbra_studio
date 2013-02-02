@@ -1,15 +1,15 @@
 class Admin::Merchandise::Part < ActiveRecord::Base
 
-  mount_uploader :image, ImageUploader                           # custom assembled part
-  mount_uploader :image_part, ImageUploader                      # background Image used to generate the custom assembled part
+  mount_uploader :image, ImageUploader                        # custom assembled part
+  mount_uploader :image_part, ImageUploader                   # background Image used to generate the custom assembled part
 
-  belongs_to :piece, :class_name => 'Admin::Merchandise::Piece'
-  belongs_to :portrait, :class_name => 'MyStudio::Portrait'
+  belongs_to :piece, class_name: 'Admin::Merchandise::Piece'
+  belongs_to :portrait, class_name: 'MyStudio::Portrait'
 
-  has_one :item, :class_name => 'Admin::Customer::Item'          # TODO: do we destroy Offer::Item on this?
-  has_one :item_side, :class_name => 'Admin::Customer::ItemSide' # TODO: do we destroy Offer::Item on this?
+  has_one :item, class_name: 'Admin::Customer::Item'          # TODO: do we destroy Offer::Item on this?
+  has_one :item_side, class_name: 'Admin::Customer::ItemSide' # TODO: do we destroy Offer::Item on this?
 
-  has_one :part_layout                                           # the viewport coordinates for the image_part background
+  has_one :part_layout                                        # the viewport coordinates for the image_part background
   has_one :piece_layout
 
   attr_accessible :image, :image_cache, :remote_image_url, :image_width, :image_height,
@@ -20,7 +20,7 @@ class Admin::Merchandise::Part < ActiveRecord::Base
                   :piece_layout, :piece_layout_attributes
   accepts_nested_attributes_for :part_layout, :piece_layout
 
-  attr_accessor :width, :height                                  # generic form of image_part_width
+  attr_accessor :width, :height                               # generic form of image_part_width
 
   after_create :create_layout_info
 
@@ -136,8 +136,8 @@ class Admin::Merchandise::Part < ActiveRecord::Base
       dest_width  = 300.0
       dest_height = (dest_width * orig_height) / orig_width
 
-      cropbox_w = dest_width  # $('#cropbox').width()
-      cropbox_h = dest_height # $('#cropbox').height()
+      cropbox_w  = dest_width  # $('#cropbox').width()
+      cropbox_h  = dest_height # $('#cropbox').height()
       @cropilize = {w: cropbox_w.round, h: cropbox_h.round}
 
       viewport_aspect_ratio = part_layout.aspect_ratio

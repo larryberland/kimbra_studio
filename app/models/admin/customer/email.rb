@@ -1,12 +1,12 @@
 class Admin::Customer::Email < ActiveRecord::Base
 
-  attr_accessible :description, :message, :generated_at, :sent_at, :active, :tracking,
-                  :my_studio_session
-
   belongs_to :my_studio_session, class_name: 'MyStudio::Session', foreign_key: 'my_studio_session_id'
   has_many :friends, class_name: 'Admin::Customer::Friend', dependent: :destroy, order: 'id DESC'
   has_many :offers, class_name: 'Admin::Customer::Offer', dependent: :destroy, order: 'id DESC', order: 'sort asc'
   has_many :carts, class_name: 'Shopping::Cart'
+
+  attr_accessible :description, :message, :generated_at, :sent_at, :active, :tracking,
+                  :my_studio_session
 
   # active_model callbacks
   before_save :set_message
@@ -41,32 +41,6 @@ class Admin::Customer::Email < ActiveRecord::Base
       sent += 1
     end
     puts "Prepared #{sent} offer emails to be sent."
-  end
-
-  def self.test_piece(piece)
-    email = Admin::Customer::Email.new(my_studio_session: MyStudio::Session.first)
-    piece_strategy_list = [piece]
-    # setup portrait pick_list strategy
-    portrait_pick_list  = studio_session.portrait_list
-    order_by_number_of_parts = piece_strategy_list.sort_by { |piece| piece.photo_parts.size.to_i }.reverse
-    idx    = 0
-    offers = order_by_number_of_parts.collect do |piece|
-      strategy_picture_list = []
-      piece.photo_parts.each do |part|
-        strategy_picture_list << {portrait:   portrait_pick_list[idx],
-                                  photo_part: part,
-                                  face:       nil} # temp for now will remove
-        idx += 1
-        idx = 0 if idx >= portrait_pick_list.size
-      end
-      strategy_picture_list = portrait_strategy_list.portraits_by_parts(piece)
-      Admin::Customer::Offer.generate(email, piece, strategy_picture_list)
-    end
-    email.offers       = offers
-    email.generated_at = Time.now
-    email.save
-    puts "built email=>#{email.id} offer=>#{email.offer.id} item=>#{email.offer.item.id}"
-    email
   end
 
   # Entry point to Generate the Offers for an Email to our customer
@@ -109,8 +83,8 @@ class Admin::Customer::Email < ActiveRecord::Base
       offer                 = Admin::Customer::Offer.generate(email, piece, strategy_picture_list)
       offer
     end
-    email.offers       = offers
-    email.generated_at = Time.now
+    email.offers             = offers
+    email.generated_at       = Time.now
     email.save
     email
   end

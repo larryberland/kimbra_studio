@@ -1,12 +1,12 @@
 class Story < ActiveRecord::Base
 
-  attr_accessor :crawler
+  @@offset = Time.now.in_time_zone("Eastern Time (US & Canada)").formatted_offset
 
   has_many :storylines, dependent: :destroy
   belongs_to :client, class_name: 'MyStudio::Client'
   belongs_to :studio
 
-  @@offset = Time.now.in_time_zone("Eastern Time (US & Canada)").formatted_offset
+  attr_accessor :crawler
 
   # TODO !! Refactor these scopes to use beginning/end_of_day helpers, etc.
   # TODO !! Also push timezone offset cals into postgres for speed.

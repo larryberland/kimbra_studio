@@ -5,6 +5,7 @@ describe Admin::Customer::Offer do
     before do
       @message = "rspec studio name suggests heirloom jewelry for Jane Doe Client."
       @email = 'janedoe@email.com'
+
     end
 
     it 'has a admin_customer_offer' do

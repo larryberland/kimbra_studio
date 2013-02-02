@@ -4,11 +4,11 @@ class MyStudio::Portrait < ActiveRecord::Base
 
   mount_uploader :image, AmazonUploader
 
-  belongs_to :my_studio_session, :class_name => 'MyStudio::Session', :foreign_key => "my_studio_session_id"
+  belongs_to :my_studio_session, class_name: 'MyStudio::Session', foreign_key: "my_studio_session_id"
 
-  has_many :offers, :class_name => 'Admin::Customer::Offer'
-  has_many :parts, :class_name => 'Admin::Merchandise::Part'
-  has_many :faces, :class_name => 'MyStudio::Portrait::Face', :dependent => :destroy
+  has_many :offers, class_name: 'Admin::Customer::Offer'
+  has_many :parts, class_name: 'Admin::Merchandise::Part'
+  has_many :faces, class_name: 'MyStudio::Portrait::Face', dependent: :destroy
 
   attr_accessible :image, :remote_image_url, :description, :active, :faces,
                   :my_studio_session, :my_studio_session_id

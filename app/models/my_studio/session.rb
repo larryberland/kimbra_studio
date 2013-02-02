@@ -6,10 +6,10 @@ class MyStudio::Session < ActiveRecord::Base
 
   belongs_to :studio
   belongs_to :category
-  belongs_to :client, :class_name => 'MyStudio::Client'
+  belongs_to :client, class_name: 'MyStudio::Client'
 
-  has_many :portraits, :class_name => 'MyStudio::Portrait', :foreign_key => 'my_studio_session_id', dependent: :destroy
-  has_many :emails, :class_name => 'Admin::Customer::Email', :foreign_key => 'my_studio_session_id', dependent: :destroy
+  has_many :portraits, class_name: 'MyStudio::Portrait', foreign_key: 'my_studio_session_id', dependent: :destroy
+  has_many :emails, class_name: 'Admin::Customer::Email', foreign_key: 'my_studio_session_id', dependent: :destroy
 
   attr_accessible :name, :session_at, :active,
                   :studio_id, :client_id, :category_id,
@@ -22,7 +22,8 @@ class MyStudio::Session < ActiveRecord::Base
   # need some validations presence here
   validates_associated :client
   validates_associated :studio
-  validates_presence_of :category
+
+  validates :client_id, :studio_id, :category_id, presence: true
 
   # active_model callbacks
   before_save :set_name_and_session_at

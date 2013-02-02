@@ -1,9 +1,9 @@
 class Admin::Customer::Item < ActiveRecord::Base
 
-  belongs_to :offer, :class_name => 'Admin::Customer::Offer'  # offer contained in email
-  belongs_to :part, :class_name => 'Admin::Merchandise::Part' # kimbra part this item is made from
+  belongs_to :offer, class_name: 'Admin::Customer::Offer'  # offer contained in email
+  belongs_to :part, class_name: 'Admin::Merchandise::Part' # kimbra part this item is made from
 
-  has_many :item_sides, :class_name => 'Admin::Customer::ItemSide', :dependent => :destroy
+  has_many :item_sides, class_name: 'Admin::Customer::ItemSide', dependent: :destroy
 
   attr_accessible :photo, :order,
                   :part, :part_attributes,

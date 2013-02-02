@@ -1,14 +1,12 @@
 class State < ActiveRecord::Base
+
   belongs_to :country
   has_many :users
   has_many :studios
-  #has_many   :tax_rates
-  #belongs_to :shipping_zone
 
-  validates :name,              :presence => true,       :length => { :maximum => 150 }
-  validates :abbreviation,      :presence => true,       :length => { :maximum => 12 }
-  validates :country_id,        :presence => true
-  #validates :shipping_zone_id,  :presence => true
+  validates :name, presence: true, length: {maximum: 150}
+  validates :abbreviation, presence: true, length: {maximum: 12}
+  validates :country_id, presence: true
 
   def stripe
     abbreviation.to_s

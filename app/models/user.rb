@@ -7,40 +7,15 @@ class User < ActiveRecord::Base
   belongs_to :studio, inverse_of: :owner
   belongs_to :state
 
-  has_many :user_roles, :dependent => :destroy
-  has_many :roles, :through => :user_roles
+  has_many :user_roles, dependent: :destroy
+  has_many :roles, through: :user_roles
 
   has_one :store_credit
   has_many :orders
-  has_many :completed_orders, :class_name => 'Order',
-           :conditions                    => {:orders => {:state => 'complete'}}
+  has_many :completed_orders,
+           class_name: 'Order',
+           conditions: {orders: {state: 'complete'}}
 
-  has_many :phones, :dependent => :destroy,
-           :as                 => :phoneable
-
-  has_one :primary_phone, :conditions => {:phones => {:primary => true}},
-          :as                         => :phoneable,
-          :class_name                 => 'Phone'
-
-
-  has_many :addresses, :dependent => :destroy,
-           :as                    => :addressable
-
-  has_one :default_billing_address, :conditions => {:addresses => {:billing_default => true, :active => true}},
-          :as                                   => :addressable,
-          :class_name                           => 'Address'
-
-  has_many :billing_addresses, :conditions => {:addresses => {:active => true}},
-           :as                             => :addressable,
-           :class_name                     => 'Address'
-
-  has_one :default_shipping_address, :conditions => {:addresses => {:default => true, :active => true}},
-          :as                                    => :addressable,
-          :class_name                            => 'Address'
-
-  has_many :shipping_addresses, :conditions => {:addresses => {:active => true}},
-           :as                              => :addressable,
-           :class_name                      => 'Address'
   has_many :payment_profiles
 
   attr_accessor :raw_seed, :use_gmap
@@ -51,7 +26,7 @@ class User < ActiveRecord::Base
                   :city, :state, :zip_code, :state_id, :id,
                   :joined_on, :csv_row, :latitude, :longitude, :gmaps, :raw_seed
 
-  accepts_nested_attributes_for :addresses, :phones, :user_roles
+  accepts_nested_attributes_for :user_roles
 
   acts_as_gmappable callback: :save_google_data
 
@@ -63,10 +38,10 @@ class User < ActiveRecord::Base
 
   after_create :update_studio
 
-  scope :search, lambda {|value|
-    like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_','\_')}%" : "%"
-    where( 'first_name ilike ? OR last_name ilike ? OR email ilike ?  OR studios.name ilike ?',
-           like_exp, like_exp, like_exp, like_exp).joins(:studio).order('last_sign_in_at desc NULLS LAST, updated_at desc, last_name asc')
+  scope :search, lambda { |value|
+    like_exp = value.present? ? "%#{value.gsub('%', '\%').gsub('_', '\_')}%" : "%"
+    where('first_name ilike ? OR last_name ilike ? OR email ilike ?  OR studios.name ilike ?',
+          like_exp, like_exp, like_exp, like_exp).joins(:studio).order('last_sign_in_at desc NULLS LAST, updated_at desc, last_name asc')
   }
 
   def phone_number_display
@@ -89,7 +64,7 @@ class User < ActiveRecord::Base
     state ? state.abbreviation : nil
   end
 
-    # Use this method to represent the "city, state.abbreviation"
+  # Use this method to represent the "city, state.abbreviation"
   #
   # @param [none]
   # @return [String] "city, state.abbreviation"
@@ -100,7 +75,7 @@ class User < ActiveRecord::Base
   # Use this method to represent the "city, state.abbreviation zip_code"
   #
   # @param [none]
-          # @return [String] "city, state.abbreviation zip_code"
+  # @return [String] "city, state.abbreviation zip_code"
   def city_state_zip
     [city_state_name, zip_code].join(' ')
   end

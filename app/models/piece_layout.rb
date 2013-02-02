@@ -1,9 +1,11 @@
 class PieceLayout < ActiveRecord::Base
-  attr_accessible :operator, :layout, :layout_attributes
 
-  belongs_to :part, :class_name => 'Admin::Merchandise::Part'
+  belongs_to :part, class_name: 'Admin::Merchandise::Part'
+  has_one :layout, class_name: 'ImageLayout', as: :layout
 
-  has_one :layout, :class_name => 'ImageLayout', :as => :layout
+  attr_accessible :operator, :part,
+                  :layout, :layout_attributes
+
   accepts_nested_attributes_for :layout
 
   def x

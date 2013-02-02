@@ -13,7 +13,8 @@ FactoryGirl.define do
 
   factory :my_studio_client, class: 'MyStudio::Client', aliases: [:client] do
     name  "Jane Doe Client"
-    email "JaneDoe@Email.com"
+    #email "JaneDoe@Email.com"
+    email { MyStudio::Client.find_or_create_by_email("JaneDoe@Email.com").email }
     phone_number '406.765.1234'
     active true
   end

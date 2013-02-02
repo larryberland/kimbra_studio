@@ -1,6 +1,6 @@
 class Shopping::Address < ActiveRecord::Base
   belongs_to :state
-  belongs_to :cart, :class_name => 'Shopping::Cart'
+  belongs_to :cart, class_name: 'Shopping::Cart'
 
   attr_accessible :cart_id, :cart,
                   :first_name, :last_name,

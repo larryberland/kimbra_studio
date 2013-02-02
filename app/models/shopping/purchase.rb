@@ -4,11 +4,10 @@ class Shopping::Purchase < ActiveRecord::Base
 
   serialize :tax_description
 
+  belongs_to :cart, class_name: 'Shopping::Cart'
+  has_one :stripe_card, class_name: 'Shopping::StripeCard'
+
   attr_accessor :stripe_create_token_response, :stripe_create_token_status
-
-
-  belongs_to :cart, :class_name => 'Shopping::Cart'
-  has_one :stripe_card, :class_name => 'Shopping::StripeCard'
 
   attr_accessible :cart, :cart_id,
                   :total_cents, :purchased_at,

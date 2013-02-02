@@ -1,10 +1,10 @@
 class MyStudio::Minisite < ActiveRecord::Base
 
+  belongs_to :studio, inverse_of: :minisite
+
   attr_accessible :image, :remote_image_url, :image_cache,
                   :name, :bgcolor, :font_color, :font_family, :theme,
                   :image_width, :image_height
-
-  belongs_to :studio, inverse_of: :minisite
 
   validates_presence_of :font_family
 

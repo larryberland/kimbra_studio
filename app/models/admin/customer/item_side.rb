@@ -3,18 +3,18 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
   mount_uploader :image_stock, StockUploader                  # original portrait cropped for image part
   mount_uploader :image_custom, PartCustomUploader            # final image with portrait and part
 
-  belongs_to :item, :class_name => 'Admin::Customer::Item'
-  belongs_to :part, :class_name => 'Admin::Merchandise::Part' # my own copy of merchandise part
+  belongs_to :item, class_name: 'Admin::Customer::Item'
+  belongs_to :part, class_name: 'Admin::Merchandise::Part' # my own copy of merchandise part
 
-  belongs_to :portrait, :class_name => 'MyStudio::Portrait'
+  belongs_to :portrait, class_name: 'MyStudio::Portrait'
 
   attr_accessible :image_stock, :remote_image_stock_url, :image_stock_cache,
                   :image_custom, :remote_image_custom_url, :image_custom_cache,
+                  :adjusted_picture_url, # stock_image url from another item_side record
                   :changed_layout_at,
                   :portrait_id, :portrait, :portrait_attributes,
                   :item, :item_attributes,
                   :part, :part_attributes,
-                  :adjusted_picture_url, # stock_image url from another item_side record
                   :crop_x, :crop_y, :crop_h, :crop_w,
                   :x, :y, :w, :h
 
@@ -66,8 +66,8 @@ class Admin::Customer::ItemSide < ActiveRecord::Base
     raise "no fog images without an id" if new_record?
     @assembly = true
 
-    puts "apu=>#{adjusted_picture_url}"
-    puts "portrait=>#{portrait.inspect}"
+    #puts "apu=>#{adjusted_picture_url}"
+    #puts "portrait=>#{portrait.inspect}"
 
     file_url = if adjusted_picture_url
                  adjusted_picture_url # the adjusted picture url

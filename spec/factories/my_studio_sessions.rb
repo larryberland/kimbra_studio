@@ -16,9 +16,13 @@ FactoryGirl.define do
   factory :my_studio_session, class: 'MyStudio::Session' do
     active true
     sequence(:name) { |n| "Jane Doe Session#{n}" }
-    category { build(:category) }
-    client { build(:my_studio_client) }
-    studio { build(:studio) }
+    category { create(:category) }
+    client { create(:my_studio_client) }
+
+    studio do
+      create(:studio)
+    end
+
     finished_uploading_at nil
 
     ignore do

@@ -24,6 +24,4 @@ class Category < ActiveRecord::Base
            PETS,
            OTHER]
 
-  has_many :shoots
-
 end

@@ -1,8 +1,8 @@
 class Storyline < ActiveRecord::Base
 
-  attr_accessor :crawler
-
   belongs_to :story
+
+  attr_accessor :crawler
 
   def description=(s)
     super s.to_s.truncate(254)

@@ -31,13 +31,30 @@ FactoryGirl.define do
     friend { email.friends.first }
 
     custom_layout 'composite'
+
+    # suggestion list if frozen_offer and client are false
     frozen_offer false
-    client true
+    client false
+
+    ignore do
+      dir 'studios/studio_one/acme_smith'
+      file ''
+    end
+
     sort 0
     # the following are all generated info when assembling an offer
     # image
     # image_front
     # image_back
 
+    trait :with_portrait do
+      before :create do |offer, evaluator|
+        portrait = create(:portrait)
+        offer.piece.parts.each do |part|
+          offer.items << create(:item, part: part, portrait: portrait)
+        end
+      end
+    end
   end
+
 end

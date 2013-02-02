@@ -76,4 +76,5 @@ group :test do
   gem 'database_cleaner'
   # Pretty printed test output
   gem 'turn', '0.8.2', :require => false
+  gem 'launchy' # display capybara pages
 end

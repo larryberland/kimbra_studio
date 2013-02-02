@@ -139,7 +139,14 @@ FactoryGirl.define do
     association :country, factory: :country, strategy: :build
     phone_number '406.765.1845'
 
-    owner {create(:owner)}
+    owner do
+      if (user = User.find_by_email("Owner@Studio.com".downcase))
+        user
+      else
+        create(:owner)
+      end
+    end
+
     info {create(:info)}
     minisite {create(:minisite)}
 

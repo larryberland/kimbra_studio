@@ -1,7 +1,7 @@
 class ImageLayout < ActiveRecord::Base
-  attr_accessible :x, :y, :w, :h, :degrees
+  belongs_to :layout, polymorphic: true
 
-  belongs_to :layout, :polymorphic => true
+  attr_accessible :x, :y, :w, :h, :degrees
 
   after_create :set_default
 

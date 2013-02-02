@@ -4,13 +4,13 @@ class Admin::Customer::Offer < ActiveRecord::Base
   mount_uploader :image_front, ImageUploader                    # the front side of the final custom kimbra piece
   mount_uploader :image_back, ImageUploader                     # the back side of the final custom kimbra piece
 
-  belongs_to :piece, :class_name => 'Admin::Merchandise::Piece' # kimbra piece
-  belongs_to :email, :class_name => 'Admin::Customer::Email'
-  belongs_to :friend, :class_name => 'Admin::Customer::Friend'
+  belongs_to :piece, class_name: 'Admin::Merchandise::Piece' # kimbra piece
+  belongs_to :email, class_name: 'Admin::Customer::Email'
+  belongs_to :friend, class_name: 'Admin::Customer::Friend'
 
-  has_many :items, :class_name => 'Admin::Customer::Item'       # Items that make up the custom piece
+  has_many :items, class_name: 'Admin::Customer::Item'       # Items that make up the custom piece
 
-  has_one :shopping_item, :class_name => 'Shopping::Item'
+  has_one :shopping_item, class_name: 'Shopping::Item'
 
   attr_accessible :image, :remote_image_url,
                   :image_front, :remote_image_front_url,
@@ -467,7 +467,7 @@ class Admin::Customer::Offer < ActiveRecord::Base
   end
 
   def check_width
-    puts "#{self} size=>#{width}x#{height}" if Rails.env.test?
+    #puts "#{self} size=>#{width}x#{height}" if Rails.env.test?
   end
 
 end

@@ -7,6 +7,7 @@ describe Admin::Customer::Email do
       @message = "rspec studio name suggests heirloom jewelry for Jane Doe Client."
       @email = 'janedoe@email.com'
     end
+
     it 'has a admin_customer_email' do
       r = create(:admin_customer_email)
       r.should be_persisted

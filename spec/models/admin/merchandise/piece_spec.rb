@@ -10,7 +10,7 @@ describe Admin::Merchandise::Piece do
     it 'has a admin_merchandise_piece' do
       r = create(:admin_merchandise_piece)
       r.should be_persisted
-      r.category.name.should == 'Photo Charms'
+      r.category.should == 'Photo Charms'
       r.name.should == 'Annika Charm'
       r.short_description.should_not be_nil
       r.parts.size.should   == 1
