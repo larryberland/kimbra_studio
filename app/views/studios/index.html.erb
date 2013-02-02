@@ -39,22 +39,22 @@
     <tbody>
     <% @studios.each do |studio| %>
         <tr>
-          <td><%= studio.logoize ? 'logo' : 'nologo' %></td>
-          <td><%= studio_email_link(studio) %></td>
-          <td><%= user_email_link(studio.owner) %></td>
-          <td><%= link_from_site_short_name(studio.info.try(:website)) %></td>
-          <td><%= number_to_phone studio.phone_number, area_code: true %></td>
-          <td><%= studio.try(:city_state_name) %></td>
-          <td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= studio.logoize ? 'logo' : 'nologo' %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= studio_email_link(studio) %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= user_email_link(studio.owner) %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= link_from_site_short_name(studio.info.try(:website)) %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= number_to_phone studio.phone_number, area_code: true %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= studio.try(:city_state_name) %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'>
             <%= editable_field studio, :sales_status, {tooltip: 'Click me to edit in place!'} %>
             <br>
-            <%= link_to 'notes', sales_notes_studio_path(studio), title: studio.sales_notes %>
+            <%= link_to 'notes', sales_notes_studio_path(studio), title: studio_sales_notes(studio) %>
           </td>
-          <td><%= date_short studio.created_at %></td>
-          <td><%= studio.created_at.to_s(:javascript) %></td>
-          <td><%= date_short studio.updated_at %></td>
-          <td><%= studio.updated_at.to_s(:javascript) %></td>
-          <td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= date_short studio.created_at %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= studio.created_at.to_s(:javascript) %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= date_short studio.updated_at %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= studio.updated_at.to_s(:javascript) %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'>
             <%= link_to('Impersonate', "/switch_user?scope_identifier=user_#{studio.owner.id}") if studio.owner %>
             <br>
             <%= link_to 'Branding', show_branding_studio_path(studio) %>
@@ -69,4 +69,8 @@
     </tbody>
   </table>
 
+</div>
+
+<div class='row span2'>
+    inactive: <span class='odd'><span class='inactive'>&nbsp;&nbsp;&nbsp;</span></span>
 </div>

@@ -35,7 +35,7 @@ gem 'client_side_validations'
 
 gem 'delayed_job_active_record'
 gem 'daemons'
-gem 'exceptional'
+gem 'airbrake'
 gem 'hirefire-resource'
 
 gem 'numbers_and_words'
@@ -67,6 +67,8 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_girl_rails'  # replaces fixtures
   gem 'rb-fsevent'
+  gem 'wirble'
+  gem 'interactive_editor'
 end
 
 group :test do

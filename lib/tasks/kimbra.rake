@@ -542,5 +542,33 @@ namespace 'kimbra' do
     puts "all done now go make some money"
   end
 
+  desc 'Mark studios as inactive if their email address has bounced. Looks for bounces.csv in config.'
+  desc 'Get the bounces file from SendGrid.com. Email address is the first column.'
+  task process_bounces: :environment do
+    require 'csv'
+    return puts('No config/bounces.csv file.') unless File.exists?(Rails.root.join('config', 'bounces.csv'))
+    CSV.foreach(Rails.root.join('config', 'bounces.csv'), headers: false) do |row|
+      email = row[0]
+      puts email
+      inactive_msg = "Marked studio inactive on #{Date.today.to_s(:short)} because their email address (#{email}) was undeliverable."
+      if studio_infos = MyStudio::Info.where('LOWER(email) = ?', email.to_s.downcase)
+        studio_infos.each do |i|
+          i.studio.update_attribute :sales_status, 'inactive'
+          i.studio.update_attribute :sales_notes, (i.studio.sales_notes.to_s + inactive_msg) unless i.studio.sales_notes.to_s.match(/was undeliverable/)
+          puts "  Marked #{i.studio.name} inactive."
+        end
+      end
+      if owners = User.where('LOWER(email) = ?', email.to_s.downcase)
+        owners.each do |i|
+          if studio = i.studio
+            studio.update_attribute :sales_status, 'inactive'
+            studio.update_attribute :sales_notes, (i.studio.sales_notes.to_s + inactive_msg) unless studio.sales_notes.to_s.match(/was undeliverable/)
+            puts "  Marked #{i.studio.name} inactive."
+          end
+        end
+      end
+    end
+    puts 'Finished processing bounces.'
+  end
 
 end

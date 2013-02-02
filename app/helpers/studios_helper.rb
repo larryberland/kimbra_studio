@@ -72,4 +72,8 @@ module StudiosHelper
     end
   end
 
+  def studio_sales_notes(studio)
+    studio.sales_notes ? studio.sales_notes : 'none yet'
+  end
+
 end

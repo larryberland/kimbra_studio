@@ -177,6 +177,10 @@ class Studio < ActiveRecord::Base
     studio_emails.exists?(:email_name => email)
   end
 
+  def inactive?
+    sales_status.to_s.match /inactive/i
+  end
+
   private #===================================================================
 
 end
