@@ -11,5 +11,10 @@ FactoryGirl.define do
   #end
 
   factory :shopping_item, class: 'Shopping::Item' do
+    # cart is coming in
+    offer {create(:offer)}
+    quantity 1
+  #  t.string   "option"
+  #  t.string   "option_selected"
   end
 end

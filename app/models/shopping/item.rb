@@ -42,7 +42,14 @@ class Shopping::Item < ActiveRecord::Base
     p
   end
 
+  # total amount to add to the invoice for this
+  #   item times the quantity ordered
+  def invoice_total
+    quantity.to_i * price.to_f
+  end
+
   def extension
+    puts "shopping_item:extension() q:#{quantity} price:#{price}"
     quantity.to_i * price.to_f
   end
 

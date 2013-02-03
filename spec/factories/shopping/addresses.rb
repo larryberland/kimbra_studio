@@ -16,5 +16,21 @@ FactoryGirl.define do
   #end
 
   factory :shopping_address, class: 'Shopping::Address', aliases: [:address] do
+    first_name "First"
+    last_name "House"
+    address1 "222 Highland Avenue"
+    city "Plentywood"
+    state { build(:state) }
+    zip_code "59254"
+    country "USA"  # Not sure why we have this since State has a country
+    email "JaneShopping@Email.com"
+    phone "406.369.1234"
+    cart do
+      puts "address cart create"
+      create(:cart)
+    end
+    before :create do |address|
+      puts "address :create"
+    end
   end
 end

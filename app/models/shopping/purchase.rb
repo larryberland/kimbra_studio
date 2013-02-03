@@ -17,6 +17,8 @@ class Shopping::Purchase < ActiveRecord::Base
 
   accepts_nested_attributes_for :stripe_card
 
+  validates :cart, presence: true
+
   validate :stripe_info
   before_create :stripe_payment
 
@@ -25,7 +27,10 @@ class Shopping::Purchase < ActiveRecord::Base
   end
 
   def total
+    puts "total() purchase=>#{self.inspect}"
+    puts "total() purchase.cart=>#{cart.inspect}"
     calculate_cart_tax
+
     cart.total
   end
 
@@ -75,6 +80,14 @@ class Shopping::Purchase < ActiveRecord::Base
 
   private #=================================================================================
 
+  def stripe_invoice_amount
+    raise 'we need a cart to shop with please?' if cart.nil?
+    attrs                = cart.stripe_invoice_amount
+    self.tax             = attrs[:tax]
+    self.tax_description = attrs[:tax_description]
+    attrs[:amount] # Total amount in dollars for this cart
+  end
+
   def stripe_info
     errors.add(:card_number, "Missing stripe token") if stripe_card_token.nil?
     errors.empty?
@@ -92,14 +105,15 @@ class Shopping::Purchase < ActiveRecord::Base
   end
 
   def stripe_payment
-    # require "stripe"
-    # Stripe.api_key = ACADIA_CONFIG[:stripe][:test_key]
+    Rails.logger.info("STRIPE::stripe_payment() BEGIN")
     unless @@seeds
-      res = Stripe::Charge.create(:amount      => (total * 100).to_i, # 400
+      invoice_amount_in_cents = stripe_invoice_amount * 100 # convert to cents
+      Rails.logger.info("STRIPE::amount_in_cents:#{invoice_amount_in_cents}")
+      res = Stripe::Charge.create(:amount      => invoice_amount_in_cents.to_i, # 400
                                   :currency    => "usd",
                                   :card        => stripe_card_token, #"tok_kUUs1tA5OWvkO4", obtained with stripe.js
                                   :description => stripe_description)
-      puts "response=>#{res.inspect}"
+      Rails.logger.info("STRIPE:response=>#{res.inspect}")
       self.stripe_response_id = res['id']
       self.stripe_paid        = res['paid']
       self.stripe_fee         = res['fee']
@@ -112,7 +126,7 @@ class Shopping::Purchase < ActiveRecord::Base
     self.purchased_at = Time.now
     true
   rescue Stripe::InvalidRequestError => e
-    logger.error "Stripe error while creating payment: #{e.message}"
+    logger.error "STRIPE:: error in purchase#strip_payment() info=>#{e.message}"
     errors.add :base, "There was a problem with your credit card."
     false
   end
