@@ -29,6 +29,12 @@
                 <%= f.text_area :sales_notes, rows: 5, class: "input-xlarge" %>
               </div>
             </div>
+            <div class="control-group">
+              <%= f.label 'Temp password', class: "control-label" %>
+              <div class="controls">
+                <%= text_field_tag :ignore, @studio.owner.first_pass, disabled: true %>
+              </div>
+            </div>
 
         <% end %>
 

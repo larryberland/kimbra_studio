@@ -22,6 +22,7 @@
     <thead>
     <tr>
       <th>Logo?</th>
+      <th>Sessions</th>
       <th title='send studio an email'>Name</th>
       <th title='send owner an email'>Owner</th>
       <th>Website</th>
@@ -40,6 +41,7 @@
     <% @studios.each do |studio| %>
         <tr>
           <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= studio.logoize ? 'logo' : 'nologo' %></td>
+          <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= studio.sessions.count %></td>
           <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= studio_email_link(studio) %></td>
           <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= user_email_link(studio.owner) %></td>
           <td class='<%= studio.inactive? ? 'inactive' : '' %>'><%= link_from_site_short_name(studio.info.try(:website)) %></td>
