@@ -64,5 +64,9 @@ window.setUpDataTable = (tableEl, optHash) ->
   $(tableEl).on 'click', 'tr', (event) =>
     console.log $(event.target)
     $(tableEl).children('tbody').children('tr').each (index,element) =>
-      $(element).removeClass('row-selected')
-    $(event.target).closest('tr').addClass('row-selected')
+      $(element).removeClass('selected')
+      $(element).children('td').each (index,td) =>
+        $(td).removeClass('selected')
+    $(event.target).closest('tr').addClass('selected')
+    $(event.target).closest('tr').children('td').each (index,td) =>
+      $(td).addClass('selected')
