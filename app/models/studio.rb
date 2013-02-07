@@ -53,7 +53,7 @@ class Studio < ActiveRecord::Base
                else
                  raise 'unknown value for logo search'
              end
-    where("my_studio_minisites.image #{clause}").joins(:minisite).order('updated_at DESC')
+    where("my_studio_minisites.image #{clause}").joins(:minisite)
   }
 
   scope :with_logo, where("my_studio_minisites.image IS NOT NULL").joins(:minisite)

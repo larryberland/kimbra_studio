@@ -16,6 +16,9 @@
           </button>
       <% end %>
     </div>
+    <div class="span3 dataTables_filter">
+      <%= label_tag 'Studios branding' %> <%= select_tag :logoize, options_for_select([[:any,:all_studios], [:present,:ready_for_calls], [:missing,:not_ready]], @logoize), id: :logoize %>
+    </div>
   </div>
 
   <table class='table table-bordered table-striped datatables-hidden' id='studios_table'>
@@ -76,3 +79,10 @@
 <div class='row span2'>
     inactive: <span class='odd'><span class='inactive'>&nbsp;&nbsp;&nbsp;</span></span>
 </div>
+
+<%= coffee_script_tag do %>
+->
+    $('#logoize').on 'change', ->
+      window.location.href = ""
+
+<% end %>
