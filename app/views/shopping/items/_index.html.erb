@@ -69,24 +69,24 @@
     </tr>
     <tr>
       <td>Shipping</td>
-      <td><%= cart.shipping ? cart.shipping.shipping_option : 'no shipping selected yet' %> </td>
+      <td><%= cart.shipping ? cart.shipping.shipping_option_name : 'no shipping selected yet' %> </td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
-      <td class='right'><%= cart.shipping ? number_to_currency(cart.shipping.total_cents / 100.0) : 'n/a' %></td>
+      <td class='right'><%= cart.shipping ? number_to_currency(cart.invoice_shipping_total) : 'n/a' %></td>
     </tr>
     <tr>
       <td>Tax</td>
-      <td><%= cart.purchase ? cart.purchase.tax_short_description : 'tax calculated at checkout' %> </td>
+      <td><%= cart.purchase ? cart.tax_short_description : 'tax calculated at checkout' %> </td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
-      <td class='right'><%= cart.purchase ? number_to_currency(cart.purchase.tax) : 'n/a' %></td>
+      <td class='right'><%= cart.purchase ? number_to_currency(cart.invoice_tax_total) : 'n/a' %></td>
     </tr>
     <tr>
       <td class='total'>Total</td>
       <td class='total'>&nbsp;</td>
       <td class='total'>&nbsp;</td>
       <td class='right total'><%= cart.quantity %></td>
-      <td class='right total'><%= number_to_currency(cart.total) %></td>
+      <td class='right total'><%= number_to_currency(cart.invoice_total) %></td>
     </tr>
     </tbody>
   </table>

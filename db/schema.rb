@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130118111415) do
+ActiveRecord::Schema.define(:version => 20130204125245) do
 
   create_table "admin_customer_emails", :force => true do |t|
     t.integer  "my_studio_session_id"
@@ -375,6 +375,11 @@ ActiveRecord::Schema.define(:version => 20130118111415) do
     t.string   "tracking"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "tax_description"
+    t.integer  "invoice_items_amount", :default => 0
+    t.integer  "invoice_tax_amount",   :default => 0
+    t.integer  "invoice_amount",       :default => 0
+    t.integer  "commission_amount",    :default => 0
   end
 
   add_index "shopping_carts", ["email_id"], :name => "index_shopping_carts_on_email_id"
@@ -394,8 +399,6 @@ ActiveRecord::Schema.define(:version => 20130118111415) do
 
   create_table "shopping_purchases", :force => true do |t|
     t.integer  "cart_id"
-    t.decimal  "tax"
-    t.decimal  "total"
     t.string   "stripe_card_token"
     t.string   "stripe_response_id"
     t.string   "stripe_paid"
@@ -404,18 +407,19 @@ ActiveRecord::Schema.define(:version => 20130118111415) do
     t.datetime "purchased_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.text     "tax_description"
+    t.integer  "invoice_amount",     :default => 0
+    t.integer  "paid_amount",        :default => 0
   end
 
   add_index "shopping_purchases", ["cart_id"], :name => "index_shopping_purchases_on_cart_id"
 
   create_table "shopping_shippings", :force => true do |t|
     t.integer  "cart_id"
-    t.string   "shipping_option"
-    t.integer  "total_cents"
+    t.string   "shipping_option_name"
+    t.integer  "amount",               :default => 0
     t.string   "tracking"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
   create_table "shopping_stripe_cards", :force => true do |t|

@@ -48,6 +48,11 @@ class Shopping::Item < ActiveRecord::Base
     quantity.to_i * price.to_f
   end
 
+  # amount in cents for the item with quantity
+  def invoice_amount
+    (invoice_total * 100).to_i
+  end
+
   def extension
     puts "shopping_item:extension() q:#{quantity} price:#{price}"
     quantity.to_i * price.to_f

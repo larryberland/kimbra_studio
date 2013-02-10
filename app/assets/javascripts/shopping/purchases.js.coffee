@@ -32,7 +32,7 @@ subscription =
       address_state: $('#shopping_purchase_cart_address_attributes_state_stripe').val()
       address_zip: $('#shopping_purchase_cart_address_attributes_zip_code').val()
       address_country: $('#shopping_purchase_cart_address_attributes_country_stripe').val()
-    Stripe.createToken(card, $('#shopping_purchase_total_cents').val(), subscription.handleStripeResponse)
+    Stripe.createToken(card, $('#shopping_purchase_invoice_amount').val(), subscription.handleStripeResponse)
 
   handleStripeResponse: (status, response) ->
     $('#shopping_purchase_stripe_create_token_status').val(status)

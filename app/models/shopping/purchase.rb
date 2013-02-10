@@ -2,15 +2,14 @@ class Shopping::Purchase < ActiveRecord::Base
 
   @@seeds = false
 
-  serialize :tax_description
-
   belongs_to :cart, class_name: 'Shopping::Cart'
   has_one :stripe_card, class_name: 'Shopping::StripeCard'
 
   attr_accessor :stripe_create_token_response, :stripe_create_token_status
 
-  attr_accessible :cart, :cart_id,
-                  :total_cents, :purchased_at,
+  attr_accessible :cart, :cart_id, :purchased_at,
+                  :invoice_amount,   # cart total in cents before calling stripe
+                  :paid_amount,      # cart total in cents after calling stripe Charge Create
                   :stripe_card_token, :stripe_response_id, :stripe_paid, :stripe_fee,
                   :stripe_create_token_response,
                   :stripe_create_token_status
@@ -18,77 +17,22 @@ class Shopping::Purchase < ActiveRecord::Base
   accepts_nested_attributes_for :stripe_card
 
   validates :cart, presence: true
-
   validate :stripe_info
+
   before_create :stripe_payment
+
+  def paid_total
+    paid_amount / 100.0
+  end
 
   def confirmation_code
     @confirmation_code ||= stripe_response_id.split('_').last if stripe_response_id
   end
 
-  def total
-    puts "total() purchase=>#{self.inspect}"
-    puts "total() purchase.cart=>#{cart.inspect}"
-    calculate_cart_tax
-
-    cart.total
-  end
-
-  def calculate_cart_tax
-    self.tax             = 0
-    self.tax_description = Hash.new(
-        zip_code:       cart.address.zip_code,
-        taxable_amount: cart.taxable_sub_total,
-        state:          cart.address.zip_code,
-        region:         '',
-        code:           '',
-        combined_tax:   {rate: 0, amount: 0},
-        state_tax:      {rate: 0, amount: 0},
-        county_tax:     {rate: 0, amount: 0},
-        city_tax:       {rate: 0, amount: 0},
-        special_tax:    {rate: 0, amount: 0})
-    tax_rate             = ZipCodeTax.find_by_zip_code(cart.address.zip_code_5_digit)
-    if tax_rate
-      state_tax            = (cart.taxable_sub_total * tax_rate.state_rate).round(2)
-      county_tax           = (cart.taxable_sub_total * tax_rate.county_rate).round(2)
-      city_tax             = (cart.taxable_sub_total * tax_rate.city_rate).round(2)
-      special_tax          = (cart.taxable_sub_total * tax_rate.special_rate).round(2)
-      combined_tax         = state_tax + county_tax + city_tax + special_tax
-      self.tax_description = {
-          zip_code:       tax_rate.zip_code,
-          taxable_amount: cart.taxable_sub_total,
-          state:          tax_rate.state,
-          region:         tax_rate.tax_region_name,
-          code:           tax_rate.tax_region_code,
-          combined_tax:   {rate: tax_rate.combined_rate, amount: combined_tax},
-          state_tax:      {rate: tax_rate.state_rate, amount: state_tax},
-          county_tax:     {rate: tax_rate.county_rate, amount: county_tax},
-          city_tax:       {rate: tax_rate.city_rate, amount: city_tax},
-          special_tax:    {rate: tax_rate.special_rate, amount: special_tax}
-      }
-      self.tax             = combined_tax
-    end
-  end
-
-  def tax_short_description
-    if tax.present? && tax != 0
-      "#{tax_description[:region]} @ #{(tax_description[:combined_tax][:rate] * 100).round(2)}%"
-    else
-      'no sales tax'
-    end
-  end
-
   private #=================================================================================
 
-  def stripe_invoice_amount
-    raise 'we need a cart to shop with please?' if cart.nil?
-    attrs                = cart.stripe_invoice_amount
-    self.tax             = attrs[:tax]
-    self.tax_description = attrs[:tax_description]
-    attrs[:amount] # Total amount in dollars for this cart
-  end
-
   def stripe_info
+    # validate we have a stripe_card_token returned from Stripe
     errors.add(:card_number, "Missing stripe token") if stripe_card_token.nil?
     errors.empty?
   end
@@ -104,12 +48,18 @@ class Shopping::Purchase < ActiveRecord::Base
     self.stripe_card      = Shopping::StripeCard.new(attrs)
   end
 
+  # before_create callback to send the purchase amount to Stripe
+  #   and confirm payment
   def stripe_payment
     Rails.logger.info("STRIPE::stripe_payment() BEGIN")
+    raise "must have a cart purchase:#{self.inspect}" if cart.nil?
+    # NOTE: hoping cart is taking care of itself to always
+    #       have the invoice_amount up to date
+    self.invoice_amount = cart.invoice_amount
+    raise "must have a cart invoice_amount:#{self.inspect}" if invoice_amount < 1
     unless @@seeds
-      invoice_amount_in_cents = stripe_invoice_amount * 100 # convert to cents
-      Rails.logger.info("STRIPE::amount_in_cents:#{invoice_amount_in_cents}")
-      res = Stripe::Charge.create(:amount      => invoice_amount_in_cents.to_i, # 400
+      Rails.logger.info("STRIPE::amount_in_cents:#{invoice_amount}")
+      res = Stripe::Charge.create(:amount      => invoice_amount, # 400
                                   :currency    => "usd",
                                   :card        => stripe_card_token, #"tok_kUUs1tA5OWvkO4", obtained with stripe.js
                                   :description => stripe_description)
@@ -124,9 +74,11 @@ class Shopping::Purchase < ActiveRecord::Base
       self.stripe_fee  = 40
     end
     self.purchased_at = Time.now
+    self.paid_amount = invoice_amount  #  the invoice was paid and we are good to go
+    raise "Purchase amount issue #{self.inspect}" if paid_amount < 1
     true
   rescue Stripe::InvalidRequestError => e
-    logger.error "STRIPE:: error in purchase#strip_payment() info=>#{e.message}"
+    logger.error "STRIPE:: error in purchase#stripe_payment() info=>#{e.message}"
     errors.add :base, "There was a problem with your credit card."
     false
   end

@@ -9,8 +9,8 @@
 
       <%= f.hidden_field :stripe_create_token_response %>
       <%= f.hidden_field :stripe_create_token_status %>
-      <%= f.fields_for :cart, @cart do |g| %>
-          <%= g.fields_for :address, @cart.address do |h| %>
+      <%= f.fields_for :cart, @purchase.cart do |g| %>
+          <%= g.fields_for :address, @purchase.cart.address do |h| %>
               <%= h.hidden_field :name %>
               <%= h.hidden_field :address1 %>
               <%= h.hidden_field :address2 %>
@@ -24,24 +24,24 @@
         <table align='center' class='field'>
           <tr>
             <td><%= "#{pluralize @cart.quantity, 'item'} in cart" %></td>
-            <td class='right'><%= number_to_currency @cart.taxable_sub_total %></td>
+            <td class='right'><%= number_to_currency @cart.invoice_items_total %></td>
           </tr>
 
           <tr>
-            <td>Tax: <%= @purchase.tax_short_description %></td>
+            <td>Tax: <%= @cart.tax_short_description %></td>
             <td class='right'>
-              <%= number_to_currency @purchase.tax %>
+              <%= number_to_currency @cart.invoice_tax_total %>
             </td>
           </tr>
 
           <tr>
-            <td><%= @cart.shipping.shipping_option %></td>
-            <td class='right'><%= number_to_currency(@cart.shipping.total_cents / 100.0) %></td>
+            <td><%= @cart.try(:shipping).try(:shipping_option_name) %></td>
+            <td class='right'><%= number_to_currency(@cart.invoice_shipping_total) %></td>
           </tr>
 
           <tr>
             <td style="border-top: 1px solid;"><%= f.label :total %></td>
-            <td style="border-top: 1px solid;" class='right'><%= number_to_currency @cart.total %></td>
+            <td style="border-top: 1px solid;" class='right'><%= number_to_currency @cart.invoice_total %></td>
           </tr>
 
           <tr>
@@ -77,9 +77,9 @@
 
       </div>
 
-      <%= f.hidden_field :cart_id, :value => @purchase.cart.id %>
+      <%= f.hidden_field :cart_id %>
       <%= f.hidden_field :stripe_card_token %>
-      <%= f.hidden_field :total_cents, :value => (@cart.total * 100).to_i %>
+      <%= f.hidden_field :invoice_amount %>
 
       <div class="field">
         <div id="stripe_error" class='flash_error'></div>

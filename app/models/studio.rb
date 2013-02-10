@@ -88,16 +88,17 @@ class Studio < ActiveRecord::Base
   end
 
   def sum_purchases
-    sum = carts.collect { |c| c.purchase.try(:total_cents).to_i / 100.0 }.sum if carts.present?
+    if carts.present?
+      sum = carts.collect { |c| c.purchase.try(:paid_amount).to_i}.sum
+      sum = sum / 100.0 if sum > 0
+    end
     sum ||= 0.0
     sum
   end
 
   def total_commission
     if (carts.present?)
-      carts.each { |c| puts "[#{c.id}] items:#{c.items.size} purchase:#{c.purchase.try(:total_cents)} taxSubTotal:#{c.taxable_sub_total}" }
-
-      sum   = carts.collect { |c| c.taxable_sub_total }.sum
+      sum   = carts.collect(&:commission_amount).sum
       total = (sum * info.commission_rate.to_i) / 100.0
     end
     total ||= 0.0

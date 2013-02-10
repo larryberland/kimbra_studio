@@ -2,14 +2,16 @@ module Shopping
   class PurchasesController < BaseController
 
     belongs_to :cart,
-               :parent_class => Shopping::Cart,
-               :singleton    => true
+               parent_class: Shopping::Cart,
+               singleton:    true
 
     def new
       @storyline.describe 'Viewing credit card purchase page.'
       new! do
-        @purchase.cart        = @cart
-        @purchase.total_cents = @purchase.total * 100.0
+        raise "need a cart to make a purchase params:#{params.inspect}" if @purchase.cart.nil?
+        # create an invoice for the cart so all amounts will be recalculated
+        #   based on the current address, shipping, and items
+        #@purchase.cart.calculate_invoice_amount
       end
     end
 

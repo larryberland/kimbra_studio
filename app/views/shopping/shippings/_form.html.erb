@@ -12,7 +12,7 @@
         <% @shipping_options.each do |so| %>
             <%= label_tag "shopping_shipping_shipping_option_#{so.last.downcase}", '', class: 'radio' %>
             <div class="controls">
-              <%= f.radio_button :shipping_option, so.last %>
+              <%= f.radio_button :shipping_option_name, so.last %>
               <%= " #{so.first}" %>
             </div>
         <% end %>

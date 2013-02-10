@@ -3,7 +3,7 @@ class Shopping::Shipping < ActiveRecord::Base
   belongs_to :cart, class_name: 'Shopping::Cart'
 
   attr_accessible :cart_id, :cart,
-                  :shipping_option, :tracking, :total_cents
+                  :shipping_option_name, :tracking, :amount
 
   # Note that :shipping_option is not a foreign key here. That's because shipping options will change over
   # time (names, descriptions and prices) and we do not want/need to maintain an audit trail of these.
@@ -40,13 +40,19 @@ class Shopping::Shipping < ActiveRecord::Base
   # c is a checksum
   @tracking_regex = /\b(1Z ?[0-9A-Z]{3} ?[0-9A-Z]{3} ?[0-9A-Z]{2} ?[0-9A-Z]{4} ?[0-9A-Z]{3} ?[0-9A-Z]|[\dT]\d\d\d ?\d\d\d\d ?\d\d\d)\b/i
 
-  validates_presence_of :cart
-  validates_presence_of :shipping_option
-  validates_presence_of :total_cents
+  validates :cart, :shipping_option_name, :amount, presence: true
   validates :tracking,
             format: {with: @tracking_regex, message: 'UPS tracking numbers look like 1Z xxx xxx yy zzzz zzz c'},
             :if => Proc.new { |shipping| shipping.tracking.present? }
   validate :valid_checksum_for_tracking
+
+  before_save :set_amount
+  after_save :update_cart_invoice
+
+  # amount in dollars
+  def total
+    amount / 100.0
+  end
 
   def tracking=(trk)
     trk.upcase!
@@ -85,4 +91,21 @@ class Shopping::Shipping < ActiveRecord::Base
     checksum == check_digit.to_i
   end
 
+  def set_amount
+    # who is setting the amount when the shipping_option_name changes?
+    so = ShippingOption.find_by_name(shipping_option_name)
+    puts "shipping_option_name:#{shipping_option_name}  changed:#{shipping_option_name_changed?} so=>#{so.inspect}"
+    self.amount = ShippingOption.find_by_name(shipping_option_name).cost_cents if amount.nil?
+    @update_cart_invoice = shipping_option_name_changed?
+    true
+  end
+
+  def update_cart_invoice
+    puts "after_save:#{id} cart:#{cart.id} update_cart_invoice:#{@update_cart_invoice}"
+    if (@update_cart_invoice)
+      cart.shipping_changed = true
+      cart.save
+    end
+    true
+  end
 end

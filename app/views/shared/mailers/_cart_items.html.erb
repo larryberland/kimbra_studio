@@ -35,22 +35,22 @@
       </tr>
   <% end if @cart.items && @cart.items.present? %>
   <tr>
-    <td class='shopping-item-index left'>Shipping<br/><%= @cart.shipping.shipping_option %></td>
+    <td class='shopping-item-index left'>Shipping<br/><%= @cart.shipping.shipping_option_name %></td>
     <td class='shopping-item-index'>&nbsp;</td>
     <td class='shopping-item-index'>&nbsp;</td>
-    <td class='shopping-item-index right' align='right'><%= @cart.shipping ? number_to_currency(@cart.shipping.total_cents / 100.0) : 'n/a' %></td>
+    <td class='shopping-item-index right' align='right'><%= @cart.shipping ? number_to_currency(@cart.invoice_shipping_total) : 'n/a' %></td>
   </tr>
   <tr>
-    <td class='shopping-item-index left'>Tax<br/><%= @cart.purchase.tax_short_description %></td>
+    <td class='shopping-item-index left'>Tax<br/><%= @cart.tax_short_description %></td>
     <td class='shopping-item-index'>&nbsp;</td>
     <td class='shopping-item-index'>&nbsp;</td>
-    <td class='shopping-item-index right' align='right' align='right'><%= @cart.purchase ? number_to_currency(@cart.purchase.tax) : 'n/a' %></td>
+    <td class='shopping-item-index right' align='right' align='right'><%= @cart.purchase ? number_to_currency(@cart.invoice_tax_total) : 'n/a' %></td>
   </tr>
   <tr>
     <td class='shopping-item-index left total'>Total</td>
     <td class='shopping-item-index total'>&nbsp;</td>
     <td class='shopping-item-index right total' align='right'><%= @cart.quantity %></td>
-    <td class='shopping-item-index right total' align='right'><%= number_to_currency(@cart.purchase.total) %></td>
+    <td class='shopping-item-index right total' align='right'><%= number_to_currency(@cart.purchase.paid_total) %></td>
   </tr>
   </tbody>
 </table>
