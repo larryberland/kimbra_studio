@@ -8,7 +8,8 @@ class StudiosController < ApplicationController
   # GET /studios
   # GET /studios.json
   def index
-    @studios = Studio.all
+    @logoize = params[:logoize]
+    @studios = Studio.by_logoize(@logoize).includes(:owner, :sessions, :minisite, :info)
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @studios }

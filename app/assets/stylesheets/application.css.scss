@@ -89,6 +89,10 @@ table.table thead .sorting_desc_disabled {
   background-color: #FFFFFF;
 }
 
+table.dataTable tr.selected td.selected {
+  background-color: lemonchiffon !important;
+}
+
 // end of DataTables
 
 .id {text-align: right !important;}
