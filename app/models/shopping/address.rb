@@ -45,18 +45,18 @@ class Shopping::Address < ActiveRecord::Base
     ZipCodeTax.invoice_tax(zip_code_5_digit, taxable_sub_total)
   end
 
+  # monitor if zip_code changed so we can recalc cart invoice_total
   def address_change
-    puts "Address zip_code_changed?#{zip_code_changed?}"
     @update_cart_invoice = zip_code_changed?
     true
   end
 
   def update_cart_invoice
-    puts "Address update_cart_invoice?#{@update_cart_invoice}"
     if @update_cart_invoice
       cart.address_changed = true
       cart.save
     end
+    true
   end
 
 end

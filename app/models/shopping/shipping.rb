@@ -92,6 +92,7 @@ class Shopping::Shipping < ActiveRecord::Base
     checksum == check_digit.to_i
   end
 
+  # monitor if shipping_option_name changed so we can recalc cart invoice_total
   def set_amount
     # who is setting the amount when the shipping_option_name changes?
     if @update_cart_invoice = shipping_option_name_changed?
@@ -100,12 +101,10 @@ class Shopping::Shipping < ActiveRecord::Base
       raise "snap:: shipping_option_name:#{shipping_option_name} does not exist?" if shipping_option.nil?
       self.amount = shipping_option.cost_cents
     end
-    puts "SHIPPING before_save:#{@update_cart_invoice}"
     true
   end
 
   def update_cart_invoice
-    puts "SHIPPING update_cart_invoice:#{@update_cart_invoice}"
     if (@update_cart_invoice)
       cart.shipping_changed = true
       cart.save

@@ -75,16 +75,6 @@ class Shopping::Cart < ActiveRecord::Base
     sub_total
   end
 
-  # deprecated for invoice_total
-  def xtotal
-    # currently this is a total before a stripe payment has been
-    #  made. thinking purchase will always be nil
-    total = taxable_sub_total
-    total += shipping.total if shipping
-    total += purchase.tax if purchase
-    total
-  end
-
   def quantity
     items.collect { |item| item.quantity.to_i }.sum
   end
@@ -162,24 +152,19 @@ class Shopping::Cart < ActiveRecord::Base
 
   def prepare_invoice
 
-    puts "PREPARE_INVOICE shipping?#{shipping_changed} address?#{address_changed}"
+    #puts "PREPARE_INVOICE shipping?#{shipping_changed} address?#{address_changed}"
     invoice_items # currently always calculate items, we should change this to items_changed
 
     if (shipping_changed || address_changed)
 
-      puts "prepare_invoice() calling calculating invoice"
       invoice_tax
 
       if (shipping.present? and address.present?)
         # do not set invoice_amount until we have address and shipping info
-        puts "YEA YEA YEA"
         self.invoice_amount = invoice_items_amount + invoice_tax_amount + invoice_shipping_amount
       else
-        puts "NO SHIPPING OR ADDRESS"
         self.invoice_amount = 0
       end
-    else
-      puts "PREPARE_INVOICE NOT CHANGED"
     end
     true
   end

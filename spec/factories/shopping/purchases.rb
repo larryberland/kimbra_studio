@@ -21,7 +21,8 @@ FactoryGirl.define do
       FactoryGirl.create(:cart, :with_address, :with_shipping).id
     end
 
-    stripe_card {FactoryGirl.create(:stripe_card)}
+    # gets created in stripe_payment callback
+    # stripe_card {FactoryGirl.create(:stripe_card)}
 
     # calculated data
     # tax 3.33
@@ -31,7 +32,8 @@ FactoryGirl.define do
     purchased_at Time.now
     #tax_description
 
-    stripe_card_token 'my_stripe_card_token'
+    sequence(:stripe_card_token) { |n| "Token #{ n }" }
+
     #stripe_response_id
     #stripe_paid
     #stripe_fee
