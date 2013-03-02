@@ -6,13 +6,19 @@ describe Shopping::Address do
     it 'has a shopping_address' do
       r = create(:shopping_address)
       r.should be_persisted
+      r.cart.should be_persisted
     end
 
     context 'aliases and traits' do
 
       it 'has a address' do
-        r = create(:address)
+        cart = create(:cart)
+        count = Shopping::Cart.count
+        r = create(:address, cart_id: cart.id, address2: 'PO Box 123')
         r.should be_persisted
+        r.cart.should be_persisted
+        Shopping::Cart.count.should == count
+        r.address2.should == 'PO Box 123'
       end
     end
   end

@@ -17,6 +17,9 @@ class Shopping::Address < ActiveRecord::Base
   validates_presence_of :email, email: true
   validates_confirmation_of :email
 
+  before_save :address_change
+  after_save :update_cart_invoice
+
   def name
     "#{first_name} #{last_name}"
   end
@@ -39,7 +42,21 @@ class Shopping::Address < ActiveRecord::Base
 
   # calculate the invoice tax based on this address information
   def invoice_tax(taxable_sub_total)
-    return ZipCodeTax.invoice_tax(zip_code_5_digit, taxable_sub_total)
+    ZipCodeTax.invoice_tax(zip_code_5_digit, taxable_sub_total)
+  end
+
+  def address_change
+    puts "Address zip_code_changed?#{zip_code_changed?}"
+    @update_cart_invoice = zip_code_changed?
+    true
+  end
+
+  def update_cart_invoice
+    puts "Address update_cart_invoice?#{@update_cart_invoice}"
+    if @update_cart_invoice
+      cart.address_changed = true
+      cart.save
+    end
   end
 
 end

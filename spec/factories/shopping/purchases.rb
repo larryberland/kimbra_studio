@@ -15,15 +15,17 @@ FactoryGirl.define do
 
   factory :shopping_purchase, class: 'Shopping::Purchase', aliases: [:purchase] do
 
-    # need to have a cart with an address and an item with a price
-    cart do
-      puts "purchase create a cart"
-      create(:cart, :with_address)
+    cart_id do
+      # for purchase we need an cart.invoice_amount so we must
+      #   create the cart with and address and shipping info
+      FactoryGirl.create(:cart, :with_address, :with_shipping).id
     end
-    #Rails.logger.info("built the cart")
+
+    stripe_card {FactoryGirl.create(:stripe_card)}
+
     # calculated data
-    #tax 3.33
-    #total_cents 123
+    # tax 3.33
+    # total_cents 123
     # total 10.33
 
     purchased_at Time.now
@@ -33,27 +35,11 @@ FactoryGirl.define do
     #stripe_response_id
     #stripe_paid
     #stripe_fee
+
     before :create do |purchase, evaluator|
-      puts "purchase create: cart=>:#{purchase.cart}"
-      puts "purchase create: address:=>#{purchase.cart.address}"
-      raise "should have an item" if purchase.cart.items.size < 1
-      FactoryGirl.create(:address, cart: purchase.cart) if (purchase.cart.address.nil?)
-      card = {
-          number:          '4242424242424242',
-          cvc:             '123',
-          expMonth:        '05',
-          expYear:         '2015',
-          name:            purchase.cart.address.name,
-          address_line1:   purchase.cart.address.address1,
-          address_line2:   purchase.cart.address.address2,
-          address_state:   purchase.cart.address.state_stripe,
-          address_zip:     purchase.cart.address.zip_code,
-          address_country: purchase.cart.address.country_stripe
-      }
-      res = Stripe.createToken(card, purchase.cart.invoice_amount)
-      puts "stripe res:#{res.inspect}"
-
-
+      raise 'should have an item' if purchase.cart.items.size < 1
+      raise 'should have an address' if purchase.cart.address.nil?
+      raise 'should have a shipping' if purchase.cart.shipping.nil?
     end
 
   end

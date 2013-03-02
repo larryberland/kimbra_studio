@@ -13,6 +13,13 @@ class ShippingOption < ActiveRecord::Base
   validates :cost_cents, presence: true
   validates :description, presence: true
 
+  def self.options(index)
+    raise "snap:: index=>#{index} not within 0 to #{OPTIONS.size-1}" unless (0...OPTIONS.size).include?(index)
+    {name:        OPTIONS[index][0],
+     cost_cents:  OPTIONS[index][1],
+     description: OPTIONS[index][2]}
+  end
+
   def total
     cost_cents / 100.0
   end

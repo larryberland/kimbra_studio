@@ -10,22 +10,22 @@ FactoryGirl.define do
   #  t.datetime "updated_at"
   #end
   factory :shopping_cart, class: 'Shopping::Cart', aliases: [:cart] do
-    tracking nil
 
     ignore do
       items_count 1
     end
 
+    tracking nil
+
     before :create do |cart, evaluator|
-      puts "carts: create items_count:#{evaluator.items_count} cart.id:#{cart.new_record?}BEGIN"
+      puts "CARTS add shopping_item"
       FactoryGirl.create_list :shopping_item, evaluator.items_count, cart: cart
-      #puts "carts: create items list:#{d.inspect}END"
     end
 
     trait :with_address do
       before :create do |cart, evaluator|
         puts "with_address before::create"
-        FactoryGirl.create(:address, cart: cart)
+        FactoryGirl.create(:address, cart_id: cart.id)
       end
     end
 
@@ -54,7 +54,7 @@ FactoryGirl.define do
     trait :with_shipping do
       before :create do |cart, evaluator|
         puts "with_shipping before:create BEGIN"
-        FactoryGirl.create(:shipping, cart: cart)
+        FactoryGirl.create(:shipping, cart_id: cart.id)
         puts "with_shipping before:create END"
       end
     end

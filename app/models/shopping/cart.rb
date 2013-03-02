@@ -24,7 +24,7 @@ class Shopping::Cart < ActiveRecord::Base
 
   attr_accessor :shipping_changed, :address_changed, :items_changed
 
-  scope :not_recent, lambda { where(" created_at < ? ", 2.hours.ago) }
+  scope :not_recent, lambda { where(' created_at < ? ', 2.hours.ago) }
 
   before_create :set_tracking
   before_save :prepare_invoice
@@ -162,6 +162,7 @@ class Shopping::Cart < ActiveRecord::Base
 
   def prepare_invoice
 
+    puts "PREPARE_INVOICE shipping?#{shipping_changed} address?#{address_changed}"
     invoice_items # currently always calculate items, we should change this to items_changed
 
     if (shipping_changed || address_changed)
@@ -171,10 +172,14 @@ class Shopping::Cart < ActiveRecord::Base
 
       if (shipping.present? and address.present?)
         # do not set invoice_amount until we have address and shipping info
+        puts "YEA YEA YEA"
         self.invoice_amount = invoice_items_amount + invoice_tax_amount + invoice_shipping_amount
       else
+        puts "NO SHIPPING OR ADDRESS"
         self.invoice_amount = 0
       end
+    else
+      puts "PREPARE_INVOICE NOT CHANGED"
     end
     true
   end
