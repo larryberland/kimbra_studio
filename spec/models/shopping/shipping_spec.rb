@@ -16,7 +16,7 @@ describe Shopping::Shipping do
       it 'has a shipping' do
         cart = create(:cart)
         count = Shopping::Cart.count
-        r = create(:shipping, index: 1, cart_id: cart.id)
+        r = create(:shipping, index: 1, cart: cart)
         r.should be_persisted
         r.shipping_option_name.should == ShippingOption.options(1)[:name]
         r.amount.should == ShippingOption.options(1)[:cost_cents]
@@ -31,7 +31,8 @@ describe Shopping::Shipping do
     end
 
     it 'requires all fields' do
-      build(:shipping, tracking: nil).should_not be_valid
+      # invalid UPS tracking number
+      build(:shipping, tracking: 'larry').should_not be_valid
       # todo: need a checksum validation check
       #       not sure what this is?
     end

@@ -49,16 +49,17 @@ class Shopping::Shipping < ActiveRecord::Base
   before_save :set_amount
   after_save :update_cart_invoice
 
-
-  # amount in dollars
+          # amount in dollars
   def total
     amount / 100.0
   end
 
   def tracking=(trk)
-    trk.upcase!
-    trk.gsub!(/[^\w^\d]/, '')
-    trk.gsub!(/\s/, '')
+    if trk
+      trk.upcase!
+      trk.gsub!(/[^\w^\d]/, '')
+      trk.gsub!(/\s/, '')
+    end
     write_attribute :tracking, trk
   end
 

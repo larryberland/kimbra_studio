@@ -32,15 +32,15 @@ FactoryGirl.define do
     trait :with_purchase do
 
       before :create do |cart, evaluator|
-        #puts "carts: with_purchase before_create"
-        #puts "carts: items:#{cart.items.inspect}"
-        #puts "carts: address:#{cart.address.inspect}"
+        # must have and address and shipping to create a purchase
         cart.address = FactoryGirl.create(:address, cart: cart) if cart.address.nil?
+        cart.shipping = FactoryGirl.create(:shipping, cart: cart) if cart.shipping.nil?
       end
 
       after :create do |cart, evaluator|
         cart.items.reload
         raise 'missing address' if cart.address.nil?
+        raise 'missing shipping' if cart.shipping.nil?
         raise 'missing cart items' if cart.items.size < 1
         FactoryGirl.create(:purchase, cart: cart)
         cart.save!

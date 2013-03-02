@@ -21,7 +21,7 @@ FactoryGirl.define do
       cart {FactoryGirl.create(:cart)}
     end
 
-    cart_id {cart.id}
+    cart_id {cart.id if cart.present?}
     shipping_option_name {shipping_option.name}
     # amount and tracking are calculated values
 
