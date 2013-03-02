@@ -2,13 +2,13 @@ require 'spec_helper'
 
 describe Shopping::Address do
 
-  context "factories" do
+  context 'factories' do
     it 'has a shopping_address' do
       r = create(:shopping_address)
       r.should be_persisted
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
       it 'has a address' do
         r = create(:address)

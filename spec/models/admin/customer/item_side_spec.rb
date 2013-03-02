@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe Admin::Customer::ItemSide do
 
-  context "factories" do
+  context 'factories' do
 
     it 'has no factory' do
       # since item_sides are created through
@@ -12,7 +12,7 @@ describe Admin::Customer::ItemSide do
   end
 
   context 'ar validations' do
-    # no validatons currently
+    # no validations currently
   end
 
   context 'class methods' do

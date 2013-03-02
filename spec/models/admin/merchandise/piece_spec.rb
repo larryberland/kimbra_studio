@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Admin::Merchandise::Piece do
 
   before(:all) do
-    @upload_path = "/uploads/admin/merchandise/piece/image"
+    @upload_path = '/uploads/admin/merchandise/piece/image'
   end
 
-  context "factories" do
+  context 'factories' do
     it 'has a admin_merchandise_piece' do
       r = create(:admin_merchandise_piece)
       r.should be_persisted
@@ -23,7 +23,7 @@ describe Admin::Merchandise::Piece do
       r.height.should == 200
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
       it 'has a piece with dir and file' do
         file = 'iphone_3_case.png'

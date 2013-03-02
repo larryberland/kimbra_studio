@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Admin::Customer::Item do
-  context "factories" do
+  context 'factories' do
     before do
-      @message = "rspec studio name suggests heirloom jewelry for Jane Doe Client."
+      @message = 'rspec studio name suggests heirloom jewelry for Jane Doe Client.'
       @email = 'janedoe@email.com'
     end
 
@@ -14,7 +14,7 @@ describe Admin::Customer::Item do
       r.part.should be_persisted
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
     end
   end

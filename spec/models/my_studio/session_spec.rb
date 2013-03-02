@@ -10,13 +10,13 @@ describe MyStudio::Session do
     s.finished_uploading_at.should be_nil
   end
 
-  context "factories" do
+  context 'factories' do
     it 'has a my_studio_session' do
       r = create(:my_studio_session)
       valid_factory_session(r)
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
       it 'has with_portraits' do
         r = create(:my_studio_session, :with_portraits)

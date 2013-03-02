@@ -5,10 +5,10 @@ describe MyStudio::Portrait do
   include CarrierWave::Test::Matchers
 
   before do
-    @upload_path = "/uploads/my_studio/portrait/image"
+    @upload_path = '/uploads/my_studio/portrait/image'
   end
 
-  context "factories" do
+  context 'factories' do
     it 'has a my_studio_portrait' do
       r = create(:my_studio_portrait)
       r.should be_persisted
@@ -21,7 +21,7 @@ describe MyStudio::Portrait do
       r.height.should == 275
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
       it 'has a file' do
         file = 'landscape.png'

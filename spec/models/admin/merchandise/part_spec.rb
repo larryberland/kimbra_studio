@@ -3,10 +3,10 @@ require 'spec_helper'
 describe Admin::Merchandise::Part do
 
   before do
-    @upload_path = "/uploads/admin/merchandise/part/image_part"
+    @upload_path = '/uploads/admin/merchandise/part/image_part'
   end
 
-  context "factories" do
+  context 'factories' do
     it 'has a admin_merchandise_part' do
       r = create(:admin_merchandise_part)
       r.should be_persisted
@@ -20,7 +20,7 @@ describe Admin::Merchandise::Part do
       r.height.should == 179
 
       # no image created yet so using our fallback
-      url = "/images/fallback/empty_deal_image.png"
+      url = '/images/fallback/empty_deal_image.png'
       r.image.url.should == url
       r.image.current_path == Rails.root.join('public').to_s + url
       r.image.identifier.should be_nil
@@ -39,7 +39,7 @@ describe Admin::Merchandise::Part do
 
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
       it 'has a part for a specific piece' do
         file = 'part_0.png'

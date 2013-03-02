@@ -14,14 +14,14 @@ describe Studio do
     s.minisite.image_height.should == 174
   end
 
-  context "factories" do
+  context 'factories' do
 
     it 'has a studio' do
       s = create(:studio)
       valid_factory_studio(s)
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
       it 'has with_session' do
         r = create(:studio, :with_session)
@@ -42,8 +42,5 @@ describe Studio do
 
   end
 
-  it "can be instantiated" do
-    Studio.new.should be_an_instance_of(Studio)
-  end
 
 end

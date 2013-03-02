@@ -13,7 +13,7 @@ describe Shopping::Cart do
     @stripe_token = mock(Stripe::Charge)
   end
 
-  context "factories" do
+  context 'factories' do
 
     it 'has a shopping_cart' do
       r = Shopping::Cart.find_by_id(create(:shopping_cart).id)

@@ -4,7 +4,7 @@ describe Admin::Customer::Email do
 
   context "factories" do
     before do
-      @message = "rspec studio name suggests heirloom jewelry for Jane Doe Client."
+      @message = 'rspec studio name suggests heirloom jewelry for Jane Doe Client.'
       @email = 'janedoe@email.com'
     end
 
@@ -19,7 +19,7 @@ describe Admin::Customer::Email do
       r.offers.size.should == 0
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
       it 'has a offer_email' do
         r = create(:offer_email)

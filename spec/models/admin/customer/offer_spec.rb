@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe Admin::Customer::Offer do
-  context "factories" do
+  context 'factories' do
     before do
-      @message = "rspec studio name suggests heirloom jewelry for Jane Doe Client."
+      @message = 'rspec studio name suggests heirloom jewelry for Jane Doe Client.'
       @email = 'janedoe@email.com'
 
     end
@@ -23,7 +23,7 @@ describe Admin::Customer::Offer do
 
     end
 
-    context "aliases and traits" do
+    context 'aliases and traits' do
 
       it 'has a offer' do
         r = create(:offer)
