@@ -19,7 +19,7 @@ module Shopping
         if @address.errors.present?
           @states = State.form_selector
           @storyline.describe "Error in creating new address: #{@address.errors.full_messages}"
-          return render()
+          return render("new#{@shopping_layout}")
         else
           @storyline.describe 'Created new address.'
           if @cart.shipping

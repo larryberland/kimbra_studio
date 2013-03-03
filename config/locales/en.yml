@@ -38,21 +38,16 @@ en:
 
   activerecord:
     models:
-      shopping/address: 'Delivery Details'
+      shopping/address: "Delivery Details"
 
     attributes:
       # For the attribute in our error_messages
       shopping/address:
-        first_name: 'First Name'
-        last_name: 'Last Name'
-        address1: 'Address'
-        zip_code: 'Zip / Postal code'
+        first_name: "First Name"
+        last_name: "Last Name"
+        address1: "Address"
+        zip_code: "Zip / Postal code"
 
-    successful:
-      models:
-        shopping/address:
-          created: 'Created this bad boy'
-          updated: 'Updated this bad boy'
     errors:
       models:
         user:
@@ -60,17 +55,16 @@ en:
             email:
               email: "email"
         shopping/address:
-          successful: 'Finally created this'
           attributes:
             address1:
-              blank: 'must be entered'
+              blank: "must be entered"
 
   gypsy:
     client:
-      name: 'new client'
-      email: 'my_email@kimbraclickplus.com'
+      name: "new client"
+      email: "my_email@kimbraclickplus.com"
     session:
-      name: 'Welcome'
+      name: "Welcome"
 
   hello: "Hello world"
   company: "Kimbra Studios ClickPLUS"
@@ -624,6 +618,7 @@ en:
           title: "View Shipping Options"
         purchase:
           link: "Credit Card"
+          title: "View Credit Card"
     shippings:
       title: "2. Shipping Options"
   studios:

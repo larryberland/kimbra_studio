@@ -3,25 +3,24 @@
 <% purchase_active ||= '' %>
 <ul class="breadcrumb">
   <% if @cart.address %>
-      <li class="<%=address_active%>">
-        <%= link_to t('.address.link'),
-                    edit_shopping_cart_address_path(@cart, @cart.address),
-                    title: t('.address.title') %>
-        <span class="divider">/</span>
+      <li class="<%= address_active %>">
+        <%= link_breadcrumb_or_not(:address) %>
+        <% if @cart.shipping %>
+            <span class="divider">/</span>
+        <% end %>
       </li>
   <% end %>
   <% if @cart.shipping %>
-      <li class="<%=shipping_active%>">
-        <%= link_to t('.shipping.link'),
-                    edit_shopping_cart_shipping_path(@cart, @cart.shipping),
-                    title: t('.shipping.title') %>
-        <span class="divider">/</span>
+      <li class="<%= shipping_active %>">
+        <%= link_breadcrumb_or_not(:shipping) %>
+        <% if @cart.purchase %>
+            <span class="divider">/</span>
+        <% end %>
       </li>
   <% end %>
   <% if @cart.purchase %>
-      <li class="<%=purchase_active%>">
-        <a href="#"><%= t('.purchase.link') %></a>
-        <span class="divider">/</span>
+      <li class="<%= purchase_active %>">
+        <%= link_breadcrumb_or_not(:purchase) %>
       </li>
   <% end %>
 </ul>
