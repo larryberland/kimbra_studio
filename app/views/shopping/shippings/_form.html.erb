@@ -9,13 +9,16 @@
                  h2_msg: 'stopped this shipping selection from being saved:' %>
 
       <div class="control-group">
-        <% @shipping_options.each do |so| %>
-            <%= label_tag "shopping_shipping_shipping_option_#{so.last.downcase}", '', class: 'radio' %>
-            <div class="controls">
-              <%= f.radio_button :shipping_option_name, so.last %>
-              <%= " #{so.first}" %>
-            </div>
-        <% end %>
+        <div class="controls">
+          <% @shipping_options.each do |so| %>
+              <% desc = so.last.downcase %>
+              <% name = so.first %>
+              <label class="radio" for="<%= "shopping_shipping_shipping_option_#{desc}" %>">
+                <%= f.radio_button :shipping_option_name, so.last %>
+                <%= " #{name}" %>
+              </label>
+          <% end %>
+        </div>
       </div>
 
       <p>

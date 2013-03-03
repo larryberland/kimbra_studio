@@ -9,7 +9,9 @@ module Shopping
     def new
       @states = State.form_selector
       @storyline.describe 'Entering new address.'
-      new!
+      new! do
+        return render("new#{@shopping_layout}")
+      end
     end
 
     def create
@@ -17,7 +19,7 @@ module Shopping
         if @address.errors.present?
           @states = State.form_selector
           @storyline.describe "Error in creating new address: #{@address.errors.full_messages}"
-          return render(:new)
+          return render()
         else
           @storyline.describe 'Created new address.'
           if @cart.shipping
@@ -32,7 +34,9 @@ module Shopping
     def edit
       @storyline.describe 'Editing the address.'
       @states = State.form_selector
-      edit!
+      edit! do
+        return render("edit#{@shopping_layout}")
+      end
     end
 
     def update
@@ -40,7 +44,7 @@ module Shopping
         if @address.errors.present?
           @states = State.form_selector
           @storyline.describe "Error in updating new address: #{@address.errors.full_messages}"
-          edit_shopping_cart_address_path(@cart, @address)
+          return render("edit#{@shopping_layout}")
         else
           @storyline.describe 'Updated the address.'
           if @cart.shipping

@@ -12,6 +12,7 @@ module Shopping
         # create an invoice for the cart so all amounts will be recalculated
         #   based on the current address, shipping, and items
         #@purchase.cart.calculate_invoice_amount
+        return render("new#{@shopping_layout}")
       end
     end
 
@@ -23,7 +24,7 @@ module Shopping
       create! do
         if @purchase.errors.present?
           @storyline.describe "Errors in cart: #{@purchase.errors.full_messages}."
-          edit_shopping_cart_purchase_path(@cart)
+          return render("edit#{@shopping_layout}")
         else
           @storyline.describe "Cart purchased!"
           ClientMailer.delay.send_order_confirmation(@cart.id, @studio.id)
@@ -39,6 +40,12 @@ module Shopping
           order_status_minisite_email_path(@admin_customer_email, cart: cart_track, show_status_only: true)
           #shopping_stripe_card_path(@purchase.stripe_card)
         end
+      end
+    end
+
+    def edit
+      edit! do
+        return render("edit#{@shopping_layout}")
       end
     end
 

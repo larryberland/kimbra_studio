@@ -1,0 +1,27 @@
+<% address_active ||= '' %>
+<% shipping_active ||= '' %>
+<% purchase_active ||= '' %>
+<ul class="breadcrumb">
+  <% if @cart.address %>
+      <li class="<%=address_active%>">
+        <%= link_to t('.address.link'),
+                    edit_shopping_cart_address_path(@cart, @cart.address),
+                    title: t('.address.title') %>
+        <span class="divider">/</span>
+      </li>
+  <% end %>
+  <% if @cart.shipping %>
+      <li class="<%=shipping_active%>">
+        <%= link_to t('.shipping.link'),
+                    edit_shopping_cart_shipping_path(@cart, @cart.shipping),
+                    title: t('.shipping.title') %>
+        <span class="divider">/</span>
+      </li>
+  <% end %>
+  <% if @cart.purchase %>
+      <li class="<%=purchase_active%>">
+        <a href="#"><%= t('.purchase.link') %></a>
+        <span class="divider">/</span>
+      </li>
+  <% end %>
+</ul>

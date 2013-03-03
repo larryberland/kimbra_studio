@@ -4,10 +4,20 @@ class Shopping::BaseController < InheritedResources::Base
   before_filter :handle_roles
   before_filter :setup_story
   before_filter :navbar_active
+  before_filter :shopping_layout
+
 
   layout 'minisite'
 
   private #================================================================================
+
+  def shopping_layout
+    # basically a way to try out new styles for our Shopping Checkout/Purchase experience
+    # This will append the @shopping_layout value to our
+    # :new, :create, :update, etc actions
+    #  simply comment out next line to go back to original view layouts
+    @shopping_layout = '_breadcrumb' # note: the underscore in front
+  end
 
   def handle_roles
     unless (is_client?)

@@ -10,6 +10,8 @@
  *= require devise
 */
 
+@import "shopping/form";
+
 p {
   margin: 0 0 0 0;
   padding: 13px 0 13px 0;
@@ -269,12 +271,6 @@ p.story_name_line {
 td.total {
   border-top: 1px dotted;
   border-bottom: 1px dotted;
-}
-
-.shopping_heading {
-  border: 1px solid;
-  padding: 5px 0 5px 0;
-  margin: 5px 0 5px 0;
 }
 
 .field {

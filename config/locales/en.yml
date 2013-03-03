@@ -26,14 +26,44 @@ en:
         image: "Upload new Studio Logo"
         bgcolor: "Background color"
         remote_image_url: "or Logo URL"
+      shopping_address:
+        address1: 'Address'
+        address2: 'Company / Suite'
+        zip_code: 'Zip / Postal code'
+
+  errors:
+    messages:
+      empty: "can't be empty"
+      blank: "can't be blank"
 
   activerecord:
+    models:
+      shopping/address: 'Delivery Details'
+
+    attributes:
+      # For the attribute in our error_messages
+      shopping/address:
+        first_name: 'First Name'
+        last_name: 'Last Name'
+        address1: 'Address'
+        zip_code: 'Zip / Postal code'
+
+    successful:
+      models:
+        shopping/address:
+          created: 'Created this bad boy'
+          updated: 'Updated this bad boy'
     errors:
       models:
         user:
           attributes:
             email:
               email: "email"
+        shopping/address:
+          successful: 'Finally created this'
+          attributes:
+            address1:
+              blank: 'must be entered'
 
   gypsy:
     client:
@@ -584,6 +614,16 @@ en:
           title: "Click to Update this Piece."
     purchases:
       title: "3. Credit Card"
+    shared:
+      breadcrumb:
+        address:
+          link: "Delivery Details"
+          title: "View Delivery Details"
+        shipping:
+          link: "Shipping Options"
+          title: "View Shipping Options"
+        purchase:
+          link: "Credit Card"
     shippings:
       title: "2. Shipping Options"
   studios:

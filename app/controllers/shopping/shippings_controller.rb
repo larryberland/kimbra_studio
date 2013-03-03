@@ -11,6 +11,7 @@ module Shopping
       @shipping_options = ShippingOption.form_selections
       new! do
         @shipping.shipping_option_name = @shipping_options.first.last
+        return render("new#{@shopping_layout}")
       end
     end
 
@@ -21,7 +22,7 @@ module Shopping
       if @shipping.errors.present?
         @storyline.describe "Errors in shipping: #{@shipping.errors.full_messages}."
         @shipping_options = ShippingOption.form_selections
-        return render(:edit)
+        return render("edit#{@shopping_layout}")
       else
         @storyline.describe "Shipping option selected: #{@shipping.shipping_option_name}."
         return redirect_to new_shopping_cart_purchase_path(@cart)
@@ -31,7 +32,10 @@ module Shopping
     def edit
       @storyline.describe "Editing shipping option."
       @shipping_options = ShippingOption.form_selections
-      edit!
+      edit! do
+        return render("edit#{@shopping_layout}")
+      end
+
     end
 
     def update

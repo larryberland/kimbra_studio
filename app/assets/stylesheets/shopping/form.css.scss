@@ -1,0 +1,21 @@
+// Form overrides for Shopping Module Forms that enter billing, credit card, and shipping
+div.platypus-form{
+
+  div.control-group label.control-label{
+    // a little above normal
+    font-weight: 500;
+  }
+
+  .form-horizontal .control-group {
+    // close up tthe rows (bootstrap has 20px;)
+    margin-bottom: .5em;
+  }
+
+  .form-horizontal .controls {
+    // close up the label with the input elements (bootstrap has 180px)
+    margin-left: 170px;
+  }
+
+
+
+}

@@ -5,6 +5,10 @@
 
       <%= render 'shared/error_messages', record: @address, h2_msg: 'stopped this delivery address from being saved:' %>
 
+      <p>
+        <b>Enter your shipping information, then select "<%= t(:shopping_submit_address)%>".</b><br>
+        (all fields required)
+      </p>
       <div class="control-group">
         <%= f.label :first_name, class: "control-label" %>
         <div class="controls">
