@@ -1,5 +1,18 @@
 <%= render 'shopping/shared/breadcrumb', purchase_active: 'active' %>
 
-<div class='row'>
-  <%= render 'form' %>
+<div class="row-fluid">
+
+  <div class='row span8'>
+    <%= render 'form' %>
+  </div>
+
+  <div class="row span3">
+    <div class="shopping-details">
+      <h5><%= t('shopping.shared.breadcrumb.address.link') %></h5>
+      <%= render 'shopping/addresses/show', address: @cart.address %>
+      <h5><%= t('shopping.shared.breadcrumb.shipping.link') %></h5>
+      <%= render 'shopping/shippings/show', shipping: @cart.shipping %>
+    </div>
+  </div>
+
 </div>

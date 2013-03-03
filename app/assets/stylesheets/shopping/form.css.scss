@@ -15,7 +15,13 @@ div.platypus-form{
     // close up the label with the input elements (bootstrap has 180px)
     margin-left: 170px;
   }
-
-
-
+}
+div.shopping-details{
+  h5 {
+    margin: 10px 0px 0px 0px;
+  }
+  p {
+    text-align: left;
+    padding: 5px 0px 13px 0px;
+  }
 }

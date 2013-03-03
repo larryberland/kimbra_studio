@@ -102,6 +102,17 @@
     }
     <% end %>
 
+    /* bootstrap breadcrumb div */
+    .breadcrumb {
+        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        background-image: none;
+    }
+    .shopping-breadcrumb{
+        /*@include rounded-corners ( 10 px );*/
+        /*border: 1px solid;*/
+
+    }
+
     /* bootstrap form_actions div */
     .form-actions {
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;

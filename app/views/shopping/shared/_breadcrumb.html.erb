@@ -1,26 +1,32 @@
 <% address_active ||= '' %>
 <% shipping_active ||= '' %>
 <% purchase_active ||= '' %>
-<ul class="breadcrumb">
-  <% if @cart.address %>
-      <li class="<%= address_active %>">
-        <%= link_breadcrumb_or_not(:address) %>
-        <% if @cart.shipping %>
-            <span class="divider">/</span>
-        <% end %>
-      </li>
-  <% end %>
-  <% if @cart.shipping %>
-      <li class="<%= shipping_active %>">
-        <%= link_breadcrumb_or_not(:shipping) %>
-        <% if @cart.purchase %>
-            <span class="divider">/</span>
-        <% end %>
-      </li>
-  <% end %>
-  <% if @cart.purchase %>
-      <li class="<%= purchase_active %>">
-        <%= link_breadcrumb_or_not(:purchase) %>
-      </li>
-  <% end %>
-</ul>
+<div class="shopping-breadcrumb border">
+  <ul class="breadcrumb">
+    <% if @cart.address %>
+        <li class="<%= address_active %>">
+          <%= link_breadcrumb_or_not(:address) %>
+          <% if @cart.shipping %>
+            <span class="divider">
+              <%= icon_minisite('icon-arrow-right') %>
+            </span>
+          <% end %>
+        </li>
+    <% end %>
+    <% if @cart.shipping %>
+        <li class="<%= shipping_active %>">
+          <%= link_breadcrumb_or_not(:shipping) %>
+          <% if @cart.purchase %>
+            <span class="divider">
+              <%= icon_minisite('icon-arrow-right') %>
+            </span>
+          <% end %>
+        </li>
+    <% end %>
+    <% if @cart.purchase %>
+        <li class="<%= purchase_active %>">
+          <%= link_breadcrumb_or_not(:purchase) %>
+        </li>
+    <% end %>
+  </ul>
+</div>

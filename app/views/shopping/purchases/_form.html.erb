@@ -1,4 +1,4 @@
-<div class="platypus-form span8">
+<div class="platypus-form">
 
   <% url = @purchase.new_record? ? shopping_cart_purchase_path(@cart) : shopping_cart_purchase_path(@cart) %>
   <% stripe_submit_klass = @purchase.new_record? ? 'new_shopping_purchase' : 'edit_shopping_purchase' %>
@@ -71,7 +71,7 @@
         <div class="controls">
 
           <%= select_month Date.today, {:add_month_numbers => true}, {:name => nil, :id => 'card_month'} %>
-          <%= select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {:name => nil, :id => 'card_year'} %>
+          <%= select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {name: nil, id: 'card_year', class: 'input-small'} %>
 
         </div>
 
