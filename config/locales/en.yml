@@ -598,6 +598,7 @@ en:
     carts:
       show:
         title: "My Shopping Cart"
+        count_html:  "You have <span id='cart_count'>%{pieces}</span> in your cart."
         checkout:
           name: "Ready to Checkout"
           title: "Click to fill in Delivery Details, Shipping, and Credit Cart information."

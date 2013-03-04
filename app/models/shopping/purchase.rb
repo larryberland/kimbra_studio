@@ -45,10 +45,10 @@ class Shopping::Purchase < ActiveRecord::Base
   # NOTE: the stripe_card_hash needs 'key' as strings
   def create_stripe_card(stripe_card_hash)
     attrs = {purchase:      self,
-             stripe_object: stripe_card_hash['object'],
-             stripe_type:   stripe_card_hash['type']}
+             stripe_object: stripe_card_hash[:object],
+             stripe_type:   stripe_card_hash[:type]}
     [:country, :cvc_check, :exp_month, :exp_year, :last4].each do |key|
-      attrs[key] = stripe_card_hash[key.to_s]
+      attrs[key] = stripe_card_hash[key]
     end
     self.stripe_card = Shopping::StripeCard.new(attrs)
   end
@@ -56,7 +56,7 @@ class Shopping::Purchase < ActiveRecord::Base
   # before_create callback to send the purchase amount to Stripe
   #   and confirm payment
   def stripe_payment
-    Rails.logger.info("STRIPE::stripe_payment() BEGIN")
+    Rails.logger.info('STRIPE::stripe_payment() BEGIN')
     raise "must have a cart purchase:#{self.inspect}" if cart.nil?
     raise "must have a cart invoice_amount:#{self.inspect}" if cart.invoice_amount < 1
     # NOTE: hoping cart is taking care of itself to always

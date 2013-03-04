@@ -1,6 +1,6 @@
-<div class='row'>
+<div class='row-fluid'>
   <h2><%= t('.title') %></h2>
-  You have <span id="cart_count"><%= pluralize @cart.quantity, 'piece' %></span> in your cart.
+  <%= t('.count_html', pieces: pluralize(@cart.quantity, 'piece')) %>
 
   <% url = if @cart.purchase.present?
              edit_shopping_cart_purchase_path(@cart)
@@ -19,7 +19,7 @@
                           class:      "btn btn-success",
                           icon_class: 'icon-shopping-cart icon-white' %>
   <% end %>
-  <%= render "minisite/offers/dev_debug" if Rails.env.development? %>
+  <%= render 'minisite/offers/dev_debug' if Rails.env.development? %>
 </div>
 
 <%= render('shopping/items/index', cart: @cart, show_status_only: false) %>

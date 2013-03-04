@@ -2,11 +2,11 @@
 
 <div class="row-fluid">
 
-  <div class='row span8'>
+  <div class="span8">
     <%= render 'form' %>
   </div>
 
-  <div class="row span3">
+  <div class="span3">
     <div class="shopping-details">
       <h5><%= t('shopping.shared.breadcrumb.address.link') %></h5>
       <%= render 'shopping/addresses/show', address: @cart.address %>
