@@ -299,7 +299,10 @@ en:
           title: "Listing all sent and unsent Offer Emails"
         edit:
           title: "Editing Offer Email"
-
+  devise:
+    sessions:
+      new:
+        welcome: "Welcome to ClickPLUS"
   minisite:
     emails:
       order_status:
@@ -360,6 +363,8 @@ en:
           confirm: "Are you sure?"
           confirm_in_cart: "This piece is currently in the Shopping Cart. Are you sure?"
       create_build_pieces_by_category_form:
+        instructions_category_html: "<p>Jewelry designs are organized by Category for your convenience.<br>Select any category to view available designs, then select the one you like</p>"
+        instructions_portrait_html: "<p>Select your preferred portrait for your piece</p>"
         submit: "Create My Custom Heirloom Piece"
       create_build_a_piece_form:
         submit: "Create My Custom Heirloom Piece"
@@ -397,7 +402,7 @@ en:
           name: "Create a new heirloom jewelry piece from any of our %{size} unique designs."
           title: "Click to design your very own custom heirloom piece."
       new:
-        title: "We have lots of unique jewelry designs for you to design your own custom heirloom pieces."
+        title: "We have lots of unique photo jewelry designs for you to design your own custom heirloom pieces."
 
     portraits:
       index:
@@ -656,7 +661,9 @@ en:
       title: "Editing ClickPLUS User"
     show:
       title: "ClickPLUS User"
-
+  welcome:
+    index:
+      submit: "Get Started Now"
   # override InheritedResources flash messages
   # shopping/purchases
   flash:

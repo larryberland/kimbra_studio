@@ -1,4 +1,5 @@
 <% content_for :head do %>
+    <%= stylesheet_link_tag 'orbit-1.2.3' %>
     <%= javascript_include_tag 'platypus_dd' %>
 
     <style type="text/css">
@@ -65,12 +66,12 @@
 <% end %>
 
 <% categories = Admin::Merchandise::Piece.categories.sort %>
-<% category_tags = categories.collect{|s|s.gsub(' ', '_').underscore} %>
-<% category_select = categories.collect{|s|s.split(' ').last} %>
+<% category_tags = categories.collect { |s| s.gsub(' ', '_').underscore } %>
+<% category_select = categories.collect { |s| s.split(' ').last } %>
 
-<% select_id = "admin_customer_offer_piece_id" %>
-<% select_portrait_id = "admin_customer_offer_portrait_id" %>
-<div class="platypus-form">
+<% select_id = 'admin_customer_offer_piece_id' %>
+<% select_portrait_id = 'admin_customer_offer_portrait_id' %>
+<div class="platypus-form span5">
 
   <%= render 'shared/error_messages', record: @admin_customer_offer %>
 
@@ -78,23 +79,25 @@
           minisite_email_offers_path(@admin_customer_email) :
           minisite_email_offer_path(@admin_customer_email, @admin_customer_offer) %>
 
-
-  <%= form_for(@admin_customer_offer, url: url, html: {multipart: true, class:'form-inline'}) do |f| %>
+  <%= form_for(@admin_customer_offer, url: url, html: {multipart: true, class: 'form-inline'}) do |f| %>
 
       <%= f.hidden_field :frozen_offer %>
       <%= f.hidden_field :piece_id %>
 
+      <%= t('.instructions_category_html') %>
       <div class="control-group">
 
-      <% categories.each_with_index do |category, idx| %>
+        <% categories.each_with_index do |category, idx| %>
             <div class="controls">
-            <input id="admin_customer_offer_pieces_<%=idx%>" type="hidden" name="admin_customer_offer[pieces][<%=category_tags[idx]%>][piece_id]" value="">
-            <div id="<%= "myDropdown_#{category_tags[idx]}" %>"></div>
+              <input id="admin_customer_offer_pieces_<%= idx %>" type="hidden" name="admin_customer_offer[pieces][<%= category_tags[idx] %>][piece_id]" value="">
+
+              <div id="<%= "myDropdown_#{category_tags[idx]}" %>"></div>
             </div>
-      <% end %>
+        <% end %>
       </div>
 
       <%= f.hidden_field :portrait_id %>
+      <%= t('.instructions_portrait_html') %>
       <div class="control-group">
         <%# f.label :portrait_id, 'Portrait', class: 'control-label' %>
         <div class="controls">
@@ -103,12 +106,31 @@
       </div>
 
       <div class="form-actions">
-        <%= f.submit_spinner t('.submit'), id: 'my_submit', class: "btn btn-primary btn-left" %>
+        <%= f.submit_spinner t('.submit'), id: 'my_submit', class: 'btn btn-primary btn-left' %>
       </div>
 
   <% end %>
 </div>
 
+<div class="span5 overflow-hidden">
+
+  <div id="myCarousel" class="carousel slide">
+    <!--<ol class="carousel-indicators">-->
+      <!--<li data-target="#myCarousel" data-slide-to="0" class="active"></li>-->
+      <!--<li data-target="#myCarousel" data-slide-to="1"></li>-->
+      <!--<li data-target="#myCarousel" data-slide-to="2"></li>-->
+    <!--</ol>-->
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+      <div class="active item"><%= image_tag 'new1.png' %></div>
+      <div class="item"><%= image_tag 'new2.png' %></div>
+      <div class="item"><%= image_tag 'new3.png' %></div>
+    </div>
+    <!-- Carousel nav -->
+    <a class="carousel-control left" href="#myCarousel" data-slide="prev">&lsaquo;</a>
+    <a class="carousel-control right" href="#myCarousel" data-slide="next">&rsaquo;</a>
+  </div>
+</div>
 
 <script type="text/javascript">
     //Code Starts
@@ -119,10 +141,10 @@
 
     $('<%="#myDropdown_#{category_tags[idx]}"%>').ddslick({
         data:<%="ddData_#{category_tags[idx]}"%>,
-        width:300,
-        selectText:"<%="#{category_select[idx]}"%>",
-        imagePosition:"right",
-        onSelected:function (selectedData) {
+        width: 300,
+        selectText: "<%="#{category_select[idx]}"%>",
+        imagePosition: "right",
+        onSelected: function (selectedData) {
             //callback function: do something with selectedData;
             $('#admin_customer_offer_pieces_<%=idx%>').val(selectedData.selectedData.value);
             return;
@@ -132,16 +154,19 @@
 
     var ddDataPortrait = <%=portrait_ddslick_data(@admin_customer_offer)%>;
     $('#myDropdownPortrait').ddslick({
-        data:ddDataPortrait,
-        width:300,
-        selectText:"Select your preferred Portrait",
-        imagePosition:"right",
-        onSelected:function (selectedData) {
+        data: ddDataPortrait,
+        width: 300,
+        selectText: "Select your preferred Portrait",
+        imagePosition: "right",
+        onSelected: function (selectedData) {
             //callback function: do something with selectedData;
             $('#<%=select_portrait_id%>').val(selectedData.selectedData.value);
             return;
         }
     });
     //Code Ends
+
+    $('#myCarousel').carousel('cycle');
+
 
 </script>

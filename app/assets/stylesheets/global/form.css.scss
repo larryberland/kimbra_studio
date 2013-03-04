@@ -6,13 +6,6 @@ div.platypus-form{
   //background-color: $base-background-container;
   @include rounded-corners(10px);
   border: 2px outset black;
-
-  div.control-group.label.control-label{
-    color:  red;
-  }
-}
-.control-label{
-  color:  red;;
 }
 
 div.platypus-form-container {
