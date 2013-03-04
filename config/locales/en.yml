@@ -310,6 +310,7 @@ en:
         ups_title: "Click to track"
         purchased: "Purchased on %{at} using credit card xxxx-xxxx-xxxx-%{last4}."
       about:
+        title: "About %{studio}"
         p1: "These are hand-crafted individual pieces of photo jewelry. Each piece is solid sterling silver or pewter, and is completely waterproof."
         p2: "%{name} has suggested some special pictures from your recent photo shoot to be created into personal pieces of jewelry."
         p3: "is the pioneer in this field and will be doing the hand-crafting at our direction in their studio in Colorado. We love their work and are proud to partner with them to bring you this jewelry."
