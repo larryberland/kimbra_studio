@@ -1,5 +1,5 @@
-<div class='row'>
-  <%= render "dev_debug" if Rails.env.development? %>
+<div class='row-fluid'>
+  <%= render 'dev_debug' if Rails.env.development? %>
   <h4 id="myTitle">
     <% if @admin_customer_friend.new_record? %>
         <%= t('.title') %>
@@ -20,14 +20,14 @@
         <% if ids_in_work_queue and ids_in_work_queue.include?(offer.id) %>
             <!-- offer in work queue -->
         <% else %>
-            <div id="<%= "div_offer_#{offer.id}" %>" class='row'>
+            <div id="<%= "div_offer_#{offer.id}" %>" class='row-fluid'>
               <%= render 'offer', offer: offer, studio: @studio %>
             </div>
         <% end %>
     <% end %>
 <% end %>
 
-<div class='row'>
+<div class='row-fluid'>
   <!-- rename my friend collection list -->
   <%= render 'minisite/friends/form' %>
 </div>

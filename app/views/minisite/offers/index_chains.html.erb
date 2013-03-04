@@ -1,6 +1,6 @@
-<%= render "dev_debug" if Rails.env.development? %>
+<%= render 'dev_debug' if Rails.env.development? %>
 <% @pieces.each do |piece| %>
-    <div class='row'>
+    <div class='row-fluid'>
       <% @shopping_item = Shopping::Item.new(piece_id: piece.id, :cart => @cart) %>
       <%= render 'piece', piece: piece, studio: @studio, offer: @admin_customer_offers.first %>
     </div>

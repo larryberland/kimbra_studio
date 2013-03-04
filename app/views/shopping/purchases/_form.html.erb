@@ -2,10 +2,13 @@
 
   <% url = @purchase.new_record? ? shopping_cart_purchase_path(@cart) : shopping_cart_purchase_path(@cart) %>
   <% stripe_submit_klass = @purchase.new_record? ? 'new_shopping_purchase' : 'edit_shopping_purchase' %>
+  <% submit_label = @purchase.new_record? ? t('.submit_new') : t('.submit_edit') %>
 
   <%= form_for(@purchase, url: url, html: {class: "#{stripe_submit_klass} form-horizontal"}) do |f| %>
 
       <%= render 'shared/error_messages', record: @purchase, h2_msg: 'stopped this purchase:' %>
+
+      <p><%= t('.instructions_html', button_label: submit_label) %></p>
 
       <%= f.hidden_field :stripe_create_token_response %>
       <%= f.hidden_field :stripe_create_token_status %>
@@ -86,8 +89,7 @@
       </div>
 
       <div class="form-actions">
-        <% text = @purchase.new_record? ? t(:shopping_purchases_submit_new) : t(:shopping_purchases_submit_edit) %>
-        <%= f.submit_spinner text, id:'my_submit', class: 'btn btn-success' %>
+        <%= f.submit_spinner submit_label, id:'my_submit', class: 'btn btn-success' %>
         <%= link_to_spinner 'Back', edit_shopping_cart_shipping_path(@cart, @cart.shipping), id: 'back', class: 'btn' %>
       </div>
 

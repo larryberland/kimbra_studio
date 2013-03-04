@@ -1,16 +1,24 @@
-<div class="page-header">
-  <h2><%= t('.title') %></h2>
-</div>
+<h2><%= t('.title') %></h2>
 
-<p><%= t('.order_number', number: @cart_order.tracking) %></p>
+<p><%= t('.number', number: @cart_order.tracking) %></p>
 
-<p><%= status_for_cart(@cart_order) %></p>
+<p>
+  <!-- status_for_cart(@cart_order) -->
+  <% if @cart_order.shipping.tracking %>
+      <%= link_to t('.ups_link', tracking: @cart_order.shipping.tracking),
+                  "http://fuhry.us/packagestalker/track/ups/#{@cart_order.shipping.tracking}",
+                  title: t('.ups_title') %>
+  <% else %>
+      <%= t('.status', email: @cart_order.address.email) %>
+  <% end %>
+</p>
 
 <%= render 'shopping/addresses/show', address: @cart_order.address %>
 
 <%= render 'shopping/items/index', cart: @cart_order, show_status_only: @show_status_only %>
 
-<p>Purchased
-  on <%= @cart_order.purchase.purchased_at.in_time_zone("Eastern Time (US & Canada)").strftime("%a %b %d %I:%M%p") %>
-  Eastern using credit card xxxx-xxxx-xxxx-<%= @cart_order.purchase.stripe_card.last4 %>.
+<p>
+  <%= t('.purchased',
+        at: @cart_order.purchase.purchased_at.in_time_zone('Eastern Time (US & Canada)').strftime('%a %b %d %I:%M%p %Z'),
+        last4: @cart_order.purchase.stripe_card.last4) %>
 </p>

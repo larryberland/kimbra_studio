@@ -7,6 +7,7 @@
       <%= render 'shared/error_messages',
                  record: @shipping,
                  h2_msg: 'stopped this shipping selection from being saved:' %>
+      <p><%= t('.instructions_html', button_label: t(:shopping_submit_address)) %></p>
 
       <div class="control-group">
         <div class="controls">

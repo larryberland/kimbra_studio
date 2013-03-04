@@ -23,29 +23,32 @@
 </head>
 <body>
 
-<div class="container">
+<!-- change to bootstrap container-fluid -->
+<div class="container-fluid">
 
-  <% content_for :page_title, "#{@studio.name} Photo Jewelry Offer" %>
+  <div class="row-fluid">
+    <% content_for :page_title, "#{@studio.name} Photo Jewelry Offer" %>
 
-  <%= render 'shared/minisite_header', studio: @studio, admin_customer_email: @admin_customer_email %>
+    <%= render 'shared/minisite_header', studio: @studio, admin_customer_email: @admin_customer_email %>
 
-  <div class="span12">
-  <% if notice || alert %>
-      <div class="alert error rounded row">
-        <i class="icon-hand-right"> </i>
-        <button type="button" class="close" data-dismiss="alert"><%= t(:alert_close_button) %></button>
-        <%= raw "<p> #{notice}</p>" if notice %>
-        <%= raw "<p><strong>#{t(:snap)}</strong>#{alert}</p>" if alert %>
-      </div>
-  <% end %>
+    <div class="row-fluid">
+      <% if notice || alert %>
+          <div class="alert error rounded">
+            <i class="icon-hand-right"> </i>
+            <button type="button" class="close" data-dismiss="alert"><%= t(:alert_close_button) %></button>
+            <%= raw "<p> #{notice}</p>" if notice %>
+            <%= raw "<p><strong>#{t(:snap)}</strong>#{alert}</p>" if alert %>
+          </div>
+      <% end %>
 
-  <%= yield %>
+      <%= yield %>
 
+      <!-- span12 -->
+    </div>
 
-  <!-- span12 -->
   </div>
 
-<!-- container -->
+  <!-- container-fluid -->
 </div>
 
 <div id='footer'>
@@ -56,17 +59,17 @@
     |
     <li>
       <%= link_to_with_current_local 'Privacy',
-                                 privacy_minisite_email_path(@admin_customer_email.tracking) %>
+                                     privacy_minisite_email_path(@admin_customer_email.tracking) %>
     </li>
     |
     <li>
       <%= link_to_with_current_local 'Returns',
-                                 returns_minisite_email_path(@admin_customer_email.tracking) %>
+                                     returns_minisite_email_path(@admin_customer_email.tracking) %>
     </li>
     |
     <li>
       <%= link_to_with_current_local 'Contact us',
-                                 contact_minisite_email_path(@admin_customer_email.tracking) %>
+                                     contact_minisite_email_path(@admin_customer_email.tracking) %>
     </li>
   </ul>
 </div>

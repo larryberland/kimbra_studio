@@ -1,7 +1,7 @@
-<div class='row span6'>
+<div class='span8'>
 
   <h2><%= t('.title', name: @my_studio_session.client.name, category: @my_studio_session.category.name) %></h2>
-  <%= render "minisite/offers/dev_debug" if Rails.env.development? %>
+  <%= render 'minisite/offers/dev_debug' if Rails.env.development? %>
   <%= render 'form' %>
 
 </div>

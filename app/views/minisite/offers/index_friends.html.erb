@@ -1,4 +1,4 @@
-<div class='row'>
+<div class='row-fluid'>
   <h4>
     <% if @friend.new_record? %>
         <%= t('.title') %>
@@ -6,11 +6,11 @@
         <%= t('.title_friend', name: @friend.name) %>
     <% end %>
   </h4>
-  <%= render "dev_debug" if Rails.env.development? %>
+  <%= render 'dev_debug' if Rails.env.development? %>
 </div>
 <% if @admin_customer_offers.size > 0 %>
     <% @admin_customer_offers.sort { |a, b| a.width.to_i <=> b.width.to_i }.each do |offer| %>
-        <div id="<%="div_offer_#{offer.id}"%>" class='row'>
+        <div id="<%="div_offer_#{offer.id}"%>" class='row-fluid'>
             <%= render 'offer', offer: offer, studio: @studio %>
         </div>
     <% end %>

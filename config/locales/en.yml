@@ -304,7 +304,11 @@ en:
     emails:
       order_status:
         title: "Order Status"
-        order_number: "Your order number is %{number}."
+        number: "Your order number is %{number}."
+        status: "Your order has not been shipped yet. We'll send a status email to %{email} when it does."
+        ups_link: "Shipped. UPS %{tracking}."
+        ups_title: "Click to track"
+        purchased: "Purchased on %{at} using credit card xxxx-xxxx-xxxx-%{last4}."
       about:
         p1: "These are hand-crafted individual pieces of photo jewelry. Each piece is solid sterling silver or pewter, and is completely waterproof."
         p2: "%{name} has suggested some special pictures from your recent photo shoot to be created into personal pieces of jewelry."
@@ -589,6 +593,8 @@ en:
       title: "1. Delivery Details"
       show:
         no_address: "No Address information."
+      form:
+        instructions_html: "<b>Enter your shipping information, then select \"%{button_label}\".</b><br>(all fields required)"
     carts:
       show:
         title: "My Shopping Cart"
@@ -608,6 +614,11 @@ en:
           title: "Click to Update this Piece."
     purchases:
       title: "3. Credit Card"
+      form:
+        instructions_html: "We accept Visa, Mastercard, American Express, JCB, Discover, and Diners Club.<br>Enter your card information, then select \"%{button_label}\""
+        submit_new: "Submit Payment"
+        submit_edit: "Resubmit Payment"
+
     shared:
       breadcrumb:
         address:
@@ -621,6 +632,8 @@ en:
           title: "View Credit Card"
     shippings:
       title: "2. Shipping Options"
+      form:
+        instructions_html: "<b>Select your preferred Shipping method, then select \"%{button_label}\".</b>"
   studios:
     edit:
       title: "Editing ClickPLUS Branding Info"

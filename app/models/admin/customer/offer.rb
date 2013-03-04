@@ -266,6 +266,16 @@ class Admin::Customer::Offer < ActiveRecord::Base
     offer
   end
 
+  # used in chains for any offer that does not currently exist
+  #   maybe?
+  def existing_offer_piece_id
+    if piece and piece.id.present?
+      piece.id
+    else
+      nil
+    end
+  end
+
   def suggestion?
     if @suggestion.nil?
       @suggestion = (frozen_offer? or client?) ? false : true

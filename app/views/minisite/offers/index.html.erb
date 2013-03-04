@@ -1,13 +1,13 @@
-<div class='row'>
+<div class='row-fluid'>
   <h4><%= t('.title', studio: @studio.name) %></h4>
-  <%= render "dev_debug" if Rails.env.development? %>
+  <%= render 'dev_debug' if Rails.env.development? %>
 </div>
 
 <%= render 'admin_buttons' if is_admin? %>
 
 <% if @admin_customer_offers.size > 0 %>
     <% @admin_customer_offers.each do |offer| %>
-        <div id="<%= "div_offer_#{offer.id}" %>" class='row'>
+        <div id="<%= "div_offer_#{offer.id}" %>" class='row-fluid'>
           <%= render 'offer', offer: offer, studio: @studio %>
         </div>
     <% end %>

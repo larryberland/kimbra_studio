@@ -84,7 +84,7 @@ module Minisite
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
       # only show charms that have not already been added to their offers page
-      existing_offers = @admin_customer_offers.collect { |r| r.piece.id }
+      existing_offers = @admin_customer_offers.collect(&:existing_offer_piece_id)
       @pieces         = Admin::Merchandise::Piece.non_photo_charms.all.select { |p| !existing_offers.include?(p.id) }
       @shopping_item  = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
       @storyline.describe 'Viewing charms page.'
@@ -104,9 +104,8 @@ module Minisite
         @admin_customer_offers = Admin::Customer::Offer.where(:tracking => params[:email_id]).all
       end
       # only show charms that have not already been added to their offers page
-      existing_offers = @admin_customer_offers.collect { |r| r.piece.id }
+      existing_offers = @admin_customer_offers.collect(&:existing_offer_piece_id)
       @pieces         = Admin::Merchandise::Piece.for_chains.all.select { |p| !existing_offers.include?(p.id) }
-
       @shopping_item = Shopping::Item.new(:offer => @admin_customer_offer, :cart => @cart)
       @storyline.describe 'Viewing chains page.'
       respond_to do |format|

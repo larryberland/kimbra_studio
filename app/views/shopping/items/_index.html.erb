@@ -1,4 +1,4 @@
-<div id='shopping_item_index' class="row">
+<div id='shopping_item_index' class="row-fluid">
   <table class='table table-bordered rounded'>
     <thead>
     <th>Piece</th>
@@ -44,7 +44,7 @@
                         </div>
                     <% end %>
                     <div class="input-append spin">
-                      <%= text_field_tag :quantity, item.quantity, class: 'span1' %>
+                      <%= text_field_tag :quantity, item.quantity, class: 'input-mini' %>
                       <button href="<%= shopping_cart_item_path(item.cart, item) %>"
                               id='<%="my_submit_update#{item.id}"%>'
                               title="<%=t('.update.title')%>"
