@@ -1,9 +1,12 @@
 <h2><%= t('.title') %></h2>
 
-<p><%= t('.number', number: @cart_order.tracking) %></p>
-
 <p>
-  <!-- status_for_cart(@cart_order) -->
+  <%= t('.number', number: @cart_order.tracking) %>
+  <br>
+  <%= t('.purchased',
+        at:    @cart_order.purchase.purchased_at.in_time_zone('Eastern Time (US & Canada)').strftime('%a %b %d %I:%M%p %Z'),
+        last4: @cart_order.purchase.stripe_card.last4) %>
+  <br>
   <% if @cart_order.shipping.tracking %>
       <%= link_to t('.ups_link', tracking: @cart_order.shipping.tracking),
                   "http://fuhry.us/packagestalker/track/ups/#{@cart_order.shipping.tracking}",
@@ -17,8 +20,3 @@
 
 <%= render 'shopping/items/index', cart: @cart_order, show_status_only: @show_status_only %>
 
-<p>
-  <%= t('.purchased',
-        at: @cart_order.purchase.purchased_at.in_time_zone('Eastern Time (US & Canada)').strftime('%a %b %d %I:%M%p %Z'),
-        last4: @cart_order.purchase.stripe_card.last4) %>
-</p>
