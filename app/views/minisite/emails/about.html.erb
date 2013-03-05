@@ -1,18 +1,16 @@
 <h2><%= t('.title', studio: @studio.name) %></h2>
 <%= render 'minisite/offers/dev_debug' if Rails.env.development? %>
-<div class="span10">
-  <div style='text-align:center;'>
-    <% @admin_customer_email.offers_by_suggestions.each do |offer| %>
-        <div class='pull-left' style='text-align:center; margin:10px;'>
-          <%= link_to_spinner image_tag_list(offer),
-                              minisite_email_offer_url(offer.email, offer),
-                              id:    offer.id,
-                              class: :no_border %>
-          <br>
-          <%= link_to_spinner t(:view), url_for_offer_or_not(offer), id: "view#{offer.id}" %>
-        </div>
-    <% end if @admin_customer_email.offers %>
-  </div>
+<div class="minisite">
+  <% @admin_customer_email.offers_by_suggestions.each do |offer| %>
+      <div class='pull-left' style='text-align:center; margin:10px;'>
+        <%= link_to_spinner image_tag_list(offer),
+                            minisite_email_offer_url(offer.email, offer),
+                            id:    offer.id,
+                            class: :no_border %>
+        <br>
+        <%= link_to_spinner t(:view), url_for_offer_or_not(offer), id: "view#{offer.id}" %>
+      </div>
+  <% end if @admin_customer_email.offers %>
 
   <p>
     <%= t('.p1') %>

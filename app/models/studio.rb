@@ -67,7 +67,7 @@ class Studio < ActiveRecord::Base
   end
 
   def navbar_background
-    background_dark? ? minisite.bgcolor : minisite.font_color
+    background_dark? ? minisite.nav_bgcolor : minisite.font_color
   end
 
   def navbar_color

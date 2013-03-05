@@ -1,66 +1,15 @@
 <% content_for :head do %>
-    <%= stylesheet_link_tag 'orbit-1.2.3' %>
     <%= javascript_include_tag 'platypus_dd' %>
 
     <style type="text/css">
         div.form-actions {
-            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
             font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
-            color: <%= @studio.try(:minisite).try(:font_color) %>;
         }
 
         div.form-actions {
             text-align: left;
         }
 
-        <% if @studio.minisite.background_dark? %>
-        div#myDropdown li,
-        div#myDropdownPortrait li {
-            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-            font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
-            color: <%= @studio.try(:minisite).try(:font_color) %>;
-
-        }
-
-        .dd-select, .dd-selected {
-            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-            font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
-            color: <%= @studio.try(:minisite).try(:font_color) %>;
-        }
-
-        .dd-option {
-            color: <%= @studio.try(:minisite).try(:font_color) %>;
-            background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-        }
-
-        .dd-option-text {
-            color: <%= @studio.try(:minisite).try(:font_color) %>;
-        }
-
-        .dd-option-selected {
-            color: <%= @studio.try(:minisite).try(:font_color) %>;
-        }
-
-        a.dd-option:hover {
-            background-color: white !important;
-        }
-
-        a.dd-option:hover label,
-        a.dd-option:hover small {
-            background-color: white;
-            color: black;
-        }
-
-        a.dd-selected:hover label {
-            color: white;
-        }
-
-        <% else %>
-        .dd-desc {
-            color: black;
-        }
-
-        <% end %>
     </style>
 
 <% end %>

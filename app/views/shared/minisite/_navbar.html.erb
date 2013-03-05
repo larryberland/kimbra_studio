@@ -1,9 +1,9 @@
 <!-- class="navbar navbar-inverse navbar-fixed-top"-->
-<div id='navbar' class="navbar navbar-inverse">
+<div id='navbar' class="navbar xnavbar-inverse">
 
-  <div class="navbar-inner no-border">
+  <div class="xnavbar-inner no-border">
 
-    <div class="pull-left">
+    <div class="pull-right">
       <div class='studio-address'>
         <address>
           <strong><%= @studio.name %></strong><br>
@@ -12,11 +12,11 @@
               <br>
           <% end %>
           <% if @studio.phone_number %>
-              <abbr title="<%= t(:phone_abbr) %>"><%= icon_minisite("icon-volume-up") %></abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
+              <abbr title="<%= t(:phone_abbr) %>"><%= icon_minisite('icon-volume-up') %></abbr> <%= number_to_phone @studio.phone_number, area_code: true %>
               <br>
           <% end %>
           <% if @studio.info and @studio.info.email %>
-              <abbr title="<%= t(:email_abbr) %>"><%= icon_minisite("icon-envelope") %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
+              <abbr title="<%= t(:email_abbr) %>"><%= icon_minisite('icon-envelope') %></abbr> <%= mail_to @studio.info.email, nil, {:encode => :javascript} %>
           <% end %>
         </address>
       </div>
@@ -26,7 +26,7 @@
 
   </div>
 
-  <div class="navbar-inner">
+  <div class="navbar-inner navbar-inner-background">
 
     <div class="container">
       <!-- .btn-navbar is used as the toggle for collapsed navbar content -->

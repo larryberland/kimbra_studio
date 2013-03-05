@@ -12,10 +12,8 @@
       font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
     }
 
-    .hero-unit, .navbar {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+    .navbar {
         font-family: <%= @studio.try(:minisite).try(:font_family) %>, Arial, sans-serif;
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
     .likeabutton {
@@ -34,21 +32,21 @@
         border-color: ButtonShadow ButtonHighlight ButtonHighlight ButtonShadow;
     }
 
-    a {
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-    }
+    /*a {*/
+        /*color: <%= @studio.try(:minisite).try(:font_color) %>;*/
+        /*background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;*/
+    /*}*/
 
-    a:link,
-    a:visited,
-    a:focus,
-    a:hover{
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
-    }
+    /*a:link,*/
+    /*a:visited,*/
+    /*a:focus,*/
+    /*a:hover{*/
+        /*color: <%= @studio.try(:minisite).try(:font_color) %>;*/
+    /*}*/
 
-    a.active {
-        color: <%= @studio.try(:minisite).try(:font_color) %>;
-    }
+    /*a.active {*/
+        /*color: <%= @studio.try(:minisite).try(:font_color) %>;*/
+    /*}*/
     a[role="button"]{
         <% if @studio.minisite.background_dark? %>
         color: <%= @studio.try(:minisite).try(:bgcolor) %>;
@@ -59,10 +57,50 @@
         color: <%= @studio.try(:minisite).try(:bgcolor) %>;
         <% end %>
     }
-    /* bootstrap navbar and navbar-inverse */
-    .navbar .navbar-inner {
+
+    .navbar .studio-address{
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+    .navbar .studio-address > a:link,
+    .navbar .studio-address > a:visited,
+    .navbar .studio-address > a:focus,
+    .navbar .studio-address > a:hover{
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    .navbar .studio-address > a.active,
+    .navbar .studio-address > address > a{
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    .minisite a:link,
+    .minisite a:visited,
+    .minisite a:focus,
+    .minisite a:hover{
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    .minisite a.active,
+    .minisite a{
+        /*color: <%= @studio.try(:minisite).try(:font_color) %>;*/
+        color: red;
+    }
+
+    /* minisite footer style */
+    .minisite > ul > li > a {
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
         background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-        background-image: none;
+    }
+
+    .minisite > ul > li > a:link,
+    .minisite > ul > li > a:visited,
+    .minisite > ul > li > a:focus,
+    .minisite > ul > li > a:hover{
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
+    }
+
+    .minisite > ul > li > a.active {
+        color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
     div.navbar {
@@ -86,13 +124,13 @@
 
     <% unless @studio.minisite.background_dark? %>
     .navbar-inverse .nav > li > a {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        background-color: <%= @studio.try(:minisite).try(:nav_bgcolor) %>;
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
 
     .navbar-inverse .nav > li > a:focus,
     .navbar-inverse .nav > li > a:hover {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
+        background-color: <%= @studio.try(:minisite).try(:nav_bgcolor) %>;
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
     <% else %>
@@ -101,22 +139,6 @@
         color: <%= @studio.try(:minisite).try(:font_color) %>;
     }
     <% end %>
-
-    /* bootstrap breadcrumb div */
-    .breadcrumb {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-        background-image: none;
-    }
-    .shopping-breadcrumb{
-        /*@include rounded-corners ( 10 px );*/
-        /*border: 1px solid;*/
-
-    }
-
-    /* bootstrap form_actions div */
-    .form-actions {
-        background-color: <%= @studio.try(:minisite).try(:bgcolor) %>;
-    }
 
     /* bootstrap media tag overrides */
     div.row div.media {

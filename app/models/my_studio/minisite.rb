@@ -57,6 +57,15 @@ class MyStudio::Minisite < ActiveRecord::Base
     end
   end
 
+  def nav_bgcolor
+    "#749242"
+    #if color.starts_with?('#')
+    #  super color
+    #else
+    #  super COLORNAMES[color.to_s.gsub(/\W/,'').to_sym]
+    #end
+  end
+
   def font_color=(color)
     if color.starts_with?('#')
       super color

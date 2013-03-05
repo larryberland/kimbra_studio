@@ -1,5 +1,10 @@
 // Form overrides for Shopping Module Forms that enter billing, credit card, and shipping
+
 div.platypus-form{
+
+  background: white;
+  @include rounded-corners(10px);
+  border: 2px outset black;
 
   div.control-group label.control-label{
     // a little above normal

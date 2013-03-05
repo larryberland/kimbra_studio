@@ -41,7 +41,9 @@
           </div>
       <% end %>
 
-      <%= yield %>
+      <div class="minisite-container">
+        <%= yield %>
+      </div>
 
       <!-- span12 -->
     </div>
@@ -51,7 +53,7 @@
   <!-- container-fluid -->
 </div>
 
-<div id='footer'>
+<div id='footer' class="minisite">
   <ul>
     <li>
       <%= link_to_with_current_local 'About', about_minisite_email_path(@admin_customer_email.tracking) %>

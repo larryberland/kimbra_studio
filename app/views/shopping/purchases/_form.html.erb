@@ -4,6 +4,8 @@
   <% stripe_submit_klass = @purchase.new_record? ? 'new_shopping_purchase' : 'edit_shopping_purchase' %>
   <% submit_label = @purchase.new_record? ? t('.submit_new') : t('.submit_edit') %>
 
+  <%= render 'shopping/shared/breadcrumb', purchase_active: 'active' %>
+
   <%= form_for(@purchase, url: url, html: {class: "#{stripe_submit_klass} form-horizontal"}) do |f| %>
 
       <%= render 'shared/error_messages', record: @purchase, h2_msg: 'stopped this purchase:' %>

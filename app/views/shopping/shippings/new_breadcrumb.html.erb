@@ -1,7 +1,5 @@
-<%= render 'shopping/shared/breadcrumb', shipping_active: 'active' %>
-
 <div class="row-fluid">
-  <div class="span8">
+  <div class="span6">
     <%= render 'form' %>
   </div>
   <div class="span3">
@@ -9,6 +7,8 @@
       <h5><%= t('shopping.shared.breadcrumb.address.link') %></h5>
       <%= render 'shopping/addresses/show', address: @cart.address %>
     </div>
+    <%= render 'shopping/shared/slides' %>
+
   </div>
 </div>
 
