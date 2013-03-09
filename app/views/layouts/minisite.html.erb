@@ -27,6 +27,7 @@
 <div class="container-fluid">
 
   <div class="row-fluid">
+
     <% content_for :page_title, "#{@studio.name} Photo Jewelry Offer" %>
 
     <%= render 'shared/minisite_header', studio: @studio, admin_customer_email: @admin_customer_email %>
@@ -45,7 +46,7 @@
         <%= yield %>
       </div>
 
-      <!-- span12 -->
+      <!-- row-fluid -->
     </div>
 
   </div>

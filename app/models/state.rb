@@ -8,6 +8,14 @@ class State < ActiveRecord::Base
   validates :abbreviation, presence: true, length: {maximum: 12}
   validates :country_id, presence: true
 
+  before_save :monitor
+
+  # filter all the states for a form for a given country_id
+  #
+  # @param [Integer] country_id
+  # @return [ Arel ]
+  scope :by_country, lambda { |country_id| where('country_id = ?', country_id) }
+
   def stripe
     abbreviation.to_s
   end
@@ -32,20 +40,24 @@ class State < ActiveRecord::Base
     abbreviation_name
   end
 
+  def form_selector_option
+    [abbrev_and_name, id]
+  end
+
   # method to get all the states for a form
   # [['NY New York', 32], ['CA California', 3] ... ]
   #
   # @param [none]
   # @return [ Array[Array] ]
   def self.form_selector
-    find(:all, :order => 'country_id DESC, abbreviation ASC').collect { |state| [state.abbrev_and_name, state.id] }
+    find(:all, :order => 'country_id DESC, abbreviation ASC').collect(&:form_selector_option)
   end
 
-  # filter all the states for a form for a given country_id
-  #
-  # @param [Integer] country_id
-  # @return [ Arel ]
-  def self.all_with_country_id(c_id)
-    where(["country_id = ?", c_id])
+  private
+
+  def monitor
+    puts "state saving:#{self.inspect}"
+    true
   end
+
 end

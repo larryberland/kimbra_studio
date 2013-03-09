@@ -33,7 +33,7 @@ class MyStudio::RegistrationsController < MyStudio::BaseController
 
   def form_info
     @countries = Country.form_selector
-    @states = State.all_with_country_id(params[:country_id]) if params[:country_id].present?
+    @states = State.by_country(params[:country_id]).all if params[:country_id].present?
     @states ||= []
   end
 

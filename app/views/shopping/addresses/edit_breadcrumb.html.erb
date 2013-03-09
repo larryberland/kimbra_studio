@@ -2,17 +2,6 @@
   <div class="span6">
     <%= render 'form' %>
   </div>
-  <div class="span3">
-    <div class="shopping-details">
-      <h5><%= t('shopping.shared.breadcrumb.address.link') %></h5>
-      <%= render 'shopping/addresses/show', address: @cart.address %>
-      <% if @cart.shipping %>
-          <h5><%= t('shopping.shared.breadcrumb.shipping.link') %></h5>
-          <%= render 'shopping/shippings/show', shipping: @cart.shipping %>
-      <% end %>
-    </div>
-    <%= render 'shopping/shared/slides' %>
-
-  </div>
+  <%= render 'shopping/addresses/form_right_side' %>
 </div>
 

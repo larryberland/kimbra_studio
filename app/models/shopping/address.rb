@@ -9,9 +9,9 @@ class Shopping::Address < ActiveRecord::Base
                   :state, :state_id,
                   :country
 
-  attr_accessor :name, :state_stripe, :country_stripe, :email_confirmation
+  attr_accessor :state_stripe, :country_stripe, :email_confirmation
 
-  accepts_nested_attributes_for :cart
+  accepts_nested_attributes_for :cart, :state
 
   validates :first_name, :last_name, :address1, :city, :state, :zip_code, :cart, presence: true
   validates_presence_of :email, email: true
@@ -45,7 +45,7 @@ class Shopping::Address < ActiveRecord::Base
     ZipCodeTax.invoice_tax(zip_code_5_digit, taxable_sub_total)
   end
 
-  # monitor if zip_code changed so we can recalc cart invoice_total
+  # monitor if zip_code changed so we can recalculate the cart invoice_total
   def address_change
     @update_cart_invoice = zip_code_changed?
     true
