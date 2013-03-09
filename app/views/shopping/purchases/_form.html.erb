@@ -24,48 +24,41 @@
 
       <p><%= t('.instructions_html', button_label: submit_label) %></p>
 
-      <%= f.hidden_field :stripe_create_token_response %>
-      <%= f.hidden_field :stripe_create_token_status %>
-      <%= f.fields_for :cart, @purchase.cart do |g| %>
-          <%= g.fields_for :address, @purchase.cart.address do |h| %>
-              <%= h.hidden_field :name %>
-              <%= h.hidden_field :address1 %>
-              <%= h.hidden_field :address2 %>
-              <%= h.hidden_field :state_stripe %>
-              <%= h.hidden_field :zip_code %>
-              <%= h.hidden_field :country_stripe %>
-          <% end %>
-      <% end %>
-
       <div class="control-group">
-        <%= label_tag :card_number, 'Credit Card Number', class: 'control-label' %>
+        <%= label_tag :card_number, t('.card_number'), class: 'control-label' %>
         <div class="controls">
           <%= text_field_tag :card_number, nil, name: nil, size: 18, placeholder: 'your card number' %>
+          <!-- filled in with purchases.js card_number.blur -->
+          <span class="help-inline"></span>
         </div>
       </div>
-      <div id="card_number_error"></div>
 
       <div class="control-group">
-        <%= label_tag :card_code, 'Security Code on Card (CVV)', class: 'control-label' %>
+        <%= label_tag :card_code, t('.card_code'), class: 'control-label' %>
         <div class="controls">
           <%= text_field_tag :card_code, nil, name: nil, size: 3, autocomplete: 'off', placeholder: 'on back of card' %></td>
         </div>
       </div>
 
       <div class="control-group">
-        <%= label_tag :card_month, 'Card Expiration', class: 'control-label' %>
+        <%= label_tag :card_month, t('.card_month'), class: 'control-label' %>
         <div class="controls">
 
-          <%= select_month Date.today, {:add_month_numbers => true}, {:name => nil, :id => 'card_month'} %>
-          <%= select_year nil, {:start_year => Date.today.year, :end_year => Date.today.year+15}, {name: nil, id: 'card_year', class: 'input-small'} %>
+          <%= select_month Date.today, {add_month_numbers: true}, {name: nil, id: 'card_month'} %>
+          <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year+15}, {name: nil, id: 'card_year', class: 'input-small'} %>
 
         </div>
 
       </div>
 
+      <!-- purchase.js processCard attributes -->
       <%= f.hidden_field :cart_id %>
-      <%= f.hidden_field :stripe_card_token %>
       <%= f.hidden_field :invoice_amount %>
+      <%= f.hidden_field :stripe_card_token %>
+      <%= f.hidden_field :stripe_create_token_response %>
+      <%= f.hidden_field :stripe_create_token_status %>
+
+      <%= render 'form_process_card', purchase_form: f %>
 
       <div class="field">
         <div id="stripe_error" class='flash_error'></div>

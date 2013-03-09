@@ -67,9 +67,11 @@ CreditCard =
 $ ->
   $("#card_number").blur ->
     if CreditCard.validNumber(@value)
-      $("#card_number_error").text("")
+      $('#card_number').closest(".control-group").removeClass('error')
+      $('#card_number').next("span").text("")
     else
-      $("#card_number_error").text("Invalid credit card number.")
+      $('#card_number').closest(".control-group").addClass('error')
+      $('#card_number').next("span").text("Invalid credit card number.")
 
 # Support for update links on shopping cart page (items/_index.html.erb).
 # This implements an unobtrusive ajax call on the links, but prevents the link itself firing.

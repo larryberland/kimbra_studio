@@ -8,13 +8,13 @@ class Shopping::Purchase < ActiveRecord::Base
   attr_accessor :stripe_create_token_response, :stripe_create_token_status
 
   attr_accessible :cart, :cart_id, :purchased_at,
-                  :invoice_amount, # cart total in cents before calling stripe
-                  :paid_amount, # cart total in cents after calling stripe Charge Create
                   :stripe_card_token, :stripe_response_id, :stripe_paid, :stripe_fee,
                   :stripe_create_token_response,
-                  :stripe_create_token_status
+                  :stripe_create_token_status,
+                  :invoice_amount, # cart total in cents before calling stripe
+                  :paid_amount # cart total in cents after calling stripe Charge Create
 
-  accepts_nested_attributes_for :stripe_card
+                  accepts_nested_attributes_for :stripe_card
 
   validates :cart, presence: true
   validate :stripe_info
