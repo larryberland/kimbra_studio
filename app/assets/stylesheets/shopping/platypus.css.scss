@@ -6,6 +6,13 @@ div.platypus-form{
   @include rounded-corners(10px);
   border: 2px outset black;
 
+  p {
+    padding: 5px 0px 13px 0px;
+  }
+
+  .table {
+    margin-bottom: 0.5em;
+  }
   div.control-group label.control-label{
     // a little above normal
     font-weight: 500;

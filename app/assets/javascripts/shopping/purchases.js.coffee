@@ -9,9 +9,9 @@ $ ->
 
 subscription =
   setupForm: ->
-    frm = $('form.new_shopping_purchase')
+    frm = $('form.new-shopping-purchase')
     if !frm[0]
-      frm = $('form.edit_shopping_purchase')
+      frm = $('form.edit-shopping-purchase')
     frm.submit ->
       $('input[type=submit]').attr('disabled', true)
       if $('#card_number').length
@@ -39,9 +39,9 @@ subscription =
     $('#shopping_purchase_stripe_create_token_response').val(response)
     if status == 200
       $('#shopping_purchase_stripe_card_token').val(response.id)
-      frm = $('form.new_shopping_purchase')
+      frm = $('form.new-shopping-purchase')
       if !frm[0]
-        frm = $('form.edit_shopping_purchase')
+        frm = $('form.edit-shopping-purchase')
       frm[0].submit()
     else
       $('#stripe_error').text(response.error.message)

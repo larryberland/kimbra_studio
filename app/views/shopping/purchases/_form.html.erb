@@ -1,12 +1,24 @@
 <div class="platypus-form">
 
-  <% url = @purchase.new_record? ? shopping_cart_purchase_path(@cart) : shopping_cart_purchase_path(@cart) %>
-  <% stripe_submit_klass = @purchase.new_record? ? 'new_shopping_purchase' : 'edit_shopping_purchase' %>
-  <% submit_label = @purchase.new_record? ? t('.submit_new') : t('.submit_edit') %>
+  <!-- POST shopping/carts/:cart_id/purchase -->
+  <!-- shopping/purchases#create -->
+  <% url = shopping_cart_purchase_path(@cart) %>
+  <% if @purchase.new_record? %>
+      <% stripe_submit_klass = 'new-shopping-purchase' %>
+      <% submit_label = t('.submit_new') %>
+  <% else %>
+      <% stripe_submit_klass = 'edit-shopping-purchase' %>
+      <% submit_label = t('.submit_edit') %>
+  <% end %>
 
   <%= render 'shopping/shared/breadcrumb', purchase_active: 'active' %>
 
   <%= form_for(@purchase, url: url, html: {class: "#{stripe_submit_klass} form-horizontal"}) do |f| %>
+
+      <div class="control-group">
+      <!--div class="row-fluid" -->
+          <%= render 'shopping/carts/summary_table' %>
+      </div>
 
       <%= render 'shared/error_messages', record: @purchase, h2_msg: 'stopped this purchase:' %>
 
@@ -24,37 +36,6 @@
               <%= h.hidden_field :country_stripe %>
           <% end %>
       <% end %>
-
-      <div class="row-fluid">
-        <table align='center' class='field'>
-          <tr>
-            <td><%= "#{pluralize @cart.quantity, 'item'} in cart" %></td>
-            <td class='right'><%= number_to_currency @cart.invoice_items_total %></td>
-          </tr>
-
-          <tr>
-            <td>Tax: <%= @cart.tax_short_description %></td>
-            <td class='right'>
-              <%= number_to_currency @cart.invoice_tax_total %>
-            </td>
-          </tr>
-
-          <tr>
-            <td><%= @cart.try(:shipping).try(:shipping_option_name) %></td>
-            <td class='right'><%= number_to_currency(@cart.invoice_shipping_total) %></td>
-          </tr>
-
-          <tr>
-            <td style="border-top: 1px solid;"><%= f.label :total %></td>
-            <td style="border-top: 1px solid;" class='right'><%= number_to_currency @cart.invoice_total %></td>
-          </tr>
-
-          <tr>
-            <td colspan=2>&nbsp;</td>
-          </tr>
-
-        </table>
-      </div>
 
       <div class="control-group">
         <%= label_tag :card_number, 'Credit Card Number', class: 'control-label' %>
@@ -91,7 +72,7 @@
       </div>
 
       <div class="form-actions">
-        <%= f.submit_spinner submit_label, id:'my_submit', class: 'btn btn-success' %>
+        <%= f.submit_spinner submit_label, id: 'my_submit', class: 'btn btn-success' %>
         <%= link_to_spinner 'Back', edit_shopping_cart_shipping_path(@cart, @cart.shipping), id: 'back', class: 'btn' %>
       </div>
 

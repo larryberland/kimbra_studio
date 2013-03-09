@@ -1,0 +1,24 @@
+<table class="table table-bordered table-condensed">
+  <tr>
+    <td><%= "#{pluralize @cart.quantity, 'item'} in cart" %></td>
+    <td class='right'><%= number_to_currency @cart.invoice_items_total %></td>
+  </tr>
+
+  <tr>
+    <td>Tax: <%= @cart.tax_short_description %></td>
+    <td class='right'>
+      <%= number_to_currency @cart.invoice_tax_total %>
+    </td>
+  </tr>
+
+  <tr>
+    <td><%= @cart.try(:shipping).try(:shipping_option_name) %></td>
+    <td class='right'><%= number_to_currency(@cart.invoice_shipping_total) %></td>
+  </tr>
+
+  <tr class="info">
+    <td style="border-top: 1px solid;"><%= t('.total') %></td>
+    <td style="border-top: 1px solid;" class="right"><%= number_to_currency @cart.invoice_total %></td>
+  </tr>
+
+</table>
