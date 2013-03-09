@@ -1,0 +1,106 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  helpers:
+    label:
+      shopping_address:
+        address1: 'Address'
+        address2: 'Company / Suite'
+        zip_code: 'Zip / Postal code'
+
+  activerecord:
+    models:
+      shopping/address: "Delivery Details"
+
+    attributes:
+      # For the attribute in our error_messages
+      shopping/address:
+        first_name: "First Name Shopping"
+        last_name: "Last Name"
+        address1: "Address"
+        zip_code: "Zip / Postal code"
+    errors:
+      models:
+        shopping/address:
+          attributes:
+            address1:
+              blank: "must be entered"
+
+  # shopping/item
+  shopping_item_destroy_link: "Remove From Cart"
+
+  # shopping/address
+  shopping_submit_address: "Continue"
+
+  # shopping/shipping
+  shopping_submit_shipping: "Continue"
+
+  # shopping/purchase
+  shopping_purchases_submit_new: "Submit Payment"
+  shopping_purchases_submit_edit: "Submit Payment"
+
+  # views
+
+  shopping:
+    addresses:
+      title: "1. Delivery Details"
+      show:
+        no_address: "No Address information."
+      form:
+        instructions_html: "<b>Enter your shipping information, then select \"%{button_label}\".</b><br>(all fields required)"
+    carts:
+      show:
+        title: "My Shopping Cart"
+        count_html:  "You have <span id='cart_count'>%{pieces}</span> in your cart."
+        checkout:
+          name: "Ready to Checkout"
+          title: "Click to fill in Delivery Details, Shipping, and Credit Cart information."
+    finished:
+      title: "4. Finished!"
+    items:
+      add_to_cart:
+        add_cart:
+          name: "Add to Cart"
+          title:  "Click to Add Piece to My Shopping Cart."
+      index:
+        update:
+          name: "Update!"
+          title: "Click to Update this Piece."
+    purchases:
+      title: "3. Credit Card"
+      form:
+        instructions_html: "We accept:<br>Visa, Mastercard, American Express, JCB, Discover, and Diners Club.<br>Enter your card information, then select \"%{button_label}\""
+        submit_new: "Submit Payment"
+        submit_edit: "Resubmit Payment"
+        card_number: "Credit Card Number"
+        card_code: "Security Code on Card (CVV)"
+        card_month: "Card Expiration"
+    shared:
+      breadcrumb:
+        address:
+#          link: "Delivery Details"
+          title: "View Delivery Details"
+        shipping:
+          link: "Shipping Options"
+          title: "View Shipping Options"
+        purchase:
+          link: "Credit Card"
+          title: "View Credit Card"
+    shippings:
+      title: "2. Shipping Options"
+      form:
+        instructions_html: "<b>Select your preferred Shipping method, then select \"%{button_label}\".</b>"
+
+  # override InheritedResources flash messages
+  # shopping/purchases
+  flash:
+    shopping_purchases:
+      create:
+        notice: "Your purchase was successful. We'll email a receipt in a few moments."
+    shopping_addresses:
+      create:
+        notice: nil
+    shopping_shippings:
+      create:
+        notice: nil
