@@ -37,9 +37,9 @@
             <div class="control-group">
               <% (0..2).each do |index| %>
                   <% if @admin_customer_email.offers[index] %>
-                      <%= link_to "Edit Offer ##{index+1}", edit_admin_customer_email_offer_path(@admin_customer_email,@admin_customer_email.offers[index]), class: "btn btn-primary" %>
+                      <%= link_to "Edit Offer ##{index+1}", edit_admin_customer_email_offer_path(@admin_customer_email,@admin_customer_email.offers[index]), class: 'btn btn-primary' %>
                   <% else %>
-                      <%= link_to "Create New Offer ##{index+1}", new_admin_customer_email_offer_path(@admin_customer_email), class: "btn btn-success" %>
+                      <%= link_to "Create New Offer ##{index+1}", new_admin_customer_email_offer_path(@admin_customer_email), class: 'btn btn-success' %>
                   <% end %>
               <% end %>
 

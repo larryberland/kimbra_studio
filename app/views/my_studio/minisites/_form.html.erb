@@ -2,7 +2,7 @@
 <%= f.fields_for :minisite, minisite do |g| %>
 
     <div class="control-group">
-      <%= g.label :image, class: "control-label" %>
+      <%= g.label :image, class: 'control-label' %>
       <div class="controls">
         <%= g.file_field :image, class:'input-medium btn-small', validate: false %>
         <span class="help-inline"><%= t(".image_help") %></span>
@@ -10,7 +10,7 @@
     </div>
 
     <div class="control-group">
-      <%= g.label :remote_image_url, class: "control-label" %>
+      <%= g.label :remote_image_url, class: 'control-label' %>
       <div class="controls">
         <%= g.text_field :remote_image_url %>
         <span class="help-inline"><%= t(".remote_image_help") %></span>
@@ -18,7 +18,7 @@
     </div>
 
     <div class="control-group">
-      <%= g.label :font_family, class: "control-label" %>
+      <%= g.label :font_family, class: 'control-label' %>
       <div class="controls">
         <%= select_tag 'studio[minisite_attributes][font_family]',
                        options_for_select(MyStudio::Minisite::FONTS.collect{|n|[n,n]}, minisite.try(:font_family)),
@@ -27,7 +27,7 @@
     </div>
 
     <div class="control-group">
-      <%= g.label :font_color, class: "control-label" %>
+      <%= g.label :font_color, class: 'control-label' %>
       <div class="controls">
         <%= g.text_field :font_color, class: 'short' %>
         <span class="help-inline"><%= t(".font_color_help") %></span>
@@ -35,7 +35,7 @@
     </div>
 
     <div class="control-group">
-      <%= g.label :bgcolor, class: "control-label" %>
+      <%= g.label :bgcolor, class: 'control-label' %>
       <div class="controls">
         <%= g.text_field :bgcolor, class: 'short' %>
         <span class="help-inline"><%= t(".bgcolor_help") %></span>

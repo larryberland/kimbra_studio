@@ -57,7 +57,7 @@
       </div>
 
       <div class="control-group">
-        <%= label_tag :card_number, 'Credit Card Number', class: "control-label" %>
+        <%= label_tag :card_number, 'Credit Card Number', class: 'control-label' %>
         <div class="controls">
           <%= text_field_tag :card_number, nil, name: nil, size: 18, placeholder: 'your card number' %>
         </div>
@@ -65,14 +65,14 @@
       <div id="card_number_error"></div>
 
       <div class="control-group">
-        <%= label_tag :card_code, 'Security Code on Card (CVV)', class: "control-label" %>
+        <%= label_tag :card_code, 'Security Code on Card (CVV)', class: 'control-label' %>
         <div class="controls">
           <%= text_field_tag :card_code, nil, name: nil, size: 3, autocomplete: 'off', placeholder: 'on back of card' %></td>
         </div>
       </div>
 
       <div class="control-group">
-        <%= label_tag :card_month, 'Card Expiration', class: "control-label" %>
+        <%= label_tag :card_month, 'Card Expiration', class: 'control-label' %>
         <div class="controls">
 
           <%= select_month Date.today, {:add_month_numbers => true}, {:name => nil, :id => 'card_month'} %>

@@ -3,14 +3,14 @@
   <%= f.fields_for :client, client do |g| %>
 
       <div class="control-group">
-        <%= g.label :email, class: "control-label" %>
+        <%= g.label :email, class: 'control-label' %>
         <div class="controls">
           <%= g.email_field :email, placeholder: t('.email_placeholder') %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= g.label :name, class: "control-label" %>
+        <%= g.label :name, class: 'control-label' %>
         <div class="controls">
           <%= g.text_field :name, placeholder: t('.name_placeholder') %>
           <span class="help-inline"><%= t('.name_help') %></span>

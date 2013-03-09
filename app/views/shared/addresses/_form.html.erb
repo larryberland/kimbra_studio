@@ -1,29 +1,29 @@
 <div class="control-group">
-  <%= f.label :address_1, class: "control-label" %>
+  <%= f.label :address_1, class: 'control-label' %>
   <div class="controls">
     <%= f.text_field :address_1 %>
   </div>
 </div>
 <div class="control-group">
-  <%= f.label :address_2, class: "control-label" %>
+  <%= f.label :address_2, class: 'control-label' %>
   <div class="controls">
     <%= f.text_field :address_2 %>
   </div>
 </div>
 <div class="control-group">
-  <%= f.label :city, class: "control-label" %>
+  <%= f.label :city, class: 'control-label' %>
   <div class="controls">
     <%= f.text_field :city %>
   </div>
 </div>
 <div class="control-group">
-  <%= f.label :state_id, "State/Province", class: "control-label" %>
+  <%= f.label :state_id, "State/Province", class: 'control-label' %>
   <div class="controls">
     <%= f.select :state_id, @states, :include_blank => true %>
   </div>
 </div>
 <div class="control-group">
-  <%= f.label :zip_code, class: "control-label" %>
+  <%= f.label :zip_code, class: 'control-label' %>
   <div class="controls">
     <%= f.text_field :zip_code, class: 'short' %>
   </div>

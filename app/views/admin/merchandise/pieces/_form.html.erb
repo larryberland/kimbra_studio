@@ -20,14 +20,14 @@
         </div>
 
         <div class="control-group">
-          <%= f.label :category, class: "control-label" %>
+          <%= f.label :category, class: 'control-label' %>
           <div class="controls">
             <%= f.text_field :category %>
           </div>
         </div>
 
         <div class="control-group">
-          <%= f.label :name, class: "control-label" %>
+          <%= f.label :name, class: 'control-label' %>
           <div class="controls">
             <%= f.text_field :name %>
           </div>
@@ -35,49 +35,49 @@
 
         <%= f.hidden_field :image_cache %>
         <div class="control-group">
-          <%= f.label :image, class: "control-label" %>
+          <%= f.label :image, class: 'control-label' %>
           <div class="controls">
             <%= f.file_field :image %>
           </div>
         </div>
 
         <div class="control-group">
-          <%= f.label :remote_image_url, 'or image URL', class: "control-label" %>
+          <%= f.label :remote_image_url, 'or image URL', class: 'control-label' %>
           <div class="controls">
             <%= f.text_field :remote_image_url %>
           </div>
         </div>
 
         <div class="control-group">
-          <%= f.label :short_description, class: "control-label" %>
+          <%= f.label :short_description, class: 'control-label' %>
           <div class="controls">
             <%= f.text_area :short_description, rows: 4, class: "input-xlarge" %>
           </div>
         </div>
 
         <div class="control-group">
-          <%= f.label :description_markup, 'Description', class: "control-label" %>
+          <%= f.label :description_markup, 'Description', class: 'control-label' %>
           <div class="controls">
             <%= f.text_area :description_markup, rows: 5, class: "input-xlarge" %>
           </div>
         </div>
 
         <div class="control-group">
-          <%= f.label :price, class: "control-label" %>
+          <%= f.label :price, class: 'control-label' %>
           <div class="controls">
             <%= f.text_field :price %>
           </div>
         </div>
 
         <div class="control-group">
-          <%= f.label :deleted_at, class: "control-label" %>
+          <%= f.label :deleted_at, class: 'control-label' %>
           <div class="controls">
             <%= f.text_field :deleted_at %>
           </div>
         </div>
 
       <div class="control-group">
-        <%= f.label :custom_layout, class: "control-label" %>
+        <%= f.label :custom_layout, class: 'control-label' %>
         <div class="controls">
           <%= f.select :custom_layout, [['composite','composite'], ['order','order']] %>
         </div>

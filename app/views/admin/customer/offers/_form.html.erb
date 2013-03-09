@@ -21,14 +21,14 @@
       </div>
 
       <div class="control-group">
-        <%= f.label :name, class: "control-label" %>
+        <%= f.label :name, class: 'control-label' %>
         <div class="controls">
           <%= f.text_field :name, class: "input-xlarge", placeholder: 'customize or auto-filled on Create' %>
         </div>
       </div>
 
       <div class="control-group">
-        <%= f.label :description, class: "control-label" %>
+        <%= f.label :description, class: 'control-label' %>
         <div class="controls">
           <%= f.text_area :description, rows: 4, class: "input-xlarge", placeholder: 'customize or auto-filled on Create' %>
         </div>
@@ -58,7 +58,7 @@
 
             <!-- the layout is pulled from the Kimbra piece we are selecting -->
             <!--<div class="control-group">-->
-              <!--<%= f.label :custom_layout, class: "control-label" %>-->
+              <!--<%= f.label :custom_layout, class: 'control-label' %>-->
               <!--<div class="controls">-->
                 <!--<%= f.select :custom_layout, [['order','order'],['composite','composite']] %>-->
               <!--</div>-->
@@ -66,7 +66,7 @@
 
             <% unless @admin_customer_offer.new_record? %>
             <div class="control-group">
-              <%= f.label :activation_code, class: "control-label" %>
+              <%= f.label :activation_code, class: 'control-label' %>
               <div class="controls">
                 <%= f.text_field :activation_code %>
               </div>

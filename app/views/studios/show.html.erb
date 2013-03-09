@@ -35,6 +35,6 @@
 
 <%= render "my_studio/minisites/show", :minisite => @studio.minisite %>
 
-<%= link_to translate(:edit), edit_studio_path(@studio), class: "btn btn-success" %> |
+<%= link_to translate(:edit), edit_studio_path(@studio), class: 'btn btn-success' %> |
 <% url = current_user.admin? ? studios_path : my_studio_overview_path %>
-<%= link_to translate(:back), url, class: "btn btn-primary" %>
+<%= link_to translate(:back), url, class: 'btn btn-primary' %>

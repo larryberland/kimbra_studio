@@ -8,7 +8,7 @@
     </div>
 
     <div class="control-group">
-      <%= g.label :website, class: "control-label" %>
+      <%= g.label :website, class: 'control-label' %>
       <div class="controls">
         <%= g.text_field :website, size: 60 %> <%= link_to('Go', info.website, target: '_blank') if current_user.admin? && info.website %>
         <span class="help-inline">paste from browser address bar. eg, http://my_photographer.com</span>
@@ -16,7 +16,7 @@
     </div>
 
     <div class="control-group">
-      <%= g.label :email, "Studio's Email", class: "control-label" %>
+      <%= g.label :email, "Studio's Email", class: 'control-label' %>
       <div class="controls">
         <%= g.email_field :email %>
         <span class="help-inline">displayed on your Contact page</span>
@@ -24,7 +24,7 @@
     </div>
 
     <div class="control-group">
-      <%= g.label :tax_ein, 'Tax ID/EIN', class: "control-label" %>
+      <%= g.label :tax_ein, 'Tax ID/EIN', class: 'control-label' %>
       <div class="controls">
         <%= g.text_field :tax_ein %>
         <span class="help-inline">we need this before we can cut you a commission check</span>
@@ -32,7 +32,7 @@
     </div>
 
     <div class="control-group">
-      <%= g.label :commission_rate, 'Commission rate (%)', class: "control-label" %>
+      <%= g.label :commission_rate, 'Commission rate (%)', class: 'control-label' %>
       <div class="controls">
         <%= g.text_field :commission_rate, disabled: !current_user.admin?, class: 'short' %>
         <span class="help-inline">base rate is 5%</span>

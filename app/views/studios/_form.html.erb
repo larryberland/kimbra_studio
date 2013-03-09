@@ -18,19 +18,19 @@
 
         <% if is_admin? %>
             <div class="control-group">
-              <%= f.label 'Sales status', class: "control-label" %>
+              <%= f.label 'Sales status', class: 'control-label' %>
               <div class="controls">
                 <%= f.text_field :sales_status %>
               </div>
             </div>
             <div class="control-group">
-              <%= f.label 'Sales notes', class: "control-label" %>
+              <%= f.label 'Sales notes', class: 'control-label' %>
               <div class="controls">
                 <%= f.text_area :sales_notes, rows: 5, class: "input-xlarge" %>
               </div>
             </div>
             <div class="control-group">
-              <%= f.label 'Temp password', class: "control-label" %>
+              <%= f.label 'Temp password', class: 'control-label' %>
               <div class="controls">
                 <%= text_field_tag :ignore, @studio.owner.first_pass, disabled: true %>
               </div>
@@ -42,7 +42,7 @@
 
         <legend><%= t('.legend')%></legend>
         <div class="control-group">
-          <%= f.label 'Studio name', class: "control-label" %>
+          <%= f.label 'Studio name', class: 'control-label' %>
           <div class="controls">
             <%= f.text_field :name %>
           </div>
@@ -51,7 +51,7 @@
         <%= render "shared/addresses/form", :f => f %>
 
         <div class="control-group">
-          <%= f.label :phone_number, class: "control-label" %>
+          <%= f.label :phone_number, class: 'control-label' %>
           <div class="controls">
             <%= f.text_field :phone_number, {size: 15, maxlength: 15, value: number_to_phone(@studio.phone_number.to_s.gsub(/\D/, ''), area_code: true)} %>
             <span class="help-inline">for clients to contact</span>
@@ -62,7 +62,7 @@
             <%= g.hidden_field :id %>
             <%= g.hidden_field :first_pass %>
             <div class="control-group">
-              <%= g.label 'Owner\'s first and last name', class: "control-label" %>
+              <%= g.label 'Owner\'s first and last name', class: 'control-label' %>
               <div class="controls">
                 <%= g.text_field :first_name, class: :short %>
                 <%= g.text_field :last_name %>
@@ -71,7 +71,7 @@
             </div>
             <% if current_user.admin? %>
                 <div class="control-group">
-                  <%= g.label "Owner's email", class: "control-label" %>
+                  <%= g.label "Owner's email", class: 'control-label' %>
                   <div class="controls">
                     <%= g.text_field :email %>
                     <span class="help-inline"> - can be different from the studio email</span>

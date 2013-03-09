@@ -11,7 +11,7 @@
           <%= t(:admin_merchandise_parts_new_link) %>...
         </button>
     <% end %>
-    <%= link_to t(:back), admin_merchandise_piece_path(@piece), class: "btn btn-primary" %>
+    <%= link_to t(:back), admin_merchandise_piece_path(@piece), class: 'btn btn-primary' %>
   </div>
 
   <% parts_by_order = @parts.sort_by(&:order) %>
