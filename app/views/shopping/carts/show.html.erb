@@ -1,5 +1,5 @@
 <div class='row-fluid'>
-  <h2><%= t('.title') %></h2>
+  <h4><%= t('.title') %></h4>
   <%= t('.count_html', pieces: pluralize(@cart.quantity, 'piece')) %>
 
   <% url = if @cart.purchase.present?
