@@ -13,24 +13,24 @@
   <% url = @admin_customer_offer.id.nil? ?
           admin_customer_email_offers_path(@email) :
           admin_customer_email_offer_path(@email, @admin_customer_offer) %>
-  <%= form_for(@admin_customer_offer, :url => url, :html => {multipart: true, class: "form-horizontal"}) do |f| %>
+  <%= form_for(@admin_customer_offer, :url => url, :html => {multipart: true, class: 'form-horizontal'}) do |f| %>
 
       <div class="control-group">
-        <%= f.label :active, t("helpers.label.admin_customer_offer.active"), class: "checkbox inline" %>
+        <%= f.label :active, t("helpers.label.admin_customer_offer.active"), class: 'checkbox inline' %>
         <%= f.check_box :active %>
       </div>
 
       <div class="control-group">
         <%= f.label :name, class: 'control-label' %>
         <div class="controls">
-          <%= f.text_field :name, class: "input-xlarge", placeholder: 'customize or auto-filled on Create' %>
+          <%= f.text_field :name, class: 'input-xlarge', placeholder: 'customize or auto-filled on Create' %>
         </div>
       </div>
 
       <div class="control-group">
         <%= f.label :description, class: 'control-label' %>
         <div class="controls">
-          <%= f.text_area :description, rows: 4, class: "input-xlarge", placeholder: 'customize or auto-filled on Create' %>
+          <%= f.text_area :description, rows: 4, class: 'input-xlarge', placeholder: 'customize or auto-filled on Create' %>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
 
       <%= f.labeled_input :id %>
       <div class="form-actions">
-        <%= f.submit_spinner class: "btn-primary" %>
+        <%= f.submit_spinner class: 'btn-primary' %>
       </div>
   <% end %>
   <!-- platypus-form -->

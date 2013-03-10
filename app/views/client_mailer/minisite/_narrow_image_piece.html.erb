@@ -44,11 +44,11 @@
 
                   <% unless @show_status_only %>
                       <% if is_client? %>
-                          <%= link_to "Share on Facebook",
+                          <%= link_to 'Share on Facebook',
                                       share_shopping_item_path(@shopping_item),
                                       :remote => true,
-                                      :title  => "Share my Custom Heirloom Jewelry Piece", class: "likeabutton", id: "share_facebook" %>
-                          <span id='<%= "spinner_share_facebook" %>' style='display:none' class='spinner'></span>
+                                      :title  => 'Share my Custom Heirloom Jewelry Piece', class: 'likeabutton', id: "share_facebook" %>
+                          <span id="spinner_share_facebook" style='display:none' class="spinner"></span>
                       <% end %>
                   <% end %>
                   <p class="shopping-item">

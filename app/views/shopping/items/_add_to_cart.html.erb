@@ -13,14 +13,14 @@
                              id:         value,
                              title:      t('.add_cart.title'),
                              class:      'btn-small btn-primary',
-                             icon_class: "icon-plus-sign icon-white" %>
+                             icon_class: 'icon-plus-sign icon-white' %>
     <% end %>
 <% else %>
     <%= button_icon_to t('.add_cart.name'),
                        '#',
                        title:      t('.add_cart.title'),
-                       method:     :get, title: t(".add_cart.title"),
+                       method:     :get, title: t('.add_cart.title'),
                        class:      'disabled',
                        button_class: 'btn btn-small btn-primary disabled',
-                       icon_class: "icon-plus-sign icon-white" %>
+                       icon_class: 'icon-plus-sign icon-white' %>
 <% end %>

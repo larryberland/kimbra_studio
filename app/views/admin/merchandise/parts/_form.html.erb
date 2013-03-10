@@ -2,7 +2,7 @@
 
   <%= render 'shared/error_messages', record: @part %>
   <% url = @part.id.nil? ? admin_merchandise_piece_parts_path(@piece) : admin_merchandise_piece_part_path(@piece, @part) %>
-  <%= form_for(@part, url: url, html: {multipart: true, class: "form-horizontal"}) do |f| %>
+  <%= form_for(@part, url: url, html: {multipart: true, class: 'form-horizontal'}) do |f| %>
 
       <div class="control-group">
         <label class="checkbox">

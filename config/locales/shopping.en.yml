@@ -59,6 +59,9 @@ en:
         update:
           name: "Update!"
           title: "Click to Update this Piece."
+      item:
+        added: "Added %{name} to your Shopping cart."
+        collection: "The Custom Jewelry Piece was added to My Collection."
     purchases:
       title: "3. Credit Card"
       form:

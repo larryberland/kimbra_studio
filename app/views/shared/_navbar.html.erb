@@ -12,13 +12,13 @@
       </a>
 
       <% text = user_signed_in? ? is_admin? ? t(:company_brand) : t('.menus.brand.name') : t(:company_brand) %>
-      <%= link_to text, root_path, class: "brand", title: nav_bar_title %>
+      <%= link_to text, root_path, class: 'brand', title: nav_bar_title %>
 
       <ul class='nav pull-right'>
         <!-- devise signup, logout, edit account -->
         <% if user_signed_in? %>
-            <li><%= link_to "Edit account", edit_user_registration_path, id: 'Editaccount', title: current_user.name %></li>
-            <li><%= link_to "Log out", destroy_user_session_path, method: :delete, id: 'Logout', title: current_user.name %>
+            <li><%= link_to 'Edit account', edit_user_registration_path, id: 'Editaccount', title: current_user.name %></li>
+            <li><%= link_to 'Log out', destroy_user_session_path, method: :delete, id: 'Logout', title: current_user.name %>
             </li>
             <%= javascript_tag do %>
                 window.currentUserName = '<%= current_user.name %>'
