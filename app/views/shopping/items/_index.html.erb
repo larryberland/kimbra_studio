@@ -1,14 +1,13 @@
 <div id='shopping_item_index' class="row-fluid">
   <table class='table table-bordered rounded'>
     <thead>
-    <th>Piece</th>
+    <th><%=t('.piece')%></th>
     <th>&nbsp;</th>
-    <th class="right">Price</th>
-    <th>Quantity</th>
-    <th class="right">Total</th>
+    <th class="right"><%=t('.price')%></th>
+    <th><%=t('.quantity')%></th>
+    <th class="right"><%=t('.total')%></th>
     </thead>
     <tbody>
-    <% total = 0 %>
     <% cart.items.each do |item| %>
         <% if item.offer %>
             <tr>
@@ -24,10 +23,10 @@
                                       :title  => item.offer.name,
                                       :alt    => item.offer.name,
                                       :width  => 150,
-                                      :class  => "img-rounded",
+                                      :class  => 'img-rounded',
                                       :border => 0),
                             minisite_email_offer_url(item.offer.email.tracking, item.offer),
-                            {:style => "text-decoration: none;"} %>
+                            {:style => 'text-decoration: none;'} %>
               </td>
               <td class='right'>
                 <%= number_to_currency item.price.to_f %>
@@ -68,21 +67,21 @@
       <td colspan=5>&nbsp;</td>
     </tr>
     <tr>
-      <td>Shipping</td>
-      <td><%= cart.shipping ? cart.shipping.shipping_option_name : 'no shipping selected yet' %> </td>
+      <td><%=t('.shipping')%></td>
+      <td><%= cart.shipping ? cart.shipping.shipping_option_name : t('.no_shipping') %> </td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
-      <td class='right'><%= cart.shipping ? number_to_currency(cart.invoice_shipping_total) : 'n/a' %></td>
+      <td class='right'><%= cart.shipping ? number_to_currency(cart.invoice_shipping_total) : t('.n_a') %></td>
     </tr>
     <tr>
-      <td>Tax</td>
-      <td><%= cart.purchase ? cart.tax_short_description : 'tax calculated at checkout' %> </td>
+      <td><%=t('.tax')%></td>
+      <td><%= cart.purchase ? cart.tax_short_description : t('.no_tax') %> </td>
       <td>&nbsp;</td>
       <td>&nbsp;</td>
-      <td class='right'><%= cart.purchase ? number_to_currency(cart.invoice_tax_total) : 'n/a' %></td>
+      <td class='right'><%= cart.purchase ? number_to_currency(cart.invoice_tax_total) : t('.n_a') %></td>
     </tr>
     <tr>
-      <td class='total'>Total</td>
+      <td class='total'><%=t('.total')%></td>
       <td class='total'>&nbsp;</td>
       <td class='total'>&nbsp;</td>
       <td class='right total'><%= cart.quantity %></td>

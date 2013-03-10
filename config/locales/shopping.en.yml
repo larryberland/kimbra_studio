@@ -55,7 +55,18 @@ en:
         add_cart:
           name: "Add to Cart"
           title:  "Click to Add Piece to My Shopping Cart."
+      form:
+        error_h2_msg: "stopped this item from being saved:"
       index:
+        n_a: "n/a"
+        no_shipping: "no shipping selected yet"
+        no_tax: "tax calculated at checkout"
+        piece: "Piece"
+        price: "Price"
+        quantity: "Quantity"
+        shipping: "Shipping"
+        tax: "Tax"
+        total: "Total"
         update:
           name: "Update!"
           title: "Click to Update this Piece."

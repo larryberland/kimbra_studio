@@ -1,6 +1,6 @@
 <%= form_for(@shopping_item) do |f| %>
 
-    <%= render 'shared/error_messages', record: @shopping_item, h2_msg: 'stopped this item from being saved:' %>
+    <%= render 'shared/error_messages', record: @shopping_item, h2_msg: t('.error_h2_msg') %>
 
     <div class="field">
       <%= f.label :cart %>
