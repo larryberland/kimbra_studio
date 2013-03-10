@@ -1,11 +1,11 @@
 <table class="table table-bordered table-condensed">
   <tr>
-    <td><%= "#{pluralize @cart.quantity, 'item'} in cart" %></td>
-    <td class='right'><%= number_to_currency @cart.invoice_items_total %></td>
+    <td><%= t('.in_cart', quantity: pluralize(@cart.quantity, 'item')) %></td>
+    <td class='right'><%= number_to_currency(@cart.invoice_items_total) %></td>
   </tr>
 
   <tr>
-    <td>Tax: <%= @cart.tax_short_description %></td>
+    <td><%= t('.tax', text: @cart.tax_short_description) %></td>
     <td class='right'>
       <%= number_to_currency @cart.invoice_tax_total %>
     </td>
@@ -18,7 +18,7 @@
 
   <tr class="info">
     <td style="border-top: 1px solid;"><%= t('.total') %></td>
-    <td style="border-top: 1px solid;" class="right"><%= number_to_currency @cart.invoice_total %></td>
+    <td style="border-top: 1px solid;" class="right"><%= number_to_currency(@cart.invoice_total) %></td>
   </tr>
 
 </table>

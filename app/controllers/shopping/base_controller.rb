@@ -27,8 +27,8 @@ class Shopping::BaseController < InheritedResources::Base
     end
   end
 
-          # current navbar menu
-          # :collection, :charms, :chains, :brand, :shopping_cart
+  # current navbar menu
+  # :collection, :charms, :chains, :brand, :shopping_cart
   def navbar_active
     # reset in controller for active navbar menu item
     @navbar_active = :shopping_cart
@@ -58,9 +58,10 @@ class Shopping::BaseController < InheritedResources::Base
     end
 
     @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:friend_id])
-    @admin_customer_friend  = @cart.email.create_friend(@cart) if @admin_customer_friend.nil?
+    @admin_customer_friend = @cart.email.create_friend(@cart) if @admin_customer_friend.nil?
 
   end
+
   # override the ApplicationController's handling of
   # session cart information
   def load_email_or_cart

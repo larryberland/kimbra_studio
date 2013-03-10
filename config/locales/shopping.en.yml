@@ -48,6 +48,10 @@ en:
         checkout:
           name: "Ready to Checkout"
           title: "Click to fill in Delivery Details, Shipping, and Credit Cart information."
+      summary_table:
+        in_cart: "%{quantity) in cart"
+        tax: "Tax %{text}"
+        total: "Total"
     finished:
       title: "4. Finished!"
     items:
