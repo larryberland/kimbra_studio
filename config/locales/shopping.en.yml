@@ -2,6 +2,11 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
+  shopping:
+    back: "Back"
+    edit: "Edit"
+    show: "Show"
+
   helpers:
     label:
       shopping_address:
@@ -27,21 +32,7 @@ en:
             address1:
               blank: "must be entered"
 
-  # shopping/item
-  shopping_item_destroy_link: "Remove From Cart"
-
-  # shopping/address
-  shopping_submit_address: "Continue"
-
-  # shopping/shipping
-  shopping_submit_shipping: "Continue"
-
-  # shopping/purchase
-  shopping_purchases_submit_new: "Submit Payment"
-  shopping_purchases_submit_edit: "Submit Payment"
-
   # views
-
   shopping:
     addresses:
       title: "1. Delivery Details"
@@ -49,6 +40,7 @@ en:
         no_address: "No Address information."
       form:
         instructions_html: "<b>Enter your shipping information, then select \"%{button_label}\".</b><br>(all fields required)"
+        submit: "Continue"
     carts:
       show:
         title: "My Shopping Cart"
@@ -79,7 +71,7 @@ en:
     shared:
       breadcrumb:
         address:
-#          link: "Delivery Details"
+          link: "Delivery Details"
           title: "View Delivery Details"
         shipping:
           link: "Shipping Options"
@@ -91,6 +83,8 @@ en:
       title: "2. Shipping Options"
       form:
         instructions_html: "<b>Select your preferred Shipping method, then select \"%{button_label}\".</b>"
+        submit: "Continue"
+
 
   # override InheritedResources flash messages
   # shopping/purchases

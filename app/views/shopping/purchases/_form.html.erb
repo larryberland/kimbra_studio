@@ -66,7 +66,7 @@
 
       <div class="form-actions">
         <%= f.submit_spinner submit_label, id: 'my_submit', class: 'btn btn-success' %>
-        <%= link_to_spinner 'Back', edit_shopping_cart_shipping_path(@cart, @cart.shipping), id: 'back', class: 'btn' %>
+        <%= link_to_spinner t('shopping.back'), edit_shopping_cart_shipping_path(@cart, @cart.shipping), id: 'back', class: 'btn' %>
       </div>
 
   <% end %>

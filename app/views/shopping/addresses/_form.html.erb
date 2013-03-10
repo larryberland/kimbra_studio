@@ -7,7 +7,7 @@
 
       <%= render 'shared/error_messages', record: @address, h2_msg: 'stopped this delivery address from being saved:' %>
 
-      <p><%= t('.instructions_html', button_label: t(:shopping_submit_address)) %></p>
+      <p><%= t('.instructions_html', button_label: t('.submit')) %></p>
 
       <div class="control-group">
         <%= f.label :first_name, class: 'control-label' %>
@@ -92,8 +92,8 @@
       </div>
 
       <div class="form-actions">
-        <%= f.submit_spinner t(:shopping_submit_address), id: 'my_submit', class: 'btn btn-success' %>
-        <%= link_to_spinner 'Back', shopping_cart_path(@cart.tracking), id: 'back', class: 'btn' %>
+        <%= f.submit_spinner t('.submit'), id: 'my_submit', class: 'btn btn-success' %>
+        <%= link_to_spinner t('shopping.back'), shopping_cart_path(@cart.tracking), id: 'back', class: 'btn' %>
       </div>
 
   <% end %>
