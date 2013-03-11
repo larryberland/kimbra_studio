@@ -51,10 +51,10 @@
   RESPONSE: <%= link_to @cart.purchase.stripe_response_id, "https://manage.stripe.com/#test/payments/#{@cart.purchase.stripe_response_id}" %>
 </p>
 
-<% if (@cart.purchase.tax > 0) %>
+<% if (@cart.invoice_tax_amount > 0) %>
     <p>
       TAXES<br/>
-      <%= tax_text(@cart.purchase.tax_description) %>
+      <%= tax_text(@cart.tax_short_description) %>
       <br/>
     </p>
 <% end %>
@@ -80,7 +80,7 @@
 <% end %>
 
 <p>
-  <%= link_to 'Add the UPS tracking number to this order when shipping.', shopping_edit_delivery_tracking_url(shopping_cart: {tracking: @cart.tracking}) %>
+  <%= link_to 'Add the UPS tracking number to this order when shipping.', edit_delivery_tracking_new_shopping_cart_url(shopping_cart: {tracking: @cart.tracking}) %>
 </p>
 
 <p>

@@ -6,7 +6,7 @@
           <%= address.address2 %><br/>
       <% end %>
       <%= address.city %>,
-      <%= address.state.abbreviation %>
+      <%= address.try(:state).try(:abbreviation) %>
       <%= address.zip_code %>
       <% if address.email.present? %>
           <br><%= address.email %>

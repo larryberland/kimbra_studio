@@ -1,5 +1,8 @@
 == Welcome to Kimbra Studios ClickPLUS
 
+=== kimbra delayed jobs
+rake jobs:work
+
 Facebook
     tester1: Harry Amdghhbgieic Chaiwitz
     email: iivockg_chaiwitz_1355058016@tfbnw.net
@@ -64,9 +67,6 @@ Admin Functionality
 
     Setup Email Offers
         /admin/customer/email/offers
-
-=== kimbra delayed jobs
-rake jobs:work
 
 
 == Welcome to Rails
