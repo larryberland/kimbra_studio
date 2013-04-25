@@ -114,7 +114,11 @@ module Minisite
           # new client without a studio to start building their own piece
           # create an email for this client to work with on the minisite
           now                   = Time.now
-          owner                 = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
+          if Rails.env.production?
+            owner                 = User.find_by_email(ENV['gypsy_studio_email'])
+          else
+            owner                 = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
+          end
           attrs                 = {studio:  owner.studio,
                                    session: {name:              t('gypsy.session.name'),
                                              session_at:        10.minutes.ago(now),
