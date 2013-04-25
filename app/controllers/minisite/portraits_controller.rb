@@ -119,6 +119,8 @@ module Minisite
           else
             owner                 = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
           end
+          Rails.logger.info "gypsy:#{ENV['gypsy_studio_email']}"
+          Rails.logger.info "owner:#{owner.inspect}"
           attrs                 = {studio:  owner.studio,
                                    session: {name:              t('gypsy.session.name'),
                                              session_at:        10.minutes.ago(now),
