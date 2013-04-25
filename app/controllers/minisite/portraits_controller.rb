@@ -132,6 +132,8 @@ module Minisite
                                              sent_at:      now}
           }
           @admin_customer_email = Admin::Customer::Email.create_gypsy(attrs)
+          Rails.logger.info "MY_ADMIN_EMAIL:#{@admin_customer_email}"
+          Rails.logger.info "ERROS:#{@admin_customer_email.errors.full_messages}"
           params[:email_id]     = @admin_customer_email.tracking
         else
           @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
