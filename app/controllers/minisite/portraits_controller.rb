@@ -113,12 +113,10 @@ module Minisite
         if params[:email_id] == 'xyz'
           # new client without a studio to start building their own piece
           # create an email for this client to work with on the minisite
-          now = Time.now
-          owner = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
-
-          Rails.logger.info "CONFIG:#{KIMBRA_STUDIO_CONFIG.inspect}"
-          gypsy_client = MyStudio::Client.create!({name:  t('gypsy.client.name'),
-                                                   email: t('gypsy.client.email')})
+          now                   = Time.now
+          owner                 = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
+          gypsy_client          = MyStudio::Client.create!({name:  t('gypsy.client.name'),
+                                                            email: t('gypsy.client.email')})
           attrs                 = {studio:  owner.studio,
                                    session: {studio:     owner.studio,
                                              name:       t('gypsy.session.name'),
@@ -130,9 +128,7 @@ module Minisite
                                              sent_at:      now}
           }
           @admin_customer_email = Admin::Customer::Email.create_gypsy(attrs)
-          Rails.logger.info "MY_ADMIN_EMAIL:#{@admin_customer_email}"
-          Rails.logger.info "ERROS:#{@admin_customer_email.errors.full_messages}"
-          params[:email_id] = @admin_customer_email.tracking
+          params[:email_id]     = @admin_customer_email.tracking
         else
           @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
         end

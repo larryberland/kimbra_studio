@@ -27,14 +27,10 @@ class Admin::Customer::Email < ActiveRecord::Base
   # we have a client that wants to build a piece and they do not have a studio
   def self.create_gypsy(attrs)
     # create a session for this user
-    Rails.logger.info("CREATE: ATTRS:#{attrs[:session].inspect}")
-    sess = MyStudio::Session.create!(attrs[:session])
-    Rails.logger.info("sess:#{sess.inspect}")
-    attrs[:studio].sessions << sess
+    session = MyStudio::Session.create!(attrs[:session])
+    attrs[:studio].sessions << session
     attrs[:studio].save
-    Rails.logger.info("studio:sessions#{attrs[:studio].errors.full_messages}")
-
-    create(attrs[:email].merge(my_studio_session: sess))
+    create!(attrs[:email].merge(my_studio_session: session))
   end
 
   def self.send_offer_emails
@@ -94,14 +90,14 @@ class Admin::Customer::Email < ActiveRecord::Base
   end
 
   def previous_emails
-    raise "did you forget to set my_studio_session" if my_studio_session.nil?
+    raise 'did you forget to set my_studio_session' if my_studio_session.nil?
     @previous_emails = my_studio_session.emails if @previous_emails.nil?
     @previous_emails
   end
 
   # list of all previous offers sent to the studio_session's clients
   def previous_offers
-    raise "did you forget to set my_studio_session" if my_studio_session.nil?
+    raise 'did you forget to set my_studio_session' if my_studio_session.nil?
     my_studio_session.previous_offers
   end
 
