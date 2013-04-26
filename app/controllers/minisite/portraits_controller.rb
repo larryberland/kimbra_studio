@@ -113,28 +113,28 @@ module Minisite
         if params[:email_id] == 'xyz'
           # new client without a studio to start building their own piece
           # create an email for this client to work with on the minisite
-          now                   = Time.now
+          now = Time.now
           if Rails.env.production?
-            owner                 = User.find_by_email(ENV['gypsy_studio_email'])
+            owner = User.find_by_email(ENV['gypsy_studio_email'])
           else
-            owner                 = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
+            owner = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
           end
-          Rails.logger.info "gypsy:#{ENV['gypsy_studio_email']}"
-          Rails.logger.info "owner:#{owner.inspect}"
+          gypsy_client = MyStudio::Client.create!({name:  t('gypsy.client.name'),
+                                                   email: t('gypsy.client.email')})
           attrs                 = {studio:  owner.studio,
-                                   session: {name:              t('gypsy.session.name'),
-                                             session_at:        10.minutes.ago(now),
-                                             active:            true,
-                                             category:          Category.find_by_name('Other'),
-                                             client_attributes: {name:  t('gypsy.client.name'),
-                                                                 email: t('gypsy.client.email')}},
+                                   session: {studio:     owner.studio,
+                                             name:       t('gypsy.session.name'),
+                                             session_at: 10.minutes.ago(now),
+                                             active:     true,
+                                             category:   Category.find_by_name('Other'),
+                                             client:     gypsy_client},
                                    email:   {generated_at: 5.minutes.ago(now),
                                              sent_at:      now}
           }
           @admin_customer_email = Admin::Customer::Email.create_gypsy(attrs)
           Rails.logger.info "MY_ADMIN_EMAIL:#{@admin_customer_email}"
           Rails.logger.info "ERROS:#{@admin_customer_email.errors.full_messages}"
-          params[:email_id]     = @admin_customer_email.tracking
+          params[:email_id] = @admin_customer_email.tracking
         else
           @admin_customer_email = Admin::Customer::Email.find_by_tracking(params[:email_id])
         end

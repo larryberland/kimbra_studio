@@ -27,7 +27,8 @@ class Admin::Customer::Email < ActiveRecord::Base
   # we have a client that wants to build a piece and they do not have a studio
   def self.create_gypsy(attrs)
     # create a session for this user
-    sess = MyStudio::Session.create(attrs[:session])
+    Rails.logger.info("CREATE: ATTRS:#{attrs[:session].inspect}")
+    sess = MyStudio::Session.create!(attrs[:session])
     Rails.logger.info("sess:#{sess.inspect}")
     attrs[:studio].sessions << sess
     attrs[:studio].save
