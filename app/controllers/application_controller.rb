@@ -53,7 +53,7 @@ class ApplicationController < ActionController::Base
   end
 
   # entry point to properly coordinate session info
-  #   for a client when viewing our site
+          #   for a client when viewing our site
   def setup_session
 
     session[:email_cart] ||= {}
@@ -120,13 +120,13 @@ class ApplicationController < ActionController::Base
   def push_session_email_cart
 
     # hash of cart_id key with a value of the email it belongs to
-    session[:email_cart][session[:email_id]] = {cart_id: session[:cart_id],
+    session[:email_cart][session[:email_id]] = {cart_id:   session[:cart_id],
                                                 friend_id: session[:friend_id]}
 
   end
 
   # using the email passed in verify our current
-          #   session[:cart_id] ad session[:email_id] are in sync
+  #   session[:cart_id] ad session[:email_id] are in sync
   def sync_session_email(email)
     raise "Expecting @cart to always be nil here" if @cart.present?
     raise "Do not call sync_session_email() without a valid id email:#{email}" if email.new_record?
@@ -147,8 +147,8 @@ class ApplicationController < ActionController::Base
         session[:email_cart][email.id] ||= {}
 
         # any email specific session info
-        session[:cart_id]   = session[:email_cart][email.id][:cart_id]
-        session[:friend_id] = session[:email_cart][email.id][:friend_id]
+        session[:cart_id]              = session[:email_cart][email.id][:cart_id]
+        session[:friend_id]            = session[:email_cart][email.id][:friend_id]
 
       end
 
@@ -157,12 +157,12 @@ class ApplicationController < ActionController::Base
       @cart = Shopping::Cart.create(email: email) if @cart.nil?
 
       @admin_customer_friend = Admin::Customer::Friend.find_by_id(session[:friend_id])
-      @admin_customer_friend  = email.create_friend(@cart) if @admin_customer_friend.nil?
+      @admin_customer_friend = email.create_friend(@cart) if @admin_customer_friend.nil?
 
     else
       # first time session for this email
-      @cart = Shopping::Cart.create(email: email)
-      @admin_customer_friend  = email.create_friend(@cart)
+      @cart                  = Shopping::Cart.create(email: email)
+      @admin_customer_friend = email.create_friend(@cart)
     end
 
     # this is our current session info going forward
@@ -200,8 +200,10 @@ class ApplicationController < ActionController::Base
   end
 
   def log_session
-    puts "RAILS SESSION: #{session.inspect}"
-    logger.info "RAILS SESSION: #{session.inspect}"
+    if Rails.env.development?
+      puts "RAILS SESSION: #{session.inspect}"
+      logger.info "RAILS SESSION: #{session.inspect}"
+    end
   end
 
   # current navbar main menu

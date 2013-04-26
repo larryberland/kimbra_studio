@@ -23,7 +23,8 @@ class MyStudio::Session < ActiveRecord::Base
   validates_associated :client
   validates_associated :studio
 
-  validates :client_id, :studio_id, :category_id, presence: true
+  #validates :client_id, :studio_id, :category_id, presence: true
+  validates :studio_id, :category_id, presence: true
 
   # active_model callbacks
   before_save :set_name_and_session_at

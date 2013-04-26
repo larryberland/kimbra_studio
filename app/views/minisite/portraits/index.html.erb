@@ -1,7 +1,7 @@
-<div class='span8'>
-
-  <h4><%= t('.title', name: @my_studio_session.client.name, category: @my_studio_session.category.name) %></h4>
-  <%= render 'minisite/offers/dev_debug' if Rails.env.development? %>
-  <%= render 'form' %>
-
+<div class="row-fluid">
+  <div class="span8">
+    <h4><%= t('.title', name: @my_studio_session.client.name, category: @my_studio_session.category.name) %></h4>
+    <%= render 'minisite/offers/dev_debug' if Rails.env.development? %>
+    <%= render 'form' %>
+  </div>
 </div>

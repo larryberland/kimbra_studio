@@ -14,10 +14,14 @@
     <!--[if lt IE 9]><!--script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
 <% end %>
+<div class="platypus-form">
 
 <%= form_for( MyStudio::Portrait.new, url: minisite_email_portraits_path(@admin_customer_email.tracking), html: {multipart: true, id: 'fileupload'}) do |f| %>
 
     <%= f.hidden_field :my_studio_session_id %>
+      <div id='portrait_messages_for_studio' class="lead">
+        <%= render 'upload_status_messages' %>
+      </div>
 
     <div class='row-fluid fileupload-buttonbar'>
 
@@ -71,6 +75,7 @@
     </table>
 
 <% end %>
+</div>
 
 <!-- modal-gallery is the modal dialog used for the image gallery -->
 <div id="modal-gallery" class="modal modal-gallery hide fade" data-filter=":odd" tabindex="-1">
@@ -183,3 +188,19 @@
 
 <!-- The XDomainRequest Transport is included for cross-domain file deletion for IE8+ -->
 <!--[if gte IE 8]><%= javascript_include_tag 'xdr.js' %><![endif]-->
+<%= coffee_script_tag do %>
+# NOTE: Spacing is critical here if you format this file make sure
+#       the there are tab stops for methods $ -> in each row
+# After portraits are added or deleted, update the studio message at the top of the page.
+$ ->
+    $('#fileupload').live 'fileuploaddone', ->
+        request = $.get '/minisite/emails/<%= @admin_customer_email.tracking %>/portraits/upload_status_messages.js'
+        request.success (data) -> data
+        request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "
+        <br/>Error: #{errorThrown} Status: #{textStatus}"
+    $('#fileupload').live 'fileuploaddestroy', ->
+        request = $.get '/minisite/emails/<%= @admin_customer_email.tracking %>/portraits/upload_status_messages.js'
+        request.success (data) -> data
+        request.error (jqXHR, textStatus, errorThrown) -> $('#portrait_messages_for_studio').append "
+        <br/>Error: #{errorThrown} Status: #{textStatus}"
+<% end %>

@@ -66,6 +66,7 @@ KimbraStudio::Application.routes.draw do
         get :privacy
         get :returns
         get :unsubscribe
+        get :is_finished_uploading_photos
       end
       resources :offers do
         collection do
@@ -76,7 +77,11 @@ KimbraStudio::Application.routes.draw do
         end
       end
       resources :friends
-      resources :portraits
+      resources :portraits do
+        collection do
+          get :upload_status_messages
+        end
+      end
     end
     resources :item_sides do
       member do

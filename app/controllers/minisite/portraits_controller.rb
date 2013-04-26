@@ -97,6 +97,12 @@ module Minisite
       end
     end
 
+    # GET /minisite/emails/:id/portraits/upload_status_messages
+    def upload_status_messages
+      @my_studio_portraits = MyStudio::Portrait.where(my_studio_session_id: @admin_customer_email.my_studio_session).order('created_at desc')
+      @record_count        = @my_studio_portraits.size
+    end
+
     private
 
     # override load_email

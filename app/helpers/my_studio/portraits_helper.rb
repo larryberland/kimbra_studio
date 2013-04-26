@@ -16,6 +16,15 @@ module MyStudio::PortraitsHelper
     msg.html_safe
   end
 
+  def feedback_for_minisite(count)
+    if count == 0
+      msg = t('.record_zero') #"Click the Add Portraits button to begin uploading your photos."
+    else
+      msg = "You have uploaded #{count == 1 ? 'only 1 photo' : "#{count} photos"} so far. "
+    end
+    msg.html_safe
+  end
+
   def empty_table_rows
     '<tr><td>No portraits uploaded yet.</td></tr>'.html_safe
   end
@@ -30,10 +39,19 @@ module MyStudio::PortraitsHelper
     elsif my_studio_session.complete?
       button_icon_to(t(:my_studio_sessions_complete_link2, portrait_count: my_studio_session.portraits.count),
                      my_studio_session_is_finished_uploading_portraits_path,
-                     {method: :get,
-                      title: t(:my_studio_sessions_complete_title),
+                     {method:     :get,
+                      title:      t(:my_studio_sessions_complete_title),
                       icon_class: 'icon-ok-sign icon-white'})
     end
+  end
+
+  def actions_for_portraits_minisite(my_admin_customer_email)
+    photo_count = my_admin_customer_email.my_studio_session.portraits.size
+    button_icon_to(t('.complete.link', photo_count: photo_count),
+                   is_finished_uploading_photos_minisite_email_path(my_admin_customer_email.tracking),
+                   {method:     :get,
+                    title:      t('.complete.title'),
+                    icon_class: 'icon-ok-sign icon-white'}) if photo_count > 0
   end
 
   def alert_type_for(count)
