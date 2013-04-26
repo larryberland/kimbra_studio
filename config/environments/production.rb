@@ -74,6 +74,6 @@ KimbraStudio::Application.configure do
       domain: 'heroku.com'}
 
   # Force all requests to use SSL.
-  config.middleware.use "ForceSSL"
+  config.middleware.use 'ForceSSL'
 
 end

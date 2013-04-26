@@ -48,7 +48,7 @@ production:
     :storage: :fog
     :dump_image: false
   :gypsy_studio:
-    :email: 'clickplus_studio@kimbraclickplus.com'
+    :email: 'sales@kimbraclickplus.com'
   :mailer:
     :dummy:
   :stripe:

@@ -103,10 +103,10 @@ module Minisite
     #  currently the exact same as offers hoping to move this
     #  into minisite base
     def load_email_or_cart
-      raise "Portraits controller should always have an email_id" unless params.key?(:email_id)
+      raise 'Portraits controller should always have an email_id' unless params.key?(:email_id)
       # TODO: in portraits we seem to have an id instead of tracking
       if "#{params[:email_id].to_i}" == params[:email_id]
-        raise "we should be using tracking not email_id"
+        raise 'we should be using tracking not email_id'
         @admin_customer_email = Admin::Customer::Email.find_by_id(params[:email_id])
       else
         # tracking number
@@ -114,11 +114,9 @@ module Minisite
           # new client without a studio to start building their own piece
           # create an email for this client to work with on the minisite
           now = Time.now
-          if Rails.env.production?
-            owner = User.find_by_email(ENV['gypsy_studio_email'])
-          else
-            owner = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
-          end
+          owner = User.find_by_email(KIMBRA_STUDIO_CONFIG[:gypsy_studio][:email])
+
+          Rails.logger.info "CONFIG:#{KIMBRA_STUDIO_CONFIG.inspect}"
           gypsy_client = MyStudio::Client.create!({name:  t('gypsy.client.name'),
                                                    email: t('gypsy.client.email')})
           attrs                 = {studio:  owner.studio,
