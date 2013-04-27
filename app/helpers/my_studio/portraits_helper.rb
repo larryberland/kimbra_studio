@@ -18,7 +18,7 @@ module MyStudio::PortraitsHelper
 
   def feedback_for_minisite(count)
     if count == 0
-      msg = t('.record_zero') #"Click the Add Portraits button to begin uploading your photos."
+      msg = t('.record_zero_html') #"Click the Add Portraits button to begin uploading your photos."
     else
       msg = "You have uploaded #{count == 1 ? 'only 1 photo' : "#{count} photos"} so far. "
     end

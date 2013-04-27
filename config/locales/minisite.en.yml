@@ -124,7 +124,7 @@ en:
         title: "Upload Your Own Photos"
         add_files: "Add Photos"
       upload_status_messages:
-        record_zero: "Click the Add Photos button to begin uploading your photos."
+        record_zero_html: "Click the Add Photos button to begin uploading your photos."
         complete:
           link: "I'm finished! These %{photo_count} photos are enough. Go to Build a Piece."
           title: "Click to start building your custom jewelry."

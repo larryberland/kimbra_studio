@@ -57,11 +57,6 @@ module Minisite
     end
 
     def is_finished_uploading_photos
-      #if sess = MyStudio::Session.find(params[:session_id]) rescue nil
-      #  sess.update_attribute(:finished_uploading_at, Time.now)
-      #  flash[:notice] = t(:my_studio_sessions_finished_uploading_notice_html)
-      #  Notifier.delay.session_ready(params[:session_id])
-      #end
       redirect_to new_minisite_email_offer_url(@admin_customer_email)
     end
 
