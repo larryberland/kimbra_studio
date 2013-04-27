@@ -48,7 +48,7 @@ module KimbraStudio
     end
 
     # Version of your assets, change this if you want to expire all your assets
-    config.assets.version                  = '2.1'
+    config.assets.version                  = '2.2'
 
     # Rspec generator functionality
     # :fixtures => true specifies to generate a fixture for each model
