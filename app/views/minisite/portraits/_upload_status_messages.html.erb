@@ -1,4 +1,4 @@
-<div class='alert <%= alert_type_for @record_count %>'>
+<div class='alert <%= @record_count < 1 ? 'alert-info' : 'alert-success'%>'>
     <%= feedback_for_minisite @record_count %><br/>
     <%= actions_for_portraits_minisite(@admin_customer_email) %>
 </div>
